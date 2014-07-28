@@ -13,6 +13,10 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var Image = require( 'SCENERY/nodes/Image' );
+
+  // images
+  var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
 
   /**
    * @param {BarMagnetModel} model
@@ -20,8 +24,10 @@ define( function( require ) {
    */
   function MoleculesAndLightScreenView( model ) {
 
-    var thisView = this;
-    ScreenView.call( thisView );
+    ScreenView.call( this );
+
+    // Add the heat lamp to the left center of screen
+    this.addChild( new Image( heatLampImage, { left: 0, centerY: this.layoutBounds.centerY, scale: 0.75 } ) );
 
   }
 
