@@ -111,6 +111,16 @@ define( function( require ) {
   }
 
   function PhotonAbsorptionModel() {
+    //TODO: We need to build something that behaves sufficiently like EventListenerList
+    this.listeners = [];
+    this.photons = []; //Elements are of type Photon
+    this.photonWavelength = WavelengthConstants.VISIBLE_WAVELENGTH;
+    this.activeMolecules = []; // Elements are of type Molecule
+    this.initialPhotonTarget = null;
+
+    // The photon target is the thing that the photons are shot at, and based
+    // on its particular nature, it may or may not absorb some of the photons.
+    this.photonTarget = null;
   }
 
   return inherit( Object, PhotonAbsorptionModel, {
@@ -126,21 +136,6 @@ define( function( require ) {
   } );
 } );
 
-//
-//
-//  //----------------------------------------------------------------------------
-//  // Instance Data
-//  //----------------------------------------------------------------------------
-//
-//  private final EventListenerList listeners = new EventListenerList();
-//  private final ArrayList<Photon> photons = new ArrayList<Photon>();
-//  private double photonWavelength = WavelengthConstants.VISIBLE_WAVELENGTH;
-//  private final ArrayList<Molecule> activeMolecules = new ArrayList<Molecule>();
-//  private final PhotonTarget initialPhotonTarget;
-//
-//  // The photon target is the thing that the photons are shot at, and based
-//  // on its particular nature, it may or may not absorb some of the photons.
-//  private PhotonTarget photonTarget = null;
 //
 //  // Variables that control periodic photon emission.
 //  private double photonEmissionCountdownTimer = Double.POSITIVE_INFINITY;
