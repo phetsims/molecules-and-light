@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var MoleculesAndLightModel = require( 'MOLECULES_AND_LIGHT/model/MoleculesAndLightModel' );
+  var PhotonAbsorptionModel = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonAbsorptionModel' );
   var MoleculesAndLightScreenView = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
@@ -20,7 +20,7 @@ define( function( require ) {
 
   function MoleculesAndLightScreen() {
     Screen.call( this, titleString, null /* no icon, single-screen sim */,
-      function() { return new MoleculesAndLightModel(); },
+      function() { return new PhotonAbsorptionModel(); },
       function( model ) { return new MoleculesAndLightScreenView( model ); },
       { backgroundColor: 'black' }
     );
