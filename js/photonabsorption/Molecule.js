@@ -75,6 +75,50 @@ define( function( require ) {
     // Velocity for this molecule.
     this.velocity = new ObservableVector2D();
 
+    // Map that matches photon wavelengths to photon absorption strategies.
+    // The strategies contained in this structure define whether the
+    // molecule can absorb a given photon and, if it does absorb it, how it
+    // will react.
+    // TODO: Declaration in original java is an empty hashmap, see if an arbitrary object is correct solution.
+    // TODO: Requires Dependency PhotonAbsorptionStrategy
+    this.mapWavelengthToAbsorptionStrategy = {}; // Object will contain keys of type Number and values of type PhotonAbsorptionStrategy
+
+    // Currently active photon absorption strategy, active because a photon
+    // was absorbed that activated it.
+    // TODO: Requires Dependency PhotonAbsorptionStrategy
+    this.activePhotonAbsorptionStrategy = new PhotonAbsorptionStrategy.NullPhotonAbsorptionStrategy( this );
+
+    // Variable that prevents reabsorption for a while after emitting a photon.
+    this.absorbtionHysteresisCountdownTime = 0;
+
+    // The "pass through photon list" keeps track of photons that were not
+    // absorbed due to random probability (essentially a simulation of quantum
+    // properties).  This is needed since the absorption of a given photon
+    // will likely be tested at many time steps as the photon moves past the
+    // molecule, and we don't want to keep deciding about the same photon.
+    this.PASS_THROUGH_PHOTON_LIST_SIZE = 10;
+    this.passThroughPhotonList = []; // Array will have size PASS_THROUGH_PHOTON_LIST_SIZE with type Photon.
+
+    // Tthhe current point within this molecule's vibration sequence.
+    this.currentVibrationRadians = 0;
+
+    // The amount of rotation currently applied to this molecule.  This is
+    // relative to its original, non-rotated state.
+    this.currentRotationRadians = 0;
+
+    // Tracks if molecule is higher energy than its ground state.
+    this.highElectronicEnergyState = false;
+
+    // Boolean values that track whether the molecule is vibrating or
+    // rotating.
+    this.vibrating = false;
+    this.rotating = false;
+    this.rotationDirectionClockwise = true; // Controls the direction of rotation.
+
+    // List of constituent molecules. This comes into play only when the
+    // molecule breaks apart, which many of the molecules never do.
+    this.constituentMolecules = []; // Elements of type Molecule
+
   }
 
   return inherit( Object, Molecule, {
@@ -90,49 +134,6 @@ define( function( require ) {
   } );
 } );
 
-
-//  :::More Instance Data:::
-//  // Map that matches photon wavelengths to photon absorption strategies.
-//  // The strategies contained in this structure define whether the
-//  // molecule can absorb a given photon and, if it does absorb it, how it
-//  // will react.
-//  private final Map<Double, PhotonAbsorptionStrategy> mapWavelengthToAbsorptionStrategy = new HashMap<Double, PhotonAbsorptionStrategy>();
-//
-//  // Currently active photon absorption strategy, active because a photon
-//  // was absorbed that activated it.
-//  private PhotonAbsorptionStrategy activePhotonAbsorptionStrategy = new PhotonAbsorptionStrategy.NullPhotonAbsorptionStrategy( this );
-//
-//  // Variable that prevents reabsorption for a while after emitting a photon.
-//  private double absorbtionHysteresisCountdownTime = 0;
-//
-//  // The "pass through photon list" keeps track of photons that were not
-//  // absorbed due to random probability (essentially a simulation of quantum
-//  // properties).  This is needed since the absorption of a given photon
-//  // will likely be tested at many time steps as the photon moves past the
-//  // molecule, and we don't want to keep deciding about the same photon.
-//  private static final int PASS_THROUGH_PHOTON_LIST_SIZE = 10;
-//  private final ArrayList<Photon> passThroughPhotonList = new ArrayList<Photon>( PASS_THROUGH_PHOTON_LIST_SIZE );
-//
-//  // The current point within this molecule's vibration sequence.
-//  private double currentVibrationRadians = 0;
-//
-//  // The amount of rotation currently applied to this molecule.  This is
-//  // relative to its original, non-rotated state.
-//  private double currentRotationRadians = 0;
-//
-//  // Tracks if molecule is higher energy than its ground state.
-//  private boolean highElectronicEnergyState = false;
-//
-//  // Boolean values that track whether the molecule is vibrating or
-//  // rotating.
-//  private boolean vibrating = false;
-//  private boolean rotating = false;
-//  private boolean rotationDirectionClockwise = true; // Controls the direction of rotation.
-//
-//  // List of constituent molecules. This comes into play only when the
-//  // molecule breaks apart, which many of the molecules never do.
-//  private final ArrayList<Molecule> constituentMolecules = new ArrayList<Molecule>();
-//
 //  //------------------------------------------------------------------------
 //  // Constructor(s)
 //  //------------------------------------------------------------------------
