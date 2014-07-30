@@ -121,6 +121,15 @@ define( function( require ) {
     // The photon target is the thing that the photons are shot at, and based
     // on its particular nature, it may or may not absorb some of the photons.
     this.photonTarget = null;
+
+    // Variables that control periodic photon emission.
+    this.photonEmissionCountdownTimer = Number.POSITIVE_INFINITY;
+    this.photonEmissionPeriodTarget = DEFAULT_PHOTON_EMISSION_PERIOD;
+    this.previousEmissionAngle = 0;
+
+    // Collection that contains the molecules that comprise the configurable
+    // atmosphere.
+    this.configurableAtmosphereMolecules = []; // Elements are of type Molecule
   }
 
   return inherit( Object, PhotonAbsorptionModel, {
@@ -136,15 +145,6 @@ define( function( require ) {
   } );
 } );
 
-//
-//  // Variables that control periodic photon emission.
-//  private double photonEmissionCountdownTimer = Double.POSITIVE_INFINITY;
-//  private double photonEmissionPeriodTarget = DEFAULT_PHOTON_EMISSION_PERIOD;
-//  private double previousEmissionAngle = 0;
-//
-//  // Collection that contains the molecules that comprise the configurable
-//  // atmosphere.
-//  private final ArrayList<Molecule> configurableAtmosphereMolecules = new ArrayList<Molecule>();
 //
 //  // Object that listens to molecules to see when they emit photons.
 //  private final Molecule.Adapter moleculePhotonEmissionListener = new Molecule.Adapter() {
