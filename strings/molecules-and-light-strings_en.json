@@ -1,3 +1,7 @@
 {
-  "molecules-and-light.name": "Molecules and Light"
+  "molecules-and-light.name": "Molecules and Light",
+  "microwave": "Microwave",
+  "infrared": "Infrared",
+  "visible": "Visible",
+  "ultraviolet": "Ultraviolet"
 }
