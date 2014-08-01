@@ -115,7 +115,9 @@ define( function( require ) {
   // TODO: Testing Molecule.js, this can be removed soon.
   var testMolecule = new Molecule();
   testMolecule.setPhotonAbsorptionStrategy( 350.5, 'blue' );
+  testMolecule.addInitialAtomCogOffset( 'carbon', new Vector2( 150, 75 ) );
   console.log( testMolecule.mapWavelengthToAbsorptionStrategy );
+  console.log( testMolecule.initialAtomCogOffsets );
 
   function PhotonAbsorptionModel() {
     //TODO: We need to build something that behaves sufficiently like EventListenerList

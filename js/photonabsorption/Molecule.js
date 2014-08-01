@@ -133,7 +133,50 @@ define( function( require ) {
 
     setPhotonAbsorptionStrategy: function( wavelength, strategy ) {
       this.mapWavelengthToAbsorptionStrategy[ wavelength ] = strategy;
+    },
+
+    /**
+     * Checks to see if a photon has been absorbed.
+     * @return {Boolean}
+     */
+    isPhotonAbsorbed: function() {
+      // If there is an active non-null photon absorption strategy, it
+      // indicates that a photon has been absorbed.
+      // TODO: Requires PhotonAbsorptionStrategy before this can be called.
+      //  return !( this.activePhotonAbsorptionStrategy instanceof PhotonAbsorptionStrategy.NullPhotonAbsorptionStrategy );
+    },
+
+    /**
+     * Add an initial offset from the molecule's Center of Gravity (COG).
+     * The offset is "initial" because this is where the atom should be when
+     * it is not vibrating or rotating.
+     *
+     * @param {Atom} atom
+     * @param {Vector2} offset - Initial COG offset for when atom is not vibrating or rotating.
+     */
+    addInitialAtomCogOffset: function( atom, offset ) {
+      // Check that the specified atom is a part of this molecule.  While it
+      // would probably work to add the offsets first and the atoms later,
+      // that's not how the sim was designed, so this is some enforcement of
+      // the "add the atoms first" policy.
+      assert && assert( this.atoms.contains( atom ) );
+      this.initialAtomCogOffsets[ atom ] = offset;
+    },
+
+
+    /**
+     * Get the initial offset from the molecule's center of gravity (COG) for
+     * the specified molecule.
+     * @param {Atom} atom
+     * @return {Vector2}
+     */
+    getInitialAtomCogOffset: function( atom ) {
+      if ( !(atom in this.initalAtomCogOffsets) ) {
+        console.log( " - Warning: Attempt to get initial COG offset for atom that is not in molecule." );
     }
+      return this.initialAtomCogOffsets[atom];
+    }
+
   } );
 } );
 
@@ -146,39 +189,10 @@ define( function( require ) {
 //  //------------------------------------------------------------------------
 //
 
+
 //
-//  protected boolean isPhotonAbsorbed() {
-//    // If there is an active non-null photon absorption strategy, it
-//    // indicates that a photon has been absorbed.
-//    return !( activePhotonAbsorptionStrategy instanceof PhotonAbsorptionStrategy.NullPhotonAbsorptionStrategy );
-//  }
-//
-//  /**
-//   * Add an initial offset from the molecule's Center of Gravity (COG).
-//   * The offset is "initial" because this is where the atom should be when
-//   * it is not vibrating or rotating.
-//   */
-//  protected void addInitialAtomCogOffset( Atom atom, MutableVector2D offset ) {
-//    // Check that the specified atom is a part of this molecule.  While it
-//    // would probably work to add the offsets first and the atoms later,
-//    // that's not how the sim was designed, so this is some enforcement of
-//    // the "add the atoms first" policy.
-//    assert atoms.contains( atom );
-//
-//    initialAtomCogOffsets.put( atom, offset );
-//  }
-//
-//  /**
-//   * Get the initial offset from the molecule's center of gravity (COG) for
-//   * the specified molecule.
-//   */
-//  protected MutableVector2D getInitialAtomCogOffset( Atom atom ) {
-//    if ( !initialAtomCogOffsets.containsKey( atom ) ) {
-//      System.out.println( getClass().getName() + " - Warning: Attempt to get initial COG offset for atom that is not in molecule." );
-//    }
-//    return initialAtomCogOffsets.get( atom );
-//  }
-//
+
+
 //  /**
 //   * Get the current vibration offset from the molecule's center of gravity
 //   * (COG) for the specified molecule.
