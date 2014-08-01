@@ -17,7 +17,6 @@ define( function( require ) {
 
   // modules
   var Vector2 = require( 'DOT/Vector2' );
-  var ObservableVector2 = require( 'DOT/ObservableVector2' );
   var inherit = require( 'PHET_CORE/inherit' );
 
   //------------------------------------------------------------------------
@@ -73,7 +72,7 @@ define( function( require ) {
     this.listeners = []; // Elements are event listeners
 
     // Velocity for this molecule.
-    this.velocity = new ObservableVector2D();
+    this.velocity = new Vector2();
 
     // Map that matches photon wavelengths to photon absorption strategies.
     // The strategies contained in this structure define whether the
@@ -86,7 +85,7 @@ define( function( require ) {
     // Currently active photon absorption strategy, active because a photon
     // was absorbed that activated it.
     // TODO: Requires Dependency PhotonAbsorptionStrategy
-    this.activePhotonAbsorptionStrategy = new PhotonAbsorptionStrategy.NullPhotonAbsorptionStrategy( this );
+    //this.activePhotonAbsorptionStrategy = new PhotonAbsorptionStrategy.NullPhotonAbsorptionStrategy( this );
 
     // Variable that prevents reabsorption for a while after emitting a photon.
     this.absorbtionHysteresisCountdownTime = 0;
@@ -130,6 +129,10 @@ define( function( require ) {
 
     step: function() {
       // Handle model animation here.
+    },
+
+    setPhotonAbsorptionStrategy: function( wavelength, strategy ) {
+      this.mapWavelengthToAbsorptionStrategy[ wavelength ] = strategy;
     }
   } );
 } );
@@ -142,9 +145,7 @@ define( function( require ) {
 //  // Methods
 //  //------------------------------------------------------------------------
 //
-//  protected void setPhotonAbsorptionStrategy( double wavelength, PhotonAbsorptionStrategy strategy ) {
-//    mapWavelengthToAbsorptionStrategy.put( wavelength, strategy );
-//  }
+
 //
 //  protected boolean isPhotonAbsorbed() {
 //    // If there is an active non-null photon absorption strategy, it

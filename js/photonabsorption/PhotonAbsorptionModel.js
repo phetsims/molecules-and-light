@@ -24,6 +24,8 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Rectangle = require( 'DOT/Rectangle' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/WavelengthConstants' );
+  var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/Molecule' );
+
 
   //----------------------------------------------------------------------------
   // Class Data
@@ -110,6 +112,11 @@ define( function( require ) {
     }
   }
 
+  // TODO: Testing Molecule.js, this can be removed soon.
+  var testMolecule = new Molecule();
+  testMolecule.setPhotonAbsorptionStrategy( 350.5, 'blue' );
+  console.log( testMolecule.mapWavelengthToAbsorptionStrategy );
+
   function PhotonAbsorptionModel() {
     //TODO: We need to build something that behaves sufficiently like EventListenerList
     this.listeners = [];
@@ -130,6 +137,8 @@ define( function( require ) {
     // Collection that contains the molecules that comprise the configurable
     // atmosphere.
     this.configurableAtmosphereMolecules = []; // Elements are of type Molecule
+
+
   }
 
   return inherit( Object, PhotonAbsorptionModel, {
