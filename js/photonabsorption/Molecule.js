@@ -317,7 +317,7 @@ define( function( require ) {
      * Create a new Vector2 describing the location of this molecules center of gravity.
      *
      * @return {Vector2}
-     */
+     **/
     getCenterOfGravityPos: function() {
       return new Vector2( this.centerOfGravity.x, this.centerOfGravity.y );
     },
@@ -325,7 +325,7 @@ define( function( require ) {
      * Get the location of this molecules center of gravity.
      *
      * @return {Vector2} - centerOfGravity
-     */
+     **/
     getCenterOfGravityPosRef: function() {
       return this.centerOfGravity;
     },
@@ -341,7 +341,7 @@ define( function( require ) {
      * @param {Number} y - the y location to set
      *
      * TODO: Requires the updateAtomPositions() and notifyCenterOfGravityPosChanged() functions.
-     */
+     **/
     setCenterOfGravityPos: function( x, y ) {
       if ( this.centerOfGravity.x != x || this.centerOfGravity.y != y ) {
         this.centerOfGravity.setXY( x, y );
@@ -355,7 +355,7 @@ define( function( require ) {
      * Allows passing a Vector2 into setCenterOfGravityPos.
      *
      * @param {Vector2} centerOfGravityPos - A vector representing the desired location for this molecule
-     */
+     **/
     setCenterOfGravityPosVec: function( centerOfGravityPos ) {
       this.setCenterOfGravityPos( centerOfGravityPos.x, centerOfGravityPos.y );
     },
@@ -365,7 +365,7 @@ define( function( require ) {
      * is in its vibration
      *
      * @param {Number} vibrationRadians - The angle describing where this molecule is in its vibration.
-     */
+     **/
     setVibration: function( vibrationRadians ) {
       this.currentVibrationRadians = vibrationRadians;
       return;   // Implements no vibration by default, override in descendant classes as needed.
@@ -375,7 +375,7 @@ define( function( require ) {
      * Advance the vibration by the prescribed radians.
      *
      * @param {Number} deltaRadians - Change of vibration angle in radians.
-     */
+     **/
     advanceVibration: function( deltaRadians ) {
       this.currentVibrationRadians += deltaRadians;
       this.setVibration( this.currentVibrationRadians );
@@ -387,7 +387,7 @@ define( function( require ) {
      * of radians.
      *
      * @param {Number} deltaRadians - Change in radians of the Molecule's angle about the center of Gravity.
-     */
+     **/
     rotate: function( deltaRadians ) {
       this.setRotation( ( this.currentRotationRadians + deltaRadians ) % ( Math.PI * 2 ) );
     },
@@ -411,10 +411,35 @@ define( function( require ) {
      * Get this Molecules current rotation angle in Radians.
      *
      * @return {Number} currentRotationRadians - The current angle of rotation.
-     */
+     **/
     getRotation: function() {
       return this.currentRotationRadians;
+    },
+
+    /**
+     * Enable/disable a molecule's high electronic energy state, which in the
+     * real world is a state where one or more electrons has moved to a higher
+     * orbit.  In this simulation, it is generally depicted by having the
+     * molecule appear to glow.
+     *
+     * TODO: Requires the notifyElectronicEnergyStateChanged() function.
+     *
+     * @param {Boolean} highElectronicEnergyState
+     **/
+    setHighElectronicEnergyState: function( highElectronicEnergyState ) {
+      this.highElectronicEnergyState = highElectronicEnergyState;
+      //notifyElectronicEnergyStateChanged();
+    },
+
+    /**
+     * Determine if the Molecule is in a high energy state.
+     *
+     * @return {Boolean} highElectronEnergyState
+     */
+    isHighElectronicEnergyState: function() {
+      return this.highElectronicEnergyState;
     }
+
 
   }, {
     // Static Methods
@@ -463,19 +488,6 @@ define( function( require ) {
 //  protected abstract void initializeAtomOffsets();
 //
 //
-//  /**
-//   * Enable/disable a molecule's high electronic energy state, which in the
-//   * real world is a state where one or more electrons has moved to a higher
-//   * orbit.  In this simulation, it is generally depicted by having the
-//   * molecule appear to glow.
-//   *
-//   * @param highElectronicEnergyState
-//   */
-//  public void setHighElectronicEnergyState( boolean highElectronicEnergyState ) {
-//    this.highElectronicEnergyState = highElectronicEnergyState;
-//    notifyElectronicEnergyStateChanged();
-//  }
-//
 //  private void notifyElectronicEnergyStateChanged() {
 //    for ( Listener listener : listeners ) {
 //      listener.electronicEnergyStateChanged( this );
@@ -486,10 +498,6 @@ define( function( require ) {
 //    for ( Listener listener : listeners ) {
 //      listener.centerOfGravityPosChanged( this );
 //    }
-//  }
-//
-//  public boolean isHighElectronicEnergyState() {
-//    return highElectronicEnergyState;
 //  }
 //
 //  /**
