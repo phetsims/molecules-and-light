@@ -369,6 +369,16 @@ define( function( require ) {
     setVibration: function( vibrationRadians ) {
       this.currentVibrationRadians = vibrationRadians;
       return;   // Implements no vibration by default, override in descendant classes as needed.
+    },
+
+    /**
+     * Advance the vibration by the prescribed radians.
+     *
+     * @param {Number} deltaRadians - Change of vibration angle in radians.
+     */
+    advanceVibration: function( deltaRadians ) {
+      this.currentVibrationRadians += deltaRadians;
+      this.setVibration( this.currentVibrationRadians );
     }
 
   }, {
@@ -416,18 +426,6 @@ define( function( require ) {
 //   * state.
 //   */
 //  protected abstract void initializeAtomOffsets();
-//
-//
-//
-//  /**
-//   * Advance the vibration by the prescribed radians.
-//   *
-//   * @param deltaRadians
-//   */
-//  public void advanceVibration( double deltaRadians ) {
-//    currentVibrationRadians += deltaRadians;
-//    setVibration( currentVibrationRadians );
-//  }
 //
 //  /**
 //   * Rotate the molecule about the center of gravity by the specified number
