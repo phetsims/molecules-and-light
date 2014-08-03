@@ -122,9 +122,19 @@ define( function( require ) {
 
   return inherit( Object, Molecule, {
 
-    // Resets all model elements
+    /**
+     * Reset the molecule.  Any photons that have been absorbed are forgotten,
+     * and any vibration is reset.
+     * TODO: Implement PhotonAbsorptionStrategy for full porting
+     **/
     reset: function() {
-
+      this.activePhotonAbsorptionStrategy.reset();
+      this.activePhotonAbsorptionStrategy = new PhotonAbsorptionStrategy.NullPhotonAbsorptionStrategy( this );
+      this.absorbtionHysteresisCountdownTime = 0;
+      this.setVibrating( false );
+      this.setVibration( 0 );
+      this.setRotating( false );
+      this.setRotation( 0 );
     },
 
     step: function() {
@@ -169,52 +179,145 @@ define( function( require ) {
      * the specified molecule.
      * @param {Atom} atom
      * @return {Vector2}
-     */
+     **/
     getInitialAtomCogOffset: function( atom ) {
-      if ( !(atom in this.initalAtomCogOffsets) ) {
+      if ( !(atom in this.initialAtomCogOffsets) ) {
         console.log( " - Warning: Attempt to get initial COG offset for atom that is not in molecule." );
-    }
+      }
       return this.initialAtomCogOffsets[atom];
+    },
+
+    /**
+     * Get the current vibration offset from the molecule's center of gravity
+     * (COG) for the specified molecule.
+     * @param {Atom} atom
+     * @return {Vector2} - Vector representing location of vibration offset from molecule's center of gravity.
+     */
+    getVibrationAtomOffset: function( atom ) {
+      if ( !(atom in this.vibrationAtomOffsets) ) {
+        console.log( " - Warning: Attempt to get vibrational COG offset for atom that is not in molecule." );
+      }
+      return this.vibrationAtomOffsets[atom];
+    },
+
+    /**
+     * Add a "constituent molecule" to this molecule's list.  Constituent
+     * molecules are what this molecule will break into if it breaks apart.
+     * Note that this does NOT check for any sort of conservation of atoms,
+     * so use this carefully or weird break apart behaviors could result.
+     * @param {Molecule} molecule
+     **/
+    addConstituentMolecule: function( molecule ) {
+      this.constituentMolecules.push( molecule );
+    },
+
+    /**
+     * Determine if the molecule is currently vibrating.
+     * @return {Boolean} vibrating
+     */
+    isVibrating: function() {
+      return this.vibrating;
+    },
+
+    /**
+     * Advance the molecule one step in time.
+     * @param {Number} dt - The change in time.
+     * TODO: Requires the PhotonAbsorptionStrategy dependency file.
+     **/
+    stepInTime: function( dt ) {
+      activePhotonAbsorptionStrategy.stepInTime( dt );
+
+      if ( this.absorbtionHysteresisCountdownTime >= 0 ) {
+        this.absorbtionHysteresisCountdownTime -= dt;
+      }
+
+      if ( this.vibrating ) {
+        advanceVibration( dt * VIBRATION_FREQUENCY / 1000 * 2 * Math.PI );
+      }
+
+      if ( this.rotating ) {
+        var directionMultiplier = this.rotationDirectionClockwise ? -1 : 1;
+        rotate( dt * ROTATION_RATE / 1000 * 2 * Math.PI * directionMultiplier );
+      }
+
+      // Do any linear movement that is required.
+      setCenterOfGravityPos( velocity.getDestination( centerOfGravity ) );
+      setCenterOfGravityPos( centerOfGravity.getX() + velocity.getX() * dt, centerOfGravity.getY() + velocity.getY() * dt );
+    },
+
+    /**
+     * Set the molecule state to vibrating.
+     * @param {Boolean} vibration
+     **/
+    setVibrating: function( vibration ) {
+      this.vibrating = vibration;
+    },
+
+    /**
+     * Determine if this molecule is currently rotating.
+     * @return {Boolean}
+     **/
+    isRotating: function() {
+      return this.rotating;
+    },
+
+    /**
+     * Set the current molecule state to vibrating.
+     * @param {Boolean} rotating
+     **/
+    setRotating: function( rotating ) {
+      this.rotating = rotating;
+    },
+
+    /**
+     * Set the molecule rotation direction to Clockwise.
+     * @param {Boolean} rotationDirectionClockwise
+     **/
+    setRotationDirectionClockwise: function( rotationDirectionClockwise ) {
+      this.rotationDirectionClockwise = rotationDirectionClockwise;
+    },
+
+    /**
+     * Add a listener to this molecules array of listeners.
+     * @param {Listener} listener
+     * TODO: indexOf() will return -1 if item is not in array.  Make sure that this is ok.
+     **/
+    addListener: function( listener ) {
+      // Don't bother adding if already there.
+      if ( this.listeners.indexOf( listener ) == -1 ) {
+        this.listeners.push( listener );
+      }
+    },
+
+    /**
+     * Remove a listener from this molecules array of listeners.
+     * @param {Listener} listener
+     **/
+    removeListener: function( listener ) {
+      // find the listener in the array.
+      var index = this.listeners.indexOf( listener );
+      if ( index > -1 ) {
+        this.listeners.splice( index, 1 );
+      }
     }
 
-  } );
-} );
+  }, {
+    // Static Methods
 
-//  //------------------------------------------------------------------------
-//  // Constructor(s)
-//  //------------------------------------------------------------------------
-//
-//  //------------------------------------------------------------------------
-//  // Methods
-//  //------------------------------------------------------------------------
-//
-
-
-//
-
-
-//  /**
-//   * Get the current vibration offset from the molecule's center of gravity
-//   * (COG) for the specified molecule.
-//   */
-//  protected MutableVector2D getVibrationAtomOffset( Atom atom ) {
-//    if ( !vibrationAtomOffsets.containsKey( atom ) ) {
-//      System.out.println( getClass().getName() + " - Warning: Attempt to get vibrational COG offset for atom that is not in molecule." );
-//    }
-//    return vibrationAtomOffsets.get( atom );
-//  }
-//
-//  /**
-//   * Add a "constituent molecule" to this molecule's list.  Constituent
-//   * molecules are what this molecule will break into if it breaks apart.
-//   * Note that this does NOT check for any sort of conservation of atoms,
-//   * so use this carefully or weird break apart behaviors could result.
-//   */
-//  protected void addConstituentMolecule( Molecule molecule ) {
-//    constituentMolecules.add( molecule );
-//  }
-//
-//  public static Molecule createMolecule( Class<? extends Molecule> moleculeClass ) {
+    /** Safely Create a new Molecule.
+     * Catches Instantiation Exceptions and Illegal Access Exceptions.
+     * (These exceptions are specific to the java newInstance() method, so new exceptions will be created.)
+     * @return {Molecule} newMolecule
+     *
+     * TODO: The original .java version used some explicit java methods.  Not sure how to go about this one.
+     * ---
+     * Temporary Notes and Questions:
+     * Declaration uses the ( Class<? extends Molecule> moleculeClass) syntax.  Will placing in static inherit
+     * to Object be an equivalent to this? Or should I call ._extend?  Or extend.js in phet-core/js/extend.js?
+     * Do we even need to check the validity of a new instance of Molecule?  We can easily call new Molecule().
+     * ---
+     **/
+//    public static Molecule createMolecule( Class<? extends Molecule> moleculeClass ) {
 //    Molecule newMolecule = null;
 //    try {
 //      newMolecule = moleculeClass.newInstance();
@@ -227,67 +330,16 @@ define( function( require ) {
 //    }
 //    return newMolecule;
 //  }
+
+  } );
+} )
+;
+
+//  //------------------------------------------------------------------------
+//  // Methods
+//  //------------------------------------------------------------------------
+
 //
-//  /**
-//   * Advance the molecule one step in time.
-//   */
-//  public void stepInTime( double dt ) {
-//
-//    activePhotonAbsorptionStrategy.stepInTime( dt );
-//
-//    if ( absorbtionHysteresisCountdownTime >= 0 ) {
-//      absorbtionHysteresisCountdownTime -= dt;
-//    }
-//
-//    if ( vibrating ) {
-//      advanceVibration( dt * VIBRATION_FREQUENCY / 1000 * 2 * Math.PI );
-//    }
-//
-//    if ( rotating ) {
-//      int directionMultiplier = rotationDirectionClockwise ? -1 : 1;
-//      rotate( dt * ROTATION_RATE / 1000 * 2 * Math.PI * directionMultiplier );
-//    }
-//
-//    // Do any linear movement that is required.
-//    setCenterOfGravityPos( velocity.getDestination( centerOfGravity ) );
-//    setCenterOfGravityPos( centerOfGravity.getX() + velocity.getX() * dt, centerOfGravity.getY() + velocity.getY() * dt );
-//  }
-//
-//  /**
-//   * Reset the molecule.  Any photons that have been absorbed are forgotten,
-//   * and any vibration is reset.
-//   *
-//   * @return
-//   */
-//  public void reset() {
-//    activePhotonAbsorptionStrategy.reset();
-//    activePhotonAbsorptionStrategy = new PhotonAbsorptionStrategy.NullPhotonAbsorptionStrategy( this );
-//    absorbtionHysteresisCountdownTime = 0;
-//    setVibrating( false );
-//    setVibration( 0 );
-//    setRotating( false );
-//    setRotation( 0 );
-//  }
-//
-//  public boolean isVibrating() {
-//    return vibrating;
-//  }
-//
-//  public void setVibrating( boolean vibration ) {
-//    this.vibrating = vibration;
-//  }
-//
-//  public boolean isRotating() {
-//    return rotating;
-//  }
-//
-//  public void setRotating( boolean rotating ) {
-//    this.rotating = rotating;
-//  }
-//
-//  public void setRotationDirectionClockwise( boolean rotationDirectionClockwise ) {
-//    this.rotationDirectionClockwise = rotationDirectionClockwise;
-//  }
 //
 //  /**
 //   * Initialize the offsets from the center of gravity for each atom within
@@ -296,16 +348,6 @@ define( function( require ) {
 //   */
 //  protected abstract void initializeAtomOffsets();
 //
-//  public void addListener( Listener listener ) {
-//    // Don't bother adding if already there.
-//    if ( !listeners.contains( listener ) ) {
-//      listeners.add( listener );
-//    }
-//  }
-//
-//  public void removeListener( Listener listener ) {
-//    listeners.remove( listener );
-//  }
 //
 //  public Point2D getCenterOfGravityPos() {
 //    return new Point2D.Double( centerOfGravity.getX(), centerOfGravity.getY() );

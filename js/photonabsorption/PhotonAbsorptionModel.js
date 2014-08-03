@@ -116,8 +116,13 @@ define( function( require ) {
   var testMolecule = new Molecule();
   testMolecule.setPhotonAbsorptionStrategy( 350.5, 'blue' );
   testMolecule.addInitialAtomCogOffset( 'carbon', new Vector2( 150, 75 ) );
+  testMolecule.getInitialAtomCogOffset( 'carbon' );
+  testMolecule.addConstituentMolecule( 'carbon' );
+  testMolecule.addListener( 'someListener' );
   console.log( testMolecule.mapWavelengthToAbsorptionStrategy );
   console.log( testMolecule.initialAtomCogOffsets );
+  console.log( testMolecule.constituentMolecules );
+  console.log( testMolecule.listeners );
 
   function PhotonAbsorptionModel() {
     //TODO: We need to build something that behaves sufficiently like EventListenerList
