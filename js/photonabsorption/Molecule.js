@@ -462,6 +462,7 @@ define( function( require ) {
 //   */
 //  protected abstract void initializeAtomOffsets();
 //
+//
 //  /**
 //   * Enable/disable a molecule's high electronic energy state, which in the
 //   * real world is a state where one or more electrons has moved to a higher
