@@ -488,6 +488,7 @@ define( function( require ) {
 //  protected abstract void initializeAtomOffsets();
 //
 //
+//
 //  private void notifyElectronicEnergyStateChanged() {
 //    for ( Listener listener : listeners ) {
 //      listener.electronicEnergyStateChanged( this );
