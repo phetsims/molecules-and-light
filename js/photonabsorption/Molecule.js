@@ -435,11 +435,19 @@ define( function( require ) {
      * Determine if the Molecule is in a high energy state.
      *
      * @return {Boolean} highElectronEnergyState
-     */
+     **/
     isHighElectronicEnergyState: function() {
       return this.highElectronicEnergyState;
-    }
+    },
 
+
+    /**
+     * Cause the molecule to dissociate, i.e. to break apart.
+     **/
+    breakApart: function() {
+      console.log( " Error: breakApart invoked on a molecule for which the action is not implemented." );
+      assert && assert( false );
+    }
 
   }, {
     // Static Methods
@@ -499,14 +507,6 @@ define( function( require ) {
 //    for ( Listener listener : listeners ) {
 //      listener.centerOfGravityPosChanged( this );
 //    }
-//  }
-//
-//  /**
-//   * Cause the molecule to dissociate, i.e. to break apart.
-//   */
-//  public void breakApart() {
-//    System.err.println( getClass().getName() + " - Error: breakApart invoked on a molecule for which the action is not implemented." );
-//    assert false;
 //  }
 //
 //  protected void markPhotonForPassThrough( Photon photon ) {
