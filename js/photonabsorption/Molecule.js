@@ -98,7 +98,7 @@ define( function( require ) {
     this.PASS_THROUGH_PHOTON_LIST_SIZE = 10;
     this.passThroughPhotonList = []; // Array will have size PASS_THROUGH_PHOTON_LIST_SIZE with type Photon.
 
-    // Tthhe current point within this molecule's vibration sequence.
+    // The current point within this molecule's vibration sequence.
     this.currentVibrationRadians = 0;
 
     // The amount of rotation currently applied to this molecule.  This is
@@ -147,6 +147,7 @@ define( function( require ) {
 
     /**
      * Checks to see if a photon has been absorbed.
+     *
      * @return {Boolean}
      */
     isPhotonAbsorbed: function() {
@@ -177,6 +178,7 @@ define( function( require ) {
     /**
      * Get the initial offset from the molecule's center of gravity (COG) for
      * the specified molecule.
+     *
      * @param {Atom} atom
      * @return {Vector2}
      **/
@@ -190,6 +192,7 @@ define( function( require ) {
     /**
      * Get the current vibration offset from the molecule's center of gravity
      * (COG) for the specified molecule.
+     *
      * @param {Atom} atom
      * @return {Vector2} - Vector representing location of vibration offset from molecule's center of gravity.
      */
@@ -205,6 +208,7 @@ define( function( require ) {
      * molecules are what this molecule will break into if it breaks apart.
      * Note that this does NOT check for any sort of conservation of atoms,
      * so use this carefully or weird break apart behaviors could result.
+     *
      * @param {Molecule} molecule
      **/
     addConstituentMolecule: function( molecule ) {
@@ -213,6 +217,7 @@ define( function( require ) {
 
     /**
      * Determine if the molecule is currently vibrating.
+     *
      * @return {Boolean} vibrating
      */
     isVibrating: function() {
@@ -221,8 +226,9 @@ define( function( require ) {
 
     /**
      * Advance the molecule one step in time.
+     *
      * @param {Number} dt - The change in time.
-     * TODO: Requires the PhotonAbsorptionStrategy dependency file.
+     * TODO: Requires the PhotonAbsorptionStrategy dependency file and setCenterOfGravityPos functions.
      **/
     stepInTime: function( dt ) {
       activePhotonAbsorptionStrategy.stepInTime( dt );
@@ -247,6 +253,7 @@ define( function( require ) {
 
     /**
      * Set the molecule state to vibrating.
+     *
      * @param {Boolean} vibration
      **/
     setVibrating: function( vibration ) {
@@ -255,6 +262,7 @@ define( function( require ) {
 
     /**
      * Determine if this molecule is currently rotating.
+     *
      * @return {Boolean}
      **/
     isRotating: function() {
@@ -263,6 +271,7 @@ define( function( require ) {
 
     /**
      * Set the current molecule state to vibrating.
+     *
      * @param {Boolean} rotating
      **/
     setRotating: function( rotating ) {
@@ -271,6 +280,7 @@ define( function( require ) {
 
     /**
      * Set the molecule rotation direction to Clockwise.
+     *
      * @param {Boolean} rotationDirectionClockwise
      **/
     setRotationDirectionClockwise: function( rotationDirectionClockwise ) {
@@ -279,6 +289,7 @@ define( function( require ) {
 
     /**
      * Add a listener to this molecules array of listeners.
+     *
      * @param {Listener} listener
      * TODO: indexOf() will return -1 if item is not in array.  Make sure that this is ok.
      **/
@@ -291,6 +302,7 @@ define( function( require ) {
 
     /**
      * Remove a listener from this molecules array of listeners.
+     *
      * @param {Listener} listener
      **/
     removeListener: function( listener ) {
@@ -299,6 +311,64 @@ define( function( require ) {
       if ( index > -1 ) {
         this.listeners.splice( index, 1 );
       }
+    },
+
+    /**
+     * Create a new Vector2 describing the location of this molecules center of gravity.
+     *
+     * @return {Vector2}
+     */
+    getCenterOfGravityPos: function() {
+      return new Vector2( this.centerOfGravity.x, this.centerOfGravity.y );
+    },
+    /**
+     * Get the location of this molecules center of gravity.
+     *
+     * @return {Vector2} - centerOfGravity
+     */
+    getCenterOfGravityPosRef: function() {
+      return this.centerOfGravity;
+    },
+
+    /**
+     * Set the location of this molecule by specifying the center of gravity.
+     * This will be unique to each molecule's configuration, and it will cause
+     * the individual molecules to be located such that the center of gravity
+     * is in the specified location.  The relative orientation of the atoms
+     * that comprise the molecules will not be changed.
+     *
+     * @param {Number} x - the x location to set
+     * @param {Number} y - the y location to set
+     *
+     * TODO: Requires the updateAtomPositions() and notifyCenterOfGravityPosChanged() functions.
+     */
+    setCenterOfGravityPos: function( x, y ) {
+      if ( this.centerOfGravity.x != x || this.centerOfGravity.y != y ) {
+        this.centerOfGravity.setXY( x, y );
+        //updateAtomPositions();
+        //notifyCenterOfGravityPosChanged();
+      }
+    },
+
+    /**
+     * Set the location of this molecule by specifying the center of gravity.
+     * Allows passing a Vector2 into setCenterOfGravityPos.
+     *
+     * @param {Vector2} centerOfGravityPos - A vector representing the desired location for this molecule
+     */
+    setCenterOfGravityPosVec: function( centerOfGravityPos ) {
+      this.setCenterOfGravityPos( centerOfGravityPos.x, centerOfGravityPos.y );
+    },
+
+    /**
+     * Set the angle, in terms of radians from 0 to 2*PI, where this molecule
+     * is in its vibration
+     *
+     * @param {Number} vibrationRadians - The angle describing where this molecule is in its vibration.
+     */
+    setVibration: function( vibrationRadians ) {
+      this.currentVibrationRadians = vibrationRadians;
+      return;   // Implements no vibration by default, override in descendant classes as needed.
     }
 
   }, {
@@ -338,7 +408,6 @@ define( function( require ) {
 //  //------------------------------------------------------------------------
 //  // Methods
 //  //------------------------------------------------------------------------
-
 //
 //
 //  /**
@@ -349,44 +418,6 @@ define( function( require ) {
 //  protected abstract void initializeAtomOffsets();
 //
 //
-//  public Point2D getCenterOfGravityPos() {
-//    return new Point2D.Double( centerOfGravity.getX(), centerOfGravity.getY() );
-//  }
-//
-//  protected Point2D getCenterOfGravityPosRef() {
-//    return centerOfGravity;
-//  }
-//
-//  /**
-//   * Set the location of this molecule by specifying the center of gravity.
-//   * This will be unique to each molecule's configuration, and it will cause
-//   * the individual molecules to be located such that the center of gravity
-//   * is in the specified location.  The relative orientation of the atoms
-//   * that comprise the molecules will not be changed.
-//   *
-//   * @param x the x location to set
-//   * @param y the y location to set
-//   */
-//  public void setCenterOfGravityPos( double x, double y ) {
-//    if ( centerOfGravity.getX() != x || centerOfGravity.getY() != y ) {
-//      this.centerOfGravity.setLocation( x, y );
-//      updateAtomPositions();
-//      notifyCenterOfGravityPosChanged();
-//    }
-//  }
-//
-//  public void setCenterOfGravityPos( Point2D centerOfGravityPos ) {
-//    setCenterOfGravityPos( centerOfGravityPos.getX(), centerOfGravityPos.getY() );
-//  }
-//
-//  /**
-//   * Set the angle, in terms of radians from 0 to 2*PI, where this molecule
-//   * is in its vibration sequence.
-//   */
-//  public void setVibration( double vibrationRadians ) {
-//    currentVibrationRadians = vibrationRadians;
-//    return; // Implements no vibration by default, override in descendant classes as needed.
-//  }
 //
 //  /**
 //   * Advance the vibration by the prescribed radians.
