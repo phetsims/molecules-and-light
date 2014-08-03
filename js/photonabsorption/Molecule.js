@@ -238,12 +238,12 @@ define( function( require ) {
       }
 
       if ( this.vibrating ) {
-        advanceVibration( dt * VIBRATION_FREQUENCY / 1000 * 2 * Math.PI );
+        this.advanceVibration( dt * VIBRATION_FREQUENCY / 1000 * 2 * Math.PI );
       }
 
       if ( this.rotating ) {
         var directionMultiplier = this.rotationDirectionClockwise ? -1 : 1;
-        rotate( dt * ROTATION_RATE / 1000 * 2 * Math.PI * directionMultiplier );
+        this.rotate( dt * ROTATION_RATE / 1000 * 2 * Math.PI * directionMultiplier );
       }
 
       // Do any linear movement that is required.
@@ -379,6 +379,41 @@ define( function( require ) {
     advanceVibration: function( deltaRadians ) {
       this.currentVibrationRadians += deltaRadians;
       this.setVibration( this.currentVibrationRadians );
+    },
+
+
+    /**
+     * Rotate the molecule about the center of gravity by the specified number
+     * of radians.
+     *
+     * @param {Number} deltaRadians - Change in radians of the Molecule's angle about the center of Gravity.
+     */
+    rotate: function( deltaRadians ) {
+      this.setRotation( ( this.currentRotationRadians + deltaRadians ) % ( Math.PI * 2 ) );
+    },
+
+    /**
+     * Set the rotation angle of the Molecule in radians.
+     *
+     * TODO: Requires the updateAtomPositions() function.
+     *
+     * @param {radians}
+     **/
+
+    setRotation: function( radians ) {
+      if ( radians != this.currentRotationRadians ) {
+        this.currentRotationRadians = radians;
+        //updateAtomPositions();
+      }
+    },
+
+    /**
+     * Get this Molecules current rotation angle in Radians.
+     *
+     * @return {Number} currentRotationRadians - The current angle of rotation.
+     */
+    getRotation: function() {
+      return this.currentRotationRadians;
     }
 
   }, {
@@ -426,27 +461,6 @@ define( function( require ) {
 //   * state.
 //   */
 //  protected abstract void initializeAtomOffsets();
-//
-//  /**
-//   * Rotate the molecule about the center of gravity by the specified number
-//   * of radians.
-//   *
-//   * @param deltaRadians
-//   */
-//  public void rotate( double deltaRadians ) {
-//    setRotation( ( currentRotationRadians + deltaRadians ) % ( Math.PI * 2 ) );
-//  }
-//
-//  public void setRotation( double radians ) {
-//    if ( radians != currentRotationRadians ) {
-//      currentRotationRadians = radians;
-//      updateAtomPositions();
-//    }
-//  }
-//
-//  protected double getRotation() {
-//    return currentRotationRadians;
-//  }
 //
 //  /**
 //   * Enable/disable a molecule's high electronic energy state, which in the
