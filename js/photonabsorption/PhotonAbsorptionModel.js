@@ -26,7 +26,7 @@ define( function( require ) {
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/WavelengthConstants' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/Molecule' );
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonAbsorptionStrategy' );
-
+  var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/Photon' );
 
 
   //----------------------------------------------------------------------------
@@ -138,6 +138,12 @@ define( function( require ) {
   var testPhotonAbsorptionStrategy = new PhotonAbsorptionStrategy( testMolecule );
   console.log( testPhotonAbsorptionStrategy.getMolecule() );
   console.log( testPhotonAbsorptionStrategy.queryAndAbsorbPhoton( 'photon' ) );
+
+  // TODO: Testing Photon.js, this can be removed soon.
+  var testPhoton = new Photon( 750 );
+  testPhoton.setVelocity( 25, 25 );
+  testPhoton.setLocation( 50, 50 );
+  console.log( testPhoton.getLocation() );
 
 
   function PhotonAbsorptionModel() {
