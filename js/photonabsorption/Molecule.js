@@ -61,12 +61,12 @@ define( function( require ) {
     // gravity.  These indicate the atom's position in the "relaxed" (i.e.
     // non-vibrating), non-rotated state.
     // TODO: Declaration in original java is an empty hashmap, see if an arbitrary object is correct solution.
-    this.initialAtomCogOffsets = {}; // Object contains keys of type atoms and values of type Vector2
+    this.initialAtomCogOffsets = {}; // Object contains keys of type Atoms and values of type Vector2
 
     // Vibration offsets - these represent the amount of deviation from the
     // initial (a.k.a relaxed) configuration for each molecule.
     // TODO: Declaration in original java is an empty hashmap, see if an arbitrary object is correct solution.
-    this.vibrationAtomOffsets = {}; // Object contains keys of type atoms and values of type Vector2
+    this.vibrationAtomOffsets = {}; // Object contains keys of type Atoms and values of type Vector2
 
     // Listeners to events that come from this molecule.
     this.listeners = []; // Elements are event listeners
@@ -247,14 +247,14 @@ define( function( require ) {
       }
 
       // Do any linear movement that is required.
-      setCenterOfGravityPos( velocity.getDestination( centerOfGravity ) );
-      setCenterOfGravityPos( centerOfGravity.getX() + velocity.getX() * dt, centerOfGravity.getY() + velocity.getY() * dt );
+      this.setCenterOfGravityPos( this.velocity.getDestination( this.centerOfGravity ) );
+      this.setCenterOfGravityPos( this.centerOfGravity.x + this.velocity.x * dt, this.centerOfGravity.y + this.velocity.y * dt );
     },
 
     /**
      * Set the molecule state to vibrating.
      *
-     * @param {Boolean} vibration
+     * @param {Booleant} vibration
      **/
     setVibrating: function( vibration ) {
       this.vibrating = vibration;
@@ -447,7 +447,205 @@ define( function( require ) {
     breakApart: function() {
       console.log( " Error: breakApart invoked on a molecule for which the action is not implemented." );
       assert && assert( false );
+    },
+    /**
+     * Mark a photon for passing through the molecule.  This means that the photon
+     * will not interact with the molecule.
+     *
+     * TODO: Requires the Photon dependency file.
+     *
+     * @param {Photon} photon - The photon to be passed through.
+     **/
+    markPhotonForPassThrough: function( photon ) {
+      if ( this.passThroughPhotonList.length >= this.PASS_THROUGH_PHOTON_LIST_SIZE ) {
+        // Make room for this photon be deleting the oldest one.
+        this.passThroughPhotonList.shift();
+      }
+      this.passThroughPhotonList.push( photon );
+    },
+
+    /**
+     * Determine if a photon is marked to be passed through this molecule.
+     *
+     * @param {Photon} photon
+     * @return {Boolean}
+     **/
+    isPhotonMarkedForPassThrough: function( photon ) {
+      if ( this.passThroughPhotonList.indexOf( photon ) == -1 ) {
+        return false;
+      }
+      else {
+        return true;
+      }
+    },
+
+    /**
+     * Create a new array containing the atoms which compose this molecule.
+     *
+     * @return {Array} - Array with elements of type Atom containing the atoms which compose this molecule.
+     **/
+    getAtoms: function() {
+      return new Array( this.atoms );
+    },
+
+    /**
+     * Create a new array containing this Molecules atomic bonds.
+     *
+     * @return {Array} - Array with elements of type AtomicBond containing the atomic bonds which construct this molecule.
+     **/
+    getAtomicBonds: function() {
+      return new Array( this.atomicBonds );
+    },
+
+
+    /**
+     * Decide whether or not to absorb the offered photon.  If the photon is
+     * absorbed, the matching absorption strategy is set so that it can
+     * control the molecule's post-absorption behavior.
+     *
+     * TODO: Requires photonAbsorptionStrategy.js and Photon.js dependency files.
+     *
+     * @param {Photon} photon - The photon offered for absorption.
+     * @return {Boolean} absorbPhoton
+     **/
+    queryAbsorbPhoton: function( photon ) {
+
+      var absorbPhoton = false;
+
+      if ( !this.isPhotonAbsorbed() &&
+           this.absorbtionHysteresisCountdownTime <= 0 &&
+           photon.getLocation().distance( this.getCenterOfGravityPos() ) < PHOTON_ABSORPTION_DISTANCE
+        && !this.isPhotonMarkedForPassThrough( photon )
+        ) {
+
+        // The circumstances for absorption are correct, but do we have an
+        // absorption strategy for this photon's wavelength?
+        var candidateAbsorptionStrategy = this.mapWavelengthToAbsorptionStrategy[ photon.getWavelength() ];
+        if ( candidateAbsorptionStrategy != null ) {
+          // Yes, there is a strategy available for this wavelength.
+          // Ask it if it wants the photon.
+          if ( candidateAbsorptionStrategy.queryAndAbsorbPhoton( photon ) ) {
+            // It does want it, so consider the photon absorbed.
+            absorbPhoton = true;
+            this.activePhotonAbsorptionStrategy = candidateAbsorptionStrategy;
+            this.activePhotonAbsorptionStrategy.queryAndAbsorbPhoton( photon );
+          }
+          else {
+            this.markPhotonForPassThrough( photon );//we have the decision logic once for whether a photon should be absorbed, so it is not queried a second time
+          }
+        }
+      }
+
+      return absorbPhoton;
+    },
+
+    /**
+     * Set the photon absorption strategy for this molecule.
+     *
+     * @param {PhotonAbsorptionStrategy} activeStrategy - The strategy to be set.
+     **/
+    setActiveStrategy: function( activeStrategy ) {
+      this.activePhotonAbsorptionStrategy = activeStrategy;
+    },
+
+    /**
+     * Add an atom to the list of atoms which compose this molecule.
+     *
+     * TODO: Requires the Atom.js dependency file.
+     *
+     * @param {Atom} atom - The atom to be added
+     **/
+    addAtom: function( atom ) {
+      this.atoms.push( atom );
+      this.initialAtomCogOffsets[atom] = new Vector2( 0, 0 );
+      this.vibrationAtomOffsets[atom] = new Vector2( 0, 0 );
+    },
+    /**
+     * Add an atomic bond to this Molecule's list of atomic bonds.
+     *
+     * @param {AtomicBond} atomicBond - The atomic bond to be added.
+     **/
+    addAtomicBond: function( atomicBond ) {
+      this.atomicBonds.push( atomicBond );
+    },
+
+    /**
+     * Emit the specified photon in a random direction.
+     *
+     * TODO: Requires the Photon.js dependency file.
+     * TODO: Requires the notifyPhotonEmitted function.
+     *
+     * @param {Photon} photonToEmit - The photon to be emitted.
+     **/
+    emitPhoton: function( photonToEmit ) {
+      var emissionAngle = RAND.nextDouble() * Math.PI * 2;
+      photonToEmit.setVelocity( PHOTON_EMISSION_SPEED * Math.cos( emissionAngle ),
+        ( PHOTON_EMISSION_SPEED * Math.sin( emissionAngle ) ) );
+      var centerOfGravityPosRef = this.getCenterOfGravityPosRef();
+      photonToEmit.setLocation( centerOfGravityPosRef.x, centerOfGravityPosRef.y );
+      this.notifyPhotonEmitted( photonToEmit );
+      this.absorbtionHysteresisCountdownTime = ABSORPTION_HYSTERESIS_TIME;
+    },
+
+    /**
+     * Cause the atom to emit a photon of the specified wavelength.
+     *
+     * TODO: Requires the Photon.js dependency file.
+     *
+     * @param {Number} wavelength
+     **/
+    emitNewPhoton: function( wavelength ) {
+      this.emitPhoton( new Photon( wavelength ) );
+    },
+
+
+    /**
+     * Update the positions of all atoms that comprise this molecule based on
+     * the current center of gravity and the offset for each atom.
+     *
+     * TODO: Requires the Atom.js dependency file for setPosition function.
+     *
+     **/
+    updateAtomPositions: function() {
+      for ( var atom in this.initialAtomCogOffsets ) {
+        var atomOffset = new Vector2( this.initialAtomCogOffsets[atom] );
+        // Add the vibration, if any exists.
+        atomOffset.add( this.vibrationAtomOffsets[atom] );
+        // Rotate.
+        atomOffset.rotate( this.currentRotationRadians );
+        // Set location based on combination of offset and current center
+        // of gravity.
+        atom.setPosition( centerOfGravity.getX() + atomOffset.getX(), centerOfGravity.getY() + atomOffset.getY() );
+      }
+    },
+    /**
+     * Set the velocity of this molecule from vector components.
+     *
+     * @param {Number} vx - The x component of the velocity vector.
+     * @param {Number} vy - The y component of the velocity vector.
+     **/
+    setVelocity: function( vx, vy ) {
+      setVelocity( new Vector2D( vx, vy ) );
+    },
+
+    /**
+     * Set the velocity of this molecule from a velocity vector.
+     *
+     * @param {Vector2} newVelocity - The velocity vector representing this molecules velocity.
+     **/
+    setVelocityVec: function( newVelocity ) {
+      this.velocity.set( newVelocity );
+    },
+
+    /**
+     * Get a the velocity vector of this molecule.
+     *
+     * @return {Vector2} velocity - The velocity vector of this molecule.
+     */
+    getVelocity: function() {
+      return this.velocity;
     }
+
 
   }, {
     // Static Methods
@@ -496,7 +694,6 @@ define( function( require ) {
 //  protected abstract void initializeAtomOffsets();
 //
 //
-//
 //  private void notifyElectronicEnergyStateChanged() {
 //    for ( Listener listener : listeners ) {
 //      listener.electronicEnergyStateChanged( this );
@@ -507,103 +704,6 @@ define( function( require ) {
 //    for ( Listener listener : listeners ) {
 //      listener.centerOfGravityPosChanged( this );
 //    }
-//  }
-//
-//  protected void markPhotonForPassThrough( Photon photon ) {
-//    if ( passThroughPhotonList.size() >= PASS_THROUGH_PHOTON_LIST_SIZE ) {
-//      // Make room for this photon be deleting the oldest one.
-//      passThroughPhotonList.remove( 0 );
-//    }
-//    passThroughPhotonList.add( photon );
-//  }
-//
-//  protected boolean isPhotonMarkedForPassThrough( Photon photon ) {
-//    return ( passThroughPhotonList.contains( photon ) );
-//  }
-//
-//  public ArrayList<Atom> getAtoms() {
-//    return new ArrayList<Atom>( atoms );
-//  }
-//
-//  public ArrayList<AtomicBond> getAtomicBonds() {
-//    return new ArrayList<AtomicBond>( atomicBonds );
-//  }
-//
-//  /**
-//   * Decide whether or not to absorb the offered photon.  If the photon is
-//   * absorbed, the matching absorption strategy is set so that it can
-//   * control the molecule's post-absorption behavior.
-//   *
-//   * @param photon - The photon offered for absorption.
-//   * @return
-//   */
-//  public boolean queryAbsorbPhoton( Photon photon ) {
-//
-//    boolean absorbPhoton = false;
-//
-//    if ( !isPhotonAbsorbed() &&
-//         absorbtionHysteresisCountdownTime <= 0 &&
-//         photon.getLocation().distance( getCenterOfGravityPos() ) < PHOTON_ABSORPTION_DISTANCE
-//      && !isPhotonMarkedForPassThrough( photon )
-//      ) {
-//
-//      // The circumstances for absorption are correct, but do we have an
-//      // absorption strategy for this photon's wavelength?
-//      PhotonAbsorptionStrategy candidateAbsorptionStrategy = mapWavelengthToAbsorptionStrategy.get( photon.getWavelength() );
-//      if ( candidateAbsorptionStrategy != null ) {
-//        // Yes, there is a strategy available for this wavelength.
-//        // Ask it if it wants the photon.
-//        if ( candidateAbsorptionStrategy.queryAndAbsorbPhoton( photon ) ) {
-//          // It does want it, so consider the photon absorbed.
-//          absorbPhoton = true;
-//          activePhotonAbsorptionStrategy = candidateAbsorptionStrategy;
-//          activePhotonAbsorptionStrategy.queryAndAbsorbPhoton( photon );
-//        }
-//        else {
-//          markPhotonForPassThrough( photon );//we have the decision logic once for whether a photon should be absorbed, so it is not queried a second time
-//        }
-//      }
-//    }
-//
-//    return absorbPhoton;
-//  }
-//
-//  public void setActiveStrategy( PhotonAbsorptionStrategy activeStrategy ) {
-//    this.activePhotonAbsorptionStrategy = activeStrategy;
-//  }
-//
-//  protected void addAtom( Atom atom ) {
-//    atoms.add( atom );
-//    initialAtomCogOffsets.put( atom, new MutableVector2D( 0, 0 ) );
-//    vibrationAtomOffsets.put( atom, new MutableVector2D( 0, 0 ) );
-//  }
-//
-//  protected void addAtomicBond( AtomicBond atomicBond ) {
-//    atomicBonds.add( atomicBond );
-//  }
-//
-//  /**
-//   * Cause the atom to emit a photon of the specified wavelength.
-//   *
-//   * @param wavelength
-//   */
-//  public void emitPhoton( double wavelength ) {
-//    emitPhoton( new Photon( wavelength ) );
-//  }
-//
-//  /**
-//   * Emit the specified photon in a random direction.
-//   *
-//   * @param photonToEmit
-//   */
-//  protected void emitPhoton( Photon photonToEmit ) {
-//    double emissionAngle = RAND.nextDouble() * Math.PI * 2;
-//    photonToEmit.setVelocity( (float) ( PHOTON_EMISSION_SPEED * Math.cos( emissionAngle ) ),
-//      (float) ( PHOTON_EMISSION_SPEED * Math.sin( emissionAngle ) ) );
-//    final Point2D centerOfGravityPosRef = getCenterOfGravityPosRef();
-//    photonToEmit.setLocation( centerOfGravityPosRef.getX(), centerOfGravityPosRef.getY() );
-//    notifyPhotonEmitted( photonToEmit );
-//    absorbtionHysteresisCountdownTime = ABSORPTION_HYSTERESIS_TIME;
 //  }
 //
 //  private void notifyPhotonEmitted( Photon photon ) {
@@ -618,34 +718,7 @@ define( function( require ) {
 //    }
 //  }
 //
-//  /**
-//   * Update the positions of all atoms that comprise this molecule based on
-//   * the current center of gravity and the offset for each atom.
-//   */
-//  protected void updateAtomPositions() {
-//    for ( Atom atom : initialAtomCogOffsets.keySet() ) {
-//      MutableVector2D atomOffset = new MutableVector2D( initialAtomCogOffsets.get( atom ) );
-//      // Add the vibration, if any exists.
-//      atomOffset.add( vibrationAtomOffsets.get( atom ) );
-//      // Rotate.
-//      atomOffset.rotate( currentRotationRadians );
-//      // Set location based on combination of offset and current center
-//      // of gravity.
-//      atom.setPosition( centerOfGravity.getX() + atomOffset.getX(), centerOfGravity.getY() + atomOffset.getY() );
-//    }
-//  }
 //
-//  public void setVelocity( double vx, double vy ) {
-//    setVelocity( new Vector2D( vx, vy ) );
-//  }
-//
-//  public void setVelocity( Vector2D newVelocity ) {
-//    this.velocity.setValue( newVelocity );
-//  }
-//
-//  public AbstractVector2D getVelocity() {
-//    return velocity;
-//  }
 //
 //  /**
 //   * Get an enclosing rectangle for this molecule.  This was created to

@@ -122,6 +122,7 @@ define( function( require ) {
   testMolecule.setCenterOfGravityPosVec( new Vector2( 150, 150 ) );
   testMolecule.advanceVibration( 0.5 );
   testMolecule.rotate( 0.3 );
+  testMolecule.atoms.push( 1, 2, 3, 4, 5 );
   console.log( testMolecule.mapWavelengthToAbsorptionStrategy );
   console.log( testMolecule.initialAtomCogOffsets );
   console.log( testMolecule.constituentMolecules );
@@ -129,6 +130,7 @@ define( function( require ) {
   console.log( testMolecule.getCenterOfGravityPosRef() );
   console.log( testMolecule.currentVibrationRadians );
   console.log( testMolecule.getRotation() );
+  console.log( testMolecule.getAtoms() );
 
   function PhotonAbsorptionModel() {
     //TODO: We need to build something that behaves sufficiently like EventListenerList
