@@ -25,6 +25,8 @@ define( function( require ) {
   var Rectangle = require( 'DOT/Rectangle' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/WavelengthConstants' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/Molecule' );
+  var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonAbsorptionStrategy' );
+
 
 
   //----------------------------------------------------------------------------
@@ -132,6 +134,10 @@ define( function( require ) {
   console.log( testMolecule.getRotation() );
   console.log( testMolecule.getAtoms() );
 
+  // TODO: Testing PhotonAbsorptionStrategy.js, this can be removed soon.
+  var testPhotonAbsorptionStrategy = new PhotonAbsorptionStrategy( testMolecule );
+  console.log( testPhotonAbsorptionStrategy.getMolecule() );
+  console.log( testPhotonAbsorptionStrategy.queryAndAbsorbPhoton( 'photon' ) );
   function PhotonAbsorptionModel() {
     //TODO: We need to build something that behaves sufficiently like EventListenerList
     this.listeners = [];

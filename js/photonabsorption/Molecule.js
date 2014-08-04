@@ -18,6 +18,8 @@ define( function( require ) {
   // modules
   var Vector2 = require( 'DOT/Vector2' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonAbsorptionStrategy' );
+
 
   //------------------------------------------------------------------------
   // Class Data
@@ -46,8 +48,6 @@ define( function( require ) {
   //------------------------------------------------------------------------
   // Instance Data
   //------------------------------------------------------------------------
-
-
   function Molecule() {
     // Atoms and bonds that comprise this molecule.
     this.atoms = []; // Elements are of type Atoms

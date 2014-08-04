@@ -1,51 +1,104 @@
-//// Copyright 2002-2011, University of Colorado
-//
-//package edu.colorado.phet.common.photonabsorption.model;
-//
-//import java.util.Random;
-//
-//import edu.colorado.phet.common.phetcommon.model.property.Property;
-//
-///**
-// * This is the base class for the strategies that define how a molecule
-// * reacts to a given photon.  It is responsible for the following:
-// * - Whether a given photon should be absorbed.
-// * - How the molecule reacts to the absorption,, i.e. whether it vibrates,
-// * rotates, breaks apart, etc.
-// * - Maintenance of any counters or timers associated with the reaction to
-// * the absorption, such as those related to re-emission of an absorbed
-// * photon.
-// */
-//public abstract class PhotonAbsorptionStrategy {
-//
-//  private static final double MIN_PHOTON_HOLD_TIME = 600; // Milliseconds of sim time.
-//  private static final double MAX_PHOTON_HOLD_TIME = 1200; // Milliseconds of sim time.
-//
-//  private static final Random RAND = new Random();
-//
-//  // Property that contains the probability that a given photon will be
-//  // absorbed.  It is a property rather than a simple constant so that it
-//  // can be hooked up to developer controls, since this was requested during
-//  // the development process.
-//  public static final Property<Double> photonAbsorptionProbability = new Property<Double>( 0.5 );
-//
-//  private final Molecule molecule;
-//
-//  // Variables involved in the holding and re-emitting of photons.
-//  protected Photon absorbedPhoton;
-//  protected boolean isPhotonAbsorbed = false;
-//  protected double photonHoldCountdownTime = 0;
-//
-//  /**
-//   * Constructor.
-//   */
-//  public PhotonAbsorptionStrategy( Molecule molecule ) {
-//    this.molecule = molecule;
-//  }
-//
-//  protected Molecule getMolecule() {
-//    return molecule;
-//  }
+// Copyright 2002-2011, University of Colorado
+
+/**
+ * The original java file is PhotonAbsorptionStrategy.java.  This is common
+ * code which will be used to define the photon absorption strategy for
+ * molecules in simulations like "Greenhouse Gas" and "Molecules and Light"
+ *
+ * This is the base class for the strategies that define how a molecule
+ * reacts to a given photon.  It is responsible for the following:
+ * - Whether a given photon should be absorbed.
+ * - How the molecule reacts to the absorption,, i.e. whether it vibrates,
+ * rotates, breaks apart, etc.
+ * - Maintenance of any counters or timers associated with the reaction to
+ * the absorption, such as those related to re-emission of an absorbed
+ * photon.
+ *
+ * @author Jesse Greenberg
+ */
+
+define( function( require ) {
+  'use strict';
+
+  // modules
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Vector2 = require( 'DOT/Vector2' );
+  var Rectangle = require( 'DOT/Rectangle' );
+
+  var MIN_PHOTON_HOLD_TIME = 600; // Milliseconds of sim time.
+  var MAX_PHOTON_HOLD_TIME = 1200; // Milliseconds of sim time.
+
+  //Random number generator.
+  //TODO: This can be removed after the rest of the file has been ported.
+  //TODO: We created it temporarily to help during the porting process.
+  var RAND = {
+    nextDouble: function() {
+      return Math.random();
+    }
+  };
+
+
+  function PhotonAbsorptionStrategy( molecule ) {
+    // Property that contains the probability that a given photon will be absorbed.
+    this.photonAbsorptionProbability = 0.5;
+
+    this.molecule = molecule;
+
+    // Variables involved in the holding and re-emitting of photons.
+    //this.absorbedPhoton = new Photon(); // TODO: Requires the Photon.js dependency file.
+    this.inExcitedState = false;
+    this.photonHoldCountdownTime = 0;
+  }
+
+  return inherit( Object, PhotonAbsorptionStrategy, {
+
+    getMolecule: function() {
+      return this.molecule;
+    },
+
+    /**
+     * Reset the strategy.  In most cases, this will need to be overridden in the descendant classes, but those
+     * overrides should also call this one.
+     */
+    reset: function() {
+      //this.absorbedPhoton = null; TODO: Requires the Photon.js dependency file.
+      this.inExcitedState = false;
+      this.photonHoldCountdownTime = 0;
+    },
+
+    /**
+     * Decide whether the provided photon should be absorbed.  By design,
+     * a given photon should only be requested once, not multiple times.
+     *
+     * @param {Photon} photon
+     * @return {Boolean} absorbed
+     */
+    queryAndAbsorbPhoton: function( photon ) {
+      // All circumstances are correct for photon absorption, so now we decide probabilistically whether or not to
+      // actually do it.  This essentially simulates the quantum nature of the absorption.
+      var absorbed = !this.isPhotonAbsorbed && RAND.nextDouble() < this.photonAbsorptionProbability;
+      if ( absorbed ) {
+        this.inExcitedState = true;
+        this.photonHoldCountdownTime = MIN_PHOTON_HOLD_TIME + RAND.nextDouble() * ( MAX_PHOTON_HOLD_TIME - MIN_PHOTON_HOLD_TIME );
+      }
+      return absorbed;
+    },
+
+    /**
+     * Determine if a photon is currently absorbed.
+     *
+     * @return {Boolean} inExcitedState
+     */
+    isPhotonAbsorbed: function() {
+      return this.inExcitedState;
+    }
+
+  }, {
+
+  } )
+} )
+;
+
 //
 //  /**
 //   * Step the strategy forward in time by the given time.
@@ -54,37 +107,6 @@
 //   */
 //  public abstract void stepInTime( double dt );
 //
-//  /**
-//   * Reset the strategy.  In most cases, this will need to be overridden in the descendant classes, but those
-//   * overrides should also call this one.
-//   */
-//  public void reset() {
-//    absorbedPhoton = null;
-//    isPhotonAbsorbed = false;
-//    photonHoldCountdownTime = 0;
-//  }
-//
-//  /**
-//   * Decide whether the provided photon should be absorbed.  By design,
-//   * a given photon should only be requested once, not multiple times.
-//   *
-//   * @param photon
-//   * @return
-//   */
-//  public boolean queryAndAbsorbPhoton( Photon photon ) {
-//    // All circumstances are correct for photon absorption, so now we decide probabilistically whether or not to
-//    // actually do it.  This essentially simulates the quantum nature of the absorption.
-//    final boolean absorbed = !isPhotonAbsorbed && RAND.nextDouble() < photonAbsorptionProbability.get();
-//    if ( absorbed ) {
-//      isPhotonAbsorbed = true;
-//      photonHoldCountdownTime = MIN_PHOTON_HOLD_TIME + RAND.nextDouble() * ( MAX_PHOTON_HOLD_TIME - MIN_PHOTON_HOLD_TIME );
-//    }
-//    return absorbed;
-//  }
-//
-//  protected boolean isPhotonAbsorbed() {
-//    return isPhotonAbsorbed;
-//  }
 //
 //  /**
 //   * Photon absorption strategy that causes a molecule to hold a photon
