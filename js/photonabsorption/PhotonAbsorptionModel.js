@@ -138,6 +138,8 @@ define( function( require ) {
   var testPhotonAbsorptionStrategy = new PhotonAbsorptionStrategy( testMolecule );
   console.log( testPhotonAbsorptionStrategy.getMolecule() );
   console.log( testPhotonAbsorptionStrategy.queryAndAbsorbPhoton( 'photon' ) );
+
+
   function PhotonAbsorptionModel() {
     //TODO: We need to build something that behaves sufficiently like EventListenerList
     this.listeners = [];
@@ -158,8 +160,6 @@ define( function( require ) {
     // Collection that contains the molecules that comprise the configurable
     // atmosphere.
     this.configurableAtmosphereMolecules = []; // Elements are of type Molecule
-
-
   }
 
   return inherit( Object, PhotonAbsorptionModel, {

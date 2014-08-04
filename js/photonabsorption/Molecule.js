@@ -440,14 +440,14 @@ define( function( require ) {
       return this.highElectronicEnergyState;
     },
 
-
     /**
      * Cause the molecule to dissociate, i.e. to break apart.
      **/
     breakApart: function() {
-      console.log( " Error: breakApart invoked on a molecule for which the action is not implemented." );
+      console.error( " Error: breakApart invoked on a molecule for which the action is not implemented." );
       assert && assert( false );
     },
+
     /**
      * Mark a photon for passing through the molecule.  This means that the photon
      * will not interact with the molecule.
