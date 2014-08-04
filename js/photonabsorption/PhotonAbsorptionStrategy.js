@@ -5,7 +5,7 @@
  * code which will be used to define the photon absorption strategy for
  * molecules in simulations like "Greenhouse Gas" and "Molecules and Light"
  *
- * This is the base class for the strategies that define how a molecule
+ * This is the base model for the strategies that define how a molecule
  * reacts to a given photon.  It is responsible for the following:
  * - Whether a given photon should be absorbed.
  * - How the molecule reacts to the absorption,, i.e. whether it vibrates,
