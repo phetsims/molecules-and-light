@@ -172,8 +172,30 @@ define( function( require ) {
 
   return inherit( Object, PhotonAbsorptionModel, {
 
-    // Resets all model elements
+
+    /**
+     * Reset the model to its initial state.
+     */
     reset: function() {
+
+      // Remove any photons that are currently in transit.
+      this.removeAllPhotons();
+
+      // Reset all molecules, which will stop any vibrations.
+      for ( var molecule in this.activeMolecules ) {
+        this.activeMolecules[molecule].reset();
+      }
+
+      // Set default values.
+      this.setPhotonTarget( this.initialPhotonTarget );
+      this.setEmittedPhotonWavelength( DEFAULT_EMITTED_PHOTON_WAVELENGTH );
+      this.setPhotonEmissionPeriod( DEFAULT_PHOTON_EMISSION_PERIOD );
+
+      // Reset the configurable atmosphere.
+      this.resetConfitgurableAtmosphere();
+
+      // Send out notification that the reset has occurred.
+      this.notifyModelReset();
     },
 
     // Called by the animation loop. Optional, so if your model has no animation, you can omit this.
@@ -256,30 +278,6 @@ define( function( require ) {
 //  // Methods
 //  //----------------------------------------------------------------------------
 //
-//  /**
-//   * Reset the model to its initial state.
-//   */
-//  public void reset() {
-//
-//    // Remove any photons that are currently in transit.
-//    removeAllPhotons();
-//
-//    // Reset all molecules, which will stop any vibrations.
-//    for ( Molecule molecule : activeMolecules ) {
-//      molecule.reset();
-//    }
-//
-//    // Set default values.
-//    setPhotonTarget( initialPhotonTarget );
-//    setEmittedPhotonWavelength( DEFAULT_EMITTED_PHOTON_WAVELENGTH );
-//    setPhotonEmissionPeriod( DEFAULT_PHOTON_EMISSION_PERIOD );
-//
-//    // Reset the configurable atmosphere.
-//    resetConfigurableAtmosphere();
-//
-//    // Send out notification that the reset has occurred.
-//    notifyModelReset();
-//  }
 //
 //  public void stepInTime( double dt ) {
 //
