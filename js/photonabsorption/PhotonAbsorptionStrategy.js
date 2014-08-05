@@ -47,7 +47,7 @@ define( function( require ) {
 
     // Variables involved in the holding and re-emitting of photons.
     //this.absorbedPhoton = new Photon(); // TODO: Requires the Photon.js dependency file.
-    this.inExcitedState = false;
+    this.isPhotonAbsorbed = false;
     this.photonHoldCountdownTime = 0;
   }
 
@@ -63,7 +63,7 @@ define( function( require ) {
      */
     reset: function() {
       //this.absorbedPhoton = null; TODO: Requires the Photon.js dependency file.
-      this.inExcitedState = false;
+      this.isPhotonAbsorbed = false;
       this.photonHoldCountdownTime = 0;
     },
 
@@ -79,19 +79,10 @@ define( function( require ) {
       // actually do it.  This essentially simulates the quantum nature of the absorption.
       var absorbed = !this.isPhotonAbsorbed && RAND.nextDouble() < this.photonAbsorptionProbability;
       if ( absorbed ) {
-        this.inExcitedState = true;
+        this.isPhotonAbsorbed = true;
         this.photonHoldCountdownTime = MIN_PHOTON_HOLD_TIME + RAND.nextDouble() * ( MAX_PHOTON_HOLD_TIME - MIN_PHOTON_HOLD_TIME );
       }
       return absorbed;
-    },
-
-    /**
-     * Determine if a photon is currently absorbed.
-     *
-     * @return {Boolean} inExcitedState
-     */
-    isPhotonAbsorbed: function() {
-      return this.inExcitedState;
     }
 
   }, {
