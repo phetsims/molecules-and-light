@@ -198,6 +198,55 @@ define( function( require ) {
       this.notifyModelReset();
     },
 
+    /**
+     * Advance the molecules one step in time
+     *
+     * @param {Number} dt - The incremental time step.
+     */
+    stepInTime: function( dt ) {
+
+      // Check if it is time to emit any photons.
+      if ( this.photonEmissionCountdownTimer != Number.POSITIVE_INFINITY ) {
+        this.photonEmissionCountdownTimer -= dt;
+        if ( this.photonEmissionCountdownTimer <= 0 ) {
+          // Time to emit.
+          this.emitPhoton();
+          this.photonEmissionCountdownTimer = this.photonEmissionPeriodTarget;
+        }
+      }
+
+      // Step the photons, marking any that have moved beyond the model
+      // bounds for removal.
+      // TODO: Implement a hasOnwProperty() check for the for loops, or just do a regular for loop call.
+      var photonsToRemove = [];
+      for ( var photon in this.photons ) {
+        this.photons[photon].stepInTime( dt );
+        if ( this.photons[photon].getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
+          // See if any of the molecules wish to absorb this photon.
+          for ( var molecule in this.activeMolecules ) {
+            if ( this.activeMolecules[molecule].queryAbsorbPhoton( photon ) ) {
+              photonsToRemove.push( photon );
+            }
+          }
+        }
+        else {
+          // The photon has moved beyond our simulation bounds, so remove it from the model.
+          photonsToRemove.push( photon );
+        }
+      }
+      // Remove any photons that were marked for removal.
+      for ( var photon in photonsToRemove ) {
+        this.photons.splice( photon, 1 );
+        this.notifyPhotonRemoved( photon );
+      }
+      // Step the molecules.
+      // TODO: The original java code created a new array for this for loop.  The ported version is messy, is this necessary?
+      var moleculesToStep = new Array( this.activeMolecules );
+      for ( var molecule in incrementMolecules ) {
+        moleculesToStep[molecule].stepInTime( dt );
+      }
+    },
+
     // Called by the animation loop. Optional, so if your model has no animation, you can omit this.
     step: function() {
       // Handle model animation here.
@@ -279,46 +328,6 @@ define( function( require ) {
 //  //----------------------------------------------------------------------------
 //
 //
-//  public void stepInTime( double dt ) {
-//
-//    // Check if it is time to emit any photons.
-//    if ( photonEmissionCountdownTimer != Double.POSITIVE_INFINITY ) {
-//      photonEmissionCountdownTimer -= dt;
-//      if ( photonEmissionCountdownTimer <= 0 ) {
-//        // Time to emit.
-//        emitPhoton();
-//        photonEmissionCountdownTimer = photonEmissionPeriodTarget;
-//      }
-//    }
-//
-//    // Step the photons, marking any that have moved beyond the model
-//    // bounds for removal.
-//    ArrayList<Photon> photonsToRemove = new ArrayList<Photon>();
-//    for ( Photon photon : photons ) {
-//      photon.stepInTime( dt );
-//      if ( photon.getLocation().getX() - PHOTON_EMISSION_LOCATION.getX() <= MAX_PHOTON_DISTANCE ) {
-//        // See if any of the molecules wish to absorb this photon.
-//        for ( Molecule molecule : activeMolecules ) {
-//          if ( molecule.queryAbsorbPhoton( photon ) ) {
-//            photonsToRemove.add( photon );
-//          }
-//        }
-//      }
-//      else {
-//        // The photon has moved beyond our simulation bounds, so remove it from the model.
-//        photonsToRemove.add( photon );
-//      }
-//    }
-//    // Remove any photons that were marked for removal.
-//    for ( Photon photon : photonsToRemove ) {
-//      photons.remove( photon );
-//      notifyPhotonRemoved( photon );
-//    }
-//    // Step the molecules.
-//    for ( Molecule molecule : new ArrayList<Molecule>( activeMolecules ) ) {
-//      molecule.stepInTime( dt );
-//    }
-//  }
 //
 //  public void setPhotonTarget( PhotonTarget photonTarget ) {
 //    if ( this.photonTarget != photonTarget ) {
