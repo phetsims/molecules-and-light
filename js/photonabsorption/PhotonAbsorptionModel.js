@@ -125,6 +125,8 @@ define( function( require ) {
   testMolecule.advanceVibration( 0.5 );
   testMolecule.rotate( 0.3 );
   testMolecule.atoms.push( 1, 2, 3, 4, 5 );
+  testMolecule.listeners.push( 'listener1', 'listener2', 'listener3', 'listener4', 'listener5' );
+  testMolecule.notifyElectronicEnergyStateChanged();
   console.log( testMolecule.mapWavelengthToAbsorptionStrategy );
   console.log( testMolecule.initialAtomCogOffsets );
   console.log( testMolecule.constituentMolecules );
@@ -147,7 +149,7 @@ define( function( require ) {
 
 
   function PhotonAbsorptionModel() {
-    //TODO: We need to build something that behaves sufficiently like EventListenerList
+    // TODO: We need to build something that behaves sufficiently like EventListenerList
     this.listeners = [];
     this.photons = []; //Elements are of type Photon
     this.photonWavelength = WavelengthConstants.VISIBLE_WAVELENGTH;

@@ -583,7 +583,7 @@ define( function( require ) {
         ( PHOTON_EMISSION_SPEED * Math.sin( emissionAngle ) ) );
       var centerOfGravityPosRef = this.getCenterOfGravityPosRef();
       photonToEmit.setLocation( centerOfGravityPosRef.x, centerOfGravityPosRef.y );
-      this.notifyPhotonEmitted( photonToEmit );
+      //this.notifyPhotonEmitted( photonToEmit );
       this.absorbtionHysteresisCountdownTime = ABSORPTION_HYSTERESIS_TIME;
     },
 
@@ -644,8 +644,53 @@ define( function( require ) {
      */
     getVelocity: function() {
       return this.velocity;
-    }
+    },
 
+    /**
+     * Notify the event listener that the Electron Energy State has changed.
+     *
+     * TODO: Requires the elctronicEnergyStateChanged method from the listener subclass.
+     */
+    notifyElectronicEnergyStateChanged: function() {
+      for ( var listener in this.listeners ) {
+        console.log( this.listeners[listener] );
+        //listener.electronicEnergyStateChanged( this );
+      }
+    },
+
+    /**
+     * Notify the event listener that the center of gravity for this molecules has changed.
+     *
+     * TODO: Requires centerOfGravityPosChanged() method from the Listener subclass.
+     */
+    notifyCenterOfGravityPosChanged: function() {
+      for ( var listener in this.listeners ) {
+        this.listeners[listener].centerOfGravityPosChanged( this );
+      }
+    },
+
+    /**
+     * Notify the event listener that a photon has been emitted from this molecule.
+     *
+     * @param {Photon} photon - The emitted photon
+     * TODO: Requires the photonEmitted() method from the Listener subclass.
+     */
+    notifyPhotonEmitted: function( photon ) {
+      for ( var listener in this.listeners ) {
+        this.listeners[listener].photonEmitted( photon );
+      }
+    },
+
+    /**
+     * Notify the event listener that this molecule has broken apart.
+     *
+     * TODO: Requires the brokApart method from the Listner subclass.
+     */
+    notifyBrokeApart: function() {
+      for ( var listener in this.listeners ) {
+        this.listeners[listener].brokeApart( this );
+      }
+    }
 
   }, {
     // Static Methods
@@ -692,32 +737,6 @@ define( function( require ) {
 //   * state.
 //   */
 //  protected abstract void initializeAtomOffsets();
-//
-//
-//  private void notifyElectronicEnergyStateChanged() {
-//    for ( Listener listener : listeners ) {
-//      listener.electronicEnergyStateChanged( this );
-//    }
-//  }
-//
-//  private void notifyCenterOfGravityPosChanged() {
-//    for ( Listener listener : listeners ) {
-//      listener.centerOfGravityPosChanged( this );
-//    }
-//  }
-//
-//  private void notifyPhotonEmitted( Photon photon ) {
-//    for ( Listener listener : listeners ) {
-//      listener.photonEmitted( photon );
-//    }
-//  }
-//
-//  protected void notifyBrokeApart() {
-//    for ( Listener listener : new ArrayList<Listener>( listeners ) ) {
-//      listener.brokeApart( this );
-//    }
-//  }
-//
 //
 //
 //  /**
