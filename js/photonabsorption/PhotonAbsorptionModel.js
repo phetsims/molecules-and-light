@@ -217,15 +217,15 @@ define( function( require ) {
 
       // Step the photons, marking any that have moved beyond the model
       // bounds for removal.
-      // TODO: Implement a hasOnwProperty() check for the for loops, or just do a regular for loop call.
+      //
       var photonsToRemove = [];
-      for ( var photon in this.photons ) {
+      for ( var photon = 0; photon < this.photons.length; photon++ ) {
         this.photons[photon].stepInTime( dt );
         if ( this.photons[photon].getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
           // See if any of the molecules wish to absorb this photon.
-          for ( var molecule in this.activeMolecules ) {
-            if ( this.activeMolecules[molecule].queryAbsorbPhoton( photon ) ) {
-              photonsToRemove.push( photon );
+          for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
+            if ( this.activeMolecules[molecule].queryAbsorbPhoton( this.photons[photon] ) ) {
+              photonsToRemove.push( this.photons[photon] );
             }
           }
         }
@@ -235,14 +235,16 @@ define( function( require ) {
         }
       }
       // Remove any photons that were marked for removal.
-      for ( var photon in photonsToRemove ) {
-        this.photons.splice( photon, 1 );
-        this.notifyPhotonRemoved( photon );
+      for ( photon = 0; this.photons < photonsToRemove.length; photon++ ) {
+        // Get the correct index of the photon to remove.
+        var photonIndex = this.photons.getIndexOf( photonsToRemove[photon] );
+        this.photons.splice( photonIndex, 1 );
+        //this.notifyPhotonRemoved( photon ); TODO: Implement notifyPhotonRemoved function or implement listener.
       }
       // Step the molecules.
       // TODO: The original java code created a new array for this for loop.  The ported version is messy, is this necessary?
       var moleculesToStep = new Array( this.activeMolecules );
-      for ( var molecule in incrementMolecules ) {
+      for ( molecule = 0; molecule < moleculesToStep; molecule++ ) {
         moleculesToStep[molecule].stepInTime( dt );
       }
     },
