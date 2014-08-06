@@ -93,31 +93,6 @@ define( function( require ) {
   } )
 } )
 ;
-
-//  /**
-//   * Photon absorption strategy that causes a molecule to rotate after
-//   * absorbing a photon, and re-emit the photon after some length of time.
-//   */
-//  public static class RotationStrategy extends PhotonHoldStrategy {
-//
-//    public RotationStrategy( Molecule molecule ) {
-//      super( molecule );
-//    }
-//
-//    @Override
-//    protected void photonAbsorbed() {
-//      getMolecule().setRotationDirectionClockwise( RAND.nextBoolean() );
-//      getMolecule().setRotating( true );
-//    }
-//
-//    @Override
-//    protected void reemitPhoton() {
-//      super.reemitPhoton();
-//      getMolecule().setRotating( false );
-//    }
-//
-//  }
-//
 //  /**
 //   * Photon absorption strategy that causes a molecule to break apart after
 //   * absorbing a photon.
