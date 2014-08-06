@@ -26,6 +26,7 @@ define( function( require ) {
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/WavelengthConstants' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/Molecule' );
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonAbsorptionStrategy' );
+  var PhotonHoldStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonHoldStrategy' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/Photon' );
 
 
@@ -136,17 +137,21 @@ define( function( require ) {
   console.log( testMolecule.getRotation() );
   console.log( testMolecule.getAtoms() );
 
-  // TODO: Testing PhotonAbsorptionStrategy.js, this can be removed soon.
-  var testPhotonAbsorptionStrategy = new PhotonAbsorptionStrategy( testMolecule );
-  console.log( testPhotonAbsorptionStrategy.getMolecule() );
-  console.log( testPhotonAbsorptionStrategy.queryAndAbsorbPhoton( 'photon' ) );
-
   // TODO: Testing Photon.js, this can be removed soon.
   var testPhoton = new Photon( 750 );
   testPhoton.setVelocity( 25, 25 );
   testPhoton.setLocation( 50, 50 );
   console.log( testPhoton.getLocation() );
 
+  // TODO: Testing PhotonAbsorptionStrategy.js, this can be removed soon.
+  var testPhotonAbsorptionStrategy = new PhotonAbsorptionStrategy( testMolecule );
+  //testPhotonAbsorptionStrategy.stepInTime();
+  var testHoldStrategy = new PhotonHoldStrategy( testMolecule );
+  testHoldStrategy.photonHoldCountdownTime = 0;
+  testHoldStrategy.stepInTime( 10 );
+  console.log( testPhotonAbsorptionStrategy.getMolecule() );
+  console.log( testPhotonAbsorptionStrategy.queryAndAbsorbPhoton( testPhoton ) );
+  console.log( testHoldStrategy.queryAndAbsorbPhoton( testPhoton ) );
 
   function PhotonAbsorptionModel() {
     // TODO: We need to build something that behaves sufficiently like EventListenerList

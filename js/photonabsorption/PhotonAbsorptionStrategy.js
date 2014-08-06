@@ -8,7 +8,7 @@
  * This is the base model for the strategies that define how a molecule
  * reacts to a given photon.  It is responsible for the following:
  * - Whether a given photon should be absorbed.
- * - How the molecule reacts to the absorption,, i.e. whether it vibrates,
+ * - How the molecule reacts to the absorption, i.e. whether it vibrates,
  * rotates, breaks apart, etc.
  * - Maintenance of any counters or timers associated with the reaction to
  * the absorption, such as those related to re-emission of an absorbed
@@ -24,7 +24,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/Photon' );
-
 
   var MIN_PHOTON_HOLD_TIME = 600; // Milliseconds of sim time.
   var MAX_PHOTON_HOLD_TIME = 1200; // Milliseconds of sim time.
@@ -82,7 +81,12 @@ define( function( require ) {
         this.isPhotonAbsorbed = true;
         this.photonHoldCountdownTime = MIN_PHOTON_HOLD_TIME + RAND.nextDouble() * ( MAX_PHOTON_HOLD_TIME - MIN_PHOTON_HOLD_TIME );
       }
+      console.log( " You are calling the supertype function!" );
       return absorbed;
+    },
+
+    stepInTime: function() {
+      throw new Error( 'stepInTime should be implemented in descendant photon absorption strategies.' );
     }
 
   }, {
@@ -91,15 +95,6 @@ define( function( require ) {
 } )
 ;
 
-//
-//  /**
-//   * Step the strategy forward in time by the given time.
-//   *
-//   * @param dt
-//   */
-//  public abstract void stepInTime( double dt );
-//
-//
 //  /**
 //   * Photon absorption strategy that causes a molecule to hold a photon
 //   * once is has absorbed it, then after some amount of time re-emit it.

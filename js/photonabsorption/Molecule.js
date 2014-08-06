@@ -497,7 +497,6 @@ define( function( require ) {
       return new Array( this.atomicBonds );
     },
 
-
     /**
      * Decide whether or not to absorb the offered photon.  If the photon is
      * absorbed, the matching absorption strategy is set so that it can
