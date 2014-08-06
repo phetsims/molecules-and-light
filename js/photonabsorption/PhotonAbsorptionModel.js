@@ -27,6 +27,7 @@ define( function( require ) {
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/Molecule' );
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonAbsorptionStrategy' );
   var PhotonHoldStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonHoldStrategy' );
+  var VibrationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/VibrationStrategy' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/Photon' );
 
 
@@ -147,11 +148,16 @@ define( function( require ) {
   var testPhotonAbsorptionStrategy = new PhotonAbsorptionStrategy( testMolecule );
   //testPhotonAbsorptionStrategy.stepInTime();
   var testHoldStrategy = new PhotonHoldStrategy( testMolecule );
+  var testVibrateStrategy = new VibrationStrategy( testMolecule );
   testHoldStrategy.photonHoldCountdownTime = 0;
   testHoldStrategy.stepInTime( 10 );
+  testVibrateStrategy.getMolecule().setVibrating( true );
   console.log( testPhotonAbsorptionStrategy.getMolecule() );
   console.log( testPhotonAbsorptionStrategy.queryAndAbsorbPhoton( testPhoton ) );
   console.log( testHoldStrategy.queryAndAbsorbPhoton( testPhoton ) );
+  console.log( testVibrateStrategy.getMolecule().vibrating );
+  testVibrateStrategy.reemitPhoton();
+  console.log( testVibrateStrategy.getMolecule().vibrating );
 
   function PhotonAbsorptionModel() {
     // TODO: We need to build something that behaves sufficiently like EventListenerList

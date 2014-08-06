@@ -37,7 +37,6 @@ define( function( require ) {
     }
   };
 
-
   function PhotonAbsorptionStrategy( molecule ) {
     // Property that contains the probability that a given photon will be absorbed.
     this.photonAbsorptionProbability = 0.5;
@@ -95,45 +94,7 @@ define( function( require ) {
 } )
 ;
 
-//  /**
-//   * Photon absorption strategy that causes a molecule to hold a photon
-//   * once is has absorbed it, then after some amount of time re-emit it.
-//   * In the
-//   */
-//  public static abstract class PhotonHoldStrategy extends PhotonAbsorptionStrategy {
-//
-//    private double absorbedWavelength;
-//
-//    public PhotonHoldStrategy( Molecule molecule ) {
-//      super( molecule );
-//    }
-//
-//    @Override
-//    public void stepInTime( double dt ) {
-//      photonHoldCountdownTime -= dt;
-//      if ( photonHoldCountdownTime <= 0 ) {
-//        reemitPhoton();
-//      }
-//    }
-//
-//    protected void reemitPhoton() {
-//      getMolecule().emitPhoton( absorbedWavelength );
-//      getMolecule().setActiveStrategy( new NullPhotonAbsorptionStrategy( getMolecule() ) );
-//      isPhotonAbsorbed = false;
-//    }
-//
-//    @Override
-//    public boolean queryAndAbsorbPhoton( Photon photon ) {
-//      final boolean absorbed = super.queryAndAbsorbPhoton( photon );
-//      if ( absorbed ) {
-//        this.absorbedWavelength = photon.getWavelength();
-//        photonAbsorbed();
-//      }
-//      return absorbed;
-//    }
-//
-//    protected abstract void photonAbsorbed();
-//  }
+
 //
 //  /**
 //   * Photon absorption strategy that causes a molecule to vibrate after

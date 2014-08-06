@@ -254,7 +254,7 @@ define( function( require ) {
     /**
      * Set the molecule state to vibrating.
      *
-     * @param {Booleant} vibration
+     * @param {Boolean} vibration
      **/
     setVibrating: function( vibration ) {
       this.vibrating = vibration;

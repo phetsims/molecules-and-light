@@ -57,10 +57,8 @@ define( function( require ) {
      * Null strategy.
      **/
     reemitPhoton: function() {
-      console.log( 'You just re-emitted a photon' );
-      console.log( this.getMolecule() );
-      //this.getMolecule().emitNewPhoton( this.absorbedWavelength );
-      //this.getMolecule().setActiveStrategy( new NullPhotonAbsorptionStrategy( getMolecule() ) );
+      this.getMolecule().emitNewPhoton( this.absorbedWavelength );
+      //this.getMolecule().setActiveStrategy( new NullPhotonAbsorptionStrategy( getMolecule() ) ); TODO: IMplement the NullPhotonAbsorptionStrategy.
       this.isPhotonAbsorbed = false;
     },
 
