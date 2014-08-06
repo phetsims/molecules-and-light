@@ -94,32 +94,6 @@ define( function( require ) {
 } )
 ;
 
-
-//
-//  /**
-//   * Photon absorption strategy that causes a molecule to vibrate after
-//   * absorbing a photon, and re-emit the photon after some length of time.
-//   */
-//  public static class VibrationStrategy extends PhotonHoldStrategy {
-//
-//    public VibrationStrategy( Molecule molecule ) {
-//      super( molecule );
-//    }
-//
-//    @Override
-//    protected void photonAbsorbed() {
-//      getMolecule().setVibrating( true );
-//    }
-//
-//    @Override
-//    protected void reemitPhoton() {
-//      super.reemitPhoton();
-//      getMolecule().setVibrating( false );
-//      getMolecule().setVibration( 0 );
-//    }
-//
-//  }
-//
 //  /**
 //   * Photon absorption strategy that causes a molecule to rotate after
 //   * absorbing a photon, and re-emit the photon after some length of time.

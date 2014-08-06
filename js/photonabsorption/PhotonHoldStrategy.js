@@ -15,16 +15,6 @@ define( function( require ) {
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonAbsorptionStrategy' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/Molecule' );
 
-
-  //Random number generator.
-  //TODO: This can be removed after the rest of the file has been ported.
-  //TODO: We created it temporarily to help during the porting process.
-  var RAND = {
-    nextDouble: function() {
-      return Math.random();
-    }
-  };
-
   function PhotonHoldStrategy( molecule ) {
     // Supertype constructor
     PhotonAbsorptionStrategy.call( this );

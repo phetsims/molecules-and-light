@@ -28,6 +28,7 @@ define( function( require ) {
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonAbsorptionStrategy' );
   var PhotonHoldStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonHoldStrategy' );
   var VibrationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/VibrationStrategy' );
+  var RotationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/RotationStrategy' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/Photon' );
 
 
@@ -144,11 +145,12 @@ define( function( require ) {
   testPhoton.setLocation( 50, 50 );
   console.log( testPhoton.getLocation() );
 
-  // TODO: Testing PhotonAbsorptionStrategy.js, this can be removed soon.
+  // TODO: Testing PhotonAbsorptionStrategy.js and other strategy files, this can be removed soon.
   var testPhotonAbsorptionStrategy = new PhotonAbsorptionStrategy( testMolecule );
   //testPhotonAbsorptionStrategy.stepInTime();
   var testHoldStrategy = new PhotonHoldStrategy( testMolecule );
   var testVibrateStrategy = new VibrationStrategy( testMolecule );
+  var testRotationStrategy = new RotationStrategy( testMolecule );
   testHoldStrategy.photonHoldCountdownTime = 0;
   testHoldStrategy.stepInTime( 10 );
   testVibrateStrategy.getMolecule().setVibrating( true );
@@ -158,6 +160,9 @@ define( function( require ) {
   console.log( testVibrateStrategy.getMolecule().vibrating );
   testVibrateStrategy.reemitPhoton();
   console.log( testVibrateStrategy.getMolecule().vibrating );
+  testRotationStrategy.getMolecule().setRotation( true );
+  testRotationStrategy.photonAbsorbed();
+  console.log( testRotationStrategy.getMolecule().rotationDirectionClockwise );
 
   function PhotonAbsorptionModel() {
     // TODO: We need to build something that behaves sufficiently like EventListenerList
