@@ -12,8 +12,8 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonAbsorptionStrategy' );
-  var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/Molecule' );
+  var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
+  var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
 
   function PhotonHoldStrategy( molecule ) {
     // Supertype constructor

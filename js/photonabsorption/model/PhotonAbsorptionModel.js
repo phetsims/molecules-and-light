@@ -23,13 +23,13 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
   var Rectangle = require( 'DOT/Rectangle' );
-  var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/WavelengthConstants' );
-  var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/Molecule' );
-  var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonAbsorptionStrategy' );
-  var PhotonHoldStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonHoldStrategy' );
-  var VibrationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/VibrationStrategy' );
-  var RotationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/RotationStrategy' );
-  var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/Photon' );
+  var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
+  var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
+  var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
+  var PhotonHoldStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonHoldStrategy' );
+  var VibrationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/VibrationStrategy' );
+  var RotationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/RotationStrategy' );
+  var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
 
 
   //----------------------------------------------------------------------------

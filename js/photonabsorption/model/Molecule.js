@@ -18,8 +18,8 @@ define( function( require ) {
   // modules
   var Vector2 = require( 'DOT/Vector2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonAbsorptionStrategy' );
-  var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/Photon' );
+  var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
+  var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
 
   //------------------------------------------------------------------------
   // Class Data

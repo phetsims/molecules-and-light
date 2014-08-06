@@ -23,7 +23,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
-  var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/Photon' );
+  var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
   var Property = require( 'AXON/Property' );
 
   var MIN_PHOTON_HOLD_TIME = 600; // Milliseconds of sim time.

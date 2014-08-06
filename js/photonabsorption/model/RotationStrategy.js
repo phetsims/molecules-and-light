@@ -9,8 +9,8 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var PhotonHoldStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/PhotonHoldStrategy' );
-  var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/Molecule' );
+  var PhotonHoldStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonHoldStrategy' );
+  var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
 
   //Random number generator.
   //TODO: This can be removed after the rest of the file has been ported.
