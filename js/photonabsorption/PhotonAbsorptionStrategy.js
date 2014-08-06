@@ -24,6 +24,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/Photon' );
+  var Property = require( 'AXON/Property' );
 
   var MIN_PHOTON_HOLD_TIME = 600; // Milliseconds of sim time.
   var MAX_PHOTON_HOLD_TIME = 1200; // Milliseconds of sim time.
@@ -39,7 +40,7 @@ define( function( require ) {
 
   function PhotonAbsorptionStrategy( molecule ) {
     // Property that contains the probability that a given photon will be absorbed.
-    this.photonAbsorptionProbability = 0.5;
+    this.photonAbsorptionProbabilityProperty = new Property( 0.5 );
 
     this.molecule = molecule;
 
@@ -75,7 +76,7 @@ define( function( require ) {
     queryAndAbsorbPhoton: function( photon ) {
       // All circumstances are correct for photon absorption, so now we decide probabilistically whether or not to
       // actually do it.  This essentially simulates the quantum nature of the absorption.
-      var absorbed = !this.isPhotonAbsorbed && RAND.nextDouble() < this.photonAbsorptionProbability;
+      var absorbed = !this.isPhotonAbsorbed && RAND.nextDouble() < this.photonAbsorptionProbabilityProperty.get();
       if ( absorbed ) {
         this.isPhotonAbsorbed = true;
         this.photonHoldCountdownTime = MIN_PHOTON_HOLD_TIME + RAND.nextDouble() * ( MAX_PHOTON_HOLD_TIME - MIN_PHOTON_HOLD_TIME );
