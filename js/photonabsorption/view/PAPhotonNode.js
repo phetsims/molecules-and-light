@@ -1,19 +1,42 @@
+define( function( require ) {
+  'use strict';
+
+  // modules
+  var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
+
+  // images
+  var microwavePhotonImage = require( 'image!EXAMPLE_SIM/barMagnet.png' );
+  var photon660Image = require( 'image!EXAMPLE_SIM/barMagnet.png' );
+  var thin2Image = require( 'image!EXAMPLE_SIM/barMagnet.png' );
+  var photon100Image = require( 'image!EXAMPLE_SIM/barMagnet.png' );
+
+  /**
+   * @param {BarMagnet} barMagnet
+   * @param {ModelViewTransform2} mvt
+   */
+
+// Map of photon wavelengths to visual images used for representing them.
+  var mapWavelengthToImageName = {};
+  mapWavelengthToImageName[ WavelengthConstants.MICRO_WAVELENGTH ] = microwavePhotonImage;
+  mapWavelengthToImageName[ WavelengthConstants.IR_WAVELENGTH ] = photon660Image;
+  mapWavelengthToImageName[ WavelengthConstants.VISIBLE_WAVELENGTH ] = thin2Image;
+  mapWavelengthToImageName[ WavelengthConstants.UV_WAVELENGTH ] = photon100Image;
+
+  function PAPhotonNode( photon, mvt ) {
+
+  }
+
+  return inherit( Node, PAPhotonNode );
+} );
+
+
 //// ------------------------------------------------------------------------
 //// Instance Data
 //// ------------------------------------------------------------------------
-//
-//private final PImage photonImage;
-//private final Photon photon; // Model element represented by this node.
-//private final ModelViewTransform2D mvt;
-//
-//// Map of photon wavelengths to visual images used for representing them.
-//private static final HashMap<Double, String> mapWavelengthToImageName = new HashMap<Double, String>() {{
-//  put( WavelengthConstants.MICRO_WAVELENGTH, "microwave-photon.png" );
-//  put( WavelengthConstants.IR_WAVELENGTH, "photon-660.png" );
-//  put( WavelengthConstants.VISIBLE_WAVELENGTH, "thin2.png" );
-//  put( WavelengthConstants.UV_WAVELENGTH, "photon-100.png" );
-//}};
-//
+
 //// ------------------------------------------------------------------------
 //// Constructor(s)
 //// ------------------------------------------------------------------------
