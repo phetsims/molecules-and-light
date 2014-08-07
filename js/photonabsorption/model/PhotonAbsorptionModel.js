@@ -30,7 +30,7 @@ define( function( require ) {
   var VibrationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/VibrationStrategy' );
   var RotationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/RotationStrategy' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
-
+  var ExcitationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/ExcitationStrategy' );
 
   //----------------------------------------------------------------------------
   // Class Data
@@ -151,9 +151,12 @@ define( function( require ) {
   var testHoldStrategy = new PhotonHoldStrategy( testMolecule );
   var testVibrateStrategy = new VibrationStrategy( testMolecule );
   var testRotationStrategy = new RotationStrategy( testMolecule );
+  var testExcitationStrategy = new ExcitationStrategy( testMolecule );
   testHoldStrategy.photonHoldCountdownTime = 0;
   testHoldStrategy.stepInTime( 10 );
   testVibrateStrategy.getMolecule().setVibrating( true );
+  testExcitationStrategy.photonAbsorbed;
+  testExcitationStrategy.reemitPhoton();
   console.log( testPhotonAbsorptionStrategy.getMolecule() );
   console.log( testPhotonAbsorptionStrategy.queryAndAbsorbPhoton( testPhoton ) );
   console.log( testHoldStrategy.queryAndAbsorbPhoton( testPhoton ) );

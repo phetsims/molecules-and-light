@@ -85,7 +85,7 @@ define( function( require ) {
       return absorbed;
     },
 
-    stepInTime: function() {
+    step: function() {
       throw new Error( 'stepInTime should be implemented in descendant photon absorption strategies.' );
     }
 
@@ -94,48 +94,8 @@ define( function( require ) {
   } )
 } )
 ;
-//  /**
-//   * Photon absorption strategy that causes a molecule to break apart after
-//   * absorbing a photon.
-//   */
-//  public static class BreakApartStrategy extends PhotonAbsorptionStrategy {
-//
-//    public BreakApartStrategy( Molecule molecule ) {
-//      super( molecule );
-//    }
-//
-//    @Override
-//    public void stepInTime( double dt ) {
-//      // Basically, all this strategy does is to instruct the molecule
-//      // to break apart, then reset the strategy.
-//      getMolecule().breakApart();
-//      getMolecule().setActiveStrategy( new NullPhotonAbsorptionStrategy( getMolecule() ) );
-//    }
-//  }
-//
-//  /**
-//   * Photon absorption strategy that causes a molecule to enter an exited
-//   * state after absorbing a photon, and then re-emit the photon after some
-//   * length of time.  At the time of this writing, and "excited state" is
-//   * depicted in the view as a glow that surrounds the molecule.
-//   */
-//  public static class ExcitationStrategy extends PhotonHoldStrategy {
-//
-//    public ExcitationStrategy( Molecule molecule ) {
-//      super( molecule );
-//    }
-//
-//    @Override
-//    protected void photonAbsorbed() {
-//      getMolecule().setHighElectronicEnergyState( true );
-//    }
-//
-//    @Override
-//    protected void reemitPhoton() {
-//      super.reemitPhoton();
-//      getMolecule().setHighElectronicEnergyState( false );
-//    }
-//  }
+
+
 //
 //  /**
 //   * Photon absorption strategy that does nothing, meaning that it will

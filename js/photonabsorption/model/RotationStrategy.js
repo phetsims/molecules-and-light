@@ -22,13 +22,7 @@ define( function( require ) {
 
     //TODO: Is this a decent way to implement a random boolean generator?
     nextBoolean: function() {
-      var determinant = RAND.nextDouble();
-      if ( RAND.nextDouble() < 0.555 ) {
-        return false;
-      }
-      else {
-        return true;
-      }
+      return RAND.nextDouble() < 0.50;
     }
   };
 
