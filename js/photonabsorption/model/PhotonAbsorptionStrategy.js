@@ -94,35 +94,3 @@ define( function( require ) {
   } )
 } )
 ;
-
-
-//
-//  /**
-//   * Photon absorption strategy that does nothing, meaning that it will
-//   * never cause a photon to be absorbed.
-//   */
-//  public static class NullPhotonAbsorptionStrategy extends PhotonAbsorptionStrategy {
-//    /**
-//     * Constructor.
-//     */
-//    public NullPhotonAbsorptionStrategy( Molecule molecule ) {
-//      super( molecule );
-//    }
-//
-//    @Override
-//    public void stepInTime( double dt ) {
-//      // Does nothing.
-//    }
-//
-//    /**
-//     * This strategy never absorbs.
-//     *
-//     * @param photon
-//     * @return
-//     */
-//    @Override
-//    public boolean queryAndAbsorbPhoton( Photon photon ) {
-//      return false;
-//    }
-//  }
-//}
