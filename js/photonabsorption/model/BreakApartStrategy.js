@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
+  var NullPhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/NullPhotonAbsorptionStrategy' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
 
   function BreakApartStrategy( molecule ) {
@@ -32,7 +33,6 @@ define( function( require ) {
       // Basically, all this strategy does is to instruct the molecule
       // to break apart, then reset the strategy.
       this.getMolecule().breakApart();
-      // TODO: Implement the NullPhotonAbsorptionStrategy Model.
       this.getMolecule().setActiveStrategy( new NullPhotonAbsorptionStrategy( this.getMolecule() ) );
     }
 
