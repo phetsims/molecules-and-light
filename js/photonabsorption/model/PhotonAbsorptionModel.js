@@ -34,6 +34,8 @@ define( function( require ) {
   var ExcitationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/ExcitationStrategy' );
   var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
   var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
+  var CarbonAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/CarbonAtom' );
+
 
 
   //----------------------------------------------------------------------------
@@ -171,11 +173,13 @@ define( function( require ) {
   testRotationStrategy.photonAbsorbed();
   console.log( testRotationStrategy.getMolecule().rotationDirectionClockwise );
 
-  // TODO: Testing Atom.js, this can be removed soon.
+  // TODO: Testing Atom.js and addition Atom files, this can be removed soon.
   var testAtom = new Atom( 'Blue', 25, 50, {position: new Vector2( 10000, 15 )} );
   var someAtom = new Atom( 'Red', 15, 100 );
+  var testCarbon = new CarbonAtom( { position: new Vector2( 333, 333 ) } );
   console.log( testAtom.getPositionRef() );
   console.log( someAtom.getPositionRef() );
+  console.log( testCarbon.getPositionRef() );
 
   // TODO: Testing AtomicBond.js, this can be removed soon.
   var testBond = new AtomicBond( testAtom, someAtom, {bondCount: 3} );
