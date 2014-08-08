@@ -33,6 +33,7 @@ define( function( require ) {
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
   var ExcitationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/ExcitationStrategy' );
   var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
+  var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
 
 
   //----------------------------------------------------------------------------
@@ -175,6 +176,12 @@ define( function( require ) {
   var someAtom = new Atom( 'Red', 15, 100 );
   console.log( testAtom.getPositionRef() );
   console.log( someAtom.getPositionRef() );
+
+  // TODO: Testing AtomicBond.js, this can be removed soon.
+  var testBond = new AtomicBond( testAtom, someAtom, {bondCount: 3} );
+  var someBond = new AtomicBond( testAtom, someAtom );
+  console.log( testBond.getBondCount() );
+  console.log( someBond.getBondCount() );
 
   function PhotonAbsorptionModel() {
     // TODO: We need to build something that behaves sufficiently like EventListenerList

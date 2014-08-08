@@ -21,6 +21,7 @@ define( function( require ) {
    * Constructor for the Atom.  Allows one to specify the color, radius, and
    * mass of this atom as well as an optional parameter describing the atom's
    * location.
+   *
    * @param {Color} representationColor - The desired color of the atom
    * @param {Number} radius - The radius of the model atom
    * @param {Number} mass - Mass of this atom
