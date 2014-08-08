@@ -28,19 +28,23 @@ define( function( require ) {
    * @param {*} options - An optional parameter to specify the position of this atom
    */
   function Atom( representationColor, radius, mass, options ) {
+    // Supertype constructor
     Property.call( this );
 
+    // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
       position: new Vector2( 0, 0 )
     }, options );
     this.options = options;
+
+    // Instance Variables
     this.representationColor = representationColor;
     this.radius = radius;
     this.mass = mass;
     this.position = options.position;
 
-
+    this.link( function() { console.log( 'The Atoms location has been set!' )} );
   }
 
   return inherit( Property, Atom, {
@@ -62,7 +66,7 @@ define( function( require ) {
     setPositionVec: function( position ) {
       if ( this.position != position ) {
         this.position.set( position );
-        //notifyObservers(); TODO: Implement Observer structure (Probably with Property).
+        this.set( position );
       }
     },
 
@@ -75,7 +79,7 @@ define( function( require ) {
     setPosition: function( x, y ) {
       if ( this.position.x != x || this.position.y != y ) {
         this.position.setXY( x, y );
-        //notifyObservers();  TODO: Implement Observer structure (Probably with Property).
+        this.set( x, y );
       }
     },
 
