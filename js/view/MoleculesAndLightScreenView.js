@@ -39,9 +39,8 @@ define( function( require ) {
     this.mvt = mvt; // Make mvt available to descendant types.
 
     // TODO: These are convenience commands to print the photon wavelength constants.  Remove this soon.
-    //var testPhotonNode = new PAPhotonNode( new Photon( 20 ), mvt );
-    //testPhotonNode.printWavelengthConstants();
-
+    var testPhotonNode = new PAPhotonNode( new Photon( 20 ), mvt );
+    testPhotonNode.printWavelengthConstants();
     photonAbsorptionModel.photons.add( new Photon( 750 ) );
 
     // Add the heat lamp to the left center of screen
