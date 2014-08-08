@@ -35,6 +35,8 @@ define( function( require ) {
   var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
   var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
   var CarbonAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/CarbonAtom' );
+  var HydrogenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/HydrogenAtom' );
+
 
 
 
@@ -177,9 +179,11 @@ define( function( require ) {
   var testAtom = new Atom( 'Blue', 25, 50, {position: new Vector2( 10000, 15 )} );
   var someAtom = new Atom( 'Red', 15, 100 );
   var testCarbon = new CarbonAtom( { position: new Vector2( 333, 333 ) } );
+  var testHydrogen = new HydrogenAtom( {position: new Vector2( 111, 111 ) } );
   console.log( testAtom.getPositionRef() );
   console.log( someAtom.getPositionRef() );
   console.log( testCarbon.getPositionRef() );
+  console.log( testHydrogen.getPositionRef() );
 
   // TODO: Testing AtomicBond.js, this can be removed soon.
   var testBond = new AtomicBond( testAtom, someAtom, {bondCount: 3} );
