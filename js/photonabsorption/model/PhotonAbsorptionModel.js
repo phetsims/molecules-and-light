@@ -32,6 +32,8 @@ define( function( require ) {
   var RotationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/RotationStrategy' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
   var ExcitationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/ExcitationStrategy' );
+  var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
+
 
   //----------------------------------------------------------------------------
   // Class Data
@@ -167,6 +169,12 @@ define( function( require ) {
   testRotationStrategy.getMolecule().setRotation( true );
   testRotationStrategy.photonAbsorbed();
   console.log( testRotationStrategy.getMolecule().rotationDirectionClockwise );
+
+  // TODO: Testing Atom.js, this can be removed soon.
+  var testAtom = new Atom( 'Blue', 25, 50, {position: new Vector2( 10000, 15 )} );
+  var someAtom = new Atom( 'Red', 15, 100 );
+  console.log( testAtom.getPositionRef() );
+  console.log( someAtom.getPositionRef() );
 
   function PhotonAbsorptionModel() {
     // TODO: We need to build something that behaves sufficiently like EventListenerList
