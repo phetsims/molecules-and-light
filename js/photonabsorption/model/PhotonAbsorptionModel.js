@@ -140,9 +140,9 @@ define( function( require ) {
   console.log( testMolecule.getAtoms() );
 
   // TODO: Testing Photon.js, this can be removed soon.
-  var testPhoton = new Photon( 750 );
+  var testPhoton = new Photon( 20 );
   testPhoton.setVelocity( 25, 25 );
-  testPhoton.setLocation( 50, 50 );
+  testPhoton.setLocation( 100, 100 );
   console.log( testPhoton.getLocation() );
 
   // TODO: Testing PhotonAbsorptionStrategy.js and other strategy files, this can be removed soon.
@@ -155,7 +155,7 @@ define( function( require ) {
   testHoldStrategy.photonHoldCountdownTime = 0;
   testHoldStrategy.stepInTime( 10 );
   testVibrateStrategy.getMolecule().setVibrating( true );
-  testExcitationStrategy.photonAbsorbed;
+  testExcitationStrategy.photonAbsorbed();
   testExcitationStrategy.reemitPhoton();
   console.log( testPhotonAbsorptionStrategy.getMolecule() );
   console.log( testPhotonAbsorptionStrategy.queryAndAbsorbPhoton( testPhoton ) );

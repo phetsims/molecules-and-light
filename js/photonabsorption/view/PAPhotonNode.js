@@ -8,10 +8,10 @@ define( function( require ) {
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
 
   // images
-  var microwavePhotonImage = require( 'image!EXAMPLE_SIM/barMagnet.png' );
-  var photon660Image = require( 'image!EXAMPLE_SIM/barMagnet.png' );
-  var thin2Image = require( 'image!EXAMPLE_SIM/barMagnet.png' );
-  var photon100Image = require( 'image!EXAMPLE_SIM/barMagnet.png' );
+  var microwavePhotonImage = require( 'image!MOLECULES_AND_LIGHT/microwave-photon.png' );
+  var photon660Image = require( 'image!MOLECULES_AND_LIGHT/photon-660.png' );
+  var thin2Image = require( 'image!MOLECULES_AND_LIGHT/thin2.png' );
+  var photon100Image = require( 'image!MOLECULES_AND_LIGHT/photon-100.png' );
 
   /**
    * @param {BarMagnet} barMagnet
@@ -27,15 +27,55 @@ define( function( require ) {
 
   function PAPhotonNode( photon, mvt ) {
 
+    // supertype constructor
+    Node.call( this );
+    // Cary this node through the scope in nested functions.
+    var thisNode = this;
+
+    this.photon = photon;
+//  this.photon.addObserver( this );
+    this.mvt = mvt;
+
+    console.log( mvt );
+
+    // lookup the image file that corresponds to the wavelength and add a centered image.
+    assert && assert( mapWavelengthToImageName.hasOwnProperty( this.photon.getWavelength() ) );
+    this.photonImage = new Image( mapWavelengthToImageName[ this.photon.getWavelength() ], { centerX: 0, centerY: 0 } );
+
+    // Function for updating position.
+    function updatePosition() {
+
+      // Set overall position.  Recall that positions in the model are defined
+      // as the center bottom of the item.
+      thisNode.centerX = mvt.modelToViewX( photon.getLocation().x );
+      thisNode.bottom = mvt.modelToViewY( photon.getLocation().y );
+
+    }
+
+    this.addChild( this.photonImage );
+
+    // Observe position changes.
+    photon.locationProperty.link( function() {
+      updatePosition();
+    } );
+
   }
 
-  return inherit( Node, PAPhotonNode );
+  return inherit( Node, PAPhotonNode, {
+
+      /**
+       * Testing method to print the map of photon wavelength constants.  Also testing
+       * Object.getOwnPropertyNames and hasOwnProperty().  This should be removed soon.
+       */
+      printWavelengthConstants: function() {
+        console.log( Object.getOwnPropertyNames( mapWavelengthToImageName ) );
+        console.log( Object.hasOwnProperty( 'randomvalue' ) );
+        console.log( mapWavelengthToImageName.hasOwnProperty( '20' ) );
+      }
+    }
+  )
+
 } );
-
-
-//// ------------------------------------------------------------------------
-//// Instance Data
-//// ------------------------------------------------------------------------
 
 //// ------------------------------------------------------------------------
 //// Constructor(s)
@@ -49,35 +89,4 @@ define( function( require ) {
 //public PAPhotonNode( double wavelength ) {
 //  this( new Photon( wavelength ), new ModelViewTransform2D() );
 //}
-//
-///**
-// * Primary constructor.
-// */
-//public PAPhotonNode( Photon photon, ModelViewTransform2D mvt ) {
-//
-//  this.photon = photon;
-//  this.photon.addObserver( this );
-//  this.mvt = mvt;
-//
-//  // lookup the image file that corresponds to the wavelength
-//  assert mapWavelengthToImageName.containsKey( photon.getWavelength() );
-//  photonImage = new PImage( PhotonAbsorptionResources.getImage( mapWavelengthToImageName.get( photon.getWavelength() ) ) );
-//
-//  // center the image
-//  photonImage.setOffset( -photonImage.getFullBoundsReference().width / 2,
-//      -photonImage.getFullBoundsReference().height / 2 );
-//  addChild( photonImage );
-//  updatePosition();
-//}
-//
-//// ------------------------------------------------------------------------
-//// Methods
-//// ------------------------------------------------------------------------
-//
-//public void update( Observable o, Object arg ) {
-//  updatePosition();
-//}
-//
-//private void updatePosition() {
-//  setOffset( mvt.modelToViewDouble( photon.getLocation() ) );
-//}
+

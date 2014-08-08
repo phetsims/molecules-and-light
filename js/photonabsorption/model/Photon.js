@@ -16,18 +16,20 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
+  var PropertySet = require( 'AXON/PropertySet' );
 
 
   function Photon( wavelength ) {
 
+    PropertySet.call( this, { location: new Vector2( 0, 0 )} );
+
     this.wavelength = wavelength;
-    this.location = new Vector2( 0, 0 );
     this.vx = 0;
     this.vy = 0;
 
   }
 
-  return inherit( Object, Photon, {
+  return inherit( PropertySet, Photon, {
 
     /**
      * Set the velocity of this photon from vector components.
