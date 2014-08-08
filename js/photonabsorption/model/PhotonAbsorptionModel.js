@@ -23,6 +23,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
   var Rectangle = require( 'DOT/Rectangle' );
+  var ObservableArray = require( 'AXON/ObservableArray' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
@@ -170,7 +171,7 @@ define( function( require ) {
   function PhotonAbsorptionModel() {
     // TODO: We need to build something that behaves sufficiently like EventListenerList
     this.listeners = [];
-    this.photons = []; //Elements are of type Photon
+    this.photons = new ObservableArray(); //Elements are of type Photon
     this.photonWavelength = WavelengthConstants.VISIBLE_WAVELENGTH;
     this.activeMolecules = []; // Elements are of type Molecule
     this.initialPhotonTarget = null;
@@ -187,6 +188,9 @@ define( function( require ) {
     // Collection that contains the molecules that comprise the configurable
     // atmosphere.
     this.configurableAtmosphereMolecules = []; // Elements are of type Molecule
+
+    // TODO: Testing emitPhoton(), this can be removed soon
+    this.photons.addItemAddedListener( function( photon ) {console.log( 'Created new Photon!', photon )} );
   }
 
   return inherit( Object, PhotonAbsorptionModel, {
@@ -218,11 +222,11 @@ define( function( require ) {
     },
 
     /**
-     * Advance the molecules one step in time
+     * Advance the molecules one step in time.  Called by the animation loop.
      *
      * @param {Number} dt - The incremental time step.
      */
-    stepInTime: function( dt ) {
+    step: function( dt ) {
 
       // Check if it is time to emit any photons.
       if ( this.photonEmissionCountdownTimer != Number.POSITIVE_INFINITY ) {
@@ -236,15 +240,14 @@ define( function( require ) {
 
       // Step the photons, marking any that have moved beyond the model
       // bounds for removal.
-      //
       var photonsToRemove = [];
       for ( var photon = 0; photon < this.photons.length; photon++ ) {
-        this.photons[photon].stepInTime( dt );
-        if ( this.photons[photon].getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
+        this.photons.get( photon ).stepInTime( dt );
+        if ( this.photons.get( photon ).getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
           // See if any of the molecules wish to absorb this photon.
           for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
-            if ( this.activeMolecules[molecule].queryAbsorbPhoton( this.photons[photon] ) ) {
-              photonsToRemove.push( this.photons[photon] );
+            if ( this.activeMolecules[molecule].queryAbsorbPhoton( this.photons.get( photon ) ) ) {
+              photonsToRemove.push( this.photons.get( photon ) );
             }
           }
         }
@@ -253,13 +256,9 @@ define( function( require ) {
           photonsToRemove.push( photon );
         }
       }
+      this.photons.removeAll( photonsToRemove );
       // Remove any photons that were marked for removal.
-      for ( photon = 0; this.photons < photonsToRemove.length; photon++ ) {
-        // Get the correct index of the photon to remove.
-        var photonIndex = this.photons.getIndexOf( photonsToRemove[photon] );
-        this.photons.splice( photonIndex, 1 );
-        //this.notifyPhotonRemoved( photon ); TODO: Implement notifyPhotonRemoved function or implement listener.
-      }
+
       // Step the molecules.
       // TODO: The original java code created a new array for this for loop.  The ported version is messy, is this necessary?
       var moleculesToStep = new Array( this.activeMolecules );
@@ -268,10 +267,33 @@ define( function( require ) {
       }
     },
 
-    // Called by the animation loop. Optional, so if your model has no animation, you can omit this.
-    step: function() {
-      // Handle model animation here.
+    /**
+     * Cause a photon to be emitted from the emission point.  Emitted photons
+     * will travel toward the photon target, which will decide whether a given
+     * photon should be absorbed.
+     *
+     * TODO: Requires implementation of PhotonTarget.js.
+     */
+    emitPhoton: function() {
+      var photon = new Photon( this.photonWavelength );
+      photon.setLocation( PHOTON_EMISSION_LOCATION.x, PHOTON_EMISSION_LOCATION.y );
+      var emissionAngle = 0; // Straight to the right.
+      if ( this.photonTarget == 'CONFIGURABLE_ATMOSPHERE' ) {
+        // Photons can be emitted at an angle.  In order to get a more
+        // even spread, we alternate emitting with an up or down angle.
+        emissionAngle = RAND.nextDouble() * PHOTON_EMISSION_ANGLE_RANGE / 2;
+        if ( this.previousEmissionAngle > 0 ) {
+          emissionAngle = -emissionAngle;
+        }
+        this.previousEmissionAngle = emissionAngle;
+      }
+      photon.setVelocity( PHOTON_VELOCITY * Math.cos( emissionAngle ),
+          PHOTON_VELOCITY * Math.sin( emissionAngle ) );
+      this.photons.add( photon );
+      console.log( 'You just emitted a photon!' )
+      //notifyPhotonAdded( photon ); TODO: Implement this function or some other Event Listener
     }
+
   } );
 } );
 
@@ -490,30 +512,7 @@ define( function( require ) {
 //    }
 //  }
 //
-//  /**
-//   * Cause a photon to be emitted from the emission point.  Emitted photons
-//   * will travel toward the photon target, which will decide whether a given
-//   * photon should be absorbed.
-//   */
-//  public void emitPhoton() {
 //
-//    Photon photon = new Photon( photonWavelength );
-//    photon.setLocation( PHOTON_EMISSION_LOCATION.getX(), PHOTON_EMISSION_LOCATION.getY() );
-//    double emissionAngle = 0; // Straight to the right.
-//    if ( photonTarget == PhotonTarget.CONFIGURABLE_ATMOSPHERE ) {
-//      // Photons can be emitted at an angle.  In order to get a more
-//      // even spread, we alternate emitting with an up or down angle.
-//      emissionAngle = RAND.nextDouble() * PHOTON_EMISSION_ANGLE_RANGE / 2;
-//      if ( previousEmissionAngle > 0 ) {
-//        emissionAngle = -emissionAngle;
-//      }
-//      previousEmissionAngle = emissionAngle;
-//    }
-//    photon.setVelocity( (float) ( PHOTON_VELOCITY * Math.cos( emissionAngle ) ),
-//      (float) ( PHOTON_VELOCITY * Math.sin( emissionAngle ) ) );
-//    photons.add( photon );
-//    notifyPhotonAdded( photon );
-//  }
 //
 //  public void setEmittedPhotonWavelength( double freq ) {
 //    if ( this.photonWavelength != freq ) {

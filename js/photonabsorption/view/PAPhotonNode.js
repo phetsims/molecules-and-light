@@ -44,12 +44,10 @@ define( function( require ) {
 
     // Function for updating position.
     function updatePosition() {
-
       // Set overall position.  Recall that positions in the model are defined
       // as the center bottom of the item.
       thisNode.centerX = mvt.modelToViewX( photon.getLocation().x );
       thisNode.bottom = mvt.modelToViewY( photon.getLocation().y );
-
     }
 
     this.addChild( this.photonImage );

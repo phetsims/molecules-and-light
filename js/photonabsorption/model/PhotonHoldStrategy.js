@@ -13,6 +13,8 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
+  var NullPhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/NullPhotonAbsorptionStrategy' );
+
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
 
   function PhotonHoldStrategy( molecule ) {
@@ -46,7 +48,7 @@ define( function( require ) {
      **/
     reemitPhoton: function() {
       this.getMolecule().emitNewPhoton( this.absorbedWavelength );
-      //this.getMolecule().setActiveStrategy( new NullPhotonAbsorptionStrategy( getMolecule() ) ); TODO: IMplement the NullPhotonAbsorptionStrategy.
+      this.getMolecule().setActiveStrategy( new NullPhotonAbsorptionStrategy( this.getMolecule() ) );
       this.isPhotonAbsorbed = false;
     },
 
