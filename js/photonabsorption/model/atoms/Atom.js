@@ -1,10 +1,9 @@
-//// Copyright 2002-2011, University of Colorado
-
+// Copyright 2002-2014, University of Colorado
 
 /**
  * Class that represents an atom in the model.  This is used in the
- * microscopic view of photon abosorption.  This is an abstract class, and
- * it is expected that it be extended by specific atoms.
+ * microscopic view of photon abosorption.  This model is expected to be
+ * extended by specific atoms.
  *
  * @author John Blanco
  * @author Jesse Greenberg
