@@ -689,6 +689,15 @@ define( function( require ) {
       for ( var listener in this.listeners ) {
         this.listeners[listener].brokeApart( this );
       }
+    },
+
+    /**
+     * Initialize the offsets from the center of gravity for each atom within
+     * this molecule.  This should be in the "relaxed" (i.e. non-vibrating)
+     * state.
+     */
+    initializeAtomOffsets: function() {
+      throw new Error( 'initializeAtomOffsets should be implemented in descendant molecule..' );
     }
 
   }, {
@@ -729,13 +738,6 @@ define( function( require ) {
 //  // Methods
 //  //------------------------------------------------------------------------
 //
-//
-//  /**
-//   * Initialize the offsets from the center of gravity for each atom within
-//   * this molecule.  This should be in the "relaxed" (i.e. non-vibrating)
-//   * state.
-//   */
-//  protected abstract void initializeAtomOffsets();
 //
 //
 //  /**

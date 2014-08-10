@@ -81,12 +81,13 @@ define( function( require ) {
         this.isPhotonAbsorbed = true;
         this.photonHoldCountdownTime = MIN_PHOTON_HOLD_TIME + RAND.nextDouble() * ( MAX_PHOTON_HOLD_TIME - MIN_PHOTON_HOLD_TIME );
       }
+      //TODO: Testing inheritance, remove this soon.
       console.log( " You are calling the supertype function!" );
       return absorbed;
     },
 
     step: function() {
-      throw new Error( 'stepInTime should be implemented in descendant photon absorption strategies.' );
+      throw new Error( 'step should be implemented in descendant photon absorption strategies.' );
     }
 
   }, {
