@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * Class that represents an atom of hydrogen in the model.
+ * Class that represents an atom of Nitrogen in the model.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -16,19 +16,19 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
 
-  // Model data for the Hydrogen atom
-  var REPRESENTATION_COLOR = Color.WHITE;
-  var MASS = 1;   // In atomic mass units (AMU).
-  var RADIUS = 37;     // In picometers.
+  // Model data for the Nitrogen atom
+  var REPRESENTATION_COLOR = Color.BLUE;
+  var MASS = 14.00674;   // In atomic mass units (AMU).
+  var RADIUS = 75;     // In picometers.
 
   /**
-   * Constructor for a Hydrogen atom.  There is an optional Vector2 parameter
-   * which specifies the location of this Hydrogen atom.
+   * Constructor for a Nitrogen atom.  There is an optional Vector2 parameter
+   * which specifies the location of this Nitrogen atom.
    *
-   * @param {*} options - Optional Vector2 for this Hydrogen atom's location.
+   * @param {*} options - Optional Vector2 for this Nitrogen atom's location.
    * @constructor
    */
-  function HydrogenAtom( options ) {
+  function NitrogenAtom( options ) {
     // Supertype constructor
     Atom.call( this, options );
 
@@ -46,6 +46,7 @@ define( function( require ) {
 
   }
 
-  return inherit( Atom, HydrogenAtom )
+  return inherit( Atom, NitrogenAtom )
 
 } );
+
