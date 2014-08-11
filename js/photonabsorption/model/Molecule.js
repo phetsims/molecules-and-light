@@ -700,7 +700,7 @@ define( function( require ) {
      * state.
      */
     initializeAtomOffsets: function() {
-      throw new Error( 'initializeAtomOffsets should be implemented in descendant molecule..' );
+      throw new Error( 'initializeAtomOffsets should be implemented in descendant molecules.' );
     }
 
   }, {
