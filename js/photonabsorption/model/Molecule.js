@@ -20,6 +20,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
+  var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
+
 
   //------------------------------------------------------------------------
   // Class Data
@@ -162,7 +164,8 @@ define( function( require ) {
      * The offset is "initial" because this is where the atom should be when
      * it is not vibrating or rotating.
      *
-     * @param {Atom} atom
+     * TODO: Is there a better way to do the @param? Way to check for subclasses?
+     * @param {Atom || CarbonAtom || HydrogenAtom || NitrogenAtom || OxygenAtom} atom
      * @param {Vector2} offset - Initial COG offset for when atom is not vibrating or rotating.
      */
     addInitialAtomCogOffset: function( atom, offset ) {
@@ -174,10 +177,9 @@ define( function( require ) {
       this.initialAtomCogOffsets[ atom ] = offset;
     },
 
-
     /**
      * Get the initial offset from the molecule's center of gravity (COG) for
-     * the specified molecule.
+     * the specified atom.
      *
      * @param {Atom} atom
      * @return {Vector2}
@@ -614,9 +616,10 @@ define( function( require ) {
         atomOffset.rotate( this.currentRotationRadians );
         // Set location based on combination of offset and current center
         // of gravity.
-        atom.setPosition( centerOfGravity.getX() + atomOffset.getX(), centerOfGravity.getY() + atomOffset.getY() );
+        this.initialAtomCogOffsets[atom].setXY( this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y );
       }
     },
+
     /**
      * Set the velocity of this molecule from vector components.
      *
@@ -624,7 +627,7 @@ define( function( require ) {
      * @param {Number} vy - The y component of the velocity vector.
      **/
     setVelocity: function( vx, vy ) {
-      setVelocity( new Vector2D( vx, vy ) );
+      this.setVelocityVec( new Vector2( vx, vy ) );
     },
 
     /**
@@ -737,8 +740,6 @@ define( function( require ) {
 //  //------------------------------------------------------------------------
 //  // Methods
 //  //------------------------------------------------------------------------
-//
-//
 //
 //  /**
 //   * Get an enclosing rectangle for this molecule.  This was created to

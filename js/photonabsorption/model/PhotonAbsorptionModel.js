@@ -36,9 +36,7 @@ define( function( require ) {
   var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
   var CarbonAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/CarbonAtom' );
   var HydrogenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/HydrogenAtom' );
-
-
-
+  var CO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO' );
 
   //----------------------------------------------------------------------------
   // Class Data
@@ -125,12 +123,24 @@ define( function( require ) {
     }
   }
 
+  // TODO: Testing Atom.js and addition Atom files, this can be removed soon.
+  var testAtom = new Atom( 'Blue', 25, 50, {position: new Vector2( 10000, 15 )} );
+  var someAtom = new Atom( 'Red', 15, 100 );
+  var testCarbon = new CarbonAtom( { position: new Vector2( 333, 333 ) } );
+  testCarbon.setPosition(1337, 1337);
+  var testHydrogen = new HydrogenAtom( {position: new Vector2( 111, 111 ) } );
+  console.log( testAtom.getPositionRef() );
+  console.log( someAtom.getPositionRef() );
+  console.log( testCarbon.getPositionRef() );
+  console.log( testHydrogen.getPositionRef() );
+
   // TODO: Testing Molecule.js, this can be removed soon.
   var testMolecule = new Molecule();
   testMolecule.setPhotonAbsorptionStrategy( 350.5, 'blue' );
-  testMolecule.addInitialAtomCogOffset( 'carbon', new Vector2( 150, 75 ) );
-  testMolecule.getInitialAtomCogOffset( 'carbon' );
-  testMolecule.addConstituentMolecule( 'carbon' );
+  testMolecule.addInitialAtomCogOffset( testCarbon, new Vector2( 150, 75 ) );
+  console.log( testMolecule.getInitialAtomCogOffset( testCarbon ) );
+  testMolecule.getInitialAtomCogOffset( testCarbon );
+  testMolecule.addConstituentMolecule( testCarbon );
   testMolecule.addListener( 'someListener' );
   testMolecule.setCenterOfGravityPosVec( new Vector2( 150, 150 ) );
   testMolecule.advanceVibration( 0.5 );
@@ -175,21 +185,20 @@ define( function( require ) {
   testRotationStrategy.photonAbsorbed();
   console.log( testRotationStrategy.getMolecule().rotationDirectionClockwise );
 
-  // TODO: Testing Atom.js and addition Atom files, this can be removed soon.
-  var testAtom = new Atom( 'Blue', 25, 50, {position: new Vector2( 10000, 15 )} );
-  var someAtom = new Atom( 'Red', 15, 100 );
-  var testCarbon = new CarbonAtom( { position: new Vector2( 333, 333 ) } );
-  var testHydrogen = new HydrogenAtom( {position: new Vector2( 111, 111 ) } );
-  console.log( testAtom.getPositionRef() );
-  console.log( someAtom.getPositionRef() );
-  console.log( testCarbon.getPositionRef() );
-  console.log( testHydrogen.getPositionRef() );
-
   // TODO: Testing AtomicBond.js, this can be removed soon.
   var testBond = new AtomicBond( testAtom, someAtom, {bondCount: 3} );
   var someBond = new AtomicBond( testAtom, someAtom );
   console.log( testBond.getBondCount() );
   console.log( someBond.getBondCount() );
+
+  // TODO: Testing CO.js, this can be removed soon.
+  var testCO = new CO();
+  var someCO = new CO( {location: new Vector2( 35, 35 ) } );
+  someCO.addInitialAtomCogOffset( someCO.carbonAtom, new Vector2( 10, 10) );
+  console.log( someCO.getInitialAtomCogOffset( someCO.carbonAtom ) );
+  testCO.initializeAtomOffsets();
+  console.log(testCO.atoms);
+  console.log(someCO.centerOfGravity);
 
   function PhotonAbsorptionModel() {
     // TODO: We need to build something that behaves sufficiently like EventListenerList
