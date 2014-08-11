@@ -37,6 +37,7 @@ define( function( require ) {
   var CarbonAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/CarbonAtom' );
   var HydrogenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/HydrogenAtom' );
   var CO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO' );
+  var N2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/N2' );
 
   //----------------------------------------------------------------------------
   // Class Data
@@ -191,14 +192,16 @@ define( function( require ) {
   console.log( testBond.getBondCount() );
   console.log( someBond.getBondCount() );
 
-  // TODO: Testing CO.js, this can be removed soon.
+  // TODO: Testing CO.js and N2.js, this can be removed soon.
   var testCO = new CO();
   var someCO = new CO( { initialCenterOfGravityPos: new Vector2( 35, 35 ) } );
+  var testN2 = new N2();
   someCO.addInitialAtomCogOffset( someCO.carbonAtom, new Vector2( 10, 10) );
   console.log( someCO.getInitialAtomCogOffset( someCO.carbonAtom ) );
   testCO.initializeAtomOffsets();
   console.log(testCO.atoms);
   console.log(someCO.centerOfGravity);
+  console.log( testN2.atoms );
 
   function PhotonAbsorptionModel() {
     // TODO: We need to build something that behaves sufficiently like EventListenerList
