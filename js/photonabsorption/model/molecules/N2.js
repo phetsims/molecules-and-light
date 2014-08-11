@@ -1,4 +1,4 @@
-`// Copyright 2002-2014, University of Colorado
+// Copyright 2002-2014, University of Colorado
 
 /**
  * Class that represents N2 (nitrogen) in the model.
@@ -28,60 +28,40 @@ define( function( require ) {
     // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      position: new Vector2( 0, 0 )
+      initialCenterOfGravityPos: new Vector2( 0, 0 )
     }, options );
     this.options = options;
 
     // Instance data for the nitrogen molecule
     this.nitrogenAtom1 = new NitrogenAtom();
     this.nitrogenAtom2 = new NitrogenAtom();
-    this. nitrogenNitrogenBond = new AtomicBond( nitrogenAtom1, nitrogenAtom2, 3 );
+    this.nitrogenNitrogenBond = new AtomicBond( this.nitrogenAtom1, this.nitrogenAtom2, 3 );
+    this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
+
+    // Configure the base class.
+    this.addAtom( this.nitrogenAtom1 );
+    this.addAtom( this.nitrogenAtom2 );
+    this.addAtomicBond( this.nitrogenNitrogenBond );
+
+    // Set the initial offsets
+    this.initializeAtomOffsets();
+
+    // Set the initial COG position.
+    this.setCenterOfGravityPosVec( this.initialCenterOfGravityPos );
 
   }
 
   return inherit( Molecule, N2, {
 
-
+    /**
+     * Initialize and set the COG offsets for the nitrogen atoms which compose this molecule.
+     */
+    initializeAtomOffsets: function() {
+      this.addInitialAtomCogOffset( this.nitrogenAtom1, new Vector2( -INITIAL_NITROGEN_NITROGEN_DISTANCE / 2, 0 ) );
+      this.addInitialAtomCogOffset( this.nitrogenAtom2, new Vector2( INITIAL_NITROGEN_NITROGEN_DISTANCE / 2, 0 ) );
+      this.updateAtomPositions();
+    }
 
   } )
 
 } );
-
-//
-//  // ------------------------------------------------------------------------
-//  // Constructor(s)
-//  // ------------------------------------------------------------------------
-//
-//  public N2( Point2D inititialCenterOfGravityPos ) {
-//    // Configure the base class.  It would be better to do this through
-//    // nested constructors, but I (jblanco) wasn't sure how to do this.
-//    addAtom( nitrogenAtom1 );
-//    addAtom( nitrogenAtom2 );
-//    addAtomicBond( nitrogenNitrogenBond );
-//
-//    // Set the initial offsets.
-//    initializeAtomOffsets();
-//
-//    // Set the initial COG position.
-//    setCenterOfGravityPos( inititialCenterOfGravityPos );
-//  }
-//
-//  public N2() {
-//    this( new Point2D.Double( 0, 0 ) );
-//  }
-//
-//  // ------------------------------------------------------------------------
-//  // Methods
-//  // ------------------------------------------------------------------------
-//
-//  /* (non-Javadoc)
-//   * @see edu.colorado.phet.common.photonabsorption.model.Molecule#initializeCogOffsets()
-//   */
-//  @Override
-//  protected void initializeAtomOffsets() {
-//    addInitialAtomCogOffset( nitrogenAtom1, new MutableVector2D( -INITIAL_NITROGEN_NITROGEN_DISTANCE / 2, 0 ) );
-//    addInitialAtomCogOffset( nitrogenAtom2, new MutableVector2D( INITIAL_NITROGEN_NITROGEN_DISTANCE / 2, 0 ) );
-//
-//    updateAtomPositions();
-//  }
-//}
