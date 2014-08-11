@@ -193,7 +193,7 @@ define( function( require ) {
 
   // TODO: Testing CO.js, this can be removed soon.
   var testCO = new CO();
-  var someCO = new CO( {location: new Vector2( 35, 35 ) } );
+  var someCO = new CO( { initialCenterOfGravityPos: new Vector2( 35, 35 ) } );
   someCO.addInitialAtomCogOffset( someCO.carbonAtom, new Vector2( 10, 10) );
   console.log( someCO.getInitialAtomCogOffset( someCO.carbonAtom ) );
   testCO.initializeAtomOffsets();

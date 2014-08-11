@@ -32,7 +32,7 @@ define( function( require ) {
     // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      position: new Vector2( 0, 0 )
+      initialCenterOfGravityPos: new Vector2( 0, 0 )
     }, options );
     this.options = options;
 
@@ -40,6 +40,7 @@ define( function( require ) {
     this.carbonAtom = new CarbonAtom();
     this.oxygenAtom = new OxygenAtom();
     this.carbonOxygenBond = new AtomicBond( this.carbonAtom, this.oxygenAtom, 3 );
+    this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
 
     // Configure the base class.
     this.addAtom( this.carbonAtom );
@@ -54,7 +55,10 @@ define( function( require ) {
     this.initializeAtomOffsets();
 
     // Set the initial center of gravity position.
-    this.setCenterOfGravityPos( this.initialCenterOfGravityPos );
+    //debugger;
+    console.log( this.initialCenterOfGravityPos.x );
+    this.setCenterOfGravityPosVec( this.initialCenterOfGravityPos );
+
   }
 
   return inherit( Molecule, CO, {
