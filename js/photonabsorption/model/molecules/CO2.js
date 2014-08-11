@@ -6,7 +6,7 @@
  * @author John Blanco
  * @author Jesse Greenberg
  */
-function( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -17,7 +17,7 @@ function( require ) {
   var OxygenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/OxygenAtom' );
   var CarbonAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/CarbonAtom' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
-  var VibrationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/VibrationStrategy')
+  var VibrationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/VibrationStrategy' )
 
   /**
    *  Model data for Carbon Dioxide molecule
@@ -73,8 +73,8 @@ function( require ) {
 
 
   } )
+} );
 
-}
 
 //  // ------------------------------------------------------------------------
 //  // Methods
