@@ -364,7 +364,7 @@ define( function( require ) {
 
     /**
      * Set the angle, in terms of radians from 0 to 2*PI, where this molecule
-     * is in its vibration
+     * is in its vibration cycle.
      *
      * @param {Number} vibrationRadians - The angle describing where this molecule is in its vibration.
      **/

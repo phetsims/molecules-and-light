@@ -54,9 +54,7 @@ define( function( require ) {
     // Set the initial offsets.
     this.initializeAtomOffsets();
 
-    // Set the initial center of gravity position.
-    //debugger;
-    console.log( this.initialCenterOfGravityPos.x );
+    // Set the initial center of gravity position.;
     this.setCenterOfGravityPosVec( this.initialCenterOfGravityPos );
 
   }

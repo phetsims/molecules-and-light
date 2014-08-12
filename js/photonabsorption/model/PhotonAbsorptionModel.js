@@ -227,7 +227,7 @@ define( function( require ) {
     // TODO: Testing photon animation, this can be removed soon
     this.testPhoton = new Photon( 580E-9 );
     this.photons.push( this.testPhoton );
-    this.testPhoton.setVelocity( 10, 10 );
+    this.testPhoton.setVelocity( 50, 0 );
   }
 
   return inherit( Object, PhotonAbsorptionModel, {
