@@ -226,6 +226,9 @@ define( function( require ) {
 
     // TODO: Testing emitPhoton(), this can be removed soon
     this.photons.addItemAddedListener( function( photon ) {console.log( 'Created new Photon!', photon )} );
+    this.testPhoton = new Photon( 20 );
+    this.photons.push( this.testPhoton );
+    this.testPhoton.setVelocity( 10, 10 );
   }
 
   return inherit( Object, PhotonAbsorptionModel, {
@@ -263,6 +266,8 @@ define( function( require ) {
      */
     step: function( dt ) {
 
+      console.log( 'Simulation is stepping through time.');
+
       // Check if it is time to emit any photons.
       if ( this.photonEmissionCountdownTimer != Number.POSITIVE_INFINITY ) {
         this.photonEmissionCountdownTimer -= dt;
@@ -277,6 +282,7 @@ define( function( require ) {
       // bounds for removal.
       var photonsToRemove = [];
       for ( var photon = 0; photon < this.photons.length; photon++ ) {
+        console.log( this.photons.length );
         this.photons.get( photon ).stepInTime( dt );
         if ( this.photons.get( photon ).getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
           // See if any of the molecules wish to absorb this photon.

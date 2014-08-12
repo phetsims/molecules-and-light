@@ -33,8 +33,9 @@ define( function( require ) {
 
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( this.layoutBounds.width * 0.375, this.layoutBounds.height * 0.79 ),
-      105 );
+      new Vector2( Math.round( 786 * 0.65 ),
+        Math.round( 786 * 0.35 ) ),
+      0.18 );
 
     this.mvt = mvt; // Make mvt available to descendant types.
 
@@ -48,6 +49,8 @@ define( function( require ) {
     this.addChild( heatLampNode );
     this.addChild( new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: heatLampNode.bottom + 100, left: 20} ) );
     this.addChild( new PAPhotonNode( new Photon( 20 ), mvt ) );
+
+    this.addChild( new PAPhotonNode(photonAbsorptionModel.testPhoton, mvt));
 
   }
 

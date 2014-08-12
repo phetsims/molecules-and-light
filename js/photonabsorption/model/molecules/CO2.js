@@ -71,7 +71,6 @@ define( function( require ) {
 
   return inherit( Molecule, CO2, {
 
-
     /**
      * Set the vibration behavior for this CO2 molecule. Initialize and set center of
      * gravity position offsets for the composing atoms.

@@ -78,7 +78,7 @@ define( function( require ) {
      * @param {Number} dt - The incremental time step.
      */
     stepInTime: function( dt ) {
-      this.setLocation( this.location.x + this.vx * dt, this.location.y + this.vy * dt );
+      this.location = new Vector2( this.location.x + this.vx * dt, this.location.y + this.vy * dt );
     }
 
   } )

@@ -48,6 +48,7 @@ define( function( require ) {
       // as the center bottom of the item.
       thisNode.centerX = mvt.modelToViewX( photon.getLocation().x );
       thisNode.bottom = mvt.modelToViewY( photon.getLocation().y );
+      console.log( thisNode.center );
     }
 
     this.addChild( this.photonImage );
