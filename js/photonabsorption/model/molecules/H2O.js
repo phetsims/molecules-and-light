@@ -19,6 +19,7 @@ define( function( require ) {
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
   var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
   var OxygenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/OxygenAtom' );
+  var HydrogenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/HydrogenAtom' );
 
   // Model Data for the water molecule
   // These constants define the initial shape of the water atom.  The angle

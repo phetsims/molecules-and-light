@@ -38,7 +38,6 @@ define( function( require ) {
 
     this.mvt = mvt; // Make mvt available to descendant types.
 
-
     photonAbsorptionModel.photons.addItemAddedListener( function( photon ) {
       moleculesAndLightScreenView.addChild( new PAPhotonNode(photon, mvt));
 

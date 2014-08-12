@@ -10,7 +10,7 @@ define( function() {
   'use strict';
 
   return {
-    SUNLIGHT_WAVELENGTH: 400E-9,
+    SUNLIGHT_WAVELENGTH: 400E-9, // Ported from the original JAVA version, but not used in Molecules And Light
     MICRO_WAVELENGTH: 20,
     IR_WAVELENGTH: 850E-9,
     VISIBLE_WAVELENGTH: 580E-9,
