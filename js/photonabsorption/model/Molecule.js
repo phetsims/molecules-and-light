@@ -173,7 +173,7 @@ define( function( require ) {
       // would probably work to add the offsets first and the atoms later,
       // that's not how the sim was designed, so this is some enforcement of
       // the "add the atoms first" policy.
-      assert && assert( this.atoms.contains( atom ) );
+      assert && assert( this.atoms.indexOf( atom ) >= 0 );
       this.initialAtomCogOffsets[ atom ] = offset;
     },
 
@@ -297,7 +297,7 @@ define( function( require ) {
      **/
     addListener: function( listener ) {
       // Don't bother adding if already there.
-      if ( this.listeners.indexOf( listener ) == -1 ) {
+      if ( this.listeners.indexOf( listener ) === -1 ) {
         this.listeners.push( listener );
       }
     },
@@ -473,7 +473,7 @@ define( function( require ) {
      * @return {Boolean}
      **/
     isPhotonMarkedForPassThrough: function( photon ) {
-      if ( this.passThroughPhotonList.indexOf( photon ) == -1 ) {
+      if ( this.passThroughPhotonList.indexOf( photon ) === -1 ) {
         return false;
       }
       else {

@@ -82,7 +82,7 @@ define( function( require ) {
   // Minimum and defaults for photon emission periods.  Note that the max is
   // assumed to be infinity.
   var MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET = 400;
-  var DEFAULT_PHOTON_EMISSION_PERIOD = Number.POSITIVE_INFINITY; // Milliseconds of sim time.
+  var DEFAULT_PHOTON_EMISSION_PERIOD = 3000; // Milliseconds of sim time.
   var MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET = 100;
 
   // Default values for various parameters that weren't already covered.
@@ -216,7 +216,7 @@ define( function( require ) {
     this.photonTarget = null;
 
     // Variables that control periodic photon emission.
-    this.photonEmissionCountdownTimer = Number.POSITIVE_INFINITY;
+    this.photonEmissionCountdownTimer = 1000;
     this.photonEmissionPeriodTarget = DEFAULT_PHOTON_EMISSION_PERIOD;
     this.previousEmissionAngle = 0;
 
@@ -224,9 +224,8 @@ define( function( require ) {
     // atmosphere.
     this.configurableAtmosphereMolecules = []; // Elements are of type Molecule
 
-    // TODO: Testing emitPhoton(), this can be removed soon
-    this.photons.addItemAddedListener( function( photon ) {console.log( 'Created new Photon!', photon )} );
-    this.testPhoton = new Photon( 20 );
+    // TODO: Testing photon animation, this can be removed soon
+    this.testPhoton = new Photon( 580E-9 );
     this.photons.push( this.testPhoton );
     this.testPhoton.setVelocity( 10, 10 );
   }
@@ -328,7 +327,8 @@ define( function( require ) {
       photon.setVelocity( PHOTON_VELOCITY * Math.cos( emissionAngle ),
           PHOTON_VELOCITY * Math.sin( emissionAngle ) );
       this.photons.add( photon );
-      console.log( 'You just emitted a photon!' )
+      console.log( 'You just emitted a photon!' );
+
       //notifyPhotonAdded( photon ); TODO: Implement this function or some other Event Listener
     }
 
