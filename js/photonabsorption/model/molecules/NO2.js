@@ -78,8 +78,8 @@ define( function( require ) {
       this.leftNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.leftOxygenAtom, 1 );
     }
     else {
-      this.rightNitrogenOxygenBond = new AtomicBond( nitrogenAtom, rightOxygenAtom, 1 );
-      this.leftNitrogenOxygenBond = new AtomicBond( nitrogenAtom, leftOxygenAtom, 2 );
+      this.rightNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.rightOxygenAtom, 1 );
+      this.leftNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.leftOxygenAtom, 2 );
     }
 
     // Configure the base class.
