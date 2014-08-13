@@ -13,11 +13,6 @@ define( function( require ) {
   var thin2Image = require( 'image!MOLECULES_AND_LIGHT/thin2.png' );
   var photon100Image = require( 'image!MOLECULES_AND_LIGHT/photon-100.png' );
 
-  /**
-   * @param {BarMagnet} barMagnet
-   * @param {ModelViewTransform2} mvt
-   */
-
 // Map of photon wavelengths to visual images used for representing them.
   var mapWavelengthToImageName = {};
   mapWavelengthToImageName[ WavelengthConstants.MICRO_WAVELENGTH ] = microwavePhotonImage;
