@@ -168,7 +168,7 @@ define( function( require ) {
 
       // Send out notifications about this molecule breaking apart.
       // TODO: Implement the event listener for break apart.  Probably will not use notifyBrokeApart().
-      this.notifyBrokeApart();
+      //this.notifyBrokeApart();
     }
   } )
 

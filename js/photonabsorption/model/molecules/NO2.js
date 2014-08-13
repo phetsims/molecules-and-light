@@ -174,9 +174,8 @@ define( function( require ) {
 
     // Send out notifications about this molecule breaking apart.
     // TODO: Make sure that the notifiers have appropriate behavior.
-    this.notifyBrokeApart();
+    //this.notifyBrokeApart();
   }
-
   } )
 
 } );
