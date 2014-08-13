@@ -1,3 +1,5 @@
+// Copyright 2002-2014, University of Colorado
+
 define( function( require ) {
   'use strict';
 
