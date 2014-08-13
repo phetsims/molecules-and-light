@@ -685,7 +685,7 @@ define( function( require ) {
     /**
      * Notify the event listener that this molecule has broken apart.
      *
-     * TODO: Requires the brokApart method from the Listner subclass.
+     * TODO: Requires the brokApart method from the Listener subclass.
      */
     notifyBrokeApart: function() {
       for ( var listener in this.listeners ) {
