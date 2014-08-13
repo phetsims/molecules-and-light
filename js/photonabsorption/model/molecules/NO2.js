@@ -21,8 +21,8 @@ define( function( require ) {
   var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
   var OxygenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/OxygenAtom' );
   var NitrogenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/NitrogenAtom' );
-  var NO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO'); // TODO: Requires us to port this constituent molecule.
-  var O = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O' ); // TODO: Requires us to port this constituent molecule.
+  var NO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO' );
+  var O = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O' );
 
   // Model data for the NO2 molecule
   // These constants define the initial shape of the NO2 atom.  The angle
@@ -142,7 +142,6 @@ define( function( require ) {
   breakApart: function() {
 
     // Create the constituent molecules that result from breaking apart.
-    // TODO: We will need to port these constituent molecules.
     var nitrogenMonoxideMolecule = new NO();
     var singleOxygenMolecule = new O();
 
