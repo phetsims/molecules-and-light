@@ -21,6 +21,8 @@ define( function( require ) {
   var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
   var OxygenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/OxygenAtom' );
   var NitrogenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/NitrogenAtom' );
+  var NO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO'); // TODO: Requires us to port this constituent molecule.
+  var O = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O' ); // TODO: Requires us to port this constituent molecule.
 
   // Model data for the NO2 molecule
   // These constants define the initial shape of the NO2 atom.  The angle
@@ -35,6 +37,7 @@ define( function( require ) {
   var INITIAL_NITROGEN_VERTICAL_OFFSET = INITIAL_MOLECULE_HEIGHT * ( ( 2 * OxygenAtom.MASS ) / TOTAL_MOLECULE_MASS );
   var INITIAL_OXYGEN_VERTICAL_OFFSET = -( INITIAL_MOLECULE_HEIGHT - INITIAL_NITROGEN_VERTICAL_OFFSET );
   var INITIAL_OXYGEN_HORIZONTAL_OFFSET = NITROGEN_OXYGEN_BOND_LENGTH * Math.sin( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 );
+  var BREAK_APART_VELOCITY = 3.0;
 
   //Random number generator.  Used to control the side on which the delocalized
   // bond is depicted.
@@ -58,17 +61,38 @@ define( function( require ) {
     this.options = options;
 
     // Instance Data
+    this.nitrogenAtom = new NitrogenAtom();
+    this.rightOxygenAtom = new OxygenAtom();
+    this.leftOxygenAtom = new OxygenAtom();
+    this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
 
-  this.nitrogenAtom = new NitrogenAtom();
-  this.rightOxygenAtom = new OxygenAtom();
-  this.leftOxygenAtom = new OxygenAtom();
-    // TODO: The following functions require a call to RAND to see which side gets the double bond.  Look at the constructor.
-//  this.rightNitrogenOxygenBond;
-//  private final AtomicBond leftNitrogenOxygenBond;
+    // Tracks the side on which the double bond is shown.  More on this where
+    // it is initialized.
+    this.doubleBondOnRight = RAND.nextBoolean();
+
+    // Create the bond structure.  NO2 has a type of bond where each N-O
+    // has essentially 1.5 bonds, so we randomly choose one side to show
+    // two bonds and another to show one.
+    if ( this.doubleBondOnRight ) {
+      this.rightNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.rightOxygenAtom, 2 );
+      this.leftNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.leftOxygenAtom, 1 );
+    }
+    else {
+      this.rightNitrogenOxygenBond = new AtomicBond( nitrogenAtom, rightOxygenAtom, 1 );
+      this.leftNitrogenOxygenBond = new AtomicBond( nitrogenAtom, leftOxygenAtom, 2 );
+    }
 
     // Configure the base class.
+    this.addAtom( nitrogenAtom );
+    this.addAtom( rightOxygenAtom );
+    this.addAtom( leftOxygenAtom );
+    this.addAtomictBond( rightNitrogenOxygenBond );
 
     // Set up the photon wavelengths to absorb.
+    this.setPhotonAbsorptionStrategy( WavelengthConstants.MICRO_WAVELENGTH, new RotationStrategy( this ) );
+    this.setPhotonAbsorptionStrategy( WavelengthConstants.IR_WAVELENGTH, new VibrationStrategy( this ) );
+    this.setPhotonAbsorptionStrategy( WavelengthConstants.VISIBLE_WAVELENGTH, new ExcitationStrategy( this ) );
+    this.setPhotonAbsorptionStrategy( WavelengthConstants.UV_WAVELENGTH, new BreakApartStrategy( this ) );
 
     // Set the initial offsets.
     this.initializeAtomOffsets();
@@ -80,119 +104,81 @@ define( function( require ) {
 
   return inherit( Molecule, NO2, {
 
+    /**
+     * Initialize and set the COG positions for each atom in this molecule.  These are the atom positions
+     * when the molecule is at rest (not rotating or vibrating).
+     */
+    initializeAtomOffsets: function() {
+      this.addInitialAtomCogOffset( this.nitrogenAtom, new Vector2( 0, INITIAL_NITROGEN_VERTICAL_OFFSET ) );
+      this.addInitialAtomCogOffset( this.rightOxygenAtom, new Vector2( INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET ) );
+      this.addInitialAtomCogOffset( this.leftOxygenAtom, new Vector2( -INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET ) );
+
+      this.updateAtomPositions();
+    },
+
+    /**
+     * Set the vibration behavior for this NO2 molecule.  Sets the NO2 molecule to a vibrating state then
+     * calculates and sets the new position for each atom in the molecule.
+     *
+     * @param {Number} vibrationRadians - Where this molecule is in its vibration cycle in radians.
+     */
+  setVibration: function( vibrationRadians ) {
+    Molecule.prototype.setVibration.call( vibrationRadians );
+    var multFactor = Math.sin( vibrationRadians );
+    var maxNitrogenDisplacement = 30;
+    var maxOxygenDisplacement = 15;
+    this.addInitialAtomCogOffset( this.nitrogenAtom, new Vector2( 0, INITIAL_NITROGEN_VERTICAL_OFFSET - multFactor * maxNitrogenDisplacement ) );
+    this.addInitialAtomCogOffset( this.rightOxygenAtom, new Vector2( INITIAL_OXYGEN_HORIZONTAL_OFFSET + multFactor * maxOxygenDisplacement,
+        INITIAL_OXYGEN_VERTICAL_OFFSET + multFactor * maxOxygenDisplacement ) );
+    this.addInitialAtomCogOffset( this.leftOxygenAtom, new Vector2( -INITIAL_OXYGEN_HORIZONTAL_OFFSET - multFactor * maxOxygenDisplacement,
+        INITIAL_OXYGEN_VERTICAL_OFFSET + multFactor * maxOxygenDisplacement ) );
+    this.updateAtomPositions();
+  },
+
+    /**
+     * Define the break apart behavior for the NO2 molecule.  Initializes and sets the velocity of constituent molecules.
+     * TODO: I had to re-declare the BREAK_APART_VELOCITY so that it could be used in this function.  Is there a way for NO2.js to find global variables in Molecules.js?
+     */
+  breakApart: function() {
+
+    // Create the constituent molecules that result from breaking apart.
+    // TODO: We will need to port these constituent molecules.
+    var nitrogenMonoxideMolecule = new NO();
+    var singleOxygenMolecule = new O();
+
+    // Set up the direction and velocity of the constituent molecules.
+    // These are set up mostly to look good, and their directions and
+    // velocities have little if anything to do with any physical rules
+    // of atomic dissociation.
+    var diatomicMoleculeRotationAngle = ( ( Math.PI / 2 ) - ( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 ) );
+    var breakApartAngle;
+    if ( this.doubleBondOnRight ) {
+      nitrogenMonoxideMolecule.rotate( -diatomicMoleculeRotationAngle );
+      nitrogenMonoxideMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.nitrogenAtom ).x + this.getInitialAtomCogOffset( this.rightOxygenAtom ).x ) / 2,
+          ( this.getInitialAtomCogOffset( this.nitrogenAtom ).y + this.getInitialAtomCogOffset( this.rightOxygenAtom ).y ) / 2 );
+      breakApartAngle = Math.PI / 4 + RAND.nextDouble() * Math.PI / 4;
+      singleOxygenMolecule.setCenterOfGravityPos( -INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );
+    }
+    else {
+      nitrogenMonoxideMolecule.rotate( Math.PI + diatomicMoleculeRotationAngle );
+      breakApartAngle = Math.PI / 2 + RAND.nextDouble() * Math.PI / 4;
+      nitrogenMonoxideMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.nitrogenAtom ).x + this.getInitialAtomCogOffset( this.leftOxygenAtom ).x ) / 2,
+          ( this.getInitialAtomCogOffset( this.nitrogenAtom ).y + this.getInitialAtomCogOffset( this.leftOxygenAtom ).y ) / 2 );
+      singleOxygenMolecule.setCenterOfGravityPos( INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );
+    }
+    nitrogenMonoxideMolecule.setVelocity( BREAK_APART_VELOCITY * 0.33 * Math.cos( breakApartAngle ), BREAK_APART_VELOCITY * 0.33 * Math.sin( breakApartAngle ) );
+    singleOxygenMolecule.setVelocity( -BREAK_APART_VELOCITY * 0.67 * Math.cos( breakApartAngle ), -BREAK_APART_VELOCITY * 0.67 * Math.sin( breakApartAngle ) );
+
+    // Add these constituent molecules to the constituent list.
+    this.addConstituentMolecule( nitrogenMonoxideMolecule );
+    this.addConstituentMolecule( singleOxygenMolecule );
+
+    // Send out notifications about this molecule breaking apart.
+    // TODO: Make sure that the notifiers have appropriate behavior.
+    this.notifyBrokeApart();
+  }
+
   } )
 
 } );
 
-//
-//  // Tracks the side on which the double bond is shown.  More on this where
-//  // it is initialized.
-//  private final boolean doubleBondOnRight;
-//
-//  public NO2( Point2D inititialCenterOfGravityPos ) {
-//
-//    // Create the bond structure.  NO2 has a type of bond where each N-O
-//    // has essentially 1.5 bonds, so we randomly choose one side to show
-//    // two bonds and another to show one.
-//    doubleBondOnRight = RAND.nextBoolean();
-//    if ( doubleBondOnRight ) {
-//      rightNitrogenOxygenBond = new AtomicBond( nitrogenAtom, rightOxygenAtom, 2 );
-//      leftNitrogenOxygenBond = new AtomicBond( nitrogenAtom, leftOxygenAtom, 1 );
-//    }
-//    else {
-//      rightNitrogenOxygenBond = new AtomicBond( nitrogenAtom, rightOxygenAtom, 1 );
-//      leftNitrogenOxygenBond = new AtomicBond( nitrogenAtom, leftOxygenAtom, 2 );
-//    }
-//
-//    // Add the atoms.
-//    addAtom( nitrogenAtom );
-//    addAtom( rightOxygenAtom );
-//    addAtom( leftOxygenAtom );
-//    addAtomicBond( rightNitrogenOxygenBond );
-//    addAtomicBond( leftNitrogenOxygenBond );
-//
-//    // Set up the photon wavelengths to absorb.
-//    setPhotonAbsorptionStrategy( WavelengthConstants.MICRO_WAVELENGTH, new PhotonAbsorptionStrategy.RotationStrategy( this ) );
-//    setPhotonAbsorptionStrategy( WavelengthConstants.IR_WAVELENGTH, new PhotonAbsorptionStrategy.VibrationStrategy( this ) );
-//    setPhotonAbsorptionStrategy( WavelengthConstants.VISIBLE_WAVELENGTH, new PhotonAbsorptionStrategy.ExcitationStrategy( this ) );
-//    setPhotonAbsorptionStrategy( WavelengthConstants.UV_WAVELENGTH, new PhotonAbsorptionStrategy.BreakApartStrategy( this ) );
-//
-//    // Set the initial offsets.
-//    initializeAtomOffsets();
-//
-//    // Set the initial COG position.
-//    setCenterOfGravityPos( inititialCenterOfGravityPos );
-//  }
-//
-//  public NO2() {
-//    this( new Point2D.Double( 0, 0 ) );
-//  }
-//
-//  // ------------------------------------------------------------------------
-//  // Methods
-//  // ------------------------------------------------------------------------
-//
-//  /* (non-Javadoc)
-//   * @see edu.colorado.phet.common.photonabsorption.model.Molecule#initializeCogOffsets()
-//   */
-//  @Override
-//  protected void initializeAtomOffsets() {
-//    addInitialAtomCogOffset( nitrogenAtom, new MutableVector2D( 0, INITIAL_NITROGEN_VERTICAL_OFFSET ) );
-//    addInitialAtomCogOffset( rightOxygenAtom, new MutableVector2D( INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET ) );
-//    addInitialAtomCogOffset( leftOxygenAtom, new MutableVector2D( -INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET ) );
-//
-//    updateAtomPositions();
-//  }
-//
-//  @Override
-//  public void setVibration( double vibrationRadians ) {
-//    super.setVibration( vibrationRadians );
-//    double multFactor = Math.sin( vibrationRadians );
-//    double maxNitrogenDisplacement = 30;
-//    double maxOxygenDisplacement = 15;
-//    addInitialAtomCogOffset( nitrogenAtom, new MutableVector2D( 0, INITIAL_NITROGEN_VERTICAL_OFFSET - multFactor * maxNitrogenDisplacement ) );
-//    addInitialAtomCogOffset( rightOxygenAtom, new MutableVector2D( INITIAL_OXYGEN_HORIZONTAL_OFFSET + multFactor * maxOxygenDisplacement,
-//        INITIAL_OXYGEN_VERTICAL_OFFSET + multFactor * maxOxygenDisplacement ) );
-//    addInitialAtomCogOffset( leftOxygenAtom, new MutableVector2D( -INITIAL_OXYGEN_HORIZONTAL_OFFSET - multFactor * maxOxygenDisplacement,
-//        INITIAL_OXYGEN_VERTICAL_OFFSET + multFactor * maxOxygenDisplacement ) );
-//    updateAtomPositions();
-//  }
-//
-//  @Override
-//  public void breakApart() {
-//
-//    // Create the constituent molecules that result from breaking apart.
-//    Molecule nitrogenMonoxideMolecule = new NO();
-//    Molecule singleOxygenMolecule = new O();
-//
-//    // Set up the direction and velocity of the constituent molecules.
-//    // These are set up mostly to look good, and their directions and
-//    // velocities have little if anything to do with any physical rules
-//    // of atomic dissociation.
-//    double diatomicMoleculeRotationAngle = ( ( Math.PI / 2 ) - ( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 ) );
-//    final double breakApartAngle;
-//    if ( doubleBondOnRight ) {
-//      nitrogenMonoxideMolecule.rotate( -diatomicMoleculeRotationAngle );
-//      nitrogenMonoxideMolecule.setCenterOfGravityPos( ( getInitialAtomCogOffset( nitrogenAtom ).getX() + getInitialAtomCogOffset( rightOxygenAtom ).getX() ) / 2,
-//          ( getInitialAtomCogOffset( nitrogenAtom ).getY() + getInitialAtomCogOffset( rightOxygenAtom ).getY() ) / 2 );
-//      breakApartAngle = Math.PI / 4 + RAND.nextDouble() * Math.PI / 4;
-//      singleOxygenMolecule.setCenterOfGravityPos( -INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );
-//    }
-//    else {
-//      nitrogenMonoxideMolecule.rotate( Math.PI + diatomicMoleculeRotationAngle );
-//      breakApartAngle = Math.PI / 2 + RAND.nextDouble() * Math.PI / 4;
-//      nitrogenMonoxideMolecule.setCenterOfGravityPos( ( getInitialAtomCogOffset( nitrogenAtom ).getX() + getInitialAtomCogOffset( leftOxygenAtom ).getX() ) / 2,
-//          ( getInitialAtomCogOffset( nitrogenAtom ).getY() + getInitialAtomCogOffset( leftOxygenAtom ).getY() ) / 2 );
-//      singleOxygenMolecule.setCenterOfGravityPos( INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );
-//    }
-//    nitrogenMonoxideMolecule.setVelocity( BREAK_APART_VELOCITY * 0.33 * Math.cos( breakApartAngle ), BREAK_APART_VELOCITY * 0.33 * Math.sin( breakApartAngle ) );
-//    singleOxygenMolecule.setVelocity( -BREAK_APART_VELOCITY * 0.67 * Math.cos( breakApartAngle ), -BREAK_APART_VELOCITY * 0.67 * Math.sin( breakApartAngle ) );
-//
-//    // Add these constituent molecules to the constituent list.
-//    addConstituentMolecule( nitrogenMonoxideMolecule );
-//    addConstituentMolecule( singleOxygenMolecule );
-//
-//    // Send out notifications about this molecule breaking apart.
-//    notifyBrokeApart();
-//  }
-//}

@@ -1,6 +1,5 @@
 //  Copyright 2002-2014, University of Colorado
 
-
 /**
  * Original file is Molecule.java which is also used by "Greenhouse Gas".
  *
