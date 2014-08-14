@@ -128,7 +128,7 @@ define( function( require ) {
   var testAtom = new Atom( 'Blue', 25, 50, {position: new Vector2( 10000, 15 )} );
   var someAtom = new Atom( 'Red', 15, 100 );
   var testCarbon = new CarbonAtom( { position: new Vector2( 333, 333 ) } );
-  testCarbon.setPosition(1337, 1337);
+  testCarbon.setPosition( 1337, 1337 );
   var testHydrogen = new HydrogenAtom( {position: new Vector2( 111, 111 ) } );
   console.log( testAtom.getPositionRef() );
   console.log( someAtom.getPositionRef() );
@@ -146,7 +146,6 @@ define( function( require ) {
   testMolecule.setCenterOfGravityPosVec( new Vector2( 150, 150 ) );
   testMolecule.advanceVibration( 0.5 );
   testMolecule.rotate( 0.3 );
-  testMolecule.atoms.push( 1, 2, 3, 4, 5 );
   testMolecule.listeners.push( 'listener1', 'listener2', 'listener3', 'listener4', 'listener5' );
   testMolecule.notifyElectronicEnergyStateChanged();
   console.log( testMolecule.mapWavelengthToAbsorptionStrategy );
@@ -196,11 +195,11 @@ define( function( require ) {
   var testCO = new CO();
   var someCO = new CO( { initialCenterOfGravityPos: new Vector2( 35, 35 ) } );
   var testN2 = new N2();
-  someCO.addInitialAtomCogOffset( someCO.carbonAtom, new Vector2( 10, 10) );
+  someCO.addInitialAtomCogOffset( someCO.carbonAtom, new Vector2( 10, 10 ) );
   console.log( someCO.getInitialAtomCogOffset( someCO.carbonAtom ) );
   testCO.initializeAtomOffsets();
-  console.log(testCO.atoms);
-  console.log(someCO.centerOfGravity);
+  console.log( testCO.atoms );
+  console.log( someCO.centerOfGravity );
   console.log( testN2.atoms );
 
   function PhotonAbsorptionModel() {

@@ -60,17 +60,6 @@ define( function( require ) {
     // the center of gravity since a molecule is a composite object.
     this.centerOfGravity = new Vector2();
 
-    // Structure of the molecule in terms of offsets from the center of
-    // gravity.  These indicate the atom's position in the "relaxed" (i.e.
-    // non-vibrating), non-rotated state.
-    // TODO: Declaration in original java is an empty hashmap, see if an arbitrary object is correct solution.
-    this.initialAtomCogOffsets = {}; // Object contains keys of type Atoms ID and values of type Vector2
-
-    // Vibration offsets - these represent the amount of deviation from the
-    // initial (a.k.a relaxed) configuration for each molecule.
-    // TODO: Declaration in original java is an empty hashmap, see if an arbitrary object is correct solution.
-    this.vibrationAtomOffsets = {}; // Object contains keys of type Atoms ID and values of type Vector2
-
     // Listeners to events that come from this molecule.
     this.listeners = []; // Elements are event listeners
 
@@ -175,7 +164,7 @@ define( function( require ) {
       // that's not how the sim was designed, so this is some enforcement of
       // the "add the atoms first" policy.
       assert && assert( this.atoms.indexOf( atom ) >= 0 );
-      this.initialAtomCogOffsets[ atom.uniqueID ] = offset;
+      atom.initialCogOffset = offset;
     },
 
     /**
@@ -186,10 +175,10 @@ define( function( require ) {
      * @return {Vector2}
      **/
     getInitialAtomCogOffset: function( atom ) {
-      if ( !(atom.uniqueID in this.initialAtomCogOffsets) ) {
+      if ( !atom.initialCogOffset ) {
         console.log( " - Warning: Attempt to get initial COG offset for atom that is not in molecule." );
       }
-      return this.initialAtomCogOffsets[atom.uniqueID];
+      return atom.initialCogOffset;
     },
 
     /**
@@ -200,10 +189,10 @@ define( function( require ) {
      * @return {Vector2} - Vector representing location of vibration offset from molecule's center of gravity.
      */
     getVibrationAtomOffset: function( atom ) {
-      if ( !(atom.uniqueID in this.vibrationAtomOffsets) ) {
+      if ( !atom.vibrationAtomOffset ) {
         console.log( " - Warning: Attempt to get vibrational COG offset for atom that is not in molecule." );
       }
-      return this.vibrationAtomOffsets[atom.uniqueID];
+      return atom.vibrationAtomOffset;
     },
 
     /**
@@ -555,8 +544,8 @@ define( function( require ) {
      **/
     addAtom: function( atom ) {
       this.atoms.push( atom );
-      this.initialAtomCogOffsets[atom.uniqueID] = new Vector2( 0, 0 );
-      this.vibrationAtomOffsets[atom.uniqueID] = new Vector2( 0, 0 );
+      atom.initialCogOffset = new Vector2( 0, 0 );
+      atom.vibrationAtomOffset = new Vector2( 0, 0 );
     },
     /**
      * Add an atomic bond to this Molecule's list of atomic bonds.
@@ -609,18 +598,18 @@ define( function( require ) {
      **/
     updateAtomPositions: function() {
       var i = 0;
-      for ( var uniqueID in this.initialAtomCogOffsets ) {
-        if ( this.initialAtomCogOffsets.hasOwnProperty( uniqueID ) ) {
-          var atomOffset = new Vector2( this.initialAtomCogOffsets[uniqueID].x, this.initialAtomCogOffsets[uniqueID].y );
-          // Add the vibration, if any exists.
-          atomOffset.add( this.vibrationAtomOffsets[uniqueID] );
-          // Rotate.
-          atomOffset.rotate( this.currentRotationRadians );
-          // Set location based on combination of offset and current center
-          // of gravity.
-          this.atoms[i].position.setXY( this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y );
-          i++;
-        }
+      for ( var j = 0; j < this.getAtoms().length; j++ ) {
+        var atom = this.getAtoms()[j];
+
+        var atomOffset = atom.initialCogOffset.copy();
+
+        // Add the vibration, if any exists.
+        atomOffset.add( atom.vibrationAtomOffset );
+        // Rotate.
+        atomOffset.rotate( this.currentRotationRadians );
+        // Set location based on combination of offset and current center
+        // of gravity.
+        atom.position.setXY( this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y );
       }
     },
 
