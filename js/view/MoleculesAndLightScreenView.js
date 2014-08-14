@@ -57,10 +57,9 @@ define( function( require ) {
     // Add the control panel for photon type
     this.addChild( new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: heatLampNode.bottom + 100, left: 20} ) );
 
-    // Add some photons to the screen.
-    //this.addChild( new PAPhotonNode( new Photon( 20 ), mvt ) );
-    this.addChild( new PAPhotonNode(photonAbsorptionModel.testPhoton, mvt));
-
+    // Add a photon to the screen.
+    this.addChild( new PAPhotonNode(photonAbsorptionModel.testPhoton, mvt ) );
+    // Add a molecule to the screen.
     this.addChild( new MoleculeNode( new CO( { initialCenterOfGravityPos: new Vector2( 50, 50 ) }), mvt) );
 
   }
