@@ -20,7 +20,7 @@ define( function( require ) {
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
   var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
-
+  var PropertySet = require( 'AXON/PropertySet' );
 
   //------------------------------------------------------------------------
   // Class Data
@@ -50,6 +50,8 @@ define( function( require ) {
   // Instance Data
   //------------------------------------------------------------------------
   function Molecule() {
+
+    PropertySet.call( this, {} );
     // Atoms and bonds that comprise this molecule.
     this.atoms = []; // Elements are of type Atoms
     this.atomicBonds = []; // Elements are of type AtomicBonds
@@ -62,12 +64,12 @@ define( function( require ) {
     // gravity.  These indicate the atom's position in the "relaxed" (i.e.
     // non-vibrating), non-rotated state.
     // TODO: Declaration in original java is an empty hashmap, see if an arbitrary object is correct solution.
-    this.initialAtomCogOffsets = {}; // Object contains keys of type Atoms and values of type Vector2
+    this.initialAtomCogOffsets = {}; // Object contains keys of type Atoms ID and values of type Vector2
 
     // Vibration offsets - these represent the amount of deviation from the
     // initial (a.k.a relaxed) configuration for each molecule.
     // TODO: Declaration in original java is an empty hashmap, see if an arbitrary object is correct solution.
-    this.vibrationAtomOffsets = {}; // Object contains keys of type Atoms and values of type Vector2
+    this.vibrationAtomOffsets = {}; // Object contains keys of type Atoms ID and values of type Vector2
 
     // Listeners to events that come from this molecule.
     this.listeners = []; // Elements are event listeners
@@ -121,7 +123,7 @@ define( function( require ) {
 
   }
 
-  return inherit( Object, Molecule, {
+  return inherit( PropertySet, Molecule, {
 
     /**
      * Reset the molecule.  Any photons that have been absorbed are forgotten,
@@ -173,7 +175,7 @@ define( function( require ) {
       // that's not how the sim was designed, so this is some enforcement of
       // the "add the atoms first" policy.
       assert && assert( this.atoms.indexOf( atom ) >= 0 );
-      this.initialAtomCogOffsets[ atom ] = offset;
+      this.initialAtomCogOffsets[ atom.uniqueID ] = offset;
     },
 
     /**
@@ -184,10 +186,10 @@ define( function( require ) {
      * @return {Vector2}
      **/
     getInitialAtomCogOffset: function( atom ) {
-      if ( !(atom in this.initialAtomCogOffsets) ) {
+      if ( !(atom.uniqueID in this.initialAtomCogOffsets) ) {
         console.log( " - Warning: Attempt to get initial COG offset for atom that is not in molecule." );
       }
-      return this.initialAtomCogOffsets[atom];
+      return this.initialAtomCogOffsets[atom.uniqueID];
     },
 
     /**
@@ -340,13 +342,11 @@ define( function( require ) {
      *
      * @param {Number} x - the x location to set
      * @param {Number} y - the y location to set
-     *
-     * TODO: Requires the updateAtomPositions() and notifyCenterOfGravityPosChanged() functions.
      **/
     setCenterOfGravityPos: function( x, y ) {
       if ( this.centerOfGravity.x != x || this.centerOfGravity.y != y ) {
         this.centerOfGravity.setXY( x, y );
-        //updateAtomPositions();
+        this.updateAtomPositions();
         //notifyCenterOfGravityPosChanged();
       }
     },
@@ -396,15 +396,13 @@ define( function( require ) {
     /**
      * Set the rotation angle of the Molecule in radians.
      *
-     * TODO: Requires the updateAtomPositions() function.
-     *
      * @param {radians}
      **/
 
     setRotation: function( radians ) {
       if ( radians != this.currentRotationRadians ) {
         this.currentRotationRadians = radians;
-        //updateAtomPositions();
+        this.updateAtomPositions();
       }
     },
 
@@ -486,7 +484,7 @@ define( function( require ) {
      * @return {Array} - Array with elements of type Atom containing the atoms which compose this molecule.
      **/
     getAtoms: function() {
-      return new Array( this.atoms );
+      return this.atoms.slice(0);
     },
 
     /**
@@ -556,9 +554,11 @@ define( function( require ) {
      * @param {Atom} atom - The atom to be added
      **/
     addAtom: function( atom ) {
+      debugger;
       this.atoms.push( atom );
-      this.initialAtomCogOffsets[atom] = new Vector2( 0, 0 );
-      this.vibrationAtomOffsets[atom] = new Vector2( 0, 0 );
+      console.log( atom.uniqueID );
+      this.initialAtomCogOffsets[atom.uniqueID] = new Vector2( 0, 0 );
+      this.vibrationAtomOffsets[atom.uniqueID] = new Vector2( 0, 0 );
     },
     /**
      * Add an atomic bond to this Molecule's list of atomic bonds.
@@ -608,14 +608,17 @@ define( function( require ) {
      **/
     updateAtomPositions: function() {
       for ( var atom in this.initialAtomCogOffsets ) {
-        var atomOffset = new Vector2( this.initialAtomCogOffsets[atom] );
-        // Add the vibration, if any exists.
-        atomOffset.add( this.vibrationAtomOffsets[atom] );
-        // Rotate.
-        atomOffset.rotate( this.currentRotationRadians );
-        // Set location based on combination of offset and current center
-        // of gravity.
-        this.initialAtomCogOffsets[atom].setXY( this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y );
+        if ( this.initialAtomCogOffsets.hasOwnProperty(atom)) {
+          debugger;
+          var atomOffset = new Vector2( this.initialAtomCogOffsets[atom].x, this.initialAtomCogOffsets[atom].y );
+          // Add the vibration, if any exists.
+          atomOffset.add( this.vibrationAtomOffsets[atom] );
+          // Rotate.
+          atomOffset.rotate( this.currentRotationRadians );
+          // Set location based on combination of offset and current center
+          // of gravity.
+          this.initialAtomCogOffsets[atom].setXY( this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y );
+        }
       }
     },
 

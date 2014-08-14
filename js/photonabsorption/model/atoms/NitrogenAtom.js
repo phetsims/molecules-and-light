@@ -21,6 +21,9 @@ define( function( require ) {
   var MASS = 14.00674;   // In atomic mass units (AMU).
   var RADIUS = 75;     // In picometers.
 
+  // Static data
+  var instanceCount = 0;
+
   /**
    * Constructor for a Nitrogen atom.  There is an optional Vector2 parameter
    * which specifies the location of this Nitrogen atom.
@@ -38,7 +41,7 @@ define( function( require ) {
       position: new Vector2( 0, 0 )
     }, options );
     this.options = options;
-
+    this.uniqueID = 'nitrogen' + instanceCount++;
     this.representationColor = REPRESENTATION_COLOR;
     this.radius = RADIUS;
     this.mass = MASS;

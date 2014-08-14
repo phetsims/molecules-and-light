@@ -21,6 +21,9 @@ define( function( require ) {
   var MASS = 12.011;   // In atomic mass units (AMU).
   var RADIUS = 77;     // In picometers.
 
+  // Static data
+  var instanceCount = 0;
+
   /**
    * Constructor for a carbon atom.  There is an optional Vector2 parameter
    * which specifies the location of this carbon atom.
@@ -38,7 +41,7 @@ define( function( require ) {
       position: new Vector2( 0, 0 )
     }, options );
     this.options = options;
-
+    this.uniqueID = 'carbon' + instanceCount++;
     this.representationColor = REPRESENTATION_COLOR;
     this.radius = RADIUS;
     this.mass = MASS;

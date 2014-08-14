@@ -14,8 +14,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
-  var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Atom' );
-  var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/AtomicBond' );
+  var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
+  var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
+  var AtomNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/AtomNode' );
+
 
   // Model Data for the molecule node
   // This flag is used to turn on/off the appearance of the center of
@@ -37,17 +39,19 @@ define( function( require ) {
 
     // Add the atoms which compose this molecule to the atomLayer
     // TODO: requires the AtomNode.js dependency file.
+    console.log('The molecule is at position: ' + molecule.getCenterOfGravityPos() );
     for ( var atom = 0; atom < molecule.getAtoms().length; atom++ ) {
-      thisNode.atomLayer.addChild( new AtomNode( atom, mvt ) );
+      console.log('The atom in this molecule is at position: ' + molecule.getAtoms()[atom].getPositionRef() );
+      thisNode.atomLayer.addChild( new AtomNode( molecule.getAtoms()[atom], mvt ) );
     }
 
     // Add the atomic bonds which form the structure of this molecule to the bondLayer
     // TODO: requires the AtomicBondNode.js dependency file.
-    for ( var atomicBond = 0; atomicBond < molecule.getAtomicBonds().length; atomicBond++ ) {
-      thisNode.bondLayer.addChild( new AtomicBondNode( atomicBond, mvt ) );
-    }
+//    for ( var atomicBond = 0; atomicBond < molecule.getAtomicBonds().length; atomicBond++ ) {
+//      thisNode.bondLayer.addChild( new AtomicBondNode( atomicBond, mvt ) );
+//    }
 
-    molecule.on( 'electronicEnergyStateChanged', function( molecule ) {
+    molecule.on( 'electronicEnergyStateChanged', function() {
       for ( var i = 0; i < thisNode.atomLayer.children.length; i++ ) {
         var atomNode = thisNode.atomLayer.getChildAt( i );
         atomNode.setHighlighted( molecule.isHighElectronicEnergyState() );
@@ -56,6 +60,8 @@ define( function( require ) {
     } );
     // Make sure the highlighting is correct when the simulation starts.
     molecule.trigger( 'electronicEnergyStateChanged' );
+
+
   }
 
   return inherit( Node, MoleculeNode );

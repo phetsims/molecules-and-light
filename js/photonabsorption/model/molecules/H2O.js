@@ -50,8 +50,8 @@ define( function( require ) {
     this.oxygenAtom = new OxygenAtom();
     this.hydrogenAtom1 = new HydrogenAtom();
     this.hydrogenAtom2 = new HydrogenAtom();
-    this.oxygenHydrogenBond1 = new AtomicBond( oxygenAtom, hydrogenAtom1, 1 );
-    this.oxygenHydrogenBond2 = new AtomicBond( oxygenAtom, hydrogenAtom2, 1 );
+    this.oxygenHydrogenBond1 = new AtomicBond( this.oxygenAtom, this.hydrogenAtom1, 1 );
+    this.oxygenHydrogenBond2 = new AtomicBond( this.oxygenAtom, this.hydrogenAtom2, 1 );
     this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
 
     // Configure the base class.

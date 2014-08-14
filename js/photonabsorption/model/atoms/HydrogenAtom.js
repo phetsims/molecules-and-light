@@ -21,6 +21,8 @@ define( function( require ) {
   var MASS = 1;   // In atomic mass units (AMU).
   var RADIUS = 37;     // In picometers.
 
+  // Static Variable
+  var instanceCount = 0;
   /**
    * Constructor for a Hydrogen atom.  There is an optional Vector2 parameter
    * which specifies the location of this Hydrogen atom.
@@ -38,7 +40,7 @@ define( function( require ) {
       position: new Vector2( 0, 0 )
     }, options );
     this.options = options;
-
+    this.uniqueID = 'hydrogen' + instanceCount++;
     this.representationColor = REPRESENTATION_COLOR;
     this.radius = RADIUS;
     this.mass = MASS;

@@ -22,6 +22,9 @@ define( function( require ) {
   var MASS = 12.011;   // In atomic mass units (AMU).
   var RADIUS = 73;     // In picometers.
 
+  // Static Data
+  var instanceCount = 0;
+
   /**
    * Constructor for an Oxygen atom.  There is an optional Vector2 parameter
    * which specifies the location of this Oxygen atom.
@@ -39,7 +42,7 @@ define( function( require ) {
       position: new Vector2( 0, 0 )
     }, options );
     this.options = options;
-
+    this.uniqueID = 'oxygen' + instanceCount++;
     this.representationColor = REPRESENTATION_COLOR;
     this.radius = RADIUS;
     this.mass = MASS;

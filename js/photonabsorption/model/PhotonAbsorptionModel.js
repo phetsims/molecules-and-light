@@ -124,84 +124,84 @@ define( function( require ) {
     }
   }
 
-  // TODO: Testing Atom.js and addition Atom files, this can be removed soon.
-  var testAtom = new Atom( 'Blue', 25, 50, {position: new Vector2( 10000, 15 )} );
-  var someAtom = new Atom( 'Red', 15, 100 );
-  var testCarbon = new CarbonAtom( { position: new Vector2( 333, 333 ) } );
-  testCarbon.setPosition(1337, 1337);
-  var testHydrogen = new HydrogenAtom( {position: new Vector2( 111, 111 ) } );
-  console.log( testAtom.getPositionRef() );
-  console.log( someAtom.getPositionRef() );
-  console.log( testCarbon.getPositionRef() );
-  console.log( testHydrogen.getPositionRef() );
-
-  // TODO: Testing Molecule.js, this can be removed soon.
-  var testMolecule = new Molecule();
-  testMolecule.setPhotonAbsorptionStrategy( 350.5, 'blue' );
-  testMolecule.addInitialAtomCogOffset( testCarbon, new Vector2( 150, 75 ) );
-  console.log( testMolecule.getInitialAtomCogOffset( testCarbon ) );
-  testMolecule.getInitialAtomCogOffset( testCarbon );
-  testMolecule.addConstituentMolecule( testCarbon );
-  testMolecule.addListener( 'someListener' );
-  testMolecule.setCenterOfGravityPosVec( new Vector2( 150, 150 ) );
-  testMolecule.advanceVibration( 0.5 );
-  testMolecule.rotate( 0.3 );
-  testMolecule.atoms.push( 1, 2, 3, 4, 5 );
-  testMolecule.listeners.push( 'listener1', 'listener2', 'listener3', 'listener4', 'listener5' );
-  testMolecule.notifyElectronicEnergyStateChanged();
-  console.log( testMolecule.mapWavelengthToAbsorptionStrategy );
-  console.log( testMolecule.initialAtomCogOffsets );
-  console.log( testMolecule.constituentMolecules );
-  console.log( testMolecule.listeners );
-  console.log( testMolecule.getCenterOfGravityPosRef() );
-  console.log( testMolecule.currentVibrationRadians );
-  console.log( testMolecule.getRotation() );
-  console.log( testMolecule.getAtoms() );
-
-  // TODO: Testing Photon.js, this can be removed soon.
-  var testPhoton = new Photon( 20 );
-  testPhoton.setVelocity( 25, 25 );
-  testPhoton.setLocation( 100, 100 );
-  console.log( testPhoton.getLocation() );
-
-  // TODO: Testing PhotonAbsorptionStrategy.js and other strategy files, this can be removed soon.
-  var testPhotonAbsorptionStrategy = new PhotonAbsorptionStrategy( testMolecule );
-  //testPhotonAbsorptionStrategy.stepInTime();
-  var testHoldStrategy = new PhotonHoldStrategy( testMolecule );
-  var testVibrateStrategy = new VibrationStrategy( testMolecule );
-  var testRotationStrategy = new RotationStrategy( testMolecule );
-  var testExcitationStrategy = new ExcitationStrategy( testMolecule );
-  testHoldStrategy.photonHoldCountdownTime = 0;
-  testHoldStrategy.stepInTime( 10 );
-  testVibrateStrategy.getMolecule().setVibrating( true );
-  testExcitationStrategy.photonAbsorbed();
-  testExcitationStrategy.reemitPhoton();
-  console.log( testPhotonAbsorptionStrategy.getMolecule() );
-  console.log( testPhotonAbsorptionStrategy.queryAndAbsorbPhoton( testPhoton ) );
-  console.log( testHoldStrategy.queryAndAbsorbPhoton( testPhoton ) );
-  console.log( testVibrateStrategy.getMolecule().vibrating );
-  testVibrateStrategy.reemitPhoton();
-  console.log( testVibrateStrategy.getMolecule().vibrating );
-  testRotationStrategy.getMolecule().setRotation( true );
-  testRotationStrategy.photonAbsorbed();
-  console.log( testRotationStrategy.getMolecule().rotationDirectionClockwise );
-
-  // TODO: Testing AtomicBond.js, this can be removed soon.
-  var testBond = new AtomicBond( testAtom, someAtom, {bondCount: 3} );
-  var someBond = new AtomicBond( testAtom, someAtom );
-  console.log( testBond.getBondCount() );
-  console.log( someBond.getBondCount() );
-
-  // TODO: Testing CO.js and N2.js, this can be removed soon.
-  var testCO = new CO();
-  var someCO = new CO( { initialCenterOfGravityPos: new Vector2( 35, 35 ) } );
-  var testN2 = new N2();
-  someCO.addInitialAtomCogOffset( someCO.carbonAtom, new Vector2( 10, 10) );
-  console.log( someCO.getInitialAtomCogOffset( someCO.carbonAtom ) );
-  testCO.initializeAtomOffsets();
-  console.log(testCO.atoms);
-  console.log(someCO.centerOfGravity);
-  console.log( testN2.atoms );
+//  // TODO: Testing Atom.js and addition Atom files, this can be removed soon.
+//  var testAtom = new Atom( 'Blue', 25, 50, {position: new Vector2( 10000, 15 )} );
+//  var someAtom = new Atom( 'Red', 15, 100 );
+//  var testCarbon = new CarbonAtom( { position: new Vector2( 333, 333 ) } );
+//  testCarbon.setPosition(1337, 1337);
+//  var testHydrogen = new HydrogenAtom( {position: new Vector2( 111, 111 ) } );
+//  console.log( testAtom.getPositionRef() );
+//  console.log( someAtom.getPositionRef() );
+//  console.log( testCarbon.getPositionRef() );
+//  //console.log( testHydrogen.getPositionRef() );
+//
+//  // TODO: Testing Molecule.js, this can be removed soon.
+//  var testMolecule = new CO();
+//  testMolecule.setPhotonAbsorptionStrategy( 350.5, 'blue' );
+//  testMolecule.addInitialAtomCogOffset( testCarbon, new Vector2( 150, 75 ) );
+//  console.log( testMolecule.getInitialAtomCogOffset( testCarbon ) );
+//  testMolecule.getInitialAtomCogOffset( testCarbon );
+//  testMolecule.addConstituentMolecule( testCarbon );
+//  testMolecule.addListener( 'someListener' );
+//  testMolecule.setCenterOfGravityPosVec( new Vector2( 150, 150 ) );
+//  testMolecule.advanceVibration( 0.5 );
+//  testMolecule.rotate( 0.3 );
+//  testMolecule.atoms.push( 1, 2, 3, 4, 5 );
+//  testMolecule.listeners.push( 'listener1', 'listener2', 'listener3', 'listener4', 'listener5' );
+//  testMolecule.notifyElectronicEnergyStateChanged();
+//  console.log( testMolecule.mapWavelengthToAbsorptionStrategy );
+//  console.log( testMolecule.initialAtomCogOffsets );
+//  console.log( testMolecule.constituentMolecules );
+//  console.log( testMolecule.listeners );
+//  console.log( testMolecule.getCenterOfGravityPosRef() );
+//  console.log( testMolecule.currentVibrationRadians );
+//  console.log( testMolecule.getRotation() );
+//  console.log( testMolecule.getAtoms() );
+//
+//  // TODO: Testing Photon.js, this can be removed soon.
+//  var testPhoton = new Photon( 20 );
+//  testPhoton.setVelocity( 25, 25 );
+//  testPhoton.setLocation( 100, 100 );
+//  console.log( testPhoton.getLocation() );
+//
+//  // TODO: Testing PhotonAbsorptionStrategy.js and other strategy files, this can be removed soon.
+//  var testPhotonAbsorptionStrategy = new PhotonAbsorptionStrategy( testMolecule );
+//  //testPhotonAbsorptionStrategy.stepInTime();
+//  var testHoldStrategy = new PhotonHoldStrategy( testMolecule );
+//  var testVibrateStrategy = new VibrationStrategy( testMolecule );
+//  var testRotationStrategy = new RotationStrategy( testMolecule );
+//  var testExcitationStrategy = new ExcitationStrategy( testMolecule );
+//  testHoldStrategy.photonHoldCountdownTime = 0;
+//  testHoldStrategy.stepInTime( 10 );
+//  testVibrateStrategy.getMolecule().setVibrating( true );
+//  testExcitationStrategy.photonAbsorbed();
+//  testExcitationStrategy.reemitPhoton();
+//  console.log( testPhotonAbsorptionStrategy.getMolecule() );
+//  console.log( testPhotonAbsorptionStrategy.queryAndAbsorbPhoton( testPhoton ) );
+//  console.log( testHoldStrategy.queryAndAbsorbPhoton( testPhoton ) );
+//  console.log( testVibrateStrategy.getMolecule().vibrating );
+//  testVibrateStrategy.reemitPhoton();
+//  console.log( testVibrateStrategy.getMolecule().vibrating );
+//  testRotationStrategy.getMolecule().setRotation( true );
+//  testRotationStrategy.photonAbsorbed();
+//  console.log( testRotationStrategy.getMolecule().rotationDirectionClockwise );
+//
+//  // TODO: Testing AtomicBond.js, this can be removed soon.
+//  var testBond = new AtomicBond( testAtom, someAtom, {bondCount: 3} );
+//  var someBond = new AtomicBond( testAtom, someAtom );
+//  console.log( testBond.getBondCount() );
+//  console.log( someBond.getBondCount() );
+//
+//  // TODO: Testing CO.js and N2.js, this can be removed soon.
+//  var testCO = new CO();
+//  var someCO = new CO( { initialCenterOfGravityPos: new Vector2( 35, 35 ) } );
+//  var testN2 = new N2();
+//  someCO.addInitialAtomCogOffset( someCO.carbonAtom, new Vector2( 10, 10) );
+//  console.log( someCO.getInitialAtomCogOffset( someCO.carbonAtom ) );
+//  testCO.initializeAtomOffsets();
+//  console.log(testCO.atoms);
+//  console.log(someCO.centerOfGravity);
+//  console.log( testN2.atoms );
 
   function PhotonAbsorptionModel() {
     // TODO: We need to build something that behaves sufficiently like EventListenerList
@@ -228,6 +228,8 @@ define( function( require ) {
     this.testPhoton = new Photon( 580E-9 );
     this.photons.push( this.testPhoton );
     this.testPhoton.setVelocity( 50, 0 );
+
+    //this.reset();
   }
 
   return inherit( Object, PhotonAbsorptionModel, {
@@ -407,8 +409,6 @@ define( function( require ) {
 //  //----------------------------------------------------------------------------
 //  // Methods
 //  //----------------------------------------------------------------------------
-//
-//
 //
 //  public void setPhotonTarget( PhotonTarget photonTarget ) {
 //    if ( this.photonTarget != photonTarget ) {

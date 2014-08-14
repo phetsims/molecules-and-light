@@ -19,6 +19,8 @@ define( function( require ) {
   var PAPhotonNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/PAPhotonNode' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/photon' ); // TODO: Temporary dependency module for testing.
   var QuadEmissionFrequencyControlPanel = require( 'MOLECULES_AND_LIGHT/view/QuadEmissionFrequencyControlPanel' );
+  var CO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO' );
+  var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );
 
   // images
   var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
@@ -58,6 +60,8 @@ define( function( require ) {
     // Add some photons to the screen.
     this.addChild( new PAPhotonNode( new Photon( 20 ), mvt ) );
     this.addChild( new PAPhotonNode(photonAbsorptionModel.testPhoton, mvt));
+
+    this.addChild( new MoleculeNode( new CO( { initialCenterOfGravityPos: new Vector2( 10, 10 ) }), mvt) );
 
   }
 
