@@ -170,14 +170,12 @@ define( function( require ) {
      * @param {Vector2} offset - Initial COG offset for when atom is not vibrating or rotating.
      */
     addInitialAtomCogOffset: function( atom, offset ) {
-      debugger;
       // Check that the specified atom is a part of this molecule.  While it
       // would probably work to add the offsets first and the atoms later,
       // that's not how the sim was designed, so this is some enforcement of
       // the "add the atoms first" policy.
       assert && assert( this.atoms.indexOf( atom ) >= 0 );
       this.initialAtomCogOffsets[ atom.uniqueID ] = offset;
-      debugger;
     },
 
     /**
@@ -603,10 +601,11 @@ define( function( require ) {
      * Update the positions of all atoms that comprise this molecule based on
      * the current center of gravity and the offset for each atom.
      *
-     * TODO: I do not like this solution.  The difficulty is that initialAtomCogOffsets uses keys of the atom's uniqueID.
-     * TODO: because of this, I cannot easily set the position of each atom without an index variable.  The best way to
+     * TODO: I do not like this solution.  The problem is that initialAtomCogOffsets uses keys of the atom's uniqueID.
+     * TODO: Because of this, I cannot easily set the position of each atom without an index variable.  The best way to
      * TODO: do this will be to not use unique ID's ad the key, but use the atom's themselves.  This way the position
-     * TODO: can be set with the index variable itself.
+     * TODO: can be set with the index variable itself.  However, javascript does not seem to easily create keys of type
+     * TODO: {Object}.
      *
      *
      **/
