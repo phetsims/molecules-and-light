@@ -170,12 +170,14 @@ define( function( require ) {
      * @param {Vector2} offset - Initial COG offset for when atom is not vibrating or rotating.
      */
     addInitialAtomCogOffset: function( atom, offset ) {
+      debugger;
       // Check that the specified atom is a part of this molecule.  While it
       // would probably work to add the offsets first and the atoms later,
       // that's not how the sim was designed, so this is some enforcement of
       // the "add the atoms first" policy.
       assert && assert( this.atoms.indexOf( atom ) >= 0 );
       this.initialAtomCogOffsets[ atom.uniqueID ] = offset;
+      debugger;
     },
 
     /**
@@ -484,7 +486,7 @@ define( function( require ) {
      * @return {Array} - Array with elements of type Atom containing the atoms which compose this molecule.
      **/
     getAtoms: function() {
-      return this.atoms.slice(0);
+      return this.atoms.slice( 0 );
     },
 
     /**
@@ -554,9 +556,7 @@ define( function( require ) {
      * @param {Atom} atom - The atom to be added
      **/
     addAtom: function( atom ) {
-      debugger;
       this.atoms.push( atom );
-      console.log( atom.uniqueID );
       this.initialAtomCogOffsets[atom.uniqueID] = new Vector2( 0, 0 );
       this.vibrationAtomOffsets[atom.uniqueID] = new Vector2( 0, 0 );
     },
@@ -603,21 +603,26 @@ define( function( require ) {
      * Update the positions of all atoms that comprise this molecule based on
      * the current center of gravity and the offset for each atom.
      *
-     * TODO: Requires the Atom.js dependency file for setPosition function.
+     * TODO: I do not like this solution.  The difficulty is that initialAtomCogOffsets uses keys of the atom's uniqueID.
+     * TODO: because of this, I cannot easily set the position of each atom without an index variable.  The best way to
+     * TODO: do this will be to not use unique ID's ad the key, but use the atom's themselves.  This way the position
+     * TODO: can be set with the index variable itself.
+     *
      *
      **/
     updateAtomPositions: function() {
-      for ( var atom in this.initialAtomCogOffsets ) {
-        if ( this.initialAtomCogOffsets.hasOwnProperty(atom)) {
-          debugger;
-          var atomOffset = new Vector2( this.initialAtomCogOffsets[atom].x, this.initialAtomCogOffsets[atom].y );
+      var i = 0;
+      for ( var uniqueID in this.initialAtomCogOffsets ) {
+        if ( this.initialAtomCogOffsets.hasOwnProperty( uniqueID ) ) {
+          var atomOffset = new Vector2( this.initialAtomCogOffsets[uniqueID].x, this.initialAtomCogOffsets[uniqueID].y );
           // Add the vibration, if any exists.
-          atomOffset.add( this.vibrationAtomOffsets[atom] );
+          atomOffset.add( this.vibrationAtomOffsets[uniqueID] );
           // Rotate.
           atomOffset.rotate( this.currentRotationRadians );
           // Set location based on combination of offset and current center
           // of gravity.
-          this.initialAtomCogOffsets[atom].setXY( this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y );
+          this.atoms[i].position.setXY( this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y );
+          i++;
         }
       }
     },
