@@ -60,7 +60,6 @@ define( function( require ) {
     },
 
     updatePosition: function() {
-      debugger;
       this.translation = ( this.mvt.modelToViewPosition( this.atom.getPositionRef() ) );
     }
 
