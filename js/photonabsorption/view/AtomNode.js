@@ -46,6 +46,8 @@ define( function( require ) {
     thisNode.addChild( thisNode.highlightNode );
     thisNode.addChild( atomNode );
 
+    this.updatePosition();
+
   }
 
   return inherit( Node, AtomNode, {
@@ -57,10 +59,10 @@ define( function( require ) {
       this.highlightNode.setVisible( highlighted );
     },
 
-
-  updatePosition: function() {
-    this.setOffset( this.mvt.modelToViewPosition( this.atom.getPositionRef() ) );
-  }
+    updatePosition: function() {
+      debugger;
+      this.translation = ( this.mvt.modelToViewPosition( this.atom.getPositionRef() ) );
+    }
 
   } );
 
