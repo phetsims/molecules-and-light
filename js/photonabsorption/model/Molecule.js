@@ -200,10 +200,10 @@ define( function( require ) {
      * @return {Vector2} - Vector representing location of vibration offset from molecule's center of gravity.
      */
     getVibrationAtomOffset: function( atom ) {
-      if ( !(atom in this.vibrationAtomOffsets) ) {
+      if ( !(atom.uniqueID in this.vibrationAtomOffsets) ) {
         console.log( " - Warning: Attempt to get vibrational COG offset for atom that is not in molecule." );
       }
-      return this.vibrationAtomOffsets[atom];
+      return this.vibrationAtomOffsets[atom.uniqueID];
     },
 
     /**
@@ -606,8 +606,6 @@ define( function( require ) {
      * TODO: do this will be to not use unique ID's ad the key, but use the atom's themselves.  This way the position
      * TODO: can be set with the index variable itself.  However, javascript does not seem to easily create keys of type
      * TODO: {Object}.
-     *
-     *
      **/
     updateAtomPositions: function() {
       var i = 0;
