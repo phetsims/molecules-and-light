@@ -63,12 +63,10 @@ define( function( require ) {
     // Structure of the molecule in terms of offsets from the center of
     // gravity.  These indicate the atom's position in the "relaxed" (i.e.
     // non-vibrating), non-rotated state.
-    // TODO: Declaration in original java is an empty hashmap, see if an arbitrary object is correct solution.
     this.initialAtomCogOffsets = {}; // Object contains keys of type Atoms ID and values of type Vector2
 
     // Vibration offsets - these represent the amount of deviation from the
     // initial (a.k.a relaxed) configuration for each molecule.
-    // TODO: Declaration in original java is an empty hashmap, see if an arbitrary object is correct solution.
     this.vibrationAtomOffsets = {}; // Object contains keys of type Atoms ID and values of type Vector2
 
     //  Map containing the atoms which compose this molecule.  Allows us to call on each atom by their unique ID.
@@ -606,12 +604,6 @@ define( function( require ) {
     /**
      * Update the positions of all atoms that comprise this molecule based on
      * the current center of gravity and the offset for each atom.
-     *
-     * TODO: I do not like this solution.  The problem is that initialAtomCogOffsets uses keys of the atom's uniqueID.
-     * TODO: Because of this, I cannot easily set the position of each atom without an index variable.  The best way to
-     * TODO: do this will be to not use unique ID's ad the key, but use the atom's themselves.  This way the position
-     * TODO: can be set with the index variable itself.  However, javascript does not seem to easily create keys of type
-     * TODO: {Object}.
      **/
     updateAtomPositions: function() {
       for ( var uniqueID in this.initialAtomCogOffsets ) {
@@ -626,7 +618,6 @@ define( function( require ) {
               this.atomsByID[uniqueID].position.setXY(this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y);
           }
       }
-
     },
 
     /**
