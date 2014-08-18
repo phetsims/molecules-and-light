@@ -28,13 +28,13 @@ define( function( require ) {
     // Instance data for the nitrogen molecule
     this.oxygenAtom1 = new OxygenAtom();
     this.oxygenAtom2 = new OxygenAtom();
-    this.oxygenOxygenBond = new AtomicBond( this.oxygenAtom1, this.oxygenAtom2, 2 );
+    this.oxygenOxygenBond = new AtomicBond( this.oxygenAtom1, this.oxygenAtom2, { bondCount: 2 } );
     this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
 
     // Configure the base class.
     this.addAtom( this.oxygenAtom1 );
     this.addAtom( this.oxygenAtom1 );
-    this.addAtomicBond( oxygenOxygenBond );
+    this.addAtomicBond( this.oxygenOxygenBond );
 
     // Set the initial offsets
     this.initializeAtomOffsets();

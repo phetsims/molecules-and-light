@@ -74,19 +74,20 @@ define( function( require ) {
     // has essentially 1.5 bonds, so we randomly choose one side to show
     // two bonds and another to show one.
     if ( this.doubleBondOnRight ) {
-      this.rightNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.rightOxygenAtom, 2 );
-      this.leftNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.leftOxygenAtom, 1 );
+      this.rightNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.rightOxygenAtom, { bondCount: 2 } );
+      this.leftNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.leftOxygenAtom, { bondCount: 1 } );
     }
     else {
-      this.rightNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.rightOxygenAtom, 1 );
-      this.leftNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.leftOxygenAtom, 2 );
+      this.rightNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.rightOxygenAtom, { bondCount: 1 } );
+      this.leftNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.leftOxygenAtom, { bondCount2: 2 } );
     }
 
     // Configure the base class.
-    this.addAtom( nitrogenAtom );
-    this.addAtom( rightOxygenAtom );
-    this.addAtom( leftOxygenAtom );
-    this.addAtomictBond( rightNitrogenOxygenBond );
+    this.addAtom( this.nitrogenAtom );
+    this.addAtom( this.rightOxygenAtom );
+    this.addAtom( this.leftOxygenAtom );
+    this.addAtomicBond( this.rightNitrogenOxygenBond );
+    this.addAtomicBond( this.leftNitrogenOxygenBond );
 
     // Set up the photon wavelengths to absorb.
     this.setPhotonAbsorptionStrategy( WavelengthConstants.MICRO_WAVELENGTH, new RotationStrategy( this ) );

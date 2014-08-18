@@ -35,7 +35,7 @@ define( function( require ) {
     // Instance data for the nitrogen molecule
     this.nitrogenAtom1 = new NitrogenAtom();
     this.nitrogenAtom2 = new NitrogenAtom();
-    this.nitrogenNitrogenBond = new AtomicBond( this.nitrogenAtom1, this.nitrogenAtom2, 3 );
+    this.nitrogenNitrogenBond = new AtomicBond( this.nitrogenAtom1, this.nitrogenAtom2, { bondCount: 3 });
     this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
 
     // Configure the base class.

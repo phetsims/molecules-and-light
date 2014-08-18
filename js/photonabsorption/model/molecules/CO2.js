@@ -47,8 +47,8 @@ define( function( require ) {
     this.carbonAtom = new CarbonAtom();
     this.oxygenAtom1 = new OxygenAtom();
     this.oxygenAtom2 = new OxygenAtom();
-    this.carbonOxygenBond1 = new AtomicBond( this.carbonAtom, this.oxygenAtom1, 2 );
-    this.carbonOxygenBond2 = new AtomicBond( this.carbonAtom, this.oxygenAtom2, 2 );
+    this.carbonOxygenBond1 = new AtomicBond( this.carbonAtom, this.oxygenAtom1, { bondCount: 2 } );
+    this.carbonOxygenBond2 = new AtomicBond( this.carbonAtom, this.oxygenAtom2, { bondCount: 2 } );
     this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
 
     // Configure the base class.

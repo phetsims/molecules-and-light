@@ -71,12 +71,12 @@ define( function( require ) {
     // has essentially 1.5 bonds, so we randomly choose one side to show
     // two bonds and another to show one.
     if ( this.doubleBondOnRight ) {
-      this.leftOxygenOxygenBond = new AtomicBond( centerOxygenAtom, leftOxygenAtom, 1 );
-      this.rightOxygenOxygenBond = new AtomicBond( centerOxygenAtom, rightOxygenAtom, 2 );
+      this.leftOxygenOxygenBond = new AtomicBond( this.centerOxygenAtom, this.leftOxygenAtom, { bondCount: 1 } );
+      this.rightOxygenOxygenBond = new AtomicBond( this.centerOxygenAtom, this.rightOxygenAtom, { bondCount: 2 } );
     }
     else {
-      this.leftOxygenOxygenBond = new AtomicBond( centerOxygenAtom, leftOxygenAtom, 2 );
-      this.rightOxygenOxygenBond = new AtomicBond( centerOxygenAtom, rightOxygenAtom, 1 );
+      this.leftOxygenOxygenBond = new AtomicBond( this.centerOxygenAtom, this.leftOxygenAtom, { bondCount: 2 } );
+      this.rightOxygenOxygenBond = new AtomicBond( this.centerOxygenAtom, this.rightOxygenAtom, { bondCount: 1 });
     }
 
     // Configure the base class.
