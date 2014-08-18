@@ -50,7 +50,7 @@ define( function( require ) {
 //    Add the atomic bonds which form the structure of this molecule to the bondLayer
 //    TODO: requires the AtomicBondNode.js dependency file.
       var atomicBonds = molecule.getAtomicBonds();
-      for ( var i = 0; i < atomicBonds.length; i++ ) {
+      for( var i = 0; i < atomicBonds.length; i++ ) {
         thisNode.bondLayer.addChild( new AtomicBondNode( atomicBonds[i], mvt ));
       }
 
