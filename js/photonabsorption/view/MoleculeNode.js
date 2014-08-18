@@ -17,11 +17,9 @@ define( function( require ) {
   var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
   var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
   var AtomNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/AtomNode' );
-    var AtomicBondNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/AtomicBondNode' );
+  var AtomicBondNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/AtomicBondNode' );
 
-
-
-    // Model Data for the molecule node
+  // Model Data for the molecule node
   // This flag is used to turn on/off the appearance of the center of
   // gravity, which is useful for debugging.
   var SHOW_COG = false;
@@ -47,12 +45,11 @@ define( function( require ) {
       thisNode.atomLayer.addChild( new AtomNode( molecule.getAtoms()[atom], mvt ) );
     }
 
-//    Add the atomic bonds which form the structure of this molecule to the bondLayer
-//    TODO: requires the AtomicBondNode.js dependency file.
-      var atomicBonds = molecule.getAtomicBonds();
-      for( var i = 0; i < atomicBonds.length; i++ ) {
-        thisNode.bondLayer.addChild( new AtomicBondNode( atomicBonds[i], mvt ));
-      }
+    // Add the atomic bonds which form the structure of this molecule to the bondLayer
+    var atomicBonds = molecule.getAtomicBonds();
+    for( var i = 0; i < atomicBonds.length; i++ ) {
+      thisNode.bondLayer.addChild( new AtomicBondNode( atomicBonds[i], mvt ));
+    }
 
     molecule.on( 'electronicEnergyStateChanged', function() {
       for ( var i = 0; i < thisNode.atomLayer.children.length; i++ ) {
@@ -64,9 +61,9 @@ define( function( require ) {
 
     // Move the bond layer behind the atoms.
     this.bondLayer.moveToBack();
+
     // Make sure the highlighting is correct when the simulation starts.
     molecule.trigger( 'electronicEnergyStateChanged' );
-
 
   }
 
