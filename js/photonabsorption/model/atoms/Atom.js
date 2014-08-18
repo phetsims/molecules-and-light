@@ -46,14 +46,6 @@ define( function( require ) {
 
     this.link( function() { console.log( 'The Atoms location has been set!' )} );
 
-    // Structure of the molecule in terms of offsets from the center of
-    // gravity.  These indicate the atom's position in the "relaxed" (i.e.
-    // non-vibrating), non-rotated state.
-    this.initialCogOffset = new Vector2();
-
-    // Vibration offsets - these represent the amount of deviation from the
-    // initial (a.k.a relaxed) configuration for each molecule.
-    this.vibrationAtomOffset = new Vector2();
   }
 
   return inherit( Property, Atom, {
