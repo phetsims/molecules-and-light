@@ -26,7 +26,7 @@ define( function( require ) {
   var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
 
   /**
-   * @param {BarMagnetModel} photonAbsorptionModel
+   * @param {PhotonAbsorptionModel} photonAbsorptionModel
    * @constructor
    */
   function MoleculesAndLightScreenView( photonAbsorptionModel ) {
@@ -61,6 +61,7 @@ define( function( require ) {
     this.addChild( new PAPhotonNode(photonAbsorptionModel.testPhoton, mvt ) );
     // Add a molecule to the screen.
     this.addChild( new MoleculeNode( new CO( { initialCenterOfGravityPos: new Vector2( 50, 50 ) }), mvt) );
+
 
   }
 

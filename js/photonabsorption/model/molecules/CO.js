@@ -13,7 +13,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
-  var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' )
+  var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
   var RotationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/RotationStrategy' );
   var VibrationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/VibrationStrategy' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
@@ -39,7 +39,7 @@ define( function( require ) {
     // Instance Data
     this.carbonAtom = new CarbonAtom();
     this.oxygenAtom = new OxygenAtom();
-    this.carbonOxygenBond = new AtomicBond( this.carbonAtom, this.oxygenAtom, 3 );
+    this.carbonOxygenBond = new AtomicBond( this.carbonAtom, this.oxygenAtom, 1 );
     this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
 
     // Configure the base class.
