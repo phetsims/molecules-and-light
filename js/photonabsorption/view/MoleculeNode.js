@@ -62,7 +62,7 @@ define( function( require ) {
 
     } );
 
-    // Move the bond layer behind the molecules.
+    // Move the bond layer behind the atoms.
     this.bondLayer.moveToBack();
     // Make sure the highlighting is correct when the simulation starts.
     molecule.trigger( 'electronicEnergyStateChanged' );
