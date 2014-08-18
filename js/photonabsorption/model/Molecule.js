@@ -71,6 +71,9 @@ define( function( require ) {
     // TODO: Declaration in original java is an empty hashmap, see if an arbitrary object is correct solution.
     this.vibrationAtomOffsets = {}; // Object contains keys of type Atoms ID and values of type Vector2
 
+    //  Map containing the atoms which compose this molecule.  Allows us to call on each atom by their unique ID.
+    this.atomsByID = {};  // Objects contains keys of the atom's uniqueID, and values of type atom.
+
     // Listeners to events that come from this molecule.
     this.listeners = []; // Elements are event listeners
 
@@ -558,6 +561,8 @@ define( function( require ) {
       this.atoms.push( atom );
       this.initialAtomCogOffsets[atom.uniqueID] = new Vector2( 0, 0 );
       this.vibrationAtomOffsets[atom.uniqueID] = new Vector2( 0, 0 );
+      this.atomsByID[atom.uniqueID] = atom;
+      console.log(this.atomsByID);
     },
     /**
      * Add an atomic bond to this Molecule's list of atomic bonds.
@@ -609,8 +614,6 @@ define( function( require ) {
      * TODO: {Object}.
      **/
     updateAtomPositions: function() {
-      var i = 0;
-
       for ( var uniqueID in this.initialAtomCogOffsets ) {
           if (this.initialAtomCogOffsets.hasOwnProperty(uniqueID)) {
               var atomOffset = new Vector2(this.initialAtomCogOffsets[uniqueID].x, this.initialAtomCogOffsets[uniqueID].y);
@@ -620,8 +623,7 @@ define( function( require ) {
               atomOffset.rotate(this.currentRotationRadians);
               // Set location based on combination of offset and current center
               // of gravity.
-              this.atoms[i].position.setXY(this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y);
-              i++;
+              this.atomsByID[uniqueID].position.setXY(this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y);
           }
       }
 
