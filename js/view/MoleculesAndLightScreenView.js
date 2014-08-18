@@ -20,7 +20,10 @@ define( function( require ) {
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/photon' ); // TODO: Temporary dependency module for testing.
   var QuadEmissionFrequencyControlPanel = require( 'MOLECULES_AND_LIGHT/view/QuadEmissionFrequencyControlPanel' );
   var CO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO' );
-  var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );
+  var NO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO' );
+  var NO2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO2' );
+
+    var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );
 
   // images
   var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
@@ -60,7 +63,7 @@ define( function( require ) {
     // Add a photon to the screen.
     this.addChild( new PAPhotonNode(photonAbsorptionModel.testPhoton, mvt ) );
     // Add a molecule to the screen.
-    this.addChild( new MoleculeNode( new CO( { initialCenterOfGravityPos: new Vector2( 50, 50 ) }), mvt) );
+    this.addChild( new MoleculeNode( new NO2( { initialCenterOfGravityPos: new Vector2( 50, 50 ) }), mvt) );
 
 
   }

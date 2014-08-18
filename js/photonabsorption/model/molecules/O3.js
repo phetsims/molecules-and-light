@@ -43,6 +43,9 @@ define( function( require ) {
   var RAND = {
     nextDouble: function() {
       return Math.random();
+    },
+    nextBoolean: function() {
+      return RAND.nextDouble() < 0.50;
     }
   };
 

@@ -46,7 +46,12 @@ define( function( require ) {
   var RAND = {
     nextDouble: function() {
       return Math.random();
+    },
+
+    nextBoolean: function() {
+      return RAND.nextDouble() < 0.50;
     }
+
   };
 
   function NO2( options ) {
@@ -79,7 +84,7 @@ define( function( require ) {
     }
     else {
       this.rightNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.rightOxygenAtom, { bondCount: 1 } );
-      this.leftNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.leftOxygenAtom, { bondCount2: 2 } );
+      this.leftNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.leftOxygenAtom, { bondCount: 2 } );
     }
 
     // Configure the base class.
