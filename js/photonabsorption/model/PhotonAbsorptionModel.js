@@ -21,6 +21,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
   var Rectangle = require( 'DOT/Rectangle' );
   var ObservableArray = require( 'AXON/ObservableArray' );
@@ -203,10 +204,13 @@ define( function( require ) {
   console.log( testN2.atoms );
 
   function PhotonAbsorptionModel() {
+
+    PropertySet.call( this, { photonWavelength: WavelengthConstants.IR_WAVELENGTH } );
+
     // TODO: We need to build something that behaves sufficiently like EventListenerList
     this.listeners = [];
     this.photons = new ObservableArray(); //Elements are of type Photon
-    this.photonWavelength = WavelengthConstants.VISIBLE_WAVELENGTH;
+    //this.photonWavelength = WavelengthConstants.VISIBLE_WAVELENGTH;
     this.activeMolecules = []; // Elements are of type Molecule
     this.initialPhotonTarget = null;
 
@@ -231,7 +235,7 @@ define( function( require ) {
     //this.reset();
   }
 
-  return inherit( Object, PhotonAbsorptionModel, {
+  return inherit( PropertySet, PhotonAbsorptionModel, {
 
 
     /**
@@ -331,7 +335,21 @@ define( function( require ) {
       console.log( 'You just emitted a photon!' );
 
       //notifyPhotonAdded( photon ); TODO: Implement this function or some other Event Listener
+    },
+
+
+  setEmittedPhotonWavelength: function( freq ) {
+    if ( this.photonWavelength != freq ) {
+      // Set the new value and send out notification of change to listeners.
+      this.photonWavelength = freq;
+      //notifyEmittedPhotonWavelengthChanged();
     }
+  },
+
+  getEmittedPhotonWavelength: function() {
+    return this.photonWavelength;
+  }
+
 
   } );
 } );
@@ -549,20 +567,7 @@ define( function( require ) {
 //    }
 //  }
 //
-//
-//
-//  public void setEmittedPhotonWavelength( double freq ) {
-//    if ( this.photonWavelength != freq ) {
-//      // Set the new value and send out notification of change to listeners.
-//      this.photonWavelength = freq;
-//      notifyEmittedPhotonWavelengthChanged();
-//    }
-//  }
-//
-//  public double getEmittedPhotonWavelength() {
-//    return photonWavelength;
-//  }
-//
+
 //  /**
 //   * Get the number of the specified molecule in the configurable atmosphere.
 //   *

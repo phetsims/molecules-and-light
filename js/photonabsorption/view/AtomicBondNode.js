@@ -37,7 +37,8 @@ define( function( require ) {
         Node.call(this);
         // Cary this node through the scope in nested functions.
         var thisNode = this;
-        //atomicBond.link( thisNode.updateRepresentation );
+
+        atomicBond.link( function() { thisNode.updateRepresentation() });
 
         // Calculate the width to use for the bond representation(s).
         this.averageAtomRadius = mvt.modelToViewDeltaX(( atomicBond.getAtom1().getRadius() + atomicBond.getAtom2().getRadius() ) / 2);
@@ -50,6 +51,7 @@ define( function( require ) {
 
     updateRepresentation: function() {
         this.removeAllChildren();  // Clear out any previous representations.
+
         // TODO: Is this style for variable declaration acceptable for switch-case?
         var bondWidth;
         var bond1;
