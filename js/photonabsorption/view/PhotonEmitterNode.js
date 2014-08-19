@@ -22,11 +22,12 @@ define( function( require ) {
     var HSlider = require( 'SUN/HSlider' );
     var Property = require( 'AXON/Property' );
     var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
+    var Vector2 = require( 'DOT/Vector2' )
 
     // images
     var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
     var flashlight2Image= require( 'image!MOLECULES_AND_LIGHT/flashlight2.png' );
-    var microwaveTransmitter = require( 'image!MOLECULES_AND_LIGHT/microwaveTransmitter.png' );
+    var microwaveTransmitter = require( 'image!MOLECULES_AND_LIGHT/microwave-transmitter.png' );
     var uvLight2= require( 'image!MOLECULES_AND_LIGHT/uv_light_2.png' );
 
 
@@ -61,13 +62,51 @@ define( function( require ) {
         this.emitterImageWidth = width;
 
         // Listen to model for events that may cause this node to change emitted wavelength.
-
         model.photonWavelengthProperty.link( function() {
             thisNode.updateImage( thisNode.emitterImageWidth );
         } );
 
         // Add the initial image.
         thisNode.updateImage( this.emitterImageWidth );
+
+        // Add the slider that will control the rate of photon emission.
+        var emissionRateControlSliderNode = new HSlider( new Property(0), { min: 0, max: SLIDER_RANGE } );
+
+        // Add the emission rate control slider to the correct location on the photon emitter.
+        // EmissionRateControlSliderNode emissionRateControlSliderNode = new EmissionRateControlSliderNode( model );
+        emissionRateControlSliderNode.setCenter( new Vector2(
+                this.photonEmitterImage.getCenterX() - emissionRateControlSliderNode.getWidth() / 2,
+                this.photonEmitterImage.getCenterY() - emissionRateControlSliderNode.getHeight() / 2 ) );
+
+
+        this.emissionControlSliderLayer.addChild( emissionRateControlSliderNode );
+        //Dimension emissionControlSliderSize = new Dimension( 100, 30 ); // This may be adjusted as needed for best look.
+//        emissionRateControlSlider = new IntensitySlider( PhetColorScheme.RED_COLORBLIND, IntensitySlider.HORIZONTAL, emissionControlSliderSize );
+//        emissionRateControlSlider.setMinimum( 0 );
+//        emissionRateControlSlider.setMaximum( SLIDER_RANGE );
+//        emissionRateControlSlider.addChangeListener( new ChangeListener() {
+//            public void stateChanged( ChangeEvent e ) {
+//                double sliderProportion = (double) emissionRateControlSlider.getValue() / (double) SLIDER_RANGE;
+//                if ( sliderProportion == 0 ) {
+//                    model.setPhotonEmissionPeriod( Double.POSITIVE_INFINITY );
+//                }
+//                else if ( model.getPhotonTarget() == PhotonTarget.CONFIGURABLE_ATMOSPHERE ) {
+//                    // Note the implicit conversion from frequency to period in the following line.
+//                    model.setPhotonEmissionPeriod(
+//                            PhotonAbsorptionModel.MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET / sliderProportion );
+//                }
+//                else {
+//                    // Note the implicit conversion from frequency to period in the following line.
+//                    model.setPhotonEmissionPeriod(
+//                            PhotonAbsorptionModel.MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET / sliderProportion );
+//                }
+//            }
+//        } );
+//
+
+//        emissionControlSliderLayer.addChild( emissionRateControlSliderNode );
+//    }
+
 
     }
 
@@ -112,38 +151,8 @@ define( function( require ) {
 
 // CONSTRUCTOR
 
-//        // Add the slider that will control the rate of photon emission.
-//        Dimension emissionControlSliderSize = new Dimension( 100, 30 ); // This may be adjusted as needed for best look.
-//        emissionRateControlSlider = new IntensitySlider( PhetColorScheme.RED_COLORBLIND, IntensitySlider.HORIZONTAL, emissionControlSliderSize );
-//        emissionRateControlSlider.setMinimum( 0 );
-//        emissionRateControlSlider.setMaximum( SLIDER_RANGE );
-//        emissionRateControlSlider.addChangeListener( new ChangeListener() {
-//            public void stateChanged( ChangeEvent e ) {
-//                double sliderProportion = (double) emissionRateControlSlider.getValue() / (double) SLIDER_RANGE;
-//                if ( sliderProportion == 0 ) {
-//                    model.setPhotonEmissionPeriod( Double.POSITIVE_INFINITY );
-//                }
-//                else if ( model.getPhotonTarget() == PhotonTarget.CONFIGURABLE_ATMOSPHERE ) {
-//                    // Note the implicit conversion from frequency to period in the following line.
-//                    model.setPhotonEmissionPeriod(
-//                            PhotonAbsorptionModel.MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET / sliderProportion );
-//                }
-//                else {
-//                    // Note the implicit conversion from frequency to period in the following line.
-//                    model.setPhotonEmissionPeriod(
-//                            PhotonAbsorptionModel.MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET / sliderProportion );
-//                }
-//            }
-//        } );
-//
-//        EmissionRateControlSliderNode emissionRateControlSliderNode = new EmissionRateControlSliderNode( model );
-//        PBounds emitterImageBounds = photonEmitterImage.getFullBoundsReference();
-//        emissionRateControlSliderNode.setOffset(
-//                emitterImageBounds.getCenterX() - emissionRateControlSliderNode.getFullBoundsReference().getWidth() / 2,
-//                emitterImageBounds.getCenterY() - emissionRateControlSliderNode.getFullBoundsReference().getHeight() / 2 );
-//
-//        emissionControlSliderLayer.addChild( emissionRateControlSliderNode );
-//    }
+
+
 //
 //
 //    // ------------------------------------------------------------------------

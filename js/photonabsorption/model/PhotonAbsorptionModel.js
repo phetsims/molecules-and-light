@@ -348,6 +348,11 @@ define( function( require ) {
 
   getEmittedPhotonWavelength: function() {
     return this.photonWavelength;
+  },
+
+
+  getPhotonEmissionLocation: function() {
+    return PHOTON_EMISSION_LOCATION;
   }
 
 
@@ -517,10 +522,6 @@ define( function( require ) {
 //
 //  public PhotonTarget getPhotonTarget() {
 //    return photonTarget;
-//  }
-//
-//  public Point2D getPhotonEmissionLocation() {
-//    return PHOTON_EMISSION_LOCATION;
 //  }
 //
 //  public Rectangle2D getContainmentAreaRect() {
