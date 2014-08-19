@@ -22,7 +22,10 @@ define( function( require ) {
     var HSlider = require( 'SUN/HSlider' );
     var Property = require( 'AXON/Property' );
     var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
-    var Vector2 = require( 'DOT/Vector2' )
+    var Vector2 = require( 'DOT/Vector2' );
+    var Dimension2 = require( 'DOT/Dimension2' );
+    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+    var Color = require( 'SCENERY/util/Color' );
 
     // images
     var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
@@ -70,7 +73,10 @@ define( function( require ) {
         thisNode.updateImage( this.emitterImageWidth );
 
         // Add the slider that will control the rate of photon emission.
-        var emissionRateControlSliderNode = new HSlider( new Property(0), { min: 0, max: SLIDER_RANGE } );
+        // Add a background rectangle for the HSlider
+        var backgroundRectangle = new Rectangle( 0, 0, 100, 30, 0, 0 , { fill: new Color( 0, 200, 0).colorUtilsDarker(0.75) } );
+        var emissionControlSliderSize = new Dimension2( 100, 5 ); // This may be adjusted as needed for best look.
+        var emissionRateControlSliderNode = new HSlider( new Property(0), { min: 0, max: SLIDER_RANGE }, { trackSize: emissionControlSliderSize } );
 
         // Add the emission rate control slider to the correct location on the photon emitter.
         // EmissionRateControlSliderNode emissionRateControlSliderNode = new EmissionRateControlSliderNode( model );
@@ -78,9 +84,13 @@ define( function( require ) {
                 this.photonEmitterImage.getCenterX() - emissionRateControlSliderNode.getWidth() / 2,
                 this.photonEmitterImage.getCenterY() - emissionRateControlSliderNode.getHeight() / 2 ) );
 
+        backgroundRectangle.setCenter( new Vector2(
+                this.photonEmitterImage.getCenterX() - emissionRateControlSliderNode.getWidth() / 2,
+                this.photonEmitterImage.getCenterY() - emissionRateControlSliderNode.getHeight() / 2 ) );
 
+        this.emissionControlSliderLayer.addChild( backgroundRectangle );
         this.emissionControlSliderLayer.addChild( emissionRateControlSliderNode );
-        //Dimension emissionControlSliderSize = new Dimension( 100, 30 ); // This may be adjusted as needed for best look.
+
 //        emissionRateControlSlider = new IntensitySlider( PhetColorScheme.RED_COLORBLIND, IntensitySlider.HORIZONTAL, emissionControlSliderSize );
 //        emissionRateControlSlider.setMinimum( 0 );
 //        emissionRateControlSlider.setMaximum( SLIDER_RANGE );
