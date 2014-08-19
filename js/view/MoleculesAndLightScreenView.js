@@ -54,7 +54,7 @@ define( function( require ) {
     //photonAbsorptionModel.photons.add( new Photon( 20 ) );
 
     // Add the heat lamp to the left center of screen
-    //var heatLampNode = new Image( heatLampImage, { left: 0, centerY: this.layoutBounds.centerY, scale: 0.75 } );
+    // TODO: Width and location will be set later when we do an official port of MoleculesAndLightCanvas.java
     var heatLampNode = new PhotonEmitterNode( 300, this.mvt, photonAbsorptionModel );
     this.addChild( heatLampNode );
 

@@ -100,7 +100,7 @@ define( function( require ) {
 //
         this.photonEmitterImage.scale( flashlightWidth / this.photonEmitterImage.getImageWidth() );
         this.photonEmitterImage.setCenterX( -flashlightWidth );
-        this.photonEmitterImage.setCenterY(-this.photonEmitterImage.getImageHeight() / 2);
+        this.photonEmitterImage.setCenterY(-this.photonEmitterImage.getImageHeight() / 2 );
 
         this.emitterImageLayer.addChild( this.photonEmitterImage );
     }
