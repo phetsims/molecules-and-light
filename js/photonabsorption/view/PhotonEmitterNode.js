@@ -25,6 +25,10 @@ define( function( require ) {
 
     // images
     var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
+    var flashlight2Image= require( 'image!MOLECULES_AND_LIGHT/flashlight2.png' );
+    var microwaveTransmitter = require( 'image!MOLECULES_AND_LIGHT/microwaveTransmitter.png' );
+    var uvLight2= require( 'image!MOLECULES_AND_LIGHT/uv_light_2.png' );
+
 
     // Model data for the PhotonEmitterNode
     var SLIDER_RANGE = 100;
@@ -85,19 +89,18 @@ define( function( require ) {
         // photons will be emitted horizontally to the right.
 
         if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.IR_WAVELENGTH ) {
-            this.photonEmitterImage = new Image( heatLampImage, { centerX: 0, centerY: 0 } );
-            console.log( this.photonEmitterImage.getCenter() );
+            this.photonEmitterImage = new Image( heatLampImage );
         }
-//        else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.VISIBLE_WAVELENGTH ) {
-//            this.photonEmitterImage = new Image( PhotonAbsorptionResources.getImage( "flashlight2.png" ) );
-//        }
-//        else if ( model.getEmittedPhotonWavelength() == WavelengthConstants.UV_WAVELENGTH ) {
-//            photonEmitterImage = new PImage( PhotonAbsorptionResources.getImage( "uv_light_2.png" ) );
-//        }
-//        else if ( model.getEmittedPhotonWavelength() == WavelengthConstants.MICRO_WAVELENGTH ) {
-//            photonEmitterImage = new PImage( PhotonAbsorptionResources.getImage( "microwave-transmitter.png" ) );
-//        }
-//
+        else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.VISIBLE_WAVELENGTH ) {
+            this.photonEmitterImage = new Image( flashlight2Image );
+        }
+        else if ( model.getEmittedPhotonWavelength() == WavelengthConstants.UV_WAVELENGTH ) {
+            this.photonEmitterImage = new Image( uvLight2 );
+        }
+        else if ( model.getEmittedPhotonWavelength() == WavelengthConstants.MICRO_WAVELENGTH ) {
+            this.photonEmitterImage = new Image( microwaveTransmitter );
+        }
+        // Translate center and scale the emitter image
         this.photonEmitterImage.scale( flashlightWidth / this.photonEmitterImage.getImageWidth() );
         this.photonEmitterImage.setCenterX( -flashlightWidth );
         this.photonEmitterImage.setCenterY(-this.photonEmitterImage.getImageHeight() / 2 );
