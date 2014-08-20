@@ -80,7 +80,6 @@ define( function( require ) {
         // Note the implicit conversion from frequency to period in the following line.
         model.setPhotonEmissionPeriod( (MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET / sliderProportion) );
       }
-      thisNode.update();
     } );
 
     this.addChild( this.backgroundRect );
