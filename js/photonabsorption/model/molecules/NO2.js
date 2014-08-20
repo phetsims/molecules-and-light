@@ -128,60 +128,60 @@ define( function( require ) {
      *
      * @param {Number} vibrationRadians - Where this molecule is in its vibration cycle in radians.
      */
-  setVibration: function( vibrationRadians ) {
-    Molecule.prototype.setVibration.call( vibrationRadians );
-    var multFactor = Math.sin( vibrationRadians );
-    var maxNitrogenDisplacement = 30;
-    var maxOxygenDisplacement = 15;
-    this.addInitialAtomCogOffset( this.nitrogenAtom, new Vector2( 0, INITIAL_NITROGEN_VERTICAL_OFFSET - multFactor * maxNitrogenDisplacement ) );
-    this.addInitialAtomCogOffset( this.rightOxygenAtom, new Vector2( INITIAL_OXYGEN_HORIZONTAL_OFFSET + multFactor * maxOxygenDisplacement,
-        INITIAL_OXYGEN_VERTICAL_OFFSET + multFactor * maxOxygenDisplacement ) );
-    this.addInitialAtomCogOffset( this.leftOxygenAtom, new Vector2( -INITIAL_OXYGEN_HORIZONTAL_OFFSET - multFactor * maxOxygenDisplacement,
-        INITIAL_OXYGEN_VERTICAL_OFFSET + multFactor * maxOxygenDisplacement ) );
-    this.updateAtomPositions();
-  },
+    setVibration: function( vibrationRadians ) {
+      Molecule.prototype.setVibration.call( vibrationRadians );
+      var multFactor = Math.sin( vibrationRadians );
+      var maxNitrogenDisplacement = 30;
+      var maxOxygenDisplacement = 15;
+      this.addInitialAtomCogOffset( this.nitrogenAtom, new Vector2( 0, INITIAL_NITROGEN_VERTICAL_OFFSET - multFactor * maxNitrogenDisplacement ) );
+      this.addInitialAtomCogOffset( this.rightOxygenAtom, new Vector2( INITIAL_OXYGEN_HORIZONTAL_OFFSET + multFactor * maxOxygenDisplacement,
+          INITIAL_OXYGEN_VERTICAL_OFFSET + multFactor * maxOxygenDisplacement ) );
+      this.addInitialAtomCogOffset( this.leftOxygenAtom, new Vector2( -INITIAL_OXYGEN_HORIZONTAL_OFFSET - multFactor * maxOxygenDisplacement,
+          INITIAL_OXYGEN_VERTICAL_OFFSET + multFactor * maxOxygenDisplacement ) );
+      this.updateAtomPositions();
+    },
 
     /**
      * Define the break apart behavior for the NO2 molecule.  Initializes and sets the velocity of constituent molecules.
      * TODO: I had to re-declare the BREAK_APART_VELOCITY so that it could be used in this function.  Is there a way for NO2.js to find global variables in Molecules.js?
      */
-  breakApart: function() {
+    breakApart: function() {
 
-    // Create the constituent molecules that result from breaking apart.
-    var nitrogenMonoxideMolecule = new NO();
-    var singleOxygenMolecule = new O();
+      // Create the constituent molecules that result from breaking apart.
+      var nitrogenMonoxideMolecule = new NO();
+      var singleOxygenMolecule = new O();
 
-    // Set up the direction and velocity of the constituent molecules.
-    // These are set up mostly to look good, and their directions and
-    // velocities have little if anything to do with any physical rules
-    // of atomic dissociation.
-    var diatomicMoleculeRotationAngle = ( ( Math.PI / 2 ) - ( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 ) );
-    var breakApartAngle;
-    if ( this.doubleBondOnRight ) {
-      nitrogenMonoxideMolecule.rotate( -diatomicMoleculeRotationAngle );
-      nitrogenMonoxideMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.nitrogenAtom ).x + this.getInitialAtomCogOffset( this.rightOxygenAtom ).x ) / 2,
-          ( this.getInitialAtomCogOffset( this.nitrogenAtom ).y + this.getInitialAtomCogOffset( this.rightOxygenAtom ).y ) / 2 );
-      breakApartAngle = Math.PI / 4 + RAND.nextDouble() * Math.PI / 4;
-      singleOxygenMolecule.setCenterOfGravityPos( -INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );
+      // Set up the direction and velocity of the constituent molecules.
+      // These are set up mostly to look good, and their directions and
+      // velocities have little if anything to do with any physical rules
+      // of atomic dissociation.
+      var diatomicMoleculeRotationAngle = ( ( Math.PI / 2 ) - ( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 ) );
+      var breakApartAngle;
+      if ( this.doubleBondOnRight ) {
+        nitrogenMonoxideMolecule.rotate( -diatomicMoleculeRotationAngle );
+        nitrogenMonoxideMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.nitrogenAtom ).x + this.getInitialAtomCogOffset( this.rightOxygenAtom ).x ) / 2,
+            ( this.getInitialAtomCogOffset( this.nitrogenAtom ).y + this.getInitialAtomCogOffset( this.rightOxygenAtom ).y ) / 2 );
+        breakApartAngle = Math.PI / 4 + RAND.nextDouble() * Math.PI / 4;
+        singleOxygenMolecule.setCenterOfGravityPos( -INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );
+      }
+      else {
+        nitrogenMonoxideMolecule.rotate( Math.PI + diatomicMoleculeRotationAngle );
+        breakApartAngle = Math.PI / 2 + RAND.nextDouble() * Math.PI / 4;
+        nitrogenMonoxideMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.nitrogenAtom ).x + this.getInitialAtomCogOffset( this.leftOxygenAtom ).x ) / 2,
+            ( this.getInitialAtomCogOffset( this.nitrogenAtom ).y + this.getInitialAtomCogOffset( this.leftOxygenAtom ).y ) / 2 );
+        singleOxygenMolecule.setCenterOfGravityPos( INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );
+      }
+      nitrogenMonoxideMolecule.setVelocity( BREAK_APART_VELOCITY * 0.33 * Math.cos( breakApartAngle ), BREAK_APART_VELOCITY * 0.33 * Math.sin( breakApartAngle ) );
+      singleOxygenMolecule.setVelocity( -BREAK_APART_VELOCITY * 0.67 * Math.cos( breakApartAngle ), -BREAK_APART_VELOCITY * 0.67 * Math.sin( breakApartAngle ) );
+
+      // Add these constituent molecules to the constituent list.
+      this.addConstituentMolecule( nitrogenMonoxideMolecule );
+      this.addConstituentMolecule( singleOxygenMolecule );
+
+      // Send out notifications about this molecule breaking apart.
+      // TODO: Make sure that the notifiers have appropriate behavior.
+      //this.notifyBrokeApart();
     }
-    else {
-      nitrogenMonoxideMolecule.rotate( Math.PI + diatomicMoleculeRotationAngle );
-      breakApartAngle = Math.PI / 2 + RAND.nextDouble() * Math.PI / 4;
-      nitrogenMonoxideMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.nitrogenAtom ).x + this.getInitialAtomCogOffset( this.leftOxygenAtom ).x ) / 2,
-          ( this.getInitialAtomCogOffset( this.nitrogenAtom ).y + this.getInitialAtomCogOffset( this.leftOxygenAtom ).y ) / 2 );
-      singleOxygenMolecule.setCenterOfGravityPos( INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );
-    }
-    nitrogenMonoxideMolecule.setVelocity( BREAK_APART_VELOCITY * 0.33 * Math.cos( breakApartAngle ), BREAK_APART_VELOCITY * 0.33 * Math.sin( breakApartAngle ) );
-    singleOxygenMolecule.setVelocity( -BREAK_APART_VELOCITY * 0.67 * Math.cos( breakApartAngle ), -BREAK_APART_VELOCITY * 0.67 * Math.sin( breakApartAngle ) );
-
-    // Add these constituent molecules to the constituent list.
-    this.addConstituentMolecule( nitrogenMonoxideMolecule );
-    this.addConstituentMolecule( singleOxygenMolecule );
-
-    // Send out notifications about this molecule breaking apart.
-    // TODO: Make sure that the notifiers have appropriate behavior.
-    //this.notifyBrokeApart();
-  }
   } )
 
 } );

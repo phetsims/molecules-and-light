@@ -43,9 +43,6 @@ define( function( require ) {
     this.radius = radius;
     this.mass = mass;
     this.position = options.position;
-
-    this.link( function() { console.log( 'The Atoms location has been set!' )} );
-
   }
 
   return inherit( Property, Atom, {

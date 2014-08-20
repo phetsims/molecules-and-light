@@ -79,7 +79,7 @@ define( function( require ) {
     }
     else {
       this.leftOxygenOxygenBond = new AtomicBond( this.centerOxygenAtom, this.leftOxygenAtom, { bondCount: 2 } );
-      this.rightOxygenOxygenBond = new AtomicBond( this.centerOxygenAtom, this.rightOxygenAtom, { bondCount: 1 });
+      this.rightOxygenOxygenBond = new AtomicBond( this.centerOxygenAtom, this.rightOxygenAtom, { bondCount: 1 } );
     }
 
     // Configure the base class.

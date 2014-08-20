@@ -32,7 +32,7 @@ define( function( require ) {
     // Supertype constructor
     Property.call( this );
 
-    // Options extension for a possible input vector.
+    // Options extension for variable bond count.
     options = _.extend( {
       // default bond count
       bondCount: 1

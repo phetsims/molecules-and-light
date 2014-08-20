@@ -338,22 +338,64 @@ define( function( require ) {
     },
 
 
-  setEmittedPhotonWavelength: function( freq ) {
-    if ( this.photonWavelength != freq ) {
-      // Set the new value and send out notification of change to listeners.
-      this.photonWavelength = freq;
-      //notifyEmittedPhotonWavelengthChanged();
+    setEmittedPhotonWavelength: function( freq ) {
+      if ( this.photonWavelength != freq ) {
+        // Set the new value and send out notification of change to listeners.
+        this.photonWavelength = freq;
+        //notifyEmittedPhotonWavelengthChanged();
+      }
+    },
+
+    getEmittedPhotonWavelength: function() {
+      return this.photonWavelength;
+    },
+
+
+    getPhotonEmissionLocation: function() {
+      return PHOTON_EMISSION_LOCATION;
+    },
+    /**
+     * Set the emission period, i.e. the time between photons.
+     *
+     * @param {Number} photonEmissionPeriod - Period between photons in milliseconds.
+     */
+    setPhotonEmissionPeriod: function( photonEmissionPeriod ) {
+      assert && assert( photonEmissionPeriod >= 0 );
+      if ( this.photonEmissionPeriodTarget != photonEmissionPeriod ) {
+        // If we are transitioning from off to on, set the countdown timer
+        // such that a photon will be emitted right away so that the user
+        // doesn't have to wait too long in order to see something come
+        // out.
+        if ( this.photonEmissionPeriodTarget === Number.POSITIVE_INFINITY && photonEmissionPeriod != Number.POSITIVE_INFINITY ) {
+          this.photonEmissionCountdownTimer = INITIAL_COUNTDOWN_WHEN_EMISSION_ENABLED;
+        }
+        // Handle the case where the new value is smaller than the current countdown value.
+        else if ( photonEmissionPeriod < this.photonEmissionCountdownTimer ) {
+          this.photonEmissionCountdownTimer = photonEmissionPeriod;
+        }
+        // If the new value is infinity, it means that emissions are being
+        // turned off, so set the period to infinity right away.
+        else if ( photonEmissionPeriod == Number.POSITIVE_INFINITY ) {
+          this.photonEmissionCountdownTimer = photonEmissionPeriod; // Turn off emissions.
+        }
+        this.photonEmissionPeriodTarget = photonEmissionPeriod;
+//      notifyPhotonEmissionPeriodChanged();
+      }
+    },
+
+    getPhotonTarget: function() {
+      return this.photonTarget;
+    },
+
+
+    /**
+     * @return {Number} - Period between photons in milliseconds.
+     */
+    getPhotonEmissionPeriod: function() {
+      return this.photonEmissionPeriodTarget;
     }
-  },
-
-  getEmittedPhotonWavelength: function() {
-    return this.photonWavelength;
-  },
 
 
-  getPhotonEmissionLocation: function() {
-    return PHOTON_EMISSION_LOCATION;
-  }
 
 
   } );
@@ -520,10 +562,6 @@ define( function( require ) {
 //    }
 //  }
 //
-//  public PhotonTarget getPhotonTarget() {
-//    return photonTarget;
-//  }
-//
 //  public Rectangle2D getContainmentAreaRect() {
 //    return CONTAINMENT_AREA_RECT;
 //  }
@@ -532,43 +570,7 @@ define( function( require ) {
 //    return new ArrayList<Molecule>( activeMolecules );
 //  }
 //
-//  /**
-//   * @return - Period between photons in milliseconds.
-//   */
-//  public double getPhotonEmissionPeriod() {
-//    return photonEmissionPeriodTarget;
-//  }
 //
-//  /**
-//   * Set the emission period, i.e. the time between photons.
-//   *
-//   * @param photonEmissionPeriod - Period between photons in milliseconds.
-//   */
-//  public void setPhotonEmissionPeriod( double photonEmissionPeriod ) {
-//    assert photonEmissionPeriod >= 0;
-//    if ( this.photonEmissionPeriodTarget != photonEmissionPeriod ) {
-//      // If we are transitioning from off to on, set the countdown timer
-//      // such that a photon will be emitted right away so that the user
-//      // doesn't have to wait too long in order to see something come
-//      // out.
-//      if ( this.photonEmissionPeriodTarget == Double.POSITIVE_INFINITY && photonEmissionPeriod != Double.POSITIVE_INFINITY ) {
-//        photonEmissionCountdownTimer = INITIAL_COUNTDOWN_WHEN_EMISSION_ENABLED;
-//      }
-//      // Handle the case where the new value is smaller than the current countdown value.
-//      else if ( photonEmissionPeriod < photonEmissionCountdownTimer ) {
-//        photonEmissionCountdownTimer = photonEmissionPeriod;
-//      }
-//      // If the new value is infinity, it means that emissions are being
-//      // turned off, so set the period to infinity right away.
-//      else if ( photonEmissionPeriod == Double.POSITIVE_INFINITY ) {
-//        photonEmissionCountdownTimer = photonEmissionPeriod; // Turn off emissions.
-//      }
-//      this.photonEmissionPeriodTarget = photonEmissionPeriod;
-//      notifyPhotonEmissionPeriodChanged();
-//    }
-//  }
-//
-
 //  /**
 //   * Get the number of the specified molecule in the configurable atmosphere.
 //   *

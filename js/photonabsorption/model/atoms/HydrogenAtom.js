@@ -23,6 +23,7 @@ define( function( require ) {
 
   // Static Variable
   var instanceCount = 0;
+
   /**
    * Constructor for a Hydrogen atom.  There is an optional Vector2 parameter
    * which specifies the location of this Hydrogen atom.
