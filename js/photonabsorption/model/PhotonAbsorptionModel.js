@@ -205,7 +205,9 @@ define( function( require ) {
 
   function PhotonAbsorptionModel() {
 
-    PropertySet.call( this, { photonWavelength: WavelengthConstants.IR_WAVELENGTH } );
+    PropertySet.call( this, {
+      emissionFrequency: 0,
+      photonWavelength: WavelengthConstants.IR_WAVELENGTH } );
 
     // TODO: We need to build something that behaves sufficiently like EventListenerList
     this.listeners = [];
@@ -219,7 +221,7 @@ define( function( require ) {
     this.photonTarget = null;
 
     // Variables that control periodic photon emission.
-    this.photonEmissionCountdownTimer = 1000;
+    this.photonEmissionCountdownTimer = Number.POSITIVE_INFINITY;
     this.photonEmissionPeriodTarget = DEFAULT_PHOTON_EMISSION_PERIOD;
     this.previousEmissionAngle = 0;
 
@@ -269,9 +271,9 @@ define( function( require ) {
      * @param {Number} dt - The incremental time step.
      */
     step: function( dt ) {
-
+      dt *= 1000;
       // Check if it is time to emit any photons.
-      if ( this.photonEmissionCountdownTimer != Number.POSITIVE_INFINITY ) {
+      if ( this.photonEmissionCountdownTimer !== Number.POSITIVE_INFINITY ) {
         this.photonEmissionCountdownTimer -= dt;
         if ( this.photonEmissionCountdownTimer <= 0 ) {
           // Time to emit.
@@ -314,7 +316,6 @@ define( function( require ) {
      * will travel toward the photon target, which will decide whether a given
      * photon should be absorbed.
      *
-     * TODO: Requires implementation of PhotonTarget.js.
      */
     emitPhoton: function() {
       var photon = new Photon( this.photonWavelength );
@@ -362,6 +363,8 @@ define( function( require ) {
     setPhotonEmissionPeriod: function( photonEmissionPeriod ) {
       assert && assert( photonEmissionPeriod >= 0 );
       if ( this.photonEmissionPeriodTarget != photonEmissionPeriod ) {
+        console.log( 'photonEmissionPeriodTarget: ' + this.photonEmissionPeriodTarget);
+        console.log( 'photonEmissionPeriod: ' + photonEmissionPeriod);
         // If we are transitioning from off to on, set the countdown timer
         // such that a photon will be emitted right away so that the user
         // doesn't have to wait too long in order to see something come
@@ -371,6 +374,7 @@ define( function( require ) {
         }
         // Handle the case where the new value is smaller than the current countdown value.
         else if ( photonEmissionPeriod < this.photonEmissionCountdownTimer ) {
+          console.log( 'The emission period is less than the countdown timer');
           this.photonEmissionCountdownTimer = photonEmissionPeriod;
         }
         // If the new value is infinity, it means that emissions are being
@@ -378,6 +382,7 @@ define( function( require ) {
         else if ( photonEmissionPeriod == Number.POSITIVE_INFINITY ) {
           this.photonEmissionCountdownTimer = photonEmissionPeriod; // Turn off emissions.
         }
+        console.log( photonEmissionPeriod );
         this.photonEmissionPeriodTarget = photonEmissionPeriod;
 //      notifyPhotonEmissionPeriodChanged();
       }

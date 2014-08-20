@@ -67,6 +67,7 @@ define( function( require ) {
     this.addChild( heatLampNode );
     heatLampNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
 
+
     // Add the control panel for photon type
     //this.addChild( new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: heatLampNode.bottom + 100, left: 20} ) );
 

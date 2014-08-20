@@ -48,12 +48,13 @@ define( function( require ) {
     this.options = options;
 
     var thisNode = this;
+    var thisModel = model;
     this.model = model;
 
-    this.sliderPositionProperty = new Property( 0 ); // Observable position of the slider
+    //this.sliderPositionProperty = new Property( 0 ); // Observable position of the slider
 
     this.emissionControlSliderSize = new Dimension2( 100, 30 ); // This may be adjusted as needed for best look.
-    this.emissionRateControlSlider = new HSlider( this.sliderPositionProperty, { min: 0, max: SLIDER_RANGE } );
+    this.emissionRateControlSlider = new HSlider( model.emissionFrequencyProperty, { min: 0, max: SLIDER_RANGE } );
 
     // Create a background box for this node.
     this.backgroundRect = new Rectangle( -this.emissionRateControlSlider.options.thumbSize.width / 2,
@@ -66,21 +67,22 @@ define( function( require ) {
     // state.
     this.model.photonWavelengthProperty.link( function() { thisNode.update() } );
 
-    this.sliderPositionProperty.link( function() {
-      var photonAbsorptionModel = new PhotonAbsorptionModel();
-      var sliderProportion = thisNode.sliderPositionProperty.value / SLIDER_RANGE;
+    model.emissionFrequencyProperty.link( function() {
+      var sliderProportion = thisModel.emissionFrequencyProperty.get() / SLIDER_RANGE;
       if ( sliderProportion === 0 ) {
         model.setPhotonEmissionPeriod( Number.POSITIVE_INFINITY );
       }
       else if ( model.getPhotonTarget() === 'CONFIGURABLE_ATMOSPHERE' ) {
         // Note the implicit conversion from frequency to period in the following line.
-        model.setPhotonEmissionPeriod( MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET / sliderProportion );
+        model.setPhotonEmissionPeriod( (MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET / sliderProportion) );
       }
       else {
         // Note the implicit conversion from frequency to period in the following line.
-        model.setPhotonEmissionPeriod( MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET / sliderProportion );
+        model.setPhotonEmissionPeriod( (MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET / sliderProportion) );
       }
+      thisNode.update();
     } );
+
     this.addChild( this.backgroundRect );
     this.addChild( this.emissionRateControlSlider );
 
