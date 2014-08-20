@@ -56,11 +56,6 @@ define( function( require ) {
 
     } );
 
-    // TODO: These are convenience commands to print the photon wavelength constants.  Remove this soon.
-    //var testPhotonNode = new PAPhotonNode( new Photon( 20 ), mvt );
-    //testPhotonNode.printWavelengthConstants();
-    //photonAbsorptionModel.photons.add( new Photon( 20 ) );
-
     // Add the heat lamp to the left center of screen
     // TODO: Width and location will be set later when we do an official port of MoleculesAndLightCanvas.java
     var heatLampNode = new PhotonEmitterNode( 300, this.mvt, photonAbsorptionModel );
@@ -71,8 +66,6 @@ define( function( require ) {
     // Add the control panel for photon type
     //this.addChild( new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: heatLampNode.bottom + 100, left: 20} ) );
 
-    // Add a photon to the screen.
-    this.addChild( new PAPhotonNode(photonAbsorptionModel.testPhoton, mvt ) );
     // Add a molecule to the screen.
     this.addChild( new MoleculeNode( new NO2( { initialCenterOfGravityPos: new Vector2( 50, 50 ) }), mvt) );
 
