@@ -25,6 +25,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
 
   // Maximum value for slider range.
   var SLIDER_RANGE = 100;
@@ -50,18 +51,25 @@ define( function( require ) {
     var thisNode = this;
     var thisModel = model;
     this.model = model;
+    this.color = new Color( 255, 85, 0); // RGB value for Phet's Color blind red.
 
     //this.sliderPositionProperty = new Property( 0 ); // Observable position of the slider
 
     this.emissionControlSliderSize = new Dimension2( 100, 30 ); // This may be adjusted as needed for best look.
     this.emissionRateControlSlider = new HSlider( model.emissionFrequencyProperty, { min: 0, max: SLIDER_RANGE } );
 
+
     // Create a background box for this node.
+    var rectHeight = this.emissionRateControlSlider.height;
+    var rectWidth = this.emissionRateControlSlider.width;
     this.backgroundRect = new Rectangle( -this.emissionRateControlSlider.options.thumbSize.width / 2,
         -this.emissionRateControlSlider.options.thumbSize.height / 2,
         this.emissionRateControlSlider.options.trackSize.width + this.emissionRateControlSlider.options.thumbSize.width,
         this.emissionRateControlSlider.options.trackSize.height + this.emissionRateControlSlider.options.thumbSize.height,
-      0, 0, { fill: new Color( 255, 85, 0 ) } );
+      0, 0, { fill: new LinearGradient( 0, 0, rectWidth, rectHeight ).addColorStop( 0, 'black' ).addColorStop( 1, this.color ),
+      stroke: '#c0b9b9' } );
+
+      ///0, 0, { fill: new Color( 255, 85, 0 ) } );
 
     // Listen to the model for events that may cause this node to change
     // state.
@@ -107,16 +115,17 @@ define( function( require ) {
       // Update the color of the slider.
       if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.IR_WAVELENGTH ) {
         // This is the rgb for PhetColorScheme.RED_COLORBLIND which tested well.
-        this.backgroundRect.fill = new Color( 255, 85, 0 );
+        this.color = new Color( 255, 85, 0);
+        //this.backgroundRect.fill = new Color( 255, 85, 0 );
       }
       else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.VISIBLE_WAVELENGTH ) {
-        this.backgroundRect.fill = Color.YELLOW;
+        this.color = Color.YELLOW;
       }
       else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.UV_WAVELENGTH ) {
-        this.emissionRateControlSlider.fill = new Color( 200, 0, 200 );
+        this.color = new Color( 200, 0, 200 );
       }
       else if ( model.getEmittedPhotonWavelength() == WavelengthConstants.MICRO_WAVELENGTH ) {
-        this.emissionRateControlSlider.fill = new Color( 200, 200, 200 );
+        this.color= new Color( 200, 200, 200 );
       }
       else {
         console.error( "Error: Unrecognized photon." );
