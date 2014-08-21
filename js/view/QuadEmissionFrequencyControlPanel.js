@@ -12,7 +12,7 @@
 define( function( require ) {
   'use strict';
 
-  // modules
+  // Modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -25,6 +25,12 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var Vector2 = require( 'DOT/Vector2' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
+
+  // Strings
+  var microwaveString = require( 'string!MOLECULES_AND_LIGHT/microwave' );
+  var infraredString = require( 'string!MOLECULES_AND_LIGHT/infrared' );
+  var visibleString = require( 'string!MOLECULES_AND_LIGHT/visible' );
+  var ultravioletString = require( 'string!MOLECULES_AND_LIGHT/ultraviolet' );
 
   // Model data for the Control Panel
   var BACKGROUND_COLOR = new Color( 185, 178, 95 );
@@ -44,10 +50,10 @@ define( function( require ) {
       }, options );
 
     var radioButtonHBox = new HBox( {children: [
-      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.MICRO_WAVELENGTH, new Text( 'Microwave' ) ),
-      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.IR_WAVELENGTH, new Text( 'Infrared' ) ),
-      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.VISIBLE_WAVELENGTH, new Text( 'Visible' ) ),
-      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.UV_WAVELENGTH, new Text( 'Ultraviolet' ) )
+      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.MICRO_WAVELENGTH, new Text( microwaveString ) ),
+      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.IR_WAVELENGTH, new Text( infraredString ) ),
+      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.VISIBLE_WAVELENGTH, new Text( visibleString ) ),
+      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.UV_WAVELENGTH, new Text( ultravioletString ) )
     ], spacing: 5
     } );
     var higherEnergyNode = new Text( 'higherEnergyNode' );
