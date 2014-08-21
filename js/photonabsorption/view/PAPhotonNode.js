@@ -33,8 +33,6 @@ define( function( require ) {
 //  this.photon.addObserver( this );
     this.mvt = mvt;
 
-    console.log( mvt );
-
     // lookup the image file that corresponds to the wavelength and add a centered image.
     assert && assert( mapWavelengthToImageName.hasOwnProperty( this.photon.getWavelength() ) );
     this.photonImage = new Image( mapWavelengthToImageName[ this.photon.getWavelength() ], { centerX: 0, centerY: 0 } );

@@ -21,22 +21,36 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Property = require( 'AXON/Property' );
+  var Dimension2 = require( 'DOT/Dimension2' );
+  var Color = require( 'SCENERY/util/Color' );
+  var Vector2 = require( 'DOT/Vector2' );
+  var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
+
+  // Model data for the Control Panel
+  var BACKGROUND_COLOR = new Color( 185, 178, 95 );
+  var PANEL_SIZE = new Dimension2( 850, 150 );
+
 
   function QuadEmissionFrequencyControlPanel( photonAbsorptionModel, options ) {
 
+    //    // Create the main background shape.
+//    final PNode backgroundNode = new PhetPPath( new RoundRectangle2D.Double(0, 0, PANEL_SIZE.getWidth(),
+//      PANEL_SIZE.getHeight(), 20, 20), BACKGROUND_COLOR );
+
     options = _.extend( {
         stroke: null,
-        fill: '#b9b25f', //Color copied from the Java version
-        lineWidth: 3 },
-      options );
+        fill: BACKGROUND_COLOR,
+        lineWidth: 3
+      }, options );
 
     var radioButtonHBox = new HBox( {children: [
-      new AquaRadioButton( new Property( false ), true, new HBox( 'hello' ) ),
-      new AquaRadioButton( new Property( false ), true, new Text( 'hello' ) )
-    ]
+      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.MICRO_WAVELENGTH, new Text( 'Microwave' ) ),
+      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.IR_WAVELENGTH, new Text( 'Infrared' ) ),
+      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.VISIBLE_WAVELENGTH, new Text( 'Visible' ) ),
+      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.UV_WAVELENGTH, new Text( 'Ultraviolet' ) )
+    ], spacing: 5
     } );
     var higherEnergyNode = new Text( 'higherEnergyNode' );
-
     // The contents of the control panel
     var content = new VBox( {align: 'center', spacing: 10, children: [radioButtonHBox, higherEnergyNode] } );
 
@@ -46,57 +60,14 @@ define( function( require ) {
   return inherit( Panel, QuadEmissionFrequencyControlPanel );
 } );
 
-// Copyright 2002-2011, University of Colorado
 
-//package edu.colorado.phet.moleculesandlight.view;
-//
-//import java.awt.BasicStroke;
-//import java.awt.Color;
-//import java.awt.Dimension;
-//import java.awt.Font;
-//import java.awt.Paint;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-//import java.awt.geom.Point2D;
-//import java.awt.geom.RoundRectangle2D;
-//
-//import javax.swing.ButtonGroup;
-//import javax.swing.JRadioButton;
-//
-//import edu.colorado.phet.common.phetcommon.view.util.PhetFont;
-//import edu.colorado.phet.common.photonabsorption.model.PhotonAbsorptionModel;
-//import edu.colorado.phet.common.photonabsorption.model.WavelengthConstants;
-//import edu.colorado.phet.common.photonabsorption.view.PAPhotonNode;
-//import edu.colorado.phet.common.piccolophet.nodes.ArrowNode;
-//import edu.colorado.phet.common.piccolophet.nodes.HTMLNode;
-//import edu.colorado.phet.common.piccolophet.nodes.PhetPPath;
-//import edu.colorado.phet.moleculesandlight.MoleculesAndLightResources;
-//import edu.umd.cs.piccolo.PNode;
-//import edu.umd.cs.piccolo.event.PBasicInputEventHandler;
-//import edu.umd.cs.piccolo.event.PInputEvent;
-//import edu.umd.cs.piccolox.pswing.PSwing;
-//
-///**
-
-// */
-//public class QuadEmissionFrequencyControlPanel extends PNode {
-//
-//  // ------------------------------------------------------------------------
-//  // Class Data
-//  // ------------------------------------------------------------------------
-//
-//  private static final Color BACKGROUND_COLOR = new Color( 185, 178, 95 );
-//  private static final Dimension PANEL_SIZE = new Dimension( 850, 150 );
-//
 //  // ------------------------------------------------------------------------
 //  // Constructor(s)
 //  // ------------------------------------------------------------------------
 //
 //  public QuadEmissionFrequencyControlPanel( final PhotonAbsorptionModel model ){
 //
-//    // Create the main background shape.
-//    final PNode backgroundNode = new PhetPPath( new RoundRectangle2D.Double(0, 0, PANEL_SIZE.getWidth(),
-//      PANEL_SIZE.getHeight(), 20, 20), BACKGROUND_COLOR );
+//
 //
 //    // Add the radio buttons that set the emission wavelength.
 //    final WavelengthSelectButtonNode microwaveSelectorNode =
@@ -107,7 +78,7 @@ define( function( require ) {
 //                                     new WavelengthSelectButtonNode( MoleculesAndLightResources.getString( "QuadWavelengthSelector.Visible" ), model, WavelengthConstants.VISIBLE_WAVELENGTH );
 //    final WavelengthSelectButtonNode ultravioletSelectorNode =
 //                                     new WavelengthSelectButtonNode( MoleculesAndLightResources.getString( "QuadWavelengthSelector.Ultraviolet" ), model, WavelengthConstants.UV_WAVELENGTH );
-//
+
 //    // Put all the buttons into a button group.  Without this, for some
 //    // reason, the individual buttons will toggle to the off state if
 //    // pressed twice in a row.

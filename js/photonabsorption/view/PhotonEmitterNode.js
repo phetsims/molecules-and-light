@@ -114,10 +114,10 @@ define( function( require ) {
       else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.VISIBLE_WAVELENGTH ) {
         this.photonEmitterImage = new Image( flashlight2Image );
       }
-      else if ( model.getEmittedPhotonWavelength() == WavelengthConstants.UV_WAVELENGTH ) {
+      else if ( this.model.getEmittedPhotonWavelength() == WavelengthConstants.UV_WAVELENGTH ) {
         this.photonEmitterImage = new Image( uvLight2 );
       }
-      else if ( model.getEmittedPhotonWavelength() == WavelengthConstants.MICRO_WAVELENGTH ) {
+      else if ( this.model.getEmittedPhotonWavelength() == WavelengthConstants.MICRO_WAVELENGTH ) {
         this.photonEmitterImage = new Image( microwaveTransmitter );
       }
       // Translate center and scale the emitter image

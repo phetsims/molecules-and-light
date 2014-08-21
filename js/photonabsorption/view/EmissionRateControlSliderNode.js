@@ -116,7 +116,6 @@ define( function( require ) {
       if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.IR_WAVELENGTH ) {
         // This is the rgb for PhetColorScheme.RED_COLORBLIND which tested well.
         this.color = new Color( 255, 85, 0);
-        //this.backgroundRect.fill = new Color( 255, 85, 0 );
       }
       else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.VISIBLE_WAVELENGTH ) {
         this.color = Color.YELLOW;
@@ -124,8 +123,8 @@ define( function( require ) {
       else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.UV_WAVELENGTH ) {
         this.color = new Color( 200, 0, 200 );
       }
-      else if ( model.getEmittedPhotonWavelength() == WavelengthConstants.MICRO_WAVELENGTH ) {
-        this.color= new Color( 200, 200, 200 );
+      else if ( this.model.getEmittedPhotonWavelength() == WavelengthConstants.MICRO_WAVELENGTH ) {
+        this.color = new Color( 200, 200, 200 );
       }
       else {
         console.error( "Error: Unrecognized photon." );

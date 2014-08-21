@@ -249,9 +249,6 @@ define( function( require ) {
       photon.setVelocity( PHOTON_VELOCITY * Math.cos( emissionAngle ),
           PHOTON_VELOCITY * Math.sin( emissionAngle ) );
       this.photons.add( photon );
-      console.log( 'You just emitted a photon!' );
-
-      //notifyPhotonAdded( photon ); TODO: Implement this function or some other Event Listener
     },
 
 
@@ -279,8 +276,6 @@ define( function( require ) {
     setPhotonEmissionPeriod: function( photonEmissionPeriod ) {
       assert && assert( photonEmissionPeriod >= 0 );
       if ( this.photonEmissionPeriodTarget != photonEmissionPeriod ) {
-        console.log( 'photonEmissionPeriodTarget: ' + this.photonEmissionPeriodTarget);
-        console.log( 'photonEmissionPeriod: ' + photonEmissionPeriod);
         // If we are transitioning from off to on, set the countdown timer
         // such that a photon will be emitted right away so that the user
         // doesn't have to wait too long in order to see something come
@@ -290,7 +285,6 @@ define( function( require ) {
         }
         // Handle the case where the new value is smaller than the current countdown value.
         else if ( photonEmissionPeriod < this.photonEmissionCountdownTimer ) {
-          console.log( 'The emission period is less than the countdown timer');
           this.photonEmissionCountdownTimer = photonEmissionPeriod;
         }
         // If the new value is infinity, it means that emissions are being
@@ -298,9 +292,7 @@ define( function( require ) {
         else if ( photonEmissionPeriod == Number.POSITIVE_INFINITY ) {
           this.photonEmissionCountdownTimer = photonEmissionPeriod; // Turn off emissions.
         }
-        console.log( photonEmissionPeriod );
         this.photonEmissionPeriodTarget = photonEmissionPeriod;
-//      notifyPhotonEmissionPeriodChanged();
       }
     },
 
