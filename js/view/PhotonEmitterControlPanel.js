@@ -28,7 +28,6 @@ define( function( require ) {
   var PANEL_OPTION_FONT = { font: new PhetFont( 14 ) };
   var PANEL_TITLE_FONT = new PhetFont( 16 );
 
-
   /**
    * @param {Property} positionIndicatorStateProperty
    * @param {Object} options

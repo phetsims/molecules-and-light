@@ -24,7 +24,9 @@ define( function( require ) {
   var NO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO' );
   var NO2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO2' );
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );
+  var VerticalRodNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/VerticalRodNode');
   var Dimension2 = require( 'DOT/Dimension2' );
+  var Color = require( 'SCENERY/util/Color' );
 
   // Class data for the Molecules and Light screen view
   // Model-view transform for intermediate coordinates.
@@ -54,13 +56,26 @@ define( function( require ) {
 
     // Add the heat lamp to the left center of screen
     // TODO: Width and location will be set later when we do an official port of MoleculesAndLightCanvas.java
-    var heatLampNode = new PhotonEmitterNode( 300, this.mvt, photonAbsorptionModel );
-    this.addChild( heatLampNode );
-    heatLampNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
+    var photonEmitterNode = new PhotonEmitterNode( 300, this.mvt, photonAbsorptionModel );
 
+    photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
 
     // Add the control panel for photon type
-    this.addChild( new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: heatLampNode.bottom + 100, left: 20} ));
+    var photonEmissionControlPanel =  new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: photonEmitterNode.bottom + 100, left: 20} );
+
+
+    // Create the rod that connects the emitter to the control panel.
+    var connectingRod = new VerticalRodNode( 30,
+      Math.abs( photonEmitterNode.getCenter().y - photonEmissionControlPanel.getCenter().y ),
+      new Color( 205, 198, 115 ) );
+
+    connectingRod.setCenter( new Vector2(
+        photonEmitterNode.getCenter().x - connectingRod.getBounds().width / 2,
+      photonEmitterNode.getCenter().y + connectingRod.getCenter().y ) );
+
+    this.addChild( connectingRod  );
+    this.addChild( photonEmissionControlPanel );
+    this.addChild( photonEmitterNode );
 
     // Add a molecule to the screen.
     this.addChild( new MoleculeNode( new NO2( { initialCenterOfGravityPos: new Vector2( 50, 50 ) }), mvt) );
