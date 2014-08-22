@@ -26,11 +26,9 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var scenery = require( 'SCENERY/scenery' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PAPhotonNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/PAPhotonNode' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/photon' );
-
 
   // Strings
   var microwaveString = require( 'string!MOLECULES_AND_LIGHT/microwave' );
@@ -62,8 +60,8 @@ define( function( require ) {
       lineWidth: 3
     }, options );
 
-    var wavelengthFont = new scenery.Font( { size: 24, weight: '500', family: 'Times New Roman' } ).font;
-    var energyFont = new scenery.Font( { size: 18, weight: 'bold', family: 'Times New Roman' } ).font;
+    var wavelengthFont = new PhetFont( { family: 'Futura', size: 24, weight: '500' } );
+    var energyFont = new PhetFont( { family: 'Futura', size: 19, weight: 'bold'} );
 
     // Declare the radio buttons
     var microwaveSelectorNode = new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.MICRO_WAVELENGTH,

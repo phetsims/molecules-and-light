@@ -19,7 +19,6 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var PAPhotonNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/PAPhotonNode' );
   var PhotonEmitterNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/PhotonEmitterNode' );
-  var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/photon' ); // TODO: Temporary dependency module for testing.
   var QuadEmissionFrequencyControlPanel = require( 'MOLECULES_AND_LIGHT/view/QuadEmissionFrequencyControlPanel' );
   var CO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO' );
   var NO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO' );
