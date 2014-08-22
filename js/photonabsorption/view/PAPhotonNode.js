@@ -67,17 +67,3 @@ define( function( require ) {
   )
 
 } );
-
-//// ------------------------------------------------------------------------
-//// Constructor(s)
-//// ------------------------------------------------------------------------
-//
-///**
-// * Construct a photon node given only a wavelength.  This is intended for
-// * use in places like control panels in the play area, where the node is
-// * needed but doesn't really correspond to anything in the model.
-// */
-//public PAPhotonNode( double wavelength ) {
-//  this( new Photon( wavelength ), new ModelViewTransform2D() );
-//}
-

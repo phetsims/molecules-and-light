@@ -26,9 +26,6 @@ define( function( require ) {
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
 
-  // images
-  var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
-
   // Class data for the Molecules and Light screen view
   // Model-view transform for intermediate coordinates.
   var INTERMEDIATE_RENDERING_SIZE = new Dimension2( 786, 786 );
