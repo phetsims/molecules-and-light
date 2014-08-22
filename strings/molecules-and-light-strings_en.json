@@ -3,5 +3,6 @@
   "microwave": "Microwave",
   "infrared": "Infrared",
   "visible": "Visible",
-  "ultraviolet": "Ultraviolet"
+  "ultraviolet": "Ultraviolet",
+  "higherEnergy": "Higher Energy"
 }

@@ -25,17 +25,30 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var Vector2 = require( 'DOT/Vector2' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+  var scenery = require( 'SCENERY/scenery' );
+  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  var PAPhotonNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/PAPhotonNode' );
+  var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/photon' );
+
 
   // Strings
   var microwaveString = require( 'string!MOLECULES_AND_LIGHT/microwave' );
   var infraredString = require( 'string!MOLECULES_AND_LIGHT/infrared' );
   var visibleString = require( 'string!MOLECULES_AND_LIGHT/visible' );
   var ultravioletString = require( 'string!MOLECULES_AND_LIGHT/ultraviolet' );
+  var higherEnergyString = require( 'string!MOLECULES_AND_LIGHT/higherEnergy' );
 
   // Model data for the Control Panel
   var BACKGROUND_COLOR = new Color( 185, 178, 95 );
   var PANEL_SIZE = new Dimension2( 850, 150 );
 
+  // Description data for the 'Energy Arrow'
+  var ARROW_LENGTH = 250;
+  var ARROW_HEAD_HEIGHT = 15;
+  var ARROW_HEAD_WIDTH = 15;
+  var ARROW_TAIL_WIDTH = 2;
+  var ARROW_COLOR = Color.BLACK;
 
   function QuadEmissionFrequencyControlPanel( photonAbsorptionModel, options ) {
 
@@ -44,21 +57,60 @@ define( function( require ) {
 //      PANEL_SIZE.getHeight(), 20, 20), BACKGROUND_COLOR );
 
     options = _.extend( {
-        stroke: null,
-        fill: BACKGROUND_COLOR,
-        lineWidth: 3
-      }, options );
+      stroke: null,
+      fill: BACKGROUND_COLOR,
+      lineWidth: 3
+    }, options );
 
-    var radioButtonHBox = new HBox( {children: [
-      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.MICRO_WAVELENGTH, new Text( microwaveString ) ),
-      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.IR_WAVELENGTH, new Text( infraredString ) ),
-      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.VISIBLE_WAVELENGTH, new Text( visibleString ) ),
-      new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.UV_WAVELENGTH, new Text( ultravioletString ) )
-    ], spacing: 5
-    } );
-    var higherEnergyNode = new Text( 'higherEnergyNode' );
-    // The contents of the control panel
-    var content = new VBox( {align: 'center', spacing: 10, children: [radioButtonHBox, higherEnergyNode] } );
+    var wavelengthFont = new scenery.Font( { size: 24, weight: '500', family: 'Times New Roman' } ).font;
+    var energyFont = new scenery.Font( { size: 18, weight: 'bold', family: 'Times New Roman' } ).font;
+
+    // Declare the radio buttons
+    var microwaveSelectorNode = new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.MICRO_WAVELENGTH,
+      new Text( microwaveString, { font: wavelengthFont } ), { scale: 0.75 } );
+    var infraredSelectorNode = new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.IR_WAVELENGTH,
+      new Text( infraredString, { font: wavelengthFont } ), {scale: 0.75 } );
+    var visibleLightSelectorNode = new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.VISIBLE_WAVELENGTH,
+      new Text( visibleString, {font: wavelengthFont } ), {scale: 0.75 } );
+    var ultravioletSelectorNode = new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.UV_WAVELENGTH,
+      new Text( ultravioletString, { font: wavelengthFont } ), { scale: 0.75 } );
+
+    // Initialize the photon nodes for the control panel
+    var microwavePhotonNode = new PAPhotonNode( new Photon( WavelengthConstants.MICRO_WAVELENGTH ), new ModelViewTransform2() );
+    var infraredPhotonNode = new PAPhotonNode( new Photon( WavelengthConstants.IR_WAVELENGTH ), new ModelViewTransform2() );
+    var visiblePhotonNode = new PAPhotonNode( new Photon( WavelengthConstants.VISIBLE_WAVELENGTH ), new ModelViewTransform2() );
+    var ultravioletPhotonNode = new PAPhotonNode( new Photon( WavelengthConstants.UV_WAVELENGTH ), new ModelViewTransform2() );
+
+    // Determine the correct spacing between the nodes on this panel.
+    var interSelectorSpacing = ( PANEL_SIZE.width - microwaveSelectorNode.getBounds().width -
+                                 infraredSelectorNode.getBounds().width -
+                                 visibleLightSelectorNode.getBounds().width -
+                                 ultravioletSelectorNode.getBounds().width ) / 5;
+
+    // Set up the radio buttons and photonNodes so that they are centered on the control panel.
+    var microwaveBox = new VBox( {children: [ microwavePhotonNode, microwaveSelectorNode ] } );
+    var infraredBox = new VBox( {children: [ infraredPhotonNode, infraredSelectorNode] } );
+    var visibleBox = new VBox( {children: [ visiblePhotonNode, visibleLightSelectorNode ] } );
+    var ultravioletBox = new VBox( {children: [ ultravioletPhotonNode, ultravioletSelectorNode ] } );
+
+    var wavelengthSelectorPanelNode = new HBox( {children: [
+      microwaveBox,
+      infraredBox,
+      visibleBox,
+      ultravioletBox
+    ], spacing: interSelectorSpacing } );
+
+    // Create the energy arrow and associated text.
+    var energyArrow = new ArrowNode( 0, 0, ARROW_LENGTH, 0, {
+      fill: ARROW_COLOR,
+      stroke: ARROW_COLOR,
+      headHeight: ARROW_HEAD_HEIGHT,
+      headWidth: ARROW_HEAD_WIDTH,
+      tailWidth: ARROW_TAIL_WIDTH } );
+    var energyText = new Text( higherEnergyString, { font: energyFont } );
+
+    // Include all contents of the control panel.
+    var content = new VBox( {align: 'center', spacing: 20, children: [ wavelengthSelectorPanelNode, energyArrow, energyText ] } );
 
     Panel.call( this, content, options );
   }
@@ -66,142 +118,13 @@ define( function( require ) {
   return inherit( Panel, QuadEmissionFrequencyControlPanel );
 } );
 
-
-//  // ------------------------------------------------------------------------
-//  // Constructor(s)
-//  // ------------------------------------------------------------------------
-//
-//  public QuadEmissionFrequencyControlPanel( final PhotonAbsorptionModel model ){
-//
-//
-//
-//    // Add the radio buttons that set the emission wavelength.
-//    final WavelengthSelectButtonNode microwaveSelectorNode =
-//                                     new WavelengthSelectButtonNode( MoleculesAndLightResources.getString( "QuadWavelengthSelector.Microwave" ), model, WavelengthConstants.MICRO_WAVELENGTH );
-//    final WavelengthSelectButtonNode infraredSelectorNode =
-//                                     new WavelengthSelectButtonNode( MoleculesAndLightResources.getString( "QuadWavelengthSelector.Infrared" ), model, WavelengthConstants.IR_WAVELENGTH );
-//    final WavelengthSelectButtonNode visibleLightSelectorNode =
-//                                     new WavelengthSelectButtonNode( MoleculesAndLightResources.getString( "QuadWavelengthSelector.Visible" ), model, WavelengthConstants.VISIBLE_WAVELENGTH );
-//    final WavelengthSelectButtonNode ultravioletSelectorNode =
-//                                     new WavelengthSelectButtonNode( MoleculesAndLightResources.getString( "QuadWavelengthSelector.Ultraviolet" ), model, WavelengthConstants.UV_WAVELENGTH );
-
-//    // Put all the buttons into a button group.  Without this, for some
-//    // reason, the individual buttons will toggle to the off state if
-//    // pressed twice in a row.
-//    ButtonGroup buttonGroup = new ButtonGroup();
-//    buttonGroup.add( microwaveSelectorNode.getButton() );
-//    buttonGroup.add( infraredSelectorNode.getButton() );
-//    buttonGroup.add( visibleLightSelectorNode.getButton() );
-//    buttonGroup.add( ultravioletSelectorNode.getButton() );
-//
-//    // Create a "panel" sort of node that contains all the selector
-//    // buttons, then position it on the main node.
-//    final PNode wavelengthSelectorPanelNode = new PNode();
-//    double interSelectorSpacing = ( PANEL_SIZE.getWidth() - microwaveSelectorNode.getFullBoundsReference().width -
-//                                    infraredSelectorNode.getFullBoundsReference().width -
-//                                    visibleLightSelectorNode.getFullBoundsReference().width -
-//                                    ultravioletSelectorNode.getFullBoundsReference().width ) / 5;
-//    interSelectorSpacing = Math.max( interSelectorSpacing, 0 ); // Don't allow less than 0.
-//    microwaveSelectorNode.setOffset( interSelectorSpacing, 0 );
-//    wavelengthSelectorPanelNode.addChild( microwaveSelectorNode );
-//    infraredSelectorNode.setOffset( microwaveSelectorNode.getFullBoundsReference().getMaxX() + interSelectorSpacing, 0 );
-//    wavelengthSelectorPanelNode.addChild( infraredSelectorNode );
-//    visibleLightSelectorNode.setOffset(  infraredSelectorNode.getFullBoundsReference().getMaxX() + interSelectorSpacing, 0 );
-//    wavelengthSelectorPanelNode.addChild( visibleLightSelectorNode );
-//    ultravioletSelectorNode.setOffset( visibleLightSelectorNode.getFullBoundsReference().getMaxX() + interSelectorSpacing, 0 );
-//    wavelengthSelectorPanelNode.addChild( ultravioletSelectorNode );
-//    wavelengthSelectorPanelNode.setOffset( 0, 10 );
-//
-//
-//    // Add the energy arrow.
-//    EnergyArrow energyArrow = new EnergyArrow( MoleculesAndLightResources.getString( "QuadWavelengthSelector.HigherEnergy" ), model ){{
-//      centerFullBoundsOnPoint( backgroundNode.getFullBoundsReference().getCenterX(),
-//          PANEL_SIZE.getHeight() - getFullBoundsReference().height / 2 - 10 );
-//    }};
-//    backgroundNode.addChild( energyArrow );
-//
-//    // Add everything in the needed order.
-//    addChild( backgroundNode );
-//    backgroundNode.addChild( wavelengthSelectorPanelNode );
-//  }
-//
-//  // ------------------------------------------------------------------------
-//  // Inner Classes and Interfaces
-//  //------------------------------------------------------------------------
-//
-//  /**
-//   * Convenience class that puts a radio button with a caption into a PNode.
-//   */
-//  private static class WavelengthSelectButtonNode extends PNode {
-//
-//    private static final Font LABEL_FONT  = new PhetFont( 16 );
-//    JRadioButton button;
-//
-//    public WavelengthSelectButtonNode( final String text, final PhotonAbsorptionModel photonAbsorptionModel, final double wavelength ){
-//
-//      // Add the radio button.
-//      button = new JRadioButton(){{
-//        setFont( LABEL_FONT );
-//        setText( text );
-//        setBackground( BACKGROUND_COLOR );
-//        setOpaque( false );
-//        addActionListener( new ActionListener() {
-//          public void actionPerformed( ActionEvent e ) {
-//            photonAbsorptionModel.setEmittedPhotonWavelength( wavelength );
-//          }
-//        });
-//        photonAbsorptionModel.addListener( new PhotonAbsorptionModel.Adapter() {
-//          @Override
-//          public void emittedPhotonWavelengthChanged() {
-//            setSelected( photonAbsorptionModel.getEmittedPhotonWavelength() == wavelength );
-//          }
-//        } );
-//        // Set initial state.
-//        setSelected( photonAbsorptionModel.getEmittedPhotonWavelength() == wavelength );
-//      }};
-//
-//      // We received some feedback that the buttons were a little small,
-//      // so the following scaling operation makes them bigger relative
-//      // to the font.
-//      PSwing buttonNode = new PSwing( button ){{
-//        setScale( 1.5 );
-//      }};
-//      addChild( buttonNode );
-//
-//      // Add an image of a photon.
-//      PAPhotonNode photonNode = new PAPhotonNode( wavelength );
-//      photonNode.addInputEventListener( new PBasicInputEventHandler(){
-//        @Override
-//        public void mouseClicked( PInputEvent event ) {
-//          photonAbsorptionModel.setEmittedPhotonWavelength( wavelength );
-//        }
-//      });
-//      addChild( photonNode );
-//
-//      // Do the layout.  The photon is above the radio button, centered.
-//      photonNode.setOffset(
-//          buttonNode.getFullBoundsReference().width / 2,
-//          photonNode.getFullBoundsReference().height / 2 );
-//      buttonNode.setOffset( 0, photonNode.getFullBoundsReference().height * 0.6 );
-//
-//    }
-//
-//    public JRadioButton getButton(){
-//      return button;
-//    }
-//  }
 //
 //  /**
 //   * Class that defines the "energy arrow", which is an arrow that depicts
 //   * the direction of increasing energy.
 //   */
 //  private static class EnergyArrow extends PNode {
-//
-//    private static final double ARROW_LENGTH = 250;
-//    private static final double ARROW_HEAD_HEIGHT = 15;
-//    private static final double ARROW_HEAD_WIDTH = 15;
-//    private static final double ARROW_TAIL_WIDTH = 2;
-//    private static final Paint ARROW_COLOR = Color.BLACK;
+
 //
 //    public EnergyArrow( String captionText, final PhotonAbsorptionModel model ){
 //      // Create and add the arrow.  The arrow points to the right.

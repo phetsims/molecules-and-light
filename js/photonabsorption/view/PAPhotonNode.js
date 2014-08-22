@@ -15,7 +15,7 @@ define( function( require ) {
   var thin2Image = require( 'image!MOLECULES_AND_LIGHT/thin2.png' );
   var photon100Image = require( 'image!MOLECULES_AND_LIGHT/photon-100.png' );
 
-// Map of photon wavelengths to visual images used for representing them.
+  // Map of photon wavelengths to visual images used for representing them.
   var mapWavelengthToImageName = {};
   mapWavelengthToImageName[ WavelengthConstants.MICRO_WAVELENGTH ] = microwavePhotonImage;
   mapWavelengthToImageName[ WavelengthConstants.IR_WAVELENGTH ] = photon660Image;
@@ -30,7 +30,6 @@ define( function( require ) {
     var thisNode = this;
 
     this.photon = photon;
-//  this.photon.addObserver( this );
     this.mvt = mvt;
 
     // lookup the image file that corresponds to the wavelength and add a centered image.
@@ -51,7 +50,6 @@ define( function( require ) {
     photon.locationProperty.link( function() {
       updatePosition();
     } );
-
   }
 
   return inherit( Node, PAPhotonNode, {
