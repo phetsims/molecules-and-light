@@ -117,33 +117,3 @@ define( function( require ) {
 
   return inherit( Panel, QuadEmissionFrequencyControlPanel );
 } );
-
-//
-//  /**
-//   * Class that defines the "energy arrow", which is an arrow that depicts
-//   * the direction of increasing energy.
-//   */
-//  private static class EnergyArrow extends PNode {
-
-//
-//    public EnergyArrow( String captionText, final PhotonAbsorptionModel model ){
-//      // Create and add the arrow.  The arrow points to the right.
-//      Point2D headPoint, tailPoint;
-//      headPoint = new Point2D.Double(ARROW_LENGTH, 0);
-//      tailPoint = new Point2D.Double(0, 0);
-//      final ArrowNode arrowNode = new ArrowNode( tailPoint, headPoint, ARROW_HEAD_HEIGHT, ARROW_HEAD_WIDTH, ARROW_TAIL_WIDTH ){{
-//        setPaint( ARROW_COLOR );
-//        setStroke( new BasicStroke( 3 ) );
-//      }};
-//      addChild( arrowNode );
-//
-//      // Create and add the caption.
-//      HTMLNode caption = new HTMLNode( captionText );
-//      caption.setFont( new PhetFont( 20, true ) );
-//      caption.setOffset(
-//          arrowNode.getFullBoundsReference().getCenterX() - caption.getFullBoundsReference().width / 2,
-//        arrowNode.getFullBoundsReference().getMaxY());
-//      addChild( caption );
-//    }
-//  }
-//}
