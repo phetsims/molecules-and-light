@@ -24,9 +24,14 @@ define( function( require ) {
   var NO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO' );
   var NO2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO2' );
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );
-  var VerticalRodNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/VerticalRodNode');
+  var VerticalRodNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/VerticalRodNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Color = require( 'SCENERY/util/Color' );
+  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
+  var MoleculesAndLightControlPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightControlPanel' );
+
+  // Strings
+  var buttonCaptionString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.buttonCaption' );
 
   // Class data for the Molecules and Light screen view
   // Model-view transform for intermediate coordinates.
@@ -50,57 +55,22 @@ define( function( require ) {
     this.mvt = mvt; // Make mvt available to descendant types.
 
     photonAbsorptionModel.photons.addItemAddedListener( function( photon ) {
-      moleculesAndLightScreenView.addChild( new PAPhotonNode(photon, mvt));
+      moleculesAndLightScreenView.addChild( new PAPhotonNode( photon, mvt ) );
 
     } );
 
-    // Add the heat lamp to the left center of screen
-    // TODO: Width and location will be set later when we do an official port of MoleculesAndLightCanvas.java
-    var photonEmitterNode = new PhotonEmitterNode( 300, this.mvt, photonAbsorptionModel );
-
-    photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
-
-    // Add the control panel for photon type
-    var photonEmissionControlPanel =  new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: photonEmitterNode.bottom + 100, left: 20} );
-
-
-    // Create the rod that connects the emitter to the control panel.
-    var connectingRod = new VerticalRodNode( 30,
-      Math.abs( photonEmitterNode.getCenter().y - photonEmissionControlPanel.getCenter().y ),
-      new Color( 205, 198, 115 ) );
-
-    connectingRod.setCenter( new Vector2(
-        photonEmitterNode.getCenter().x - connectingRod.getBounds().width / 2,
-      photonEmitterNode.getCenter().y + connectingRod.getCenter().y ) );
-
-    this.addChild( connectingRod  );
-    this.addChild( photonEmissionControlPanel );
-    this.addChild( photonEmitterNode );
-
-    // Add a molecule to the screen.
-    this.addChild( new MoleculeNode( new NO2( { initialCenterOfGravityPos: new Vector2( 50, 50 ) }), mvt) );
-
-
-  }
-
-  return inherit( ScreenView, MoleculesAndLightScreenView );
-} );
-
-
-//  //----------------------------------------------------------------------------
-//  // Instance Data
-//  //----------------------------------------------------------------------------
-//
 //  // Data structures that match model objects to their representations in
 //  // the view.
+    // TODO: I am not sure if I will need these yet.  The hashmap equivalent for javascript has been
+    // TODO: an object with keys and values but the key cannot be an object.  For this structure to
+    // TODO: work I will probably need to implement uniqueID's for each object which will be linked
+    // TODO: the proper node and then hashmaps from the unique ID back to the original object.
+    // TODO: This reuires a total of 4 hashmaps.
 //  private final HashMap<Photon, PAPhotonNode> photonMap = new HashMap<Photon, PAPhotonNode>();
 //  private final HashMap<Molecule, MoleculeNode> moleculeMap = new HashMap<Molecule, MoleculeNode>();
-//
-//  // Button for restoring molecules that break apart.
-//  private final HTMLImageButtonNode restoreMoleculeButtonNode;
-//
+
 //  // Listener for watching molecules and updating the restore button
-//  // visibility.
+//  // visibility.  TODO: I will use a property such as brokenUpProperty to determine whether the button should be seen.
 //  private final Molecule.Adapter moleculeMotionListener = new Molecule.Adapter() {
 //    @Override
 //    public void centerOfGravityPosChanged( Molecule molecule ) {
@@ -110,10 +80,50 @@ define( function( require ) {
 //
 //  // Button for displaying EM specturm.
 //  private final HTMLImageButtonNode showSpectrumButton = new HTMLImageButtonNode( MoleculesAndLightResources.getString( "SpectrumWindow.buttonCaption" ), new PhetFont( Font.BOLD, 24 ), new Color( 185, 178, 95 ) );
-//
+    var showSpectrumButton = new TextPushButton( buttonCaptionString, { fill: Color.RED } );
+
 //  // Window that displays the EM spectrum upon request.
 //  private final SpectrumWindow spectrumWindow = new SpectrumWindow() {{ setVisible( false ); }};
 //
+
+    // Add the heat lamp to the left center of screen
+    // TODO: Width and location will be set later when we do an official port of MoleculesAndLightCanvas.java
+    var photonEmitterNode = new PhotonEmitterNode( 300, this.mvt, photonAbsorptionModel );
+
+    photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
+
+    // Add the control panel for photon type
+    var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: photonEmitterNode.bottom + 100, left: 20} );
+
+//    // Declare the control panel for molecule type
+//    var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
+//    moleculeControlPanel.setCenter( new Vector2(700, 400 ) );
+
+    // Create the rod that connects the emitter to the control panel.
+    var connectingRod = new VerticalRodNode( 30,
+      Math.abs( photonEmitterNode.getCenter().y - photonEmissionControlPanel.getCenter().y ),
+      new Color( 205, 198, 115 ) );
+
+    connectingRod.setCenter( new Vector2(
+        photonEmitterNode.getCenter().x - connectingRod.getBounds().width / 2,
+        photonEmitterNode.getCenter().y + connectingRod.getCenter().y ) );
+
+    this.addChild( connectingRod );
+    this.addChild( photonEmissionControlPanel );
+    this.addChild( photonEmitterNode );
+    this.addChild( showSpectrumButton );
+    //this.addChild( moleculeControlPanel );
+
+    // Add a molecule to the screen.
+    this.addChild( new MoleculeNode( new NO2( { initialCenterOfGravityPos: new Vector2( 50, 50 ) } ), mvt ) );
+
+
+  }
+
+  return inherit( ScreenView, MoleculesAndLightScreenView );
+} );
+
+
 //  //----------------------------------------------------------------------------
 //  // Constructors
 //  //----------------------------------------------------------------------------

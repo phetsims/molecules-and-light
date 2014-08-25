@@ -85,7 +85,7 @@ define( function( require ) {
                                  visibleLightSelectorNode.getBounds().width -
                                  ultravioletSelectorNode.getBounds().width ) / 5;
 
-    // Set up the radio buttons and photonNodes so that they are centered on the control panel.
+    // Set up the radio buttons and photonNodes so that they are centered together on the control panel.
     var microwaveBox = new VBox( {children: [ microwavePhotonNode, microwaveSelectorNode ] } );
     var infraredBox = new VBox( {children: [ infraredPhotonNode, infraredSelectorNode] } );
     var visibleBox = new VBox( {children: [ visiblePhotonNode, visibleLightSelectorNode ] } );

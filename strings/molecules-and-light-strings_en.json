@@ -4,5 +4,6 @@
   "infrared": "Infrared",
   "visible": "Visible",
   "ultraviolet": "Ultraviolet",
-  "higherEnergy": "Higher Energy"
+  "higherEnergy": "Higher Energy",
+  "SpectrumWindow.buttonCaption": "Show Light Spectrum"
 }
