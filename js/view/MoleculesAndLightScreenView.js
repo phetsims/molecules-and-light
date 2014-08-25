@@ -95,9 +95,9 @@ define( function( require ) {
     // Add the control panel for photon type
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: photonEmitterNode.bottom + 100, left: 20} );
 
-//    // Declare the control panel for molecule type
-//    var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
-//    moleculeControlPanel.setCenter( new Vector2(700, 400 ) );
+    // Declare the control panel for molecule type
+    var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
+    moleculeControlPanel.setCenter( new Vector2(700, 400 ) );
 
     // Create the rod that connects the emitter to the control panel.
     var connectingRod = new VerticalRodNode( 30,
@@ -112,7 +112,7 @@ define( function( require ) {
     this.addChild( photonEmissionControlPanel );
     this.addChild( photonEmitterNode );
     this.addChild( showSpectrumButton );
-    //this.addChild( moleculeControlPanel );
+    this.addChild( moleculeControlPanel );
 
     // Add a molecule to the screen.
     this.addChild( new MoleculeNode( new NO2( { initialCenterOfGravityPos: new Vector2( 50, 50 ) } ), mvt ) );

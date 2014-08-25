@@ -48,8 +48,8 @@ define( function( require ) {
     // Create the reset all button.
     var resetAllButton = new ResetAllButton();
 
-    // Create the molecule selector panels for this control panel.
-    var testSelectorPanel = new MoleculeSelectorPanel( "Carbon Monoxide", "CO", new MoleculeNode( new CO(), MVT), "C" );
+    // Create the molecule selector panels for this control panel. TODO: These wil be pushed into moleculeSelectors array.
+    var testSelectorPanel = new MoleculeSelectorPanel( "Carbon Monoxide", "CO", new MoleculeNode( new CO(), MVT), model );
 
     // Include all contents of the control panel.
     var content = new VBox( {align: 'center', spacing: 20, children: [ testSelectorPanel, resetAllButton ] } );

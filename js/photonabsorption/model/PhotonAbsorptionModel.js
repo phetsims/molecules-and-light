@@ -323,7 +323,7 @@ define( function( require ) {
         this.photonTarget = photonTarget;
 
         // Remove the old photon target(s).
-        this.removeOldTarget(); // TODO: Requires removeOldTarget() method
+        //this.removeOldTarget(); // TODO: Requires removeOldTarget() method
 
         // Add the new photon target(s).
         var newMolecule = new Molecule();

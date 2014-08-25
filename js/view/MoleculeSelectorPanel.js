@@ -39,18 +39,21 @@ define( function( require ) {
     // Create the node containing the molecule name and associated molecular abbreviation which will describe the radio button.
     var molecularName = new VBox( { children: [
       new Text( molecule),
-      new Text(molecularAbbreviation)
-    ]});
+      new Text( molecularAbbreviation )
+    ], align: 'left' } );
 
-    // Create the inner HBox which contains the the radio button and moleculeName box to control spacing.
+    // Create the inner HBox which contains the the radio button and moleculeName boz.
     var moleculeButton = new HBox( { children: [
       new AquaRadioButton( model.photonTargetProperty, 'SINGLE_CO_MOLECULE', molecularName, { scale: 0.75 } )
     ]});
 
+    // Scale the molecule node to an appropriate size for the panel display.
+    moleculeNode.scale( MOLECULE_SCALING_FACTOR );
+
     // Include all contents of the molecule selector panel.
     var content = new HBox( {align: 'center', spacing: 20, children: [ moleculeButton, moleculeNode ] } );
 
-    Panel.call( this, content, options );
+    Panel.call( this, content );
   }
   return inherit( Panel, MoleculeSelectorPanel );
 
