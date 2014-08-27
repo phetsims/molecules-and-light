@@ -39,6 +39,11 @@ define( function( require ) {
   var HydrogenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/HydrogenAtom' );
   var CO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO' );
   var N2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/N2' );
+  var CO2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO2' );
+  var H2O = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/H2O' );
+  var NO2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO2' );
+  var O2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O2' );
+  var O3 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O3' );
 
   //----------------------------------------------------------------------------
   // Class Data
@@ -132,19 +137,20 @@ define( function( require ) {
       photonWavelength: WavelengthConstants.IR_WAVELENGTH,
       photonTarget: null } );
 
+    var thisModel = this;
+
     // TODO: We need to build something that behaves sufficiently like EventListenerList
     this.listeners = [];
     this.photons = new ObservableArray(); //Elements are of type Photon
     this.activeMolecules = new ObservableArray(); // Elements are of type Molecule.
-    this.initialPhotonTarget = initialPhotonTarget;
-
-    // Set the initial photon target to the molecule defined by this.initialPhotonTarget.
-    //  TODO: There may be a more logical place for this call.
-    this.setPhotonTarget( this.initialPhotonTarget );
 
     // The photon target is the thing that the photons are shot at, and based
     // on its particular nature, it may or may not absorb some of the photons.
-    //this.photonTarget = null;
+    this.initialPhotonTarget = initialPhotonTarget;
+
+    // Set the initial photon target to the molecule.
+    //  TODO: There may be a more logical place for this call.
+    this.setPhotonTarget( this.initialPhotonTarget );
 
     // Variables that control periodic photon emission.
     this.photonEmissionCountdownTimer = Number.POSITIVE_INFINITY;
@@ -153,7 +159,13 @@ define( function( require ) {
 
     // Collection that contains the molecules that comprise the configurable
     // atmosphere.
-    this.configurableAtmosphereMolecules = []; // Elements are of type Molecule
+    this.configurableAtmosphereMolecules = []; // Elements are of type
+
+//    this.photonTargetProperty.link( function() {
+//      debugger;
+//      thisModel.setPhotonTarget( thisModel.photonTargetProperty.get() );
+//    } )
+
 
   }
 
@@ -241,7 +253,7 @@ define( function( require ) {
       var photon = new Photon( this.photonWavelength );
       photon.setLocation( PHOTON_EMISSION_LOCATION.x, PHOTON_EMISSION_LOCATION.y );
       var emissionAngle = 0; // Straight to the right.
-      if ( this.photonTargetProperty == 'CONFIGURABLE_ATMOSPHERE' ) {
+      if ( this.photonTargetProperty.get() == 'CONFIGURABLE_ATMOSPHERE' ) {
         // Photons can be emitted at an angle.  In order to get a more
         // even spread, we alternate emitting with an up or down angle.
         emissionAngle = RAND.nextDouble() * PHOTON_EMISSION_ANGLE_RANGE / 2;
@@ -300,8 +312,9 @@ define( function( require ) {
       }
     },
 
+
     getPhotonTarget: function() {
-      return this.photonTargetProperty;
+      return this.photonTargetProperty.get();
     },
 
 
@@ -313,87 +326,91 @@ define( function( require ) {
     },
 
     setPhotonTarget: function( photonTarget ) {
-
-      if ( this.photonTargetProperty != photonTarget ) {
-        // If switching to the configurable atmosphere, photon emission
-        // is turned off (if it is happening).  This is done because it
-        // just looks better.
-        if ( photonTarget == "CONFIGURABLE_ATMOSPHERE" || this.photonTargetProperty == "CONFIGURABLE_ATMOSPHERE" ) {
-          this.setPhotonEmissionPeriod( Number.POSITIVE_INFINITY );
-          this.removeAllPhotons(); // TODO: Requires removeAllPhotons() method
-        }
-
-        // Update to the new value.
-        this.photonTargetProperty = photonTarget;
-
-        // Remove the old photon target(s).
-        //this.removeOldTarget(); // TODO: Requires removeOldTarget() method
-
-        // Add the new photon target(s).
-        var newMolecule = new Molecule();
-        switch( photonTarget ) {
-
-          case "SINGLE_CO_MOLECULE":
-            newMolecule = new CO( SINGLE_MOLECULE_LOCATION );
-            this.activeMolecules.add( newMolecule );
-            break;
-
-          case "SINGLE_CO2_MOLECULE":
-            newMolecule = new CO2( SINGLE_MOLECULE_LOCATION );
-            this.activeMolecules.add( newMolecule );
-            break;
-
-          case "SINGLE_H2O_MOLECULE":
-            newMolecule = new H2O( SINGLE_MOLECULE_LOCATION );
-            this.activeMolecules.add( newMolecule );
-            break;
-
-          case "SINGLE_CH4_MOLECULE":
-            newMolecule = new CH4( SINGLE_MOLECULE_LOCATION );
-            this.activeMolecules.add( newMolecule );
-            break;
-
-          case "SINGLE_N2_MOLECULE":
-            newMolecule = new N2( SINGLE_MOLECULE_LOCATION );
-            this.activeMolecules.add( newMolecule );
-            break;
-
-          case "SINGLE_O2_MOLECULE":
-            newMolecule = new O2( SINGLE_MOLECULE_LOCATION );
-            this.activeMolecules.add( newMolecule );
-            break;
-
-          case "SINGLE_O3_MOLECULE":
-            newMolecule = new O3( SINGLE_MOLECULE_LOCATION );
-            this.activeMolecules.add( newMolecule );
-            break;
-
-          case "SINGLE_NO2_MOLECULE":
-            newMolecule = new NO2( SINGLE_MOLECULE_LOCATION );
-            this.activeMolecules.add( newMolecule );
-            break;
-
-          case "CONFIGURABLE_ATMOSPHERE":
-            // Add references for all the molecules in the configurable
-            // atmosphere to the "active molecules" list.
-            this.activeMolecules.addAll( this.configurableAtmosphereMolecules );
-            break;
-
-          default:
-            console.error( "Error: Unhandled photon target." );
-            break;
-        }
+      //if ( this.photonTargetProperty.get() != photonTarget ) {
+      // If switching to the configurable atmosphere, photon emission
+      // is turned off (if it is happening).  This is done because it
+      // just looks better.
+      if ( photonTarget == "CONFIGURABLE_ATMOSPHERE" || this.photonTargetProperty.get() == "CONFIGURABLE_ATMOSPHERE" ) {
+        this.setPhotonEmissionPeriod( Number.POSITIVE_INFINITY );
+        this.removeAllPhotons(); // TODO: Requires removeAllPhotons() method
       }
+
+      // Update to the new value.
+      this.photonTargetProperty.set( photonTarget );
+
+      // Remove the old photon target(s).
+      this.removeOldTarget();
+
+      // Add the new photon target(s).
+      var newMolecule = new Molecule();
+      switch( photonTarget ) {
+        case "SINGLE_CO_MOLECULE":
+          newMolecule = new CO( SINGLE_MOLECULE_LOCATION );
+          this.activeMolecules.add( newMolecule );
+          break;
+
+        case "SINGLE_CO2_MOLECULE":
+          newMolecule = new CO2( SINGLE_MOLECULE_LOCATION );
+          this.activeMolecules.add( newMolecule );
+          debugger;
+          break;
+
+        case "SINGLE_H2O_MOLECULE":
+          newMolecule = new H2O( SINGLE_MOLECULE_LOCATION );
+          this.activeMolecules.add( newMolecule );
+          break;
+
+        case "SINGLE_CH4_MOLECULE":
+          newMolecule = new CH4( SINGLE_MOLECULE_LOCATION );
+          this.activeMolecules.add( newMolecule );
+          break;
+
+        case "SINGLE_N2_MOLECULE":
+          newMolecule = new N2( SINGLE_MOLECULE_LOCATION );
+          this.activeMolecules.add( newMolecule );
+          break;
+
+        case "SINGLE_O2_MOLECULE":
+          newMolecule = new O2( SINGLE_MOLECULE_LOCATION );
+          this.activeMolecules.add( newMolecule );
+          break;
+
+        case "SINGLE_O3_MOLECULE":
+          newMolecule = new O3( SINGLE_MOLECULE_LOCATION );
+          this.activeMolecules.add( newMolecule );
+          break;
+
+        case "SINGLE_NO2_MOLECULE":
+          newMolecule = new NO2( SINGLE_MOLECULE_LOCATION );
+          this.activeMolecules.add( newMolecule );
+          break;
+
+        case "CONFIGURABLE_ATMOSPHERE":
+          // Add references for all the molecules in the configurable
+          // atmosphere to the "active molecules" list.
+          this.activeMolecules.addAll( this.configurableAtmosphereMolecules );
+          break;
+
+        default:
+          console.error( "Error: Unhandled photon target." );
+          break;
+      }
+      //}
     },
 
     getMolecules: function() {
       // this.activeMolecules is an observable array so I cannot use the slice method to create an array copy.
       var activeMolecules = [];
       for ( var i = 0; i < this.activeMolecules.length; i++ ) {
-        activeMolecules[i] = this.activeMolecules.get(i);
+        activeMolecules[i] = this.activeMolecules.get( i );
       }
       return activeMolecules;
 //      return this.activeMolecules.slice( 0 );
+    },
+
+
+    removeOldTarget: function() {
+      this.activeMolecules.clear(); // Clear the old active molecules array
     }
 
   } )
@@ -435,14 +452,6 @@ define( function( require ) {
 //    notifyPhotonTargetChanged();
 //  }
 //
-//  TODO: This should be unnecessary now.   All of this should be handled by observable arrays.
-//  private void removeOldTarget() {
-//    ArrayList<Molecule> copyOfMolecules = new ArrayList<Molecule>( activeMolecules ); // Create an identical copy of activeMolecules
-//    activeMolecules.clear(); // Clear the old active molecules array
-//    for ( Molecule molecule : copyOfMolecules ) { // Notify that that array has been cleared.
-//      notifyMoleculeRemoved( molecule );
-//    }
-//  }
 //
 //  //----------------------------------------------------------------------------
 //  // Constructor(s)

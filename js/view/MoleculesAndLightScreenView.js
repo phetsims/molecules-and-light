@@ -48,6 +48,7 @@ define( function( require ) {
     var moleculesAndLightScreenView = this;
     ScreenView.call( this );
 
+    var thisScreenView = this;
     this.photonAbsorptionModel = photonAbsorptionModel;
 
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
@@ -142,14 +143,21 @@ define( function( require ) {
     this.photonEmitterLayer.addChild( connectingRod );
     this.photonEmitterLayer.addChild( photonEmitterNode );
     this.photonEmitterLayer.addChild( photonEmissionControlPanel );
-    this.photonEmitterLayer.addChild( moleculeControlPanel);
-
+    this.photonEmitterLayer.addChild( moleculeControlPanel );
 
     // Add in the initial molecule(s).
-    for( var molecule in photonAbsorptionModel.getMolecules() ) {
+    for ( var molecule in photonAbsorptionModel.getMolecules() ) {
       this.addMolecule( photonAbsorptionModel.getMolecules()[molecule] );
     }
 
+    // Observe the photon target property for change in molecule type.
+    photonAbsorptionModel.photonTargetProperty.link( function() {
+      thisScreenView.addMolecule( photonAbsorptionModel.getMolecules()[0] );
+    } );
+
+    photonAbsorptionModel.activeMolecules.addItemRemovedListener( function() {
+      thisScreenView.removeMolecule( photonAbsorptionModel.getMolecules()[0]);
+    } );
   }
 
   return inherit( ScreenView, MoleculesAndLightScreenView, {
@@ -159,8 +167,17 @@ define( function( require ) {
       this.moleculeLayer.addChild( moleculeNode );
 //    moleculeMap.put( molecule, moleculeNode );
 //    updateRestoreMolecueButtonVisibility();
-    }
+    },
 
+    removeMolecule: function( molecule ) {
+//    if ( this.moleculeLayer.removeChild( this.moleculeMap.get( molecule ) ) == null ) {
+//      System.out.println( getClass().getName() + " - Error: MoleculeNode not found for molecule." );
+//    }
+      this.moleculeLayer.removeChild( molecule );
+//    moleculeMap.remove( molecule );
+//    updateRestoreMolecueButtonVisibility();
+//    molecule.removeListener( moleculeMotionListener );
+    }
   } );
 } );
 
@@ -213,13 +230,6 @@ define( function( require ) {
 //
 //
 //
-//  private void removeMolecule( Molecule molecule ) {
-//    if ( moleculeLayer.removeChild( moleculeMap.get( molecule ) ) == null ) {
-//      System.out.println( getClass().getName() + " - Error: MoleculeNode not found for molecule." );
-//    }
-//    moleculeMap.remove( molecule );
-//    updateRestoreMolecueButtonVisibility();
-//    molecule.removeListener( moleculeMotionListener );
 //  }
 //
 //  /**

@@ -88,7 +88,6 @@ define( function( require ) {
         this.photonEmitterImage.getBounds().getCenterY() - this.emissionRateControlSliderNode.getBounds().getCenterY() / 2 ) );
 
     this.emissionControlSliderLayer.addChild( this.emissionRateControlSliderNode );
-
   }
 
   return inherit( Node, PhotonEmitterNode, {

@@ -82,10 +82,8 @@ define( function( require ) {
     Panel.call( this, content, options );
 
     model.photonTargetProperty.link( function() {
-      console.log( model.photonTargetProperty );
+      model.setPhotonTarget( model.photonTargetProperty.get() );
     });
-
-
   }
 
   return inherit( Panel, MoleculesAndLightControlPanel );

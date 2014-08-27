@@ -43,6 +43,7 @@ define( function( require ) {
     }, options );
 
     // Create the node containing the molecule name and associated molecular abbreviation which will describe the radio button.
+    // TODO: Have this text use PhetPhont.
     var molecularName = new VBox( { children: [
       new Text( molecule),
       new Text( molecularAbbreviation )
