@@ -352,7 +352,6 @@ define( function( require ) {
         case "SINGLE_CO2_MOLECULE":
           newMolecule = new CO2( SINGLE_MOLECULE_LOCATION );
           this.activeMolecules.add( newMolecule );
-          debugger;
           break;
 
         case "SINGLE_H2O_MOLECULE":

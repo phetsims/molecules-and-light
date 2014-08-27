@@ -71,6 +71,21 @@ define( function( require ) {
 
     // Add the layers for molecules, photons, and photon emitters.
     this.moleculeLayer = new Node();
+    photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
+      var moleculeNode = new MoleculeNode( addedMolecule, thisScreenView.mvt );
+      thisScreenView.moleculeLayer.addChild( moleculeNode );
+      console.log( 'adding', moleculeNode );
+
+      photonAbsorptionModel.activeMolecules.addItemRemovedListener( function removalListener( removedMolecule ) {
+        if ( removedMolecule === addedMolecule ) {
+          thisScreenView.moleculeLayer.removeChild( moleculeNode );
+          photonAbsorptionModel.activeMolecules.removeItemRemovedListener( removalListener );
+          console.log( 'removing', moleculeNode );
+        }
+      } );
+    } );
+
+
     this.myWorldNode.addChild( this.moleculeLayer );
     this.photonLayer = new Node();
     this.myWorldNode.addChild( this.photonLayer );
@@ -149,16 +164,6 @@ define( function( require ) {
     for ( var molecule in photonAbsorptionModel.getMolecules() ) {
       this.addMolecule( photonAbsorptionModel.getMolecules()[molecule] );
     }
-
-    // Observe the photon target property for change in molecule type.
-    photonAbsorptionModel.photonTargetProperty.link( function() {
-      thisScreenView.addMolecule( photonAbsorptionModel.getMolecules()[0] );
-    } );
-
-    photonAbsorptionModel.activeMolecules.addItemRemovedListener( function() {
-      console.log( ' Trying to remove the molecule node from the view.');
-      thisScreenView.removeMolecule( photonAbsorptionModel.getMolecules()[0]);
-    } );
   }
 
   return inherit( ScreenView, MoleculesAndLightScreenView, {
