@@ -26,6 +26,12 @@ define( function( require ) {
   var MoleculeSelectorPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculeSelectorPanel' );
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );
   var CO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO' );
+  var CO2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO2' );
+  var H2O = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/H2O' );
+  var N2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/N2' );
+  var O2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O2' );
+  var NO2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO2' );
+  var O3 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O3' );
 
   // Images
   var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
@@ -39,22 +45,47 @@ define( function( require ) {
   // Scaling factor for the molecule images, determined empirically.
   var MOLECULE_SCALING_FACTOR = 0.13;
 
-  function MoleculesAndLightControlPanel( model ) {
+  function MoleculesAndLightControlPanel( model, options ) {
+
+    options = _.extend( {
+      stroke: null,
+      fill: new Color( 206, 206, 206 ),
+      lineWidth: 3
+    }, options );
 
     // The following data structure defines each of the molecule selectors
     // that will exist on this control panel.
-    var moleculeSelectors = [];
+    this.moleculeSelectors = [];
 
     // Create the reset all button.
     var resetAllButton = new ResetAllButton();
 
-    // Create the molecule selector panels for this control panel. TODO: These wil be pushed into moleculeSelectors array.
-    var testSelectorPanel = new MoleculeSelectorPanel( "Carbon Monoxide", "CO", new MoleculeNode( new CO(), MVT), model );
-
+    // Create the molecule selector panels for this control panel and push into the selector array.
+    //this.moleculeSelectors.push( new MoleculeSelectorPanel( "Carbon Monoxide", "CO", new MoleculeNode( new CO(), MVT), model ) );
+//    moleculeSelectors.push( new MoleculeSelectorPanel( "Nitrogen", "N2", new MoleculeNode( new N2(), MVT), model ) );
+//    moleculeSelectors.push( new MoleculeSelectorPanel( "Oxygen", "O2", new MoleculeNode( new O2(), MVT), model ) );
+//    moleculeSelectors.push( new MoleculeSelectorPanel( "Carbon Dioxide", "CO2", new MoleculeNode( new CO2(), MVT), model ) );
+//    moleculeSelectors.push( new MoleculeSelectorPanel( "Water", "H2O", new MoleculeNode( new H2O(), MVT), model ) );
+//    moleculeSelectors.push( new MoleculeSelectorPanel( "Nitrogen Dioxide", "NO2", new MoleculeNode( new NO2(), MVT), model ) );
+//    moleculeSelectors.push( new MoleculeSelectorPanel( "Ozone", "O3", new MoleculeNode( new O3(), MVT), model ) );
     // Include all contents of the control panel.
-    var content = new VBox( {align: 'center', spacing: 20, children: [ testSelectorPanel, resetAllButton ] } );
+    var content = new VBox( {fill: Color.BLACK, stroke: null, align: 'center', spacing: 20, children: [
+      new MoleculeSelectorPanel( "Carbon Monoxide", "CO", new MoleculeNode( new CO(), MVT), 'SINGLE_CO_MOLECULE', model ),
+      new MoleculeSelectorPanel( "Nitrogen", "N2", new MoleculeNode( new N2(), MVT), 'SINGLE_N2_MOLECULE', model ),
+      new MoleculeSelectorPanel( "Oxygen", "O2", new MoleculeNode( new O2(), MVT),'SINGLE_O2_MOLECULE', model ),
+      new MoleculeSelectorPanel( "Carbon Dioxide", "CO2", new MoleculeNode( new CO2(), MVT), 'SINGLE_CO2_MOLECULE', model ),
+      new MoleculeSelectorPanel( "Water", "H2O", new MoleculeNode( new H2O(), MVT), 'SINGLE_H2O_MOLECULE', model ),
+      new MoleculeSelectorPanel( "Nitrogen Dioxide", "NO2", new MoleculeNode( new NO2(), MVT), 'SINGLE_NO2_MOLECULE', model ),
+      new MoleculeSelectorPanel( "Ozone", "O3", new MoleculeNode( new O3(), MVT), 'SINGLE_O3_MOLECULE', model ),
+      resetAllButton
+    ] } );
+    Panel.call( this, content, options );
 
-    Panel.call( this, content );
+    model.photonTargetProperty.link( function() {
+      console.log( model.photonTargetProperty );
+    });
+
+
   }
 
   return inherit( Panel, MoleculesAndLightControlPanel );

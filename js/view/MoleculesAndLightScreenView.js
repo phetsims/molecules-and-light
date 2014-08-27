@@ -14,6 +14,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Image = require( 'SCENERY/nodes/Image' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -36,7 +37,7 @@ define( function( require ) {
   // Class data for the Molecules and Light screen view
   // Model-view transform for intermediate coordinates.
   var INTERMEDIATE_RENDERING_SIZE = new Dimension2( 786, 786 );
-  var PHOTON_EMITTER_WIDTH = 300;
+  var PHOTON_EMITTER_WIDTH = 220;
 
 
   /**
@@ -47,17 +48,49 @@ define( function( require ) {
     var moleculesAndLightScreenView = this;
     ScreenView.call( this );
 
+    this.photonAbsorptionModel = photonAbsorptionModel;
+
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( Math.round( 786 * 0.65 ), Math.round( 786 * 0.35 ) ),
-      0.18 );
+      new Vector2( Math.round( INTERMEDIATE_RENDERING_SIZE.width * 0.65 ), Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.35 ) ),
+      0.18 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
 
     this.mvt = mvt; // Make mvt available to descendant types.
 
     photonAbsorptionModel.photons.addItemAddedListener( function( photon ) {
       moleculesAndLightScreenView.addChild( new PAPhotonNode( photon, mvt ) );
-
     } );
+
+    // Create the node that will be the root for all the world children on
+    // this canvas.  This is done to make it easier to zoom in and out on
+    // the world without affecting screen children.
+    this.myWorldNode = new Node();
+    this.addChild( this.myWorldNode );
+
+
+    // Add the layers for molecules, photons, and photon emitters.
+    this.moleculeLayer = new Node();
+    this.myWorldNode.addChild( this.moleculeLayer );
+    this.photonLayer = new Node();
+    this.myWorldNode.addChild( this.photonLayer );
+    this.photonEmitterLayer = new Node();
+    this.myWorldNode.addChild( this.photonEmitterLayer );
+
+    // Create the control panel for photon emission frequency.
+    var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
+    photonEmissionControlPanel.setLeftTop( new Vector2( -30, 400 ) );
+
+    // Create the photon emitter.
+    var photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, mvt, photonAbsorptionModel );
+    photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
+
+    // Create the rod that connects the emitter to the control panel.
+    var connectingRod = new VerticalRodNode( 30,
+      Math.abs( photonEmitterNode.getCenter().y - photonEmissionControlPanel.getCenter().y ),
+      new Color( 205, 198, 115 ) );
+    connectingRod.setCenter( new Vector2(
+        photonEmitterNode.getCenter().x - connectingRod.getBounds().width / 2,
+        photonEmitterNode.getCenter().y + connectingRod.getCenter().y ) );
 
 //  // Data structures that match model objects to their representations in
 //  // the view.
@@ -80,7 +113,7 @@ define( function( require ) {
 //
 //  // Button for displaying EM specturm.
 //  private final HTMLImageButtonNode showSpectrumButton = new HTMLImageButtonNode( MoleculesAndLightResources.getString( "SpectrumWindow.buttonCaption" ), new PhetFont( Font.BOLD, 24 ), new Color( 185, 178, 95 ) );
-    var showSpectrumButton = new TextPushButton( buttonCaptionString, { fill: Color.RED } );
+//    var showSpectrumButton = new TextPushButton( buttonCaptionString, { fill: Color.RED } );
 
 //  // Window that displays the EM spectrum upon request.
 //  private final SpectrumWindow spectrumWindow = new SpectrumWindow() {{ setVisible( false ); }};
@@ -88,145 +121,53 @@ define( function( require ) {
 
     // Add the heat lamp to the left center of screen
     // TODO: Width and location will be set later when we do an official port of MoleculesAndLightCanvas.java
-    var photonEmitterNode = new PhotonEmitterNode( 300, this.mvt, photonAbsorptionModel );
+//    var photonEmitterNode = new PhotonEmitterNode( 300, this.mvt, photonAbsorptionModel );
 
-    photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
+//    photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
 
     // Add the control panel for photon type
-    var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: photonEmitterNode.bottom + 100, left: 20} );
+//    var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: photonEmitterNode.bottom + 100, left: 20} );
 
-    // Declare the control panel for molecule type
+//    Declare the control panel for molecule type
     var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
-    moleculeControlPanel.setCenter( new Vector2(700, 400 ) );
+    moleculeControlPanel.setCenter( new Vector2( 700, 400 ) );
 
-    // Create the rod that connects the emitter to the control panel.
-    var connectingRod = new VerticalRodNode( 30,
-      Math.abs( photonEmitterNode.getCenter().y - photonEmissionControlPanel.getCenter().y ),
-      new Color( 205, 198, 115 ) );
+//    this.addChild( connectingRod );
+//    this.addChild( photonEmissionControlPanel );
+//    this.addChild( photonEmitterNode );
+//    this.addChild( showSpectrumButton );
+//    this.addChild( moleculeControlPanel );
 
-    connectingRod.setCenter( new Vector2(
-        photonEmitterNode.getCenter().x - connectingRod.getBounds().width / 2,
-        photonEmitterNode.getCenter().y + connectingRod.getCenter().y ) );
+    // Add the nodes in the order necessary for correct layering.
+    this.photonEmitterLayer.addChild( connectingRod );
+    this.photonEmitterLayer.addChild( photonEmitterNode );
+    this.photonEmitterLayer.addChild( photonEmissionControlPanel );
+    this.photonEmitterLayer.addChild( moleculeControlPanel);
 
-    this.addChild( connectingRod );
-    this.addChild( photonEmissionControlPanel );
-    this.addChild( photonEmitterNode );
-    this.addChild( showSpectrumButton );
-    this.addChild( moleculeControlPanel );
 
-    // Add a molecule to the screen.
-    this.addChild( new MoleculeNode( new NO2( { initialCenterOfGravityPos: new Vector2( 50, 50 ) } ), mvt ) );
-
+    // Add in the initial molecule(s).
+    for( var molecule in photonAbsorptionModel.getMolecules() ) {
+      this.addMolecule( photonAbsorptionModel.getMolecules()[molecule] );
+    }
 
   }
 
-  return inherit( ScreenView, MoleculesAndLightScreenView );
+  return inherit( ScreenView, MoleculesAndLightScreenView, {
+
+    addMolecule: function( molecule ) {
+      var moleculeNode = new MoleculeNode( molecule, this.mvt );
+      this.moleculeLayer.addChild( moleculeNode );
+//    moleculeMap.put( molecule, moleculeNode );
+//    updateRestoreMolecueButtonVisibility();
+    }
+
+  } );
 } );
 
 
 //  //----------------------------------------------------------------------------
 //  // Constructors
 //  //----------------------------------------------------------------------------
-//
-//  /**
-//   * Constructor.
-//   *
-//   * @param parentFrame           TODO
-//   * @param photonAbsorptionModel - Model that is being portrayed on this canvas.
-//   */
-//  public MoleculesAndLightCanvas( final Frame parentFrame, final MoleculesAndLightModule module, final PhotonAbsorptionModel photonAbsorptionModel ) {
-//
-//    this.photonAbsorptionModel = photonAbsorptionModel;
-//
-//    // Monitor the property that the user can use (through the options
-//    // menu) to force the background to be white.
-//    module.getWhiteBackgroundProperty().addObserver( new SimpleObserver() {
-//      public void update() {
-//        setBackground( module.getWhiteBackgroundProperty().get() ? Color.white : Color.black );
-//      }
-//    } );
-//
-//    // Set up the canvas-screen transform.
-//    setWorldTransformStrategy( new CenteringBoxStrategy( this, INTERMEDIATE_RENDERING_SIZE ) );
-//
-//    // Set up the model-canvas transform.  The multiplier values below can
-//    // be used to shift the center of the play area right or left, and the
-//    // scale factor can be used to essentially zoom in or out.
-//    mvt = new ModelViewTransform2D(
-//      new Point2D.Double( 0, 0 ),
-//      new Point( (int) Math.round( INTERMEDIATE_RENDERING_SIZE.width * 0.65 ),
-//      (int) Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.35 ) ),
-//    0.18, // Scale factor - smaller numbers "zoom out", bigger ones "zoom in".
-//      true );
-//
-//    // Listen to the model for notifications that we care about.
-//    photonAbsorptionModel.addListener( new PhotonAbsorptionModel.Adapter() {
-//
-//      @Override
-//      public void photonRemoved( Photon photon ) {
-//        if ( photonLayer.removeChild( photonMap.get( photon ) ) == null ) {
-//          System.out.println( getClass().getName() + " - Error: PhotonNode not found for photon." );
-//        }
-//        photonMap.remove( photon );
-//      }
-//
-//      @Override
-//      public void photonAdded( Photon photon ) {
-//        PAPhotonNode photonNode = new PAPhotonNode( photon, mvt );
-//        photonLayer.addChild( photonNode );
-//        photonMap.put( photon, photonNode );
-//      }
-//
-//      @Override
-//      public void moleculeRemoved( Molecule molecule ) {
-//        removeMolecule( molecule );
-//      }
-//
-//      @Override
-//      public void moleculeAdded( Molecule molecule ) {
-//        addMolecule( molecule );
-//      }
-//
-//      @Override
-//      public void modelReset() {
-//        // Hide the spectrum window (if it is showing) and set it
-//        // back to its default size.
-//        spectrumWindow.setVisible( false );
-//        spectrumWindow.setToDefaultSizeAndPosition();
-//      }
-//    } );
-//
-//    // Create the node that will be the root for all the world children on
-//    // this canvas.  This is done to make it easier to zoom in and out on
-//    // the world without affecting screen children.
-//    myWorldNode = new PNode();
-//    addWorldChild( myWorldNode );
-//
-//    // Add the layers.
-//    moleculeLayer = new PNode();
-//    myWorldNode.addChild( moleculeLayer );
-//    photonLayer = new PNode();
-//    myWorldNode.addChild( photonLayer );
-//    photonEmitterLayer = new PNode();
-//    myWorldNode.addChild( photonEmitterLayer );
-//
-//    // Create the control panel for photon emission frequency.
-//    PNode photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
-//    photonEmissionControlPanel.setOffset( -30, 500 );
-//
-//    // Create the photon emitter.
-//    PNode photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, mvt, photonAbsorptionModel );
-//    photonEmitterNode.setOffset( mvt.modelToViewDouble( photonAbsorptionModel.getPhotonEmissionLocation() ) );
-//
-//    // Create the rod that connects the emitter to the control panel.
-//    PNode connectingRod = new VerticalRodNode( 30,
-//      Math.abs( photonEmitterNode.getFullBoundsReference().getCenterY() - photonEmissionControlPanel.getFullBoundsReference().getCenterY() ),
-//      new Color( 205, 198, 115 ) );
-//
-//    connectingRod.setOffset(
-//        photonEmitterNode.getFullBoundsReference().getCenterX() - connectingRod.getFullBoundsReference().width / 2,
-//      photonEmitterNode.getFullBoundsReference().getCenterY() );
-//
 //    // Add the button for restoring molecules that break apart.
 //    restoreMoleculeButtonNode = new HTMLImageButtonNode( MoleculesAndLightResources.getString( "ButtonNode.ReturnMolecule" ), new PhetFont( Font.BOLD, 24 ), new Color( 255, 144, 0 ) );
 //    restoreMoleculeButtonNode.setOffset( INTERMEDIATE_RENDERING_SIZE.width - restoreMoleculeButtonNode.getFullBounds().getWidth(), 50 );
@@ -238,15 +179,8 @@ define( function( require ) {
 //    myWorldNode.addChild( restoreMoleculeButtonNode );
 //    updateRestoreMolecueButtonVisibility();
 //
-//    // Add the nodes in the order necessary for correct layering.
-//    photonEmitterLayer.addChild( connectingRod );
-//    photonEmitterLayer.addChild( photonEmitterNode );
-//    photonEmitterLayer.addChild( photonEmissionControlPanel );
-//
-//    // Add in the initial molecule(s).
-//    for ( Molecule molecule : photonAbsorptionModel.getMolecules() ) {
-//      addMolecule( molecule );
-//    }
+
+
 //
 //    // Add the button for displaying the EM spectrum.
 //    myWorldNode.addChild( showSpectrumButton );
@@ -277,13 +211,7 @@ define( function( require ) {
 //  // Methods
 //  //----------------------------------------------------------------------------
 //
-//  private void addMolecule( Molecule molecule ) {
-//    molecule.addListener( moleculeMotionListener );
-//    MoleculeNode moleculeNode = new MoleculeNode( molecule, mvt );
-//    moleculeLayer.addChild( moleculeNode );
-//    moleculeMap.put( molecule, moleculeNode );
-//    updateRestoreMolecueButtonVisibility();
-//  }
+//
 //
 //  private void removeMolecule( Molecule molecule ) {
 //    if ( moleculeLayer.removeChild( moleculeMap.get( molecule ) ) == null ) {

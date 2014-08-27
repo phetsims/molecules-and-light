@@ -124,8 +124,8 @@ define( function( require ) {
           j * gridLineSpacingY + CONTAINMENT_AREA_RECT.getMinY() ) );
     }
   }
-
-  function PhotonAbsorptionModel() {
+  // TODO: Is it ok to pass in a parameter to the PhotonAbsorptionModel Constructor?  The java version does this.  This call is made in MoleculesAndLightScreen.js
+  function PhotonAbsorptionModel( initialPhotonTarget ) {
 
     PropertySet.call( this, {
       emissionFrequency: 0,
@@ -135,8 +135,12 @@ define( function( require ) {
     // TODO: We need to build something that behaves sufficiently like EventListenerList
     this.listeners = [];
     this.photons = new ObservableArray(); //Elements are of type Photon
-    this.activeMolecules = new ObservableArray(); // Elements are of type Molecule
-    this.initialPhotonTarget = null;
+    this.activeMolecules = new ObservableArray(); // Elements are of type Molecule.
+    this.initialPhotonTarget = initialPhotonTarget;
+
+    // Set the initial photon target to the molecule defined by this.initialPhotonTarget.
+    //  TODO: There may be a more logical place for this call.
+    this.setPhotonTarget( this.initialPhotonTarget );
 
     // The photon target is the thing that the photons are shot at, and based
     // on its particular nature, it may or may not absorb some of the photons.
@@ -237,7 +241,7 @@ define( function( require ) {
       var photon = new Photon( this.photonWavelength );
       photon.setLocation( PHOTON_EMISSION_LOCATION.x, PHOTON_EMISSION_LOCATION.y );
       var emissionAngle = 0; // Straight to the right.
-      if ( this.photonTarget == 'CONFIGURABLE_ATMOSPHERE' ) {
+      if ( this.photonTargetProperty == 'CONFIGURABLE_ATMOSPHERE' ) {
         // Photons can be emitted at an angle.  In order to get a more
         // even spread, we alternate emitting with an up or down angle.
         emissionAngle = RAND.nextDouble() * PHOTON_EMISSION_ANGLE_RANGE / 2;
@@ -297,7 +301,7 @@ define( function( require ) {
     },
 
     getPhotonTarget: function() {
-      return this.photonTarget;
+      return this.photonTargetProperty;
     },
 
 
@@ -310,17 +314,17 @@ define( function( require ) {
 
     setPhotonTarget: function( photonTarget ) {
 
-      if ( this.photonTarget != photonTarget ) {
+      if ( this.photonTargetProperty != photonTarget ) {
         // If switching to the configurable atmosphere, photon emission
         // is turned off (if it is happening).  This is done because it
         // just looks better.
-        if ( photonTarget == "CONFIGURABLE_ATMOSPHERE" || this.photonTarget == "CONFIGURABLE_ATMOSPHERE" ) {
+        if ( photonTarget == "CONFIGURABLE_ATMOSPHERE" || this.photonTargetProperty == "CONFIGURABLE_ATMOSPHERE" ) {
           this.setPhotonEmissionPeriod( Number.POSITIVE_INFINITY );
           this.removeAllPhotons(); // TODO: Requires removeAllPhotons() method
         }
 
         // Update to the new value.
-        this.photonTarget = photonTarget;
+        this.photonTargetProperty = photonTarget;
 
         // Remove the old photon target(s).
         //this.removeOldTarget(); // TODO: Requires removeOldTarget() method
@@ -380,7 +384,18 @@ define( function( require ) {
             break;
         }
       }
+    },
+
+    getMolecules: function() {
+      // this.activeMolecules is an observable array so I cannot use the slice method to create an array copy.
+      var activeMolecules = [];
+      for ( var i = 0; i < this.activeMolecules.length; i++ ) {
+        activeMolecules[i] = this.activeMolecules.get(i);
+      }
+      return activeMolecules;
+//      return this.activeMolecules.slice( 0 );
     }
+
   } )
 } );
 
@@ -439,7 +454,6 @@ define( function( require ) {
 //
 //  public PhotonAbsorptionModel( ConstantDtClock clock, PhotonTarget initialPhotonTarget ) {
 //
-//    this.initialPhotonTarget = initialPhotonTarget;
 //
 //    // Listen to the clock in order to step this model.
 //    clock.addClockListener( new ClockAdapter() {
@@ -485,9 +499,6 @@ define( function( require ) {
 //    return CONTAINMENT_AREA_RECT;
 //  }
 //
-//  public ArrayList<Molecule> getMolecules() {
-//    return new ArrayList<Molecule>( activeMolecules );
-//  }
 //
 //
 //  /**

@@ -21,7 +21,7 @@ define( function( require ) {
     // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      initialCenterOfGravityPos: new Vector2( 0, 0 )
+      initialCenterOfGravityPos: Vector2.ZERO
     }, options );
     this.options = options;
 
@@ -33,7 +33,7 @@ define( function( require ) {
 
     // Configure the base class.
     this.addAtom( this.oxygenAtom1 );
-    this.addAtom( this.oxygenAtom1 );
+    this.addAtom( this.oxygenAtom2 );
     this.addAtomicBond( this.oxygenOxygenBond );
 
     // Set the initial offsets

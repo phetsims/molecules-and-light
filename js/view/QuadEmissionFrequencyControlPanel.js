@@ -50,10 +50,6 @@ define( function( require ) {
 
   function QuadEmissionFrequencyControlPanel( photonAbsorptionModel, options ) {
 
-    //    // Create the main background shape.
-//    final PNode backgroundNode = new PhetPPath( new RoundRectangle2D.Double(0, 0, PANEL_SIZE.getWidth(),
-//      PANEL_SIZE.getHeight(), 20, 20), BACKGROUND_COLOR );
-
     options = _.extend( {
       stroke: null,
       fill: BACKGROUND_COLOR,

@@ -34,7 +34,13 @@ define( function( require ) {
    * @param(MoleculeNode} moleculeNode
    * @constructor
    */
-  function MoleculeSelectorPanel( molecule, molecularAbbreviation, moleculeNode, model ) {
+  function MoleculeSelectorPanel( molecule, molecularAbbreviation, moleculeNode, newPhotonTarget, model, options) {
+
+    options = _.extend( {
+      stroke: null,
+      fill: new Color( 206, 206, 206 ),
+      lineWidth: 3
+    }, options );
 
     // Create the node containing the molecule name and associated molecular abbreviation which will describe the radio button.
     var molecularName = new VBox( { children: [
@@ -44,7 +50,7 @@ define( function( require ) {
 
     // Create the inner HBox which contains the the radio button and moleculeName boz.
     var moleculeButton = new HBox( { children: [
-      new AquaRadioButton( model.photonTargetProperty, 'SINGLE_CO_MOLECULE', molecularName, { scale: 0.75 } )
+      new AquaRadioButton( model.photonTargetProperty, newPhotonTarget, molecularName, { scale: 0.75 } )
     ]});
 
     // Scale the molecule node to an appropriate size for the panel display.
@@ -53,7 +59,8 @@ define( function( require ) {
     // Include all contents of the molecule selector panel.
     var content = new HBox( {align: 'center', spacing: 20, children: [ moleculeButton, moleculeNode ] } );
 
-    Panel.call( this, content );
+    Panel.call( this, content, options );
+
   }
   return inherit( Panel, MoleculeSelectorPanel );
 

@@ -130,6 +130,5 @@ define( function( require ) {
   } );
 } );
 
-// CONSTRUCTOR
 
 

@@ -20,7 +20,7 @@ define( function( require ) {
 
   function MoleculesAndLightScreen() {
     Screen.call( this, titleString, null /* no icon, single-screen sim */,
-      function() { return new PhotonAbsorptionModel(); },
+      function() { return new PhotonAbsorptionModel( 'SINGLE_CO_MOLECULE' ); },
       function( model ) { return new MoleculesAndLightScreenView( model ); },
       { backgroundColor: 'black' }
     );
