@@ -332,7 +332,7 @@ define( function( require ) {
       // just looks better.
       if ( photonTarget == "CONFIGURABLE_ATMOSPHERE" || this.photonTargetProperty.get() == "CONFIGURABLE_ATMOSPHERE" ) {
         this.setPhotonEmissionPeriod( Number.POSITIVE_INFINITY );
-        this.removeAllPhotons(); // TODO: Requires removeAllPhotons() method
+        //this.removeAllPhotons(); // TODO: Requires removeAllPhotons() method
       }
 
       // Update to the new value.

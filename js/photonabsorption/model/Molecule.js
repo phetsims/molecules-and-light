@@ -560,7 +560,6 @@ define( function( require ) {
       this.initialAtomCogOffsets[atom.uniqueID] = new Vector2( 0, 0 );
       this.vibrationAtomOffsets[atom.uniqueID] = new Vector2( 0, 0 );
       this.atomsByID[atom.uniqueID] = atom;
-      console.log( this.atomsByID );
     },
     /**
      * Add an atomic bond to this Molecule's list of atomic bonds.

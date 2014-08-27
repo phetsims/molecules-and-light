@@ -90,8 +90,6 @@ define( function( require ) {
           bond1 = new Line( p1.x + offsetVector.x, p1.y - offsetVector.y, p2.x + offsetVector.x, p2.y - offsetVector.y, { lineWidth: bondWidth, stroke: BOND_COLOR } );
           offsetVector.rotate( Math.PI );
           bond2 = new Line( p1.x + offsetVector.x, p1.y - offsetVector.y, p2.x + offsetVector.x, p2.y - offsetVector.y, { lineWidth: bondWidth, stroke: BOND_COLOR } );
-          console.log( 'THIS BOND ' + bond1 );
-          console.log( 'THIS BOND ' + bond2 );
           this.addChild( bond1 );
           this.addChild( bond2 );
           break;

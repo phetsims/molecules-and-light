@@ -156,6 +156,7 @@ define( function( require ) {
     } );
 
     photonAbsorptionModel.activeMolecules.addItemRemovedListener( function() {
+      console.log( ' Trying to remove the molecule node from the view.');
       thisScreenView.removeMolecule( photonAbsorptionModel.getMolecules()[0]);
     } );
   }

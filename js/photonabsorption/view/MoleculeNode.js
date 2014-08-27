@@ -39,9 +39,7 @@ define( function( require ) {
 
     // Add the atoms which compose this molecule to the atomLayer
     // TODO: requires the AtomNode.js dependency file.
-    console.log('The molecule is at position: ' + molecule.getCenterOfGravityPos() );
     for ( var atom = 0; atom < molecule.getAtoms().length; atom++ ) {
-      console.log('The atom in this molecule is at position: ' + molecule.getAtoms()[atom].getPositionRef() );
       thisNode.atomLayer.addChild( new AtomNode( molecule.getAtoms()[atom], mvt ) );
     }
 
