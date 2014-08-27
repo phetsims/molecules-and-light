@@ -58,9 +58,9 @@ define( function( require ) {
 
     this.mvt = mvt; // Make mvt available to descendant types.
 
-    photonAbsorptionModel.photons.addItemAddedListener( function( photon ) {
-      moleculesAndLightScreenView.addChild( new PAPhotonNode( photon, mvt ) );
-    } );
+//    photonAbsorptionModel.photons.addItemAddedListener( function( photon ) {
+//      moleculesAndLightScreenView.addChild( new PAPhotonNode( photon, mvt ) );
+//    } );
 
     // Create the node that will be the root for all the world children on
     // this canvas.  This is done to make it easier to zoom in and out on
@@ -160,10 +160,10 @@ define( function( require ) {
     this.photonEmitterLayer.addChild( photonEmissionControlPanel );
     this.photonEmitterLayer.addChild( moleculeControlPanel );
 
-    // Add in the initial molecule(s).
-    for ( var molecule in photonAbsorptionModel.getMolecules() ) {
-      this.addMolecule( photonAbsorptionModel.getMolecules()[molecule] );
-    }
+//    // Add in the initial molecule(s).
+//    for ( var molecule in photonAbsorptionModel.getMolecules() ) {
+//      this.addMolecule( photonAbsorptionModel.getMolecules()[molecule] );
+//    }
   }
 
   return inherit( ScreenView, MoleculesAndLightScreenView, {
