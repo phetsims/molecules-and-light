@@ -72,15 +72,8 @@ define( function( require ) {
       thisNode.updateImage( thisNode.emitterImageWidth );
     } );
 
-    // Add the initial image.
+    // Add the initial image and photon emission slider.
     thisNode.updateImage( this.emitterImageWidth );
-
-    // Add the slider that will control the rate of photon emission.
-    // Add a background rectangle for the HSlider
-    this.emissionRateControlSliderNode = new EmissionRateControlSliderNode( this.model, new Color( 255, 85, 0 ) );
-
-
-//    this.emissionControlSliderLayer.addChild( this.emissionRateControlSliderNode );
   }
 
   return inherit( Node, PhotonEmitterNode, {
