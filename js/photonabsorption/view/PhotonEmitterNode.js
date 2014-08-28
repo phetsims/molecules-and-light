@@ -77,17 +77,10 @@ define( function( require ) {
 
     // Add the slider that will control the rate of photon emission.
     // Add a background rectangle for the HSlider
-    var backgroundRectangle = new Rectangle( 0, 0, 100, 30, 0, 0, { fill: new Color( 255, 85, 0 ) } );
-    var emissionControlSliderSize = new Dimension2( 100, 5 ); // This may be adjusted as needed for best look.
-    //this.emissionRateControlSliderNode = new HSlider( new Property( 0 ), { min: 0, max: SLIDER_RANGE }, { trackSize: emissionControlSliderSize } );
-    this.emissionRateControlSliderNode = new EmissionRateControlSliderNode( this.model );
-    // Add the emission rate control slider to the correct location on the photon emitter.
-    // EmissionRateControlSliderNode emissionRateControlSliderNode = new EmissionRateControlSliderNode( model );
-    this.emissionRateControlSliderNode.setCenter( new Vector2(
-        this.photonEmitterImage.getBounds().getCenterX() - this.emissionRateControlSliderNode.getBounds().getCenterX() / 2,
-        this.photonEmitterImage.getBounds().getCenterY() - this.emissionRateControlSliderNode.getBounds().getCenterY() / 2 ) );
+    this.emissionRateControlSliderNode = new EmissionRateControlSliderNode( this.model, new Color( 255, 85, 0 ) );
 
-    this.emissionControlSliderLayer.addChild( this.emissionRateControlSliderNode );
+
+//    this.emissionControlSliderLayer.addChild( this.emissionRateControlSliderNode );
   }
 
   return inherit( Node, PhotonEmitterNode, {
@@ -102,6 +95,7 @@ define( function( require ) {
     updateImage: function( flashlightWidth ) {
       // Clear any existing image.
       this.emitterImageLayer.removeAllChildren();
+      this.emissionControlSliderLayer.removeAllChildren();
 
       // Create the flashlight image node, setting the offset such that the
       // center right side of the image is the origin.  This assumes that
@@ -123,8 +117,17 @@ define( function( require ) {
       this.photonEmitterImage.scale( flashlightWidth / this.photonEmitterImage.getImageWidth() );
       this.photonEmitterImage.setCenterX( -flashlightWidth );
       this.photonEmitterImage.setCenterY( -this.photonEmitterImage.getImageHeight() / 2 );
+      this.emissionRateControlSliderNode = new EmissionRateControlSliderNode( this.model, new Color( 0, 85, 0 ) );
+
+      // Add the emission rate control slider to the correct location on the photon emitter.
+      // TODO: The emission rate control slider does not have a good length for the emitter it is attached to.  Update this.
+      this.emissionRateControlSliderNode.setCenter( new Vector2(
+          this.photonEmitterImage.getBounds().getCenterX() - this.emissionRateControlSliderNode.getBounds().getCenterX() / 2,
+          this.photonEmitterImage.getBounds().getCenterY() - this.emissionRateControlSliderNode.getBounds().getCenterY() / 2 ) );
 
       this.emitterImageLayer.addChild( this.photonEmitterImage );
+      this.emissionControlSliderLayer.addChild( this.emissionRateControlSliderNode );
+
     }
   } );
 } );

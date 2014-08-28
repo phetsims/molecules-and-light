@@ -36,14 +36,14 @@ define( function( require ) {
   var DEFAULT_PHOTON_EMISSION_PERIOD = 3000; // Milliseconds of sim time.
   var MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET = 100;
 
-  function EmissionRateControlSliderNode( model, options ) {
+  function EmissionRateControlSliderNode( model, color, options ) {
 
     // Supertype constructor
     Node.call( this, {} );
 
     // Options extension for position of the control slider.
     options = _.extend( {
-      // default bond count
+
       position: new Vector2( 0, 0 )
     }, options );
     this.options = options;
@@ -51,7 +51,7 @@ define( function( require ) {
     var thisNode = this;
     var thisModel = model;
     this.model = model;
-    this.color = new Color( 255, 85, 0); // RGB value for Phet's Color blind red.
+    this.color = color;
 
     //this.sliderPositionProperty = new Property( 0 ); // Observable position of the slider
 
@@ -59,22 +59,18 @@ define( function( require ) {
     this.emissionRateControlSlider = new HSlider( model.emissionFrequencyProperty, { min: 0, max: SLIDER_RANGE } );
 
 
-    // Create a background box for this node.
-    var rectHeight = this.emissionRateControlSlider.height;
-    var rectWidth = this.emissionRateControlSlider.width;
-    this.backgroundRect = new Rectangle( -this.emissionRateControlSlider.options.thumbSize.width / 2,
-        -this.emissionRateControlSlider.options.thumbSize.height / 2,
-        this.emissionRateControlSlider.options.trackSize.width + this.emissionRateControlSlider.options.thumbSize.width,
-        this.emissionRateControlSlider.options.trackSize.height + this.emissionRateControlSlider.options.thumbSize.height,
-      0, 0, { fill: new LinearGradient( 0, 0, rectWidth, rectHeight ).addColorStop( 0, 'black' ).addColorStop( 1, this.color ),
-      stroke: '#c0b9b9' } );
-
-      ///0, 0, { fill: new Color( 255, 85, 0 ) } );
+    // Create the default background box for this node.
+    this.setBackgroundRectangle( new Color( 255, 85, 0 ) );
+//    this.backgroundRect = new Rectangle( -this.emissionRateControlSlider.options.thumbSize.width / 2,
+//        -this.emissionRateControlSlider.options.thumbSize.height / 2,
+//        this.emissionRateControlSlider.options.trackSize.width + this.emissionRateControlSlider.options.thumbSize.width,
+//        this.emissionRateControlSlider.options.trackSize.height + this.emissionRateControlSlider.options.thumbSize.height,
+//      0, 0, { fill: new LinearGradient( 0, 0, rectWidth, rectHeight ).addColorStop( 0, 'black' ).addColorStop( 1, this.color ),
+//      stroke: '#c0b9b9' } );
 
     // Listen to the model for events that may cause this node to change
     // state.
-    this.model.photonWavelengthProperty.link( function() { thisNode.update() } );
-
+    model.photonWavelengthProperty.link( function() { thisNode.update() } );
     model.emissionFrequencyProperty.link( function() {
       var sliderProportion = thisModel.emissionFrequencyProperty.get() / SLIDER_RANGE;
       if ( sliderProportion === 0 ) {
@@ -115,20 +111,31 @@ define( function( require ) {
       // Update the color of the slider.
       if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.IR_WAVELENGTH ) {
         // This is the rgb for PhetColorScheme.RED_COLORBLIND which tested well.
-        this.color = new Color( 255, 85, 0);
+        this.setBackgroundRectangle( new Color( 255, 85, 0 ) );
       }
       else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.VISIBLE_WAVELENGTH ) {
-        this.color = Color.YELLOW;
+        this.setBackgroundRectangle( Color.YELLOW );
       }
       else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.UV_WAVELENGTH ) {
-        this.color = new Color( 200, 0, 200 );
+        this.setBackgroundRectangle( new Color( 200, 0, 200 ) );
       }
       else if ( this.model.getEmittedPhotonWavelength() == WavelengthConstants.MICRO_WAVELENGTH ) {
-        this.color = new Color( 200, 200, 200 );
+        this.setBackgroundRectangle( new Color( 200, 200, 200 ) );
       }
       else {
         console.error( "Error: Unrecognized photon." );
       }
+    },
+    // Set the parameters of the background rectangle for the emission rate control slider.
+    setBackgroundRectangle: function( baseColor ) {
+      var rectHeight = this.emissionRateControlSlider.height;
+      var rectWidth = this.emissionRateControlSlider.width;
+      this.backgroundRect = new Rectangle( -this.emissionRateControlSlider.options.thumbSize.width / 2,
+          -this.emissionRateControlSlider.options.thumbSize.height / 2,
+          this.emissionRateControlSlider.options.trackSize.width + this.emissionRateControlSlider.options.thumbSize.width,
+          this.emissionRateControlSlider.options.trackSize.height + this.emissionRateControlSlider.options.thumbSize.height,
+        0, 0, { fill: new LinearGradient( 0, 0, rectWidth, rectHeight ).addColorStop( 0, 'black' ).addColorStop( 1, baseColor ),
+          stroke: '#c0b9b9' } );
     }
   } );
 
