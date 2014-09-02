@@ -33,6 +33,23 @@ define( function( require ) {
   var NO2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO2' );
   var O3 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O3' );
 
+  // Strings
+  var carbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
+  var nitrogenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Nitrogen' );
+  var oxygenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Oxygen' );
+  var carbonDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonDioxide' );
+  var nitrogenDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.NitrogenDioxide' );
+  var ozoneString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Ozone' );
+  var waterString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Water' );
+  var COString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CO' );
+  var N2String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.N2' );
+  var O2String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.O2' );
+  var CO2String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CO2' );
+  var NO2String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.NO2' );
+  var O3String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.O3' );
+  var H2OString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.H20' );
+
+
   // Images
   var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
 
@@ -70,13 +87,13 @@ define( function( require ) {
 //    moleculeSelectors.push( new MoleculeSelectorPanel( "Ozone", "O3", new MoleculeNode( new O3(), MVT), model ) );
     // Include all contents of the control panel.
     var content = new VBox( {fill: Color.BLACK, stroke: null, align: 'center', spacing: 20, children: [
-      new MoleculeSelectorPanel( "Carbon Monoxide", "CO", new MoleculeNode( new CO(), MVT), 'SINGLE_CO_MOLECULE', model ),
-      new MoleculeSelectorPanel( "Nitrogen", "N2", new MoleculeNode( new N2(), MVT), 'SINGLE_N2_MOLECULE', model ),
-      new MoleculeSelectorPanel( "Oxygen", "O2", new MoleculeNode( new O2(), MVT),'SINGLE_O2_MOLECULE', model ),
-      new MoleculeSelectorPanel( "Carbon Dioxide", "CO2", new MoleculeNode( new CO2(), MVT), 'SINGLE_CO2_MOLECULE', model ),
-      new MoleculeSelectorPanel( "Water", "H2O", new MoleculeNode( new H2O(), MVT), 'SINGLE_H2O_MOLECULE', model ),
-      new MoleculeSelectorPanel( "Nitrogen Dioxide", "NO2", new MoleculeNode( new NO2(), MVT), 'SINGLE_NO2_MOLECULE', model ),
-      new MoleculeSelectorPanel( "Ozone", "O3", new MoleculeNode( new O3(), MVT), 'SINGLE_O3_MOLECULE', model ),
+      new MoleculeSelectorPanel( carbonMonoxideString, COString, new MoleculeNode( new CO(), MVT), 'SINGLE_CO_MOLECULE', model ),
+      new MoleculeSelectorPanel( nitrogenString, N2String, new MoleculeNode( new N2(), MVT), 'SINGLE_N2_MOLECULE', model ),
+      new MoleculeSelectorPanel( oxygenString, O2String, new MoleculeNode( new O2(), MVT),'SINGLE_O2_MOLECULE', model ),
+      new MoleculeSelectorPanel( carbonDioxideString, CO2String, new MoleculeNode( new CO2(), MVT), 'SINGLE_CO2_MOLECULE', model ),
+      new MoleculeSelectorPanel( waterString, H2OString, new MoleculeNode( new H2O(), MVT), 'SINGLE_H2O_MOLECULE', model ),
+      new MoleculeSelectorPanel( nitrogenDioxideString, NO2String, new MoleculeNode( new NO2(), MVT), 'SINGLE_NO2_MOLECULE', model ),
+      new MoleculeSelectorPanel( ozoneString, O3String, new MoleculeNode( new O3(), MVT), 'SINGLE_O3_MOLECULE', model ),
       resetAllButton
     ] } );
     Panel.call( this, content, options );

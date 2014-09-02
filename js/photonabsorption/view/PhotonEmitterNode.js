@@ -50,7 +50,6 @@ define( function( require ) {
    *
    */
   function PhotonEmitterNode( width, mvt, model, options ) {
-
     // Supertype constructor
     Node.call( this, { photonWavelength: WavelengthConstants.VISIBLE_WAVELENGTH} );
 

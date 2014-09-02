@@ -5,5 +5,19 @@
   "visible": "Visible",
   "ultraviolet": "Ultraviolet",
   "higherEnergy": "Higher Energy",
-  "SpectrumWindow.buttonCaption": "Show Light Spectrum"
+  "SpectrumWindow.buttonCaption": "Show Light Spectrum",
+  "ControlPanel.CO": "CO",
+  "ControlPanel.N2": "N2",
+  "ControlPanel.O2": "O2",
+  "ControlPanel.CO2": "CO2",
+  "ControlPanel.NO2": "NO2",
+  "ControlPanel.O3": "O3",
+  "ControlPanel.H20": "H20",
+  "ControlPanel.CarbonMonoxide": "Carbon Monoxide",
+  "ControlPanel.Nitrogen": "Nitrogen",
+  "ControlPanel.Oxygen": "Oxygen",
+  "ControlPanel.CarbonDioxide": "Carbon Dioxide",
+  "ControlPanel.NitrogenDioxide": "Nitrogen Dioxide",
+  "ControlPanel.Ozone": "Ozone",
+  "ControlPanel.Water": "Water"
 }
