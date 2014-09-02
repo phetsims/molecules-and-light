@@ -77,14 +77,6 @@ define( function( require ) {
     // Create the reset all button.
     var resetAllButton = new ResetAllButton();
 
-    // Create the molecule selector panels for this control panel and push into the selector array.
-    //this.moleculeSelectors.push( new MoleculeSelectorPanel( "Carbon Monoxide", "CO", new MoleculeNode( new CO(), MVT), model ) );
-//    moleculeSelectors.push( new MoleculeSelectorPanel( "Nitrogen", "N2", new MoleculeNode( new N2(), MVT), model ) );
-//    moleculeSelectors.push( new MoleculeSelectorPanel( "Oxygen", "O2", new MoleculeNode( new O2(), MVT), model ) );
-//    moleculeSelectors.push( new MoleculeSelectorPanel( "Carbon Dioxide", "CO2", new MoleculeNode( new CO2(), MVT), model ) );
-//    moleculeSelectors.push( new MoleculeSelectorPanel( "Water", "H2O", new MoleculeNode( new H2O(), MVT), model ) );
-//    moleculeSelectors.push( new MoleculeSelectorPanel( "Nitrogen Dioxide", "NO2", new MoleculeNode( new NO2(), MVT), model ) );
-//    moleculeSelectors.push( new MoleculeSelectorPanel( "Ozone", "O3", new MoleculeNode( new O3(), MVT), model ) );
     // Include all contents of the control panel.
     var content = new VBox( {fill: Color.BLACK, stroke: null, align: 'center', spacing: 20, children: [
       new MoleculeSelectorPanel( carbonMonoxideString, COString, new MoleculeNode( new CO(), MVT), 'SINGLE_CO_MOLECULE', model ),
@@ -107,64 +99,3 @@ define( function( require ) {
 
 
 } );
-
-// CONSTRUCTOR
-
-
-//    PhetTitledPanel moleculeSelectionPanel = new PhetTitledPanel( MoleculesAndLightResources.getString( "ControlPanel.Molecule" ) );
-//    moleculeSelectionPanel.setLayout( new GridBagLayout() );
-//    GridBagConstraints constraints = new GridBagConstraints( 0, GridBagConstraints.RELATIVE, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets( 0, 0, 0, 0 ), 0, 0 );
-//    addControlFullWidth( moleculeSelectionPanel );
-//
-//    // Create the selector panels for each molecule and put them on a list.
-//    moleculeSelectors.add( new MoleculeSelectorPanel( MoleculesAndLightResources.getString("ControlPanel.CarbonMonoxide"),MoleculesAndLightResources.getString("ControlPanel.CO"), createMoleculeImage( new CO(), MOLECULE_SCALING_FACTOR ), model, PhotonTarget.SINGLE_CO_MOLECULE ));
-//    moleculeSelectors.add( new MoleculeSelectorPanel( MoleculesAndLightResources.getString("ControlPanel.Nitrogen"), MoleculesAndLightResources.getString("ControlPanel.N2"), createMoleculeImage( new N2(), MOLECULE_SCALING_FACTOR ), model, PhotonTarget.SINGLE_N2_MOLECULE ));
-//    moleculeSelectors.add( new MoleculeSelectorPanel( MoleculesAndLightResources.getString("ControlPanel.Oxygen"), MoleculesAndLightResources.getString("ControlPanel.O2"), createMoleculeImage( new O2(), MOLECULE_SCALING_FACTOR ), model, PhotonTarget.SINGLE_O2_MOLECULE ));
-//    moleculeSelectors.add( new MoleculeSelectorPanel( MoleculesAndLightResources.getString("ControlPanel.CarbonDioxide"), MoleculesAndLightResources.getString("ControlPanel.CO2"), createMoleculeImage( new CO2(), MOLECULE_SCALING_FACTOR ), model, PhotonTarget.SINGLE_CO2_MOLECULE ));
-//    moleculeSelectors.add( new MoleculeSelectorPanel( MoleculesAndLightResources.getString("ControlPanel.Water"), MoleculesAndLightResources.getString("ControlPanel.H2O"), createMoleculeImage( new H2O(), MOLECULE_SCALING_FACTOR ), model, PhotonTarget.SINGLE_H2O_MOLECULE ));
-//    moleculeSelectors.add( new MoleculeSelectorPanel( MoleculesAndLightResources.getString("ControlPanel.NitrogenDioxide"), MoleculesAndLightResources.getString("ControlPanel.NO2"), createMoleculeImage( new NO2(), MOLECULE_SCALING_FACTOR ), model, PhotonTarget.SINGLE_NO2_MOLECULE ));
-//    moleculeSelectors.add( new MoleculeSelectorPanel( MoleculesAndLightResources.getString("ControlPanel.Ozone"), MoleculesAndLightResources.getString("ControlPanel.O3"), createMoleculeImage( new O3(), MOLECULE_SCALING_FACTOR ), model, PhotonTarget.SINGLE_O3_MOLECULE ));
-//
-//    // Add the molecule selection panels to the main panel.
-//
-//    int interSelectorSpacing = 15;
-//    ButtonGroup buttonGroup = new ButtonGroup();
-//
-//    for ( MoleculeSelectorPanel moleculeSelector : moleculeSelectors ){
-//      moleculeSelectionPanel.add(  createVerticalSpacingPanel( interSelectorSpacing ), constraints );
-//      moleculeSelectionPanel.add(  moleculeSelector, constraints );
-//      buttonGroup.add( moleculeSelector.getRadioButton() ); // This prevent toggling when clicking same button twice.
-//    }
-//
-//    moleculeSelectionPanel.add(  createVerticalSpacingPanel( interSelectorSpacing ), constraints );
-//
-//    // Add the Reset All button.
-//    addControlFullWidth( createVerticalSpacingPanel( 5 ) );
-//    addResetAllButton( module );
-//  }
-//
-//  // ------------------------------------------------------------------------
-//  // Methods
-//  // ------------------------------------------------------------------------
-//
-//  private JPanel createVerticalSpacingPanel( int space ) {
-//    JPanel spacePanel = new JPanel();
-//    spacePanel.setLayout( new BoxLayout( spacePanel, BoxLayout.Y_AXIS ) );
-//    spacePanel.add( Box.createVerticalStrut( space ) );
-//    return spacePanel;
-//  }
-//
-//  */
-///**
-//   * Creates a buffered image of a molecule given an instance of a Molecule
-//   * object.
-//   *
-//   * @param molecule
-//   * @return
-//   *//*
-//
-//  private BufferedImage createMoleculeImage( Molecule molecule, double scaleFactor ) {
-//    BufferedImage unscaledMoleculeImage = new MoleculeNode( molecule, MVT ).getImage();
-//    return BufferedImageUtils.multiScale( unscaledMoleculeImage, scaleFactor );
-//  }
-//}*/
