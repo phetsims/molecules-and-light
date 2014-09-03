@@ -58,39 +58,45 @@ define( function( require ) {
 
     this.mvt = mvt; // Make mvt available to descendant types.
 
-//    photonAbsorptionModel.photons.addItemAddedListener( function( photon ) {
-//      moleculesAndLightScreenView.addChild( new PAPhotonNode( photon, mvt ) );
-//    } );
-
     // Create the node that will be the root for all the world children on
     // this canvas.  This is done to make it easier to zoom in and out on
     // the world without affecting screen children.
     this.myWorldNode = new Node();
     this.addChild( this.myWorldNode );
 
-
     // Add the layers for molecules, photons, and photon emitters.
     this.moleculeLayer = new Node();
-    photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
-      var moleculeNode = new MoleculeNode( addedMolecule, thisScreenView.mvt );
-      thisScreenView.moleculeLayer.addChild( moleculeNode );
-      console.log( 'adding', moleculeNode );
-
-      photonAbsorptionModel.activeMolecules.addItemRemovedListener( function removalListener( removedMolecule ) {
-        if ( removedMolecule === addedMolecule ) {
-          thisScreenView.moleculeLayer.removeChild( moleculeNode );
-          photonAbsorptionModel.activeMolecules.removeItemRemovedListener( removalListener );
-          console.log( 'removing', moleculeNode );
-        }
-      } );
-    } );
-
-
     this.myWorldNode.addChild( this.moleculeLayer );
     this.photonLayer = new Node();
     this.myWorldNode.addChild( this.photonLayer );
     this.photonEmitterLayer = new Node();
     this.myWorldNode.addChild( this.photonEmitterLayer );
+
+    // Set up an event listeners for adding and removing molecules.
+    photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
+      var moleculeNode = new MoleculeNode( addedMolecule, thisScreenView.mvt ); //Create the molecule node.
+      thisScreenView.moleculeLayer.addChild( moleculeNode );
+
+      photonAbsorptionModel.activeMolecules.addItemRemovedListener( function removalListener( removedMolecule ) {
+        if ( removedMolecule === addedMolecule ) {
+          thisScreenView.moleculeLayer.removeChild( moleculeNode );
+          photonAbsorptionModel.activeMolecules.removeItemRemovedListener( removalListener );
+        }
+      } );
+    } );
+
+    // Set up the event listeners for adding and removing photons from the photon emitter.
+    photonAbsorptionModel.photons.addItemAddedListener( function( addedPhoton ) {
+      var photonNode = new PAPhotonNode( addedPhoton, thisScreenView.mvt );
+      thisScreenView.photonLayer.addChild( photonNode );
+
+      photonAbsorptionModel.photons.addItemRemovedListener( function removalListener( removedPhoton ) {
+        if ( removedPhoton === addedPhoton ) {
+          thisScreenView.photonLayer.removeChild( photonNode );
+          photonAbsorptionModel.photons.removeItemRemovedListener( removalListener );
+        }
+      } );
+    } );
 
     // Create the control panel for photon emission frequency.
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
@@ -135,24 +141,10 @@ define( function( require ) {
 //  private final SpectrumWindow spectrumWindow = new SpectrumWindow() {{ setVisible( false ); }};
 //
 
-    // Add the heat lamp to the left center of screen
-    // TODO: Width and location will be set later when we do an official port of MoleculesAndLightCanvas.java
-//    var photonEmitterNode = new PhotonEmitterNode( 300, this.mvt, photonAbsorptionModel );
-
-//    photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
-
-    // Add the control panel for photon type
-//    var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel, {top: photonEmitterNode.bottom + 100, left: 20} );
 
 //    Declare the control panel for molecule type
     var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
     moleculeControlPanel.setCenter( new Vector2( 700, 400 ) );
-
-//    this.addChild( connectingRod );
-//    this.addChild( photonEmissionControlPanel );
-//    this.addChild( photonEmitterNode );
-//    this.addChild( showSpectrumButton );
-//    this.addChild( moleculeControlPanel );
 
     // Add the nodes in the order necessary for correct layering.
     this.photonEmitterLayer.addChild( connectingRod );
@@ -160,10 +152,6 @@ define( function( require ) {
     this.photonEmitterLayer.addChild( photonEmissionControlPanel );
     this.photonEmitterLayer.addChild( moleculeControlPanel );
 
-//    // Add in the initial molecule(s).
-//    for ( var molecule in photonAbsorptionModel.getMolecules() ) {
-//      this.addMolecule( photonAbsorptionModel.getMolecules()[molecule] );
-//    }
   }
 
   return inherit( ScreenView, MoleculesAndLightScreenView, {

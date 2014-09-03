@@ -15,6 +15,7 @@
  * photon.
  *
  * @author Jesse Greenberg
+ * @author John Blanco
  */
 
 define( function( require ) {
@@ -45,7 +46,7 @@ define( function( require ) {
     this.molecule = molecule;
 
     // Variables involved in the holding and re-emitting of photons.
-    //this.absorbedPhoton = new Photon(); // TODO: Requires the Photon.js dependency file.
+    this.absorbedPhoton = new Photon();
     this.isPhotonAbsorbed = false;
     this.photonHoldCountdownTime = 0;
   }
@@ -61,7 +62,7 @@ define( function( require ) {
      * overrides should also call this one.
      */
     reset: function() {
-      //this.absorbedPhoton = null; TODO: Requires the Photon.js dependency file.
+      this.absorbedPhoton = null;
       this.isPhotonAbsorbed = false;
       this.photonHoldCountdownTime = 0;
     },
@@ -76,17 +77,17 @@ define( function( require ) {
     queryAndAbsorbPhoton: function( photon ) {
       // All circumstances are correct for photon absorption, so now we decide probabilistically whether or not to
       // actually do it.  This essentially simulates the quantum nature of the absorption.
-      var absorbed = !this.isPhotonAbsorbed && RAND.nextDouble() < this.photonAbsorptionProbabilityProperty.get();
+      var rand = RAND.nextDouble();
+      var absorbed = (!this.isPhotonAbsorbed) && ( rand < this.photonAbsorptionProbabilityProperty.get() );
       if ( absorbed ) {
         this.isPhotonAbsorbed = true;
         this.photonHoldCountdownTime = MIN_PHOTON_HOLD_TIME + RAND.nextDouble() * ( MAX_PHOTON_HOLD_TIME - MIN_PHOTON_HOLD_TIME );
       }
       //TODO: Testing inheritance, remove this soon.
-      console.log( " You are calling the supertype function!" );
       return absorbed;
     },
 
-    step: function() {
+    step: function()  {
       throw new Error( 'step should be implemented in descendant photon absorption strategies.' );
     }
 

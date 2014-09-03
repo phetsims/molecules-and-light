@@ -15,7 +15,6 @@ define( function( require ) {
   function NullPhotonAbsorptionStrategy( molecule ) {
     // Supertype constructor
     PhotonAbsorptionStrategy.call( this, molecule );
-
   }
 
   return inherit( PhotonAbsorptionStrategy, NullPhotonAbsorptionStrategy, {

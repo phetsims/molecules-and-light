@@ -34,10 +34,9 @@ define( function( require ) {
      *
      * @param {Number} dt - The incremental time step.
      */
-    stepInTime: function( dt ) {
+    step: function( dt ) {
       this.photonHoldCountdownTime -= dt;
       if ( this.photonHoldCountdownTime <= 0 ) {
-        console.log( 'You just emitted a photon' );
         this.reemitPhoton();
       }
     },
@@ -60,13 +59,16 @@ define( function( require ) {
      * @return {Boolean} absorbed
      **/
     queryAndAbsorbPhoton: function( photon ) {
-      //var absorbed = false;
       var absorbed = PhotonAbsorptionStrategy.prototype.queryAndAbsorbPhoton.call( this, photon );
       if ( absorbed ) {
         this.absorbedWavelength = photon.getWavelength();
-        //photonAbsorbed(); TODO: Implement photonAbsorbed!
+        this.photonAbsorbed();
       }
       return absorbed;
+    },
+
+    photonAbsorbed: function() {
+      console.error( "Error: photonAbsorbed function should be implemented by descendant absorption strategies.");
     }
 
   } )

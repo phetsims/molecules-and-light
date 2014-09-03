@@ -18,6 +18,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
+  var NullPhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/NullPhotonAbsorptionStrategy' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
   var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
   var PropertySet = require( 'AXON/PropertySet' );
@@ -51,7 +52,10 @@ define( function( require ) {
   //------------------------------------------------------------------------
   function Molecule() {
 
-    PropertySet.call( this, {} );
+    PropertySet.call( this, {
+      emittedPhoton: null
+    } );
+
     // Atoms and bonds that comprise this molecule.
     this.atoms = []; // Elements are of type Atoms
     this.atomicBonds = []; // Elements are of type AtomicBonds
@@ -89,7 +93,7 @@ define( function( require ) {
     // Currently active photon absorption strategy, active because a photon
     // was absorbed that activated it.
     // TODO: Requires Dependency PhotonAbsorptionStrategy
-    //this.activePhotonAbsorptionStrategy = new PhotonAbsorptionStrategy.NullPhotonAbsorptionStrategy( this );
+    this.activePhotonAbsorptionStrategy = new NullPhotonAbsorptionStrategy( this );
 
     // Variable that prevents reabsorption for a while after emitting a photon.
     this.absorbtionHysteresisCountdownTime = 0;
@@ -125,7 +129,6 @@ define( function( require ) {
   }
 
   return inherit( PropertySet, Molecule, {
-
     /**
      * Reset the molecule.  Any photons that have been absorbed are forgotten,
      * and any vibration is reset.
@@ -139,10 +142,6 @@ define( function( require ) {
       this.setVibration( 0 );
       this.setRotating( false );
       this.setRotation( 0 );
-    },
-
-    step: function() {
-      // Handle model animation here.
     },
 
     setPhotonAbsorptionStrategy: function( wavelength, strategy ) {
@@ -204,7 +203,6 @@ define( function( require ) {
       if ( !(atom.uniqueID in this.vibrationAtomOffsets) ) {
         console.log( " - Warning: Attempt to get vibrational COG offset for atom that is not in molecule." );
       }
-      console.log( this.vibrationAtomOffsets );
       return this.vibrationAtomOffsets[atom.uniqueID];
     },
 
@@ -235,8 +233,8 @@ define( function( require ) {
      * @param {Number} dt - The change in time.
      * TODO: Requires the PhotonAbsorptionStrategy dependency file and setCenterOfGravityPos functions.
      **/
-    stepInTime: function( dt ) {
-      activePhotonAbsorptionStrategy.stepInTime( dt );
+    step: function( dt ) {
+      this.activePhotonAbsorptionStrategy.step( dt );
 
       if ( this.absorbtionHysteresisCountdownTime >= 0 ) {
         this.absorbtionHysteresisCountdownTime -= dt;
@@ -252,7 +250,7 @@ define( function( require ) {
       }
 
       // Do any linear movement that is required.
-      this.setCenterOfGravityPos( this.velocity.getDestination( this.centerOfGravity ) );
+      this.setCenterOfGravityPosVec( this.getDestination( this.centerOfGravity ) );
       this.setCenterOfGravityPos( this.centerOfGravity.x + this.velocity.x * dt, this.centerOfGravity.y + this.velocity.y * dt );
     },
 
@@ -584,21 +582,17 @@ define( function( require ) {
         ( PHOTON_EMISSION_SPEED * Math.sin( emissionAngle ) ) );
       var centerOfGravityPosRef = this.getCenterOfGravityPosRef();
       photonToEmit.setLocation( centerOfGravityPosRef.x, centerOfGravityPosRef.y );
-      //this.notifyPhotonEmitted( photonToEmit );
       this.absorbtionHysteresisCountdownTime = ABSORPTION_HYSTERESIS_TIME;
     },
 
     /**
      * Cause the atom to emit a photon of the specified wavelength.
      *
-     * TODO: Requires the Photon.js dependency file.
-     *
      * @param {Number} wavelength
      **/
     emitNewPhoton: function( wavelength ) {
       this.emitPhoton( new Photon( wavelength ) );
     },
-
 
     /**
      * Update the positions of all atoms that comprise this molecule based on
@@ -674,9 +668,11 @@ define( function( require ) {
      * Notify the event listener that a photon has been emitted from this molecule.
      *
      * @param {Photon} photon - The emitted photon
+     * @param {PhotonAbsorptionModel} model - The model which gets the notification.
      * TODO: Requires the photonEmitted() method from the Listener subclass.
      */
-    notifyPhotonEmitted: function( photon ) {
+    notifyPhotonEmitted: function( photon, model ) {
+
       for ( var listener in this.listeners ) {
         this.listeners[listener].photonEmitted( photon );
       }
@@ -700,6 +696,20 @@ define( function( require ) {
      */
     initializeAtomOffsets: function() {
       throw new Error( 'initializeAtomOffsets should be implemented in descendant molecules.' );
+    },
+
+    getBreakApartConstituents: function() {
+      return this.constituentMolecules;
+    },
+
+    /**
+     * Get the instantaneous position destination of this molecule as a vector.
+     * TODO: getDestination was originally a more generalized function in Abstract2D.java.  Perhaps this should be moved to Vector2.js?
+     * @param { Vector2 } startPt - The initial position of the object.
+     * @return { Vector2 } - The instantaneous destination of this object as a vector.
+     */
+    getDestination: function( startPt ) {
+      return startPt.plus( this.velocity );
     }
 
   }, {
@@ -758,11 +768,6 @@ define( function( require ) {
 //  //------------------------------------------------------------------------
 //  // Inner Classes and Interfaces
 //  //------------------------------------------------------------------------
-//
-//  public ArrayList<Molecule> getBreakApartConstituents() {
-//    return constituentMolecules;
-//  }
-//
 //  public interface Listener {
 //    void photonEmitted( Photon photon );
 //

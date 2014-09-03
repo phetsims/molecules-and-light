@@ -129,7 +129,7 @@ define( function( require ) {
           j * gridLineSpacingY + CONTAINMENT_AREA_RECT.getMinY() ) );
     }
   }
-  // TODO: Is it ok to pass in a parameter to the PhotonAbsorptionModel Constructor?  The java version does this.  This call is made in MoleculesAndLightScreen.js
+
   function PhotonAbsorptionModel( initialPhotonTarget ) {
 
     PropertySet.call( this, {
@@ -157,20 +157,12 @@ define( function( require ) {
     this.photonEmissionPeriodTarget = DEFAULT_PHOTON_EMISSION_PERIOD;
     this.previousEmissionAngle = 0;
 
-    // Collection that contains the molecules that comprise the configurable
-    // atmosphere.
+    // Collection that contains the molecules that make up the configurable
+    // atmosphere.  Used in Greenhouse Gas Simulation.
     this.configurableAtmosphereMolecules = []; // Elements are of type
-
-//    this.photonTargetProperty.link( function() {
-//      debugger;
-//      thisModel.setPhotonTarget( thisModel.photonTargetProperty.get() );
-//    } )
-
-
   }
 
   return inherit( PropertySet, PhotonAbsorptionModel, {
-
 
     /**
      * Reset the model to its initial state.
@@ -222,7 +214,7 @@ define( function( require ) {
         if ( this.photons.get( photon ).getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
           // See if any of the molecules wish to absorb this photon.
           for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
-            if ( this.activeMolecules[molecule].queryAbsorbPhoton( this.photons.get( photon ) ) ) {
+            if ( this.activeMolecules.get( molecule ).queryAbsorbPhoton( this.photons.get( photon ) ) ) {
               photonsToRemove.push( this.photons.get( photon ) );
             }
           }
@@ -232,14 +224,14 @@ define( function( require ) {
           photonsToRemove.push( photon );
         }
       }
-      this.photons.removeAll( photonsToRemove );
       // Remove any photons that were marked for removal.
+      this.photons.removeAll( photonsToRemove );
 
       // Step the molecules.
       // TODO: The original java code created a new array for this for loop.  The ported version is messy, is this necessary?
-      var moleculesToStep = new Array( this.activeMolecules );
-      for ( molecule = 0; molecule < moleculesToStep; molecule++ ) {
-        moleculesToStep[molecule].stepInTime( dt );
+      var moleculesToStep = this.activeMolecules.getArray().slice( 0 );
+      for ( molecule = 0; molecule < moleculesToStep.length; molecule++ ) {
+        moleculesToStep[molecule].step( dt );
       }
     },
 
@@ -267,7 +259,6 @@ define( function( require ) {
       this.photons.add( photon );
     },
 
-
     setEmittedPhotonWavelength: function( freq ) {
       if ( this.photonWavelength != freq ) {
         // Set the new value and send out notification of change to listeners.
@@ -279,7 +270,6 @@ define( function( require ) {
     getEmittedPhotonWavelength: function() {
       return this.photonWavelength;
     },
-
 
     getPhotonEmissionLocation: function() {
       return PHOTON_EMISSION_LOCATION;
@@ -326,7 +316,6 @@ define( function( require ) {
     },
 
     setPhotonTarget: function( photonTarget ) {
-      //if ( this.photonTargetProperty.get() != photonTarget ) {
       // If switching to the configurable atmosphere, photon emission
       // is turned off (if it is happening).  This is done because it
       // just looks better.
@@ -394,7 +383,6 @@ define( function( require ) {
           console.error( "Error: Unhandled photon target." );
           break;
       }
-      //}
     },
 
     getMolecules: function() {
@@ -407,9 +395,26 @@ define( function( require ) {
 //      return this.activeMolecules.slice( 0 );
     },
 
+    // Remove all of the photons in this PhotonAbsorptionModel.
+    removeAllPhotons: function() {
+      this.photons.clear();
+    },
 
+    // Remove the old photon target by clearing the array of active molecules in this PhotonAbsorptionModel.
     removeOldTarget: function() {
       this.activeMolecules.clear(); // Clear the old active molecules array
+    },
+
+    /**
+     * This method restores the photon target to whatever it is currently set
+     * to.  This may seem nonsensical, and in some cases it is, but it is
+     * useful in cases where an atom has broken apart and needs to be restored
+     * to its original condition.
+     */
+    restorePhotonTarget: function() {
+      var currentTarget = photonTarget;
+      this.photonTargetProperty = null; // This forces the call to setPhotonTarget to pay attention to the renewal. TODO: This may not be necessary now.
+      this.setPhotonTarget( currentTarget );
     }
 
   } )
@@ -479,29 +484,6 @@ define( function( require ) {
 //  //----------------------------------------------------------------------------
 //  // Methods
 //  //----------------------------------------------------------------------------
-//
-//
-//
-//  /**
-//   * This method restores the photon target to whatever it is currently set
-//   * to.  This may seem nonsensical, and in some cases it is, but it is
-//   * useful in cases where an atom has broken apart and needs to be restored
-//   * to its original condition.
-//   */
-//  public void restorePhotonTarget() {
-//    PhotonTarget currentTarget = photonTarget;
-//    photonTarget = null; // This forces the call to setPhotonTarget to pay attention to the renewal.
-//    setPhotonTarget( currentTarget );
-//  }
-//
-//  private void removeAllPhotons() {
-//    ArrayList<Photon> copyOfPhotons = new ArrayList<Photon>( photons );
-//    photons.clear();
-//    for ( Photon photon : copyOfPhotons ) {
-//      photons.remove( photon );
-//      notifyPhotonRemoved( photon );
-//    }
-//  }
 //
 //  public Rectangle2D getContainmentAreaRect() {
 //    return CONTAINMENT_AREA_RECT;

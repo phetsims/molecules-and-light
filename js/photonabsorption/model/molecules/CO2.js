@@ -94,7 +94,6 @@ define( function( require ) {
       this.addInitialAtomCogOffset( this.carbonAtom, new Vector2( 0, 0 ) );
       this.addInitialAtomCogOffset( this.oxygenAtom1, new Vector2( INITIAL_CARBON_OXYGEN_DISTANCE, 0 ) );
       this.addInitialAtomCogOffset( this.oxygenAtom2, new Vector2( -INITIAL_CARBON_OXYGEN_DISTANCE, 0 ) );
-
       this.updateAtomPositions();
     }
 

@@ -19,7 +19,6 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Color = require( 'SCENERY/util/Color' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var Panel = require( 'SUN/Panel' );
@@ -48,7 +47,6 @@ define( function( require ) {
   var NO2String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.NO2' );
   var O3String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.O3' );
   var H2OString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.H20' );
-
 
   // Images
   var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
