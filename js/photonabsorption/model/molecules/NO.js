@@ -21,9 +21,9 @@ define( function( require ) {
   // Model Data for the nitrogen monoxide molecule.
   var INITIAL_NITROGEN_OXYGEN_DISTANCE = 170; // In picometers.
 
-  function NO( options ) {
+  function NO( model, options ) {
     // Supertype constructor
-    Molecule.call( this );
+    Molecule.call( this, model );
 
     // Options extension for a possible input vector.
     options = _.extend( {

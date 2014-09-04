@@ -49,9 +49,9 @@ define( function( require ) {
     }
   };
 
-  function O3( options ) {
+  function O3( model, options ) {
     // Supertype constructor
-    Molecule.call( this );
+    Molecule.call( this, model );
 
     // Options extension for a possible input vector.
     options = _.extend( {

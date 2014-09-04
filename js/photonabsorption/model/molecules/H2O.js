@@ -35,9 +35,9 @@ define( function( require ) {
   var INITIAL_HYDROGEN_VERTICAL_OFFSET = -( INITIAL_MOLECULE_HEIGHT - INITIAL_OXYGEN_VERTICAL_OFFSET );
   var INITIAL_HYDROGEN_HORIZONTAL_OFFSET = OXYGEN_HYDROGEN_BOND_LENGTH * Math.sin( INITIAL_HYDROGEN_OXYGEN_HYDROGEN_ANGLE / 2 );
 
-  function H20( options ) {
+  function H20( model, options ) {
     // Supertype constructor
-    Molecule.call( this );
+    Molecule.call( this, model );
 
     // Options extension for a possible input vector.
     options = _.extend( {

@@ -20,9 +20,10 @@ define( function( require ) {
   function PhotonHoldStrategy( molecule ) {
     // Supertype constructor
     PhotonAbsorptionStrategy.call( this, molecule );
+    this.strategy = this;
 
     // Wavelength of the absorbed photon
-    this.absorbedWavelength = 0;
+    //this.absorbedWavelength = 0;
 
   }
 

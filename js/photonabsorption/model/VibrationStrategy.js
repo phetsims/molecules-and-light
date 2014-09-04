@@ -16,8 +16,7 @@ define( function( require ) {
 
   function VibrationStrategy( molecule ) {
     // Supertype constructor
-    PhotonHoldStrategy.call( this );
-
+    PhotonHoldStrategy.call( this, molecule );
     this.molecule = molecule;
   }
 

@@ -31,10 +31,10 @@ define( function( require ) {
   var OXYGEN_MAX_DEFLECTION = new CarbonAtom().getMass() * CARBON_MAX_DEFLECTION / ( 2 * new OxygenAtom().getMass() );
 
 
-  function CO2( options ) {
+  function CO2( model, options ) {
 
     // Supertype constructor
-    Molecule.call( this );
+    Molecule.call( this, model );
 
     // Options extension for a possible input vector.
     options = _.extend( {

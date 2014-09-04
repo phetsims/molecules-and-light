@@ -20,10 +20,10 @@ define( function( require ) {
   // Model data for nitrogen molecule
   var INITIAL_NITROGEN_NITROGEN_DISTANCE = 170; // In picometers.
 
-  function N2( options ) {
+  function N2( model, options ) {
 
     // Supertype constructor
-    Molecule.call( this );
+    Molecule.call( this, model );
 
     // Options extension for a possible input vector.
     options = _.extend( {

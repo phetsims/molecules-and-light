@@ -340,37 +340,37 @@ define( function( require ) {
           break;
 
         case "SINGLE_CO2_MOLECULE":
-          newMolecule = new CO2( SINGLE_MOLECULE_LOCATION );
+          newMolecule = new CO2( this, SINGLE_MOLECULE_LOCATION );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_H2O_MOLECULE":
-          newMolecule = new H2O( SINGLE_MOLECULE_LOCATION );
+          newMolecule = new H2O( this, SINGLE_MOLECULE_LOCATION );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_CH4_MOLECULE":
-          newMolecule = new CH4( SINGLE_MOLECULE_LOCATION );
+          newMolecule = new CH4( this, SINGLE_MOLECULE_LOCATION );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_N2_MOLECULE":
-          newMolecule = new N2( SINGLE_MOLECULE_LOCATION );
+          newMolecule = new N2( this, SINGLE_MOLECULE_LOCATION );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_O2_MOLECULE":
-          newMolecule = new O2( SINGLE_MOLECULE_LOCATION );
+          newMolecule = new O2( this, SINGLE_MOLECULE_LOCATION );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_O3_MOLECULE":
-          newMolecule = new O3( SINGLE_MOLECULE_LOCATION );
+          newMolecule = new O3( this, SINGLE_MOLECULE_LOCATION );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_NO2_MOLECULE":
-          newMolecule = new NO2( SINGLE_MOLECULE_LOCATION );
+          newMolecule = new NO2( this, SINGLE_MOLECULE_LOCATION );
           this.activeMolecules.add( newMolecule );
           break;
 

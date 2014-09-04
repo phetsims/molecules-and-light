@@ -27,7 +27,7 @@ define( function( require ) {
     },
 
     reemitPhoton: function() {
-      PhotonHoldStrategy.prototype.reemitPhoton.call( this, this.absorbedWavelength );
+      PhotonHoldStrategy.prototype.reemitPhoton.call( this );
       this.getMolecule().setHighElectronicEnergyState( false );
     }
   } )

@@ -28,8 +28,7 @@ define( function( require ) {
 
   function RotationStrategy( molecule ) {
     // Supertype constructor
-    PhotonHoldStrategy.call( this );
-
+    PhotonHoldStrategy.call( this, molecule );
     this.molecule = molecule;
   }
 
@@ -48,7 +47,7 @@ define( function( require ) {
      * Re-emit the absorbed photon.  Set the molecule to a non-rotating state.
      */
     reemitPhoton: function() {
-      PhotonHoldStrategy.prototype.reemitPhoton().call( this );
+      PhotonHoldStrategy.prototype.reemitPhoton.call( this );
       this.getMolecule().setRotating( false );
     }
 

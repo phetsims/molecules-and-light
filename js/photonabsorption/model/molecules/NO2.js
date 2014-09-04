@@ -54,9 +54,9 @@ define( function( require ) {
 
   };
 
-  function NO2( options ) {
+  function NO2( model, options ) {
     // Supertype constructor
-    Molecule.call( this );
+    Molecule.call( this, model );
 
     // Options extension for a possible input vector.
     options = _.extend( {

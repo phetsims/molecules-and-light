@@ -17,9 +17,9 @@ define( function( require ) {
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
   var OxygenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/OxygenAtom' )
 
-  function O( options ) {
+  function O( model, options ) {
     // Supertype constructor
-    Molecule.call( this );
+    Molecule.call( this, model );
 
     // Options extension for a possible input vector.
     options = _.extend( {
