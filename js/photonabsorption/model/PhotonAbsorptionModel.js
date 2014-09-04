@@ -160,6 +160,7 @@ define( function( require ) {
     // Collection that contains the molecules that make up the configurable
     // atmosphere.  Used in Greenhouse Gas Simulation.
     this.configurableAtmosphereMolecules = []; // Elements are of type
+
   }
 
   return inherit( PropertySet, PhotonAbsorptionModel, {
@@ -331,10 +332,10 @@ define( function( require ) {
       this.removeOldTarget();
 
       // Add the new photon target(s).
-      var newMolecule = new Molecule();
+      var newMolecule = new Molecule( this );
       switch( photonTarget ) {
         case "SINGLE_CO_MOLECULE":
-          newMolecule = new CO( SINGLE_MOLECULE_LOCATION );
+          newMolecule = new CO( this, SINGLE_MOLECULE_LOCATION );
           this.activeMolecules.add( newMolecule );
           break;
 

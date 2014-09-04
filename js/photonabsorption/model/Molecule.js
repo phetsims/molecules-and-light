@@ -22,6 +22,7 @@ define( function( require ) {
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
   var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
   var PropertySet = require( 'AXON/PropertySet' );
+  var ObservableArray = require( 'AXON/ObservableArray' );
 
   //------------------------------------------------------------------------
   // Class Data
@@ -50,7 +51,7 @@ define( function( require ) {
   //------------------------------------------------------------------------
   // Instance Data
   //------------------------------------------------------------------------
-  function Molecule() {
+  function Molecule( model ) {
 
     PropertySet.call( this, {
       emittedPhoton: null
@@ -125,6 +126,8 @@ define( function( require ) {
     // List of constituent molecules. This comes into play only when the
     // molecule breaks apart, which many of the molecules never do.
     this.constituentMolecules = []; // Elements of type Molecule
+
+    this.photonAbsorptionModel = model;
 
   }
 
@@ -582,7 +585,10 @@ define( function( require ) {
         ( PHOTON_EMISSION_SPEED * Math.sin( emissionAngle ) ) );
       var centerOfGravityPosRef = this.getCenterOfGravityPosRef();
       photonToEmit.setLocation( centerOfGravityPosRef.x, centerOfGravityPosRef.y );
+      this.emittedPhotonProperty.set( photonToEmit );
+      console.log( this.emittedPhoton );
       this.absorbtionHysteresisCountdownTime = ABSORPTION_HYSTERESIS_TIME;
+      this.notifyPhotonEmitted( photonToEmit, this.photonAbsorptionModel );
     },
 
     /**
@@ -672,10 +678,7 @@ define( function( require ) {
      * TODO: Requires the photonEmitted() method from the Listener subclass.
      */
     notifyPhotonEmitted: function( photon, model ) {
-
-      for ( var listener in this.listeners ) {
-        this.listeners[listener].photonEmitted( photon );
-      }
+      model.photons.add( photon );
     },
 
     /**

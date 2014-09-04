@@ -25,9 +25,9 @@ define( function( require ) {
   var INITIAL_CARBON_OXYGEN_DISTANCE = 170; // In picometers.
   var VIBRATION_MAGNITUDE = 20; // In picometers.
 
-  function CO( options ) {
+  function CO( model, options ) {
     // Supertype constructor
-    Molecule.call( this );
+    Molecule.call( this, model );
 
     // Options extension for a possible input vector.
     options = _.extend( {
