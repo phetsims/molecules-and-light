@@ -38,10 +38,14 @@ define( function( require ) {
     // Cary this node through the scope in nested functions.
     var thisNode = this;
 
-    atomicBond.link( function() { thisNode.updateRepresentation() } );
-
     // Calculate the width to use for the bond representation(s).
     this.averageAtomRadius = mvt.modelToViewDeltaX( ( atomicBond.getAtom1().getRadius() + atomicBond.getAtom2().getRadius() ) / 2 );
+
+    // Link the atomic bond view node to the model.
+    // TODO:  This implementation is not efficient.  Redraws the line nodes every step. Come up with a better way to do this.
+    this.atomicBond.atom1.positionProperty.link( function() {
+      thisNode.updateRepresentation();
+    });
 
     // Create the initial representation.
     this.updateRepresentation();
@@ -65,7 +69,7 @@ define( function( require ) {
       switch( this.atomicBond.getBondCount() ) {
         case 1:
           // Single bond, so connect it from the center of one atom to the
-          // center of the other.
+          // center of the other
           var transformedPt1 = this.mvt.modelToViewPosition( this.atomicBond.getAtom1().getPositionRef() );
           var transformedPt2 = this.mvt.modelToViewPosition( this.atomicBond.getAtom2().getPositionRef() );
           bondWidth = BOND_WIDTH_PROPORTION_SINGLE * this.averageAtomRadius;
@@ -118,7 +122,7 @@ define( function( require ) {
           break;
 
         default:
-          System.error( " - Error: Can't represent bond number, value = " + this.atomicBond.getBondCount() );
+          console.error( " - Error: Can't represent bond number, value = " + this.atomicBond.getBondCount() );
           assert && assert( false );
           break;
       }

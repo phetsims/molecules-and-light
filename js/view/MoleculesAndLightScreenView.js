@@ -75,7 +75,7 @@ define( function( require ) {
     // Set up an event listeners for adding and removing molecules.
     photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
       var moleculeNode = new MoleculeNode( addedMolecule, thisScreenView.mvt ); //Create the molecule node.
-      thisScreenView.moleculeLayer.addChild( moleculeNode );
+      thisScreenView.moleculeLayer.addChild( moleculeNode )
 
       photonAbsorptionModel.activeMolecules.addItemRemovedListener( function removalListener( removedMolecule ) {
         if ( removedMolecule === addedMolecule ) {
@@ -85,7 +85,7 @@ define( function( require ) {
       } );
     } );
 
-    // Set up the event listeners for adding and removing photons from the photon emitter.
+    // Set up the event listeners for adding and removing photons.
     photonAbsorptionModel.photons.addItemAddedListener( function( addedPhoton ) {
       var photonNode = new PAPhotonNode( addedPhoton, thisScreenView.mvt );
       thisScreenView.photonLayer.addChild( photonNode );

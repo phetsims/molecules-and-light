@@ -15,6 +15,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var Vector2 = require( 'DOT/Vector2' );
   var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
+  var Property = require( 'AXON/Property' );
 
   // Model data for the Oxygen atom.
   // TODO: The color below is called RED_COLORBLIND and was taken from PhetColorScheme.java.  Do we have such color schemes in the JavaScript scenery?
@@ -39,14 +40,14 @@ define( function( require ) {
     // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      position: new Vector2( 0, 0 )
+      positionProperty: new Property( new Vector2( 0, 0 ) )
     }, options );
     this.options = options;
     this.uniqueID = 'oxygen' + instanceCount++;
     this.representationColor = REPRESENTATION_COLOR;
     this.radius = RADIUS;
     this.mass = MASS;
-    this.position = options.position;
+    this.positionProperty = options.positionProperty;
 
   }
 

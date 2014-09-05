@@ -34,7 +34,7 @@ define( function( require ) {
     // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      position: new Vector2( 0, 0 )
+      positionProperty: new Property( new Vector2( 0, 0 ) )
     }, options );
     this.options = options;
 
@@ -42,7 +42,7 @@ define( function( require ) {
     this.representationColor = representationColor;
     this.radius = radius;
     this.mass = mass;
-    this.position = options.position;
+    this.positionProperty = options.positionProperty;
   }
 
   return inherit( Property, Atom, {
@@ -53,7 +53,7 @@ define( function( require ) {
      * @return {Vector2} - The position vector of this atom.
      */
     getPositionRef: function() {
-      return this.position;
+      return this.positionProperty.get();
     },
 
     /**
@@ -62,8 +62,8 @@ define( function( require ) {
      * @param {Vector2} position - The desired position of this atom as a Vector
      */
     setPositionVec: function( position ) {
-      if ( this.position != position ) {
-        this.position.set( position );
+      if ( this.positionProperty != position ) {
+        this.positionProperty.set( position );
         this.set( position );
       }
     },
@@ -75,8 +75,8 @@ define( function( require ) {
      * @param {Number} y - The desired y coordinate of this atom
      */
     setPosition: function( x, y ) {
-      if ( this.position.x != x || this.position.y != y ) {
-        this.position.setXY( x, y );
+      if ( this.positionProperty.get.x != x || this.positionProperty.get.y != y ) {
+        this.positionProperty.set( new Vector2( x, y ) );
         this.set( x, y );
       }
     },

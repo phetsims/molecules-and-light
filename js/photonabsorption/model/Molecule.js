@@ -586,7 +586,6 @@ define( function( require ) {
       var centerOfGravityPosRef = this.getCenterOfGravityPosRef();
       photonToEmit.setLocation( centerOfGravityPosRef.x, centerOfGravityPosRef.y );
       this.emittedPhotonProperty.set( photonToEmit );
-      console.log( this.emittedPhoton );
       this.absorbtionHysteresisCountdownTime = ABSORPTION_HYSTERESIS_TIME;
       this.notifyPhotonEmitted( photonToEmit, this.photonAbsorptionModel );
     },
@@ -614,7 +613,7 @@ define( function( require ) {
           atomOffset.rotate( this.currentRotationRadians );
           // Set location based on combination of offset and current center
           // of gravity.
-          this.atomsByID[uniqueID].position.setXY( this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y );
+          this.atomsByID[uniqueID].positionProperty.set( new Vector2( this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y) );
         }
       }
     },

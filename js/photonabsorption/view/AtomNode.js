@@ -21,12 +21,13 @@ define( function( require ) {
 
     // supertype constructor
     Node.call( this );
+
     // Cary this node through the scope in nested functions.
     var thisNode = this;
 
     // Instance Data
-    this.atom = atom;
-    this.mvt = mvt;
+    thisNode.atom = atom;
+    thisNode.mvt = mvt;
 
     // Create a Shaded Sphere to give the atom a 3D effect.
     var highlightWidth = 13;
@@ -36,8 +37,12 @@ define( function( require ) {
     thisNode.addChild( this.highlightNode );
     thisNode.addChild( atomNode );
 
-    this.updatePosition();
+    this.atom.positionProperty.link( function() {
+      thisNode.updatePosition();
+    });
 
+    // Set initial positions.
+    this.updatePosition();
   }
 
   return inherit( Node, AtomNode, {

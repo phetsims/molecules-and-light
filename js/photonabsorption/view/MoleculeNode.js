@@ -26,10 +26,13 @@ define( function( require ) {
 
   function MoleculeNode( molecule, mvt ) {
 
-    // supertype constructor
     Node.call( this );
     // Cary this node through the scope in nested functions.
     var thisNode = this;
+    this.mvt = mvt;
+
+    // Hold the atom count to carry through scope of nested functions.
+    this.atomCount = 0;
 
     // Instance Data
     thisNode.atomLayer = new Node();
@@ -38,15 +41,15 @@ define( function( require ) {
     thisNode.addChild( thisNode.bondLayer );
 
     // Add the atoms which compose this molecule to the atomLayer
-    // TODO: requires the AtomNode.js dependency file.
     for ( var atom = 0; atom < molecule.getAtoms().length; atom++ ) {
-      thisNode.atomLayer.addChild( new AtomNode( molecule.getAtoms()[atom], mvt ) );
+      this.atomNode = new AtomNode( molecule.getAtoms()[atom], thisNode.mvt );
+      this.atomLayer.addChild( this.atomNode );
     }
 
     // Add the atomic bonds which form the structure of this molecule to the bondLayer
     var atomicBonds = molecule.getAtomicBonds();
-    for( var i = 0; i < atomicBonds.length; i++ ) {
-      thisNode.bondLayer.addChild( new AtomicBondNode( atomicBonds[i], mvt ));
+    for ( var i = 0; i < atomicBonds.length; i++ ) {
+      thisNode.bondLayer.addChild( new AtomicBondNode( atomicBonds[i], this.mvt ) );
     }
 
     molecule.on( 'electronicEnergyStateChanged', function() {

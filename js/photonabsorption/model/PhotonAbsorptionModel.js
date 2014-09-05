@@ -24,6 +24,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
   var Rectangle = require( 'DOT/Rectangle' );
+  var Property = require( 'AXON/Property' );
   var ObservableArray = require( 'AXON/ObservableArray' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
@@ -54,7 +55,7 @@ define( function( require ) {
 
   // Location used when a single molecule is sitting in the area where the
   // photons pass through.
-  var SINGLE_MOLECULE_LOCATION = new Vector2( 0, 0 );
+  var SINGLE_MOLECULE_LOCATION = new Property( new Vector2( 0, 0 ) );
 
   // Velocity of emitted photons.  Since they are emitted horizontally, only
   // one value is needed.
