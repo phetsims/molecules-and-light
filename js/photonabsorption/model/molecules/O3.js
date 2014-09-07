@@ -128,8 +128,8 @@ define( function( require ) {
       var maxCenterOxygenDisplacement = 30;
       var maxOuterOxygenDisplacement = 15;
       this.getVibrationAtomOffset( this.centerOxygenAtom ).setXY( 0, multFactor * maxCenterOxygenDisplacement );
-      this.getVibrationAtomOffset( rightOxygenAtom ).setXY( -multFactor * maxOuterOxygenDisplacement, -multFactor * maxOuterOxygenDisplacement );
-      this.getVibrationAtomOffset( leftOxygenAtom ).setXY( multFactor * maxOuterOxygenDisplacement, -multFactor * maxOuterOxygenDisplacement );
+      this.getVibrationAtomOffset( this.rightOxygenAtom ).setXY( -multFactor * maxOuterOxygenDisplacement, -multFactor * maxOuterOxygenDisplacement );
+      this.getVibrationAtomOffset( this.leftOxygenAtom ).setXY( multFactor * maxOuterOxygenDisplacement, -multFactor * maxOuterOxygenDisplacement );
       this.updateAtomPositions();
     },
 
