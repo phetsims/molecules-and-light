@@ -65,6 +65,8 @@ define( function( require ) {
     }, options );
     this.options = options;
 
+    this.model = model;
+
     // Instance Data
     this.nitrogenAtom = new NitrogenAtom();
     this.rightOxygenAtom = new OxygenAtom();
@@ -146,11 +148,13 @@ define( function( require ) {
      * TODO: I had to re-declare the BREAK_APART_VELOCITY so that it could be used in this function.  Is there a way for NO2.js to find global variables in Molecules.js?
      */
     breakApart: function() {
-      debugger;
-
-      // Create the constituent molecules that result from breaking apart.
+      // Remove this NO2 molecule from the photonAbsorptionModel's list of active molecules.
+      this.model.activeMolecules.remove( this );
+      // Create the constituent molecules that result from breaking apart and add them to the activeMolecules observable array.
       var nitrogenMonoxideMolecule = new NO();
       var singleOxygenMolecule = new O();
+      this.model.activeMolecules.add( nitrogenMonoxideMolecule );
+      this.model.activeMolecules.add( singleOxygenMolecule );
 
       // Set up the direction and velocity of the constituent molecules.
       // These are set up mostly to look good, and their directions and
