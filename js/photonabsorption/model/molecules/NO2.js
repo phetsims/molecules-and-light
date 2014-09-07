@@ -146,6 +146,7 @@ define( function( require ) {
      * TODO: I had to re-declare the BREAK_APART_VELOCITY so that it could be used in this function.  Is there a way for NO2.js to find global variables in Molecules.js?
      */
     breakApart: function() {
+      debugger;
 
       // Create the constituent molecules that result from breaking apart.
       var nitrogenMonoxideMolecule = new NO();
