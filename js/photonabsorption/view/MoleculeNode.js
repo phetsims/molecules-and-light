@@ -52,7 +52,7 @@ define( function( require ) {
       thisNode.bondLayer.addChild( new AtomicBondNode( atomicBonds[i], this.mvt ) );
     }
 
-    molecule.on( 'electronicEnergyStateChanged', function() {
+    molecule.highElectronicEnergyStateProperty.link( function() {
       for ( var i = 0; i < thisNode.atomLayer.children.length; i++ ) {
         var atomNode = thisNode.atomLayer.getChildAt( i );
         atomNode.setHighlighted( molecule.isHighElectronicEnergyState() );

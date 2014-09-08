@@ -16,6 +16,9 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
   var Color = require( 'SCENERY/util/Color' );
+  var Circle = require( 'SCENERY/nodes/Circle' );
+  var RadialGradient = require( 'SCENERY/util/RadialGradient' );
+  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
 
   function AtomNode( atom, mvt ) {
 
@@ -32,14 +35,17 @@ define( function( require ) {
     // Create a Shaded Sphere to give the atom a 3D effect.
     var highlightWidth = 13;
     var transformedRadius = mvt.modelToViewDeltaX( atom.getRadius() );
-    this.highlightNode = new ShadedSphereNode( transformedRadius * 2 + highlightWidth * 2 );
+
+    var haloGradientPaint = new RadialGradient( 0, 0, 0, 0, 0, transformedRadius * 2 ).addColorStop( 0, Color.YELLOW ).addColorStop( 1, Color.BLACK );
+    this.highlightNode = new Circle( transformedRadius * 2, { fill: haloGradientPaint } );
+    this.highlightNode.setOpacity( 0.6 );
     var atomNode = new ShadedSphereNode( transformedRadius * 2, {mainColor: this.atom.representationColor } );
-    thisNode.addChild( this.highlightNode );
     thisNode.addChild( atomNode );
+    thisNode.addChild( this.highlightNode );
 
     this.atom.positionProperty.link( function() {
       thisNode.updatePosition();
-    });
+    } );
 
     // Set initial positions.
     this.updatePosition();
@@ -51,7 +57,13 @@ define( function( require ) {
      * @param {Boolean} highlighted
      */
     setHighlighted: function( highlighted ) {
-      this.highlightNode.setVisible( highlighted );
+      if ( highlighted ) {
+        this.addChild( this.highlightNode );
+        this.highlightNode.moveToBack();
+      }
+      else {
+        this.removeChild( this.highlightNode );
+      }
     },
 
     updatePosition: function() {
@@ -65,9 +77,6 @@ define( function( require ) {
 //  // ------------------------------------------------------------------------
 //  // Constructor(s)
 //  // ------------------------------------------------------------------------
-//
-//  public AtomNode( Atom atom, ModelViewTransform2D mvt ) {
-//
 //    final RoundGradientPaint baseGradientPaint =
 //                             new RoundGradientPaint( -transformedRadius / 2, -transformedRadius / 2, lightColor, new Point2D.Double( transformedRadius / 2, transformedRadius / 2 ), darkColor );
 //    final RoundGradientPaint haloGradientPaint =
@@ -84,14 +93,4 @@ define( function( require ) {
 //        updatePosition();
 //      }
 //    } );
-//    updatePosition();
-//  }
-//
-//  // ------------------------------------------------------------------------
-//  // Methods
-//  // ------------------------------------------------------------------------
-
-//  // ------------------------------------------------------------------------
-//  // Inner Classes and Interfaces
-//  //------------------------------------------------------------------------
 

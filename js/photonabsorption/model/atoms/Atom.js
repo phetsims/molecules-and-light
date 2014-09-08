@@ -29,7 +29,9 @@ define( function( require ) {
    */
   function Atom( representationColor, radius, mass, options ) {
     // Supertype constructor
-    Property.call( this );
+    Property.call( this, {
+
+    } );
 
     // Options extension for a possible input vector.
     options = _.extend( {

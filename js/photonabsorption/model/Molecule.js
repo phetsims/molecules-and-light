@@ -54,7 +54,8 @@ define( function( require ) {
   function Molecule( model ) {
 
     PropertySet.call( this, {
-      emittedPhoton: null
+      emittedPhoton: null,
+      highElectronicEnergyState: false
     } );
 
     // Atoms and bonds that comprise this molecule.
@@ -113,9 +114,6 @@ define( function( require ) {
     // The amount of rotation currently applied to this molecule.  This is
     // relative to its original, non-rotated state.
     this.currentRotationRadians = 0;
-
-    // Tracks if molecule is higher energy than its ground state.
-    this.highElectronicEnergyState = false;
 
     // Boolean values that track whether the molecule is vibrating or
     // rotating.
@@ -424,13 +422,10 @@ define( function( require ) {
      * orbit.  In this simulation, it is generally depicted by having the
      * molecule appear to glow.
      *
-     * TODO: Requires the notifyElectronicEnergyStateChanged() function.
-     *
      * @param {Boolean} highElectronicEnergyState
      **/
     setHighElectronicEnergyState: function( highElectronicEnergyState ) {
-      this.highElectronicEnergyState = highElectronicEnergyState;
-      //notifyElectronicEnergyStateChanged();
+      this.highElectronicEnergyStateProperty.set( highElectronicEnergyState );
     },
 
     /**
@@ -439,7 +434,7 @@ define( function( require ) {
      * @return {Boolean} highElectronEnergyState
      **/
     isHighElectronicEnergyState: function() {
-      return this.highElectronicEnergyState;
+      return this.highElectronicEnergyStateProperty.get();
     },
 
     /**
