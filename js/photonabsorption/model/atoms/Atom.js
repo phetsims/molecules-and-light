@@ -25,7 +25,7 @@ define( function( require ) {
    * @param {Color} representationColor - The desired color of the atom
    * @param {Number} radius - The radius of the model atom
    * @param {Number} mass - Mass of this atom
-   * @param {*} options - An optional parameter to specify the position of this atom
+   * @param {Object} options - An optional parameter to specify the position of this atom
    */
   function Atom( representationColor, radius, mass, options ) {
     // Supertype constructor

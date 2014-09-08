@@ -23,7 +23,7 @@ define( function( require ) {
    * @param {number} width - Desired width of the emitter image in screen coords. The
    *                          height will be based on the aspect ratio of the image.
    * @param {PhotonAbsorptionModel} photonAbsorptionModel
-   * @param {*} options - Additional parameters to describe position or other attributes.
+   * @param {Object} options - Additional parameters to describe position or other attributes.
    */
   function PhotonEmitterNode( width, photonAbsorptionModel, options ) {
 

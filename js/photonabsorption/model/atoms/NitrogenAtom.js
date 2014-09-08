@@ -29,7 +29,7 @@ define( function( require ) {
    * Constructor for a Nitrogen atom.  There is an optional Vector2 parameter
    * which specifies the location of this Nitrogen atom.
    *
-   * @param {*} options - Optional Vector2 for this Nitrogen atom's location.
+   * @param {Object} options - Optional Vector2 for this Nitrogen atom's location.
    * @constructor
    */
   function NitrogenAtom( options ) {

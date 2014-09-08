@@ -46,7 +46,7 @@ define( function( require ) {
    * The height will be based on the aspect ratio of the image.
    * @param {mvt} mvt - The moddel view transform for converting between model and view coordinate systems.
    * @param {PhotonAbsorptionModel} model
-   * @param {*} options
+   * @param {Object} options
    *
    */
   function PhotonEmitterNode( width, mvt, model, options ) {

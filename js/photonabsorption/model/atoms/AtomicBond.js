@@ -20,7 +20,7 @@ define( function( require ) {
    *
    * @param {Atom} atom1 - Atom involved in the bond
    * @param {Atom} atom2 - Atom involved in the bond
-   * @param {*} options - Indicates whether this is a single, double, triple, etc. bond.
+   * @param {Object} options - Indicates whether this is a single, double, triple, etc. bond.
    * @constructor
    *
    * TODO: The Original JAVA constructor implements some observers for the

@@ -29,7 +29,7 @@ define( function( require ) {
    * Constructor for a carbon atom.  There is an optional Vector2 parameter
    * which specifies the location of this carbon atom.
    *
-   * @param {*} options - Optional Vector2 for this carbon atom's location.
+   * @param {Object} options - Optional Vector2 for this carbon atom's location.
    * @constructor
    */
   function CarbonAtom( options ) {
