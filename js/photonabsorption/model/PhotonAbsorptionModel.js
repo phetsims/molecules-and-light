@@ -185,7 +185,7 @@ define( function( require ) {
       this.setPhotonEmissionPeriod( DEFAULT_PHOTON_EMISSION_PERIOD );
 
       // Reset the configurable atmosphere.
-      this.resetConfitgurableAtmosphere();
+      this.resetConfigurableAtmosphere();
 
       // Send out notification that the reset has occurred.
       this.notifyModelReset();
@@ -417,72 +417,19 @@ define( function( require ) {
       var currentTarget = photonTarget;
       this.photonTargetProperty = null; // This forces the call to setPhotonTarget to pay attention to the renewal. TODO: This may not be necessary now.
       this.setPhotonTarget( currentTarget );
-    }
+    },
+
+      /**
+   * Reset the configurable atmosphere by adding the initial levels of all
+   * gases.
+   */
+  resetConfigurableAtmosphere: function() {
+    assert && assert( this.photonTargetProperty.get() != 'CONFIGURABLE_ATMOSPHERE' ); // See method header comment if this assertion is hit.
+  }
 
   } )
 } );
 
-//
-//  // Object that listens to molecules to see when they emit photons.
-//  private final Molecule.Adapter moleculePhotonEmissionListener = new Molecule.Adapter() {
-//    @Override
-//    public void photonEmitted( Photon photon ) {
-//      photons.add( photon );
-//      notifyPhotonAdded( photon );
-//    }
-//
-//    @Override
-//    public void brokeApart( Molecule molecule ) {
-//
-//      // The molecule broke apart, so we need to remove the current molecule...
-//      removeOldTarget();
-//
-//      // ...and then get the constituents and add them to the model.
-//      ArrayList<Molecule> constituents = molecule.getBreakApartConstituents();
-//      for ( Molecule constituent : constituents ) {
-//        activeMolecules.add( constituent );
-//      }
-//
-//      finishAddingMolecules();
-//    }
-//  };
-//
-//  private void finishAddingMolecules() {
-//    // Send out notifications about the new molecule(s);
-//    for ( Molecule molecule : activeMolecules ) {
-//      molecule.addListener( moleculePhotonEmissionListener );
-//      notifyMoleculeAdded( molecule );
-//    }
-//
-//    // Send out general notification about the change.
-//    notifyPhotonTargetChanged();
-//  }
-//
-//
-//  //----------------------------------------------------------------------------
-//  // Constructor(s)
-//  //----------------------------------------------------------------------------
-//
-//  public PhotonAbsorptionModel( ConstantDtClock clock ) {
-//    this( clock, DEFAULT_PHOTON_TARGET );
-//  }
-//
-//  public PhotonAbsorptionModel( ConstantDtClock clock, PhotonTarget initialPhotonTarget ) {
-//
-//
-//    // Listen to the clock in order to step this model.
-//    clock.addClockListener( new ClockAdapter() {
-//      @Override
-//      public void clockTicked( ClockEvent clockEvent ) {
-//        stepInTime( clockEvent.getSimulationTimeChange() );
-//      }
-//    } );
-//
-//    // Note: It is expected that this model will be reset as part of the
-//    // initialization sequence, so additional initialization is performed
-//    // there.
-//  }
-//
 //  //----------------------------------------------------------------------------
 //  // Methods
 //  //----------------------------------------------------------------------------
@@ -490,8 +437,6 @@ define( function( require ) {
 //  public Rectangle2D getContainmentAreaRect() {
 //    return CONTAINMENT_AREA_RECT;
 //  }
-//
-//
 //
 //  /**
 //   * Get the number of the specified molecule in the configurable atmosphere.
@@ -745,13 +690,7 @@ define( function( require ) {
 //    return overlap;
 //  }
 //
-//  /**
-//   * Reset the configurable atmosphere by adding the initial levels of all
-//   * gases.
-//   */
-//  private void resetConfigurableAtmosphere() {
-//    assert photonTarget != PhotonTarget.CONFIGURABLE_ATMOSPHERE; // See method header comment if this assertion is hit.
-//  }
+//
 //
 //  private void notifyPhotonAdded( Photon photon ) {
 //    for ( Listener listener : listeners.getListeners( Listener.class ) ) {

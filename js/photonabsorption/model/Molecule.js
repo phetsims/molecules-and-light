@@ -567,10 +567,7 @@ define( function( require ) {
     },
 
     /**
-     * Emit the specified photon in a random direction.
-     *
-     * TODO: Requires the Photon.js dependency file.
-     * TODO: Requires the notifyPhotonEmitted function.
+     * Emit the specified photon in a random direction
      *
      * @param {Photon} photonToEmit - The photon to be emitted.
      **/
@@ -669,7 +666,6 @@ define( function( require ) {
      *
      * @param {Photon} photon - The emitted photon
      * @param {PhotonAbsorptionModel} model - The model which gets the notification.
-     * TODO: Requires the photonEmitted() method from the Listener subclass.
      */
     notifyPhotonEmitted: function( photon, model ) {
       model.photons.add( photon );

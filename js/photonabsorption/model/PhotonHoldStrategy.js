@@ -22,9 +22,6 @@ define( function( require ) {
     PhotonAbsorptionStrategy.call( this, molecule );
     this.strategy = this;
 
-    // Wavelength of the absorbed photon
-    //this.absorbedWavelength = 0;
-
   }
 
   return inherit( PhotonAbsorptionStrategy, PhotonHoldStrategy, {
@@ -43,7 +40,7 @@ define( function( require ) {
     },
 
     /**
-     * Re-emit the absorbed photon and reset the molecules absorption strategy to a
+     * Re-emit the absorbed photon and set the molecules absorption strategy to a
      * Null strategy.
      **/
     reemitPhoton: function() {
