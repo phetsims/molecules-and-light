@@ -33,10 +33,6 @@ define( function( require ) {
   var NITROGEN_OXYGEN_BOND_LENGTH = 180;
   var INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE = 120 * Math.PI / 180; // In radians.
   var INITIAL_MOLECULE_HEIGHT = NITROGEN_OXYGEN_BOND_LENGTH * Math.cos( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 );
-  var TOTAL_MOLECULE_MASS = NitrogenAtom.MASS + ( 2 * OxygenAtom.MASS );
-  var INITIAL_NITROGEN_VERTICAL_OFFSET = INITIAL_MOLECULE_HEIGHT * ( ( 2 * OxygenAtom.MASS ) / TOTAL_MOLECULE_MASS );
-  var INITIAL_OXYGEN_VERTICAL_OFFSET = -( INITIAL_MOLECULE_HEIGHT - INITIAL_NITROGEN_VERTICAL_OFFSET );
-  var INITIAL_OXYGEN_HORIZONTAL_OFFSET = NITROGEN_OXYGEN_BOND_LENGTH * Math.sin( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 );
   var BREAK_APART_VELOCITY = 3.0;
 
   //Random number generator.  Used to control the side on which the delocalized
@@ -71,6 +67,10 @@ define( function( require ) {
     this.nitrogenAtom = new NitrogenAtom();
     this.rightOxygenAtom = new OxygenAtom();
     this.leftOxygenAtom = new OxygenAtom();
+    this.totalMoleculeMass = this.nitrogenAtom.mass + ( 2 * this.rightOxygenAtom.mass );
+    this.initialNitrogenVerticalOffset = INITIAL_MOLECULE_HEIGHT * ( ( 2 * this.rightOxygenAtom.mass ) / this.totalMoleculeMass );
+    this.initialOxygenVerticalOffset = -( INITIAL_MOLECULE_HEIGHT - this.initialNitrogenVerticalOffset );
+    this.initialOxygenHorizontalOffset = NITROGEN_OXYGEN_BOND_LENGTH * Math.sin( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 );
     this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
 
     // Tracks the side on which the double bond is shown.  More on this where
@@ -117,9 +117,9 @@ define( function( require ) {
      * when the molecule is at rest (not rotating or vibrating).
      */
     initializeAtomOffsets: function() {
-      this.addInitialAtomCogOffset( this.nitrogenAtom, new Vector2( 0, INITIAL_NITROGEN_VERTICAL_OFFSET ) );
-      this.addInitialAtomCogOffset( this.rightOxygenAtom, new Vector2( INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET ) );
-      this.addInitialAtomCogOffset( this.leftOxygenAtom, new Vector2( -INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET ) );
+      this.addInitialAtomCogOffset( this.nitrogenAtom, new Vector2( 0, this.initialNitrogenVerticalOffset ) );
+      this.addInitialAtomCogOffset( this.rightOxygenAtom, new Vector2( this.initialOxygenHorizontalOffset, this.initialOxygenVerticalOffset ) );
+      this.addInitialAtomCogOffset( this.leftOxygenAtom, new Vector2( -this.initialOxygenHorizontalOffset, this.initialOxygenVerticalOffset ) );
 
       this.updateAtomPositions();
     },
@@ -135,11 +135,11 @@ define( function( require ) {
       var multFactor = Math.sin( vibrationRadians );
       var maxNitrogenDisplacement = 30;
       var maxOxygenDisplacement = 15;
-      this.addInitialAtomCogOffset( this.nitrogenAtom, new Vector2( 0, INITIAL_NITROGEN_VERTICAL_OFFSET - multFactor * maxNitrogenDisplacement ) );
-      this.addInitialAtomCogOffset( this.rightOxygenAtom, new Vector2( INITIAL_OXYGEN_HORIZONTAL_OFFSET + multFactor * maxOxygenDisplacement,
-          INITIAL_OXYGEN_VERTICAL_OFFSET + multFactor * maxOxygenDisplacement ) );
-      this.addInitialAtomCogOffset( this.leftOxygenAtom, new Vector2( -INITIAL_OXYGEN_HORIZONTAL_OFFSET - multFactor * maxOxygenDisplacement,
-          INITIAL_OXYGEN_VERTICAL_OFFSET + multFactor * maxOxygenDisplacement ) );
+      this.addInitialAtomCogOffset( this.nitrogenAtom, new Vector2( 0, this.initialNitrogenVerticalOffset - multFactor * maxNitrogenDisplacement ) );
+      this.addInitialAtomCogOffset( this.rightOxygenAtom, new Vector2( this.initialOxygenHorizontalOffset + multFactor * maxOxygenDisplacement,
+          this.initialOxygenVerticalOffset + multFactor * maxOxygenDisplacement ) );
+      this.addInitialAtomCogOffset( this.leftOxygenAtom, new Vector2( -this.initialOxygenHorizontalOffset - multFactor * maxOxygenDisplacement,
+          this.initialOxygenVerticalOffset + multFactor * maxOxygenDisplacement ) );
       this.updateAtomPositions();
     },
 
@@ -167,14 +167,14 @@ define( function( require ) {
         nitrogenMonoxideMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.nitrogenAtom ).x + this.getInitialAtomCogOffset( this.rightOxygenAtom ).x ) / 2,
             ( this.getInitialAtomCogOffset( this.nitrogenAtom ).y + this.getInitialAtomCogOffset( this.rightOxygenAtom ).y ) / 2 );
         breakApartAngle = Math.PI / 4 + RAND.nextDouble() * Math.PI / 4;
-        singleOxygenMolecule.setCenterOfGravityPos( -INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );
+        singleOxygenMolecule.setCenterOfGravityPos( -this.initialOxygenHorizontalOffset, this.initialOxygenVerticalOffset );
       }
       else {
         nitrogenMonoxideMolecule.rotate( Math.PI + diatomicMoleculeRotationAngle );
         breakApartAngle = Math.PI / 2 + RAND.nextDouble() * Math.PI / 4;
         nitrogenMonoxideMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.nitrogenAtom ).x + this.getInitialAtomCogOffset( this.leftOxygenAtom ).x ) / 2,
             ( this.getInitialAtomCogOffset( this.nitrogenAtom ).y + this.getInitialAtomCogOffset( this.leftOxygenAtom ).y ) / 2 );
-        singleOxygenMolecule.setCenterOfGravityPos( INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );
+        singleOxygenMolecule.setCenterOfGravityPos( this.initialOxygenHorizontalOffset, this.initialOxygenVerticalOffset);
       }
       nitrogenMonoxideMolecule.setVelocity( BREAK_APART_VELOCITY * 0.33 * Math.cos( breakApartAngle ), BREAK_APART_VELOCITY * 0.33 * Math.sin( breakApartAngle ) );
       singleOxygenMolecule.setVelocity( -BREAK_APART_VELOCITY * 0.67 * Math.cos( breakApartAngle ), -BREAK_APART_VELOCITY * 0.67 * Math.sin( breakApartAngle ) );

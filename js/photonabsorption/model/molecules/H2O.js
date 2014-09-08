@@ -30,9 +30,6 @@ define( function( require ) {
   var OXYGEN_HYDROGEN_BOND_LENGTH = 130;
   var INITIAL_HYDROGEN_OXYGEN_HYDROGEN_ANGLE = 109 * Math.PI / 180;
   var INITIAL_MOLECULE_HEIGHT = OXYGEN_HYDROGEN_BOND_LENGTH * Math.cos( INITIAL_HYDROGEN_OXYGEN_HYDROGEN_ANGLE / 2 );
-  var TOTAL_MOLECULE_MASS = OxygenAtom.MASS + ( 2 * HydrogenAtom.MASS );
-  var INITIAL_OXYGEN_VERTICAL_OFFSET = INITIAL_MOLECULE_HEIGHT * ( ( 2 * HydrogenAtom.MASS ) / TOTAL_MOLECULE_MASS );
-  var INITIAL_HYDROGEN_VERTICAL_OFFSET = -( INITIAL_MOLECULE_HEIGHT - INITIAL_OXYGEN_VERTICAL_OFFSET );
   var INITIAL_HYDROGEN_HORIZONTAL_OFFSET = OXYGEN_HYDROGEN_BOND_LENGTH * Math.sin( INITIAL_HYDROGEN_OXYGEN_HYDROGEN_ANGLE / 2 );
 
   function H20( model, options ) {
@@ -52,6 +49,9 @@ define( function( require ) {
     this.hydrogenAtom2 = new HydrogenAtom();
     this.oxygenHydrogenBond1 = new AtomicBond( this.oxygenAtom, this.hydrogenAtom1, { bondCount: 1 } );
     this.oxygenHydrogenBond2 = new AtomicBond( this.oxygenAtom, this.hydrogenAtom2, { bondCount: 1 } );
+    this.totalMoleculeMass = this.oxygenAtom.mass + ( 2 * this.hydrogenAtom1.mass );
+    this.initialOxygenVerticalOffset = INITIAL_MOLECULE_HEIGHT * ( ( 2 * this.hydrogenAtom1.mass ) / this.totalMoleculeMass );
+    this.initialHydrogenVerticalOffset = -( INITIAL_MOLECULE_HEIGHT - this.initialOxygenVerticalOffset );
     this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
 
     // Configure the base class.
@@ -80,9 +80,9 @@ define( function( require ) {
      * each atom in this molecule.
      */
     initializeAtomOffsets: function() {
-      this.addInitialAtomCogOffset( this.oxygenAtom, new Vector2( 0, INITIAL_OXYGEN_VERTICAL_OFFSET ) );
-      this.addInitialAtomCogOffset( this.hydrogenAtom1, new Vector2( INITIAL_HYDROGEN_HORIZONTAL_OFFSET, INITIAL_HYDROGEN_VERTICAL_OFFSET ) );
-      this.addInitialAtomCogOffset( this.hydrogenAtom2, new Vector2( -INITIAL_HYDROGEN_HORIZONTAL_OFFSET, INITIAL_HYDROGEN_VERTICAL_OFFSET ) );
+      this.addInitialAtomCogOffset( this.oxygenAtom, new Vector2( 0, this.initialOxygenVerticalOffset ) );
+      this.addInitialAtomCogOffset( this.hydrogenAtom1, new Vector2( INITIAL_HYDROGEN_HORIZONTAL_OFFSET, this.initialHydrogenVerticalOffset ) );
+      this.addInitialAtomCogOffset( this.hydrogenAtom2, new Vector2( -INITIAL_HYDROGEN_HORIZONTAL_OFFSET, this.initialHydrogenVerticalOffset ) );
       this.updateAtomPositions();
     },
 
@@ -96,11 +96,11 @@ define( function( require ) {
       var multFactor = Math.sin( vibrationRadians );
       var maxOxygenDisplacement = 3;
       var maxHydrogenDisplacement = 18;
-      this.addInitialAtomCogOffset( this.oxygenAtom, new Vector2( 0, INITIAL_OXYGEN_VERTICAL_OFFSET - multFactor * maxOxygenDisplacement ) );
+      this.addInitialAtomCogOffset( this.oxygenAtom, new Vector2( 0, this.initialOxygenVerticalOffset - multFactor * maxOxygenDisplacement ) );
       this.addInitialAtomCogOffset( this.hydrogenAtom1, new Vector2( INITIAL_HYDROGEN_HORIZONTAL_OFFSET + multFactor * maxHydrogenDisplacement,
-          INITIAL_HYDROGEN_VERTICAL_OFFSET + multFactor * maxHydrogenDisplacement ) );
+          this.initialHydrogenVerticalOffset + multFactor * maxHydrogenDisplacement ) );
       this.addInitialAtomCogOffset( this.hydrogenAtom2, new Vector2( -INITIAL_HYDROGEN_HORIZONTAL_OFFSET - multFactor * maxHydrogenDisplacement,
-          INITIAL_HYDROGEN_VERTICAL_OFFSET + multFactor * maxHydrogenDisplacement ) );
+          this.initialHydrogenVerticalOffset + multFactor * maxHydrogenDisplacement ) );
       this.updateAtomPositions();
     }
   } )
