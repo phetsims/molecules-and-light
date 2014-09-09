@@ -22,7 +22,7 @@ define( function( require ) {
     Screen.call( this, titleString, null /* no icon, single-screen sim */,
       function() { return new PhotonAbsorptionModel( 'SINGLE_CO_MOLECULE' ); },
       function( model ) { return new MoleculesAndLightScreenView( model ); },
-      { backgroundColor: 'black' }
+      { backgroundColor: '#C5D6E8' }
     );
   }
 

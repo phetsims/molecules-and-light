@@ -116,16 +116,11 @@ define( function( require ) {
 
 //  // Data structures that match model objects to their representations in
 //  // the view.
-    // TODO: I am not sure if I will need these yet.  The hashmap equivalent for javascript has been
-    // TODO: an object with keys and values but the key cannot be an object.  For this structure to
-    // TODO: work I will probably need to implement uniqueID's for each object which will be linked
-    // TODO: the proper node and then hashmaps from the unique ID back to the original object.
-    // TODO: This reuires a total of 4 hashmaps.
 //  private final HashMap<Photon, PAPhotonNode> photonMap = new HashMap<Photon, PAPhotonNode>();
 //  private final HashMap<Molecule, MoleculeNode> moleculeMap = new HashMap<Molecule, MoleculeNode>();
 
 //  // Listener for watching molecules and updating the restore button
-//  // visibility.  TODO: I will use a property such as brokenUpProperty to determine whether the button should be seen.
+//  // visibility.
 //  private final Molecule.Adapter moleculeMotionListener = new Molecule.Adapter() {
 //    @Override
 //    public void centerOfGravityPosChanged( Molecule molecule ) {
@@ -151,7 +146,6 @@ define( function( require ) {
     this.photonEmitterLayer.addChild( photonEmitterNode );
     this.photonEmitterLayer.addChild( photonEmissionControlPanel );
     this.photonEmitterLayer.addChild( moleculeControlPanel );
-
   }
 
   return inherit( ScreenView, MoleculesAndLightScreenView, {
