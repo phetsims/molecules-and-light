@@ -95,9 +95,7 @@ define( function( require ) {
         alignVertically: true,
         spacing: 5,
         baseColor: 'black',
-        stroke: 'white',
-        selectedLineWidth: 3,
-        deselectedLineWidth: 0
+        selectedStroke: 'white',
       } )
     Panel.call( this, radioButtons,
       {
