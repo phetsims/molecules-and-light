@@ -22,6 +22,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var Panel = require( 'SUN/Panel' );
+  var RadioButtons = require( 'SUN/buttons/RadioButtons' );
   var MoleculeSelectorPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculeSelectorPanel' );
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );
   var CO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO' );
@@ -75,18 +76,33 @@ define( function( require ) {
     // Create the reset all button.
     var resetAllButton = new ResetAllButton();
 
+    var photonTargets = ['SINGLE_CO_MOLECULE', 'SINGLE_N2_MOLECULE', 'SINGLE_O2_MOLECULE', 'SINGLE_CO2_MOLECULE',
+      'SINGLE_H2O_MOLECULE', 'SINGLE_NO2_MOLECULE', 'SINGLE_O3_MOLECULE'];
+
     // Include all contents of the control panel.
-    var content = new VBox( {fill: Color.BLACK, stroke: null, align: 'center', spacing: 20, children: [
+    var content = [
       new MoleculeSelectorPanel( carbonMonoxideString, COString, new MoleculeNode( new CO(), MVT), 'SINGLE_CO_MOLECULE', model ),
       new MoleculeSelectorPanel( nitrogenString, N2String, new MoleculeNode( new N2(), MVT), 'SINGLE_N2_MOLECULE', model ),
       new MoleculeSelectorPanel( oxygenString, O2String, new MoleculeNode( new O2(), MVT),'SINGLE_O2_MOLECULE', model ),
       new MoleculeSelectorPanel( carbonDioxideString, CO2String, new MoleculeNode( new CO2(), MVT), 'SINGLE_CO2_MOLECULE', model ),
       new MoleculeSelectorPanel( waterString, H2OString, new MoleculeNode( new H2O(), MVT), 'SINGLE_H2O_MOLECULE', model ),
       new MoleculeSelectorPanel( nitrogenDioxideString, NO2String, new MoleculeNode( new NO2(), MVT), 'SINGLE_NO2_MOLECULE', model ),
-      new MoleculeSelectorPanel( ozoneString, O3String, new MoleculeNode( new O3(), MVT), 'SINGLE_O3_MOLECULE', model ),
-      resetAllButton
-    ] } );
-    Panel.call( this, content, options );
+      new MoleculeSelectorPanel( ozoneString, O3String, new MoleculeNode( new O3(), MVT), 'SINGLE_O3_MOLECULE', model )
+    ];
+
+    var radioButtons = new RadioButtons( model.photonTargetProperty, content, photonTargets,
+      {
+        alignVertically: true,
+        spacing: 5,
+        baseColor: 'black',
+        stroke: 'white',
+        selectedLineWidth: 3,
+        deselectedLineWidth: 0
+      } )
+    Panel.call( this, radioButtons,
+      {
+        fill: 'black'
+      } );
 
     model.photonTargetProperty.link( function() {
       model.setPhotonTarget( model.photonTargetProperty.get() );
