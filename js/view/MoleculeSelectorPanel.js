@@ -41,19 +41,20 @@ define( function( require ) {
       lineWidth: 3
     }, options );
 
-    // Invisible node to keep track of panel layout.
+    // Invisible node to control panel layout.
     var content = new Rectangle( 0, 0, 300, 0 );
     // Text containing the molecule name and abbreviation
-    var font = new PhetFont( { size: 20, family: 'Sans-serif' } );
-    var molecularName = new Text( moleculeName, { fill: 'white', font: font } ).setCenterY( content.getCenterY() );
-    molecularName.setLeft( 10 );
+    var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
+    var molecularName = new Text( moleculeName, { fill: 'white', font: font } );
+    molecularName.setCenterY( content.getCenterY() );
+    molecularName.setLeft( content.getLeft() + 10 );
 
     // Scale the molecule node to an appropriate size for the panel display.
     moleculeNode.scale( MOLECULE_SCALING_FACTOR );
-    moleculeNode.setRight( 290 );
+    moleculeNode.setRight( content.getRight() - 10 );
     moleculeNode.setCenterY( content.getCenterY() );
 
-    // Addd the molecular namde and molecule node to the selector panel.
+    // Add the molecular name and molecule node to the selector panel.
     content.addChild( molecularName);
     content.addChild( moleculeNode );
 
