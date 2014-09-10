@@ -39,7 +39,6 @@ define( function( require ) {
   var INTERMEDIATE_RENDERING_SIZE = new Dimension2( 786, 786 );
   var PHOTON_EMITTER_WIDTH = 220;
 
-
   /**
    * @param {PhotonAbsorptionModel} photonAbsorptionModel
    * @constructor
@@ -72,7 +71,7 @@ define( function( require ) {
     this.photonEmitterLayer = new Node();
     this.myWorldNode.addChild( this.photonEmitterLayer );
 
-    // Set up an event listeners for adding and removing molecules.
+    // Set up an event listener for adding and removing molecules.
     photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
       var moleculeNode = new MoleculeNode( addedMolecule, thisScreenView.mvt ); //Create the molecule node.
       thisScreenView.moleculeLayer.addChild( moleculeNode )
