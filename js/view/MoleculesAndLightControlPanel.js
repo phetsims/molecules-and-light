@@ -90,17 +90,20 @@ define( function( require ) {
       new MoleculeSelectorPanel( ozoneString, O3String, new MoleculeNode( new O3(), MVT), 'SINGLE_O3_MOLECULE', model )
     ];
 
-    var radioButtons = new RadioButtons( model.photonTargetProperty, content, photonTargets,
+    var radioButtonContent = [];
+    for ( var i = 0; i < photonTargets.length; i++ ) {
+      radioButtonContent.push( { value: photonTargets[i], node: content[i] } );
+    }
+
+    var radioButtons = new RadioButtons( model.photonTargetProperty, radioButtonContent,
       {
         alignVertically: true,
         spacing: 5,
         baseColor: 'black',
         selectedStroke: 'white',
+        deselectedLineWidth: 0
       } )
-    Panel.call( this, radioButtons,
-      {
-        fill: 'black'
-      } );
+    Panel.call( this, radioButtons, { fill: 'black' } );
 
     model.photonTargetProperty.link( function() {
       model.setPhotonTarget( model.photonTargetProperty.get() );
