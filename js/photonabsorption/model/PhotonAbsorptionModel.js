@@ -230,7 +230,6 @@ define( function( require ) {
       this.photons.removeAll( photonsToRemove );
 
       // Step the molecules.
-      // TODO: The original java code created a new array for this for loop.  The ported version is messy, is this necessary?
       var moleculesToStep = this.activeMolecules.getArray().slice( 0 );
       for ( molecule = 0; molecule < moleculesToStep.length; molecule++ ) {
         moleculesToStep[molecule].step( dt );
