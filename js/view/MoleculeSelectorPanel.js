@@ -15,50 +15,47 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var Panel = require( 'SUN/Panel' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Property = require( 'AXON/Property' );
-
+  var Node = ( 'SCENERY/nodes/Node' );
 
   // Class Data for the Molecule Selector Panels
   // Model view transform used for creating images of the various molecules.
   // This is basically a null transform except that it flips the Y axis so
   // that molecules on the panel are oriented the same as in the play area.
-  var MVT = new ModelViewTransform2( new Vector2( 0, 0 ), new Vector2( 0, 0 ), 1, true );
+  //var MVT = new ModelViewTransform2( new Vector2( 0, 0 ), new Vector2( 0, 0 ), 1, true );
 
   // Scaling factor for the molecule images, determined empirically.
   var MOLECULE_SCALING_FACTOR = 0.13;
 
   /**
-   *
-   * @param {String} molecule
-   * @param {String} molecularAbbreviation
+   * @param {String} moleculeName
    * @param(MoleculeNode} moleculeNode
+   * @param {object} options
    * @constructor
    */
-  function MoleculeSelectorPanel( molecule, molecularAbbreviation, moleculeNode, newPhotonTarget, model, options) {
-
+  function MoleculeSelectorPanel( moleculeName, moleculeNode, options) {
     options = _.extend( {
       stroke: null,
-      fill: new Color( 206, 206, 206 ),
+      fill: 'black',
       lineWidth: 3
     }, options );
 
-    // Create the node containing the molecule name and associated molecular abbreviation which will describe the radio button.
-    // TODO: Have this text use PhetPhont.
-    var molecularName = new VBox( { children: [
-      new Text( molecule),
-      new Text( molecularAbbreviation )
-    ], align: 'left' } );
-
-    // Create the inner HBox which contains the the radio button and moleculeName boz.
-    var moleculeButton = new HBox( { children: [
-      new AquaRadioButton( model.photonTargetProperty, newPhotonTarget, molecularName, { scale: 0.75 } )
-    ]});
+    // Invisible node to keep track of panel layout.
+    var content = new Rectangle( 0, 0, 300, 0 );
+    // Text containing the molecule name and abbreviation
+    var font = new PhetFont( { size: 20, family: 'Sans-serif' } );
+    var molecularName = new Text( moleculeName, { fill: 'white', font: font } ).setCenterY( content.getCenterY() );
+    molecularName.setLeft( 10 );
 
     // Scale the molecule node to an appropriate size for the panel display.
     moleculeNode.scale( MOLECULE_SCALING_FACTOR );
+    moleculeNode.setRight( 290 );
+    moleculeNode.setCenterY( content.getCenterY() );
 
-    // Include all contents of the molecule selector panel.
-    var content = new HBox( {align: 'center', spacing: 20, children: [ moleculeButton, moleculeNode ] } );
+    // Addd the molecular namde and molecule node to the selector panel.
+    content.addChild( molecularName);
+    content.addChild( moleculeNode );
 
     Panel.call( this, content, options );
 

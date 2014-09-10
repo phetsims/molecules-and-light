@@ -81,22 +81,24 @@ define( function( require ) {
 
     // Include all contents of the control panel.
     var content = [
-      new MoleculeSelectorPanel( carbonMonoxideString, COString, new MoleculeNode( new CO(), MVT), 'SINGLE_CO_MOLECULE', model ),
-      new MoleculeSelectorPanel( nitrogenString, N2String, new MoleculeNode( new N2(), MVT), 'SINGLE_N2_MOLECULE', model ),
-      new MoleculeSelectorPanel( oxygenString, O2String, new MoleculeNode( new O2(), MVT),'SINGLE_O2_MOLECULE', model ),
-      new MoleculeSelectorPanel( carbonDioxideString, CO2String, new MoleculeNode( new CO2(), MVT), 'SINGLE_CO2_MOLECULE', model ),
-      new MoleculeSelectorPanel( waterString, H2OString, new MoleculeNode( new H2O(), MVT), 'SINGLE_H2O_MOLECULE', model ),
-      new MoleculeSelectorPanel( nitrogenDioxideString, NO2String, new MoleculeNode( new NO2(), MVT), 'SINGLE_NO2_MOLECULE', model ),
-      new MoleculeSelectorPanel( ozoneString, O3String, new MoleculeNode( new O3(), MVT), 'SINGLE_O3_MOLECULE', model )
+      new MoleculeSelectorPanel( carbonMonoxideString, new MoleculeNode( new CO(), MVT), 'SINGLE_CO_MOLECULE', model ),
+      new MoleculeSelectorPanel( nitrogenString, new MoleculeNode( new N2(), MVT), 'SINGLE_N2_MOLECULE', model ),
+      new MoleculeSelectorPanel( oxygenString, new MoleculeNode( new O2(), MVT),'SINGLE_O2_MOLECULE', model ),
+      new MoleculeSelectorPanel( carbonDioxideString, new MoleculeNode( new CO2(), MVT), 'SINGLE_CO2_MOLECULE', model ),
+      new MoleculeSelectorPanel( waterString, new MoleculeNode( new H2O(), MVT), 'SINGLE_H2O_MOLECULE', model ),
+      new MoleculeSelectorPanel( nitrogenDioxideString, new MoleculeNode( new NO2(), MVT), 'SINGLE_NO2_MOLECULE', model ),
+      new MoleculeSelectorPanel( ozoneString, new MoleculeNode( new O3(), MVT), 'SINGLE_O3_MOLECULE', model )
     ];
 
     var radioButtons = new RadioButtons( model.photonTargetProperty, content, photonTargets,
       {
         alignVertically: true,
-        spacing: 5,
+        spacing: 0,
+        contentYMargin: 0,
         baseColor: 'black',
-        selectedStroke: 'white',
-      } )
+        selectedStroke: 'white'
+      } );
+
     Panel.call( this, radioButtons,
       {
         fill: 'black'

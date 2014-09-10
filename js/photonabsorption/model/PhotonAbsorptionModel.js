@@ -79,13 +79,6 @@ define( function( require ) {
     CONTAINMENT_AREA_HEIGHT
   );
 
-  // Choices of targets for the photons.
-  // We may not technically need these strings to be enumerated here and accessed in an array, but it
-  // serves as a good point to document what all the possible types are.
-  var photonTargets = ['SINGLE_CO_MOLECULE', 'SINGLE_CO2_MOLECULE', 'SINGLE_H2O_MOLECULE', 'SINGLE_CH4_MOLECULE',
-    'SINGLE_N2O_MOLECULE', 'SINGLE_N2_MOLECULE', 'SINGLE_NO2_MOLECULE', 'SINGLE_O2_MOLECULE', 'SINGLE_O3_MOLECULE',
-    'CONFIGURABLE_ATMOSPHERE'];
-
   // Minimum and defaults for photon emission periods.  Note that the max is
   // assumed to be infinity.
   var MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET = 400;
@@ -139,6 +132,13 @@ define( function( require ) {
       photonTarget: null } );
 
     var thisModel = this;
+
+    // Choices of targets for the photons.
+    // We may not technically need these strings to be enumerated here and accessed in an array, but it
+    // serves as a good point to document what all the possible types are.
+    this.photonTargets = ['SINGLE_CO_MOLECULE', 'SINGLE_CO2_MOLECULE', 'SINGLE_H2O_MOLECULE', 'SINGLE_CH4_MOLECULE',
+      'SINGLE_N2O_MOLECULE', 'SINGLE_N2_MOLECULE', 'SINGLE_NO2_MOLECULE', 'SINGLE_O2_MOLECULE', 'SINGLE_O3_MOLECULE',
+      'CONFIGURABLE_ATMOSPHERE'];
 
     // TODO: We need to build something that behaves sufficiently like EventListenerList
     this.listeners = [];
@@ -419,13 +419,13 @@ define( function( require ) {
       this.setPhotonTarget( currentTarget );
     },
 
-      /**
-   * Reset the configurable atmosphere by adding the initial levels of all
-   * gases.
-   */
-  resetConfigurableAtmosphere: function() {
-    assert && assert( this.photonTargetProperty.get() != 'CONFIGURABLE_ATMOSPHERE' ); // See method header comment if this assertion is hit.
-  }
+    /**
+     * Reset the configurable atmosphere by adding the initial levels of all
+     * gases.
+     */
+    resetConfigurableAtmosphere: function() {
+      assert && assert( this.photonTargetProperty.get() != 'CONFIGURABLE_ATMOSPHERE' ); // See method header comment if this assertion is hit.
+    }
 
   } )
 } );
