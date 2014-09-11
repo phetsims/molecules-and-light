@@ -14,7 +14,6 @@ define( function( require ) {
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Color = require( 'SCENERY/util/Color' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
-  var Panel = require( 'SUN/Panel' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Property = require( 'AXON/Property' );
   var Node = ( 'SCENERY/nodes/Node' );
@@ -41,26 +40,23 @@ define( function( require ) {
       lineWidth: 3
     }, options );
 
-    // Invisible node to control panel layout.
-    var content = new Rectangle( 0, 0, 280, 0 );
+    Rectangle.call( this, 0, 0, 280, 0, options );
+
     // Text containing the molecule name and abbreviation
     var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
     var molecularName = new Text( moleculeName, { fill: 'white', font: font } );
-    molecularName.setCenterY( content.getCenterY() );
-    molecularName.setLeft( content.getLeft() + 10 );
+    molecularName.setCenterY( this.getCenterY() );
+    molecularName.setLeft( this.getLeft() + 10 );
 
     // Scale the molecule node to an appropriate size for the panel display.
     moleculeNode.scale( MOLECULE_SCALING_FACTOR );
-    moleculeNode.setRight( content.getRight() - 10 );
-    moleculeNode.setCenterY( content.getCenterY() );
+    moleculeNode.setRight( this.getRight() - 10 );
+    moleculeNode.setCenterY( this.getCenterY() );
 
     // Add the molecular name and molecule node to the selector panel.
-    content.addChild( molecularName);
-    content.addChild( moleculeNode );
-
-    Panel.call( this, content, options );
-
+    this.addChild( molecularName );
+    this.addChild( moleculeNode );
   }
-  return inherit( Panel, MoleculeSelectorPanel );
 
+  return inherit( Rectangle, MoleculeSelectorPanel );
 } );
