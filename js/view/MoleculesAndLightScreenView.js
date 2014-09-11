@@ -46,7 +46,7 @@ define( function( require ) {
    */
   function MoleculesAndLightScreenView( photonAbsorptionModel ) {
     var moleculesAndLightScreenView = this;
-    ScreenView.call( this );
+    ScreenView.call( this, { renderer: 'svg' } );
 
     var thisScreenView = this;
     this.photonAbsorptionModel = photonAbsorptionModel;
