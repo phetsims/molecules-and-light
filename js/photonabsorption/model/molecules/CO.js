@@ -35,7 +35,6 @@ define( function( require ) {
       initialCenterOfGravityPos: new Vector2(0, 0)
     }, options );
     this.options = options;
-    debugger;
 
     // Instance Data
     this.carbonAtom = new CarbonAtom();
