@@ -50,7 +50,7 @@ define( function( require ) {
   // Class Data
   //----------------------------------------------------------------------------
   // Constants that control where and how photons are emitted.
-  var PHOTON_EMISSION_LOCATION = new Vector2( -2400, 800 );
+  var PHOTON_EMISSION_LOCATION = new Vector2( -2400, 650 );
   var PHOTON_EMISSION_ANGLE_RANGE = Math.PI / 2;
 
   // Velocity of emitted photons.  Since they are emitted horizontally, only
@@ -65,7 +65,7 @@ define( function( require ) {
 
   // Location used when a single molecule is sitting in the area where the
   // photons pass through.
-  var SINGLE_MOLECULE_POSITION = new Vector2( 0, 800 );
+  var SINGLE_MOLECULE_POSITION = new Vector2( -800, 650 );
 
   // Constants that define the size of the containment area, which is the
   // rectangle that surrounds the molecule(s).
