@@ -36,34 +36,22 @@ define( function( require ) {
     assert && assert( mapWavelengthToImageName.hasOwnProperty( this.photon.getWavelength() ) );
     this.photonImage = new Image( mapWavelengthToImageName[ this.photon.getWavelength() ], { centerX: 0, centerY: 0 } );
 
-    // Function for updating position.
-    function updatePosition() {
-      // Set overall position.  Recall that positions in the model are defined
-      // as the center bottom of the item.
-      thisNode.centerX = mvt.modelToViewX( photon.getLocation().x );
-      thisNode.bottom = mvt.modelToViewY( photon.getLocation().y );
-    }
-
     this.addChild( this.photonImage );
 
     // Observe position changes.
     photon.locationProperty.link( function() {
-      updatePosition();
+      thisNode.updatePosition();
     } );
   }
 
   return inherit( Node, PAPhotonNode, {
 
-      /**
-       * Testing method to print the map of photon wavelength constants.  Also testing
-       * Object.getOwnPropertyNames and hasOwnProperty().  This should be removed soon.
-       */
-      printWavelengthConstants: function() {
-        console.log( Object.getOwnPropertyNames( mapWavelengthToImageName ) );
-        console.log( Object.hasOwnProperty( 'randomvalue' ) );
-        console.log( mapWavelengthToImageName.hasOwnProperty( '20' ) );
-      }
+    // Function for updating position.
+    updatePosition: function() {
+      // Set overall position.  Recall that positions in the model are defined
+      // as the center bottom of the item.
+      this.centerX = this.mvt.modelToViewX( this.photon.getLocation().x );
+      this.bottom = this.mvt.modelToViewY( this.photon.getLocation().y );
     }
-  )
-
+  } )
 } );
