@@ -49,13 +49,9 @@ define( function( require ) {
   //----------------------------------------------------------------------------
   // Class Data
   //----------------------------------------------------------------------------
-  // Constants that controls where and how photons are emitted.
-  var PHOTON_EMISSION_LOCATION = new Vector2( -1400, 0 );
+  // Constants that control where and how photons are emitted.
+  var PHOTON_EMISSION_LOCATION = new Vector2( -2400, 800 );
   var PHOTON_EMISSION_ANGLE_RANGE = Math.PI / 2;
-
-  // Location used when a single molecule is sitting in the area where the
-  // photons pass through.
-  var SINGLE_MOLECULE_LOCATION = new Property( new Vector2( 0, 0 ) );
 
   // Velocity of emitted photons.  Since they are emitted horizontally, only
   // one value is needed.
@@ -66,6 +62,10 @@ define( function( require ) {
   // photons only disappear after they have traveled beyond the bounds of
   // the play area.
   var MAX_PHOTON_DISTANCE = 4500;
+
+  // Location used when a single molecule is sitting in the area where the
+  // photons pass through.
+  var SINGLE_MOLECULE_POSITION = new Vector2( 0, 800 );
 
   // Constants that define the size of the containment area, which is the
   // rectangle that surrounds the molecule(s).
@@ -322,7 +322,7 @@ define( function( require ) {
       // just looks better.
       if ( photonTarget == "CONFIGURABLE_ATMOSPHERE" || this.photonTargetProperty.get() == "CONFIGURABLE_ATMOSPHERE" ) {
         this.setPhotonEmissionPeriod( Number.POSITIVE_INFINITY );
-        //this.removeAllPhotons(); // TODO: Requires removeAllPhotons() method
+        this.removeAllPhotons();
       }
 
       // Update to the new value.
@@ -335,42 +335,42 @@ define( function( require ) {
       var newMolecule = new Molecule( this );
       switch( photonTarget ) {
         case "SINGLE_CO_MOLECULE":
-          newMolecule = new CO( this, SINGLE_MOLECULE_LOCATION );
+          newMolecule = new CO( this, {initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION } );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_CO2_MOLECULE":
-          newMolecule = new CO2( this, SINGLE_MOLECULE_LOCATION );
+          newMolecule = new CO2( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION } );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_H2O_MOLECULE":
-          newMolecule = new H2O( this, SINGLE_MOLECULE_LOCATION );
+          newMolecule = new H2O( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_CH4_MOLECULE":
-          newMolecule = new CH4( this, SINGLE_MOLECULE_LOCATION );
+          newMolecule = new CH4( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_N2_MOLECULE":
-          newMolecule = new N2( this, SINGLE_MOLECULE_LOCATION );
+          newMolecule = new N2( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_O2_MOLECULE":
-          newMolecule = new O2( this, SINGLE_MOLECULE_LOCATION );
+          newMolecule = new O2( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_O3_MOLECULE":
-          newMolecule = new O3( this, SINGLE_MOLECULE_LOCATION );
+          newMolecule = new O3( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_NO2_MOLECULE":
-          newMolecule = new NO2( this, SINGLE_MOLECULE_LOCATION );
+          newMolecule = new NO2( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
           this.activeMolecules.add( newMolecule );
           break;
 
@@ -387,7 +387,6 @@ define( function( require ) {
     },
 
     getMolecules: function() {
-      // this.activeMolecules is an observable array so I cannot use the slice method to create an array copy.
       var activeMolecules = [];
       for ( var i = 0; i < this.activeMolecules.length; i++ ) {
         activeMolecules[i] = this.activeMolecules.get( i );
@@ -424,6 +423,16 @@ define( function( require ) {
      */
     resetConfigurableAtmosphere: function() {
       assert && assert( this.photonTargetProperty.get() != 'CONFIGURABLE_ATMOSPHERE' ); // See method header comment if this assertion is hit.
+    },
+
+    /**
+     * Get the initial vector of the starting position of a single molecule.
+     *
+     * @return {Array}
+     */
+    getSingleMoleculePosition: function() {
+
+      return SINGLE_MOLECULE_POSITION;
     }
 
   } )

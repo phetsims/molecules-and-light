@@ -32,9 +32,10 @@ define( function( require ) {
     // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      initialCenterOfGravityPos: Vector2.ZERO
+      initialCenterOfGravityPos: new Vector2(0, 0)
     }, options );
     this.options = options;
+    debugger;
 
     // Instance Data
     this.carbonAtom = new CarbonAtom();
