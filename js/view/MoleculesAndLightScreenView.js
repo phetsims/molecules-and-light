@@ -30,6 +30,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var MoleculesAndLightControlPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightControlPanel' );
+  var MoleculesAndLightApplicationWindow = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightApplicationWindow' );
 
   // Strings
   var buttonCaptionString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.buttonCaption' );
@@ -52,10 +53,9 @@ define( function( require ) {
 
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( Math.round( INTERMEDIATE_RENDERING_SIZE.width * 0.65 ), Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.35 ) ),
-      0.18 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
-
-    this.mvt = mvt; // Make mvt available to descendant types.
+      new Vector2( Math.round( INTERMEDIATE_RENDERING_SIZE.width * 0.65 ),
+        Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.35 ) ),
+        0.18 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
 
     // Create the node that will be the root for all the world children on
     // this canvas.  This is done to make it easier to zoom in and out on
@@ -63,55 +63,15 @@ define( function( require ) {
     this.myWorldNode = new Node();
     this.addChild( this.myWorldNode );
 
-    // Add the layers for molecules, photons, and photon emitters.
-    this.moleculeLayer = new Node();
-    this.myWorldNode.addChild( this.moleculeLayer );
-    this.photonLayer = new Node();
-    this.myWorldNode.addChild( this.photonLayer );
-    this.photonEmitterLayer = new Node();
-    this.myWorldNode.addChild( this.photonEmitterLayer );
-
-    // Set up an event listener for adding and removing molecules.
-    photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
-      var moleculeNode = new MoleculeNode( addedMolecule, thisScreenView.mvt ); //Create the molecule node.
-      thisScreenView.moleculeLayer.addChild( moleculeNode )
-
-      photonAbsorptionModel.activeMolecules.addItemRemovedListener( function removalListener( removedMolecule ) {
-        if ( removedMolecule === addedMolecule ) {
-          thisScreenView.moleculeLayer.removeChild( moleculeNode );
-          photonAbsorptionModel.activeMolecules.removeItemRemovedListener( removalListener );
-        }
-      } );
-    } );
-
-    // Set up the event listeners for adding and removing photons.
-    photonAbsorptionModel.photons.addItemAddedListener( function( addedPhoton ) {
-      var photonNode = new PAPhotonNode( addedPhoton, thisScreenView.mvt );
-      thisScreenView.photonLayer.addChild( photonNode );
-
-      photonAbsorptionModel.photons.addItemRemovedListener( function removalListener( removedPhoton ) {
-        if ( removedPhoton === addedPhoton ) {
-          thisScreenView.photonLayer.removeChild( photonNode );
-          photonAbsorptionModel.photons.removeItemRemovedListener( removalListener );
-        }
-      } );
-    } );
+    // Create the application window.  This will hold all photons, molecules, and photonEmitters for this photon
+    // absorption model.
+    var applicationWindow = new MoleculesAndLightApplicationWindow( photonAbsorptionModel, mvt );
+    this.myWorldNode.addChild( applicationWindow );
+    applicationWindow.setLeftTop( new Vector2( 15, 15 ) );
 
     // Create the control panel for photon emission frequency.
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
     photonEmissionControlPanel.setLeftTop( new Vector2( -30, 400 ) );
-
-    // Create the photon emitter.
-    var photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, mvt, photonAbsorptionModel );
-    photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
-
-    // Create the rod that connects the emitter to the control panel.
-    var connectingRod = new VerticalRodNode( 30,
-      Math.abs( photonEmitterNode.getCenter().y - photonEmissionControlPanel.getCenter().y ),
-      new Color( 205, 198, 115 ) );
-    connectingRod.setCenter( new Vector2(
-        photonEmitterNode.getCenter().x - connectingRod.getBounds().width / 2,
-        photonEmitterNode.getCenter().y + connectingRod.getCenter().y ) );
 
 //  // Data structures that match model objects to their representations in
 //  // the view.
@@ -138,34 +98,16 @@ define( function( require ) {
 
 //    Declare the control panel for molecule type
     var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
-    moleculeControlPanel.setCenter( new Vector2( 700, 400 ) );
+    moleculeControlPanel.scale(.75);
+    moleculeControlPanel.setLeftTop( new Vector2( 530, 15 ) );
 
     // Add the nodes in the order necessary for correct layering.
-    this.photonEmitterLayer.addChild( connectingRod );
-    this.photonEmitterLayer.addChild( photonEmitterNode );
-    this.photonEmitterLayer.addChild( photonEmissionControlPanel );
-    this.photonEmitterLayer.addChild( moleculeControlPanel );
+    this.myWorldNode.addChild( photonEmissionControlPanel );
+    this.myWorldNode.addChild( moleculeControlPanel );
   }
 
-  return inherit( ScreenView, MoleculesAndLightScreenView, {
+  return inherit( ScreenView, MoleculesAndLightScreenView );
 
-    addMolecule: function( molecule ) {
-      var moleculeNode = new MoleculeNode( molecule, this.mvt );
-      this.moleculeLayer.addChild( moleculeNode );
-//    moleculeMap.put( molecule, moleculeNode );
-//    updateRestoreMolecueButtonVisibility();
-    },
-
-    removeMolecule: function( molecule ) {
-//    if ( this.moleculeLayer.removeChild( this.moleculeMap.get( molecule ) ) == null ) {
-//      System.out.println( getClass().getName() + " - Error: MoleculeNode not found for molecule." );
-//    }
-      this.moleculeLayer.removeChild( molecule );
-//    moleculeMap.remove( molecule );
-//    updateRestoreMolecueButtonVisibility();
-//    molecule.removeListener( moleculeMotionListener );
-    }
-  } );
 } );
 
 

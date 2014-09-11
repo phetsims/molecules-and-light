@@ -42,7 +42,7 @@ define( function( require ) {
     }, options );
 
     // Invisible node to control panel layout.
-    var content = new Rectangle( 0, 0, 300, 0 );
+    var content = new Rectangle( 0, 0, 280, 0 );
     // Text containing the molecule name and abbreviation
     var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
     var molecularName = new Text( moleculeName, { fill: 'white', font: font } );
