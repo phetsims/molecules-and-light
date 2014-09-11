@@ -42,27 +42,23 @@ define( function( require ) {
   function MoleculesAndLightApplicationWindow( photonAbsorptionModel, mvt ) {
 
     // Supertype constructor
-    Node.call( this );
+    Rectangle.call( this, 0, 0, 500, 300, {fill: 'black' } );
 
     // Allow this view window to be called on through nested functions.
     var thisWindow = this;
     this.mvt = mvt;
 
-    // Add the parent layer for the application window which will hold all items.
-    this.windowNode = new Rectangle( 0, 0, 500, 300, {fill: 'black' } );
-    this.addChild( this.windowNode );
-
     // The center of this window seems to be changing once I emit photons and I cannot find out why.
     // This will keep track of the initial value.  TODO: Find out why this is.
-    this.centerVal = this.windowNode.getCenter();
+    this.centerVal = this.getCenter();
 
     // Add the layers for molecules, photons, and photon emitters.
     this.moleculeLayer = new Node();
-    this.windowNode.addChild( this.moleculeLayer );
+    this.addChild( this.moleculeLayer );
     this.photonLayer = new Node();
-    this.windowNode.addChild( this.photonLayer );
+    this.addChild( this.photonLayer );
     this.photonEmitterLayer = new Node();
-    this.windowNode.addChild( this.photonEmitterLayer );
+    this.addChild( this.photonEmitterLayer );
 
     // Create the photon emitter.
     var photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, mvt, photonAbsorptionModel );
@@ -85,7 +81,7 @@ define( function( require ) {
 
     // Set up the event listeners for adding and removing photons.
     photonAbsorptionModel.photons.addItemAddedListener( function( addedPhoton ) {
-      console.log( thisWindow.windowNode.getCenter());
+      console.log( thisWindow.getCenter());
       var photonNode = new PAPhotonNode( addedPhoton, thisWindow.mvt );
       thisWindow.photonLayer.addChild( photonNode );
 
@@ -101,6 +97,6 @@ define( function( require ) {
     this.photonEmitterLayer.addChild( photonEmitterNode );
   }
 
-  return inherit( Node, MoleculesAndLightApplicationWindow );
+  return inherit( Rectangle, MoleculesAndLightApplicationWindow );
 
 } );
