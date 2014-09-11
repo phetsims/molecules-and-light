@@ -43,7 +43,6 @@ define( function( require ) {
 
     // Options extension for position of the control slider.
     options = _.extend( {
-
       position: new Vector2( 0, 0 )
     }, options );
     this.options = options;
@@ -53,20 +52,12 @@ define( function( require ) {
     this.model = model;
     this.color = color;
 
-    //this.sliderPositionProperty = new Property( 0 ); // Observable position of the slider
-
-    this.emissionControlSliderSize = new Dimension2( 100, 30 ); // This may be adjusted as needed for best look.
-    this.emissionRateControlSlider = new HSlider( model.emissionFrequencyProperty, { min: 0, max: SLIDER_RANGE } );
-
+    this.emissionControlSliderSize = new Dimension2( 10, 15 ); // This may be adjusted as needed for best look.
+    this.emissionRateControlSlider = new HSlider( model.emissionFrequencyProperty, { min: 0, max: SLIDER_RANGE },
+      { thumbSize: this.emissionControlSliderSize, trackSize: new Dimension2( 50, 0 ) } );
 
     // Create the default background box for this node.
     this.setBackgroundRectangle( new Color( 255, 85, 0 ) );
-//    this.backgroundRect = new Rectangle( -this.emissionRateControlSlider.options.thumbSize.width / 2,
-//        -this.emissionRateControlSlider.options.thumbSize.height / 2,
-//        this.emissionRateControlSlider.options.trackSize.width + this.emissionRateControlSlider.options.thumbSize.width,
-//        this.emissionRateControlSlider.options.trackSize.height + this.emissionRateControlSlider.options.thumbSize.height,
-//      0, 0, { fill: new LinearGradient( 0, 0, rectWidth, rectHeight ).addColorStop( 0, 'black' ).addColorStop( 1, this.color ),
-//      stroke: '#c0b9b9' } );
 
     // Listen to the model for events that may cause this node to change
     // state.
@@ -88,7 +79,6 @@ define( function( require ) {
 
     this.addChild( this.backgroundRect );
     this.addChild( this.emissionRateControlSlider );
-
   }
 
   return inherit( Node, EmissionRateControlSliderNode, {
@@ -132,8 +122,10 @@ define( function( require ) {
       var rectWidth = this.emissionRateControlSlider.width;
       this.backgroundRect = new Rectangle( -this.emissionRateControlSlider.options.thumbSize.width / 2,
           -this.emissionRateControlSlider.options.thumbSize.height / 2,
-          this.emissionRateControlSlider.options.trackSize.width + this.emissionRateControlSlider.options.thumbSize.width,
-          this.emissionRateControlSlider.options.trackSize.height + this.emissionRateControlSlider.options.thumbSize.height,
+          this.emissionRateControlSlider.options.trackSize.width +
+          this.emissionRateControlSlider.options.thumbSize.width,
+          this.emissionRateControlSlider.options.trackSize.height +
+          this.emissionRateControlSlider.options.thumbSize.height,
         0, 0, { fill: new LinearGradient( 0, 0, rectWidth, rectHeight ).addColorStop( 0, 'black' ).addColorStop( 1, baseColor ),
           stroke: '#c0b9b9' } );
     }
