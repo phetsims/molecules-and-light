@@ -22,7 +22,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var Panel = require( 'SUN/Panel' );
-  var RadioButtons = require( 'SUN/buttons/RadioButtons' );
+  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var MoleculeSelectorPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculeSelectorPanel' );
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );
   var CO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO' );
@@ -95,7 +95,7 @@ define( function( require ) {
       radioButtonContent.push( { value: photonTargets[i], node: content[i] } );
     }
 
-    var radioButtons = new RadioButtons( model.photonTargetProperty, radioButtonContent,
+    var radioButtons = new RadioButtonGroup( model.photonTargetProperty, radioButtonContent,
       {
         alignVertically: true,
         spacing: 10,
