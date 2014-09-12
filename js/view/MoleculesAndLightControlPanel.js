@@ -100,7 +100,7 @@ define( function( require ) {
         alignVertically: true,
         spacing: 10,
         baseColor: 'black',
-        contentYMargin: 0,
+        buttonContentYMargin: 0,
         selectedStroke: 'white',
         deselectedLineWidth: 0,
         cornerRadius: 7
