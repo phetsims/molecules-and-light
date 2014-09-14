@@ -31,7 +31,6 @@ define( function( require ) {
    * @param { Molecule } molecule - The molecule which will use this strategy.
    * @constructor
    */
-
   function RotationStrategy( molecule ) {
     // Supertype constructor
     PhotonHoldStrategy.call( this, molecule );

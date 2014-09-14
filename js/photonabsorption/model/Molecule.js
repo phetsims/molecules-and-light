@@ -48,9 +48,12 @@ define( function( require ) {
   // that is absolute in model space.
   var BREAK_APART_VELOCITY = 3.0;
 
-  //------------------------------------------------------------------------
-  // Instance Data
-  //------------------------------------------------------------------------
+  /**
+   * Constructor for a molecule.
+   *
+   * @param { PhotonAbsorptionModel } model - The model which will add this molecule to its observable array.
+   * @constructor
+   */
   function Molecule( model ) {
 
     PropertySet.call( this, {

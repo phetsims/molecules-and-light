@@ -66,7 +66,6 @@ define( function( require ) {
    * @param { PhotonAbsorptionModel } model - The model controlled by this panel.
    * @constructor
    */
-
   function MoleculesAndLightControlPanel( model ) {
 
     // The following data structure defines each of the molecule selectors

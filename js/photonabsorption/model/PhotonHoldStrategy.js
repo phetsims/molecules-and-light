@@ -23,7 +23,6 @@ define( function( require ) {
    * @param { Molecule } molecule - The molecule which will use this strategy.
    * @constructor
    */
-
   function PhotonHoldStrategy( molecule ) {
 
     // Supertype constructor

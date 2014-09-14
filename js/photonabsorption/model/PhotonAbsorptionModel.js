@@ -124,6 +124,12 @@ define( function( require ) {
     }
   }
 
+  /**
+   * Constructor for a photon absorption model.
+   *
+   * @param { Number } initialPhotonTarget - wavelength of the initial photon target.
+   * @constructor
+   */
   function PhotonAbsorptionModel( initialPhotonTarget ) {
 
     PropertySet.call( this, {

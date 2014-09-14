@@ -18,7 +18,6 @@ define( function( require ) {
    * @param { Molecule } molecule - The molecule which will use this strategy.
    * @constructor
    */
-
   function NullPhotonAbsorptionStrategy( molecule ) {
 
     // Supertype constructor

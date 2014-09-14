@@ -19,9 +19,15 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
 
 
+  /**
+   * Constructor for a photon.
+   *
+   * @param { Number } wavelength
+   * @constructor
+   */
   function Photon( wavelength ) {
 
-    PropertySet.call( this, { location: new Vector2( 0, 0 )} );
+    PropertySet.call( this, { location: new Vector2( 0, 0 ) } );
 
     this.wavelength = wavelength;
     this.vx = 0;
