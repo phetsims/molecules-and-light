@@ -4,7 +4,7 @@
 * Selector panel for a single molecule.  This will construct one of the panels to be used in the full Molecules and
  * Light control panel.
  *
- * @author Jesse Greenberg ( PheT Interactive Simulations )
+ * @author Jesse Greenberg ( PhET Interactive Simulations )
  */
 
 define( function( require ) {

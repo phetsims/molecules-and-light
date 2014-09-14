@@ -1,6 +1,4 @@
-/*
- * //  Copyright 2002-2014, University of Colorado Boulder
- */
+//  Copyright 2002-2014, University of Colorado Boulder
 
 /**
  * Molecules and Light viewing window which holds the play area for this application.  This is where the photon
