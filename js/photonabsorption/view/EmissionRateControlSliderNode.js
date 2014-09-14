@@ -1,10 +1,9 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Node that implements the slider that is used to control the emission
- * rate of photons.  The slider will update its background color based on
- * the emission wavelength, and will adjust its position as the
- * corresponding setting in the model changes.
+ * Node that implements the slider that is used to control the emission rate of photons.  The slider will update its
+ * background color based on the emission wavelength, and will adjust its position as the corresponding setting in the
+ * model changes.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -40,11 +39,10 @@ define( function( require ) {
    * Constructor for an emission rate control slider.
    *
    * @param { PhotonAbsorptionModel} model
-   * @param { Color }color
+   * @param { Color } color
    * @param { Object } options
    * @constructor
    */
-
   function EmissionRateControlSliderNode( model, color, options ) {
 
     // Supertype constructor
@@ -62,7 +60,7 @@ define( function( require ) {
 
     this.emissionControlSliderSize = new Dimension2( 10, 15 ); // This may be adjusted as needed for best look.
     this.emissionRateControlSlider = new HSlider( model.emissionFrequencyProperty, { min: 0, max: SLIDER_RANGE },
-      { thumbSize: this.emissionControlSliderSize, trackSize: new Dimension2( 50, 0 ) } );
+      { thumbSize: this.emissionControlSliderSize, trackSize: new Dimension2( 50, 1 ) } );
 
     // Create the default background box for this node.
     this.setBackgroundRectangle( new Color( 255, 85, 0 ) );
