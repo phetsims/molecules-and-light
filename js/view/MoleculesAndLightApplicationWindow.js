@@ -81,7 +81,7 @@ define( function( require ) {
 
     // Set up the event listeners for adding and removing photons.
     photonAbsorptionModel.photons.addItemAddedListener( function( addedPhoton ) {
-      var photonNode = new PAPhotonNode( addedPhoton, thisWindow.mvt );
+        var photonNode = new PAPhotonNode( addedPhoton, thisWindow.mvt );
       thisWindow.photonLayer.addChild( photonNode );
 
       photonAbsorptionModel.photons.addItemRemovedListener( function removalListener( removedPhoton ) {

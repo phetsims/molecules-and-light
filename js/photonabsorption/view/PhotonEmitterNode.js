@@ -78,12 +78,10 @@ define( function( require ) {
   return inherit( Node, PhotonEmitterNode, {
 
     /**
-     * Set the appropriate image based on the current setting for the
-     * wavelength of the emitted photons.
+     * Set the appropriate image based on the current setting for the wavelength of the emitted photons.
      *
      * @param {Number} flashlightWidth
      */
-
     updateImage: function( flashlightWidth ) {
       // Clear any existing image.
       this.emitterImageLayer.removeAllChildren();
@@ -106,19 +104,19 @@ define( function( require ) {
         this.photonEmitterImage = new Image( microwaveTransmitter );
       }
       // Translate center and scale the emitter image
-      this.photonEmitterImage.scale( flashlightWidth / this.photonEmitterImage.getImageWidth() );
-      this.photonEmitterImage.setCenterX( -flashlightWidth );
-      this.photonEmitterImage.setCenterY( -this.photonEmitterImage.getImageHeight() / 2 );
+      this.photonEmitterImage.scale( flashlightWidth / this.photonEmitterImage.getWidth() );
+      this.photonEmitterImage.setRightCenter( new Vector2( -flashlightWidth, -this.photonEmitterImage.getBounds.height / 2 ) );
       this.emissionRateControlSliderNode = new EmissionRateControlSliderNode( this.model, new Color( 0, 85, 0 ) );
 
       // Add the emission rate control slider to the correct location on the photon emitter.
-      // TODO: The emission rate control slider does not have a good length for the emitter it is attached to.  Update this.
       this.emissionRateControlSliderNode.setCenter( new Vector2(
-          this.photonEmitterImage.getBounds().getCenterX() - this.emissionRateControlSliderNode.getBounds().getCenterX() / 2,
-          this.photonEmitterImage.getBounds().getCenterY() - this.emissionRateControlSliderNode.getBounds().getCenterY() / 2 ) );
+          this.photonEmitterImage.getCenterX() - this.emissionRateControlSliderNode.getCenterX() / 2,
+          this.photonEmitterImage.getCenterY() - this.emissionRateControlSliderNode.getCenterY() / 2 ) );
 
       this.emitterImageLayer.addChild( this.photonEmitterImage );
       this.emissionControlSliderLayer.addChild( this.emissionRateControlSliderNode );
+
+      console.log( this.getRightCenter() );
 
     }
   } );

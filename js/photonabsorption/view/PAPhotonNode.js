@@ -29,7 +29,6 @@ define( function( require ) {
    * @param { ModelViewTransform2 } mvt
    * @constructor
    */
-
   function PAPhotonNode( photon, mvt ) {
 
     // supertype constructor
