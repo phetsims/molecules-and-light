@@ -1,10 +1,9 @@
 // Copyright 2002-2011, University of Colorado
 
 /**
- * Ported from the original file Photon.java.  This will
- * model a particular photon.  Primarily keeps track of wavelength,
- * position, and velocity (as odd as that may seem) and can be stepped in
- * order to make the photon move in model space.
+ * Ported from the original file Photon.java.  This will model a particular photon.  Primarily keeps track of
+ * wavelength, position, and velocity (as odd as that may seem) and can be stepped in order to make the photon move in
+ * model space.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -17,7 +16,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
   var PropertySet = require( 'AXON/PropertySet' );
-
 
   /**
    * Constructor for a photon.
@@ -74,8 +72,6 @@ define( function( require ) {
      */
     setLocation: function( x, y ) {
       this.location.setXY( x, y );
-      //setChanged(); TODO: This might be a method from java's Observable.  Find an equivalent.
-      //notifyObservers(); TODO: This might be an method from java's Observable class.  Find an equivalent.
     },
 
     /**
