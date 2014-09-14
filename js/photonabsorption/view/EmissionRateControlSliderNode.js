@@ -36,14 +36,22 @@ define( function( require ) {
   var DEFAULT_PHOTON_EMISSION_PERIOD = 3000; // Milliseconds of sim time.
   var MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET = 100;
 
+  /**
+   * Constructor for an emission rate control slider.
+   *
+   * @param { PhotonAbsorptionModel} model
+   * @param { Color }color
+   * @param { Object } options
+   * @constructor
+   */
+
   function EmissionRateControlSliderNode( model, color, options ) {
 
     // Supertype constructor
     Node.call( this, {} );
 
-    // Options extension for position of the control slider.
     options = _.extend( {
-      position: new Vector2( 0, 0 )
+      position: new Vector2( 0, 0 ) // position of the emission rate control slider
     }, options );
     this.options = options;
 

@@ -26,6 +26,14 @@ define( function( require ) {
   var BOND_WIDTH_PROPORTION_TRIPLE = 0.24;
   var BOND_COLOR = new Color( 0, 200, 0 );
 
+  /**
+   * Constructor for an atomic bond node.
+   *
+   * @param { AtomicBond} atomicBond
+   * @param { ModelViewTransform2 } mvt
+   * @constructor
+   */
+
   function AtomicBondNode( atomicBond, mvt ) {
     assert && assert( atomicBond.getBondCount() > 0 && atomicBond.getBondCount() <= 3 );  // Only single through triple bonds currently supported.
 

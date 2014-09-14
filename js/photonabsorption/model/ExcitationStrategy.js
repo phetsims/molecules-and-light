@@ -14,7 +14,15 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var PhotonHoldStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonHoldStrategy' );
 
+  /**
+   * Constructor for the excitation strategy.
+   *
+   * @param { Molecule } molecule - The molecule which will use this strategy.
+   * @constructor
+   */
+
   function ExcitationStrategy( molecule ) {
+
     // Supertype constructor
     PhotonHoldStrategy.call( this, molecule );
 

@@ -12,7 +12,15 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
 
+  /**
+   * Constructor for the null absorption strategy.  This strategy does nothing.
+   *
+   * @param { Molecule } molecule - The molecule which will use this strategy.
+   * @constructor
+   */
+
   function NullPhotonAbsorptionStrategy( molecule ) {
+
     // Supertype constructor
     PhotonAbsorptionStrategy.call( this, molecule );
   }

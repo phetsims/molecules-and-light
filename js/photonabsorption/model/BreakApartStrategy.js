@@ -14,7 +14,14 @@ define( function( require ) {
   var NullPhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/NullPhotonAbsorptionStrategy' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
 
+  /**
+   * Constructor for the break apart strategy.
+   *
+   * @param { Molecule } molecule - The molecule which will use this strategy.
+   * @constructor
+   */
   function BreakApartStrategy( molecule ) {
+
     // Supertype constructor
     PhotonAbsorptionStrategy.call( this, molecule );
 

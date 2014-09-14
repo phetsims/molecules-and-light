@@ -32,14 +32,21 @@ define( function( require ) {
   var INITIAL_MOLECULE_HEIGHT = OXYGEN_HYDROGEN_BOND_LENGTH * Math.cos( INITIAL_HYDROGEN_OXYGEN_HYDROGEN_ANGLE / 2 );
   var INITIAL_HYDROGEN_HORIZONTAL_OFFSET = OXYGEN_HYDROGEN_BOND_LENGTH * Math.sin( INITIAL_HYDROGEN_OXYGEN_HYDROGEN_ANGLE / 2 );
 
+  /**
+   * Constructor for a water molecule.
+   *
+   * @param { PhotonAbsorptionModel } model - The model which holds this molecule
+   * @param { Object } options
+   * @constructor
+   */
   function H20( model, options ) {
+
     // Supertype constructor
     Molecule.call( this, model );
 
-    // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      initialCenterOfGravityPos: new Vector2( 0, 0 )
+      initialCenterOfGravityPos: new Vector2( 0, 0 ) // Initial center of gravity position of the molecule
     }, options );
     this.options = options;
 

@@ -20,11 +20,17 @@ define( function( require ) {
       return Math.random();
     },
 
-    //TODO: Is this a decent way to implement a random boolean generator?
     nextBoolean: function() {
       return RAND.nextDouble() < 0.50;
     }
   };
+
+  /**
+   * Constructor for a rotation strategy.
+   *
+   * @param { Molecule } molecule - The molecule which will use this strategy.
+   * @constructor
+   */
 
   function RotationStrategy( molecule ) {
     // Supertype constructor

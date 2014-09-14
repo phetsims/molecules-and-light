@@ -39,7 +39,15 @@ define( function( require ) {
     }
   };
 
+  /**
+   * Constructor for photon absorption strategy.
+   *
+   * @param { Molecule } molecule - The molecule which will use this strategy.
+   * @constructor
+   */
+
   function PhotonAbsorptionStrategy( molecule ) {
+
     // Property that contains the probability that a given photon will be absorbed.
     this.photonAbsorptionProbabilityProperty = new Property( 0.5 );
 

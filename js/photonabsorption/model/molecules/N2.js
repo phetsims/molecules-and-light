@@ -20,15 +20,21 @@ define( function( require ) {
   // Model data for nitrogen molecule
   var INITIAL_NITROGEN_NITROGEN_DISTANCE = 170; // In picometers.
 
+  /**
+   * Constructor for a molecule of nitrogen.
+   *
+   * @param { PhotonAbsorptionModel } model - The model which holds this molecule
+   * @param { Object } options
+   * @constructor
+   */
   function N2( model, options ) {
 
     // Supertype constructor
     Molecule.call( this, model );
 
-    // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      initialCenterOfGravityPos: new Vector2( 0, 0 )
+      initialCenterOfGravityPos: new Vector2( 0, 0 ) // center of gravity position of this molecule
     }, options );
     this.options = options;
 

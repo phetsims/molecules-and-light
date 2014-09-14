@@ -20,22 +20,17 @@ define( function( require ) {
    *
    * @param {Atom} atom1 - Atom involved in the bond
    * @param {Atom} atom2 - Atom involved in the bond
-   * @param {Object} options - Indicates whether this is a single, double, triple, etc. bond.
+   * @param {Object} options -
    * @constructor
    *
-   * TODO: The Original JAVA constructor implements some observers for the
-   * TODO: atom states in the constructor.  I believe that the atoms
-   * TODO: themselves have observers and event listeners prepared so I do not think
-   * TODO: that we will need to implement them here.  I will keep thinking about it.
    */
   function AtomicBond( atom1, atom2, options ) {
     // Supertype constructor
     Property.call( this );
 
-    // Options extension for variable bond count.
     options = _.extend( {
-      // default bond count
-      bondCount: 1
+      // defaults
+      bondCount: 1 // Indicates whether this is a single, double, triple, etc. bond.
     }, options );
     this.options = options;
 

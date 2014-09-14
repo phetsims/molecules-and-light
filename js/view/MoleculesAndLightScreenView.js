@@ -41,10 +41,13 @@ define( function( require ) {
   var PHOTON_EMITTER_WIDTH = 220;
 
   /**
+   * Constructor for the screen view of Molecules and Light.
+   *
    * @param {PhotonAbsorptionModel} photonAbsorptionModel
    * @constructor
    */
   function MoleculesAndLightScreenView( photonAbsorptionModel ) {
+
     var moleculesAndLightScreenView = this;
     ScreenView.call( this, { renderer: 'svg' } );
 

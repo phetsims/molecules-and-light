@@ -25,14 +25,21 @@ define( function( require ) {
   var INITIAL_CARBON_OXYGEN_DISTANCE = 170; // In picometers.
   var VIBRATION_MAGNITUDE = 20; // In picometers.
 
+
+  /**
+   * Constructor for a carbon monoxide molecule.
+   *
+   * @param { PhotonAbsorptionModel } model - The model which holds this molecule
+   * @param { Object } options
+   * @constructor
+   */
   function CO( model, options ) {
     // Supertype constructor
     Molecule.call( this, model );
 
-    // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      initialCenterOfGravityPos: new Vector2(0, 0)
+      initialCenterOfGravityPos: new Vector2(0, 0) // initial position of the molecule
     }, options );
     this.options = options;
 

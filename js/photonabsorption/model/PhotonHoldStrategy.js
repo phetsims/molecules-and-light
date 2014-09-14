@@ -17,10 +17,18 @@ define( function( require ) {
 
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
 
+  /**
+   * Constructor for the photon hold strategy.
+   *
+   * @param { Molecule } molecule - The molecule which will use this strategy.
+   * @constructor
+   */
+
   function PhotonHoldStrategy( molecule ) {
+
     // Supertype constructor
     PhotonAbsorptionStrategy.call( this, molecule );
-    this.strategy = this;
+    this.strategy = this; // TODO: is this necessary?
 
   }
 

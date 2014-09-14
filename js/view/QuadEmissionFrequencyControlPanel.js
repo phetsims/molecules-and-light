@@ -1,8 +1,8 @@
 //  Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * This is a control panel that is intended for use in the play area and
- * that allows the setting of 4 different photon emission frequencies.
+ * This is a control panel that is intended for use in the play area and that allows the setting of 4 different photon
+ * emission frequencies.
  *
  * @author John Blanco (PhET Interactive Simulations)
  * @author Chris Malley (PixelZoom, Inc.)
@@ -47,6 +47,14 @@ define( function( require ) {
   var ARROW_HEAD_WIDTH = 15;
   var ARROW_TAIL_WIDTH = 2;
   var ARROW_COLOR = Color.BLACK;
+
+  /**
+   * Constructor for the control panel of emitted photon frequency.
+   *
+   * @param { PhotonAbsorptionModel } photonAbsorptionModel
+   * @param options
+   * @constructor
+   */
 
   function QuadEmissionFrequencyControlPanel( photonAbsorptionModel, options ) {
 

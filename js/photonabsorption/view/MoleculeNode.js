@@ -24,6 +24,13 @@ define( function( require ) {
   // gravity, which is useful for debugging.
   var SHOW_COG = false;
 
+  /**
+   * Constructor for a molecule node.
+   *
+   * @param { Molecule } molecule
+   * @param { ModelViewTransform2 } mvt
+   * @constructor
+   */
   function MoleculeNode( molecule, mvt ) {
 
     Node.call( this );

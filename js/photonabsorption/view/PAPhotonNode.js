@@ -22,6 +22,14 @@ define( function( require ) {
   mapWavelengthToImageName[ WavelengthConstants.VISIBLE_WAVELENGTH ] = thin2Image;
   mapWavelengthToImageName[ WavelengthConstants.UV_WAVELENGTH ] = photon100Image;
 
+  /**
+   * Constructor for a photon node.
+   *
+   * @param { Photon }photon
+   * @param { ModelViewTransform2 } mvt
+   * @constructor
+   */
+
   function PAPhotonNode( photon, mvt ) {
 
     // supertype constructor

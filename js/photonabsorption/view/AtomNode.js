@@ -20,6 +20,13 @@ define( function( require ) {
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
 
+  /**
+   * Constructor for an atom node.
+   *
+   * @param { Atom } atom
+   * @param { ModelViewTransform2 }mvt
+   * @constructor
+   */
   function AtomNode( atom, mvt ) {
 
     // supertype constructor

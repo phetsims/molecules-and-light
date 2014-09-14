@@ -1,9 +1,12 @@
-// Copyright 2002-2013, University of Colorado Boulder
+// Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * This type defines a control panel that selects between the various types of
- * photon emitters, i.e. microwave, infrared, visible, or ultraviolet.
+ * This type defines a control panel that selects between the various types of photon emitters, i.e. microwave,
+ * infrared, visible, or ultraviolet.
+ *
+ * @author Jesse Greenberg ( PhET Interactive Simulations )
  */
+
 define( function( require ) {
   'use strict';
 
@@ -48,6 +51,7 @@ define( function( require ) {
       { node: new Text( rulersString, PANEL_OPTION_FONT ), property: positionIndicatorStateProperty, value: 'rulers', label: rulersString },
       { node: new Text( marksString, PANEL_OPTION_FONT ), property: positionIndicatorStateProperty, value: 'marks', label: marksString }
     ], { radius: 8 } );
+
     var positionMarkerVBox = new VBox( {
       children: [
         new Text( positionString, PANEL_TITLE_FONT ),

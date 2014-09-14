@@ -20,8 +20,16 @@ define( function( require ) {
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-
+  /**
+   * Constructor for the vertical rod node.
+   *
+   * @param { Number } width
+   * @param { Number } height
+   * @param { Color } baseColor
+   * @constructor
+   */
   function VerticalRodNode( width, height, baseColor ) {
+
     // Supertype constructor
     Node.call( this );
 

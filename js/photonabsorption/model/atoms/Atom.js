@@ -25,7 +25,7 @@ define( function( require ) {
    * @param {Color} representationColor - The desired color of the atom
    * @param {Number} radius - The radius of the model atom
    * @param {Number} mass - Mass of this atom
-   * @param {Object} options - An optional parameter to specify the position of this atom
+   * @param {Object} options
    * @constructor
    */
   function Atom( representationColor, radius, mass, options ) {
@@ -34,10 +34,9 @@ define( function( require ) {
 
     } );
 
-    // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      positionProperty: new Property( new Vector2( 0, 0 ) )
+      positionProperty: new Property( new Vector2( 0, 0 ) ) // position of the atom
     }, options );
     this.options = options;
 

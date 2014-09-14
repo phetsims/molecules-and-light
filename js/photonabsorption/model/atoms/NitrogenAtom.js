@@ -29,18 +29,18 @@ define( function( require ) {
    * Constructor for a Nitrogen atom.  There is an optional Vector2 parameter
    * which specifies the location of this Nitrogen atom.
    *
-   * @param {Object} options - Optional Vector2 for this Nitrogen atom's location.
+   * @param {Object} options
    * @constructor
    */
   function NitrogenAtom( options ) {
     // Supertype constructor
     Atom.call( this, options );
 
-    // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      positionProperty: new Property( new Vector2( 0, 0 ) )
+      positionProperty: new Property( new Vector2( 0, 0 ) ) // position of the atom
     }, options );
+
     this.options = options;
     this.uniqueID = 'nitrogen' + instanceCount++;
     this.representationColor = REPRESENTATION_COLOR;

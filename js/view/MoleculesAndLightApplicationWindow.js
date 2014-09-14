@@ -35,6 +35,8 @@ define( function( require ) {
   var PHOTON_EMITTER_WIDTH = 125;
 
   /**
+   * Constructor for a Molecules and Light application window.
+   *
    * @param {PhotonAbsorptionModel} photonAbsorptionModel
    * @param {ModelViewTransform2} mvt
    * @constructor

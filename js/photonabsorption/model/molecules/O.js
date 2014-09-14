@@ -15,16 +15,22 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
-  var OxygenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/OxygenAtom' )
+  var OxygenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/OxygenAtom' );
 
+  /**
+   * Constructor for a single atom of oxygen.
+   *
+   * @param { PhotonAbsorptionModel } model - The model which holds this molecule
+   * @param { Object } options
+   * @constructor
+   */
   function O( model, options ) {
     // Supertype constructor
     Molecule.call( this, model );
 
-    // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      initialCenterOfGravityPos: new Vector2( 0, 0 )
+      initialCenterOfGravityPos: new Vector2( 0, 0 ) // center of gravity position of this molecule
     }, options );
     this.options = options;
 

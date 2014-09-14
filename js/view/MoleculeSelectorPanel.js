@@ -1,5 +1,12 @@
 //  Copyright 2002-2014, University of Colorado Boulder
 
+/**
+* Selector panel for a single molecule.  This will construct one of the panels to be used in the full Molecules and
+ * Light control panel.
+ *
+ * @author Jesse Greenberg ( PheT Interactive Simulations )
+ */
+
 define( function( require ) {
   'use strict';
 
@@ -28,6 +35,8 @@ define( function( require ) {
   var MOLECULE_SCALING_FACTOR = 0.13;
 
   /**
+   * Constructor for a molecule selector panel.  This is a single panel of the molecules and light control panel.
+   *
    * @param {String} moleculeName
    * @param(MoleculeNode} moleculeNode
    * @param {object} options

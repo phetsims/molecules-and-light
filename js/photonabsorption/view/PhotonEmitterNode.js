@@ -40,16 +40,16 @@ define( function( require ) {
   var SLIDER_RANGE = 100;
 
   /**
-   * Constructor
+   * Constructor for the photon emitter node.
    *
    * @param {Number} width - Desired width of the emitter image in screen coords.
    * The height will be based on the aspect ratio of the image.
-   * @param {mvt} mvt - The moddel view transform for converting between model and view coordinate systems.
+   * @param { ModelViewTransform2 } mvt - The moddel view transform for converting between model and view coordinate systems.
    * @param {PhotonAbsorptionModel} model
-   * @param {Object} options
-   *
+   * @constructor
    */
-  function PhotonEmitterNode( width, mvt, model, options ) {
+  function PhotonEmitterNode( width, mvt, model ) {
+
     // Supertype constructor
     Node.call( this, { photonWavelength: WavelengthConstants.VISIBLE_WAVELENGTH} );
 

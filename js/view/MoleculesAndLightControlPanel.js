@@ -1,8 +1,7 @@
 //  Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Control panel for the "Molecules and Light" sim.  Allows the user pause and restart the simulation
- * as well as control which molecule is being simulated.
+ * Control panel for the "Molecules and Light" sim.  Allows the user control which molecule is being simulated.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -61,13 +60,14 @@ define( function( require ) {
   // Scaling factor for the molecule images, determined empirically.
   var MOLECULE_SCALING_FACTOR = 0.13;
 
-  function MoleculesAndLightControlPanel( model, options ) {
+  /**
+   * Constructor for a Molecules and Light control panel.
+   *
+   * @param { PhotonAbsorptionModel } model - The model controlled by this panel.
+   * @constructor
+   */
 
-    options = _.extend( {
-      stroke: null,
-      fill: new Color( 206, 206, 206 ),
-      lineWidth: 3
-    }, options );
+  function MoleculesAndLightControlPanel( model ) {
 
     // The following data structure defines each of the molecule selectors
     // that will exist on this control panel.

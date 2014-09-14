@@ -14,7 +14,15 @@ define( function( require ) {
   var PhotonHoldStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonHoldStrategy' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
 
+  /**
+   * Constructor for the break apart strategy.
+   *
+   * @param { Molecule } molecule - The molecule which will use this strategy.
+   * @constructor
+   */
+
   function VibrationStrategy( molecule ) {
+
     // Supertype constructor
     PhotonHoldStrategy.call( this, molecule );
     this.molecule = molecule;

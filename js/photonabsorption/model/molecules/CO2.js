@@ -30,16 +30,21 @@ define( function( require ) {
   var CARBON_MAX_DEFLECTION = 40;
   var OXYGEN_MAX_DEFLECTION = new CarbonAtom().getMass() * CARBON_MAX_DEFLECTION / ( 2 * new OxygenAtom().getMass() );
 
-
+  /**
+   * Constructor for a carbon dioxide molecule.
+   *
+   * @param { PhotonAbsorptionModel } model - The model which holds this molecule
+   * @param { Object } options
+   * @constructor
+   */
   function CO2( model, options ) {
 
     // Supertype constructor
     Molecule.call( this, model );
 
-    // Options extension for a possible input vector.
     options = _.extend( {
       // defaults
-      initialCenterOfGravityPos: new Vector2( 0, 0 )
+      initialCenterOfGravityPos: new Vector2( 0, 0 ) // initial center of gravity position of the molecule
     }, options );
     this.options = options;
 
