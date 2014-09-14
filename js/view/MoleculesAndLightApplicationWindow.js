@@ -68,7 +68,7 @@ define( function( require ) {
     photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
       var moleculeNode = new MoleculeNode( addedMolecule, thisWindow.mvt ); //Create the molecule node.
       moleculeNode.scale( 0.65 );
-      moleculeNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getSingleMoleculePosition()) );
+      moleculeNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getSingleMoleculePosition() ) );
       thisWindow.moleculeLayer.addChild( moleculeNode );
 
       photonAbsorptionModel.activeMolecules.addItemRemovedListener( function removalListener( removedMolecule ) {
@@ -81,7 +81,7 @@ define( function( require ) {
 
     // Set up the event listeners for adding and removing photons.
     photonAbsorptionModel.photons.addItemAddedListener( function( addedPhoton ) {
-        var photonNode = new PAPhotonNode( addedPhoton, thisWindow.mvt );
+      var photonNode = new PAPhotonNode( addedPhoton, thisWindow.mvt );
       thisWindow.photonLayer.addChild( photonNode );
 
       photonAbsorptionModel.photons.addItemRemovedListener( function removalListener( removedPhoton ) {

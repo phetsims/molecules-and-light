@@ -61,7 +61,7 @@ define( function( require ) {
      * @return {Vector2} location
      */
     getLocation: function() {
-      return this.location;
+      return this.locationProperty.get();
     },
 
     /**
@@ -71,7 +71,7 @@ define( function( require ) {
      * @param {Number} y - The y component of the positino vector.
      */
     setLocation: function( x, y ) {
-      this.location.setXY( x, y );
+      this.locationProperty.set( new Vector2( x, y ) );
     },
 
     /**
@@ -80,7 +80,7 @@ define( function( require ) {
      * @param {Number} dt - The incremental time step.
      */
     stepInTime: function( dt ) {
-      this.location = new Vector2( this.location.x + this.vx * dt, this.location.y + this.vy * dt );
+      this.locationProperty.set( new Vector2( this.location.x + this.vx * dt, this.location.y + this.vy * dt ) );
     }
 
   } )
