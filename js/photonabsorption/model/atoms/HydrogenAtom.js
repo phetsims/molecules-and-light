@@ -29,7 +29,7 @@ define( function( require ) {
    * Constructor for a Hydrogen atom.  There is an optional Vector2 parameter
    * which specifies the location of this Hydrogen atom.
    *
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function HydrogenAtom( options ) {

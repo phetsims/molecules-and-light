@@ -39,7 +39,7 @@ define( function( require ) {
    *
    * @param {String} moleculeName
    * @param(MoleculeNode} moleculeNode
-   * @param {object} options
+   * @param {Object} [options]
    * @constructor
    */
   function MoleculeSelectorPanel( moleculeName, moleculeNode, options) {

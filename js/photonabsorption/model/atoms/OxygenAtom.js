@@ -30,7 +30,7 @@ define( function( require ) {
    * Constructor for an Oxygen atom.  There is an optional Vector2 parameter
    * which specifies the location of this Oxygen atom.
    *
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function OxygenAtom( options ) {
