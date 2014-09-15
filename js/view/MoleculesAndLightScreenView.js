@@ -74,7 +74,7 @@ define( function( require ) {
 
     // Create the control panel for photon emission frequency.
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
-    photonEmissionControlPanel.setLeftTop( new Vector2( -30, 400 ) );
+    photonEmissionControlPanel.setLeftTop( new Vector2( 15, 350 ) );
 
 //  // Data structures that match model objects to their representations in
 //  // the view.

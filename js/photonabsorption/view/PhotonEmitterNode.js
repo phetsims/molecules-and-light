@@ -28,7 +28,6 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var EmissionRateControlSliderNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/EmissionRateControlSliderNode' );
 
-
   // images
   var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
   var flashlight2Image = require( 'image!MOLECULES_AND_LIGHT/flashlight2.png' );
@@ -105,7 +104,7 @@ define( function( require ) {
       }
       // Translate center and scale the emitter image
       this.photonEmitterImage.scale( flashlightWidth / this.photonEmitterImage.getWidth() );
-      this.photonEmitterImage.setRightCenter( new Vector2( -flashlightWidth, -this.photonEmitterImage.getBounds.height / 2 ) );
+      this.photonEmitterImage.setCenter( new Vector2( 0, 0 ) );
       this.emissionRateControlSliderNode = new EmissionRateControlSliderNode( this.model, new Color( 0, 85, 0 ) );
 
       // Add the emission rate control slider to the correct location on the photon emitter.
@@ -115,8 +114,6 @@ define( function( require ) {
 
       this.emitterImageLayer.addChild( this.photonEmitterImage );
       this.emissionControlSliderLayer.addChild( this.emissionRateControlSliderNode );
-
-      console.log( this.getRightCenter() );
 
     }
   } );
