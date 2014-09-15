@@ -93,6 +93,7 @@ define( function( require ) {
       {
         alignVertically: false,
         spacing: 15,
+        baseColor: '#C5D6E8',
         selectedStroke: new Color( 47, 101, 209 ),
         deselectedLineWidth: 0,
         buttonContentXMargin: 0,
@@ -100,7 +101,7 @@ define( function( require ) {
         cornerRadius: 7
       } );
 
-    Panel.call( this, radioButtons );
+    Panel.call( this, radioButtons, { fill: '#C5D6E8', stroke: null } );
 
 //    model.photonTargetProperty.link( function() {
 //      model.setPhotonTarget( model.photonTargetProperty.get() );
