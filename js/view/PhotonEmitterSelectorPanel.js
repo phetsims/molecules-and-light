@@ -34,7 +34,7 @@ define( function( require ) {
       // defaults
       stroke: null,
       fill: 'black',
-      lineWidth: 3,
+      lineWidth: 3
     }, options );
 
     // Supertype constructor
