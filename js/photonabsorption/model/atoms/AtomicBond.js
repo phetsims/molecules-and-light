@@ -20,7 +20,7 @@ define( function( require ) {
    *
    * @param {Atom} atom1 - Atom involved in the bond
    * @param {Atom} atom2 - Atom involved in the bond
-   * @param {Object} options -
+   * @param {Object} [options] -
    * @constructor
    *
    */
