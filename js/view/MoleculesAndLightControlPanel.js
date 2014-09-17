@@ -96,7 +96,6 @@ define( function( require ) {
 
     var radioButtons = new RadioButtonGroup( model.photonTargetProperty, radioButtonContent,
       {
-        alignVertically: true,
         spacing: 10,
         baseColor: 'black',
         buttonContentYMargin: 0,
