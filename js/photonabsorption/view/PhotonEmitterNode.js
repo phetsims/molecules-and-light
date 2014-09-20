@@ -19,7 +19,6 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var HSlider = require( 'SUN/HSlider' );
   var Property = require( 'AXON/Property' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
   var Vector2 = require( 'DOT/Vector2' );
