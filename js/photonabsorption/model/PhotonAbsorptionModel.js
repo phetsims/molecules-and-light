@@ -135,7 +135,9 @@ define( function( require ) {
     PropertySet.call( this, {
       emissionFrequency: 0,
       photonWavelength: WavelengthConstants.IR_WAVELENGTH,
-      photonTarget: initialPhotonTarget } );
+      photonTarget: initialPhotonTarget,
+      play: true // is the sim running or paused
+    } );
 
     var thisModel = this;
 
@@ -203,42 +205,45 @@ define( function( require ) {
      * @param {Number} dt - The incremental time step.
      */
     step: function( dt ) {
-      dt *= 1000;
-      // Check if it is time to emit any photons.
-      if ( this.photonEmissionCountdownTimer !== Number.POSITIVE_INFINITY ) {
-        this.photonEmissionCountdownTimer -= dt;
-        if ( this.photonEmissionCountdownTimer <= 0 ) {
-          // Time to emit.
-          this.emitPhoton();
-          this.photonEmissionCountdownTimer = this.photonEmissionPeriodTarget;
-        }
-      }
 
-      // Step the photons, marking any that have moved beyond the model
-      // bounds for removal.
-      var photonsToRemove = [];
-      for ( var photon = 0; photon < this.photons.length; photon++ ) {
-        this.photons.get( photon ).stepInTime( dt );
-        if ( this.photons.get( photon ).getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
-          // See if any of the molecules wish to absorb this photon.
-          for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
-            if ( this.activeMolecules.get( molecule ).queryAbsorbPhoton( this.photons.get( photon ) ) ) {
-              photonsToRemove.push( this.photons.get( photon ) );
-            }
+      if ( this.play ) {
+        dt *= 1000; // convert from miliseconds.
+        // Check if it is time to emit any photons.
+        if ( this.photonEmissionCountdownTimer !== Number.POSITIVE_INFINITY ) {
+          this.photonEmissionCountdownTimer -= dt;
+          if ( this.photonEmissionCountdownTimer <= 0 ) {
+            // Time to emit.
+            this.emitPhoton();
+            this.photonEmissionCountdownTimer = this.photonEmissionPeriodTarget;
           }
         }
-        else {
-          // The photon has moved beyond our simulation bounds, so remove it from the model.
-          photonsToRemove.push( photon );
-        }
-      }
-      // Remove any photons that were marked for removal.
-      this.photons.removeAll( photonsToRemove );
 
-      // Step the molecules.
-      var moleculesToStep = this.activeMolecules.getArray().slice( 0 );
-      for ( molecule = 0; molecule < moleculesToStep.length; molecule++ ) {
-        moleculesToStep[molecule].step( dt );
+        // Step the photons, marking any that have moved beyond the model
+        // bounds for removal.
+        var photonsToRemove = [];
+        for ( var photon = 0; photon < this.photons.length; photon++ ) {
+          this.photons.get( photon ).stepInTime( dt );
+          if ( this.photons.get( photon ).getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
+            // See if any of the molecules wish to absorb this photon.
+            for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
+              if ( this.activeMolecules.get( molecule ).queryAbsorbPhoton( this.photons.get( photon ) ) ) {
+                photonsToRemove.push( this.photons.get( photon ) );
+              }
+            }
+          }
+          else {
+            // The photon has moved beyond our simulation bounds, so remove it from the model.
+            photonsToRemove.push( photon );
+          }
+        }
+        // Remove any photons that were marked for removal.
+        this.photons.removeAll( photonsToRemove );
+
+        // Step the molecules.
+        var moleculesToStep = this.activeMolecules.getArray().slice( 0 );
+        for ( molecule = 0; molecule < moleculesToStep.length; molecule++ ) {
+          moleculesToStep[molecule].step( dt );
+        }
       }
     },
 
@@ -356,32 +361,32 @@ define( function( require ) {
           break;
 
         case "SINGLE_H2O_MOLECULE":
-          newMolecule = new H2O( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
+          newMolecule = new H2O( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION } );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_CH4_MOLECULE":
-          newMolecule = new CH4( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
+          newMolecule = new CH4( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION } );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_N2_MOLECULE":
-          newMolecule = new N2( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
+          newMolecule = new N2( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION } );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_O2_MOLECULE":
-          newMolecule = new O2( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
+          newMolecule = new O2( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION } );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_O3_MOLECULE":
-          newMolecule = new O3( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
+          newMolecule = new O3( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION } );
           this.activeMolecules.add( newMolecule );
           break;
 
         case "SINGLE_NO2_MOLECULE":
-          newMolecule = new NO2( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION }  );
+          newMolecule = new NO2( this, { initialCenterOfGravityPos: SINGLE_MOLECULE_POSITION } );
           this.activeMolecules.add( newMolecule );
           break;
 
@@ -444,6 +449,24 @@ define( function( require ) {
     getSingleMoleculePosition: function() {
 
       return SINGLE_MOLECULE_POSITION;
+    },
+
+    /**
+     * Step one frame manually.  Assuming 60 frames per second.
+     */
+    manualStep: function() {
+
+      this.step( 1 / 60 );
+      // Step each active molecule.
+//      for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
+//        this.activeMolecules.get( molecule ).step( 1 / 60 );
+//      }
+//
+//      // Step each active photon.
+//      for ( var photon = 0; photon < this.photons.length; photon++ ) {
+//        this.photons.get( photon ).stepInTime( 1 / 60 );
+//      }
+
     }
 
   } )

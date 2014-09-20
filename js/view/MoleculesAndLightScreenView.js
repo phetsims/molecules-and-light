@@ -32,6 +32,8 @@ define( function( require ) {
   var MoleculesAndLightControlPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightControlPanel' );
   var MoleculesAndLightApplicationWindow = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightApplicationWindow' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
+  var PlayPauseButton = require( 'SCENERY_PHET/PlayPauseButton' );
+  var StepButton = require( 'SCENERY_PHET/StepButton' );
 
   // Strings
   var buttonCaptionString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.buttonCaption' );
@@ -87,6 +89,26 @@ define( function( require ) {
       } );
 
     this.addChild( resetAllButton );
+
+    // Add play/pause button
+    var playPauseButton = new PlayPauseButton( photonAbsorptionModel.playProperty,
+      {
+        bottom: this.layoutBounds.bottom - 20,
+        centerX: this.layoutBounds.centerX - 25,
+        radius: 20
+      } );
+
+    this.addChild( playPauseButton );
+
+    // Add step button
+    var stepButton = new StepButton( function() { photonAbsorptionModel.manualStep(); }, photonAbsorptionModel.playProperty,
+      {
+        centerY: playPauseButton.centerY,
+        centerX: this.layoutBounds.centerX + 25,
+        radius: 15
+      } );
+
+    this.addChild( stepButton );
 
 //  // Data structures that match model objects to their representations in
 //  // the view.
