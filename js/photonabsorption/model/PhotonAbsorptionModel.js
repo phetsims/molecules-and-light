@@ -207,43 +207,76 @@ define( function( require ) {
     step: function( dt ) {
 
       if ( this.play ) {
-        dt *= 1000; // convert from miliseconds.
-        // Check if it is time to emit any photons.
-        if ( this.photonEmissionCountdownTimer !== Number.POSITIVE_INFINITY ) {
-          this.photonEmissionCountdownTimer -= dt;
-          if ( this.photonEmissionCountdownTimer <= 0 ) {
-            // Time to emit.
-            this.emitPhoton();
-            this.photonEmissionCountdownTimer = this.photonEmissionPeriodTarget;
-          }
-        }
 
-        // Step the photons, marking any that have moved beyond the model
-        // bounds for removal.
-        var photonsToRemove = [];
-        for ( var photon = 0; photon < this.photons.length; photon++ ) {
-          this.photons.get( photon ).stepInTime( dt );
-          if ( this.photons.get( photon ).getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
-            // See if any of the molecules wish to absorb this photon.
-            for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
-              if ( this.activeMolecules.get( molecule ).queryAbsorbPhoton( this.photons.get( photon ) ) ) {
-                photonsToRemove.push( this.photons.get( photon ) );
-              }
-            }
-          }
-          else {
-            // The photon has moved beyond our simulation bounds, so remove it from the model.
-            photonsToRemove.push( photon );
-          }
-        }
-        // Remove any photons that were marked for removal.
-        this.photons.removeAll( photonsToRemove );
+        // Check if it is time to emit any photons.
+        this.checkEmissionTimer( dt );
+
+        // Step the photons, marking and removing any that have moved beyond the model
+        this.stepPhotons( dt );
 
         // Step the molecules.
-        var moleculesToStep = this.activeMolecules.getArray().slice( 0 );
-        for ( molecule = 0; molecule < moleculesToStep.length; molecule++ ) {
-          moleculesToStep[molecule].step( dt );
+        this.stepMolecules( dt );
+
+      }
+    },
+
+    /**
+     * Check if it is time to emit any photons from the photon emitter.
+     *
+     * @param { Number } dt - The incremental time step.
+     */
+    checkEmissionTimer: function( dt ) {
+
+      dt *= 1000; // convert from milliseconds.
+      if ( this.photonEmissionCountdownTimer !== Number.POSITIVE_INFINITY ) {
+        this.photonEmissionCountdownTimer -= dt;
+        if ( this.photonEmissionCountdownTimer <= 0 ) {
+          // Time to emit.
+          this.emitPhoton();
+          this.photonEmissionCountdownTimer = this.photonEmissionPeriodTarget;
         }
+      }
+    },
+
+    /**
+     * Step the photons in time.
+     *
+     * @param { Number } dt - The incremental times step.
+     */
+    stepPhotons: function( dt ) {
+
+      dt *= 1000; // convert from miliseconds.
+      var photonsToRemove = [];
+      for ( var photon = 0; photon < this.photons.length; photon++ ) {
+        this.photons.get( photon ).stepInTime( dt );
+        if ( this.photons.get( photon ).getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
+          // See if any of the molecules wish to absorb this photon.
+          for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
+            if ( this.activeMolecules.get( molecule ).queryAbsorbPhoton( this.photons.get( photon ) ) ) {
+              photonsToRemove.push( this.photons.get( photon ) );
+            }
+          }
+        }
+        else {
+          // The photon has moved beyond our simulation bounds, so remove it from the model.
+          photonsToRemove.push( photon );
+        }
+      }
+      // Remove any photons that were marked for removal.
+      this.photons.removeAll( photonsToRemove );
+    },
+
+    /**
+     * Step the molecules one step in time.
+     *
+     * @param { Number } dt - The incremental time step.
+     */
+    stepMolecules: function( dt ) {
+
+      dt *= 1000; // convert from milliseconds.
+      var moleculesToStep = this.activeMolecules.getArray().slice( 0 );
+      for ( var molecule = 0; molecule < moleculesToStep.length; molecule++ ) {
+        moleculesToStep[molecule].step( dt );
       }
     },
 
@@ -456,17 +489,14 @@ define( function( require ) {
      */
     manualStep: function() {
 
-      this.step( 1 / 60 );
-      // Step each active molecule.
-//      for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
-//        this.activeMolecules.get( molecule ).step( 1 / 60 );
-//      }
-//
-//      // Step each active photon.
-//      for ( var photon = 0; photon < this.photons.length; photon++ ) {
-//        this.photons.get( photon ).stepInTime( 1 / 60 );
-//      }
+      // Check if it is time to emit any photons.
+      this.checkEmissionTimer( 1/60 );
 
+      // Step the photons, marking and removing any that have moved beyond the model bounds.
+      this.stepPhotons( 1/60 );
+
+      // Step the molecules.
+      this.stepMolecules( 1/60 );
     }
 
   } )
