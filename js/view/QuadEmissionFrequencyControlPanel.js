@@ -91,12 +91,13 @@ define( function( require ) {
 
     var radioButtons = new RadioButtonGroup( photonAbsorptionModel.photonWavelengthProperty, radioButtonContent,
       {
-        alignVertically: false,
+        orientation: 'horizontal',
         spacing: 15,
         baseColor: '#C5D6E8',
         selectedStroke: new Color( 47, 101, 209 ),
         deselectedLineWidth: 0,
         buttonContentXMargin: 0,
+        buttonContentYMargin: 0,
         selectedLineWidth: 3,
         cornerRadius: 7
       } );
