@@ -82,7 +82,7 @@ define( function( require ) {
   // Minimum and defaults for photon emission periods.  Note that the max is
   // assumed to be infinity.
   var MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET = 400;
-  var DEFAULT_PHOTON_EMISSION_PERIOD = 3000; // Milliseconds of sim time.
+  var DEFAULT_PHOTON_EMISSION_PERIOD = Number.POSITIVE_INFINITY; // Milliseconds of sim time.
   var MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET = 100;
 
   // Default values for various parameters that weren't already covered.
@@ -176,14 +176,11 @@ define( function( require ) {
      * Reset the model to its initial state.
      */
     reset: function() {
-
       // Remove any photons that are currently in transit.
       this.removeAllPhotons();
 
-      // Reset all molecules, which will stop any vibrations.
-      for ( var molecule in this.activeMolecules ) {
-        this.activeMolecules[molecule].reset();
-      }
+      // Reset all active molecules, which will stop any vibrations.
+      this.activeMolecules.reset();
 
       // Set default values.
       this.setPhotonTarget( this.initialPhotonTarget );
@@ -193,8 +190,6 @@ define( function( require ) {
       // Reset the configurable atmosphere.
       this.resetConfigurableAtmosphere();
 
-      // Send out notification that the reset has occurred.
-      this.notifyModelReset();
     },
 
     /**
