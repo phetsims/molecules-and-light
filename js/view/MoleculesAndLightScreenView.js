@@ -31,6 +31,7 @@ define( function( require ) {
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var MoleculesAndLightControlPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightControlPanel' );
   var MoleculesAndLightApplicationWindow = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightApplicationWindow' );
+  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
 
   // Strings
   var buttonCaptionString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.buttonCaption' );
@@ -75,6 +76,17 @@ define( function( require ) {
     // Create the control panel for photon emission frequency.
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
     photonEmissionControlPanel.setLeftTop( new Vector2( 15, 350 ) );
+
+    // Add reset all button
+    var resetAllButton = new ResetAllButton(
+      {
+        listener: function() { photonAbsorptionModel.reset(); },
+        bottom: this.layoutBounds.bottom - 5,
+        right: this.layoutBounds.right - 30,
+        radius: 18
+      } );
+
+    this.addChild( resetAllButton );
 
 //  // Data structures that match model objects to their representations in
 //  // the view.
