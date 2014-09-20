@@ -140,7 +140,7 @@ define( function( require ) {
      **/
     reset: function() {
       this.activePhotonAbsorptionStrategy.reset();
-      this.activePhotonAbsorptionStrategy = new PhotonAbsorptionStrategy.NullPhotonAbsorptionStrategy( this );
+      this.activePhotonAbsorptionStrategy = new NullPhotonAbsorptionStrategy( this );
       this.absorbtionHysteresisCountdownTime = 0;
       this.setVibrating( false );
       this.setVibration( 0 );

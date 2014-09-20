@@ -135,7 +135,7 @@ define( function( require ) {
     PropertySet.call( this, {
       emissionFrequency: 0,
       photonWavelength: WavelengthConstants.IR_WAVELENGTH,
-      photonTarget: null } );
+      photonTarget: initialPhotonTarget } );
 
     var thisModel = this;
 
@@ -180,7 +180,9 @@ define( function( require ) {
       this.removeAllPhotons();
 
       // Reset all active molecules, which will stop any vibrations.
-      this.activeMolecules.reset();
+      for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
+        this.activeMolecules.get( molecule ).reset();
+      }
 
       // Set default values.
       this.setPhotonTarget( this.initialPhotonTarget );
@@ -189,6 +191,9 @@ define( function( require ) {
 
       // Reset the configurable atmosphere.
       this.resetConfigurableAtmosphere();
+
+      // Reset all associated properties.
+      PropertySet.prototype.reset.call( this );
 
     },
 
@@ -317,6 +322,11 @@ define( function( require ) {
       return this.photonEmissionPeriodTarget;
     },
 
+    /**
+     * Set the current photon target, and remove the old value.
+     *
+     * @param {String} photonTarget - The string constant which represents the desired photon target.
+     */
     setPhotonTarget: function( photonTarget ) {
       // If switching to the configurable atmosphere, photon emission
       // is turned off (if it is happening).  This is done because it
