@@ -58,7 +58,8 @@ define( function( require ) {
 
     PropertySet.call( this, {
       emittedPhoton: null,
-      highElectronicEnergyState: false
+      highElectronicEnergyState: false,
+      centerOfGravity: new Vector2( 0, 0 )
     } );
 
     // Atoms and bonds that comprise this molecule.
@@ -254,8 +255,8 @@ define( function( require ) {
       }
 
       // Do any linear movement that is required.
-      this.setCenterOfGravityPosVec( this.getDestination( this.centerOfGravity ) );
-      this.setCenterOfGravityPos( this.centerOfGravity.x + this.velocity.x * dt, this.centerOfGravity.y + this.velocity.y * dt );
+      this.setCenterOfGravityPosVec( this.getDestination( this.centerOfGravityProperty.get() ) );
+      this.setCenterOfGravityPos( this.centerOfGravityProperty.get().x + this.velocity.x * dt, this.centerOfGravityProperty.get().y + this.velocity.y * dt );
     },
 
     /**
@@ -326,7 +327,7 @@ define( function( require ) {
      * @return {Vector2}
      **/
     getCenterOfGravityPos: function() {
-      return new Vector2( this.centerOfGravity.x, this.centerOfGravity.y );
+      return new Vector2( this.centerOfGravityProperty.get().x, this.centerOfGravityProperty.get().y );
     },
 
     /**
@@ -335,7 +336,7 @@ define( function( require ) {
      * @return {Vector2} - centerOfGravity
      **/
     getCenterOfGravityPosRef: function() {
-      return this.centerOfGravity;
+      return this.centerOfGravityProperty.get();
     },
 
     /**
@@ -349,8 +350,8 @@ define( function( require ) {
      * @param {Number} y - the y location to set
      **/
     setCenterOfGravityPos: function( x, y ) {
-      if ( this.centerOfGravity.x != x || this.centerOfGravity.y != y ) {
-        this.centerOfGravity.setXY( x, y );
+      if ( this.centerOfGravityProperty.get().x != x || this.centerOfGravityProperty.get().y != y ) {
+        this.centerOfGravityProperty.set( new Vector2( x, y ) );
         this.updateAtomPositions();
         //notifyCenterOfGravityPosChanged();
       }
@@ -609,7 +610,7 @@ define( function( require ) {
           atomOffset.rotate( this.currentRotationRadians );
           // Set location based on combination of offset and current center
           // of gravity.
-          this.atomsByID[uniqueID].positionProperty.set( new Vector2( this.centerOfGravity.x + atomOffset.x, this.centerOfGravity.y + atomOffset.y) );
+          this.atomsByID[uniqueID].positionProperty.set( new Vector2( this.centerOfGravityProperty.get().x + atomOffset.x, this.centerOfGravityProperty.get().y + atomOffset.y ) );
         }
       }
     },

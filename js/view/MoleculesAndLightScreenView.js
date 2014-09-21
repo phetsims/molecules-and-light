@@ -130,8 +130,7 @@ define( function( require ) {
     this.myWorldNode.addChild( this.restoreMoleculeButtonNode );
     this.updateRestoreMoleculeButtonVisibility();
 
-//  // Listener for watching molecules and updating the restore button visibility.
-
+    // Listener for watching molecules and updating the restore button visibility.
 
 //  private final Molecule.Adapter moleculeMotionListener = new Molecule.Adapter() {
 //    @Override
