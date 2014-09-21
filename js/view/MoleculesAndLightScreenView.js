@@ -83,8 +83,8 @@ define( function( require ) {
     var resetAllButton = new ResetAllButton(
       {
         listener: function() { photonAbsorptionModel.reset(); },
-        bottom: this.layoutBounds.bottom - 5,
-        right: this.layoutBounds.right - 30,
+        bottom: this.layoutBounds.bottom - 15,
+        right: this.layoutBounds.right - 15,
         radius: 18
       } );
 
