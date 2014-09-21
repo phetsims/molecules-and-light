@@ -328,6 +328,7 @@ define( function( require ) {
     getCenterOfGravityPos: function() {
       return new Vector2( this.centerOfGravity.x, this.centerOfGravity.y );
     },
+
     /**
      * Get the location of this molecules center of gravity.
      *

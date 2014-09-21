@@ -29,14 +29,18 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var Color = require( 'SCENERY/util/Color' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var MoleculesAndLightControlPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightControlPanel' );
   var MoleculesAndLightApplicationWindow = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightApplicationWindow' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var PlayPauseButton = require( 'SCENERY_PHET/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/StepButton' );
+  var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  var Rectangle = require( 'DOT/Rectangle' );
 
   // Strings
   var buttonCaptionString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.buttonCaption' );
+  var returnMoleculeString = require( 'string!MOLECULES_AND_LIGHT/buttonNode.returnMolecule' );
 
   // Class data for the Molecules and Light screen view
   // Model-view transform for intermediate coordinates.
@@ -57,23 +61,22 @@ define( function( require ) {
     var thisScreenView = this;
     this.photonAbsorptionModel = photonAbsorptionModel;
 
-    var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    this.mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( Math.round( INTERMEDIATE_RENDERING_SIZE.width * 0.65 ),
         Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.35 ) ),
-        0.18 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
+      0.18 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
 
-    // Create the node that will be the root for all the world children on
-    // this canvas.  This is done to make it easier to zoom in and out on
-    // the world without affecting screen children.
+    // Create the node that will be the root for all the world children on this canvas.  This is done to make it easier
+    // to zoom in and out on the world without affecting screen children.
     this.myWorldNode = new Node();
     this.addChild( this.myWorldNode );
 
     // Create the application window.  This will hold all photons, molecules, and photonEmitters for this photon
     // absorption model.
-    var applicationWindow = new MoleculesAndLightApplicationWindow( photonAbsorptionModel, mvt );
-    this.myWorldNode.addChild( applicationWindow );
-    applicationWindow.setLeftTop( new Vector2( 15, 15 ) );
+    this.applicationWindow = new MoleculesAndLightApplicationWindow( photonAbsorptionModel, this.mvt );
+    this.myWorldNode.addChild( this.applicationWindow );
+    this.applicationWindow.setLeftTop( new Vector2( 15, 15 ) );
 
     // Create the control panel for photon emission frequency.
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
@@ -81,10 +84,10 @@ define( function( require ) {
 
     // Create the molecule control panel
     var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
-    moleculeControlPanel.scale(.75);
+    moleculeControlPanel.scale( .75 );
     moleculeControlPanel.setLeftTop( new Vector2( 530, 15 ) );
 
-    // Add reset all button
+    // Add reset all button.
     var resetAllButton = new ResetAllButton(
       {
         listener: function() { photonAbsorptionModel.reset(); },
@@ -95,7 +98,7 @@ define( function( require ) {
 
     this.addChild( resetAllButton );
 
-    // Add play/pause button
+    // Add play/pause button.
     var playPauseButton = new PlayPauseButton( photonAbsorptionModel.playProperty,
       {
         bottom: moleculeControlPanel.bottom + 60,
@@ -105,7 +108,7 @@ define( function( require ) {
 
     this.addChild( playPauseButton );
 
-    // Add step button
+    // Add step button to manually step the animation.
     var stepButton = new StepButton( function() { photonAbsorptionModel.manualStep(); }, photonAbsorptionModel.playProperty,
       {
         centerY: playPauseButton.centerY,
@@ -115,13 +118,21 @@ define( function( require ) {
 
     this.addChild( stepButton );
 
-//  // Data structures that match model objects to their representations in
-//  // the view.
-//  private final HashMap<Photon, PAPhotonNode> photonMap = new HashMap<Photon, PAPhotonNode>();
-//  private final HashMap<Molecule, MoleculeNode> moleculeMap = new HashMap<Molecule, MoleculeNode>();
+    // Add the button for restoring molecules that break apart.
+    this.restoreMoleculeButtonNode = new RectangularPushButton( { content: new Text( returnMoleculeString ), baseColor: new Color( 255, 144, 0 ) } );
+    this.restoreMoleculeButtonNode.setCenter( new Vector2( this.applicationWindow.width - this.restoreMoleculeButtonNode.width,
+        this.applicationWindow.height - this.restoreMoleculeButtonNode.height - 50 ) );
+//    restoreMoleculeButtonNode.addActionListener( new ActionListener() {
+//      public void actionPerformed( ActionEvent e ) {
+//        photonAbsorptionModel.restorePhotonTarget();
+//      }
+//    } );
+    this.myWorldNode.addChild( this.restoreMoleculeButtonNode );
+    this.updateRestoreMoleculeButtonVisibility();
 
-//  // Listener for watching molecules and updating the restore button
-//  // visibility.
+//  // Listener for watching molecules and updating the restore button visibility.
+
+
 //  private final Molecule.Adapter moleculeMotionListener = new Molecule.Adapter() {
 //    @Override
 //    public void centerOfGravityPosChanged( Molecule molecule ) {
@@ -143,7 +154,27 @@ define( function( require ) {
     this.myWorldNode.addChild( moleculeControlPanel );
   }
 
-  return inherit( ScreenView, MoleculesAndLightScreenView );
+  return inherit( ScreenView, MoleculesAndLightScreenView, {
+    /**
+     * Update the visibility of the button that restores molecules that have
+     * broken apart.  This button should be visible only when one or more
+     * molecules are off the screen (more or less).  This routine uses the
+     * intermediate rendering size to make the determination, which isn't
+     * perfectly accurate, but works well enough for our purposes.
+     */
+    updateRestoreMoleculeButtonVisibility: function() {
+      var restoreButtonVisible = false;
+      var screenRect = new Rectangle( 0, 0, this.applicationWindow.width, this.applicationWindow.height );
+      for ( var molecule = 0; molecule < this.photonAbsorptionModel.activeMolecules.length; molecule++ ) {
+        if ( !screenRect.containsPoint( this.mvt.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
+          restoreButtonVisible = true;
+          break;
+        }
+      }
+      this.restoreMoleculeButtonNode.setVisible( restoreButtonVisible );
+    }
+
+  } );
 
 } );
 
@@ -151,19 +182,6 @@ define( function( require ) {
 //  //----------------------------------------------------------------------------
 //  // Constructors
 //  //----------------------------------------------------------------------------
-//    // Add the button for restoring molecules that break apart.
-//    restoreMoleculeButtonNode = new HTMLImageButtonNode( MoleculesAndLightResources.getString( "ButtonNode.ReturnMolecule" ), new PhetFont( Font.BOLD, 24 ), new Color( 255, 144, 0 ) );
-//    restoreMoleculeButtonNode.setOffset( INTERMEDIATE_RENDERING_SIZE.width - restoreMoleculeButtonNode.getFullBounds().getWidth(), 50 );
-//    restoreMoleculeButtonNode.addActionListener( new ActionListener() {
-//      public void actionPerformed( ActionEvent e ) {
-//        photonAbsorptionModel.restorePhotonTarget();
-//      }
-//    } );
-//    myWorldNode.addChild( restoreMoleculeButtonNode );
-//    updateRestoreMolecueButtonVisibility();
-//
-
-
 //
 //    // Add the button for displaying the EM spectrum.
 //    myWorldNode.addChild( showSpectrumButton );
@@ -198,22 +216,4 @@ define( function( require ) {
 //
 //  }
 //
-//  /**
-//   * Update the visibility of the button that restores molecules that have
-//   * broken apart.  This button should be visible only when one or more
-//   * molecules are off the screen (more or less).  This routine uses the
-//   * intermediate rendering size to make the determination, which isn't
-//   * perfectly accurate, but works well enough for our purposes.
-//   */
-//  private void updateRestoreMolecueButtonVisibility() {
-//    boolean restoreButtonVisible = false;
-//    Rectangle2D screenRect = new Rectangle2D.Double( 0, 0, INTERMEDIATE_RENDERING_SIZE.width, INTERMEDIATE_RENDERING_SIZE.height );
-//    for ( Molecule molecule : photonAbsorptionModel.getMolecules() ) {
-//      if ( !screenRect.contains( mvt.modelToView( molecule.getCenterOfGravityPos() ) ) ) {
-//        restoreButtonVisible = true;
-//        break;
-//      }
-//    }
-//    restoreMoleculeButtonNode.setVisible( restoreButtonVisible );
-//  }
-//}
+

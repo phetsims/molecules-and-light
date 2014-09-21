@@ -19,5 +19,6 @@
   "ControlPanel.CarbonDioxide": "Carbon Dioxide (CO2)",
   "ControlPanel.NitrogenDioxide": "Nitrogen Dioxide (NO2)",
   "ControlPanel.Ozone": "Ozone (O3)",
-  "ControlPanel.Water": "Water (H20)"
+  "ControlPanel.Water": "Water (H20)",
+  "buttonNode.returnMolecule": "Return Molecule"
 }
