@@ -79,6 +79,11 @@ define( function( require ) {
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
     photonEmissionControlPanel.setLeftTop( new Vector2( 15, 350 ) );
 
+    // Create the molecule control panel
+    var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
+    moleculeControlPanel.scale(.75);
+    moleculeControlPanel.setLeftTop( new Vector2( 530, 15 ) );
+
     // Add reset all button
     var resetAllButton = new ResetAllButton(
       {
@@ -93,9 +98,9 @@ define( function( require ) {
     // Add play/pause button
     var playPauseButton = new PlayPauseButton( photonAbsorptionModel.playProperty,
       {
-        bottom: this.layoutBounds.bottom - 20,
-        centerX: this.layoutBounds.centerX - 25,
-        radius: 20
+        bottom: moleculeControlPanel.bottom + 60,
+        centerX: moleculeControlPanel.centerX - 25,
+        radius: 23
       } );
 
     this.addChild( playPauseButton );
@@ -104,7 +109,7 @@ define( function( require ) {
     var stepButton = new StepButton( function() { photonAbsorptionModel.manualStep(); }, photonAbsorptionModel.playProperty,
       {
         centerY: playPauseButton.centerY,
-        centerX: this.layoutBounds.centerX + 25,
+        centerX: moleculeControlPanel.centerX + 25,
         radius: 15
       } );
 
@@ -132,11 +137,6 @@ define( function( require ) {
 //  private final SpectrumWindow spectrumWindow = new SpectrumWindow() {{ setVisible( false ); }};
 //
 
-
-//    Declare the control panel for molecule type
-    var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
-    moleculeControlPanel.scale(.75);
-    moleculeControlPanel.setLeftTop( new Vector2( 530, 15 ) );
 
     // Add the nodes in the order necessary for correct layering.
     this.myWorldNode.addChild( photonEmissionControlPanel );
