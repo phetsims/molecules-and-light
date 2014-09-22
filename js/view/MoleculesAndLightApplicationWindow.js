@@ -121,11 +121,9 @@ define( function( require ) {
   return inherit( Rectangle, MoleculesAndLightApplicationWindow, {
 
     /**
-     * Update the visibility of the button that restores molecules that have
-     * broken apart.  This button should be visible only when one or more
-     * molecules are off the screen (more or less).  This routine uses the
-     * intermediate rendering size to make the determination, which isn't
-     * perfectly accurate, but works well enough for our purposes.
+     * Update the visibility of the button that restores molecules that have broken apart.  This button should be
+     * visible only when one or more molecules are off the screen (more or less).  This routine uses the intermediate
+     * rendering size to make the determination, which isn't perfectly accurate, but works well enough for our purposes.
      */
     updateRestoreMoleculeButtonVisibility: function() {
       var restoreButtonVisible = false;
