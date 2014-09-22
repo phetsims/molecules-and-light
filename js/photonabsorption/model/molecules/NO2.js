@@ -157,8 +157,8 @@ define( function( require ) {
       // Remove this NO2 molecule from the photonAbsorptionModel's list of active molecules.
       this.model.activeMolecules.remove( this );
       // Create the constituent molecules that result from breaking apart and add them to the activeMolecules observable array.
-      var nitrogenMonoxideMolecule = new NO();
-      var singleOxygenMolecule = new O();
+      var nitrogenMonoxideMolecule = new NO( this.model );
+      var singleOxygenMolecule = new O( this.model );
       this.model.activeMolecules.add( nitrogenMonoxideMolecule );
       this.model.activeMolecules.add( singleOxygenMolecule );
 
