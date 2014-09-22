@@ -69,9 +69,14 @@ define( function( require ) {
     photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
 
     // Add the button for restoring molecules that break apart.
-    this.restoreMoleculeButtonNode = new RectangularPushButton( { content: new Text( returnMoleculeString ), baseColor: new Color( 255, 144, 0 ) } );
+    this.restoreMoleculeButtonNode = new RectangularPushButton( {
+      content: new Text( returnMoleculeString ),
+      baseColor: new Color( 255, 144, 0 ),
+      listener: function() { photonAbsorptionModel.restorePhotonTarget() }
+    } );
+
     this.restoreMoleculeButtonNode.setCenter( new Vector2( this.width - this.restoreMoleculeButtonNode.width,
-        this.height - this.restoreMoleculeButtonNode.height - 50 ) );
+        this.restoreMoleculeButtonNode.height + 10 ) );
 
     this.addChild( this.restoreMoleculeButtonNode );
     this.updateRestoreMoleculeButtonVisibility();

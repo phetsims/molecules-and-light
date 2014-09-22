@@ -461,8 +461,7 @@ define( function( require ) {
      * to its original condition.
      */
     restorePhotonTarget: function() {
-      var currentTarget = photonTarget;
-      this.photonTargetProperty = null; // This forces the call to setPhotonTarget to pay attention to the renewal. TODO: This may not be necessary now.
+      var currentTarget = this.photonTargetProperty.get();
       this.setPhotonTarget( currentTarget );
     },
 
