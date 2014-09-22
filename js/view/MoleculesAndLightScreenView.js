@@ -44,7 +44,7 @@ define( function( require ) {
 
   // Class data for the Molecules and Light screen view
   // Model-view transform for intermediate coordinates.
-  var INTERMEDIATE_RENDERING_SIZE = new Dimension2( 786, 786 );
+  var INTERMEDIATE_RENDERING_SIZE = new Dimension2( 500, 300 );
   var PHOTON_EMITTER_WIDTH = 220;
 
   /**
@@ -63,8 +63,8 @@ define( function( require ) {
 
     this.mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( Math.round( INTERMEDIATE_RENDERING_SIZE.width * 0.65 ),
-        Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.35 ) ),
+      new Vector2( Math.round( INTERMEDIATE_RENDERING_SIZE.width * 0.55 ),
+        Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.50 ) ),
       0.18 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
 
     // Create the node that will be the root for all the world children on this canvas.  This is done to make it easier
@@ -118,27 +118,6 @@ define( function( require ) {
 
     this.addChild( stepButton );
 
-    // Add the button for restoring molecules that break apart.
-    this.restoreMoleculeButtonNode = new RectangularPushButton( { content: new Text( returnMoleculeString ), baseColor: new Color( 255, 144, 0 ) } );
-    this.restoreMoleculeButtonNode.setCenter( new Vector2( this.applicationWindow.width - this.restoreMoleculeButtonNode.width,
-        this.applicationWindow.height - this.restoreMoleculeButtonNode.height - 50 ) );
-//    restoreMoleculeButtonNode.addActionListener( new ActionListener() {
-//      public void actionPerformed( ActionEvent e ) {
-//        photonAbsorptionModel.restorePhotonTarget();
-//      }
-//    } );
-    this.myWorldNode.addChild( this.restoreMoleculeButtonNode );
-    this.updateRestoreMoleculeButtonVisibility();
-
-    // Listener for watching molecules and updating the restore button visibility.
-
-//  private final Molecule.Adapter moleculeMotionListener = new Molecule.Adapter() {
-//    @Override
-//    public void centerOfGravityPosChanged( Molecule molecule ) {
-//      updateRestoreMolecueButtonVisibility();
-//    }
-//  };
-//
 //  // Button for displaying EM specturm.
 //  private final HTMLImageButtonNode showSpectrumButton = new HTMLImageButtonNode( MoleculesAndLightResources.getString( "SpectrumWindow.buttonCaption" ), new PhetFont( Font.BOLD, 24 ), new Color( 185, 178, 95 ) );
 //    var showSpectrumButton = new TextPushButton( buttonCaptionString, { fill: Color.RED } );
@@ -153,27 +132,7 @@ define( function( require ) {
     this.myWorldNode.addChild( moleculeControlPanel );
   }
 
-  return inherit( ScreenView, MoleculesAndLightScreenView, {
-    /**
-     * Update the visibility of the button that restores molecules that have
-     * broken apart.  This button should be visible only when one or more
-     * molecules are off the screen (more or less).  This routine uses the
-     * intermediate rendering size to make the determination, which isn't
-     * perfectly accurate, but works well enough for our purposes.
-     */
-    updateRestoreMoleculeButtonVisibility: function() {
-      var restoreButtonVisible = false;
-      var screenRect = new Rectangle( 0, 0, this.applicationWindow.width, this.applicationWindow.height );
-      for ( var molecule = 0; molecule < this.photonAbsorptionModel.activeMolecules.length; molecule++ ) {
-        if ( !screenRect.containsPoint( this.mvt.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
-          restoreButtonVisible = true;
-          break;
-        }
-      }
-      this.restoreMoleculeButtonNode.setVisible( restoreButtonVisible );
-    }
-
-  } );
+  return inherit( ScreenView, MoleculesAndLightScreenView );
 
 } );
 

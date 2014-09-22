@@ -26,10 +26,14 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var PhotonAbsorptionModel = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionModel' );
   var Property = require( 'AXON/Property' );
+  var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  var RectangleBounds = require( 'DOT/Rectangle' );
+  var Text = require( 'SCENERY/nodes/Text' );
 
-  // Class data for the Application Window.
-  // Model-view transform for intermediate coordinates.
-  var INTERMEDIATE_RENDERING_SIZE = new Dimension2( 786, 786 );
+  // Strings
+  var returnMoleculeString = require( 'string!MOLECULES_AND_LIGHT/buttonNode.returnMolecule' );
+
+  // Class data for the Application Window
   var PHOTON_EMITTER_WIDTH = 125;
 
   /**
@@ -44,13 +48,13 @@ define( function( require ) {
     // Supertype constructor
     Rectangle.call( this, 0, 0, 500, 300, {fill: 'black' } );
 
-    // Allow this view window to be called on through nested functions.
+    // Declare immutable rectangle bounds and scale to the mvt matrix scale.
+    this.screenRect = new RectangleBounds( 15, 15, 515, 315);
+    this.screenRect.dilateXY( this.screenRect.minX * mvt.matrix.scaleVector.x, this.screenRect.minY * mvt.matrix.scaleVector.y );
+
     var thisWindow = this;
     this.mvt = mvt;
-
-    // The center of this window seems to be changing once I emit photons and I cannot find out why.
-    // This will keep track of the initial value.  TODO: Find out why this is.
-    this.centerVal = this.getCenter();
+    this.photonAbsorptionModel = photonAbsorptionModel;
 
     // Add the layers for molecules, photons, and photon emitters.
     this.moleculeLayer = new Node();
@@ -64,12 +68,25 @@ define( function( require ) {
     var photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, mvt, photonAbsorptionModel );
     photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
 
+    // Add the button for restoring molecules that break apart.
+    this.restoreMoleculeButtonNode = new RectangularPushButton( { content: new Text( returnMoleculeString ), baseColor: new Color( 255, 144, 0 ) } );
+    this.restoreMoleculeButtonNode.setCenter( new Vector2( this.width - this.restoreMoleculeButtonNode.width,
+        this.height - this.restoreMoleculeButtonNode.height - 50 ) );
+
+    this.addChild( this.restoreMoleculeButtonNode );
+    this.updateRestoreMoleculeButtonVisibility();
+
     // Set up an event listener for adding and removing molecules.
     photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
       var moleculeNode = new MoleculeNode( addedMolecule, thisWindow.mvt ); //Create the molecule node.
-      moleculeNode.scale( 0.65 );
+      moleculeNode.scale( 0.65 ); // Scale the molecule appropriately for the window.
       moleculeNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getSingleMoleculePosition() ) );
       thisWindow.moleculeLayer.addChild( moleculeNode );
+
+      // Watch the molecule position and update restore molecule button visibility.
+      addedMolecule.centerOfGravityProperty.link( function() {
+        thisWindow.updateRestoreMoleculeButtonVisibility();
+      });
 
       photonAbsorptionModel.activeMolecules.addItemRemovedListener( function removalListener( removedMolecule ) {
         if ( removedMolecule === addedMolecule ) {
@@ -96,6 +113,25 @@ define( function( require ) {
     this.photonEmitterLayer.addChild( photonEmitterNode );
   }
 
-  return inherit( Rectangle, MoleculesAndLightApplicationWindow );
+  return inherit( Rectangle, MoleculesAndLightApplicationWindow, {
+
+    /**
+     * Update the visibility of the button that restores molecules that have
+     * broken apart.  This button should be visible only when one or more
+     * molecules are off the screen (more or less).  This routine uses the
+     * intermediate rendering size to make the determination, which isn't
+     * perfectly accurate, but works well enough for our purposes.
+     */
+    updateRestoreMoleculeButtonVisibility: function() {
+      var restoreButtonVisible = false;
+      for ( var molecule = 0; molecule < this.photonAbsorptionModel.activeMolecules.length; molecule++ ) {
+        if ( !this.screenRect.containsPoint( this.mvt.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
+          restoreButtonVisible = true;
+          break;
+        }
+      }
+      this.restoreMoleculeButtonNode.setVisible( restoreButtonVisible );
+    }
+  } );
 
 } );

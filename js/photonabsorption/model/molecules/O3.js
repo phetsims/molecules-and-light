@@ -151,8 +151,8 @@ define( function( require ) {
       this.model.activeMolecules.remove( this );
 
       // Create the constituent molecules that result from breaking apart and add them to the active molecules observable array.
-      var diatomicOxygenMolecule = new O2();
-      var singleOxygenMolecule = new O();
+      var diatomicOxygenMolecule = new O2( this.model );
+      var singleOxygenMolecule = new O( this.model );
       this.model.activeMolecules.add( diatomicOxygenMolecule );
       this.model.activeMolecules.add( singleOxygenMolecule );
 
