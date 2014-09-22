@@ -50,7 +50,7 @@ define( function( require ) {
 
     // Declare immutable rectangle bounds and scale to the mvt matrix scale.
     this.screenRect = new RectangleBounds( 15, 15, 515, 315);
-    this.screenRect.dilateXY( this.screenRect.minX * mvt.matrix.scaleVector.x, this.screenRect.minY * mvt.matrix.scaleVector.y );
+    this.screenRect.dilateXY( this.screenRect.maxX * mvt.matrix.scaleVector.x, this.screenRect.maxY * mvt.matrix.scaleVector.y );
 
     var thisWindow = this;
     this.mvt = mvt;
