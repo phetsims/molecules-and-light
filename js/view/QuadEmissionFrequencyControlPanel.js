@@ -51,10 +51,10 @@ define( function( require ) {
   var PANEL_SIZE = new Dimension2( 850, 150 );
 
   // Description data for the 'Energy Arrow'
-  var ARROW_LENGTH = 250;
+  var ARROW_LENGTH = 200;
   var ARROW_HEAD_HEIGHT = 15;
-  var ARROW_HEAD_WIDTH = 15;
-  var ARROW_TAIL_WIDTH = 2;
+  var ARROW_HEAD_WIDTH = 20;
+  var ARROW_TAIL_WIDTH = 1;
   var ARROW_COLOR = Color.BLACK;
 
   /**
@@ -102,74 +102,26 @@ define( function( require ) {
         cornerRadius: 7
       } );
 
+    // Place radioButtons into a panel.
     Panel.call( this, radioButtons, { fill: '#C5D6E8', stroke: null } );
 
-//    model.photonTargetProperty.link( function() {
-//      model.setPhotonTarget( model.photonTargetProperty.get() );
-//    });
+    // Draw an arrow node to illustrate energy of the emitted photons.
+    var energyFont = new PhetFont( { family: 'Futura', size: 19} ); // font for energy description
+    var energyText = new Text( higherEnergyString, { font: energyFont } );
+    var energyArrow = new ArrowNode( 0, 0, ARROW_LENGTH, 0, {
+      fill: ARROW_COLOR,
+      stroke: ARROW_COLOR,
+      headHeight: ARROW_HEAD_HEIGHT,
+      headWidth: ARROW_HEAD_WIDTH,
+      tailWidth: ARROW_TAIL_WIDTH } );
+    energyArrow.setCenter( new Vector2( this.getCenterX(), this.getCenterY() + 60 ) );
+    energyText.setCenter( new Vector2( energyArrow.getCenterX(), energyArrow.getCenterY() + 15) );
+
+    this.addChild( energyArrow );
+    this.addChild( energyText );
 
   }
 
   return inherit( Panel, QuadEmissionFrequencyControlPanel );
 
 } );
-
-
-
-
-//    options = _.extend( {
-//      stroke: null,
-//      fill: BACKGROUND_COLOR,
-//      lineWidth: 3
-//    }, options );
-//
-//    var wavelengthFont = new PhetFont( { family: 'Futura', size: 24, weight: '500' } );
-//    var energyFont = new PhetFont( { family: 'Futura', size: 19, weight: 'bold'} );
-//
-//    // Declare the radio buttons
-//    var microwaveSelectorNode = new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.MICRO_WAVELENGTH,
-//      new Text( microwaveString, { font: wavelengthFont } ), { scale: 0.75 } );
-//    var infraredSelectorNode = new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.IR_WAVELENGTH,
-//      new Text( infraredString, { font: wavelengthFont } ), {scale: 0.75 } );
-//    var visibleLightSelectorNode = new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.VISIBLE_WAVELENGTH,
-//      new Text( visibleString, {font: wavelengthFont } ), {scale: 0.75 } );
-//    var ultravioletSelectorNode = new AquaRadioButton( photonAbsorptionModel.photonWavelengthProperty, WavelengthConstants.UV_WAVELENGTH,
-//      new Text( ultravioletString, { font: wavelengthFont } ), { scale: 0.75 } );
-//
-//
-//
-//    // Determine the correct spacing between the nodes on this panel.
-//    var interSelectorSpacing = ( PANEL_SIZE.width - microwaveSelectorNode.getBounds().width -
-//                                 infraredSelectorNode.getBounds().width -
-//                                 visibleLightSelectorNode.getBounds().width -
-//                                 ultravioletSelectorNode.getBounds().width ) / 5;
-//
-//    // Set up the radio buttons and photonNodes so that they are centered together on the control panel.
-//    var microwaveBox = new VBox( {children: [ microwavePhotonNode, microwaveSelectorNode ] } );
-//    var infraredBox = new VBox( {children: [ infraredPhotonNode, infraredSelectorNode] } );
-//    var visibleBox = new VBox( {children: [ visiblePhotonNode, visibleLightSelectorNode ] } );
-//    var ultravioletBox = new VBox( {children: [ ultravioletPhotonNode, ultravioletSelectorNode ] } );
-//
-//    var wavelengthSelectorPanelNode = new HBox( {children: [
-//      microwaveBox,
-//      infraredBox,
-//      visibleBox,
-//      ultravioletBox
-//    ], spacing: interSelectorSpacing } );
-//
-//    // Create the energy arrow and associated text.
-//    var energyArrow = new ArrowNode( 0, 0, ARROW_LENGTH, 0, {
-//      fill: ARROW_COLOR,
-//      stroke: ARROW_COLOR,
-//      headHeight: ARROW_HEAD_HEIGHT,
-//      headWidth: ARROW_HEAD_WIDTH,
-//      tailWidth: ARROW_TAIL_WIDTH } );
-//    var energyText = new Text( higherEnergyString, { font: energyFont } );
-//
-//    // Include all contents of the control panel.
-//    var content = new VBox( {align: 'center', spacing: 20, children: [ wavelengthSelectorPanelNode, energyArrow, energyText ] } );
-//
-//    Panel.call( this, content, options );
-//  }
-//
-//  return inherit( Panel, QuadEmissionFrequencyControlPanel );
