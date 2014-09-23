@@ -71,6 +71,7 @@ define( function( require ) {
 
     // Add the initial image and photon emission slider.
     thisNode.updateImage( this.emitterImageWidth );
+
   }
 
   return inherit( Node, PhotonEmitterNode, {

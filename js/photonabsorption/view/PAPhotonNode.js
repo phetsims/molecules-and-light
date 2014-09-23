@@ -8,6 +8,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // images
   var microwavePhotonImage = require( 'image!MOLECULES_AND_LIGHT/microwave-photon.png' );
@@ -30,7 +31,6 @@ define( function( require ) {
    * @constructor
    */
   function PAPhotonNode( photon, mvt ) {
-
     // supertype constructor
     Node.call( this );
     // Cary this node through the scope in nested functions.
@@ -41,7 +41,7 @@ define( function( require ) {
 
     // lookup the image file that corresponds to the wavelength and add a centered image.
     assert && assert( mapWavelengthToImageName.hasOwnProperty( this.photon.getWavelength() ) );
-    this.photonImage = new Image( mapWavelengthToImageName[ this.photon.getWavelength() ], { centerX: 0, centerY: 0 } );
+    this.photonImage = new Image( mapWavelengthToImageName[ this.photon.getWavelength() ]);
 
     this.addChild( this.photonImage );
 
@@ -55,10 +55,8 @@ define( function( require ) {
 
     // Function for updating position.
     updatePosition: function() {
-      // Set overall position.  Recall that positions in the model are defined
-      // as the center bottom of the item.
-      this.centerX = this.mvt.modelToViewX( this.photon.getLocation().x );
-      this.bottom = this.mvt.modelToViewY( this.photon.getLocation().y );
+      // Set overall position.
+      this.center = this.mvt.modelToViewPosition( this.photon.getLocation() );
     }
   } )
 } );
