@@ -27,7 +27,6 @@ define( function( require ) {
   var PhotonAbsorptionModel = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionModel' );
   var Property = require( 'AXON/Property' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
-  var RectangleBounds = require( 'DOT/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // Strings
@@ -48,10 +47,6 @@ define( function( require ) {
     // Supertype constructor
     Rectangle.call( this, 0, 0, 500, 300, {fill: 'black' } );
 
-    // Declare immutable rectangle bounds and scale to the mvt matrix scale.
-    this.screenRect = new RectangleBounds( 15, 15, 515, 315);
-    this.screenRect.dilateXY( this.screenRect.maxX * mvt.matrix.scaleVector.x, this.screenRect.maxY * mvt.matrix.scaleVector.y );
-
     var thisWindow = this;
     this.mvt = mvt;
     this.photonAbsorptionModel = photonAbsorptionModel;
@@ -59,14 +54,18 @@ define( function( require ) {
     // Add the layers for molecules, photons, and photon emitters.
     this.moleculeLayer = new Node();
     this.addChild( this.moleculeLayer );
+
     this.photonLayer = new Node();
     this.addChild( this.photonLayer );
+
     this.photonEmitterLayer = new Node();
     this.addChild( this.photonEmitterLayer );
 
-    // Create the photon emitter.
-    var photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, mvt, photonAbsorptionModel );
-    photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
+
+    // Create and add the photon emitter.
+    this.photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, mvt, photonAbsorptionModel );
+    this.photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
+    this.photonEmitterLayer.addChild( this.photonEmitterNode );
 
     // Add the button for restoring molecules that break apart.
     this.restoreMoleculeButtonNode = new RectangularPushButton( {
@@ -84,14 +83,15 @@ define( function( require ) {
     // Set up an event listener for adding and removing molecules.
     photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
       var moleculeNode = new MoleculeNode( addedMolecule, thisWindow.mvt ); //Create the molecule node.
-      moleculeNode.scale( 0.65 ); // Scale the molecule appropriately for the window.
+      moleculeNode.scale( 0.65 ); // Scale appropriately for the window.
+
       moleculeNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getSingleMoleculePosition() ) );
       thisWindow.moleculeLayer.addChild( moleculeNode );
 
       // Watch the molecule position and update restore molecule button visibility.
       addedMolecule.centerOfGravityProperty.link( function() {
         thisWindow.updateRestoreMoleculeButtonVisibility();
-      });
+      } );
 
       photonAbsorptionModel.activeMolecules.addItemRemovedListener( function removalListener( removedMolecule ) {
         if ( removedMolecule === addedMolecule ) {
@@ -104,7 +104,13 @@ define( function( require ) {
     // Set up the event listeners for adding and removing photons.
     photonAbsorptionModel.photons.addItemAddedListener( function( addedPhoton ) {
       var photonNode = new PAPhotonNode( addedPhoton, thisWindow.mvt );
+      photonNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
       thisWindow.photonLayer.addChild( photonNode );
+
+      // Watch photon positions and determine if photon should be removed from window.
+      addedPhoton.locationProperty.link( function() {
+        thisWindow.checkPhotonBounds();
+      });
 
       photonAbsorptionModel.photons.addItemRemovedListener( function removalListener( removedPhoton ) {
         if ( removedPhoton === addedPhoton ) {
@@ -114,8 +120,6 @@ define( function( require ) {
       } );
     } );
 
-    // Add the photon emitter.
-    this.photonEmitterLayer.addChild( photonEmitterNode );
   }
 
   return inherit( Rectangle, MoleculesAndLightApplicationWindow, {
@@ -128,13 +132,27 @@ define( function( require ) {
     updateRestoreMoleculeButtonVisibility: function() {
       var restoreButtonVisible = false;
       for ( var molecule = 0; molecule < this.photonAbsorptionModel.activeMolecules.length; molecule++ ) {
-        if ( !this.screenRect.containsPoint( this.mvt.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
+        if ( !this.containsPointSelf( this.mvt.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
           restoreButtonVisible = true;
           break;
         }
       }
       this.restoreMoleculeButtonNode.setVisible( restoreButtonVisible );
-    }
-  } );
+    },
 
+    /**
+     * Check to see if any photons are outside the application window.
+     */
+    checkPhotonBounds: function() {
+      var photonsToRemove = [];
+      for ( var photon = 0; photon < this.photonAbsorptionModel.photons.length; photon++ ) {
+        if ( !this.containsPoint( this.mvt.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).getLocation() ) ) ) {
+          console.log( this.mvt.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).getLocation() ) );
+          photonsToRemove.push( this.photonAbsorptionModel.photons.get( photon ) );
+        }
+      }
+
+      this.photonAbsorptionModel.photons.removeAll( photonsToRemove );
+    }
+  } )
 } );
