@@ -147,7 +147,6 @@ define( function( require ) {
       var photonsToRemove = [];
       for ( var photon = 0; photon < this.photonAbsorptionModel.photons.length; photon++ ) {
         if ( !this.containsPoint( this.mvt.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).getLocation() ) ) ) {
-          console.log( this.mvt.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).getLocation() ) );
           photonsToRemove.push( this.photonAbsorptionModel.photons.get( photon ) );
         }
       }
