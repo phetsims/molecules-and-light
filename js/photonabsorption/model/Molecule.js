@@ -27,7 +27,7 @@ define( function( require ) {
   //------------------------------------------------------------------------
   // Class Data
   //------------------------------------------------------------------------
-  var PHOTON_EMISSION_SPEED = 2; // Picometers per second.
+  var PHOTON_EMISSION_SPEED = 3; // Picometers per second.
   var PHOTON_ABSORPTION_DISTANCE = 100;
 
   //Random number generator.
