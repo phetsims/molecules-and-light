@@ -18,6 +18,8 @@ define( function( require ) {
   var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
   var AtomNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/AtomNode' );
   var AtomicBondNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/AtomicBondNode' );
+  var Circle = require( 'SCENERY/nodes/Circle' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // Model Data for the molecule node
   // This flag is used to turn on/off the appearance of the center of
@@ -32,6 +34,7 @@ define( function( require ) {
    * @constructor
    */
   function MoleculeNode( molecule, mvt ) {
+
 
     Node.call( this );
     // Cary this node through the scope in nested functions.
@@ -69,6 +72,7 @@ define( function( require ) {
 
     // Move the bond layer behind the atoms.
     this.bondLayer.moveToBack();
+  
 
     // Make sure the highlighting is correct when the simulation starts.
     molecule.trigger( 'electronicEnergyStateChanged' );

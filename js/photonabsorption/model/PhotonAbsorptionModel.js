@@ -50,12 +50,12 @@ define( function( require ) {
   // Class Data
   //----------------------------------------------------------------------------
   // Constants that control where and how photons are emitted.
-  var PHOTON_EMISSION_LOCATION = new Vector2( -1100, 0 );
+  var PHOTON_EMISSION_LOCATION = new Vector2( -2000, 0 );
   var PHOTON_EMISSION_ANGLE_RANGE = Math.PI / 2;
 
   // Velocity of emitted photons.  Since they are emitted horizontally, only
   // one value is needed.
-  var PHOTON_VELOCITY = 2.0;
+  var PHOTON_VELOCITY = 3.0;
 
   // Distance for a photon to travel before being removed from the model.
   // This value is essentially arbitrary, and needs to be set such that the

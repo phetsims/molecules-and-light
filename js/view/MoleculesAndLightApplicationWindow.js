@@ -51,6 +51,8 @@ define( function( require ) {
     this.mvt = mvt;
     this.photonAbsorptionModel = photonAbsorptionModel;
 
+    this.restoreButtonVisibleProperty = new Property( false );
+
     // Add the layers for molecules, photons, and photon emitters.
     this.moleculeLayer = new Node();
     this.addChild( this.moleculeLayer );
@@ -71,26 +73,27 @@ define( function( require ) {
     this.restoreMoleculeButtonNode = new RectangularPushButton( {
       content: new Text( returnMoleculeString ),
       baseColor: new Color( 255, 144, 0 ),
-      listener: function() { photonAbsorptionModel.restorePhotonTarget() }
+      listener: function() {
+        photonAbsorptionModel.restorePhotonTarget();
+        thisWindow.restoreButtonVisibleProperty.set( false );
+        thisWindow.moleculeCheckBounds();
+      }
     } );
 
     this.restoreMoleculeButtonNode.setCenter( new Vector2( this.width - this.restoreMoleculeButtonNode.width,
         this.restoreMoleculeButtonNode.height + 10 ) );
 
     this.addChild( this.restoreMoleculeButtonNode );
-    this.updateRestoreMoleculeButtonVisibility();
+    this.moleculeCheckBounds();
 
     // Set up an event listener for adding and removing molecules.
     photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
       var moleculeNode = new MoleculeNode( addedMolecule, thisWindow.mvt ); //Create the molecule node.
-      moleculeNode.scale( 0.65 ); // Scale appropriately for the window.
-
-      moleculeNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getSingleMoleculePosition() ) );
       thisWindow.moleculeLayer.addChild( moleculeNode );
 
-      // Watch the molecule position and update restore molecule button visibility.
+      // Determine if it is time to remove molecule and update restore molecule button visibility.
       addedMolecule.centerOfGravityProperty.link( function() {
-        thisWindow.updateRestoreMoleculeButtonVisibility();
+        thisWindow.moleculeCheckBounds();
       } );
 
       photonAbsorptionModel.activeMolecules.addItemRemovedListener( function removalListener( removedMolecule ) {
@@ -109,8 +112,8 @@ define( function( require ) {
 
       // Watch photon positions and determine if photon should be removed from window.
       addedPhoton.locationProperty.link( function() {
-        thisWindow.checkPhotonBounds();
-      });
+        thisWindow.photonCheckBounds();
+      } );
 
       photonAbsorptionModel.photons.addItemRemovedListener( function removalListener( removedPhoton ) {
         if ( removedPhoton === addedPhoton ) {
@@ -119,6 +122,11 @@ define( function( require ) {
         }
       } );
     } );
+
+    // If the molecule control panel is used, remove the restore molecule button.
+    this.photonAbsorptionModel.photonTargetProperty.link( function() {
+      thisWindow.restoreButtonVisibleProperty.set( false );
+    } )
 
   }
 
@@ -129,21 +137,23 @@ define( function( require ) {
      * visible only when one or more molecules are off the screen (more or less).  This routine uses the intermediate
      * rendering size to make the determination, which isn't perfectly accurate, but works well enough for our purposes.
      */
-    updateRestoreMoleculeButtonVisibility: function() {
-      var restoreButtonVisible = false;
+    moleculeCheckBounds: function() {
+      var moleculesToRemove = [];
       for ( var molecule = 0; molecule < this.photonAbsorptionModel.activeMolecules.length; molecule++ ) {
-        if ( !this.containsPointSelf( this.mvt.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
-          restoreButtonVisible = true;
+        if ( !this.containsPoint( this.mvt.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
+          moleculesToRemove.push( this.photonAbsorptionModel.activeMolecules.get( molecule ) );
+          this.restoreButtonVisibleProperty.set( true );
           break;
         }
       }
-      this.restoreMoleculeButtonNode.setVisible( restoreButtonVisible );
+      this.restoreMoleculeButtonNode.setVisible( this.restoreButtonVisibleProperty.get() );
+      this.photonAbsorptionModel.activeMolecules.removeAll( moleculesToRemove );
     },
 
     /**
      * Check to see if any photons are outside the application window.
      */
-    checkPhotonBounds: function() {
+    photonCheckBounds: function() {
       var photonsToRemove = [];
       for ( var photon = 0; photon < this.photonAbsorptionModel.photons.length; photon++ ) {
         if ( !this.containsPoint( this.mvt.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).getLocation() ) ) ) {

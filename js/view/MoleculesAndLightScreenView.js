@@ -65,7 +65,7 @@ define( function( require ) {
       Vector2.ZERO,
       new Vector2( Math.round( INTERMEDIATE_RENDERING_SIZE.width * 0.55 ),
         Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.50 ) ),
-      0.18 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
+      0.10 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
 
     // Create the node that will be the root for all the world children on this canvas.  This is done to make it easier
     // to zoom in and out on the world without affecting screen children.
