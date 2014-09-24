@@ -18,48 +18,20 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
 
   /**
    * Constructor for a photon emitter panel.  This is a single panel for the emission frequency control panel.
    *
-   * @param { String } emitterName
    * @param( Image } emitterImage
    * @param( PAPhotonNode } photonNode
-   * @param { Object } options
    * @constructor
    */
-  function PhotonEmitterSelectorPanel( emitterName, emitterImage, photonNode, options) {
-
-    options = _.extend( {
-      // defaults
-      stroke: null,
-      fill: 'black',
-      lineWidth: 3
-    }, options );
-
-    // Supertype constructor
-    Rectangle.call( this, 0, 0, 100, 50, 7, 7, options );
-
-    // Scale the emitter and place it in the center of the panel.
+  function PhotonEmitterSelectorPanel( emitterImage, photonNode ) {
     emitterImage.scale( 0.15 );
-    // TODO: Find out how to remove x offset of microwave and ultraviolet emitters.
-    emitterImage.setCenter( new Vector2( this.getLeft() + emitterImage.getWidth() / 2, this.getCenterY() ) );
-
-    // Place the photon node to the right of the emitter.
-    photonNode.setCenter( new Vector2( emitterImage.getRight() + 20, emitterImage.getCenterY()) );
-
-    // Text containing the emitter name
-    var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
-    var emitterTitle = new Text( emitterName, { font: font } );
-    emitterTitle.setCenter( new Vector2( this.getCenterX(), this.getBottom() + 10 ) );
-
-    // Add the emitter image and emitter name to the rectangle.
-    this.addChild( emitterImage );
-    this.addChild( emitterTitle );
-    this.addChild( photonNode );
-
+    LayoutBox.call( this, { orientation: 'horizontal', spacing: 10, children: [ emitterImage, photonNode ] } );
   }
 
-  return inherit( Rectangle, PhotonEmitterSelectorPanel );
+  return inherit( LayoutBox, PhotonEmitterSelectorPanel );
 
 } );

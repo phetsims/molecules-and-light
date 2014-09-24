@@ -16,8 +16,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Text = require( 'SCENERY/nodes/Text' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Property = require( 'AXON/Property' );
@@ -74,30 +73,33 @@ define( function( require ) {
 
     // Include all contents of the control panel.
     var content = [
-      new PhotonEmitterSelectorPanel( microwaveString, new Image( microwaveTransmitter ), microwavePhotonNode ),
-      new PhotonEmitterSelectorPanel( infraredString, new Image( heatLampImage ), infraredPhotonNode ),
-      new PhotonEmitterSelectorPanel( visibleString, new Image( flashlight2Image ), visiblePhotonNode ),
-      new PhotonEmitterSelectorPanel( ultravioletString, new Image( uvLight2 ), ultravioletPhotonNode )
+      new PhotonEmitterSelectorPanel( new Image( microwaveTransmitter ), microwavePhotonNode ),
+      new PhotonEmitterSelectorPanel( new Image( heatLampImage ), infraredPhotonNode ),
+      new PhotonEmitterSelectorPanel( new Image( flashlight2Image ), visiblePhotonNode ),
+      new PhotonEmitterSelectorPanel( new Image( uvLight2 ), ultravioletPhotonNode )
     ];
 
     // Load the wavelengths into an array for the radio button content.
     var wavelengths = [ WavelengthConstants.MICRO_WAVELENGTH, WavelengthConstants.IR_WAVELENGTH,
       WavelengthConstants.VISIBLE_WAVELENGTH, WavelengthConstants.UV_WAVELENGTH ];
 
+    var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
+    var labels = [ microwaveString, infraredString, visibleString, ultravioletString ];
+
     var radioButtonContent = [];
     for ( var i = 0; i < wavelengths.length; i++ ) {
-      radioButtonContent.push( { value: wavelengths[i], node: content[i] } );
+      radioButtonContent.push( { value: wavelengths[i], node: content[i], label: new Text( labels[i], { font: font } ) } );
     }
 
     var radioButtons = new RadioButtonGroup( photonAbsorptionModel.photonWavelengthProperty, radioButtonContent,
       {
         orientation: 'horizontal',
         spacing: 15,
-        baseColor: '#C5D6E8',
+        baseColor: 'black',
         selectedStroke: new Color( 47, 101, 209 ),
         deselectedLineWidth: 0,
         buttonContentXMargin: 0,
-        buttonContentYMargin: 0,
+        buttonContentYMargin: 8,
         selectedLineWidth: 3,
         cornerRadius: 7
       } );
