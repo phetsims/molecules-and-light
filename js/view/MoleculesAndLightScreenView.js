@@ -76,7 +76,7 @@ define( function( require ) {
     // absorption model.
     this.applicationWindow = new MoleculesAndLightApplicationWindow( photonAbsorptionModel, this.mvt );
     this.myWorldNode.addChild( this.applicationWindow );
-//    this.applicationWindow.setLeftTop( new Vector2( 15, 15 ) );
+    this.applicationWindow.translate( new Vector2( 15, 15 ) );
 
     // Create the control panel for photon emission frequency.
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );

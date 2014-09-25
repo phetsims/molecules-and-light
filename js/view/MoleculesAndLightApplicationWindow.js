@@ -140,7 +140,7 @@ define( function( require ) {
     moleculeCheckBounds: function() {
       var moleculesToRemove = [];
       for ( var molecule = 0; molecule < this.photonAbsorptionModel.activeMolecules.length; molecule++ ) {
-        if ( !this.containsPoint( this.mvt.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
+        if ( !this.containsPointSelf( this.mvt.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
           moleculesToRemove.push( this.photonAbsorptionModel.activeMolecules.get( molecule ) );
           this.restoreButtonVisibleProperty.set( true );
           break;
@@ -156,7 +156,7 @@ define( function( require ) {
     photonCheckBounds: function() {
       var photonsToRemove = [];
       for ( var photon = 0; photon < this.photonAbsorptionModel.photons.length; photon++ ) {
-        if ( !this.containsPoint( this.mvt.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).getLocation() ) ) ) {
+        if ( !this.containsPointSelf( this.mvt.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).getLocation() ) ) ) {
           photonsToRemove.push( this.photonAbsorptionModel.photons.get( photon ) );
         }
       }
