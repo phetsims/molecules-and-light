@@ -45,7 +45,7 @@ define( function( require ) {
   function MoleculesAndLightApplicationWindow( photonAbsorptionModel, mvt ) {
 
     // Supertype constructor
-    Rectangle.call( this, 0, 0, 500, 300, {fill: 'black' } );
+    Rectangle.call( this, 0, 0, 500, 300, 7, 7, {fill: 'black', stroke: new Color( 47, 101, 209 ), lineWidth: 5} );
 
     var thisWindow = this;
     this.mvt = mvt;
