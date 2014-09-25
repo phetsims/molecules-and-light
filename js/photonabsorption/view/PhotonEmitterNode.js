@@ -23,7 +23,6 @@ define( function( require ) {
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
   var Vector2 = require( 'DOT/Vector2' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Color = require( 'SCENERY/util/Color' );
   var EmissionRateControlSliderNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/EmissionRateControlSliderNode' );
 
