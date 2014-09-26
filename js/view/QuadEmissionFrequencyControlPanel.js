@@ -86,12 +86,12 @@ define( function( require ) {
     var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
     var labels = [ microwaveString, infraredString, visibleString, ultravioletString ];
 
-    var radioButtonContent = [];
+    this.radioButtonContent = [];
     for ( var i = 0; i < wavelengths.length; i++ ) {
-      radioButtonContent.push( { value: wavelengths[i], node: content[i], label: new Text( labels[i], { font: font } ) } );
+      this.radioButtonContent.push( { value: wavelengths[i], node: content[i], label: new Text( labels[i], { font: font } ) } );
     }
 
-    var radioButtons = new RadioButtonGroup( photonAbsorptionModel.photonWavelengthProperty, radioButtonContent,
+    this.radioButtons = new RadioButtonGroup( photonAbsorptionModel.photonWavelengthProperty, this.radioButtonContent,
       {
         orientation: 'horizontal',
         spacing: 15,
@@ -105,7 +105,7 @@ define( function( require ) {
       } );
 
     // Place radioButtons into a panel.
-    Panel.call( this, radioButtons, { fill: '#C5D6E8', stroke: null } );
+    Panel.call( this, this.radioButtons, { fill: '#C5D6E8', stroke: null } );
 
     // Draw an arrow node to illustrate energy of the emitted photons.
     var energyFont = new PhetFont( { family: 'Futura', size: 19} ); // font for energy description
@@ -117,7 +117,7 @@ define( function( require ) {
       headWidth: ARROW_HEAD_WIDTH,
       tailWidth: ARROW_TAIL_WIDTH } );
     energyArrow.setCenter( new Vector2( this.getCenterX(), this.getCenterY() + 60 ) );
-    energyText.setCenter( new Vector2( energyArrow.getCenterX(), energyArrow.getCenterY() + 15) );
+    energyText.setCenter( new Vector2( energyArrow.getCenterX(), energyArrow.getCenterY() + 15 ) );
 
     this.addChild( energyArrow );
     this.addChild( energyText );

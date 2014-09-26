@@ -37,6 +37,7 @@ define( function( require ) {
   var StepButton = require( 'SCENERY_PHET/StepButton' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var Rectangle = require( 'DOT/Rectangle' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   // Strings
   var buttonCaptionString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.buttonCaption' );
@@ -117,6 +118,18 @@ define( function( require ) {
       } );
 
     this.addChild( stepButton );
+
+    // Add the button for displaying the electromagnetic spectrum.
+    var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
+    var showSpectrumButton = new RectangularPushButton( {
+      content: new Text( buttonCaptionString, { font: font } ),
+      baseColor: new Color( 98, 173, 205 ),
+      listener: function() {}
+    } );
+    showSpectrumButton.setCenter( new Vector2( moleculeControlPanel.centerX, photonEmissionControlPanel.centerY - 33 ) );
+    this.myWorldNode.addChild( showSpectrumButton );
+
+
 
 //  // Button for displaying EM specturm.
 //  private final HTMLImageButtonNode showSpectrumButton = new HTMLImageButtonNode( MoleculesAndLightResources.getString( "SpectrumWindow.buttonCaption" ), new PhetFont( Font.BOLD, 24 ), new Color( 185, 178, 95 ) );
