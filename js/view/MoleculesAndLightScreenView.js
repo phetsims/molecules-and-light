@@ -38,10 +38,12 @@ define( function( require ) {
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var Rectangle = require( 'DOT/Rectangle' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var SpectrumWindow = require( 'MOLECULES_AND_LIGHT/view/SpectrumWindow' );
+  var Plane = require( 'SCENERY/nodes/Plane' );
+
 
   // Strings
   var buttonCaptionString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.buttonCaption' );
-  var returnMoleculeString = require( 'string!MOLECULES_AND_LIGHT/buttonNode.returnMolecule' );
 
   // Class data for the Molecules and Light screen view
   // Model-view transform for intermediate coordinates.
@@ -107,7 +109,7 @@ define( function( require ) {
         radius: 23
       } );
 
-    this.addChild( playPauseButton );
+    this.myWorldNode.addChild( playPauseButton );
 
     // Add step button to manually step the animation.
     var stepButton = new StepButton( function() { photonAbsorptionModel.manualStep(); }, photonAbsorptionModel.playProperty,
@@ -117,7 +119,7 @@ define( function( require ) {
         radius: 15
       } );
 
-    this.addChild( stepButton );
+    this.myWorldNode.addChild( stepButton );
 
     // Add the button for displaying the electromagnetic spectrum.
     var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
@@ -129,20 +131,18 @@ define( function( require ) {
     showSpectrumButton.setCenter( new Vector2( moleculeControlPanel.centerX, photonEmissionControlPanel.centerY - 33 ) );
     this.myWorldNode.addChild( showSpectrumButton );
 
-
-
-//  // Button for displaying EM specturm.
-//  private final HTMLImageButtonNode showSpectrumButton = new HTMLImageButtonNode( MoleculesAndLightResources.getString( "SpectrumWindow.buttonCaption" ), new PhetFont( Font.BOLD, 24 ), new Color( 185, 178, 95 ) );
-//    var showSpectrumButton = new TextPushButton( buttonCaptionString, { fill: Color.RED } );
-
-//  // Window that displays the EM spectrum upon request.
-//  private final SpectrumWindow spectrumWindow = new SpectrumWindow() {{ setVisible( false ); }};
-//
-
-
     // Add the nodes in the order necessary for correct layering.
     this.myWorldNode.addChild( photonEmissionControlPanel );
     this.myWorldNode.addChild( moleculeControlPanel );
+
+    //Renderer must be specified here because the plane is added directly to the scene (instead of to some other node
+    // that already has svg renderer)
+    var plane = new Plane( {fill: 'black', opacity: 0.3, renderer: 'svg'} );
+    this.myWorldNode.addChild( plane );
+
+    // Window that displays the EM spectrum upon request.
+    var spectrumWindow = new SpectrumWindow();
+    this.myWorldNode.addChild( spectrumWindow );
   }
 
   return inherit( ScreenView, MoleculesAndLightScreenView );
