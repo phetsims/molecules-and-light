@@ -40,6 +40,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SpectrumWindow = require( 'MOLECULES_AND_LIGHT/view/SpectrumWindow' );
   var Plane = require( 'SCENERY/nodes/Plane' );
+  var Property = require( 'AXON/Property' );
 
 
   // Strings
@@ -70,6 +71,9 @@ define( function( require ) {
         Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.50 ) ),
       0.10 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
 
+    // Property to watch visibility of the
+    var spectrumOpenProperty = new Property( false );
+
     // Create the node that will be the root for all the world children on this canvas.  This is done to make it easier
     // to zoom in and out on the world without affecting screen children.
     this.myWorldNode = new Node();
@@ -99,7 +103,7 @@ define( function( require ) {
         radius: 18
       } );
 
-    this.addChild( resetAllButton );
+    this.myWorldNode.addChild( resetAllButton );
 
     // Add play/pause button.
     var playPauseButton = new PlayPauseButton( photonAbsorptionModel.playProperty,
@@ -121,12 +125,15 @@ define( function( require ) {
 
     this.myWorldNode.addChild( stepButton );
 
+    // Window that displays the EM spectrum upon request.
+    var spectrumWindow = new SpectrumWindow();
+
     // Add the button for displaying the electromagnetic spectrum.
     var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
     var showSpectrumButton = new RectangularPushButton( {
       content: new Text( buttonCaptionString, { font: font } ),
       baseColor: new Color( 98, 173, 205 ),
-      listener: function() {}
+      listener: function() { thisScreenView.updateSpectrumWindowVisibility( spectrumWindow ) }
     } );
     showSpectrumButton.setCenter( new Vector2( moleculeControlPanel.centerX, photonEmissionControlPanel.centerY - 33 ) );
     this.myWorldNode.addChild( showSpectrumButton );
@@ -137,15 +144,32 @@ define( function( require ) {
 
     //Renderer must be specified here because the plane is added directly to the scene (instead of to some other node
     // that already has svg renderer)
-    var plane = new Plane( {fill: 'black', opacity: 0.3, renderer: 'svg'} );
-    this.myWorldNode.addChild( plane );
+//    var plane = new Plane( {fill: 'black', opacity: 0.3, renderer: 'svg'} );
+//    this.myWorldNode.addChild( plane );
 
-    // Window that displays the EM spectrum upon request.
-    var spectrumWindow = new SpectrumWindow();
-    this.myWorldNode.addChild( spectrumWindow );
   }
 
-  return inherit( ScreenView, MoleculesAndLightScreenView );
+  return inherit( ScreenView, MoleculesAndLightScreenView, {
+
+    updateSpectrumWindowVisibility: function( spectrumWindow ) {
+      //Renderer must be specified here because the plane is added directly to the scene (instead of to some other node
+      // that already has svg renderer)
+      var plane = new Plane( {fill: 'black', opacity: 0.3, renderer: 'svg'} );
+      this.myWorldNode.addChild( plane );
+      this.myWorldNode.addChild( spectrumWindow );
+      var aboutDialogListener = {up: function() {
+        spectrumWindow.removeInputListener( aboutDialogListener );
+        plane.addInputListener( aboutDialogListener );
+        spectrumWindow.detach();
+        plane.detach();
+      }};
+      spectrumWindow.addInputListener( aboutDialogListener );
+      plane.addInputListener( aboutDialogListener );
+
+    }
+
+  } );
+
 
 } );
 

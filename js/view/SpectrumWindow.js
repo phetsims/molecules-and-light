@@ -36,7 +36,7 @@ define( function( require ) {
     /**
      * @constructor
      */
-    function SpectrumWindow() {
+    function SpectrumWindow( ) {
 
       var spectrumWindow = this;
 
@@ -48,7 +48,7 @@ define( function( require ) {
 
       var children = [
         new SpectrumDiagram(),
-        new CloseButton()
+        new CloseButton( )
       ];
 
       var content = new LayoutBox( { orientation: 'vertical', align: 'center', spacing: 5, children: children } );
@@ -113,7 +113,14 @@ define( function( require ) {
     };
 
     /**
-     * Class that defines a labeled arrow node.
+     *
+     * @param {Number} length
+     * @param {String} orientation
+     * @param {String} captionText
+     * @param {Color} leftColor
+     * @param {Color} rightColor
+     * @returns {ArrowNode}
+     * @constructor
      */
     var LabeledArrow = function( length, orientation, captionText, leftColor, rightColor ) {
 
@@ -162,6 +169,14 @@ define( function( require ) {
 
     };
 
+    /**
+     * Create a button which closes the spectrum window.  As of right now the behavior of the spectrum window is to
+     * close whenever the user clicks in the molecuels and light screen view ( as in AboutDialog ).  This means that no
+     * closing listener is necessary.
+     *
+     * @returns {RectangularPushButton}
+     * @constructor
+     */
     var CloseButton = function() {
 
       var content = new Text( spectrumWindowCloseString, { font: new PhetFont( 16 ) } );
@@ -172,31 +187,7 @@ define( function( require ) {
     return inherit( ScreenView, SpectrumWindow );
 
   }
-)
-;
-
-//    /**
-//     * Constructor.
-//     */
-//    public SpectrumWindow() {
-
-//
-//        // Add the close button.
-//        HTMLImageButtonNode closeButton = new HTMLImageButtonNode( MoleculesAndLightResources.getCommonString( "Common.choice.close" ), Color.ORANGE );
-//        closeButton.addActionListener( new ActionListener() {
-//            public void actionPerformed( ActionEvent event ) {
-//                // Post an event in the system queue that indicates a close.
-//                WindowEvent wev = new WindowEvent(SpectrumWindow.this, WindowEvent.WINDOW_CLOSING);
-//                Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
-//            }
-//        } );
-//        closeButton.centerFullBoundsOnPoint( spectrumDiagram.getFullBoundsReference().getCenterX(),
-//                spectrumDiagram.getFullBoundsReference().getMaxY() + 30 );
-//        canvas.addWorldChild( closeButton );
-//
-//
-//
-
+);
 
 //
 //    /**
