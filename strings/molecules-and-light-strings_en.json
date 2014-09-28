@@ -23,6 +23,7 @@
   "buttonNode.returnMolecule": "Return Molecule",
   "SpectrumWindow.title": "Light Spectrum",
   "SpectrumWindow.frequencyArrowLabel": "Increasing frequency and energy",
-  "SpectrumWindow.wavelengthArrowLabel": "Increasing wavelength"
+  "SpectrumWindow.wavelengthArrowLabel": "Increasing wavelength",
+  "SpectrumWindow.close": "Close"
 
 }

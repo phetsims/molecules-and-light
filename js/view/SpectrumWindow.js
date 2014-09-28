@@ -25,18 +25,20 @@ define( function( require ) {
     var Dimension2 = require( 'DOT/Dimension2' );
     var LinearGradient = require( 'SCENERY/util/LinearGradient' );
     var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+    var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
 
     // strings
     var spectrumWindowTitleString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.title' );
     var frequencyArrowLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.frequencyArrowLabel' );
     var wavelengthArrowLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.wavelengthArrowLabel' );
+    var spectrumWindowCloseString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.close' );
 
     /**
      * @constructor
      */
     function SpectrumWindow() {
 
-      var SpectrumWindow = this;
+      var spectrumWindow = this;
 
       /*
        * Use ScreenView, to help center and scale content. Renderer must be specified here because the window is added
@@ -45,11 +47,11 @@ define( function( require ) {
       ScreenView.call( this, {renderer: 'svg'} );
 
       var children = [
-        new SpectrumDiagram()
-//      new CloseButton()
+        new SpectrumDiagram(),
+        new CloseButton()
       ];
 
-      var content = new LayoutBox( { orientation: 'vertical', align: 'left', spacing: 5, children: children } );
+      var content = new LayoutBox( { orientation: 'vertical', align: 'center', spacing: 5, children: children } );
 
       this.addChild( new Panel( content, {
           centerX: this.layoutBounds.centerX,
@@ -101,25 +103,14 @@ define( function( require ) {
       );
       children.push( wavelengthArrow );
 
+      // Add the diagram that depicts the wave that gets shorter.
+      // ChirpNode decreasingWavelengthNode = new ChirpNode( OVERALL_DIMENSIONS.width - 2 * HORIZONTAL_INSET );
+      // decreasingWavelengthNode.setOffset( HORIZONTAL_INSET, wavelengthArrow.getFullBoundsReference().getMaxY() + 20 );
+      // addChild( decreasingWavelengthNode );
+
       return new LayoutBox( { orientation: 'vertical', children: children } )
 
     };
-
-    //
-//        public SpectrumDiagram() {
-//
-
-//
-
-//
-
-//
-//            // Add the diagram that depicts the wave that gets shorter.
-//            ChirpNode decreasingWavelengthNode = new ChirpNode( OVERALL_DIMENSIONS.width - 2 * HORIZONTAL_INSET );
-//            decreasingWavelengthNode.setOffset( HORIZONTAL_INSET, wavelengthArrow.getFullBoundsReference().getMaxY() + 20 );
-//            addChild( decreasingWavelengthNode );
-//        }
-//    }
 
     /**
      * Class that defines a labeled arrow node.
@@ -171,22 +162,14 @@ define( function( require ) {
 
     };
 
-//        public LabeledArrow( double length, Orientation orientation, String captionText, Color topColor, Color bottomColor ) {
-//
-//
-//            // Create and add the textual label.
-//            PText label = new PText( captionText );
-//            label.setFont( LABEL_FONT );
-//            label.centerFullBoundsOnPoint( arrowNode.getFullBoundsReference().getCenterX(),
-//                    arrowNode.getFullBoundsReference().getCenterY() );
-//            addChild( label );
-//        }
-//    }
+    var CloseButton = function() {
 
-    inherit( ScreenView, SpectrumWindow );
+      var content = new Text( spectrumWindowCloseString, { font: new PhetFont( 16 ) } );
+      return new RectangularPushButton( { content: content } );
 
+    };
 
-    return SpectrumWindow;
+    return inherit( ScreenView, SpectrumWindow );
 
   }
 )
