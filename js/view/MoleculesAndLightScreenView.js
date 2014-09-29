@@ -71,9 +71,6 @@ define( function( require ) {
         Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.50 ) ),
       0.10 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
 
-    // Property to watch visibility of the
-    var spectrumOpenProperty = new Property( false );
-
     // Create the node that will be the root for all the world children on this canvas.  This is done to make it easier
     // to zoom in and out on the world without affecting screen children.
     this.myWorldNode = new Node();
@@ -172,43 +169,4 @@ define( function( require ) {
 
 
 } );
-
-
-//  //----------------------------------------------------------------------------
-//  // Constructors
-//  //----------------------------------------------------------------------------
-//
-//    // Add the button for displaying the EM spectrum.
-//    myWorldNode.addChild( showSpectrumButton );
-//    showSpectrumButton.setOffset( 0, 700 );
-//    showSpectrumButton.addActionListener( new ActionListener() {
-//      public void actionPerformed( ActionEvent event ) {
-//        // If the spectrum window is currently invisible
-//        // maximized, un-maximize it.
-//        if ( !spectrumWindow.isVisible() && ( spectrumWindow.getExtendedState() & Frame.MAXIMIZED_BOTH ) == Frame.MAXIMIZED_BOTH ) {
-//          spectrumWindow.setExtendedState( spectrumWindow.getExtendedState() & ~Frame.MAXIMIZED_BOTH );
-//        }
-//        // If the spectrum window is currently minimized, restore it.
-//        if ( spectrumWindow.getState() == Frame.ICONIFIED ) {
-//          spectrumWindow.setState( Frame.NORMAL );
-//        }
-//
-//        // Always set it visible.  This has the effect of bringing it
-//        // to the front if it is behind the main sim window.
-//        spectrumWindow.setVisible( true );
-//      }
-//    } );
-//
-//    // Update the layout.
-//    updateLayout();
-//  }
-//
-//  //----------------------------------------------------------------------------
-//  // Methods
-//  //----------------------------------------------------------------------------
-//
-//
-//
-//  }
-//
 
