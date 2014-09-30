@@ -219,8 +219,14 @@ define( function( require ) {
 
       // Add the frequency tick marks to the top of the spectrum strip.
       for ( var i = 4; i <= 20; i++ ) {
-        var includeLabel = ( i % 2 === 0 );
-        addFrequencyTickMark( Math.pow( 10, i ), includeLabel );
+        var includeFrequencyLabel = ( i % 2 === 0 );
+        addFrequencyTickMark( Math.pow( 10, i ), includeFrequencyLabel );
+      }
+
+      // Add the wavelength tick marks to the bottom of the spectrum.
+      for ( var j = -12; j <= 4; j++ ) {
+        var includeWavelengthLabel = ( j % 2 === 0 );
+        addWavelengthTickMark( Math.pow( 10, j ), includeWavelengthLabel );
       }
 
       /**
@@ -266,6 +272,38 @@ define( function( require ) {
       }
 
       /**
+       * Add a tick mark for the specified wavelength.  Wavelength tick marks go on the bottom of the strip.
+       *
+       * @param {Number} wavelength
+       * @param {Boolean} addLabel
+       */
+      function addWavelengthTickMark( wavelength, addLabel ) {
+
+        // Create and add the tick mark line.
+        var tickMarkNode = new Line( 0, 0, 0, TICK_MARK_HEIGHT, { stroke: Color.BLACK, lineWidth: 2 } );
+        tickMarkNode.setCenterTop( new Vector2( getOffsetFromWavelength( wavelength ), strip.getBottom() ) );
+        spectrumRootNode.addChild( tickMarkNode );
+        if ( addLabel ) {
+          // Create and add the label.
+          var label = createExponentialLabel( wavelength );
+          // Calculate x offset for label.  Allows the base number of the label to be centered with the tick mark.
+          var xOffset = new Text( '10', { font: TICK_MARK_FONT } ).width / 2;
+          label.setLeftCenter( new Vector2( tickMarkNode.getCenterX() - xOffset, tickMarkNode.getTop() + label.getHeight() ) );
+          spectrumRootNode.addChild( label );
+
+        }
+      }
+
+      /**
+       * Convert the given wavelength to an offset from the left edge of the spectrum strip.
+       *
+       * @param wavelength - wavelength in meters
+       */
+      function getOffsetFromWavelength( wavelength ) {
+        return getOffsetFromFrequency( 299792458 / wavelength );
+      }
+
+      /**
        * Calculate the log base 10 of a value.
        * @param value
        * @returns {number}
@@ -282,11 +320,7 @@ define( function( require ) {
 //
 
 //
-//            // Add the wavelength tick marks.
-//            for ( int i = -12; i <= 4; i++ ) {
-//                boolean includeLabel = i % 2 == 0;
-//                addWavelengthTickMark( Math.pow( 10, i ), includeLabel );
-//            }
+
 //
 //            // Add the various bands.
 //            addBandLabel( 1E3, 1E9, MoleculesAndLightResources.getString( "SpectrumWindow.radioBandLabel" ) );
@@ -345,39 +379,11 @@ define( function( require ) {
 //
 
 //
-//        /**
-//         * Convert the given wavelength to an offset from the left edge of the
-//         * spectrum strip.
-//         * @param wavelength - wavelength in meters
-//         */
-//        private double getOffsetFromWavelength( double wavelength ) {
-//            return getOffsetFromFrequency( 299792458 / wavelength );
-//        }
+
 //
 
 //
-//        /**
-//         * Add a tick mark for the specified frequency.  Frequency tick marks
-//         * go on top of the strip.
-//         */
-//        private void addWavelengthTickMark( double wavelength, boolean addLabel ) {
-//            // Create and add the tick mark line.
-//            DoubleGeneralPath path = new DoubleGeneralPath();
-//            path.moveTo( 0, 0 );
-//            path.lineTo( 0, TICK_MARK_HEIGHT );
-//            PNode tickMarkNode = new PhetPPath( path.getGeneralPath(), TICK_MARK_STROKE, Color.BLACK );
-//            tickMarkNode.setOffset( getOffsetFromWavelength( wavelength ), STRIP_HEIGHT );
-//            spectrumRootNode.addChild( tickMarkNode );
-//
-//            if ( addLabel ) {
-//                // Create and add the label.
-//                PNode label = createExponentialLabel( wavelength );
-//                label.setOffset(
-//                        tickMarkNode.getFullBoundsReference().getCenterX() - label.getFullBoundsReference().width / 2,
-//                        tickMarkNode.getFullBoundsReference().getMaxY() );
-//                spectrumRootNode.addChild( label );
-//            }
-//        }
+
 
 //        /**
 //         * Add a "band divider" at the given frequency.  A band divider is
