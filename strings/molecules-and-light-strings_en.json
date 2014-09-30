@@ -24,6 +24,12 @@
   "SpectrumWindow.title": "Light Spectrum",
   "SpectrumWindow.frequencyArrowLabel": "Increasing frequency and energy",
   "SpectrumWindow.wavelengthArrowLabel": "Increasing wavelength",
-  "SpectrumWindow.close": "Close"
+  "SpectrumWindow.close": "Close",
+  "SpectrumWindow.radioBandLabel": "Radio",
+  "SpectrumWindow.microwaveBandLabel": "Microwave",
+  "SpectrumWindow.infraredBandLabel": "Infrared",
+  "SpectrumWindow.ultravioletBandLabel": "Ultraviolet",
+  "SpectrumWindow.xrayBandLabel": "X-ray",
+  "SpectrumWindow.gammaRayBandLabel": "Gamma ray"
 
 }

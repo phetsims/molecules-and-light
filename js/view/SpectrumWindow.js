@@ -37,6 +37,12 @@ define( function( require ) {
     var frequencyArrowLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.frequencyArrowLabel' );
     var wavelengthArrowLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.wavelengthArrowLabel' );
     var spectrumWindowCloseString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.close' );
+    var radioBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.radioBandLabel' );
+    var microwaveBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.microwaveBandLabel' );
+    var infraredBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.infraredBandLabel' );
+    var ultraVioletBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.ultravioletBandLabel' );
+    var xrayBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.xrayBandLabel' );
+    var gammaRayBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.gammaRayBandLabel' );
 
     /**
      * @constructor
@@ -229,6 +235,18 @@ define( function( require ) {
         addWavelengthTickMark( Math.pow( 10, j ), includeWavelengthLabel );
       }
 
+      // Add the various bands.
+      addBandLabel( 1E3, 1E9, radioBandLabelString );
+      addBandDivider( 1E9 );
+      addBandLabel( 1E9, 3E11, microwaveBandLabelString );
+      addBandDivider( 3E11 );
+      addBandLabel( 3E11, 6E14, infraredBandLabelString );
+      addBandLabel( 1E15, 8E15, ultraVioletBandLabelString );
+      addBandDivider( 1E16 );
+      addBandLabel( 1E16, 1E19, xrayBandLabelString );
+      addBandDivider( 1E19 );
+      addBandLabel( 1E19, 1E21, gammaRayBandLabelString );
+
       /**
        * Add a tick mark for the specified frequency.  Frequency tick marks go on top of the strip.
        *
@@ -295,6 +313,48 @@ define( function( require ) {
       }
 
       /**
+       * Add a label to a band which sections the spectrum diagram.
+       *
+       * @param {Number} lowEndFrequency
+       * @param {Number} highEndFrequency
+       * @param {String} labelText
+       */
+      function addBandLabel( lowEndFrequency, highEndFrequency, labelText ) {
+        // Argument validation.
+        assert && assert( highEndFrequency >= lowEndFrequency );
+
+        // Set up values needed for calculations.
+        var leftBoundaryX = getOffsetFromFrequency( lowEndFrequency );
+        var rightBoundaryX = getOffsetFromFrequency( highEndFrequency );
+        var width = rightBoundaryX - leftBoundaryX;
+        var centerX = leftBoundaryX + width / 2;
+
+        // Create and add the label.
+        var labelNode = new Text( labelText, { font: LABEL_FONT } );
+        if ( labelNode.width > width ) {
+          // Scale the label to fit.
+          labelNode.scale( width / labelNode.width );
+        }
+        labelNode.setCenter( new Vector2( centerX, STRIP_HEIGHT / 2 ) );
+        spectrumRootNode.addChild( labelNode );
+      }
+
+      /**
+       * Add a "band divider" at the given frequency.  A band divider is a dotted line that spans the spectrum strip in
+       * the vertical direction.
+       *
+       * @param {Number} frequency
+       */
+      function addBandDivider( frequency ) {
+        var drawDividerSegment = function() { return new Line( 0, 0, 0, STRIP_HEIGHT / 9, { stroke: Color.BLACK, lineWidth: 2 } ) };
+        for ( var i = 0; i < 5; i++ ) {
+          var dividerSegment = drawDividerSegment();
+          dividerSegment.setCenterTop( new Vector2( getOffsetFromFrequency( frequency ), 2 * i * STRIP_HEIGHT / 9 ) );
+          spectrumRootNode.addChild( dividerSegment );
+        }
+      }
+
+      /**
        * Convert the given wavelength to an offset from the left edge of the spectrum strip.
        *
        * @param wavelength - wavelength in meters
@@ -322,17 +382,7 @@ define( function( require ) {
 //
 
 //
-//            // Add the various bands.
-//            addBandLabel( 1E3, 1E9, MoleculesAndLightResources.getString( "SpectrumWindow.radioBandLabel" ) );
-//            addBandDivider( 1E9 );
-//            addBandLabel( 1E9, 3E11, MoleculesAndLightResources.getString( "SpectrumWindow.microwaveBandLabel" ) );
-//            addBandDivider( 3E11 );
-//            addBandLabel( 3E11, 6E14, MoleculesAndLightResources.getString( "SpectrumWindow.infraredBandLabel" ) );
-//            addBandLabel( 1E15, 8E15, MoleculesAndLightResources.getString( "SpectrumWindow.ultravioletBandLabel" ) );
-//            addBandDivider( 1E16 );
-//            addBandLabel( 1E16, 1E19, MoleculesAndLightResources.getString( "SpectrumWindow.xrayBandLabel" ) );
-//            addBandDivider( 1E19 );
-//            addBandLabel( 1E19, 1E21, MoleculesAndLightResources.getString( "SpectrumWindow.gammaRayBandLabel" ) );
+
 //
 //            // Add the visible spectrum.
 //            int visSpectrumWidth = (int) Math.round( getOffsetFromFrequency( 790E12 ) - getOffsetFromFrequency( 400E12 ) );
@@ -385,42 +435,8 @@ define( function( require ) {
 //
 
 
-//        /**
-//         * Add a "band divider" at the given frequency.  A band divider is
-//         * a dotted line that spans the spectrum strip in the vertical
-//         * direction.
-//         */
-//        private void addBandDivider( double frequency ) {
-//            DoubleGeneralPath path = new DoubleGeneralPath();
-//            path.moveTo( 0, 0 );
-//            path.lineTo( 0, STRIP_HEIGHT );
-//            PNode bandDividerNode = new PhetPPath( path.getGeneralPath(), BAND_DIVIDER_STROKE, Color.BLACK );
-//            bandDividerNode.setOffset( getOffsetFromFrequency( frequency ), 0 );
-//            spectrumRootNode.addChild( bandDividerNode );
-//        }
 //
-//        private void addBandLabel( double lowEndFrequency, double highEndFrequency, String htmlLabelText ) {
-//            // Argument validation.
-//            assert highEndFrequency >= lowEndFrequency;
-//
-//            // Set up values needed for calculations.
-//            double leftBoundaryX = getOffsetFromFrequency( lowEndFrequency );
-//            double rightBoundaryX = getOffsetFromFrequency( highEndFrequency );
-//            double width = rightBoundaryX - leftBoundaryX;
-//            double centerX = leftBoundaryX + width / 2;
-//
-//            // Create and add the label.
-//            HTMLNode labelNode = new HTMLNode( htmlLabelText );
-//            labelNode.setFont( LABEL_FONT );
-//            if ( labelNode.getFullBoundsReference().width > width ) {
-//                // Scale the label to fit.
-//                labelNode.setScale( width / labelNode.getFullBoundsReference().width );
-//            }
-//            labelNode.setOffset(
-//                    centerX - labelNode.getFullBoundsReference().width / 2,
-//                    STRIP_HEIGHT / 2 - labelNode.getFullBoundsReference().height / 2 );
-//            spectrumRootNode.addChild( labelNode );
-//        }
+
 //    }
 
     return inherit( ScreenView, SpectrumWindow );
