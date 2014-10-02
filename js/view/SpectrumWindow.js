@@ -104,7 +104,6 @@ define( function( require ) {
 
       // Add the spectrum portion.
       var spectrum = new LabeledSpectrumNode( OVERALL_DIMENSIONS.width - 2 * HORIZONTAL_INSET );
-      // spectrum.setOffset( HORIZONTAL_INSET, frequencyArrow.getFullBoundsReference().getMaxY() + 10 );
       children.push( spectrum );
 
       // Add the wavelength arrow.
@@ -320,7 +319,7 @@ define( function( require ) {
        *
        * @param {Number} lowEndFrequency
        * @param {Number} highEndFrequency
-       * @param {Array} labelText - An array of strings to be put in the label.  Handles new lines without HTML.
+       * @param {Array} labelText - Array of strings to be put in the label.  LayoutBox handles new lines without HTML.
        */
       function addBandLabel( lowEndFrequency, highEndFrequency, labelText ) {
         // Argument validation.
@@ -340,9 +339,9 @@ define( function( require ) {
           content.insertChild( i, new Text( labelText[i], { font: LABEL_FONT } ) );
         }
 //        var labelNode = new Text( labelText, { font: LABEL_FONT } );
-        if ( content.width > width ) {
+        if ( ( content.width + 10 ) > width ) {
           // Scale the label to fit.
-          content.scale( width / content.width );
+          content.scale( width / ( content.width + 10 ) );
         }
         content.setCenter( new Vector2( centerX, STRIP_HEIGHT / 2 ) );
         spectrumRootNode.addChild( content );
