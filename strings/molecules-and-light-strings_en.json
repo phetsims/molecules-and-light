@@ -28,8 +28,10 @@
   "SpectrumWindow.radioBandLabel": "Radio",
   "SpectrumWindow.microwaveBandLabel": "Microwave",
   "SpectrumWindow.infraredBandLabel": "Infrared",
-  "SpectrumWindow.ultravioletBandLabel": "Ultraviolet",
+  "SpectrumWindow.ultraBandLabel": "Ultra -",
+  "SpectrumWindow.violetBandLabel": "violet",
   "SpectrumWindow.xrayBandLabel": "X-ray",
-  "SpectrumWindow.gammaRayBandLabel": "Gamma ray"
+  "SpectrumWindow.gammaBandLabel": "Gamma",
+  "SpectrumWindow.rayBandLabel": "ray"
 
 }

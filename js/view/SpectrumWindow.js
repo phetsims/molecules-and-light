@@ -32,6 +32,7 @@ define( function( require ) {
     var Vector2 = require( 'DOT/Vector2' );
     var SubSupText = require( 'SCENERY_PHET/SubSupText' );
     var HTMLText = require( 'SCENERY/nodes/HTMLText' );
+
     // strings
     var spectrumWindowTitleString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.title' );
     var frequencyArrowLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.frequencyArrowLabel' );
@@ -40,9 +41,11 @@ define( function( require ) {
     var radioBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.radioBandLabel' );
     var microwaveBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.microwaveBandLabel' );
     var infraredBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.infraredBandLabel' );
-    var ultraVioletBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.ultravioletBandLabel' );
+    var ultraBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.ultraBandLabel' );
+    var violetBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.violetBandLabel' );
     var xrayBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.xrayBandLabel' );
-    var gammaRayBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.gammaRayBandLabel' );
+    var gammaBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.gammaBandLabel' );
+    var rayBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.rayBandLabel' );
 
     /**
      * @constructor
@@ -236,16 +239,16 @@ define( function( require ) {
       }
 
       // Add the various bands.
-      addBandLabel( 1E3, 1E9, radioBandLabelString );
+      addBandLabel( 1E3, 1E9, [ radioBandLabelString ] );
       addBandDivider( 1E9 );
-      addBandLabel( 1E9, 3E11, microwaveBandLabelString );
+      addBandLabel( 1E9, 3E11, [ microwaveBandLabelString ] );
       addBandDivider( 3E11 );
-      addBandLabel( 3E11, 6E14, infraredBandLabelString );
-      addBandLabel( 1E15, 8E15, ultraVioletBandLabelString );
+      addBandLabel( 3E11, 6E14, [ infraredBandLabelString ] );
+      addBandLabel( 1E15, 8E15, [ ultraBandLabelString, violetBandLabelString ] );
       addBandDivider( 1E16 );
-      addBandLabel( 1E16, 1E19, xrayBandLabelString );
+      addBandLabel( 1E16, 1E19, [ xrayBandLabelString ] );
       addBandDivider( 1E19 );
-      addBandLabel( 1E19, 1E21, gammaRayBandLabelString );
+      addBandLabel( 1E19, 1E21, [ gammaBandLabelString, rayBandLabelString ] );
 
       /**
        * Add a tick mark for the specified frequency.  Frequency tick marks go on top of the strip.
@@ -317,7 +320,7 @@ define( function( require ) {
        *
        * @param {Number} lowEndFrequency
        * @param {Number} highEndFrequency
-       * @param {String} labelText
+       * @param {Array} labelText - An array of strings to be put in the label.  Handles new lines without HTML.
        */
       function addBandLabel( lowEndFrequency, highEndFrequency, labelText ) {
         // Argument validation.
@@ -329,14 +332,20 @@ define( function( require ) {
         var width = rightBoundaryX - leftBoundaryX;
         var centerX = leftBoundaryX + width / 2;
 
+        // Place the strings into a layout box.
+        var content = new LayoutBox( { orientation: 'vertical', align: 'center', spacing: 3 } );
         // Create and add the label.
-        var labelNode = new Text( labelText, { font: LABEL_FONT } );
-        if ( labelNode.width > width ) {
-          // Scale the label to fit.
-          labelNode.scale( width / labelNode.width );
+
+        for ( var i = 0; i < labelText.length; i++ ) {
+          content.insertChild( i, new Text( labelText[i], { font: LABEL_FONT } ) );
         }
-        labelNode.setCenter( new Vector2( centerX, STRIP_HEIGHT / 2 ) );
-        spectrumRootNode.addChild( labelNode );
+//        var labelNode = new Text( labelText, { font: LABEL_FONT } );
+        if ( content.width > width ) {
+          // Scale the label to fit.
+          content.scale( width / content.width );
+        }
+        content.setCenter( new Vector2( centerX, STRIP_HEIGHT / 2 ) );
+        spectrumRootNode.addChild( content );
       }
 
       /**
@@ -375,13 +384,6 @@ define( function( require ) {
       return spectrumRootNode;
 
     };
-
-
-//
-
-//
-
-//
 
 //
 //            // Add the visible spectrum.
