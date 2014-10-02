@@ -338,9 +338,9 @@ define( function( require ) {
         for ( var i = 0; i < labelText.length; i++ ) {
           content.insertChild( i, new Text( labelText[i], { font: LABEL_FONT } ) );
         }
-//        var labelNode = new Text( labelText, { font: LABEL_FONT } );
+
         if ( ( content.width + 10 ) > width ) {
-          // Scale the label to fit.
+          // Scale the label to fit with a little bit of padding on each side.
           content.scale( width / ( content.width + 10 ) );
         }
         content.setCenter( new Vector2( centerX, STRIP_HEIGHT / 2 ) );
