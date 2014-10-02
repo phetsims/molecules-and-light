@@ -32,6 +32,7 @@ define( function( require ) {
     var Vector2 = require( 'DOT/Vector2' );
     var SubSupText = require( 'SCENERY_PHET/SubSupText' );
     var HTMLText = require( 'SCENERY/nodes/HTMLText' );
+    var SpectrumNode = require( 'SCENERY_PHET/SpectrumNode' );
 
     // strings
     var spectrumWindowTitleString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.title' );
@@ -249,6 +250,15 @@ define( function( require ) {
       addBandDivider( 1E19 );
       addBandLabel( 1E19, 1E21, [ gammaBandLabelString, rayBandLabelString ] );
 
+      // Add the visible spectrum.
+      var visSpectrumWidth = Math.round( getOffsetFromFrequency( 790E12 ) - getOffsetFromFrequency( 400E12 ) );
+      var visibleSpectrum = new SpectrumNode( visSpectrumWidth, STRIP_HEIGHT - strip.lineWidth, 380, 780, 1 );
+      visibleSpectrum.rotate( Math.PI ); // Flip the visible spectrum so that it is represented correctly in the diagram.
+      visibleSpectrum.setLeftTop( new Vector2( getOffsetFromFrequency( 400E12 ), strip.getTop() + strip.lineWidth ) );
+      spectrumRootNode.addChild( visibleSpectrum );
+
+
+
       /**
        * Add a tick mark for the specified frequency.  Frequency tick marks go on top of the strip.
        *
@@ -372,6 +382,16 @@ define( function( require ) {
       }
 
       /**
+       * Convert the electromagnetic frequency to its corresponding wavelength.  Returns value in units of meters.
+       *
+       * @param {Number} frequency
+       * @returns {number}
+       */
+      function frequencyToWavelength( frequency ) {
+        return 299792458 / frequency;
+      }
+
+      /**
        * Calculate the log base 10 of a value.
        * @param value
        * @returns {number}
@@ -385,13 +405,7 @@ define( function( require ) {
     };
 
 //
-//            // Add the visible spectrum.
-//            int visSpectrumWidth = (int) Math.round( getOffsetFromFrequency( 790E12 ) - getOffsetFromFrequency( 400E12 ) );
-//            final Image horizontalSpectrum = new ExponentialGrowthSpectrumImageFactory().createHorizontalSpectrum( visSpectrumWidth, (int) STRIP_HEIGHT );
-//            BufferedImage flipped = BufferedImageUtils.flipX( BufferedImageUtils.toBufferedImage( horizontalSpectrum ) );
-//            PNode visibleSpectrum = new PImage( flipped );
-//            visibleSpectrum.setOffset( getOffsetFromFrequency( 400E12 ), 0 );
-//            spectrumRootNode.addChild( visibleSpectrum );
+
 //
 //            // Add the label for the visible band.
 //            PText visibleBandLabel = new PText( MoleculesAndLightResources.getString( "SpectrumWindow.visibleBandLabel" ) );
