@@ -33,6 +33,7 @@
   "SpectrumWindow.xrayBandLabel": "X-ray",
   "SpectrumWindow.gammaBandLabel": "Gamma",
   "SpectrumWindow.rayBandLabel": "ray",
-  "SpectrumWindow.visibleBandLabel": "Visible"
-
+  "SpectrumWindow.visibleBandLabel": "Visible",
+  "SpectrumWindow.cyclesPerSecondUnits": "Hz",
+  "SpectrumWindow.metersUnits": "m"
 }

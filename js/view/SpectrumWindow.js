@@ -48,6 +48,8 @@ define( function( require ) {
     var gammaBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.gammaBandLabel' );
     var rayBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.rayBandLabel' );
     var visibleBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.visibleBandLabel' );
+    var cyclesPerSecondUnitsString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.cyclesPerSecondUnits' );
+    var metersUnitsString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.metersUnits' );
 
     /**
      * @constructor
@@ -213,7 +215,7 @@ define( function( require ) {
       var MIN_FREQUENCY = 1E3;
       var MAX_FREQUENCY = 1E21;
       var TICK_MARK_HEIGHT = 8;
-      var TICK_MARK_FONT = new PhetFont( 12 );
+      var TICK_MARK_FONT = new PhetFont( 11 );
       var LABEL_FONT = new PhetFont( 16 );
 
       var stripWidth = width;
@@ -264,14 +266,21 @@ define( function( require ) {
       visibleBandLabel.setCenter( new Vector2( visibleBandCenterX, -35 ) );
       spectrumRootNode.addChild( visibleBandLabel );
 
-      // Add the arrow that connects the visible band label to the
-      // visible band itself.
+      // Add the arrow that connects the visible band label to the visible band itself.
       var visibleBandArrow = new ArrowNode( visibleBandCenterX, visibleBandLabel.bottom, visibleBandCenterX, -5, {
         tailWidth: 2,
         headWidth: 7,
         headHeight: 7
       } );
       spectrumRootNode.addChild( visibleBandArrow );
+
+      // Add the units.
+      var frequencyUnits = new Text( cyclesPerSecondUnitsString, { font: LABEL_FONT } );
+      frequencyUnits.setLeftCenter( new Vector2( stripWidth, -TICK_MARK_HEIGHT - frequencyUnits.getHeight() / 2 ) );
+      spectrumRootNode.addChild( frequencyUnits );
+      var wavelengthUnits = new Text( metersUnitsString, { font: LABEL_FONT } );
+      wavelengthUnits.setLeftCenter( new Vector2( stripWidth, STRIP_HEIGHT + TICK_MARK_HEIGHT + frequencyUnits.getHeight() / 2 ) );
+      spectrumRootNode.addChild( wavelengthUnits );
 
       /**
        * Add a tick mark for the specified frequency.  Frequency tick marks go on top of the strip.
@@ -311,7 +320,7 @@ define( function( require ) {
       function createExponentialLabel( value ) {
 
         var superscript = Math.round( log10( value ) );
-        return new SubSupText( "10<sup>" + superscript + "</sup>", { font: TICK_MARK_FONT } );
+        return new SubSupText( "10<sup>" + superscript + "</sup>", { font: TICK_MARK_FONT, supScale: 0.65 } );
 
       }
 
@@ -330,9 +339,7 @@ define( function( require ) {
         if ( addLabel ) {
           // Create and add the label.
           var label = createExponentialLabel( wavelength );
-          // Calculate x offset for label.  Allows the base number of the label to be centered with the tick mark.
-          var xOffset = new Text( '10', { font: TICK_MARK_FONT } ).width / 2;
-          label.setLeftCenter( new Vector2( tickMarkNode.getCenterX() - xOffset, tickMarkNode.getTop() + label.getHeight() ) );
+          label.setCenter( new Vector2( tickMarkNode.getCenterX(), tickMarkNode.getTop() + label.getHeight() ) );
           spectrumRootNode.addChild( label );
 
         }
@@ -424,15 +431,7 @@ define( function( require ) {
 //
 
 //
-//            // Add the units.
-//            PText frequencyUnits = new PText( MoleculesAndLightResources.getString( "SpectrumWindow.cyclesPerSecondUnits" ) );
-//            frequencyUnits.setFont( LABEL_FONT );
-//            frequencyUnits.setOffset( stripWidth, -TICK_MARK_HEIGHT - frequencyUnits.getFullBoundsReference().getHeight() );
-//            spectrumRootNode.addChild( frequencyUnits );
-//            PText wavelengthUnits = new PText( MoleculesAndLightResources.getString( "SpectrumWindow.metersUnits" ) );
-//            wavelengthUnits.setFont( LABEL_FONT );
-//            wavelengthUnits.setOffset( stripWidth, STRIP_HEIGHT + TICK_MARK_HEIGHT + 5 );
-//            spectrumRootNode.addChild( wavelengthUnits );
+
 //
 //            // Set the offset of the root node to account for child nodes that
 //            // ended up with negative offsets when the layout was complete.
