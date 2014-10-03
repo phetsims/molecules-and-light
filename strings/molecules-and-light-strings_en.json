@@ -32,6 +32,7 @@
   "SpectrumWindow.violetBandLabel": "violet",
   "SpectrumWindow.xrayBandLabel": "X-ray",
   "SpectrumWindow.gammaBandLabel": "Gamma",
-  "SpectrumWindow.rayBandLabel": "ray"
+  "SpectrumWindow.rayBandLabel": "ray",
+  "SpectrumWindow.visibleBandLabel": "Visible"
 
 }

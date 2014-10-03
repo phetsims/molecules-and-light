@@ -47,6 +47,7 @@ define( function( require ) {
     var xrayBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.xrayBandLabel' );
     var gammaBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.gammaBandLabel' );
     var rayBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.rayBandLabel' );
+    var visibleBandLabelString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.visibleBandLabel' );
 
     /**
      * @constructor
@@ -257,7 +258,20 @@ define( function( require ) {
       visibleSpectrum.setLeftTop( new Vector2( getOffsetFromFrequency( 400E12 ), strip.getTop() + strip.lineWidth ) );
       spectrumRootNode.addChild( visibleSpectrum );
 
+      // Add the label for the visible band.
+      var visibleBandLabel = new Text( visibleBandLabelString, { font: new PhetFont( 12 ) } );
+      var visibleBandCenterX = visibleSpectrum.centerX;
+      visibleBandLabel.setCenter( new Vector2( visibleBandCenterX, -35 ) );
+      spectrumRootNode.addChild( visibleBandLabel );
 
+      // Add the arrow that connects the visible band label to the
+      // visible band itself.
+      var visibleBandArrow = new ArrowNode( visibleBandCenterX, visibleBandLabel.bottom, visibleBandCenterX, -5, {
+        tailWidth: 2,
+        headWidth: 7,
+        headHeight: 7
+      } );
+      spectrumRootNode.addChild( visibleBandArrow );
 
       /**
        * Add a tick mark for the specified frequency.  Frequency tick marks go on top of the strip.
@@ -406,24 +420,9 @@ define( function( require ) {
 
 //
 
+
 //
-//            // Add the label for the visible band.
-//            PText visibleBandLabel = new PText( MoleculesAndLightResources.getString( "SpectrumWindow.visibleBandLabel" ) );
-//            visibleBandLabel.setFont( LABEL_FONT );
-//            double visibleBandCenterX = visibleSpectrum.getFullBounds().getCenterX();
-//            visibleBandLabel.setOffset( visibleBandCenterX - visibleBandLabel.getFullBoundsReference().width / 2, -50 );
-//            spectrumRootNode.addChild( visibleBandLabel );
-//
-//            // Add the arrow that connects the visible band label to the
-//            // visible band itself.
-//            ArrowNode visibleBandArrow = new ArrowNode(
-//                    new Point2D.Double( visibleBandCenterX, visibleBandLabel.getFullBoundsReference().getMaxY() ),
-//                    new Point2D.Double( visibleBandCenterX, 0 ),
-//                    7,
-//                    7,
-//                    2 );
-//            visibleBandArrow.setPaint( Color.BLACK );
-//            spectrumRootNode.addChild( visibleBandArrow );
+
 //
 //            // Add the units.
 //            PText frequencyUnits = new PText( MoleculesAndLightResources.getString( "SpectrumWindow.cyclesPerSecondUnits" ) );
@@ -443,25 +442,11 @@ define( function( require ) {
 //        }
 //
 
-//
-
-//
-
-//
-
-
-//
-
-//    }
-
     return inherit( ScreenView, SpectrumWindow );
 
   }
-)
-;
+);
 
-
-//
 //    /**
 //     *  Class that depicts a wave that gets progressively shorter in wavelength
 //     * from left to right, which is called a chirp.
