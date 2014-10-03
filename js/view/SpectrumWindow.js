@@ -320,8 +320,10 @@ define( function( require ) {
       function createExponentialLabel( value ) {
 
         var superscript = Math.round( log10( value ) );
-        return new SubSupText( "10<sup>" + superscript + "</sup>", { font: TICK_MARK_FONT, supScale: 0.65 } );
-
+        return new SubSupText( "10<sup>" + superscript + "</sup>", {
+          font: TICK_MARK_FONT,
+          supScale: 0.65,
+          supYOffset: 1} );
       }
 
       /**
@@ -339,7 +341,9 @@ define( function( require ) {
         if ( addLabel ) {
           // Create and add the label.
           var label = createExponentialLabel( wavelength );
-          label.setCenter( new Vector2( tickMarkNode.getCenterX(), tickMarkNode.getTop() + label.getHeight() ) );
+          // Calculate x offset for label.  Allows the base number of the label to be centered with the tick mark.
+//          var xOffset = new Text( '10', { font: TICK_MARK_FONT } ).width;
+          label.setCenter( new Vector2( tickMarkNode.getCenterX(), tickMarkNode.getTop() + label.getHeight() + 2 ) );
           spectrumRootNode.addChild( label );
 
         }
