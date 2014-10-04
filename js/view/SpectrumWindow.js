@@ -122,7 +122,6 @@ define( function( require ) {
 
       // Add the diagram that depicts the wave that gets shorter.
       var decreasingWavelengthNode = new ChirpNode( OVERALL_DIMENSIONS.width - 2 * HORIZONTAL_INSET );
-      decreasingWavelengthNode.setCenter( new Vector2( HORIZONTAL_INSET, wavelengthArrow.top + 20 ) );
       children.push( decreasingWavelengthNode );
 
       return new LayoutBox( { orientation: 'vertical', children: children, spacing: 15 } )
@@ -465,7 +464,7 @@ define( function( require ) {
         var tScale = 4.5;
         var sinTerm = Math.sin( 2 * Math.PI * f0 * ( Math.pow( k, t * tScale ) - 1) / Math.log( k ) );
 
-        var y = ( sinTerm *  boundingBoxHeight * 0.40 + boundingBoxHeight / 2 );
+        var y = ( sinTerm * boundingBoxHeight * 0.40 + boundingBoxHeight / 2 );
         context.lineTo( x, y );
 
       }
