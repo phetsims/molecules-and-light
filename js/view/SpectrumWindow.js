@@ -50,11 +50,11 @@ define( function( require ) {
     var metersUnitsString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.metersUnits' );
 
     /**
+     * Constructor for the Spectrum Window.  Loads all subclass objects into a horizontal layout box.
+     *
      * @constructor
      */
     function SpectrumWindow() {
-
-      var spectrumWindow = this;
 
       /*
        * Use ScreenView, to help center and scale content. Renderer must be specified here because the window is added
@@ -67,7 +67,7 @@ define( function( require ) {
         new CloseButton()
       ];
 
-      var content = new LayoutBox( { orientation: 'vertical', align: 'center', spacing: 5, children: children } );
+      var content = new LayoutBox( { orientation: 'vertical', align: 'center', spacing: 10, children: children } );
 
       this.addChild( new Panel( content, {
           centerX: this.layoutBounds.centerX,
@@ -82,8 +82,10 @@ define( function( require ) {
      * Class that contains the diagram of the EM spectrum.  This class includes the arrows, the spectrum strip, the
      * wavelength indicator, etc.  In other words, it is the top level node within which the constituent parts that make
      * up the entire diagram are contained.
+     *
+     * @returns {LayoutBox}
+     * @constructor
      */
-
     var SpectrumDiagram = function() {
       var OVERALL_DIMENSIONS = new Dimension2( 550, 440 );
       var HORIZONTAL_INSET = 30;
@@ -100,7 +102,7 @@ define( function( require ) {
         'right',
         frequencyArrowLabelString,
         Color.WHITE,
-        new Color( 225, 5, 255 )
+        new Color( 5, 255, 255 )
       );
       children.push( frequencyArrow );
 
@@ -114,7 +116,7 @@ define( function( require ) {
         'left',
         wavelengthArrowLabelString,
         Color.WHITE,
-        new Color( 5, 255, 255 )
+        new Color( 225, 5, 255 )
       );
       children.push( wavelengthArrow );
 
@@ -123,15 +125,15 @@ define( function( require ) {
       decreasingWavelengthNode.setCenter( new Vector2( HORIZONTAL_INSET, wavelengthArrow.top + 20 ) );
       children.push( decreasingWavelengthNode );
 
-      return new LayoutBox( { orientation: 'vertical', children: children } )
+      return new LayoutBox( { orientation: 'vertical', children: children, spacing: 15 } )
 
     };
 
     /**
      *
-     * @param {Number} length
-     * @param {String} orientation
-     * @param {String} captionText
+     * @param {Number} length - Length of the arrow
+     * @param {String} orientation - options are 'left' or 'right'.  Determines direction of the arrow.
+     * @param {String} captionText - Description of what the arrow node represents.
      * @param {Color} leftColor
      * @param {Color} rightColor
      * @returns {ArrowNode}
