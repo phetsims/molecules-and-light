@@ -187,7 +187,7 @@ define( function( require ) {
 
     /**
      * Create a button which closes the spectrum window.  As of right now the behavior of the spectrum window is to
-     * close whenever the user clicks in the molecuels and light screen view ( as in AboutDialog ).  This means that no
+     * close whenever the user clicks in the molecules and light screen view ( as in AboutDialog ).  This means that no
      * closing listener is necessary.
      *
      * @returns {RectangularPushButton}
@@ -196,7 +196,7 @@ define( function( require ) {
     var CloseButton = function() {
 
       var content = new Text( spectrumWindowCloseString, { font: new PhetFont( 16 ) } );
-      return new RectangularPushButton( { content: content } );
+      return new RectangularPushButton( { content: content, listener: null } );
 
     };
 
@@ -316,6 +316,12 @@ define( function( require ) {
         return ( logarithmicFrequency - log10( MIN_FREQUENCY ) ) / logarithmicRange * stripWidth;
       }
 
+      /**
+       * Create a label for the tick marks on the spectrum diagram.
+       *
+       * @param {Number} value -  Wavelength or frequency to be described by the label.
+       * @return {SubSupText}
+       */
       function createExponentialLabel( value ) {
 
         var superscript = Math.round( log10( value ) );
@@ -341,7 +347,6 @@ define( function( require ) {
           // Create and add the label.
           var label = createExponentialLabel( wavelength );
           // Calculate x offset for label.  Allows the base number of the label to be centered with the tick mark.
-//          var xOffset = new Text( '10', { font: TICK_MARK_FONT } ).width;
           label.setCenter( new Vector2( tickMarkNode.getCenterX(), tickMarkNode.getTop() + label.getHeight() + 2 ) );
           spectrumRootNode.addChild( label );
 
@@ -367,8 +372,8 @@ define( function( require ) {
 
         // Place the strings into a layout box.
         var content = new LayoutBox( { orientation: 'vertical', align: 'center', spacing: 3 } );
-        // Create and add the label.
 
+        // Create and add the label.
         for ( var i = 0; i < labelText.length; i++ ) {
           content.insertChild( i, new Text( labelText[i], { font: LABEL_FONT } ) );
         }
@@ -403,16 +408,6 @@ define( function( require ) {
        */
       function getOffsetFromWavelength( wavelength ) {
         return getOffsetFromFrequency( 299792458 / wavelength );
-      }
-
-      /**
-       * Convert the electromagnetic frequency to its corresponding wavelength.  Returns value in units of meters.
-       *
-       * @param {Number} frequency
-       * @returns {number}
-       */
-      function frequencyToWavelength( frequency ) {
-        return 299792458 / frequency;
       }
 
       /**
