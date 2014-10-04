@@ -33,6 +33,10 @@ define( function( require ) {
     var SubSupText = require( 'SCENERY_PHET/SubSupText' );
     var HTMLText = require( 'SCENERY/nodes/HTMLText' );
     var SpectrumNode = require( 'SCENERY_PHET/SpectrumNode' );
+    var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
+    var Util = require( 'DOT/Util' );
+    var Image = require( 'SCENERY/nodes/Image' );
+
 
     // strings
     var spectrumWindowTitleString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.title' );
@@ -121,9 +125,9 @@ define( function( require ) {
       children.push( wavelengthArrow );
 
       // Add the diagram that depicts the wave that gets shorter.
-      // ChirpNode decreasingWavelengthNode = new ChirpNode( OVERALL_DIMENSIONS.width - 2 * HORIZONTAL_INSET );
-      // decreasingWavelengthNode.setOffset( HORIZONTAL_INSET, wavelengthArrow.getFullBoundsReference().getMaxY() + 20 );
-      // addChild( decreasingWavelengthNode );
+      var decreasingWavelengthNode = new ChirpNode( OVERALL_DIMENSIONS.width - 2 * HORIZONTAL_INSET );
+      decreasingWavelengthNode.setCenter( new Vector2( HORIZONTAL_INSET, wavelengthArrow.top + 20 ) );
+      children.push( decreasingWavelengthNode );
 
       return new LayoutBox( { orientation: 'vertical', children: children } )
 
@@ -429,69 +433,54 @@ define( function( require ) {
 
     };
 
-//
+    /**
+     *  Class that depicts a wave that gets progressively shorter in wavelength from left to right, which is called a
+     *  chirp.
+     */
 
+    var ChirpNode = function( width ) {
 
-//
+      // Create and add the boundary and background.
+      var boundingBoxHeight = width * 0.1; // Arbitrary, adjust as needed.
 
-//
+      var boundingBox = new Rectangle( 0, 0, width, width * 0.1, {
+        fill: new Color( 237, 243, 246 ),
+        lineWidth: 2,
+        stroke: Color.BLACK
+      } );
 
-//
-//            // Set the offset of the root node to account for child nodes that
-//            // ended up with negative offsets when the layout was complete.
-//            spectrumRootNode.setOffset(
-//                    Math.max( -spectrumRootNode.getFullBoundsReference().getMinX(), 0 ),
-//                    Math.max( -spectrumRootNode.getFullBoundsReference().getMinY(), 0 ) );
-//        }
-//
+      // Draw the spectrum directly to a canvas, to improve performance.
+      var canvas = document.createElement( 'canvas' );
+      var context = canvas.getContext( '2d' );
+      canvas.width = width;
+      canvas.height = boundingBoxHeight;
+
+      // Create the line that represents the decreasing wavelength.
+      context.beginPath(); // Begin the sin path.
+      context.moveTo( 0, boundingBox.getCenterY() ); // Move starting point to left center of bounding box.
+      var numPointsOnLine = 2000;
+      for ( var i = 0; i < numPointsOnLine; i++ ) {
+        var x = i * ( width / (numPointsOnLine - 1) );
+        var t = x / width;
+
+        var f0 = 1;
+        var k = 2;
+        var tScale = 4.5;
+        var sinTerm = Math.sin( 2 * Math.PI * f0 * ( Math.pow( k, t * tScale ) - 1) / Math.log( k ) );
+
+        var y = ( sinTerm *  boundingBoxHeight * 0.40 + boundingBoxHeight / 2 );
+        context.lineTo( x, y );
+
+      }
+
+      context.lineWidth = 2; // Set the line width of the curve.
+      context.stroke(); // Draw the path on the canvas.
+      boundingBox.addChild( new Image( canvas.toDataURL() ) ); // Add the canvas to the bounding box as an image.
+      return boundingBox;
+
+    };
 
     return inherit( ScreenView, SpectrumWindow );
 
   }
 );
-
-//    /**
-//     *  Class that depicts a wave that gets progressively shorter in wavelength
-//     * from left to right, which is called a chirp.
-//     */
-//    private static class ChirpNode extends PNode {
-//        public ChirpNode( double width ) {
-//            // Create and add the boundary and background.
-//            double boundingBoxHeight = width * 0.1; // Arbitrary, adjust as needed.
-//            PNode boundingBox = new PhetPPath( new Rectangle2D.Double( 0, 0, width, width * 0.1 ),
-//                    new Color( 237, 243, 246 ), new BasicStroke( 2f ), Color.black );
-//            addChild( boundingBox );
-//
-//            // Create the line that represents the decreasing wavelength.
-//            DoubleGeneralPath squigglyLinePath = new DoubleGeneralPath(0, 0);
-//            int numPointsOnLine = 2000;
-//            for ( int i = 0; i < numPointsOnLine; i++ ) {
-//                double x = i * ( width / ( numPointsOnLine - 1 ) );
-//                double t = x / width;
-//
-//                double f0 = 1;
-//                double k = 2;
-//                final double tScale = 4.5;
-//                double exponentialSinTerm = Math.sin( 2 * Math.PI * f0 * ( Math.pow( k, t * tScale ) - 1 ) / Math.log( k ) );
-//
-//                double sinTerm = exponentialSinTerm;
-//
-//                double y = ( sinTerm * boundingBoxHeight * 0.40 + boundingBoxHeight / 2 );
-//                squigglyLinePath.lineTo( x, y );
-//            }
-//            PNode squigglyLineNode = new PhetPPath( squigglyLinePath.getGeneralPath(),
-//                    new BasicStroke( 2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND ), Color.BLACK );
-//            addChild( squigglyLineNode );
-//        }
-//    }
-//
-//    /**
-//     * Test harness.
-//     */
-//    public static void main( String[] args ) {
-//        JFrame spectrumWindow = new SpectrumWindow();
-//        spectrumWindow.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
-//        spectrumWindow.setLocation( 200, 100 );
-//        spectrumWindow.setVisible( true );
-//    }
-//}
