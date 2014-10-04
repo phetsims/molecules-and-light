@@ -14,12 +14,9 @@ define( function( require ) {
     // modules
     var Text = require( 'SCENERY/nodes/Text' );
     var inherit = require( 'PHET_CORE/inherit' );
-    var MultiLineText = require( 'SCENERY_PHET/MultiLineText' );
     var ScreenView = require( 'JOIST/ScreenView' );
     var Panel = require( 'SUN/Panel' );
     var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-    var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-    var VStrut = require( 'SUN/VStrut' );
     var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
     var Color = require( 'SCENERY/util/Color' );
     var Dimension2 = require( 'DOT/Dimension2' );
@@ -31,12 +28,9 @@ define( function( require ) {
     var Line = require( 'SCENERY/nodes/Line' );
     var Vector2 = require( 'DOT/Vector2' );
     var SubSupText = require( 'SCENERY_PHET/SubSupText' );
-    var HTMLText = require( 'SCENERY/nodes/HTMLText' );
     var SpectrumNode = require( 'SCENERY_PHET/SpectrumNode' );
     var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
-    var Util = require( 'DOT/Util' );
     var Image = require( 'SCENERY/nodes/Image' );
-
 
     // strings
     var spectrumWindowTitleString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.title' );
@@ -436,14 +430,15 @@ define( function( require ) {
     /**
      *  Class that depicts a wave that gets progressively shorter in wavelength from left to right, which is called a
      *  chirp.
+     *
+     *  @param {Number} width - Width of the bounding box that holds the chirp.
+     *  @constructor
      */
-
     var ChirpNode = function( width ) {
 
       // Create and add the boundary and background.
       var boundingBoxHeight = width * 0.1; // Arbitrary, adjust as needed.
-
-      var boundingBox = new Rectangle( 0, 0, width, width * 0.1, {
+      var boundingBox = new Rectangle( 0, 0, width, boundingBoxHeight, {
         fill: new Color( 237, 243, 246 ),
         lineWidth: 2,
         stroke: Color.BLACK
@@ -456,7 +451,7 @@ define( function( require ) {
       canvas.height = boundingBoxHeight;
 
       // Create the line that represents the decreasing wavelength.
-      context.beginPath(); // Begin the sin path.
+      context.beginPath();
       context.moveTo( 0, boundingBox.getCenterY() ); // Move starting point to left center of bounding box.
       var numPointsOnLine = 2000;
       for ( var i = 0; i < numPointsOnLine; i++ ) {
