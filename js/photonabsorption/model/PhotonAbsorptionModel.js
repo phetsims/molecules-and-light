@@ -43,16 +43,14 @@ define( function( require ) {
   var PHOTON_EMISSION_LOCATION = new Vector2( -2000, 0 );
   var PHOTON_EMISSION_ANGLE_RANGE = Math.PI / 2;
 
-  // Velocity of emitted photons.  Since they are emitted horizontally, only
-  // one value is needed.
+  // Velocity of emitted photons.  Since they are emitted horizontally, only one value is needed.
   var PHOTON_VELOCITY = 3.0;
 
   // Location used when a single molecule is sitting in the area where the
   // photons pass through.
   var SINGLE_MOLECULE_POSITION = new Vector2( 0, 0 );
 
-  // Constants that define the size of the containment area, which is the
-  // rectangle that surrounds the molecule(s).
+  // Constants that define the size of the containment area, which is the rectangle that surrounds the molecule(s).
   var CONTAINMENT_AREA_WIDTH = 3100;   // In picometers.
   var CONTAINMENT_AREA_HEIGHT = 3000;  // In picometers.
   var CONTAINMENT_AREA_CENTER = new Vector2( 0, 0 );
@@ -63,8 +61,7 @@ define( function( require ) {
     CONTAINMENT_AREA_HEIGHT
   );
 
-  // Minimum and defaults for photon emission periods.  Note that the max is
-  // assumed to be infinity.
+  // Minimum and defaults for photon emission periods.  Note that the max is assumed to be infinity.
   var MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET = 400;
   var DEFAULT_PHOTON_EMISSION_PERIOD = Number.POSITIVE_INFINITY; // Milliseconds of sim time.
   var MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET = 100;
@@ -91,9 +88,8 @@ define( function( require ) {
     }
   };
 
-  // Create a grid-based set of possible locations for molecules in the
-  // configurable atmosphere.
-  // The type of element in the array is Vector2
+  // Create a grid-based set of possible locations for molecules in the configurable atmosphere.
+  // The type of element in the array are Vector2.
   var GRID_POINTS = [];
 
   var numGridlinesX = 8;
@@ -123,11 +119,9 @@ define( function( require ) {
       play: true // is the sim running or paused
     } );
 
-    var thisModel = this;
-
     // Choices of targets for the photons.
-    // We may not technically need these strings to be enumerated here and accessed in an array, but it
-    // serves as a good point to document what all the possible types are.
+    // We may not technically need these strings to be enumerated here and accessed in an array, but it serves as a
+    // good point to document what all the possible types are.
     this.photonTargets = ['SINGLE_CO_MOLECULE', 'SINGLE_CO2_MOLECULE', 'SINGLE_H2O_MOLECULE', 'SINGLE_CH4_MOLECULE',
       'SINGLE_N2O_MOLECULE', 'SINGLE_N2_MOLECULE', 'SINGLE_NO2_MOLECULE', 'SINGLE_O2_MOLECULE', 'SINGLE_O3_MOLECULE',
       'CONFIGURABLE_ATMOSPHERE'];
@@ -137,12 +131,11 @@ define( function( require ) {
     this.photons = new ObservableArray(); //Elements are of type Photon
     this.activeMolecules = new ObservableArray(); // Elements are of type Molecule.
 
-    // The photon target is the thing that the photons are shot at, and based
-    // on its particular nature, it may or may not absorb some of the photons.
+    // The photon target is the thing that the photons are shot at, and based on its particular nature, it may or may
+    // not absorb some of the photons.
     this.initialPhotonTarget = initialPhotonTarget;
 
     // Set the initial photon target to the molecule.
-    //  TODO: There may be a more logical place for this call.
     this.setPhotonTarget( this.initialPhotonTarget );
 
     // Variables that control periodic photon emission.
@@ -150,9 +143,9 @@ define( function( require ) {
     this.photonEmissionPeriodTarget = DEFAULT_PHOTON_EMISSION_PERIOD;
     this.previousEmissionAngle = 0;
 
-    // Collection that contains the molecules that make up the configurable
-    // atmosphere.  Used in Greenhouse Gas Simulation.
-    this.configurableAtmosphereMolecules = []; // Elements are of type
+    // Collection that contains the molecules that make up the configurable atmosphere.  Used in Greenhouse Gas
+    // Simulation.
+    this.configurableAtmosphereMolecules = []; // Elements are of type Molecule.
 
   }
 
@@ -234,12 +227,12 @@ define( function( require ) {
       for ( var photon = 0; photon < this.photons.length; photon++ ) {
         this.photons.get( photon ).stepInTime( dt );
 //        if ( this.photons.get( photon ).getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
-          // See if any of the molecules wish to absorb this photon.
-          for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
-            if ( this.activeMolecules.get( molecule ).queryAbsorbPhoton( this.photons.get( photon ) ) ) {
-              photonsToRemove.push( this.photons.get( photon ) );
-            }
+        // See if any of the molecules wish to absorb this photon.
+        for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
+          if ( this.activeMolecules.get( molecule ).queryAbsorbPhoton( this.photons.get( photon ) ) ) {
+            photonsToRemove.push( this.photons.get( photon ) );
           }
+        }
 //        }
 //        else {
 //          // The photon has moved beyond our simulation bounds, so remove it from the model.
@@ -264,10 +257,25 @@ define( function( require ) {
       }
     },
 
+
     /**
-     * Cause a photon to be emitted from the emission point.  Emitted photons
-     * will travel toward the photon target, which will decide whether a given
-     * photon should be absorbed.
+     * Step one frame manually.  Assuming 60 frames per second.
+     */
+    manualStep: function() {
+
+      // Check if it is time to emit any photons.
+      this.checkEmissionTimer( 1 / 60 );
+
+      // Step the photons, marking and removing any that have moved beyond the model bounds.
+      this.stepPhotons( 1 / 60 );
+
+      // Step the molecules.
+      this.stepMolecules( 1 / 60 );
+    },
+
+    /**
+     * Cause a photon to be emitted from the emission point.  Emitted photons will travel toward the photon target,
+     * which will decide whether a given photon should be absorbed.
      *
      */
     emitPhoton: function() {
@@ -288,18 +296,32 @@ define( function( require ) {
       this.photons.add( photon );
     },
 
+    /**
+     * Set the wavelength of the photon to be emitted.
+     *
+     * @param {Number} freq
+     */
     setEmittedPhotonWavelength: function( freq ) {
       if ( this.photonWavelength != freq ) {
         // Set the new value and send out notification of change to listeners.
         this.photonWavelength = freq;
-        //notifyEmittedPhotonWavelengthChanged();
       }
     },
 
+    /**
+     * Get the wavelength of the emitted photon.
+     *
+     * @returns {Number}
+     */
     getEmittedPhotonWavelength: function() {
       return this.photonWavelength;
     },
 
+    /**
+     * Get the emission location for this photonAbsorptionModel.  Useful when other models need access to this position.
+     *
+     * @returns {Vector2}
+     */
     getPhotonEmissionLocation: function() {
       return PHOTON_EMISSION_LOCATION;
     },
@@ -331,13 +353,18 @@ define( function( require ) {
       }
     },
 
-
+    /**
+     * Get the current photon target.
+     *
+     * @returns {Property}
+     */
     getPhotonTarget: function() {
       return this.photonTargetProperty.get();
     },
 
-
     /**
+     * Get the period between photon emissoins.
+     *
      * @return {Number} - Period between photons in milliseconds.
      */
     getPhotonEmissionPeriod: function() {
@@ -350,9 +377,8 @@ define( function( require ) {
      * @param {String} photonTarget - The string constant which represents the desired photon target.
      */
     setPhotonTarget: function( photonTarget ) {
-      // If switching to the configurable atmosphere, photon emission
-      // is turned off (if it is happening).  This is done because it
-      // just looks better.
+      // If switching to the configurable atmosphere, photon emission is turned off (if it is happening).  This is done
+      // because it just looks better.
       if ( photonTarget == "CONFIGURABLE_ATMOSPHERE" || this.photonTargetProperty.get() == "CONFIGURABLE_ATMOSPHERE" ) {
         this.setPhotonEmissionPeriod( Number.POSITIVE_INFINITY );
         this.removeAllPhotons();
@@ -419,30 +445,38 @@ define( function( require ) {
       }
     },
 
+    /**
+     * Get the active molecules in this photonAbsorption model.  Returns a new array object holding those molecules.
+     * TODO: This can be done more simply by getting the array from the observable and then calling slice(0).
+     *
+     * @returns {Array} activeMolecules
+     */
     getMolecules: function() {
       var activeMolecules = [];
       for ( var i = 0; i < this.activeMolecules.length; i++ ) {
         activeMolecules[i] = this.activeMolecules.get( i );
       }
       return activeMolecules;
-//      return this.activeMolecules.slice( 0 );
     },
 
-    // Remove all of the photons in this PhotonAbsorptionModel.
+    /**
+     * Remove all photons in this PhotonAbsorptionModel
+     */
     removeAllPhotons: function() {
       this.photons.clear();
     },
 
-    // Remove the old photon target by clearing the array of active molecules in this PhotonAbsorptionModel.
+    /**
+     * Remove the old photon target by clearing the array of active molecules in this PhotonAbsorptionModel.
+     */
     removeOldTarget: function() {
       this.activeMolecules.clear(); // Clear the old active molecules array
     },
 
     /**
-     * This method restores the photon target to whatever it is currently set
-     * to.  This may seem nonsensical, and in some cases it is, but it is
-     * useful in cases where an atom has broken apart and needs to be restored
-     * to its original condition.
+     * This method restores the photon target to whatever it is currently set to.  This may seem nonsensical, and in
+     * some cases it is, but it is useful in cases where an atom has broken apart and needs to be restored to its
+     * original condition.
      */
     restorePhotonTarget: function() {
       var currentTarget = this.photonTargetProperty.get();
@@ -450,36 +484,19 @@ define( function( require ) {
     },
 
     /**
-     * Reset the configurable atmosphere by adding the initial levels of all
-     * gases.
+     * Reset the configurable atmosphere by adding the initial levels of all gases.
      */
     resetConfigurableAtmosphere: function() {
       assert && assert( this.photonTargetProperty.get() != 'CONFIGURABLE_ATMOSPHERE' ); // See method header comment if this assertion is hit.
     },
 
     /**
-     * Get the initial vector of the starting position of a single molecule.
+     * Get the initial starting position of a single molecule.
      *
      * @return {Array}
      */
     getSingleMoleculePosition: function() {
-
       return SINGLE_MOLECULE_POSITION;
-    },
-
-    /**
-     * Step one frame manually.  Assuming 60 frames per second.
-     */
-    manualStep: function() {
-
-      // Check if it is time to emit any photons.
-      this.checkEmissionTimer( 1/60 );
-
-      // Step the photons, marking and removing any that have moved beyond the model bounds.
-      this.stepPhotons( 1/60 );
-
-      // Step the molecules.
-      this.stepMolecules( 1/60 );
     }
 
   } )
