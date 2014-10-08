@@ -375,7 +375,6 @@ define( function( require ) {
      **/
     setVibration: function( vibrationRadians ) {
       this.currentVibrationRadians = vibrationRadians;
-      return;   // Implements no vibration by default, override in descendant classes as needed.
     },
 
     /**
@@ -387,7 +386,6 @@ define( function( require ) {
       this.currentVibrationRadians += deltaRadians;
       this.setVibration( this.currentVibrationRadians );
     },
-
 
     /**
      * Rotate the molecule about the center of gravity by the specified number

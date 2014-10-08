@@ -99,7 +99,7 @@ define( function( require ) {
      * @param {Number} vibrationRadians - The current angle of the vibration cycle.
      */
     setVibration: function( vibrationRadians ) {
-      Molecule.prototype.setVibration.call( vibrationRadians );
+      Molecule.prototype.setVibration.call( this, vibrationRadians );
       var multFactor = Math.sin( vibrationRadians );
       var maxOxygenDisplacement = 3;
       var maxHydrogenDisplacement = 18;

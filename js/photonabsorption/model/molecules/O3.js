@@ -131,7 +131,7 @@ define( function( require ) {
      * @param {Number} vibrationRadians - Where this molecule is in its vibration cycle in radians.
      */
     setVibration: function( vibrationRadians ) {
-      Molecule.prototype.setVibration.call( vibrationRadians );
+      Molecule.prototype.setVibration.call( this, vibrationRadians );
       var multFactor = Math.sin( vibrationRadians );
       var maxCenterOxygenDisplacement = 30;
       var maxOuterOxygenDisplacement = 15;

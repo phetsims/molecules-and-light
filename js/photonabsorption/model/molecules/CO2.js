@@ -80,11 +80,11 @@ define( function( require ) {
      * Set the vibration behavior for this CO2 molecule. Initialize and set center of
      * gravity position offsets for the composing atoms.
      *
-     * @param {Number} - Where this molecule is in its vibration cycle in radians.
+     * @param {Number} vibrationRadians Where this molecule is in its vibration cycle in radians.
      */
 
     setVibration: function( vibrationRadians ) {
-      Molecule.prototype.setVibration.call( vibrationRadians );
+      Molecule.prototype.setVibration.call( this, vibrationRadians );
       var multFactor = Math.sin( vibrationRadians );
       this.addInitialAtomCogOffset( this.carbonAtom, new Vector2( 0, multFactor * CARBON_MAX_DEFLECTION ) );
       this.addInitialAtomCogOffset( this.oxygenAtom1, new Vector2( INITIAL_CARBON_OXYGEN_DISTANCE, -multFactor * OXYGEN_MAX_DEFLECTION ) );
