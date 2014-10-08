@@ -47,12 +47,6 @@ define( function( require ) {
   // one value is needed.
   var PHOTON_VELOCITY = 3.0;
 
-  // Distance for a photon to travel before being removed from the model.
-  // This value is essentially arbitrary, and needs to be set such that the
-  // photons only disappear after they have traveled beyond the bounds of
-  // the play area.
-  var MAX_PHOTON_DISTANCE = 4500;
-
   // Location used when a single molecule is sitting in the area where the
   // photons pass through.
   var SINGLE_MOLECULE_POSITION = new Vector2( 0, 0 );
