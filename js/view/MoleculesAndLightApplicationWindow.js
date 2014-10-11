@@ -134,8 +134,7 @@ define( function( require ) {
 
     /**
      * Update the visibility of the button that restores molecules that have broken apart.  This button should be
-     * visible only when one or more molecules are off the screen (more or less).  This routine uses the intermediate
-     * rendering size to make the determination, which isn't perfectly accurate, but works well enough for our purposes.
+     * visible only when one or more molecules are off the screen (more or less).
      */
     moleculeCheckBounds: function() {
       var moleculesToRemove = [];
@@ -151,7 +150,9 @@ define( function( require ) {
     },
 
     /**
-     * Check to see if any photons are outside the application window.
+     * Check to see if any photons collide with the appliication window.  If there is a collision, remove the photon
+     * from the model.
+     *
      */
     photonCheckBounds: function() {
       var photonsToRemove = [];
@@ -160,8 +161,15 @@ define( function( require ) {
           photonsToRemove.push( this.photonAbsorptionModel.photons.get( photon ) );
         }
       }
-
       this.photonAbsorptionModel.photons.removeAll( photonsToRemove );
+    },
+
+    /**
+     * Draw a border around the application window.  The border has a color gradient which
+     *
+     */
+    drawBorder: function() {
+
     }
   } )
 } );
