@@ -28,6 +28,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
 
   // Strings
   var returnMoleculeString = require( 'string!MOLECULES_AND_LIGHT/buttonNode.returnMolecule' );
@@ -44,8 +45,10 @@ define( function( require ) {
    */
   function MoleculesAndLightApplicationWindow( photonAbsorptionModel, mvt ) {
 
+    // Describe the stroke of the window.
+    var border = new LinearGradient( 0, 0, 0, 300 ).addColorStop( 0, Color.BLACK ).addColorStop(1, Color.WHITE );
     // Supertype constructor
-    Rectangle.call( this, 0, 0, 500, 300, 7, 7, {fill: 'black', stroke: new Color( 47, 101, 209 ), lineWidth: 5} );
+    Rectangle.call( this, 0, 0, 500, 300, 7, 7, {fill: 'black'});
 
     var thisWindow = this;
     this.mvt = mvt;
@@ -63,6 +66,8 @@ define( function( require ) {
     this.photonEmitterLayer = new Node();
     this.addChild( this.photonEmitterLayer );
 
+    // Add the frame around the application window.
+    this.addChild( this.drawBorder( 5, new Color( "#BED0E7" ), new Color( '#4070CE' ) ) );
 
     // Create and add the photon emitter.
     this.photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, mvt, photonAbsorptionModel );
@@ -150,7 +155,7 @@ define( function( require ) {
     },
 
     /**
-     * Check to see if any photons collide with the appliication window.  If there is a collision, remove the photon
+     * Check to see if any photons collide with the application window.  If there is a collision, remove the photon
      * from the model.
      *
      */
@@ -165,10 +170,44 @@ define( function( require ) {
     },
 
     /**
-     * Draw a border around the application window.  The border has a color gradient which
+     * Draw a border around the application window.  The desired border has a color gradient which cannot be done in a
+     * normal stroke. TODO: This function could probably use some refactoring.
      *
+     * @param { Number } lineWidth - The width of the border.  Similar to lineWidth in Rectangle.js.
+     * @param { Color } innerColor - The color directly outside the application window.  First color in the gradient.
+     * @param { Color } outerColor - The final color of the stroke.  'Destination' color of the gradient.
+     * @return {Node} applicationFrame
      */
-    drawBorder: function() {
+    drawBorder: function( lineWidth, innerColor, outerColor  ) {
+      // Declare the entire frame.
+      var applicationFrame = new Node();
+
+      // Draw the top of the frame and add to the border.
+      var topFill = new LinearGradient( 0, 0, 0, lineWidth ).addColorStop( 0, outerColor ).addColorStop( 1, innerColor );
+      var borderTop = new Rectangle( 0, 0, this.width, lineWidth, { fill: topFill } );
+      borderTop.setLeftBottom( this.leftTop );
+      applicationFrame.addChild( borderTop );
+
+      // Draw the bottom of frame and add to the border.
+      var bottomFill = new LinearGradient( 0, 0, 0, lineWidth ).addColorStop( 0, innerColor ).addColorStop( 1, outerColor );
+      var borderBottom = new Rectangle( 0, 0, this.width, lineWidth, { fill: bottomFill } );
+      borderBottom.setLeftTop( this.leftBottom );
+      applicationFrame.addChild( borderBottom );
+
+      // Draw the left section of the frame and add to the border.
+      var leftFill = new LinearGradient( 0, 0, lineWidth, 0 ).addColorStop( 0, outerColor ).addColorStop( 1, innerColor );
+      var borderLeft = new Rectangle( 0, 0, lineWidth, this.height, { fill: leftFill } );
+      borderLeft.setRightTop( this.leftTop );
+      applicationFrame.addChild( borderLeft );
+
+      // Draw the left section of the frame and add to the border.
+      var rightFill = new LinearGradient( 0, 0, lineWidth, 0 ).addColorStop( 0, innerColor ).addColorStop( 1, outerColor );
+      var borderRight = new Rectangle( 0, 0, lineWidth, this.height, { fill: rightFill } );
+      borderRight.setLeftTop( this.rightTop );
+      applicationFrame.addChild( borderRight );
+
+      // Return the finished frame.
+      return applicationFrame;
 
     }
   } )
