@@ -33,9 +33,19 @@ define( function( require ) {
     paintCanvas: function( wrapper ) {
       var context = wrapper.context;
 
-      // Draw the left section of the window frame.
-//      this.drawBorderWidth( this.model.rectArcWidth, 0, this.model.width - this.lineWidth, this.lineWidth, context );
+      // Draw the top section of the window frame
+      this.drawFrameSide( 'top', this.model.rectArcWidth, -this.lineWidth, this.model.rectWidth - 2 * this.model.rectArcWidth, this.lineWidth, context );
 
+      // Draw the bottom section of the window frame.
+      this.drawFrameSide( 'bottom', this.model.rectArcWidth, this.model.rectHeight, this.model.rectWidth - 2 * this.model.rectArcWidth, this.lineWidth, context );
+
+      // Draw the left section of the window frame.
+      this.drawFrameSide( 'left', -this.lineWidth, this.model.rectArcHeight, this.lineWidth, this.model.rectHeight - 2 * this.model.rectArcHeight, context );
+
+      // Draw the right secion of the window frame.
+      this.drawFrameSide( 'right', this.model.rectWidth, this.model.rectArcHeight, this.lineWidth, this.model.rectHeight - 2 * this.model.rectArcHeight, context );
+
+      // Draw the frame corners.
       this.drawFrameCorner( new Vector2( this.model.rectArcWidth, this.model.rectArcHeight ), 'topLeft', context );
       this.drawFrameCorner( new Vector2(
         this.model.rectArcWidth, this.model.rectHeight - this.model.rectArcHeight ), 'bottomLeft', context );
@@ -81,7 +91,7 @@ define( function( require ) {
 
       // Draw the corner of the frame with canvas arc.
       context.beginPath(); // Begin and clear the path drawing context.
-      context.arc( radialCenter.x, radialCenter.y, this.model.rectArcWidth + this.lineWidth/2, initialAngle, finalAngle, false );
+      context.arc( radialCenter.x, radialCenter.y, this.model.rectArcWidth + this.lineWidth / 2, initialAngle, finalAngle, false );
 
       // Create the radial gradient for the arc on the corner.
       var grad = context.createRadialGradient( radialCenter.x, radialCenter.y, this.model.rectArcWidth,
@@ -98,20 +108,48 @@ define( function( require ) {
      * Function which creates the sections of the frame that span the width.  These sections are the top and
      * bottom of the border.
      *
+     * @param { String } side - String which specifies desired side of the window frame.
      * @param { Number } x - x position of the upper left corner (left bound)
      * @param { Number } y - y position of the upper left corner (top bound)
      * @param { Number } width - Width of the rectangle to the right of the upper left corner
      * @param { Number } height - Height of the rectangle to the
      * @param { CanvasRenderingContext2D } context - The drawing context
-     * TODO: Generalize this method for the bottom as well.
      */
-    drawBorderWidth: function( x, y, width, height, context ) {
+    drawFrameSide: function( side, x, y, width, height, context ) {
 
-      var grad = context.createLinearGradient( x, y, x, y + this.lineWidth );
-      grad.addColorStop( 0, 'red' );
+      // Create the linear gradient and add some length or height buffers for the window frame pieces.  Parameters of
+      // the gradient are dependent on the desired side of the frame.
+      var grad;
+      switch( side ){
+        case 'top':
+          x--; // Extra length buffers for the width ensures continuity in the window frame.
+          width += 2;
+          grad = context.createLinearGradient( x, y + height, x, y );
+          break;
+        case 'bottom':
+          x--; // Extra length buffers for the width ensures continuity in the window frame.
+          width+=2;
+          grad = context.createLinearGradient( x, y, x, y + height );
+          break;
+        case 'left':
+          y--; // Extra height buffers on this side ensure continuity in the window frame.
+          height+=2;
+          grad = context.createLinearGradient( x + width, y, x, y );
+          break;
+        case 'right':
+          y--; // Extra height buffers on this side ensure continuity in the window frame.
+          height+=2;
+          grad = context.createLinearGradient( x, y, x + width, y );
+          break;
+        default:
+          console.error( "Side must be one of 'top', 'bottom', 'left', or 'right'");
+          break;
+      }
+
+      grad.addColorStop( 0, this.innerColor );
       grad.addColorStop( 1, this.outerColor );
       context.fillStyle = grad;
-      context.fillRect( x, y, x + width, y + height );
+      context.fillRect( x, y, width, height ); // Extra buffers in length ensure continuity in the window frame.
 
     }
   } );
