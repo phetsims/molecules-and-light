@@ -15,6 +15,16 @@ define( function( require ) {
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  /**
+   * Constructor for the molecules and light window frame. This is a border around the application play window.  Similar
+   * to a typical stroke though each side of the border has a linear gradient.
+   *
+   * @param { MoleculesAndLightApplicationWindow } model
+   * @param { Number } lineWidth - width of the window frame, similar to lineWidth for stroke in other scenery objects.
+   * @param { Color } innerColor - boundary color on the inside of the window frame.
+   * @param { Color } outerColor - boundary color along the outer edge of the window frame.
+   * @constructor
+   */
   function WindowFrameNode( model, lineWidth, innerColor, outerColor ) {
 
     // Set inputs as class variables so they can be used in canvas methods.
@@ -42,17 +52,20 @@ define( function( require ) {
       // Draw the left section of the window frame.
       this.drawFrameSide( 'left', -this.lineWidth, this.model.rectArcHeight, this.lineWidth, this.model.rectHeight - 2 * this.model.rectArcHeight, context );
 
-      // Draw the right secion of the window frame.
+      // Draw the right section of the window frame.
       this.drawFrameSide( 'right', this.model.rectWidth, this.model.rectArcHeight, this.lineWidth, this.model.rectHeight - 2 * this.model.rectArcHeight, context );
 
-      // Draw the frame corners.
-      this.drawFrameCorner( new Vector2( this.model.rectArcWidth, this.model.rectArcHeight ), 'topLeft', context );
-      this.drawFrameCorner( new Vector2(
-        this.model.rectArcWidth, this.model.rectHeight - this.model.rectArcHeight ), 'bottomLeft', context );
-      this.drawFrameCorner( new Vector2(
-          this.model.rectWidth - this.model.rectArcWidth, this.model.rectHeight - this.model.rectArcHeight ), 'bottomRight', context );
-      this.drawFrameCorner( new Vector2(
-          this.model.rectWidth - this.model.rectArcWidth, this.model.rectArcHeight ), 'topRight', context );
+      // Draw the top left corner of the window frame.
+      this.drawFrameCorner( 'topLeft', new Vector2( this.model.rectArcWidth, this.model.rectArcHeight ), context );
+
+      // Draw the bottom left corner of the window frame.
+      this.drawFrameCorner( 'bottomLeft', new Vector2( this.model.rectArcWidth, this.model.rectHeight - this.model.rectArcHeight ), context );
+
+      // Draw the bottom right corner of the window frame.
+      this.drawFrameCorner( 'bottomRight', new Vector2( this.model.rectWidth - this.model.rectArcWidth, this.model.rectHeight - this.model.rectArcHeight ), context );
+
+      // Draw the top right corner of the window frame.
+      this.drawFrameCorner( 'topRight', new Vector2( this.model.rectWidth - this.model.rectArcWidth, this.model.rectArcHeight ), context );
     },
 
     /**
@@ -62,7 +75,7 @@ define( function( require ) {
      * @param { String } corner - String describing desired corner of the window frame.
      * @param { CanvasRenderingContext2D } context - Context for the canvas methods.
      */
-    drawFrameCorner: function( radialCenter, corner, context ) {
+    drawFrameCorner: function( corner, radialCenter, context ) {
 
       // Determine the initial and final angles for arc methods based on input location.
       var initialAngle;
@@ -85,7 +98,7 @@ define( function( require ) {
           finalAngle = 2 * Math.PI;
           break;
         default:
-          console.error( 'Improper location for a frame corner.' );
+          console.error( "Corner must be one of 'topLeft', 'topRight', 'bottomLeft', 'bottomRight'." );
           break;
       }
 
@@ -149,7 +162,7 @@ define( function( require ) {
       grad.addColorStop( 0, this.innerColor );
       grad.addColorStop( 1, this.outerColor );
       context.fillStyle = grad;
-      context.fillRect( x, y, width, height ); // Extra buffers in length ensure continuity in the window frame.
+      context.fillRect( x, y, width, height );
 
     }
   } );
