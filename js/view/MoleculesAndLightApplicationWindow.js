@@ -29,6 +29,8 @@ define( function( require ) {
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var Text = require( 'SCENERY/nodes/Text' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
+  var WindowFrameNode = require( 'MOLECULES_AND_LIGHT/view/WindowFrameNode' );
 
   // Strings
   var returnMoleculeString = require( 'string!MOLECULES_AND_LIGHT/buttonNode.returnMolecule' );
@@ -45,10 +47,8 @@ define( function( require ) {
    */
   function MoleculesAndLightApplicationWindow( photonAbsorptionModel, mvt ) {
 
-    // Describe the stroke of the window.
-    var border = new LinearGradient( 0, 0, 0, 300 ).addColorStop( 0, Color.BLACK ).addColorStop(1, Color.WHITE );
     // Supertype constructor
-    Rectangle.call( this, 0, 0, 500, 300, 7, 7, {fill: 'black'});
+    Rectangle.call( this, 0, 0, 500, 300, 7, 7, {fill: 'black'} );
 
     var thisWindow = this;
     this.mvt = mvt;
@@ -67,7 +67,8 @@ define( function( require ) {
     this.addChild( this.photonEmitterLayer );
 
     // Add the frame around the application window.
-    this.addChild( this.drawBorder( 5, new Color( "#BED0E7" ), new Color( '#4070CE' ) ) );
+    var windowFrame = this.drawBorder( 5, new Color( "#BED0E7" ), new Color( '#4070CE' ) );
+    this.addChild( windowFrame );
 
     // Create and add the photon emitter.
     this.photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, mvt, photonAbsorptionModel );
@@ -171,40 +172,60 @@ define( function( require ) {
 
     /**
      * Draw a border around the application window.  The desired border has a color gradient which cannot be done in a
-     * normal stroke. TODO: This function could probably use some refactoring.
+     * normal stroke. TODO: Move this function to the WindowFrameNode.js which uses canvas directly.
      *
      * @param { Number } lineWidth - The width of the border.  Similar to lineWidth in Rectangle.js.
      * @param { Color } innerColor - The color directly outside the application window.  First color in the gradient.
      * @param { Color } outerColor - The final color of the stroke.  'Destination' color of the gradient.
      * @return {Node} applicationFrame
      */
-    drawBorder: function( lineWidth, innerColor, outerColor  ) {
+    drawBorder: function( lineWidth, innerColor, outerColor ) {
       // Declare the entire frame.
       var applicationFrame = new Node();
 
-      // Draw the top of the frame and add to the border.
-      var topFill = new LinearGradient( 0, 0, 0, lineWidth ).addColorStop( 0, outerColor ).addColorStop( 1, innerColor );
-      var borderTop = new Rectangle( 0, 0, this.width, lineWidth, { fill: topFill } );
-      borderTop.setLeftBottom( this.leftTop );
+      /**
+       * Function which creates the sections of the frame which span the width.  These sections will form the top and
+       * bottom of the border.  The top and bottom sections of the frame are identical except for being rotated 180
+       * degrees and translated to their respective edges.
+       *
+       * @param { MoleculesAndLightApplicationWindow } window
+       * @returns {Rectangle}
+       */
+      var drawBorderWidth = function( window ) {
+        var widthFill = new LinearGradient( 0, 0, 0, lineWidth ).addColorStop( 0, outerColor ).addColorStop( 1, innerColor );
+        return new Rectangle( 0, 0, window.rectWidth - 2 * window.rectArcWidth, lineWidth, { fill: widthFill } );
+      };
+
+      var drawBorderHeight = function( window ) {
+        var heightFill = new LinearGradient( 0, 0, lineWidth, 0 ).addColorStop( 0, outerColor ).addColorStop( 1, innerColor );
+        return new Rectangle( 0, 0, lineWidth, window.rectHeight - 2 * window.rectArcHeight, { fill: heightFill } );
+      };
+
+      // Draw the top section of the frame.
+      var borderTop = new drawBorderWidth( this );
+      borderTop.setLeftBottom( new Vector2( this.leftTop.x + this.rectArcWidth, this.leftTop.y ) );
       applicationFrame.addChild( borderTop );
 
-      // Draw the bottom of frame and add to the border.
-      var bottomFill = new LinearGradient( 0, 0, 0, lineWidth ).addColorStop( 0, innerColor ).addColorStop( 1, outerColor );
-      var borderBottom = new Rectangle( 0, 0, this.width, lineWidth, { fill: bottomFill } );
-      borderBottom.setLeftTop( this.leftBottom );
-      applicationFrame.addChild( borderBottom );
+      // Draw the bottom section of the frame.
+      var borderBottom = new drawBorderWidth( this );
+      borderBottom.rotate( Math.PI ); // Rotate this frame piece by 180 degrees.
+      borderBottom.setLeftTop( new Vector2( this.leftBottom.x + this.rectArcWidth, this.leftBottom.y ) );
+      this.addChild( borderBottom );
 
-      // Draw the left section of the frame and add to the border.
-      var leftFill = new LinearGradient( 0, 0, lineWidth, 0 ).addColorStop( 0, outerColor ).addColorStop( 1, innerColor );
-      var borderLeft = new Rectangle( 0, 0, lineWidth, this.height, { fill: leftFill } );
-      borderLeft.setRightTop( this.leftTop );
+      // Draw the left section of the frame.
+      var borderLeft = new drawBorderHeight( this );
+      borderLeft.setRightTop( new Vector2( this.leftTop.x, this.leftTop.y + this.rectArcHeight ) );
       applicationFrame.addChild( borderLeft );
 
-      // Draw the left section of the frame and add to the border.
-      var rightFill = new LinearGradient( 0, 0, lineWidth, 0 ).addColorStop( 0, innerColor ).addColorStop( 1, outerColor );
-      var borderRight = new Rectangle( 0, 0, lineWidth, this.height, { fill: rightFill } );
-      borderRight.setLeftTop( this.rightTop );
+      // Draw the right section of the frame.
+      var borderRight = new drawBorderHeight( this );
+      borderRight.rotate( Math.PI ); // Rotate this frame piece by 180 degrees.
+      borderRight.setLeftTop( new Vector2( this.rightTop.x, this.rightTop.y + this.rectArcHeight ) );
       applicationFrame.addChild( borderRight );
+
+      // Draw the windowframe.
+      var borderLeftTopCorner = new WindowFrameNode( this, lineWidth, innerColor, outerColor );
+      applicationFrame.addChild( borderLeftTopCorner );
 
       // Return the finished frame.
       return applicationFrame;

@@ -87,6 +87,7 @@ define( function( require ) {
      * @constructor
      */
     var SpectrumDiagram = function() {
+
       var OVERALL_DIMENSIONS = new Dimension2( 550, 440 );
       var HORIZONTAL_INSET = 30;
 
@@ -466,6 +467,7 @@ define( function( require ) {
 
       context.lineWidth = 2; // Set the line width of the curve.
       context.stroke(); // Draw the path on the canvas.
+      context.closePath(); // Close path to prepare for further canvas calls.
       boundingBox.addChild( new Image( canvas.toDataURL() ) ); // Add the canvas to the bounding box as an image.
       return boundingBox;
 
