@@ -184,22 +184,20 @@ define( function( require ) {
     },
 
     /**
-     * Get the initial offset from the molecule's center of gravity (COG) for
-     * the specified atom.
+     * Get the initial offset from the molecule's center of gravity (COG) for the specified atom.
      *
      * @param {Atom} atom
      * @return {Vector2}
      **/
     getInitialAtomCogOffset: function( atom ) {
-      if ( !atom.uniqueID in this.initialAtomCogOffsets ) {
+      if ( !(atom.uniqueID in this.initialAtomCogOffsets) ) {
         console.log( " - Warning: Attempt to get initial COG offset for atom that is not in molecule." );
       }
       return this.initialAtomCogOffsets[atom.uniqueID];
     },
 
     /**
-     * Get the current vibration offset from the molecule's center of gravity
-     * (COG) for the specified molecule.
+     * Get the current vibration offset from the molecule's center of gravity (COG) for the specified molecule.
      *
      * @param {Atom} atom
      * @return {Vector2} - Vector representing location of vibration offset from molecule's center of gravity.
@@ -212,10 +210,9 @@ define( function( require ) {
     },
 
     /**
-     * Add a "constituent molecule" to this molecule's list.  Constituent
-     * molecules are what this molecule will break into if it breaks apart.
-     * Note that this does NOT check for any sort of conservation of atoms,
-     * so use this carefully or weird break apart behaviors could result.
+     * Add a "constituent molecule" to this molecule's list.  Constituent molecules are what this molecule will break
+     * into if it breaks apart. Note that this does NOT check for any sort of conservation of atoms, so use this
+     * carefully or weird break apart behaviors could result.
      *
      * @param {Molecule} molecule
      **/
@@ -236,7 +233,6 @@ define( function( require ) {
      * Advance the molecule one step in time.
      *
      * @param {Number} dt - The change in time.
-     * TODO: Requires the PhotonAbsorptionStrategy dependency file and setCenterOfGravityPos functions.
      **/
     step: function( dt ) {
       this.activePhotonAbsorptionStrategy.step( dt );
@@ -293,32 +289,6 @@ define( function( require ) {
      **/
     setRotationDirectionClockwise: function( rotationDirectionClockwise ) {
       this.rotationDirectionClockwise = rotationDirectionClockwise;
-    },
-
-    /**
-     * Add a listener to this molecules array of listeners.
-     *
-     * @param {Listener} listener
-     * TODO: indexOf() will return -1 if item is not in array.  Make sure that this is ok.
-     **/
-    addListener: function( listener ) {
-      // Don't bother adding if already there.
-      if ( this.listeners.indexOf( listener ) === -1 ) {
-        this.listeners.push( listener );
-      }
-    },
-
-    /**
-     * Remove a listener from this molecules array of listeners.
-     *
-     * @param {Listener} listener
-     **/
-    removeListener: function( listener ) {
-      // find the listener in the array.
-      var index = this.listeners.indexOf( listener );
-      if ( index > -1 ) {
-        this.listeners.splice( index, 1 );
-      }
     },
 
     /**
