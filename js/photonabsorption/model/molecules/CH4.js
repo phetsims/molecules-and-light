@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
   var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
@@ -18,8 +19,8 @@ define( function( require ) {
   var CarbonAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/CarbonAtom' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
   var VibrationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/VibrationStrategy' );
-  var HydrogenAtom = require( 'MOLECULES_AND_LIGHT/photonAbsorptionModel/model/atoms/HydrogenAtom' );
-  var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonAbsorptionModel/model/PhotonAbsorptionStrategy' );
+  var HydrogenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/HydrogenAtom' );
+  var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
 
   /**
    * Model data for methane.
@@ -87,61 +88,66 @@ define( function( require ) {
 
   }
 
+  return inherit( Molecule, CH4, {
+
+    /**
+     * Set the initial positions of the atoms which compose this molecule.
+     */
+    initializeAtomOffsets: function() {
+
+      this.addInitialAtomCogOffset( this.carbonAtom, new Vector2( 0, 0 ) );
+      this.addInitialAtomCogOffset( this.hydrogenAtom1, new Vector2( -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,
+        ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
+      this.addInitialAtomCogOffset( this.hydrogenAtom2, new Vector2( ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,
+        ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
+      this.addInitialAtomCogOffset( this.hydrogenAtom3, new Vector2( ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,
+        -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
+      this.addInitialAtomCogOffset( this.hydrogenAtom4, new Vector2( -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,
+        -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
+
+      this.updateAtomPositions();
+    },
+
+    /**
+     * Set the vibration behavior for this CH4 molecule. Initialize and set center of gravity position offsets for the
+     * composing atoms.
+     *
+     * @param {Number} vibrationRadians - Where this molecule is in its vibration cycle in radians.
+     */
+    setVibration: function( vibrationRadians ) {
+
+      Molecule.prototype.setVibration.call( this, vibrationRadians );
+
+      if ( vibrationRadians !== 0 ) {
+        var multFactor = Math.sin( vibrationRadians );
+        this.addInitialAtomCogOffset( this.hydrogenAtom1, new Vector2( -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_X,
+            ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_Y ) );
+        this.addInitialAtomCogOffset( this.hydrogenAtom2, new Vector2( ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE - multFactor * HYDROGEN_VIBRATION_DISTANCE_X,
+            ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_Y ) );
+        this.addInitialAtomCogOffset( this.hydrogenAtom3, new Vector2( -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE - multFactor * HYDROGEN_VIBRATION_DISTANCE_X,
+            -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_Y ) );
+        this.addInitialAtomCogOffset( this.hydrogenAtom4, new Vector2( ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_X,
+            -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_Y ) );
+
+        // Position the carbon atom so that the center of mass of the molecule remains the same.
+        var carbonXPos = -( HydrogenAtom.mass / CarbonAtom.mass ) *
+                         ( this.getInitialAtomCogOffset( this.hydrogenAtom1 ).getX() + this.getInitialAtomCogOffset( this.hydrogenAtom2 ).getX() +
+                           this.getInitialAtomCogOffset( this.hydrogenAtom3 ).getX() + this.getInitialAtomCogOffset( this.hydrogenAtom4 ).getX() );
+        var carbonYPos = -( HydrogenAtom.mass / CarbonAtom.mass ) *
+                         ( this.getInitialAtomCogOffset( this.hydrogenAtom1 ).getY() + this.getInitialAtomCogOffset( this.hydrogenAtom2 ).getY() +
+                           this.getInitialAtomCogOffset( this.hydrogenAtom3 ).getY() + this.getInitialAtomCogOffset( this.hydrogenAtom4 ).getY() );
+        this.addInitialAtomCogOffset( this.carbonAtom, new Vector2( carbonXPos, carbonYPos ) );
+      }
+
+      else {
+        this.initializeAtomOffsets();
+      }
+
+      this.updateAtomPositions();
+
+    }
+
+  } );
 } );
 
-//  // ------------------------------------------------------------------------
-//  // Methods
-//  // ------------------------------------------------------------------------
-//
-//  /* (non-Javadoc)
-//   * @see edu.colorado.phet.common.photonabsorption.model.Molecule#initializeCogOffsets()
-//   */
-//  @Override
-//  protected void initializeAtomOffsets() {
-//    addInitialAtomCogOffset( carbonAtom, new MutableVector2D( 0, 0 ) );
-//    addInitialAtomCogOffset( hydrogenAtom1, new MutableVector2D( -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,
-//      ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
-//    addInitialAtomCogOffset( hydrogenAtom2, new MutableVector2D( ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,
-//      ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
-//    addInitialAtomCogOffset( hydrogenAtom3, new MutableVector2D( ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,
-//      -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
-//    addInitialAtomCogOffset( hydrogenAtom4, new MutableVector2D( -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,
-//      -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
-//
-//    updateAtomPositions();
-//  }
-//
-//  @Override
-//  public void setVibration( double vibrationRadians ) {
-//    super.setVibration( vibrationRadians );
-//    if ( vibrationRadians != 0 ) {
-//      double multFactor = Math.sin( vibrationRadians );
-//      addInitialAtomCogOffset( hydrogenAtom1,
-//        new MutableVector2D( -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_X,
-//            ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_Y ) );
-//      addInitialAtomCogOffset( hydrogenAtom2,
-//        new MutableVector2D( ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE - multFactor * HYDROGEN_VIBRATION_DISTANCE_X,
-//            ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_Y ) );
-//      addInitialAtomCogOffset( hydrogenAtom3,
-//        new MutableVector2D( -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE - multFactor * HYDROGEN_VIBRATION_DISTANCE_X,
-//            -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_Y ) );
-//      addInitialAtomCogOffset( hydrogenAtom4,
-//        new MutableVector2D( ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_X,
-//            -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + multFactor * HYDROGEN_VIBRATION_DISTANCE_Y ) );
-//
-//      // Position the carbon atom so that the center of mass of the
-//      // molecule remains the same.
-//      double carbonXPos = -( HydrogenAtom.MASS / CarbonAtom.MASS ) *
-//                          ( getInitialAtomCogOffset( hydrogenAtom1 ).getX() + getInitialAtomCogOffset( hydrogenAtom2 ).getX() +
-//                            getInitialAtomCogOffset( hydrogenAtom3 ).getX() + getInitialAtomCogOffset( hydrogenAtom4 ).getX() );
-//      double carbonYPos = -( HydrogenAtom.MASS / CarbonAtom.MASS ) *
-//                          ( getInitialAtomCogOffset( hydrogenAtom1 ).getY() + getInitialAtomCogOffset( hydrogenAtom2 ).getY() +
-//                            getInitialAtomCogOffset( hydrogenAtom3 ).getY() + getInitialAtomCogOffset( hydrogenAtom4 ).getY() );
-//      addInitialAtomCogOffset( carbonAtom, new MutableVector2D( carbonXPos, carbonYPos ) );
-//    }
-//    else {
-//      initializeAtomOffsets();
-//    }
-//    updateAtomPositions();
-//  }
-//}
+

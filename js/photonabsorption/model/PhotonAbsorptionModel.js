@@ -35,6 +35,7 @@ define( function( require ) {
   var NO2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO2' );
   var O2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O2' );
   var O3 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O3' );
+  var CH4 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CH4' );
 
   //----------------------------------------------------------------------------
   // Class Data
