@@ -77,12 +77,11 @@ define( function( require ) {
   return inherit( Molecule, CO2, {
 
     /**
-     * Set the vibration behavior for this CO2 molecule. Initialize and set center of
-     * gravity position offsets for the composing atoms.
+     * Set the vibration behavior for this CO2 molecule. Initialize and set center of gravity position offsets for the
+     * composing atoms.
      *
      * @param {Number} vibrationRadians Where this molecule is in its vibration cycle in radians.
      */
-
     setVibration: function( vibrationRadians ) {
       Molecule.prototype.setVibration.call( this, vibrationRadians );
       var multFactor = Math.sin( vibrationRadians );
