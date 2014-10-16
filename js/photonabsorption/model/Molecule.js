@@ -166,9 +166,8 @@ define( function( require ) {
     },
 
     /**
-     * Add an initial offset from the molecule's Center of Gravity (COG).
-     * The offset is "initial" because this is where the atom should be when
-     * it is not vibrating or rotating.
+     * Add an initial offset from the molecule's Center of Gravity (COG). The offset is "initial" because this is where
+     * the atom should be when it is not vibrating or rotating.
      *
      * TODO: Is there a better way to do the @param? Way to check for subclasses?
      * @param {Atom || CarbonAtom || HydrogenAtom || NitrogenAtom || OxygenAtom} atom
@@ -310,11 +309,9 @@ define( function( require ) {
     },
 
     /**
-     * Set the location of this molecule by specifying the center of gravity.
-     * This will be unique to each molecule's configuration, and it will cause
-     * the individual molecules to be located such that the center of gravity
-     * is in the specified location.  The relative orientation of the atoms
-     * that comprise the molecules will not be changed.
+     * Set the location of this molecule by specifying the center of gravity.  This will be unique to each molecule's
+     * configuration, and it will cause the individual molecules to be located such that the center of gravity is in
+     * the specified location.  The relative orientation of the atoms that comprise the molecules will not be changed.
      *
      * @param {Number} x - the x location to set
      * @param {Number} y - the y location to set
@@ -338,8 +335,7 @@ define( function( require ) {
     },
 
     /**
-     * Set the angle, in terms of radians from 0 to 2*PI, where this molecule
-     * is in its vibration cycle.
+     * Set the angle, in terms of radians from 0 to 2*PI, where this molecule is in its vibration cycle.
      *
      * @param {Number} vibrationRadians - The angle describing where this molecule is in its vibration.
      **/
@@ -358,8 +354,7 @@ define( function( require ) {
     },
 
     /**
-     * Rotate the molecule about the center of gravity by the specified number
-     * of radians.
+     * Rotate the molecule about the center of gravity by the specified number of radians.
      *
      * @param {Number} deltaRadians - Change in radians of the Molecule's angle about the center of Gravity.
      **/
@@ -370,7 +365,7 @@ define( function( require ) {
     /**
      * Set the rotation angle of the Molecule in radians.
      *
-     * @param {radians}
+     * @param { Number } radians
      **/
 
     setRotation: function( radians ) {
@@ -390,10 +385,9 @@ define( function( require ) {
     },
 
     /**
-     * Enable/disable a molecule's high electronic energy state, which in the
-     * real world is a state where one or more electrons has moved to a higher
-     * orbit.  In this simulation, it is generally depicted by having the
-     * molecule appear to glow.
+     * Enable/disable a molecule's high electronic energy state, which in the real world is a state where one or more
+     * electrons has moved to a higher orbit.  In this simulation, it is generally depicted by having the molecule
+     * appear to glow.
      *
      * @param {Boolean} highElectronicEnergyState
      **/
@@ -419,10 +413,7 @@ define( function( require ) {
     },
 
     /**
-     * Mark a photon for passing through the molecule.  This means that the photon
-     * will not interact with the molecule.
-     *
-     * TODO: Requires the Photon dependency file.
+     * Mark a photon for passing through the molecule.  This means that the photon will not interact with the molecule.
      *
      * @param {Photon} photon - The photon to be passed through.
      **/
@@ -468,11 +459,8 @@ define( function( require ) {
     },
 
     /**
-     * Decide whether or not to absorb the offered photon.  If the photon is
-     * absorbed, the matching absorption strategy is set so that it can
-     * control the molecule's post-absorption behavior.
-     *
-     * TODO: Requires photonAbsorptionStrategy.js and Photon.js dependency files.
+     * Decide whether or not to absorb the offered photon.  If the photon is absorbed, the matching absorption strategy
+     * is set so that it can control the molecule's post-absorption behavior.
      *
      * @param {Photon} photon - The photon offered for absorption.
      * @return {Boolean} absorbPhoton
@@ -520,8 +508,6 @@ define( function( require ) {
     /**
      * Add an atom to the list of atoms which compose this molecule.
      *
-     * TODO: Requires the Atom.js dependency file.
-     *
      * @param {Atom} atom - The atom to be added
      **/
     addAtom: function( atom ) {
@@ -565,8 +551,8 @@ define( function( require ) {
     },
 
     /**
-     * Update the positions of all atoms that comprise this molecule based on
-     * the current center of gravity and the offset for each atom.
+     * Update the positions of all atoms that comprise this molecule based on the current center of gravity and the
+     * offset for each atom.
      **/
     updateAtomPositions: function() {
       for ( var uniqueID in this.initialAtomCogOffsets ) {
@@ -612,29 +598,6 @@ define( function( require ) {
     },
 
     /**
-     * Notify the event listener that the Electron Energy State has changed.
-     *
-     * TODO: Requires the elctronicEnergyStateChanged method from the listener subclass.
-     */
-    notifyElectronicEnergyStateChanged: function() {
-      for ( var listener in this.listeners ) {
-        console.log( this.listeners[listener] );
-        //listener.electronicEnergyStateChanged( this );
-      }
-    },
-
-    /**
-     * Notify the event listener that the center of gravity for this molecules has changed.
-     *
-     * TODO: Requires centerOfGravityPosChanged() method from the Listener subclass.
-     */
-    notifyCenterOfGravityPosChanged: function() {
-      for ( var listener in this.listeners ) {
-        this.listeners[listener].centerOfGravityPosChanged( this );
-      }
-    },
-
-    /**
      * Notify the event listener that a photon has been emitted from this molecule.
      *
      * @param {Photon} photon - The emitted photon
@@ -645,20 +608,8 @@ define( function( require ) {
     },
 
     /**
-     * Notify the event listener that this molecule has broken apart.
-     *
-     * TODO: Requires the brokApart method from the Listener subclass.
-     */
-    notifyBrokeApart: function() {
-      for ( var listener in this.listeners ) {
-        this.listeners[listener].brokeApart( this );
-      }
-    },
-
-    /**
-     * Initialize the offsets from the center of gravity for each atom within
-     * this molecule.  This should be in the "relaxed" (i.e. non-vibrating)
-     * state.
+     * Initialize the offsets from the center of gravity for each atom within this molecule.  This should be in the
+     * "relaxed" (i.e. non-vibrating) state.
      */
     initializeAtomOffsets: function() {
       throw new Error( 'initializeAtomOffsets should be implemented in descendant molecules.' );
@@ -670,7 +621,7 @@ define( function( require ) {
 
     /**
      * Get the instantaneous position destination of this molecule as a vector.
-     * TODO: getDestination was originally a more generalized function in Abstract2D.java.  Perhaps this should be moved to Vector2.js?
+     *
      * @param { Vector2 } startPt - The initial position of the object.
      * @return { Vector2 } - The instantaneous destination of this object as a vector.
      */
@@ -678,47 +629,17 @@ define( function( require ) {
       return startPt.plus( this.velocity );
     }
 
-  }, {
-    // Static Methods
-
-    /** Safely Create a new Molecule.
-     * Catches Instantiation Exceptions and Illegal Access Exceptions.
-     * (These exceptions are specific to the java newInstance() method, so new exceptions will be created.)
-     * @return {Molecule} newMolecule
-     *
-     * TODO: The original .java version used some explicit java methods.  Not sure how to go about this one.
-     * ---
-     * Temporary Notes and Questions:
-     * Declaration uses the ( Class<? extends Molecule> moleculeClass) syntax.  Will placing in static inherit
-     * to Object be an equivalent to this? Or should I call ._extend?  Or extend.js in phet-core/js/extend.js?
-     * Do we even need to check the validity of a new instance of Molecule?  We can easily call new Molecule().
-     * ---
-     **/
-//    public static Molecule createMolecule( Class<? extends Molecule> moleculeClass ) {
-//    Molecule newMolecule = null;
-//    try {
-//      newMolecule = moleculeClass.newInstance();
-//    }
-//    catch ( InstantiationException e ) {
-//      e.printStackTrace();
-//    }
-//  catch ( IllegalAccessException e ) {
-//      e.printStackTrace();
-//    }
-//    return newMolecule;
-//  }
-
   } );
-} )
-;
+} );
 
 //  //------------------------------------------------------------------------
 //  // Methods
 //  //------------------------------------------------------------------------
 //
 //  /**
-//   * Get an enclosing rectangle for this molecule.  This was created to
-//   * support searching for open locations for new molecules.
+//   * Get an enclosing rectangle for this molecule.  This was created to support searching for open locations for new
+//   * molecules.  This method is to be used in Greenhouse Gas.  Unsure if I should still port this for Molecules
+//   * and light.
 //   *
 //   * @return
 //   */
@@ -730,31 +651,4 @@ define( function( require ) {
 //
 //    return RectangleUtils.union( atomRects );
 //  }
-//
-//  //------------------------------------------------------------------------
-//  // Inner Classes and Interfaces
-//  //------------------------------------------------------------------------
-//  public interface Listener {
-//    void photonEmitted( Photon photon );
-//
-//    void brokeApart( Molecule molecule );
-//
-//    void electronicEnergyStateChanged( Molecule molecule );
-//
-//    void centerOfGravityPosChanged( Molecule molecule );
-//  }
-//
-//  public static class Adapter implements Listener {
-//    public void photonEmitted( Photon photon ) {
-//    }
-//
-//    public void brokeApart( Molecule molecule ) {
-//    }
-//
-//    public void electronicEnergyStateChanged( Molecule molecule ) {
-//    }
-//
-//    public void centerOfGravityPosChanged( Molecule molecule ) {
-//    }
-//  }
-//}
+
