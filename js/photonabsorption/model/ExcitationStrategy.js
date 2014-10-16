@@ -1,8 +1,7 @@
 /**
- * Photon absorption strategy that causes a molecule to enter an exited
- * state after absorbing a photon, and then re-emit the photon after some
- * length of time.  At the time of this writing, and "excited state" is
- * depicted in the view as a glow that surrounds the molecule.
+ * Photon absorption strategy that causes a molecule to enter an exited state after absorbing a photon, and then re-emit
+ * the photon after some length of time.  At the time of this writing, and "excited state" is depicted in the view as a
+ * glow that surrounds the molecule.
  *
  * @author Jesse Greenberg
  */
