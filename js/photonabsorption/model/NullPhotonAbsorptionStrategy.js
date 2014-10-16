@@ -45,5 +45,5 @@ define( function( require ) {
     queryAndAbsorbPhoton: function( photon ) {
       return false;
     }
-  } )
+  } );
 } );

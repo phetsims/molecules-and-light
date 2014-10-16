@@ -83,5 +83,5 @@ define( function( require ) {
       this.locationProperty.set( new Vector2( this.location.x + this.vx * dt, this.location.y + this.vy * dt ) );
     }
 
-  } )
+  } );
 } );
