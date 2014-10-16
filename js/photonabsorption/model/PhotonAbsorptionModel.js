@@ -282,7 +282,7 @@ define( function( require ) {
       var photon = new Photon( this.photonWavelength );
       photon.setLocation( PHOTON_EMISSION_LOCATION.x, PHOTON_EMISSION_LOCATION.y );
       var emissionAngle = 0; // Straight to the right.
-      if ( this.photonTargetProperty.get() == 'CONFIGURABLE_ATMOSPHERE' ) {
+      if ( this.photonTargetProperty.get() === 'CONFIGURABLE_ATMOSPHERE' ) {
         // Photons can be emitted at an angle.  In order to get a more
         // even spread, we alternate emitting with an up or down angle.
         emissionAngle = RAND.nextDouble() * PHOTON_EMISSION_ANGLE_RANGE / 2;
@@ -302,7 +302,7 @@ define( function( require ) {
      * @param {Number} freq
      */
     setEmittedPhotonWavelength: function( freq ) {
-      if ( this.photonWavelength != freq ) {
+      if ( this.photonWavelength !== freq ) {
         // Set the new value and send out notification of change to listeners.
         this.photonWavelength = freq;
       }
@@ -332,7 +332,7 @@ define( function( require ) {
      */
     setPhotonEmissionPeriod: function( photonEmissionPeriod ) {
       assert && assert( photonEmissionPeriod >= 0 );
-      if ( this.photonEmissionPeriodTarget != photonEmissionPeriod ) {
+      if ( this.photonEmissionPeriodTarget !== photonEmissionPeriod ) {
         // If we are transitioning from off to on, set the countdown timer
         // such that a photon will be emitted right away so that the user
         // doesn't have to wait too long in order to see something come
@@ -346,7 +346,7 @@ define( function( require ) {
         }
         // If the new value is infinity, it means that emissions are being
         // turned off, so set the period to infinity right away.
-        else if ( photonEmissionPeriod == Number.POSITIVE_INFINITY ) {
+        else if ( photonEmissionPeriod === Number.POSITIVE_INFINITY ) {
           this.photonEmissionCountdownTimer = photonEmissionPeriod; // Turn off emissions.
         }
         this.photonEmissionPeriodTarget = photonEmissionPeriod;
@@ -379,7 +379,7 @@ define( function( require ) {
     setPhotonTarget: function( photonTarget ) {
       // If switching to the configurable atmosphere, photon emission is turned off (if it is happening).  This is done
       // because it just looks better.
-      if ( photonTarget == "CONFIGURABLE_ATMOSPHERE" || this.photonTargetProperty.get() == "CONFIGURABLE_ATMOSPHERE" ) {
+      if ( photonTarget === "CONFIGURABLE_ATMOSPHERE" || this.photonTargetProperty.get() === "CONFIGURABLE_ATMOSPHERE" ) {
         this.setPhotonEmissionPeriod( Number.POSITIVE_INFINITY );
         this.removeAllPhotons();
       }
@@ -487,7 +487,7 @@ define( function( require ) {
      * Reset the configurable atmosphere by adding the initial levels of all gases.
      */
     resetConfigurableAtmosphere: function() {
-      assert && assert( this.photonTargetProperty.get() != 'CONFIGURABLE_ATMOSPHERE' ); // See method header comment if this assertion is hit.
+      assert && assert( this.photonTargetProperty.get() !== 'CONFIGURABLE_ATMOSPHERE' ); // See method header comment if this assertion is hit.
     },
 
     /**
@@ -499,7 +499,7 @@ define( function( require ) {
       return SINGLE_MOLECULE_POSITION;
     }
 
-  } )
+  } );
 } );
 
 //  //----------------------------------------------------------------------------
