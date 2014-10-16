@@ -30,11 +30,10 @@ define( function( require ) {
   return inherit( PhotonAbsorptionStrategy, BreakApartStrategy, {
 
     /**
-     * The step method for the break apart strategy.  This function
-     * instructs the molecule to break apart and then reset the
-     * photon absorption strategy.
+     * The step method for the break apart strategy.  This function instructs the molecule to break apart and then reset
+     * the photon absorption strategy.
      *
-     * @param {Number} - dt - The incremental time step
+     * @param {Number} dt - The incremental time step
      */
     step: function( dt ) {
       // Basically, all this strategy does is to instruct the molecule
@@ -44,5 +43,4 @@ define( function( require ) {
     }
 
   } )
-} )
-;
+} );
