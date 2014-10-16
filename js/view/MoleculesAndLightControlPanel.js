@@ -40,13 +40,6 @@ define( function( require ) {
   var nitrogenDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.NitrogenDioxide' );
   var ozoneString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Ozone' );
   var waterString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Water' );
-  var COString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CO' );
-  var N2String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.N2' );
-  var O2String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.O2' );
-  var CO2String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CO2' );
-  var NO2String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.NO2' );
-  var O3String = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.O3' );
-  var H2OString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.H20' );
 
   // Images
   var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
