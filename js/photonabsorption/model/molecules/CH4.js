@@ -25,7 +25,6 @@ define( function( require ) {
   /**
    * Model data for methane.
    */
-
   var INITIAL_CARBON_HYDROGEN_DISTANCE = 170; // In picometers.
 
   // Assume that the angle from the carbon to the hydrogen is 45 degrees.
@@ -44,7 +43,6 @@ define( function( require ) {
    * @constructor
    */
   function CH4( model, options ) {
-
 
     // Supertype constructor
     Molecule.call( this, model );
