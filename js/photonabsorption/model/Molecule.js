@@ -17,12 +17,10 @@ define( function( require ) {
   // modules
   var Vector2 = require( 'DOT/Vector2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
   var NullPhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/NullPhotonAbsorptionStrategy' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
   var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
   var PropertySet = require( 'AXON/PropertySet' );
-  var ObservableArray = require( 'AXON/ObservableArray' );
 
   //------------------------------------------------------------------------
   // Class Data
@@ -42,11 +40,6 @@ define( function( require ) {
   var VIBRATION_FREQUENCY = 5;  // Cycles per second of sim time.
   var ROTATION_RATE = 1.1;  // Revolutions per second of sim time.
   var ABSORPTION_HYSTERESIS_TIME = 200; // Milliseconds of sim time.
-
-  // Scaler quantity representing the speed at which the constituent particles
-  // move away from each other.  Note that this is a relative speed, not one
-  // that is absolute in model space.
-  var BREAK_APART_VELOCITY = 3.0;
 
   /**
    * Constructor for a molecule.
@@ -317,7 +310,7 @@ define( function( require ) {
      * @param {Number} y - the y location to set
      **/
     setCenterOfGravityPos: function( x, y ) {
-      if ( this.centerOfGravityProperty.get().x != x || this.centerOfGravityProperty.get().y != y ) {
+      if ( this.centerOfGravityProperty.get().x !== x || this.centerOfGravityProperty.get().y !== y ) {
         this.centerOfGravityProperty.set( new Vector2( x, y ) );
         this.updateAtomPositions();
         //notifyCenterOfGravityPosChanged();
@@ -369,7 +362,7 @@ define( function( require ) {
      **/
 
     setRotation: function( radians ) {
-      if ( radians != this.currentRotationRadians ) {
+      if ( radians !== this.currentRotationRadians ) {
         this.currentRotationRadians = radians;
         this.updateAtomPositions();
       }
@@ -471,14 +464,13 @@ define( function( require ) {
 
       if ( !this.isPhotonAbsorbed() &&
            this.absorbtionHysteresisCountdownTime <= 0 &&
-           photon.getLocation().distance( this.getCenterOfGravityPos() ) < PHOTON_ABSORPTION_DISTANCE
-        && !this.isPhotonMarkedForPassThrough( photon )
-        ) {
+           photon.getLocation().distance( this.getCenterOfGravityPos() ) < PHOTON_ABSORPTION_DISTANCE &&
+           !this.isPhotonMarkedForPassThrough( photon ) ) {
 
-        // The circumstances for absorption are correct, but do we have an
-        // absorption strategy for this photon's wavelength?
+        // The circumstances for absorption are correct, but do we have an absorption strategy for this photon's
+        // wavelength?
         var candidateAbsorptionStrategy = this.mapWavelengthToAbsorptionStrategy[ photon.getWavelength() ];
-        if ( candidateAbsorptionStrategy != null ) {
+        if ( candidateAbsorptionStrategy !== null ) {
           // Yes, there is a strategy available for this wavelength.
           // Ask it if it wants the photon.
           if ( candidateAbsorptionStrategy.queryAndAbsorbPhoton( photon ) ) {

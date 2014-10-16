@@ -41,5 +41,5 @@ define( function( require ) {
       this.getMolecule().setActiveStrategy( new NullPhotonAbsorptionStrategy( this.getMolecule() ) );
     }
 
-  } )
+  } );
 } );

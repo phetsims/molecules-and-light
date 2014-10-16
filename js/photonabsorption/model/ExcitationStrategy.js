@@ -36,5 +36,5 @@ define( function( require ) {
       PhotonHoldStrategy.prototype.reemitPhoton.call( this );
       this.getMolecule().setHighElectronicEnergyState( false );
     }
-  } )
+  } );
 } );
