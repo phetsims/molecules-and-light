@@ -62,9 +62,10 @@ define( function( require ) {
     CONTAINMENT_AREA_HEIGHT
   );
 
-  // Defaults for photon emission periods.  Note that the max is assumed to be infinity.  Note that min and max values
-  // will be needed for Greenhouse Gas simulation but are not needed for Molecules And Light.
+  // Minimum and defaults for photon emission periods.  Note that the max is assumed to be infinity.
+  var MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET = 400;
   var DEFAULT_PHOTON_EMISSION_PERIOD = Number.POSITIVE_INFINITY; // Milliseconds of sim time.
+  var MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET = 100;
 
   // Default values for various parameters that weren't already covered.
   var DEFAULT_PHOTON_TARGET = 'SINGLE_CH4_MOLECULE';
