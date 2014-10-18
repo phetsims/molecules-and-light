@@ -1,13 +1,12 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * A node that looks like a vertical rod that is shaded.  This is generally
- * used to connect things in the view, or so make something look like it is on
- * a pole.
- * TODO: This was in photon-absorption/view but the description makes it seem useful in many
- * TODO: applications.  Should this be a common node?
+ * A node that looks like a vertical rod that is shaded.  This is generally used to connect things in the view, or so
+ * make something look like it is on a pole.
+ * This object is no longer used.  Perhaps it should be deleted entirely.
  *
  * @author John Blanco
+ * @author Jesse Greenberg
  */
 
 define( function( require ) {
@@ -16,7 +15,6 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Color = require( 'SCENERY/util/Color' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
