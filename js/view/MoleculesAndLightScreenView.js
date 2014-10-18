@@ -15,17 +15,9 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Vector2 = require( 'DOT/Vector2' );
-  var PAPhotonNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/PAPhotonNode' );
-  var PhotonEmitterNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/PhotonEmitterNode' );
   var QuadEmissionFrequencyControlPanel = require( 'MOLECULES_AND_LIGHT/view/QuadEmissionFrequencyControlPanel' );
-  var CO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO' );
-  var NO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO' );
-  var NO2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO2' );
-  var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );
-  var VerticalRodNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/VerticalRodNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Color = require( 'SCENERY/util/Color' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -35,20 +27,17 @@ define( function( require ) {
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
-  var Rectangle = require( 'DOT/Rectangle' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SpectrumWindow = require( 'MOLECULES_AND_LIGHT/view/SpectrumWindow' );
   var Plane = require( 'SCENERY/nodes/Plane' );
-  var Property = require( 'AXON/Property' );
 
 
   // Strings
   var buttonCaptionString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.buttonCaption' );
 
-  // Class data for the Molecules and Light screen view
   // Model-view transform for intermediate coordinates.
   var INTERMEDIATE_RENDERING_SIZE = new Dimension2( 500, 300 );
-  var PHOTON_EMITTER_WIDTH = 220;
+
 
   /**
    * Constructor for the screen view of Molecules and Light.
@@ -58,7 +47,6 @@ define( function( require ) {
    */
   function MoleculesAndLightScreenView( photonAbsorptionModel ) {
 
-    var moleculesAndLightScreenView = this;
     ScreenView.call( this, { renderer: 'svg' } );
 
     var thisScreenView = this;
@@ -87,7 +75,7 @@ define( function( require ) {
 
     // Create the molecule control panel
     var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
-    moleculeControlPanel.scale( .75 );
+    moleculeControlPanel.scale( 0.75 ); // TODO: This scaling should probably be done in MoleculeControlPanel.js
     moleculeControlPanel.setLeftTop( new Vector2( 530, 15 ) );
 
     // Add reset all button.
@@ -129,7 +117,7 @@ define( function( require ) {
     var showSpectrumButton = new RectangularPushButton( {
       content: new Text( buttonCaptionString, { font: font } ),
       baseColor: new Color( 98, 173, 205 ),
-      listener: function() { thisScreenView.updateSpectrumWindowVisibility( spectrumWindow ) }
+      listener: function() { thisScreenView.updateSpectrumWindowVisibility( spectrumWindow ); }
     } );
     showSpectrumButton.setCenter( new Vector2( moleculeControlPanel.centerX, photonEmissionControlPanel.centerY - 33 ) );
     this.myWorldNode.addChild( showSpectrumButton );
