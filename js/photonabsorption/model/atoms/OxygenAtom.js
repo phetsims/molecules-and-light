@@ -51,6 +51,6 @@ define( function( require ) {
 
   }
 
-  return inherit( Atom, OxygenAtom )
+  return inherit( Atom, OxygenAtom );
 
 } );

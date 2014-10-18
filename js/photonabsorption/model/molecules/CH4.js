@@ -15,10 +15,8 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
   var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
-  var OxygenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/OxygenAtom' );
   var CarbonAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/CarbonAtom' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
-  var VibrationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/VibrationStrategy' );
   var HydrogenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/HydrogenAtom' );
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
 

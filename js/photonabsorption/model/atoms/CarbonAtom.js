@@ -49,6 +49,6 @@ define( function( require ) {
 
   }
 
-  return inherit( Atom, CarbonAtom )
+  return inherit( Atom, CarbonAtom );
 
 } );

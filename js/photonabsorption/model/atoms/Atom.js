@@ -64,7 +64,7 @@ define( function( require ) {
      * @param {Vector2} position - The desired position of this atom as a Vector
      */
     setPositionVec: function( position ) {
-      if ( this.positionProperty != position ) {
+      if ( this.positionProperty !== position ) {
         this.positionProperty.set( position );
         this.set( position );
       }
@@ -77,7 +77,7 @@ define( function( require ) {
      * @param {Number} y - The desired y coordinate of this atom
      */
     setPosition: function( x, y ) {
-      if ( this.positionProperty.get.x != x || this.positionProperty.get.y != y ) {
+      if ( this.positionProperty.get.x !== x || this.positionProperty.get.y !== y ) {
         this.positionProperty.set( new Vector2( x, y ) );
         this.set( x, y );
       }
@@ -109,7 +109,7 @@ define( function( require ) {
     getMass: function() {
       return this.mass;
     }
-  } )
+  } );
 } );
 
 //  //------------------------------------------------------------------------
