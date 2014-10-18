@@ -12,24 +12,15 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Vector2 = require( 'DOT/Vector2' );
   var PAPhotonNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/PAPhotonNode' );
   var PhotonEmitterNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/PhotonEmitterNode' );
-  var CO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/CO' );
-  var NO = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO' );
-  var NO2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/NO2' );
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );
-  var Dimension2 = require( 'DOT/Dimension2' );
   var Color = require( 'SCENERY/util/Color' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var PhotonAbsorptionModel = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionModel' );
   var Property = require( 'AXON/Property' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   var WindowFrameNode = require( 'MOLECULES_AND_LIGHT/view/WindowFrameNode' );
 
   // Strings
@@ -132,7 +123,7 @@ define( function( require ) {
     // If the molecule control panel is used, remove the restore molecule button.
     this.photonAbsorptionModel.photonTargetProperty.link( function() {
       thisWindow.restoreButtonVisibleProperty.set( false );
-    } )
+    } );
 
   }
 
@@ -170,5 +161,5 @@ define( function( require ) {
       this.photonAbsorptionModel.photons.removeAll( photonsToRemove );
     }
 
-  } )
+  } );
 } );
