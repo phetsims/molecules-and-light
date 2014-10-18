@@ -15,8 +15,6 @@ define( function( require ) {
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
   var NullPhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/NullPhotonAbsorptionStrategy' );
 
-  var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
-
   /**
    * Constructor for the photon hold strategy.
    *
@@ -76,6 +74,5 @@ define( function( require ) {
       console.error( "Error: photonAbsorbed function should be implemented by descendant absorption strategies.");
     }
 
-  } )
-} )
-;
+  } );
+} );

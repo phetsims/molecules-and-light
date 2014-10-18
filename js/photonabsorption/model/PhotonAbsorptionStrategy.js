@@ -23,7 +23,6 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var Vector2 = require( 'DOT/Vector2' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
   var Property = require( 'AXON/Property' );
 
@@ -100,6 +99,5 @@ define( function( require ) {
 
   }, {
 
-  } )
-} )
-;
+  } );
+} );

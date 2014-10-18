@@ -45,6 +45,5 @@ define( function( require ) {
       this.getMolecule().setVibration( 0 );
     }
 
-  } )
-} )
-;
+  } );
+} );

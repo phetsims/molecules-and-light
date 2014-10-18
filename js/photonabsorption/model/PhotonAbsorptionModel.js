@@ -62,10 +62,9 @@ define( function( require ) {
     CONTAINMENT_AREA_HEIGHT
   );
 
-  // Minimum and defaults for photon emission periods.  Note that the max is assumed to be infinity.
-  var MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET = 400;
+  // Defaults for photon emission periods.  Note that the max is assumed to be infinity.  Note that min and max values
+  // will be needed for Greenhouse Gas simulation but are not needed for Molecules And Light.
   var DEFAULT_PHOTON_EMISSION_PERIOD = Number.POSITIVE_INFINITY; // Milliseconds of sim time.
-  var MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET = 100;
 
   // Default values for various parameters that weren't already covered.
   var DEFAULT_PHOTON_TARGET = 'SINGLE_CH4_MOLECULE';
@@ -338,7 +337,7 @@ define( function( require ) {
         // such that a photon will be emitted right away so that the user
         // doesn't have to wait too long in order to see something come
         // out.
-        if ( this.photonEmissionPeriodTarget === Number.POSITIVE_INFINITY && photonEmissionPeriod != Number.POSITIVE_INFINITY ) {
+        if ( this.photonEmissionPeriodTarget === Number.POSITIVE_INFINITY && photonEmissionPeriod !== Number.POSITIVE_INFINITY ) {
           this.photonEmissionCountdownTimer = INITIAL_COUNTDOWN_WHEN_EMISSION_ENABLED;
         }
         // Handle the case where the new value is smaller than the current countdown value.
