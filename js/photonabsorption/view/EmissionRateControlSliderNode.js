@@ -18,11 +18,8 @@ define( function( require ) {
   var HSlider = require( 'SUN/HSlider' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Color = require( 'SCENERY/util/Color' );
-  var Property = require( 'AXON/Property' );
-  var PhotonAbsorptionModel = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionModel' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
   var Vector2 = require( 'DOT/Vector2' );
-  var Line = require( 'SCENERY/nodes/Line' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
 
@@ -67,7 +64,7 @@ define( function( require ) {
 
     // Listen to the model for events that may cause this node to change
     // state.
-    model.photonWavelengthProperty.link( function() { thisNode.update() } );
+    model.photonWavelengthProperty.link( function() { thisNode.update(); } );
     model.emissionFrequencyProperty.link( function() {
       var sliderProportion = thisModel.emissionFrequencyProperty.get() / SLIDER_RANGE;
       if ( sliderProportion === 0 ) {
@@ -115,7 +112,7 @@ define( function( require ) {
       else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.UV_WAVELENGTH ) {
         this.setBackgroundRectangle( new Color( 200, 0, 200 ) );
       }
-      else if ( this.model.getEmittedPhotonWavelength() == WavelengthConstants.MICRO_WAVELENGTH ) {
+      else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.MICRO_WAVELENGTH ) {
         this.setBackgroundRectangle( new Color( 200, 200, 200 ) );
       }
       else {

@@ -78,7 +78,6 @@ define( function( require ) {
     // Set the initial center of gravity position.
     this.setCenterOfGravityPosVec( this.initialCenterOfGravityPos );
 
-
   }
 
   return inherit( Molecule, H20, {
@@ -110,7 +109,6 @@ define( function( require ) {
           this.initialHydrogenVerticalOffset + multFactor * maxHydrogenDisplacement ) );
       this.updateAtomPositions();
     }
-  } )
-
+  } );
 } );
 

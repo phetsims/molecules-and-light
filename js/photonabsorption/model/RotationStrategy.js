@@ -55,8 +55,7 @@ define( function( require ) {
       this.getMolecule().setRotating( false );
     }
 
-  } )
-} )
-;
+  } );
+} );
 
 

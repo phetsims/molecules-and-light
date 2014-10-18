@@ -162,10 +162,8 @@ define( function( require ) {
       this.model.activeMolecules.add( nitrogenMonoxideMolecule );
       this.model.activeMolecules.add( singleOxygenMolecule );
 
-      // Set up the direction and velocity of the constituent molecules.
-      // These are set up mostly to look good, and their directions and
-      // velocities have little if anything to do with any physical rules
-      // of atomic dissociation.
+      // Set up the direction and velocity of the constituent molecules.  These are set up mostly to look good, and
+      // their directions and velocities have little if anything to do with any physical rules of atomic dissociation.
       var diatomicMoleculeRotationAngle = ( ( Math.PI / 2 ) - ( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 ) );
       var breakApartAngle;
       if ( this.doubleBondOnRight ) {
@@ -180,7 +178,7 @@ define( function( require ) {
         breakApartAngle = Math.PI / 2 + RAND.nextDouble() * Math.PI / 4;
         nitrogenMonoxideMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.nitrogenAtom ).x + this.getInitialAtomCogOffset( this.leftOxygenAtom ).x ) / 2,
             ( this.getInitialAtomCogOffset( this.nitrogenAtom ).y + this.getInitialAtomCogOffset( this.leftOxygenAtom ).y ) / 2 );
-        singleOxygenMolecule.setCenterOfGravityPos( this.initialOxygenHorizontalOffset, this.initialOxygenVerticalOffset);
+        singleOxygenMolecule.setCenterOfGravityPos( this.initialOxygenHorizontalOffset, this.initialOxygenVerticalOffset );
       }
       nitrogenMonoxideMolecule.setVelocity( BREAK_APART_VELOCITY * 0.33 * Math.cos( breakApartAngle ), BREAK_APART_VELOCITY * 0.33 * Math.sin( breakApartAngle ) );
       singleOxygenMolecule.setVelocity( -BREAK_APART_VELOCITY * 0.67 * Math.cos( breakApartAngle ), -BREAK_APART_VELOCITY * 0.67 * Math.sin( breakApartAngle ) );
@@ -188,12 +186,8 @@ define( function( require ) {
       // Add these constituent molecules to the constituent list.
       this.addConstituentMolecule( nitrogenMonoxideMolecule );
       this.addConstituentMolecule( singleOxygenMolecule );
-
-      // Send out notifications about this molecule breaking apart.
-      // TODO: Make sure that the notifiers have appropriate behavior.
-      //this.notifyBrokeApart();
     }
-  } )
 
+  } );
 } );
 

@@ -50,7 +50,7 @@ define( function( require ) {
 
   }
 
-  return inherit( Atom, NitrogenAtom )
+  return inherit( Atom, NitrogenAtom );
 
 } );
 

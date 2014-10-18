@@ -11,14 +11,12 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
   var Color = require( 'SCENERY/util/Color' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
-  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
 
   /**
    * Constructor for an atom node.
@@ -40,7 +38,6 @@ define( function( require ) {
     thisNode.mvt = mvt;
 
     // Create a Shaded Sphere to give the atom a 3D effect.
-    var highlightWidth = 13;
     var transformedRadius = mvt.modelToViewDeltaX( atom.getRadius() );
 
     var haloGradientPaint = new RadialGradient( 0, 0, 0, 0, 0, transformedRadius * 2 ).addColorStop( 0, Color.YELLOW ).addColorStop( 1, Color.BLACK );
@@ -80,24 +77,3 @@ define( function( require ) {
   } );
 
 } );
-
-//  // ------------------------------------------------------------------------
-//  // Constructor(s)
-//  // ------------------------------------------------------------------------
-//    final RoundGradientPaint baseGradientPaint =
-//                             new RoundGradientPaint( -transformedRadius / 2, -transformedRadius / 2, lightColor, new Point2D.Double( transformedRadius / 2, transformedRadius / 2 ), darkColor );
-//    final RoundGradientPaint haloGradientPaint =
-//                             new RoundGradientPaint( 0, 0, Color.yellow, new Point2D.Double( transformedRadius + highlightWidth, transformedRadius + highlightWidth ), new Color( 0, 0, 0, 0 ) );
-//    highlightNode = new PhetPPath( new Ellipse2D.Double( -transformedRadius - highlightWidth, -transformedRadius - highlightWidth,
-//          transformedRadius * 2 + highlightWidth * 2, transformedRadius * 2 + highlightWidth * 2 ),
-//      haloGradientPaint );
-//    PhetPPath atomNode = new PhetPPath( new Ellipse2D.Double( -transformedRadius, -transformedRadius,
-//        transformedRadius * 2, transformedRadius * 2 ), baseGradientPaint );
-//    addChild( highlightNode );
-//    addChild( atomNode );
-//    atom.addObserver( new SimpleObserver() {
-//      public void update() {
-//        updatePosition();
-//      }
-//    } );
-

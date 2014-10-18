@@ -68,6 +68,5 @@ define( function( require ) {
       this.updateAtomPositions();
     }
 
-  } )
-
+  } );
 } );
