@@ -10,21 +10,10 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Molecule = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Molecule' );
-  var Atom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/Atom' );
-  var AtomicBond = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/AtomicBond' );
   var AtomNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/AtomNode' );
   var AtomicBondNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/AtomicBondNode' );
-  var Circle = require( 'SCENERY/nodes/Circle' );
-  var Vector2 = require( 'DOT/Vector2' );
-
-  // Model Data for the molecule node
-  // This flag is used to turn on/off the appearance of the center of
-  // gravity, which is useful for debugging.
-  var SHOW_COG = false;
 
   /**
    * Constructor for a molecule node.
