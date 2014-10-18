@@ -11,19 +11,10 @@ define( function( require ) {
   'use strict';
 
   // Modules
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var Vector2 = require( 'DOT/Vector2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var Color = require( 'SCENERY/util/Color' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Property = require( 'AXON/Property' );
-  var Node = ( 'SCENERY/nodes/Node' );
 
   // Class Data for the Molecule Selector Panels
   // Model view transform used for creating images of the various molecules.
