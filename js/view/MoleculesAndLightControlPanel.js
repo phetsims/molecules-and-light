@@ -14,11 +14,6 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Vector2 = require( 'DOT/Vector2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Color = require( 'SCENERY/util/Color' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
@@ -41,17 +36,11 @@ define( function( require ) {
   var ozoneString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Ozone' );
   var waterString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Water' );
 
-  // Images
-  var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
-
   // Class Data for the control panel
   // Model view transform used for creating images of the various molecules.
   // This is basically a null transform except that it flips the Y axis so
   // that molecules on the panel are oriented the same as in the play area.
   var MVT = ModelViewTransform2.createSinglePointScaleInvertedYMapping( new Vector2( 0, 0 ), new Vector2( 0, 0 ), 1 );
-
-  // Scaling factor for the molecule images, determined empirically.
-  var MOLECULE_SCALING_FACTOR = 0.13;
 
   /**
    * Constructor for a Molecules and Light control panel.
@@ -60,13 +49,6 @@ define( function( require ) {
    * @constructor
    */
   function MoleculesAndLightControlPanel( model ) {
-
-    // The following data structure defines each of the molecule selectors
-    // that will exist on this control panel.
-    this.moleculeSelectors = [];
-
-    // Create the reset all button.
-    var resetAllButton = new ResetAllButton();
 
     var photonTargets = ['SINGLE_CO_MOLECULE', 'SINGLE_N2_MOLECULE', 'SINGLE_O2_MOLECULE', 'SINGLE_CO2_MOLECULE',
       'SINGLE_H2O_MOLECULE', 'SINGLE_NO2_MOLECULE', 'SINGLE_O3_MOLECULE'];
