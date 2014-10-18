@@ -8,7 +8,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   // images
   var microwavePhotonImage = require( 'image!MOLECULES_AND_LIGHT/microwave-photon.png' );
@@ -58,5 +57,5 @@ define( function( require ) {
       // Set overall position.
       this.center = this.mvt.modelToViewPosition( this.photon.getLocation() );
     }
-  } )
+  } );
 } );
