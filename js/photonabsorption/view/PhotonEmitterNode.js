@@ -19,10 +19,8 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Property = require( 'AXON/Property' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
   var Vector2 = require( 'DOT/Vector2' );
-  var Dimension2 = require( 'DOT/Dimension2' );
   var Color = require( 'SCENERY/util/Color' );
   var EmissionRateControlSliderNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/EmissionRateControlSliderNode' );
 
@@ -31,10 +29,6 @@ define( function( require ) {
   var flashlight2Image = require( 'image!MOLECULES_AND_LIGHT/flashlight2.png' );
   var microwaveTransmitter = require( 'image!MOLECULES_AND_LIGHT/microwave-transmitter.png' );
   var uvLight2 = require( 'image!MOLECULES_AND_LIGHT/uv_light_2.png' );
-
-
-  // Model data for the PhotonEmitterNode
-  var SLIDER_RANGE = 100;
 
   /**
    * Constructor for the photon emitter node.
@@ -95,10 +89,10 @@ define( function( require ) {
       else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.VISIBLE_WAVELENGTH ) {
         this.photonEmitterImage = new Image( flashlight2Image );
       }
-      else if ( this.model.getEmittedPhotonWavelength() == WavelengthConstants.UV_WAVELENGTH ) {
+      else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.UV_WAVELENGTH ) {
         this.photonEmitterImage = new Image( uvLight2 );
       }
-      else if ( this.model.getEmittedPhotonWavelength() == WavelengthConstants.MICRO_WAVELENGTH ) {
+      else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.MICRO_WAVELENGTH ) {
         this.photonEmitterImage = new Image( microwaveTransmitter );
       }
       // Translate center and scale the emitter image
