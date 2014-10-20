@@ -3,9 +3,8 @@
 /**
  * Original file is Molecule.java which is also used by "Greenhouse Gas".
  *
- * A model for a particular molecule.  This, by its nature, is
- * essentially a composition of other objects, generally atoms and atomic
- * bonds.
+ * A model for a particular molecule.  This, by its nature, is essentially a composition of other objects, generally
+ * atoms and atomic bonds.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -58,17 +57,16 @@ define( function( require ) {
     this.atoms = []; // Elements are of type Atoms
     this.atomicBonds = []; // Elements are of type AtomicBonds
 
-    // This is basically the location of the molecule, but it is specified as
-    // the center of gravity since a molecule is a composite object.
+    // This is basically the location of the molecule, but it is specified as the center of gravity since a molecule is
+    // a composite object.
     this.centerOfGravity = new Vector2();
 
-    // Structure of the molecule in terms of offsets from the center of
-    // gravity.  These indicate the atom's position in the "relaxed" (i.e.
-    // non-vibrating), non-rotated state.
+    // Structure of the molecule in terms of offsets from the center of gravity.  These indicate the atom's position in
+    // the "relaxed" (i.e. non-vibrating), non-rotated state.
     this.initialAtomCogOffsets = {}; // Object contains keys of type Atoms ID and values of type Vector2
 
-    // Vibration offsets - these represent the amount of deviation from the
-    // initial (a.k.a relaxed) configuration for each molecule.
+    // Vibration offsets - these represent the amount of deviation from the initial (a.k.a relaxed) configuration for
+    // each molecule.
     this.vibrationAtomOffsets = {}; // Object contains keys of type Atoms ID and values of type Vector2
 
     //  Map containing the atoms which compose this molecule.  Allows us to call on each atom by their unique ID.
@@ -80,45 +78,36 @@ define( function( require ) {
     // Velocity for this molecule.
     this.velocity = new Vector2();
 
-    // Map that matches photon wavelengths to photon absorption strategies.
-    // The strategies contained in this structure define whether the
-    // molecule can absorb a given photon and, if it does absorb it, how it
-    // will react.
-    // TODO: Declaration in original java is an empty hashmap, see if an arbitrary object is correct solution.
-    // TODO: Requires Dependency PhotonAbsorptionStrategy
+    // Map that matches photon wavelengths to photon absorption strategies. The strategies contained in this structure
+    // define whether the molecule can absorb a given photon and, if it does absorb it, how it will react.
     this.mapWavelengthToAbsorptionStrategy = {}; // Object will contain keys of type Number and values of type PhotonAbsorptionStrategy
 
-    // Currently active photon absorption strategy, active because a photon
-    // was absorbed that activated it.
-    // TODO: Requires Dependency PhotonAbsorptionStrategy
+    // Currently active photon absorption strategy, active because a photon was absorbed that activated it.
     this.activePhotonAbsorptionStrategy = new NullPhotonAbsorptionStrategy( this );
 
     // Variable that prevents reabsorption for a while after emitting a photon.
     this.absorbtionHysteresisCountdownTime = 0;
 
-    // The "pass through photon list" keeps track of photons that were not
-    // absorbed due to random probability (essentially a simulation of quantum
-    // properties).  This is needed since the absorption of a given photon
-    // will likely be tested at many time steps as the photon moves past the
-    // molecule, and we don't want to keep deciding about the same photon.
+    // The "pass through photon list" keeps track of photons that were not absorbed due to random probability
+    // (essentially a simulation of quantum properties).  This is needed since the absorption of a given photon will
+    // likely be tested at many time steps as the photon moves past the molecule, and we don't want to keep deciding
+    // about the same photon.
     this.PASS_THROUGH_PHOTON_LIST_SIZE = 10;
     this.passThroughPhotonList = []; // Array will have size PASS_THROUGH_PHOTON_LIST_SIZE with type Photon.
 
     // The current point within this molecule's vibration sequence.
     this.currentVibrationRadians = 0;
 
-    // The amount of rotation currently applied to this molecule.  This is
-    // relative to its original, non-rotated state.
+    // The amount of rotation currently applied to this molecule.  This is relative to its original, non-rotated state.
     this.currentRotationRadians = 0;
 
-    // Boolean values that track whether the molecule is vibrating or
-    // rotating.
+    // Boolean values that track whether the molecule is vibrating or rotating.
     this.vibrating = false;
     this.rotating = false;
     this.rotationDirectionClockwise = true; // Controls the direction of rotation.
 
-    // List of constituent molecules. This comes into play only when the
-    // molecule breaks apart, which many of the molecules never do.
+    // List of constituent molecules. This comes into play only when the molecule breaks apart, which many of the
+    // molecules never do.
     this.constituentMolecules = []; // Elements of type Molecule
 
     this.photonAbsorptionModel = model;
@@ -132,6 +121,7 @@ define( function( require ) {
      * TODO: Implement PhotonAbsorptionStrategy for full porting
      **/
     reset: function() {
+
       this.activePhotonAbsorptionStrategy.reset();
       this.activePhotonAbsorptionStrategy = new NullPhotonAbsorptionStrategy( this );
       this.absorbtionHysteresisCountdownTime = 0;
@@ -151,10 +141,8 @@ define( function( require ) {
      * @return {Boolean}
      */
     isPhotonAbsorbed: function() {
-      // If there is an active non-null photon absorption strategy, it
-      // indicates that a photon has been absorbed.
-      // TODO: Requires PhotonAbsorptionStrategy before this can be called.
-      //  return !( this.activePhotonAbsorptionStrategy instanceof PhotonAbsorptionStrategy.NullPhotonAbsorptionStrategy );
+      // If there is an active non-null photon absorption strategy, it indicates that a photon has been absorbed.
+      return !( this.activePhotonAbsorptionStrategy instanceof NullPhotonAbsorptionStrategy );
     },
 
     /**
@@ -166,10 +154,9 @@ define( function( require ) {
      * @param {Vector2} offset - Initial COG offset for when atom is not vibrating or rotating.
      */
     addInitialAtomCogOffset: function( atom, offset ) {
-      // Check that the specified atom is a part of this molecule.  While it
-      // would probably work to add the offsets first and the atoms later,
-      // that's not how the sim was designed, so this is some enforcement of
-      // the "add the atoms first" policy.
+      // Check that the specified atom is a part of this molecule.  While it would probably work to add the offsets
+      // first and the atoms later, that's not how the sim was designed, so this is some enforcement of the "add the
+      // atoms first" policy.
       assert && assert( this.atoms.indexOf( atom ) >= 0 );
       this.initialAtomCogOffsets[ atom.uniqueID ] = offset;
     },
@@ -317,10 +304,10 @@ define( function( require ) {
     },
 
     /**
-     * Set the location of this molecule by specifying the center of gravity.
-     * Allows passing a Vector2 into setCenterOfGravityPos.
+     * Set the location of this molecule by specifying the center of gravity. Allows passing a Vector2 into
+     * setCenterOfGravityPos.
      *
-     * @param {Vector2} centerOfGravityPos - A vector representing the desired location for this molecule
+     * @param {Vector2} centerOfGravityPos - A vector representing the desired location for this molecule.
      **/
     setCenterOfGravityPosVec: function( centerOfGravityPos ) {
       this.setCenterOfGravityPos( centerOfGravityPos.x, centerOfGravityPos.y );
@@ -444,7 +431,7 @@ define( function( require ) {
     /**
      * Create a new array containing this Molecules atomic bonds.
      *
-     * @return {Array} - Array with elements of type AtomicBond containing the atomic bonds which construct this molecule.
+     * @return {Array} - Array with elements of type AtomicBond containing the atomic bonds constructing this molecule.
      **/
     getAtomicBonds: function() {
       return  this.atomicBonds.slice();
@@ -463,8 +450,7 @@ define( function( require ) {
 
       if ( !this.isPhotonAbsorbed() &&
            this.absorbtionHysteresisCountdownTime <= 0 &&
-           photon.getLocation().distance( this.getCenterOfGravityPos() ) < PHOTON_ABSORPTION_DISTANCE &&
-           !this.isPhotonMarkedForPassThrough( photon ) ) {
+           photon.getLocation().distance( this.getCenterOfGravityPos() ) < PHOTON_ABSORPTION_DISTANCE && !this.isPhotonMarkedForPassThrough( photon ) ) {
 
         // The circumstances for absorption are correct, but do we have an absorption strategy for this photon's
         // wavelength?
@@ -522,6 +508,7 @@ define( function( require ) {
      * @param {Photon} photonToEmit - The photon to be emitted.
      **/
     emitPhoton: function( photonToEmit ) {
+
       var emissionAngle = RAND.nextDouble() * Math.PI * 2;
       photonToEmit.setVelocity( PHOTON_EMISSION_SPEED * Math.cos( emissionAngle ),
         ( PHOTON_EMISSION_SPEED * Math.sin( emissionAngle ) ) );
@@ -546,6 +533,7 @@ define( function( require ) {
      * offset for each atom.
      **/
     updateAtomPositions: function() {
+
       for ( var uniqueID in this.initialAtomCogOffsets ) {
         if ( this.initialAtomCogOffsets.hasOwnProperty( uniqueID ) ) {
           var atomOffset = new Vector2( this.initialAtomCogOffsets[uniqueID].x, this.initialAtomCogOffsets[uniqueID].y );
