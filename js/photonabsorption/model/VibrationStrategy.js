@@ -1,3 +1,5 @@
+// Copyright 2002-2014, University of Colorado
+
 /**
  * Photon absorption strategy that causes a molecule to vibrate after
  * absorbing a photon, and re-emit the photon after some length of time.
@@ -39,6 +41,7 @@ define( function( require ) {
      * Re-emit the absorbed photon and stop the molecule from vibrating.
      */
     reemitPhoton: function() {
+
       PhotonHoldStrategy.prototype.reemitPhoton.call( this );
       this.getMolecule().setVibrating( false );
       this.getMolecule().setVibration( 0 );

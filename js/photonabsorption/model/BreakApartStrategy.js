@@ -1,6 +1,7 @@
+// Copyright 2002-2014, University of Colorado
+
 /**
- * Photon absorption strategy that causes a molecule to break apart after
- * absorbing a photon.
+ * Photon absorption strategy that causes a molecule to break apart after absorbing a photon.
  *
  * @author Jesse Greenberg
  */

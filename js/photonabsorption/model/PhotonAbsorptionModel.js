@@ -258,7 +258,6 @@ define( function( require ) {
       }
     },
 
-
     /**
      * Step one frame manually.  Assuming 60 frames per second.
      */
@@ -280,6 +279,7 @@ define( function( require ) {
      *
      */
     emitPhoton: function() {
+
       var photon = new Photon( this.photonWavelength );
       photon.setLocation( PHOTON_EMISSION_LOCATION.x, PHOTON_EMISSION_LOCATION.y );
       var emissionAngle = 0; // Straight to the right.
@@ -303,6 +303,7 @@ define( function( require ) {
      * @param {Number} freq
      */
     setEmittedPhotonWavelength: function( freq ) {
+
       if ( this.photonWavelength !== freq ) {
         // Set the new value and send out notification of change to listeners.
         this.photonWavelength = freq;
@@ -332,6 +333,7 @@ define( function( require ) {
      * @param {Number} photonEmissionPeriod - Period between photons in milliseconds.
      */
     setPhotonEmissionPeriod: function( photonEmissionPeriod ) {
+
       assert && assert( photonEmissionPeriod >= 0 );
       if ( this.photonEmissionPeriodTarget !== photonEmissionPeriod ) {
         // If we are transitioning from off to on, set the countdown timer
@@ -378,6 +380,7 @@ define( function( require ) {
      * @param {String} photonTarget - The string constant which represents the desired photon target.
      */
     setPhotonTarget: function( photonTarget ) {
+
       // If switching to the configurable atmosphere, photon emission is turned off (if it is happening).  This is done
       // because it just looks better.
       if ( photonTarget === "CONFIGURABLE_ATMOSPHERE" || this.photonTargetProperty.get() === "CONFIGURABLE_ATMOSPHERE" ) {
@@ -453,6 +456,7 @@ define( function( require ) {
      * @returns {Array} activeMolecules
      */
     getMolecules: function() {
+
       var activeMolecules = [];
       for ( var i = 0; i < this.activeMolecules.length; i++ ) {
         activeMolecules[i] = this.activeMolecules.get( i );
@@ -480,6 +484,7 @@ define( function( require ) {
      * original condition.
      */
     restorePhotonTarget: function() {
+
       var currentTarget = this.photonTargetProperty.get();
       this.setPhotonTarget( currentTarget );
     },

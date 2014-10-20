@@ -1,7 +1,8 @@
+// Copyright 2002-2014, University of Colorado
+
 /**
- * Photon absorption strategy that causes a molecule to rotate after
- * absorbing a photon, and re-emit the photon after some length of time.
- * This is to be inherited by the general PhotonAbsorptionStrategy class.
+ * Photon absorption strategy that causes a molecule to rotate after absorbing a photon, and re-emit the photon after
+ * some length of time.  This is to be inherited by the general PhotonAbsorptionStrategy class.
  */
 
 define( function( require ) {
@@ -31,6 +32,7 @@ define( function( require ) {
    * @constructor
    */
   function RotationStrategy( molecule ) {
+
     // Supertype constructor
     PhotonHoldStrategy.call( this, molecule );
     this.molecule = molecule;
@@ -43,6 +45,7 @@ define( function( require ) {
      * and set the direction of rotation to a random direction.
      */
     photonAbsorbed: function() {
+
       this.getMolecule().setRotationDirectionClockwise( RAND.nextBoolean() );
       this.getMolecule().setRotating( true );
     },
@@ -51,6 +54,7 @@ define( function( require ) {
      * Re-emit the absorbed photon.  Set the molecule to a non-rotating state.
      */
     reemitPhoton: function() {
+
       PhotonHoldStrategy.prototype.reemitPhoton.call( this );
       this.getMolecule().setRotating( false );
     }

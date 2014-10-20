@@ -1,6 +1,7 @@
+// Copyright 2002-2014, University of Colorado
+
 /**
- * Photon absorption strategy that does nothing, meaning that it will
- * never cause a photon to be absorbed.
+ * Photon absorption strategy that does nothing, meaning that it will never cause a photon to be absorbed.
  *
  * @author Jesse Greenberg
  */
