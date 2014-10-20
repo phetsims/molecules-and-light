@@ -78,13 +78,11 @@ define( function( require ) {
     queryAndAbsorbPhoton: function( photon ) {
       // All circumstances are correct for photon absorption, so now we decide probabilistically whether or not to
       // actually do it.  This essentially simulates the quantum nature of the absorption.
-      var rand = RAND.nextDouble();
-      var absorbed = (!this.isPhotonAbsorbed) && ( rand < this.photonAbsorptionProbabilityProperty.get() );
+      var absorbed = (!this.isPhotonAbsorbed) && ( RAND.nextDouble() < this.photonAbsorptionProbabilityProperty.get() );
       if ( absorbed ) {
         this.isPhotonAbsorbed = true;
         this.photonHoldCountdownTime = MIN_PHOTON_HOLD_TIME + RAND.nextDouble() * ( MAX_PHOTON_HOLD_TIME - MIN_PHOTON_HOLD_TIME );
       }
-      //TODO: Testing inheritance, remove this soon.
       return absorbed;
     },
 
