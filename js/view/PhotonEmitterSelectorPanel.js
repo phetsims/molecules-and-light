@@ -11,13 +11,7 @@ define( function( require ) {
   'use strict';
 
   // Modules
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var Vector2 = require( 'DOT/Vector2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
 
   /**

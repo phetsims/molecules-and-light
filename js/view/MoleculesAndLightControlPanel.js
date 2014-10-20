@@ -11,11 +11,10 @@ define( function( require ) {
   'use strict';
 
   // Modules
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Vector2 = require( 'DOT/Vector2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var Panel = require( 'SUN/Panel' );
+  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var MoleculeSelectorPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculeSelectorPanel' );
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/MoleculeNode' );

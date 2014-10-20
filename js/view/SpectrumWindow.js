@@ -29,7 +29,6 @@ define( function( require ) {
     var Vector2 = require( 'DOT/Vector2' );
     var SubSupText = require( 'SCENERY_PHET/SubSupText' );
     var SpectrumNode = require( 'SCENERY_PHET/SpectrumNode' );
-    var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
     var Image = require( 'SCENERY/nodes/Image' );
 
     // strings
@@ -125,11 +124,12 @@ define( function( require ) {
       var decreasingWavelengthNode = new ChirpNode( OVERALL_DIMENSIONS.width - 2 * HORIZONTAL_INSET );
       children.push( decreasingWavelengthNode );
 
-      return new LayoutBox( { orientation: 'vertical', children: children, spacing: 15 } )
+      return new LayoutBox( { orientation: 'vertical', children: children, spacing: 15 } );
 
     };
 
     /**
+     * Constructor for the labeled arrow in the spectrum window.
      *
      * @param {Number} length - Length of the arrow
      * @param {String} orientation - options are 'left' or 'right'.  Determines direction of the arrow.
@@ -211,76 +211,7 @@ define( function( require ) {
      */
     var LabeledSpectrumNode = function( width ) {
 
-      var STRIP_HEIGHT = 65;
-      var MIN_FREQUENCY = 1E3;
-      var MAX_FREQUENCY = 1E21;
-      var TICK_MARK_HEIGHT = 8;
-      var TICK_MARK_FONT = new PhetFont( 11 );
-      var LABEL_FONT = new PhetFont( 16 );
-
-      var stripWidth = width;
-      var spectrumRootNode = new Node();
-
-      // Create the "strip", which is the solid background portions that contains the different bands and that has tick
-      // marks on the top and bottom.
-      var strip = new Rectangle( 0, 0, stripWidth, STRIP_HEIGHT, {
-        fill: new Color( 237, 243, 246 ),
-        lineWidth: 2,
-        stroke: Color.BLACK } );
-      spectrumRootNode.addChild( strip );
-
-      // Add the frequency tick marks to the top of the spectrum strip.
-      for ( var i = 4; i <= 20; i++ ) {
-        var includeFrequencyLabel = ( i % 2 === 0 );
-        addFrequencyTickMark( Math.pow( 10, i ), includeFrequencyLabel );
-      }
-
-      // Add the wavelength tick marks to the bottom of the spectrum.
-      for ( var j = -12; j <= 4; j++ ) {
-        var includeWavelengthLabel = ( j % 2 === 0 );
-        addWavelengthTickMark( Math.pow( 10, j ), includeWavelengthLabel );
-      }
-
-      // Add the various bands.
-      addBandLabel( 1E3, 1E9, [ radioBandLabelString ] );
-      addBandDivider( 1E9 );
-      addBandLabel( 1E9, 3E11, [ microwaveBandLabelString ] );
-      addBandDivider( 3E11 );
-      addBandLabel( 3E11, 6E14, [ infraredBandLabelString ] );
-      addBandLabel( 1E15, 8E15, [ ultraBandLabelString, violetBandLabelString ] );
-      addBandDivider( 1E16 );
-      addBandLabel( 1E16, 1E19, [ xrayBandLabelString ] );
-      addBandDivider( 1E19 );
-      addBandLabel( 1E19, 1E21, [ gammaBandLabelString, rayBandLabelString ] );
-
-      // Add the visible spectrum.
-      var visSpectrumWidth = Math.round( getOffsetFromFrequency( 790E12 ) - getOffsetFromFrequency( 400E12 ) );
-      var visibleSpectrum = new SpectrumNode( visSpectrumWidth, STRIP_HEIGHT - strip.lineWidth, 380, 780, 1 );
-      visibleSpectrum.rotate( Math.PI ); // Flip the visible spectrum so that it is represented correctly in the diagram.
-      visibleSpectrum.setLeftTop( new Vector2( getOffsetFromFrequency( 400E12 ), strip.getTop() + strip.lineWidth ) );
-      spectrumRootNode.addChild( visibleSpectrum );
-
-      // Add the label for the visible band.
-      var visibleBandLabel = new Text( visibleBandLabelString, { font: new PhetFont( 12 ) } );
-      var visibleBandCenterX = visibleSpectrum.centerX;
-      visibleBandLabel.setCenter( new Vector2( visibleBandCenterX, -35 ) );
-      spectrumRootNode.addChild( visibleBandLabel );
-
-      // Add the arrow that connects the visible band label to the visible band itself.
-      var visibleBandArrow = new ArrowNode( visibleBandCenterX, visibleBandLabel.bottom, visibleBandCenterX, -5, {
-        tailWidth: 2,
-        headWidth: 7,
-        headHeight: 7
-      } );
-      spectrumRootNode.addChild( visibleBandArrow );
-
-      // Add the units.
-      var frequencyUnits = new Text( cyclesPerSecondUnitsString, { font: LABEL_FONT } );
-      frequencyUnits.setLeftCenter( new Vector2( stripWidth, -TICK_MARK_HEIGHT - frequencyUnits.getHeight() / 2 ) );
-      spectrumRootNode.addChild( frequencyUnits );
-      var wavelengthUnits = new Text( metersUnitsString, { font: LABEL_FONT } );
-      wavelengthUnits.setLeftCenter( new Vector2( stripWidth, STRIP_HEIGHT + TICK_MARK_HEIGHT + frequencyUnits.getHeight() / 2 ) );
-      spectrumRootNode.addChild( wavelengthUnits );
+      // Define the functions used for the labeled spectrum node.
 
       /**
        * Add a tick mark for the specified frequency.  Frequency tick marks go on top of the strip.
@@ -394,7 +325,7 @@ define( function( require ) {
        * @param {Number} frequency
        */
       function addBandDivider( frequency ) {
-        var drawDividerSegment = function() { return new Line( 0, 0, 0, STRIP_HEIGHT / 9, { stroke: Color.BLACK, lineWidth: 2 } ) };
+        var drawDividerSegment = function() { return new Line( 0, 0, 0, STRIP_HEIGHT / 9, { stroke: Color.BLACK, lineWidth: 2 } ); };
         for ( var i = 0; i < 5; i++ ) {
           var dividerSegment = drawDividerSegment();
           dividerSegment.setCenterTop( new Vector2( getOffsetFromFrequency( frequency ), 2 * i * STRIP_HEIGHT / 9 ) );
@@ -419,6 +350,77 @@ define( function( require ) {
       function log10( value ) {
         return Math.log( value ) / Math.LN10;
       }
+
+      var STRIP_HEIGHT = 65;
+      var MIN_FREQUENCY = 1E3;
+      var MAX_FREQUENCY = 1E21;
+      var TICK_MARK_HEIGHT = 8;
+      var TICK_MARK_FONT = new PhetFont( 11 );
+      var LABEL_FONT = new PhetFont( 16 );
+
+      var stripWidth = width;
+      var spectrumRootNode = new Node();
+
+      // Create the "strip", which is the solid background portions that contains the different bands and that has tick
+      // marks on the top and bottom.
+      var strip = new Rectangle( 0, 0, stripWidth, STRIP_HEIGHT, {
+        fill: new Color( 237, 243, 246 ),
+        lineWidth: 2,
+        stroke: Color.BLACK } );
+      spectrumRootNode.addChild( strip );
+
+      // Add the frequency tick marks to the top of the spectrum strip.
+      for ( var i = 4; i <= 20; i++ ) {
+        var includeFrequencyLabel = ( i % 2 === 0 );
+        addFrequencyTickMark( Math.pow( 10, i ), includeFrequencyLabel );
+      }
+
+      // Add the wavelength tick marks to the bottom of the spectrum.
+      for ( var j = -12; j <= 4; j++ ) {
+        var includeWavelengthLabel = ( j % 2 === 0 );
+        addWavelengthTickMark( Math.pow( 10, j ), includeWavelengthLabel );
+      }
+
+      // Add the various bands.
+      addBandLabel( 1E3, 1E9, [ radioBandLabelString ] );
+      addBandDivider( 1E9 );
+      addBandLabel( 1E9, 3E11, [ microwaveBandLabelString ] );
+      addBandDivider( 3E11 );
+      addBandLabel( 3E11, 6E14, [ infraredBandLabelString ] );
+      addBandLabel( 1E15, 8E15, [ ultraBandLabelString, violetBandLabelString ] );
+      addBandDivider( 1E16 );
+      addBandLabel( 1E16, 1E19, [ xrayBandLabelString ] );
+      addBandDivider( 1E19 );
+      addBandLabel( 1E19, 1E21, [ gammaBandLabelString, rayBandLabelString ] );
+
+      // Add the visible spectrum.
+      var visSpectrumWidth = Math.round( getOffsetFromFrequency( 790E12 ) - getOffsetFromFrequency( 400E12 ) );
+      var visibleSpectrum = new SpectrumNode( visSpectrumWidth, STRIP_HEIGHT - strip.lineWidth, 380, 780, 1 );
+      visibleSpectrum.rotate( Math.PI ); // Flip the visible spectrum so that it is represented correctly in the diagram.
+      visibleSpectrum.setLeftTop( new Vector2( getOffsetFromFrequency( 400E12 ), strip.getTop() + strip.lineWidth ) );
+      spectrumRootNode.addChild( visibleSpectrum );
+
+      // Add the label for the visible band.
+      var visibleBandLabel = new Text( visibleBandLabelString, { font: new PhetFont( 12 ) } );
+      var visibleBandCenterX = visibleSpectrum.centerX;
+      visibleBandLabel.setCenter( new Vector2( visibleBandCenterX, -35 ) );
+      spectrumRootNode.addChild( visibleBandLabel );
+
+      // Add the arrow that connects the visible band label to the visible band itself.
+      var visibleBandArrow = new ArrowNode( visibleBandCenterX, visibleBandLabel.bottom, visibleBandCenterX, -5, {
+        tailWidth: 2,
+        headWidth: 7,
+        headHeight: 7
+      } );
+      spectrumRootNode.addChild( visibleBandArrow );
+
+      // Add the units.
+      var frequencyUnits = new Text( cyclesPerSecondUnitsString, { font: LABEL_FONT } );
+      frequencyUnits.setLeftCenter( new Vector2( stripWidth, -TICK_MARK_HEIGHT - frequencyUnits.getHeight() / 2 ) );
+      spectrumRootNode.addChild( frequencyUnits );
+      var wavelengthUnits = new Text( metersUnitsString, { font: LABEL_FONT } );
+      wavelengthUnits.setLeftCenter( new Vector2( stripWidth, STRIP_HEIGHT + TICK_MARK_HEIGHT + frequencyUnits.getHeight() / 2 ) );
+      spectrumRootNode.addChild( wavelengthUnits );
 
       return spectrumRootNode;
 

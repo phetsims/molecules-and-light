@@ -16,11 +16,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var Property = require( 'AXON/Property' );
-  var Dimension2 = require( 'DOT/Dimension2' );
   var Color = require( 'SCENERY/util/Color' );
   var Vector2 = require( 'DOT/Vector2' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
@@ -44,10 +40,6 @@ define( function( require ) {
   var visibleString = require( 'string!MOLECULES_AND_LIGHT/visible' );
   var ultravioletString = require( 'string!MOLECULES_AND_LIGHT/ultraviolet' );
   var higherEnergyString = require( 'string!MOLECULES_AND_LIGHT/higherEnergy' );
-
-  // Model data for the Control Panel
-  var BACKGROUND_COLOR = new Color( 185, 178, 95 );
-  var PANEL_SIZE = new Dimension2( 850, 150 );
 
   // Description data for the 'Energy Arrow'
   var ARROW_LENGTH = 200;
