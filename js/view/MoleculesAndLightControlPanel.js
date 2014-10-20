@@ -35,10 +35,8 @@ define( function( require ) {
   var ozoneString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Ozone' );
   var waterString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Water' );
 
-  // Class Data for the control panel
-  // Model view transform used for creating images of the various molecules.
-  // This is basically a null transform except that it flips the Y axis so
-  // that molecules on the panel are oriented the same as in the play area.
+  // Model view transform used for creating images of the various molecules. This is basically a null transform except
+  // that it flips the Y axis so that molecules on the panel are oriented the same as in the play area.
   var MVT = ModelViewTransform2.createSinglePointScaleInvertedYMapping( new Vector2( 0, 0 ), new Vector2( 0, 0 ), 1 );
 
   /**
@@ -70,7 +68,7 @@ define( function( require ) {
 
     var radioButtons = new RadioButtonGroup( model.photonTargetProperty, radioButtonContent,
       {
-        spacing: 0,
+        spacing: 7,
         baseColor: 'black',
         buttonContentYMargin: 7,
         selectedStroke: 'white',
