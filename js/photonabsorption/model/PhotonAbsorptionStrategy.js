@@ -1,18 +1,13 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * The original java file is PhotonAbsorptionStrategy.java.  This is common
- * code which will be used to define the photon absorption strategy for
- * molecules in simulations like "Greenhouse Gas" and "Molecules and Light"
- *
- * This is the base model for the strategies that define how a molecule
- * reacts to a given photon.  It is responsible for the following:
+ * The original java file is PhotonAbsorptionStrategy.java.  This is common code which will be used to define the photon
+ * absorption strategy for molecules in simulations like "Greenhouse Gas" and "Molecules and Light".  This is the base
+ * model for the strategies that define how a molecule reacts to a given photon.  It is responsible for the following:
  * - Whether a given photon should be absorbed.
- * - How the molecule reacts to the absorption, i.e. whether it vibrates,
- * rotates, breaks apart, etc.
- * - Maintenance of any counters or timers associated with the reaction to
- * the absorption, such as those related to re-emission of an absorbed
- * photon.
+ * - How the molecule reacts to the absorption, i.e. whether it vibrates, rotates, breaks apart, etc.
+ * - Maintenance of any counters or timers associated with the reaction to the absorption, such as those related to
+ *    re-emission of an absorbed photon.
  *
  * @author Jesse Greenberg
  * @author John Blanco
@@ -74,8 +69,8 @@ define( function( require ) {
     },
 
     /**
-     * Decide whether the provided photon should be absorbed.  By design,
-     * a given photon should only be requested once, not multiple times.
+     * Decide whether the provided photon should be absorbed.  By design, a given photon should only be requested once,
+     * not multiple times.
      *
      * @param {Photon} photon
      * @return {Boolean} absorbed
@@ -93,11 +88,9 @@ define( function( require ) {
       return absorbed;
     },
 
-    step: function()  {
+    step: function() {
       throw new Error( 'step should be implemented in descendant photon absorption strategies.' );
     }
-
-  }, {
 
   } );
 } );
