@@ -62,23 +62,12 @@ define( function( require ) {
     CONTAINMENT_AREA_HEIGHT
   );
 
-  // Minimum and defaults for photon emission periods.  Note that the max is assumed to be infinity.
-  var MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET = 400;
+  // Defaults for photon emission periods.
   var DEFAULT_PHOTON_EMISSION_PERIOD = Number.POSITIVE_INFINITY; // Milliseconds of sim time.
-  var MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET = 100;
 
   // Default values for various parameters that weren't already covered.
-  var DEFAULT_PHOTON_TARGET = 'SINGLE_CH4_MOLECULE';
   var DEFAULT_EMITTED_PHOTON_WAVELENGTH = WavelengthConstants.IR_WAVELENGTH;
   var INITIAL_COUNTDOWN_WHEN_EMISSION_ENABLED = 300;
-
-  var MAX_ATMOSPHERE_CONCENTRATIONS = {
-    'N2': 15,
-    'O2': 15,
-    'CO2': 15,
-    'CH4': 15,
-    'H2O': 15
-  };
 
   //Random number generator.
   //TODO: This can be removed after the rest of the file has been ported.

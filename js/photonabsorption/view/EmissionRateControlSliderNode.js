@@ -26,10 +26,8 @@ define( function( require ) {
   // Maximum value for slider range.
   var SLIDER_RANGE = 100;
 
-  // Minimum and defaults for photon emission periods.  Note that the max is
-  // assumed to be infinity.
+  // Minima for photon emission periods.
   var MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET = 400;
-  var DEFAULT_PHOTON_EMISSION_PERIOD = 3000; // Milliseconds of sim time.
   var MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET = 100;
 
   /**
