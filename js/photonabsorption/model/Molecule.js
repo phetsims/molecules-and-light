@@ -1,8 +1,6 @@
 //  Copyright 2002-2014, University of Colorado
 
 /**
- * Original file is Molecule.java which is also used by "Greenhouse Gas".
- *
  * A model for a particular molecule.  This, by its nature, is essentially a composition of other objects, generally
  * atoms and atomic bonds.
  *
@@ -455,7 +453,7 @@ define( function( require ) {
         // The circumstances for absorption are correct, but do we have an absorption strategy for this photon's
         // wavelength?
         var candidateAbsorptionStrategy = this.mapWavelengthToAbsorptionStrategy[ photon.getWavelength() ];
-        if ( candidateAbsorptionStrategy !== null ) {
+        if ( typeof candidateAbsorptionStrategy !== "undefined" ) {
           // Yes, there is a strategy available for this wavelength.
           // Ask it if it wants the photon.
           if ( candidateAbsorptionStrategy.queryAndAbsorbPhoton( photon ) ) {
