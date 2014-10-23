@@ -5,7 +5,7 @@
   "visible": "Visible",
   "ultraviolet": "Ultraviolet",
   "higherEnergy": "Higher Energy",
-  "SpectrumWindow.buttonCaption": "Show Light Spectrum",
+
   "ControlPanel.CO": "CO",
   "ControlPanel.N2": "N2",
   "ControlPanel.O2": "O2",
@@ -20,7 +20,10 @@
   "ControlPanel.NitrogenDioxide": "Nitrogen Dioxide (NO2)",
   "ControlPanel.Ozone": "Ozone (O3)",
   "ControlPanel.Water": "Water (H20)",
+
   "buttonNode.returnMolecule": "Return Molecule",
+
+  "SpectrumWindow.buttonCaption": "Show Light Spectrum",
   "SpectrumWindow.title": "Light Spectrum",
   "SpectrumWindow.frequencyArrowLabel": "Increasing frequency and energy",
   "SpectrumWindow.wavelengthArrowLabel": "Increasing wavelength",
