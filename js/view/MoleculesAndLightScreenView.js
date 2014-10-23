@@ -38,6 +38,8 @@ define( function( require ) {
   // Model-view transform for intermediate coordinates.
   var INTERMEDIATE_RENDERING_SIZE = new Dimension2( 500, 300 );
 
+  // Location of the top left corner of the application window.
+  var APPLICATION_WINDOW_LOCATION = new Vector2( 15, 15 );
 
   /**
    * Constructor for the screen view of Molecules and Light.
@@ -60,23 +62,23 @@ define( function( require ) {
 
     // Create the node that will be the root for all the world children on this canvas.  This is done to make it easier
     // to zoom in and out on the world without affecting screen children.
-    this.myWorldNode = new Node();
+    this.myWorldNode = new Node(); // TODO: REMOVE nodes like this.  Used in Java but not in javascript.
     this.addChild( this.myWorldNode );
 
     // Create the application window.  This will hold all photons, molecules, and photonEmitters for this photon
     // absorption model.
     this.applicationWindow = new MoleculesAndLightApplicationWindow( photonAbsorptionModel, this.mvt );
     this.myWorldNode.addChild( this.applicationWindow );
-    this.applicationWindow.translate( new Vector2( 15, 15 ) );
+    this.applicationWindow.translate( APPLICATION_WINDOW_LOCATION );
 
     // Create the control panel for photon emission frequency.
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
-    photonEmissionControlPanel.setLeftTop( new Vector2( 15, 350 ) );
+    photonEmissionControlPanel.setLeftTop( new Vector2( APPLICATION_WINDOW_LOCATION.x, 350 ) );
 
     // Create the molecule control panel
     var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
     moleculeControlPanel.scale( 0.75 ); // TODO: This scaling should probably be done in MoleculeControlPanel.js
-    moleculeControlPanel.setLeftTop( new Vector2( 530, 15 ) );
+    moleculeControlPanel.setLeftTop( new Vector2( 530, this.applicationWindow.top - this.applicationWindow.windowFrame.lineWidth ) );
 
     // Add reset all button.
     var resetAllButton = new ResetAllButton(
