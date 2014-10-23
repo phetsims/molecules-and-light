@@ -38,52 +38,102 @@ define( function( require ) {
     // Instance Data
     this.atomicBond = atomicBond;
     this.mvt = mvt;
+    this.atomicBonds = []; // Array which holds the lines for the atomicBonds.
 
     // supertype constructor
     Node.call( this );
+
     // Cary this node through the scope in nested functions.
     var thisNode = this;
 
     // Calculate the width to use for the bond representation(s).
     this.averageAtomRadius = mvt.modelToViewDeltaX( ( atomicBond.getAtom1().getRadius() + atomicBond.getAtom2().getRadius() ) / 2 );
 
+    // Create the initial representation.
+    this.initializeRepresentation();
+
     // Link the atomic bond view node to the model.
-    // TODO:  This implementation is not efficient.  Redraws the line nodes every step. Come up with a better way to do this.
     this.atomicBond.atom1.positionProperty.link( function() {
       thisNode.updateRepresentation();
     });
 
-    // Create the initial representation.
-    this.updateRepresentation();
   }
 
   return inherit( Node, AtomicBondNode, {
 
-    updateRepresentation: function() {
-      this.removeAllChildren();  // Clear out any previous representations.
+    /**
+     * Draw the initial lines which represent the atomic bonds.  This function should only be called once.  Drawing the
+     * lines a single time should provide a performance benefit.  This will also set the bond width for the lines for
+     * each case of 1, 2, or 3 atomic bonds.
+     */
+    initializeRepresentation: function() {
 
-      // TODO: Is this style for variable declaration acceptable for switch-case?
-      var bondWidth;
-      var bond1;
-      var bond2;
-      var bond3;
-      var angle;
-      var p1;
-      var p2;
-      var offsetVector;
-      var transformedRadius;
+      var bondWidth; // Width of the line representing this bond.  Dependent on the number of bonds between the atoms.
+      var bond1; // First bond shared by the atoms.
+      var bond2; // Second bond shared by the atoms.
+      var bond3; // Third bond shared by the atoms.
+
       switch( this.atomicBond.getBondCount() ) {
         case 1:
-          // Single bond, so connect it from the center of one atom to the
-          // center of the other
-          var transformedPt1 = this.mvt.modelToViewPosition( this.atomicBond.getAtom1().getPositionRef() );
-          var transformedPt2 = this.mvt.modelToViewPosition( this.atomicBond.getAtom2().getPositionRef() );
           bondWidth = BOND_WIDTH_PROPORTION_SINGLE * this.averageAtomRadius;
-          bond1 = new Line( transformedPt1, transformedPt2, {lineWidth: bondWidth, stroke: BOND_COLOR } );
+          bond1 = new Line( {lineWidth: bondWidth, stroke: BOND_COLOR } );
+          this.atomicBonds.push( bond1 );
           this.addChild( bond1 );
           break;
 
         case 2:
+          bondWidth = BOND_WIDTH_PROPORTION_DOUBLE * this.averageAtomRadius;
+          bond1 = new Line( { lineWidth: bondWidth, stroke: BOND_COLOR } );
+          bond2 = new Line( { lineWidth: bondWidth, stroke: BOND_COLOR } );
+          this.atomicBonds.push( bond1, bond2 );
+          this.addChild( bond1 );
+          this.addChild( bond2 );
+          break;
+
+        case 3:
+
+          // Draw the bonds.
+          bondWidth = BOND_WIDTH_PROPORTION_TRIPLE * this.averageAtomRadius;
+          bond1 = new Line( { lineWidth: bondWidth, stroke: BOND_COLOR } );
+          bond2 = new Line( { lineWidth: bondWidth, stroke: BOND_COLOR } );
+          bond3 = new Line( { lineWidth: bondWidth, stroke: BOND_COLOR } );
+          this.atomicBonds.push( bond1, bond2, bond3 );
+          this.addChild( bond1 );
+          this.addChild( bond2 );
+          this.addChild( bond3 );
+          break;
+
+        default:
+          console.error( " - Error: Can't represent bond number, value = " + this.atomicBond.getBondCount() );
+          assert && assert( false );
+          break;
+      }
+    },
+
+    /**
+     * Update the atomic bond positions by setting the end points of line to the positions of the
+     * atoms which share the bond.
+     */
+    updateRepresentation: function() {
+
+      var p1; // Point describing position of one end of the line representing this atomic bond.
+      var p2; // Point describing position of the other end of the line representing the atomic bond.
+      var offsetVector; // Vector which places the atomic bonds an offset away from the center between the atoms.
+      var angle; // An angle used to describe the offset vector.
+      var transformedRadius; // A position required to calculate the offset vector.
+
+      switch( this.atomicBond.getBondCount() ) {
+
+        case 1:
+
+          // Single bond, so connect it from the center of one atom to the center of the other
+          p1 = this.mvt.modelToViewPosition( this.atomicBond.getAtom1().getPositionRef() );
+          p2 = this.mvt.modelToViewPosition( this.atomicBond.getAtom2().getPositionRef() );
+          this.atomicBonds[0].setLine( p1.x, p1.y, p2.x, p2.y );
+          break;
+
+        case 2:
+
           // Double bond.
           transformedRadius = this.mvt.modelToViewDeltaX( Math.min( this.atomicBond.getAtom1().getRadius(),
             this.atomicBond.getAtom2().getRadius() ) );
@@ -91,20 +141,17 @@ define( function( require ) {
           p1 = this.mvt.modelToViewPosition( this.atomicBond.getAtom1().getPositionRef() );
           p2 = this.mvt.modelToViewPosition( this.atomicBond.getAtom2().getPositionRef() );
           angle = Math.atan2( p1.x - p2.x, p1.y - p2.y );
-          // Create a vector that will act as the offset from the center
-          // point to the origin of the bond line.
+          // Create a vector that will act as the offset from the center point to the origin of the bond line.
           offsetVector = Vector2.createPolar( transformedRadius / 3, angle );
 
           // Draw the bonds.
-          bondWidth = BOND_WIDTH_PROPORTION_DOUBLE * this.averageAtomRadius;
-          bond1 = new Line( p1.x + offsetVector.x, p1.y - offsetVector.y, p2.x + offsetVector.x, p2.y - offsetVector.y, { lineWidth: bondWidth, stroke: BOND_COLOR } );
+          this.atomicBonds[0].setLine( p1.x + offsetVector.x, p1.y - offsetVector.y, p2.x + offsetVector.x, p2.y - offsetVector.y );
           offsetVector.rotate( Math.PI );
-          bond2 = new Line( p1.x + offsetVector.x, p1.y - offsetVector.y, p2.x + offsetVector.x, p2.y - offsetVector.y, { lineWidth: bondWidth, stroke: BOND_COLOR } );
-          this.addChild( bond1 );
-          this.addChild( bond2 );
+          this.atomicBonds[1].setLine( p1.x + offsetVector.x, p1.y - offsetVector.y, p2.x + offsetVector.x, p2.y - offsetVector.y );
           break;
 
         case 3:
+
           // Triple bond.
           transformedRadius = this.mvt.modelToViewDeltaX( Math.min( this.atomicBond.getAtom1().getRadius(),
             this.atomicBond.getAtom2().getRadius() ) );
@@ -112,19 +159,14 @@ define( function( require ) {
           p1 = this.mvt.modelToViewPosition( this.atomicBond.getAtom1().getPositionRef() );
           p2 = this.mvt.modelToViewPosition( this.atomicBond.getAtom2().getPositionRef() );
           angle = Math.atan2( p1.x - p2.x, p1.y - p2.y );
-          // Create a vector that will act as the offset from the center
-          // point to the origin of the bond line.
+          // Create a vector that will act as the offset from the center point to the origin of the bond line.
           offsetVector = Vector2.createPolar( transformedRadius * 0.6, angle );
 
           // Draw the bonds.
-          bondWidth = BOND_WIDTH_PROPORTION_TRIPLE * this.averageAtomRadius;
-          bond1 = new Line( p1, p2, { lineWidth: bondWidth, stroke: BOND_COLOR } );
-          bond2 = new Line( p1.x + offsetVector.x, p1.y - offsetVector.y, p2.x + offsetVector.x, p2.y - offsetVector.y, { lineWidth: bondWidth, stroke: BOND_COLOR } );
+          this.atomicBonds[0].setLine( p1.x, p1.y, p2.x, p2.y );
+          this.atomicBonds[1].setLine( p1.x + offsetVector.x, p1.y - offsetVector.y, p2.x + offsetVector.x, p2.y - offsetVector.y );
           offsetVector.rotate( Math.PI );
-          bond3 = new Line( p1.x + offsetVector.x, p1.y - offsetVector.y, p2.x + offsetVector.x, p2.y - offsetVector.y, { lineWidth: bondWidth, stroke: BOND_COLOR } );
-          this.addChild( bond1 );
-          this.addChild( bond2 );
-          this.addChild( bond3 );
+          this.atomicBonds[2].setLine( p1.x + offsetVector.x, p1.y - offsetVector.y, p2.x + offsetVector.x, p2.y - offsetVector.y );
           break;
 
         default:
