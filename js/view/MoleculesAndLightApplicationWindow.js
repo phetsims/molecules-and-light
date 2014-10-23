@@ -22,7 +22,7 @@ define( function( require ) {
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var Text = require( 'SCENERY/nodes/Text' );
   var WindowFrameNode = require( 'MOLECULES_AND_LIGHT/view/WindowFrameNode' );
-
+  var Shape = require( 'KITE/Shape' );
   // Strings
   var returnMoleculeString = require( 'string!MOLECULES_AND_LIGHT/buttonNode.returnMolecule' );
 
@@ -58,8 +58,11 @@ define( function( require ) {
     this.addChild( this.photonEmitterLayer );
 
     // Add the frame around the application window.
-    var windowFrame = new WindowFrameNode( this, 5, new Color( "#BED0E7" ), new Color( '#4070CE' ) );
-    this.addChild( windowFrame );
+    this.windowFrame = new WindowFrameNode( this, 5, new Color( "#BED0E7" ), new Color( '#4070CE' ) );
+    this.addChild( this.windowFrame );
+
+    // Add a clip area around the edge of the windowframe to clean up photon and molecule removal from screen.
+    this.drawClipFrame();
 
     // Create and add the photon emitter.
     this.photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, mvt, photonAbsorptionModel );
@@ -134,6 +137,7 @@ define( function( require ) {
      * visible only when one or more molecules are off the screen (more or less).
      */
     moleculeCheckBounds: function() {
+
       var moleculesToRemove = [];
       for ( var molecule = 0; molecule < this.photonAbsorptionModel.activeMolecules.length; molecule++ ) {
         if ( !this.containsPointSelf( this.mvt.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
@@ -149,9 +153,9 @@ define( function( require ) {
     /**
      * Check to see if any photons collide with the application window.  If there is a collision, remove the photon
      * from the model.
-     *
      */
     photonCheckBounds: function() {
+
       var photonsToRemove = [];
       for ( var photon = 0; photon < this.photonAbsorptionModel.photons.length; photon++ ) {
         if ( !this.containsPointSelf( this.mvt.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).getLocation() ) ) ) {
@@ -159,6 +163,16 @@ define( function( require ) {
         }
       }
       this.photonAbsorptionModel.photons.removeAll( photonsToRemove );
+    },
+
+    drawClipFrame: function() {
+      var clipArea = new Shape().roundRect(
+        this.leftTop.x - this.windowFrame.lineWidth,
+        this.leftTop.y - this.windowFrame.lineWidth,
+          this.width + ( 2 * this.windowFrame.lineWidth),
+          this.height + ( 2 * this.windowFrame.lineWidth ),
+        7, 7 );
+      this.setClipArea( clipArea );
     }
 
   } );

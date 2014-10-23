@@ -4,8 +4,6 @@
  * Window frame for the Molecules and Light application window.  This uses canvas node in order to draw certain shapes
  * which are not currently in PhET scenery.
  *
- * TODO: This file could probably use some clean up or refactoring.
- *
  * @author Jesse Greenberg (PhET Interactive Simulations)
  */
 
