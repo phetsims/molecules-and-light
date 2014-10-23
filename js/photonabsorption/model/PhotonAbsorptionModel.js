@@ -215,19 +215,13 @@ define( function( require ) {
       dt *= 1000; // convert from miliseconds.
       var photonsToRemove = [];
       for ( var photon = 0; photon < this.photons.length; photon++ ) {
-        this.photons.get( photon ).stepInTime( dt );
-//        if ( this.photons.get( photon ).getLocation().x - PHOTON_EMISSION_LOCATION.x <= MAX_PHOTON_DISTANCE ) {
         // See if any of the molecules wish to absorb this photon.
         for ( var molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
           if ( this.activeMolecules.get( molecule ).queryAbsorbPhoton( this.photons.get( photon ) ) ) {
             photonsToRemove.push( this.photons.get( photon ) );
           }
         }
-//        }
-//        else {
-//          // The photon has moved beyond our simulation bounds, so remove it from the model.
-//          photonsToRemove.push( photon );
-//        }
+        this.photons.get( photon ).stepInTime( dt ); // TODO: This function should be changed to step.
       }
       // Remove any photons that were marked for removal.
       this.photons.removeAll( photonsToRemove );
