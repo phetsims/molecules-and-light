@@ -15,6 +15,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
 
   // Class Data for the Molecule Selector Panels
   // Model view transform used for creating images of the various molecules.
@@ -28,12 +29,14 @@ define( function( require ) {
   /**
    * Constructor for a molecule selector panel.  This is a single panel of the molecules and light control panel.
    *
-   * @param {String} moleculeName
-   * @param(MoleculeNode} moleculeNode
+   * @param {String} moleculeName - The written name of the molecule
+   * @param {String} moleculeFormula - The chemical formula representation of the molecule, HTML5 format for SubSupText
+   * @param(MoleculeNode} moleculeNode - The molecule node for this selector panel
    * @param {Object} [options]
    * @constructor
    */
-  function MoleculeSelectorPanel( moleculeName, moleculeNode, options) {
+  function MoleculeSelectorPanel( moleculeName, moleculeFormula, moleculeNode, options ) {
+
     options = _.extend( {
       stroke: null,
       fill: 'black',
@@ -44,7 +47,7 @@ define( function( require ) {
 
     // Text containing the molecule name and abbreviation
     var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
-    var molecularName = new Text( moleculeName, { fill: 'white', font: font } );
+    var molecularName = new SubSupText( moleculeName + ' (' + moleculeFormula + ')', { fill: 'white', font: font } );
     molecularName.setCenterY( this.getCenterY() );
     molecularName.setLeft( this.getLeft() + 10 );
 
