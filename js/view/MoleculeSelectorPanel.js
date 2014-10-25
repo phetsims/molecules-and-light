@@ -17,12 +17,6 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
 
-  // Class Data for the Molecule Selector Panels
-  // Model view transform used for creating images of the various molecules.
-  // This is basically a null transform except that it flips the Y axis so
-  // that molecules on the panel are oriented the same as in the play area.
-  //var MVT = new ModelViewTransform2( new Vector2( 0, 0 ), new Vector2( 0, 0 ), 1, true );
-
   // Scaling factor for the molecule images, determined empirically.
   var MOLECULE_SCALING_FACTOR = 0.13;
 
@@ -45,7 +39,7 @@ define( function( require ) {
 
     Rectangle.call( this, 0, 0, 280, 0, options );
 
-    // Text containing the molecule name and abbreviation
+    // Create text label for the molecule name and append the chemical formula in parentheses.
     var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
     var molecularName = new SubSupText( moleculeName + ' (' + moleculeFormula + ')', { fill: 'white', font: font } );
     molecularName.setCenterY( this.getCenterY() );
