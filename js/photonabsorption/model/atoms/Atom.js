@@ -1,9 +1,7 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * Class that represents an atom in the model.  This is used in the
- * microscopic view of photon abosorption.  This model is expected to be
- * extended by specific atoms.
+ * Class that represents an atom in the model.  This model is expected to be extended by specific atoms.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -18,33 +16,24 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
 
   /**
-   * Constructor for the Atom.  Allows one to specify the color, radius, and
-   * mass of this atom as well as an optional parameter describing the atom's
-   * location.
+   * Constructor for the Atom.  Allows one to specify the color, radius, and mass of this atom as well as an optional
+   * parameter describing the atom's location.
    *
    * @param {Color} representationColor - The desired color of the atom
    * @param {Number} radius - The radius of the model atom
    * @param {Number} mass - Mass of this atom
-   * @param {Object} [options]
    * @constructor
    */
-  function Atom( representationColor, radius, mass, options ) {
+  function Atom( representationColor, radius, mass ) {
+
     // Supertype constructor
-    Property.call( this, {
-
-    } );
-
-    options = _.extend( {
-      // defaults
-      positionProperty: new Property( new Vector2( 0, 0 ) ) // position of the atom
-    }, options );
-    this.options = options;
+    Property.call( this, { position: new Vector2( 0, 0 ) } );
 
     // Instance Variables
     this.representationColor = representationColor;
     this.radius = radius;
     this.mass = mass;
-    this.positionProperty = options.positionProperty;
+
   }
 
   return inherit( Property, Atom, {
@@ -111,12 +100,3 @@ define( function( require ) {
     }
   } );
 } );
-
-//  //------------------------------------------------------------------------
-//  // Methods
-//  //------------------------------------------------------------------------
-
-//  public Rectangle2D getBoundingRect() {
-//    return new Rectangle2D.Double( position.getX() - radius, position.getY() - radius, radius * 2, radius * 2 );
-//  }
-//}
