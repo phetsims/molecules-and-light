@@ -46,7 +46,7 @@ define( function( require ) {
   // Chemical formulas for the button labels.
   var CO_FORMULA_STRING = 'CO';
   var N2_FORMULA_STRING = 'N<sub>2</sub>';
-  var O2_FORMULA_STRING = 'H<sub>2</sub>O';
+  var O2_FORMULA_STRING = 'O<sub>2</sub>';
   var CO2_FORMULA_STRING = 'CO<sub>2</sub>';
   var NO2_FORMULA_STRING = 'NO<sub>2</sub>';
   var O3_FORMULA_STRING = 'O<sub>3</sub>';
