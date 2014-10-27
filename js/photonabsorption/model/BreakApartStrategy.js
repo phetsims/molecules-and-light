@@ -33,11 +33,9 @@ define( function( require ) {
      * The step method for the break apart strategy.  This function instructs the molecule to break apart and then reset
      * the photon absorption strategy.
      *
-     * @param {Number} dt - The incremental time step
      */
-    step: function( dt ) {
-      // Basically, all this strategy does is to instruct the molecule
-      // to break apart, then reset the strategy.
+    step: function() {
+      // Basically, all this strategy does is to instruct the molecule to break apart, then reset the strategy.
       this.getMolecule().breakApart();
       this.getMolecule().setActiveStrategy( new NullPhotonAbsorptionStrategy( this.getMolecule() ) );
     }
