@@ -55,7 +55,6 @@ define( function( require ) {
     setPositionVec: function( position ) {
       if ( this.positionProperty !== position ) {
         this.positionProperty.set( position );
-        this.set( position );
       }
     },
 
@@ -68,7 +67,6 @@ define( function( require ) {
     setPosition: function( x, y ) {
       if ( this.positionProperty.get.x !== x || this.positionProperty.get.y !== y ) {
         this.positionProperty.set( new Vector2( x, y ) );
-        this.set( x, y );
       }
     },
 
