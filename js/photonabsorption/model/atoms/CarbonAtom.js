@@ -41,6 +41,7 @@ define( function( require ) {
       // defaults
       positionProperty: new Property( new Vector2( 0, 0 ) ) // position of the atom
     }, options );
+
     this.options = options;
     this.uniqueID = 'carbon' + instanceCount++;
     this.representationColor = REPRESENTATION_COLOR;
