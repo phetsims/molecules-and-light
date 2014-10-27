@@ -1,9 +1,9 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * The original java file is PhotonAbsorptionStrategy.java.  This is common code which will be used to define the photon
- * absorption strategy for molecules in simulations like "Greenhouse Gas" and "Molecules and Light".  This is the base
- * model for the strategies that define how a molecule reacts to a given photon.  It is responsible for the following:
+ * This is common code which will be used to define the photon absorption strategy for molecules in simulations like
+ * "Greenhouse Gas" and "Molecules and Light".  This is the base model for the strategies that define how a molecule
+ * reacts to a given photon.  It is responsible for the following:
  * - Whether a given photon should be absorbed.
  * - How the molecule reacts to the absorption, i.e. whether it vibrates, rotates, breaks apart, etc.
  * - Maintenance of any counters or timers associated with the reaction to the absorption, such as those related to
@@ -23,15 +23,6 @@ define( function( require ) {
 
   var MIN_PHOTON_HOLD_TIME = 600; // Milliseconds of sim time.
   var MAX_PHOTON_HOLD_TIME = 1200; // Milliseconds of sim time.
-
-  //Random number generator.
-  //TODO: This can be removed after the rest of the file has been ported.
-  //TODO: We created it temporarily to help during the porting process.
-  var RAND = {
-    nextDouble: function() {
-      return Math.random();
-    }
-  };
 
   /**
    * Constructor for photon absorption strategy.
@@ -54,6 +45,11 @@ define( function( require ) {
 
   return inherit( Object, PhotonAbsorptionStrategy, {
 
+    /**
+     * Return the molecule associated with the strategy.
+     *
+     * @returns {Molecule}
+     */
     getMolecule: function() {
       return this.molecule;
     },
@@ -78,10 +74,10 @@ define( function( require ) {
     queryAndAbsorbPhoton: function( photon ) {
       // All circumstances are correct for photon absorption, so now we decide probabilistically whether or not to
       // actually do it.  This essentially simulates the quantum nature of the absorption.
-      var absorbed = (!this.isPhotonAbsorbed) && ( RAND.nextDouble() < this.photonAbsorptionProbabilityProperty.get() );
+      var absorbed = (!this.isPhotonAbsorbed) && ( Math.random() < this.photonAbsorptionProbabilityProperty.get() );
       if ( absorbed ) {
         this.isPhotonAbsorbed = true;
-        this.photonHoldCountdownTime = MIN_PHOTON_HOLD_TIME + RAND.nextDouble() * ( MAX_PHOTON_HOLD_TIME - MIN_PHOTON_HOLD_TIME );
+        this.photonHoldCountdownTime = MIN_PHOTON_HOLD_TIME + Math.random() * ( MAX_PHOTON_HOLD_TIME - MIN_PHOTON_HOLD_TIME );
       }
       return absorbed;
     },
