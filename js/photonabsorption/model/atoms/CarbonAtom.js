@@ -23,7 +23,7 @@ define( function( require ) {
   var RADIUS = 77;     // In picometers.
 
   // Static data
-  var instanceCount = 0;
+  var instanceCount = 0; // Base count for the unique ID of this atom.
 
   /**
    * Constructor for a carbon atom.  There is an optional Vector2 parameter
