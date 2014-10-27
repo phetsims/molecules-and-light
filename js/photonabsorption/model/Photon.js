@@ -79,7 +79,7 @@ define( function( require ) {
      *
      * @param {Number} dt - The incremental time step.
      */
-    stepInTime: function( dt ) {
+    step: function( dt ) {
       this.locationProperty.set( new Vector2( this.location.x + this.vx * dt, this.location.y + this.vy * dt ) );
     }
 
