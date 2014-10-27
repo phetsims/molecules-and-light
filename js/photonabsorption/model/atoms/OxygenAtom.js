@@ -18,13 +18,12 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
 
   // Model data for the Oxygen atom.
-  // TODO: The color below is called RED_COLORBLIND and was taken from PhetColorScheme.java.  Do we have such color schemes in the JavaScript scenery?
-  var REPRESENTATION_COLOR = new Color( 255, 85, 0 ); //Reddish color that also looks good in colorblind tests, see #2753
+  var REPRESENTATION_COLOR = new Color( 255, 85, 0 ); // Reddish color that also looks good in colorblind tests
   var MASS = 12.011;   // In atomic mass units (AMU).
   var RADIUS = 73;     // In picometers.
 
   // Static Data
-  var instanceCount = 0;
+  var instanceCount = 0; // Base count for the unique ID of this atom
 
   /**
    * Constructor for an Oxygen atom.  There is an optional Vector2 parameter
