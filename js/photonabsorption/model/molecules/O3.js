@@ -4,6 +4,7 @@
  * Class that represents ozone (O3) in the model.
  *
  * @author John Blanco
+ * @author Jesse Greenberg
  */
 define( function( require ) {
   'use strict';
@@ -22,11 +23,9 @@ define( function( require ) {
   var O2 = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O2' );
 
   // Model data for the O3 molecule
-  // These constants define the initial shape of the O3 atom.  The angle
-  // between the atoms is intended to be correct, and the bond is somewhat
-  // longer than real life.  The algebraic calculations are intended to make
-  // it so that the bond length and/or the angle could be changed and the
-  // correct center of gravity will be maintained.
+  // These constants define the initial shape of the O3 atom.  The angle between the atoms is intended to be correct,
+  // and the bond is somewhat longer than real life.  The algebraic calculations are intended to make it so that the
+  // bond length and/or the angle could be changed and the correct center of gravity will be maintained.
   var OXYGEN_OXYGEN_BOND_LENGTH = 180;
   var INITIAL_OXYGEN_OXYGEN_OXYGEN_ANGLE = 120 * Math.PI / 180; // In radians.
   var INITIAL_MOLECULE_HEIGHT = OXYGEN_OXYGEN_BOND_LENGTH * Math.cos( INITIAL_OXYGEN_OXYGEN_OXYGEN_ANGLE / 2 );
@@ -36,16 +35,10 @@ define( function( require ) {
   var INITIAL_OXYGEN_HORIZONTAL_OFFSET = INITIAL_MOLECULE_WIDTH / 2;
   var BREAK_APART_VELOCITY = 3.0;
 
-  //Random number generator.  Used to control the side on which the delocalized
-  // bond is depicted.
-  //TODO: This can be removed after the rest of the file has been ported.
-  //TODO: We created it temporarily to help during the porting process.
+  //Random boolean generator.  Used to control the side on which the delocalized bond is depicted.
   var RAND = {
-    nextDouble: function() {
-      return Math.random();
-    },
     nextBoolean: function() {
-      return RAND.nextDouble() < 0.50;
+      return Math.random() < 0.50;
     }
   };
 
@@ -74,13 +67,11 @@ define( function( require ) {
     this.rightOxygenAtom = new OxygenAtom();
     this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
 
-    // Tracks the side on which the double bond is shown.  More on this where
-    // it is initialized.
+    // Tracks the side on which the double bond is shown.  More on this where it is initialized.
     this.doubleBondOnRight = RAND.nextBoolean();
 
-    // Create the bond structure.  O3 has a type of bond where each O-O
-    // has essentially 1.5 bonds, so we randomly choose one side to show
-    // two bonds and another to show one.
+    // Create the bond structure.  O3 has a type of bond where each O-O has essentially 1.5 bonds, so we randomly choose
+    // one side to sho two bonds and another to show one.
     if ( this.doubleBondOnRight ) {
       this.leftOxygenOxygenBond = new AtomicBond( this.centerOxygenAtom, this.leftOxygenAtom, { bondCount: 1 } );
       this.rightOxygenOxygenBond = new AtomicBond( this.centerOxygenAtom, this.rightOxygenAtom, { bondCount: 2 } );
@@ -117,11 +108,13 @@ define( function( require ) {
      * when the molecule is at rest (not rotating or vibrating).
      */
     initializeAtomOffsets: function() {
+
       this.addInitialAtomCogOffset( this.centerOxygenAtom, new Vector2( 0, INITIAL_CENTER_OXYGEN_VERTICAL_OFFSET ) );
       this.addInitialAtomCogOffset( this.leftOxygenAtom, new Vector2( -INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET ) );
       this.addInitialAtomCogOffset( this.rightOxygenAtom, new Vector2( INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET ) );
 
       this.updateAtomPositions();
+
     },
 
     /**
@@ -131,6 +124,7 @@ define( function( require ) {
      * @param {Number} vibrationRadians - Where this molecule is in its vibration cycle in radians.
      */
     setVibration: function( vibrationRadians ) {
+
       Molecule.prototype.setVibration.call( this, vibrationRadians );
       var multFactor = Math.sin( vibrationRadians );
       var maxCenterOxygenDisplacement = 30;
@@ -139,39 +133,38 @@ define( function( require ) {
       this.getVibrationAtomOffset( this.rightOxygenAtom ).setXY( -multFactor * maxOuterOxygenDisplacement, -multFactor * maxOuterOxygenDisplacement );
       this.getVibrationAtomOffset( this.leftOxygenAtom ).setXY( multFactor * maxOuterOxygenDisplacement, -multFactor * maxOuterOxygenDisplacement );
       this.updateAtomPositions();
+
     },
 
     /**
      * Define the break apart behavior for the O3 molecule.  Initializes and sets the velocity of constituent molecules.
-     * TODO: I had to re-declare the BREAK_APART_VELOCITY so that it could be used in this function.  Is there a way for NO2.js to find global variables in Molecules.js?
      */
     breakApart: function() {
 
       // Remove this O3 molecule from the the photon absorption model's list of active molecules.
       this.model.activeMolecules.remove( this );
 
-      // Create the constituent molecules that result from breaking apart and add them to the active molecules observable array.
+      // Create the constituent molecules that result from breaking apart and add them to the active molecules
+      // observable array.
       var diatomicOxygenMolecule = new O2( this.model );
       var singleOxygenMolecule = new O( this.model );
       this.model.activeMolecules.add( diatomicOxygenMolecule );
       this.model.activeMolecules.add( singleOxygenMolecule );
 
-      // Set up the direction and velocity of the constituent molecules.
-      // These are set up mostly to look good, and their directions and
-      // velocities have little if anything to do with any physical rules
-      // of atomic dissociation.
+      // Set up the direction and velocity of the constituent molecules. These are set up mostly to look good, and their
+      // directions and velocities have little if anything to do with any physical rules of atomic dissociation.
       var diatomicMoleculeRotationAngle = ( ( Math.PI / 2 ) - ( INITIAL_OXYGEN_OXYGEN_OXYGEN_ANGLE / 2 ) );
       var breakApartAngle;
       if ( this.doubleBondOnRight ) {
         diatomicOxygenMolecule.rotate( -diatomicMoleculeRotationAngle );
         diatomicOxygenMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.rightOxygenAtom ).x + this.getInitialAtomCogOffset( this.centerOxygenAtom ).x ) / 2,
             ( this.getInitialAtomCogOffset( this.centerOxygenAtom ).y + this.getInitialAtomCogOffset( this.rightOxygenAtom ).y ) / 2 );
-        breakApartAngle = Math.PI / 4 + RAND.nextDouble() * Math.PI / 4;
+        breakApartAngle = Math.PI / 4 + Math.random() * Math.PI / 4;
         singleOxygenMolecule.setCenterOfGravityPos( -INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );
       }
       else {
         diatomicOxygenMolecule.rotate( diatomicMoleculeRotationAngle );
-        breakApartAngle = Math.PI / 2 + RAND.nextDouble() * Math.PI / 4;
+        breakApartAngle = Math.PI / 2 + Math.random() * Math.PI / 4;
         diatomicOxygenMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.leftOxygenAtom ).x + this.getInitialAtomCogOffset( this.centerOxygenAtom ).x ) / 2,
             ( this.getInitialAtomCogOffset( this.leftOxygenAtom ).y + this.getInitialAtomCogOffset( this.centerOxygenAtom ).y ) / 2 );
         singleOxygenMolecule.setCenterOfGravityPos( INITIAL_OXYGEN_HORIZONTAL_OFFSET, INITIAL_OXYGEN_VERTICAL_OFFSET );

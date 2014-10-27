@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * Class that represents nitrogen dioxide (NO2) in the model.
+ * Class that represents NO2 ( nitrogen dioxide ) in the model.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -25,29 +25,19 @@ define( function( require ) {
   var O = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/molecules/O' );
 
   // Model data for the NO2 molecule
-  // These constants define the initial shape of the NO2 atom.  The angle
-  // between the atoms is intended to be correct, and the bond is somewhat
-  // longer than real life.  The algebraic calculations are intended to make
-  // it so that the bond length and/or the angle could be changed and the
-  // correct center of gravity will be maintained.
+  // These constants define the initial shape of the NO2 atom.  The angle between the atoms is intended to be correct,
+  // and the bond is somewhat longer than real life.  The algebraic calculations are intended to make it so that the
+  // bond length and/or the angle could be changed and the correct center of gravity will be maintained.
   var NITROGEN_OXYGEN_BOND_LENGTH = 180;
   var INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE = 120 * Math.PI / 180; // In radians.
   var INITIAL_MOLECULE_HEIGHT = NITROGEN_OXYGEN_BOND_LENGTH * Math.cos( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 );
   var BREAK_APART_VELOCITY = 3.0;
 
-  //Random number generator.  Used to control the side on which the delocalized
-  // bond is depicted.
-  //TODO: This can be removed after the rest of the file has been ported.
-  //TODO: We created it temporarily to help during the porting process.
+  //Random boolean generator.  Used to control the side on which the delocalized bond is depicted.
   var RAND = {
-    nextDouble: function() {
-      return Math.random();
-    },
-
     nextBoolean: function() {
-      return RAND.nextDouble() < 0.50;
+      return Math.random() < 0.50;
     }
-
   };
 
   /**
@@ -79,13 +69,11 @@ define( function( require ) {
     this.initialOxygenHorizontalOffset = NITROGEN_OXYGEN_BOND_LENGTH * Math.sin( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 );
     this.initialCenterOfGravityPos = options.initialCenterOfGravityPos;
 
-    // Tracks the side on which the double bond is shown.  More on this where
-    // it is initialized.
+    // Tracks the side on which the double bond is shown.  More on this where it is initialized.
     this.doubleBondOnRight = RAND.nextBoolean();
 
-    // Create the bond structure.  NO2 has a type of bond where each N-O
-    // has essentially 1.5 bonds, so we randomly choose one side to show
-    // two bonds and another to show one.
+    // Create the bond structure.  NO2 has a type of bond where each N-O has essentially 1.5 bonds, so we randomly
+    // choose one side to show two bonds and another to show one.
     if ( this.doubleBondOnRight ) {
       this.rightNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.rightOxygenAtom, { bondCount: 2 } );
       this.leftNitrogenOxygenBond = new AtomicBond( this.nitrogenAtom, this.leftOxygenAtom, { bondCount: 1 } );
@@ -119,24 +107,27 @@ define( function( require ) {
   return inherit( Molecule, NO2, {
 
     /**
-     * Initialize and set the COG positions for each atom in this molecule.  These are the atom positions
-     * when the molecule is at rest (not rotating or vibrating).
+     * Initialize and set the COG positions for each atom in this molecule.  These are the atom positions when the
+     * molecule is at rest (not rotating or vibrating).
      */
     initializeAtomOffsets: function() {
+
       this.addInitialAtomCogOffset( this.nitrogenAtom, new Vector2( 0, this.initialNitrogenVerticalOffset ) );
       this.addInitialAtomCogOffset( this.rightOxygenAtom, new Vector2( this.initialOxygenHorizontalOffset, this.initialOxygenVerticalOffset ) );
       this.addInitialAtomCogOffset( this.leftOxygenAtom, new Vector2( -this.initialOxygenHorizontalOffset, this.initialOxygenVerticalOffset ) );
 
       this.updateAtomPositions();
+
     },
 
     /**
-     * Set the vibration behavior for this NO2 molecule.  Sets the NO2 molecule to a vibrating state then
-     * calculates and sets the new position for each atom in the molecule.
+     * Set the vibration behavior for this NO2 molecule.  Sets the NO2 molecule to a vibrating state then calculates
+     * and sets the new position for each atom in the molecule.
      *
      * @param {Number} vibrationRadians - Where this molecule is in its vibration cycle in radians.
      */
     setVibration: function( vibrationRadians ) {
+
       Molecule.prototype.setVibration.call( this, vibrationRadians );
       var multFactor = Math.sin( vibrationRadians );
       var maxNitrogenDisplacement = 30;
@@ -147,15 +138,18 @@ define( function( require ) {
       this.addInitialAtomCogOffset( this.leftOxygenAtom, new Vector2( -this.initialOxygenHorizontalOffset - multFactor * maxOxygenDisplacement,
           this.initialOxygenVerticalOffset + multFactor * maxOxygenDisplacement ) );
       this.updateAtomPositions();
+
     },
 
     /**
-     * Define the break apart behavior for the NO2 molecule.  Initializes and sets the velocity of constituent molecules.
-     * TODO: I had to re-declare the BREAK_APART_VELOCITY so that it could be used in this function.  Is there a way for NO2.js to find global variables in Molecules.js?
+     * Define the break apart behavior for the NO2 molecule.  Initializes and sets the velocity of constituent
+     * molecules.
      */
     breakApart: function() {
+
       // Remove this NO2 molecule from the photonAbsorptionModel's list of active molecules.
       this.model.activeMolecules.remove( this );
+
       // Create the constituent molecules that result from breaking apart and add them to the activeMolecules observable array.
       var nitrogenMonoxideMolecule = new NO( this.model );
       var singleOxygenMolecule = new O( this.model );
@@ -170,12 +164,12 @@ define( function( require ) {
         nitrogenMonoxideMolecule.rotate( -diatomicMoleculeRotationAngle );
         nitrogenMonoxideMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.nitrogenAtom ).x + this.getInitialAtomCogOffset( this.rightOxygenAtom ).x ) / 2,
             ( this.getInitialAtomCogOffset( this.nitrogenAtom ).y + this.getInitialAtomCogOffset( this.rightOxygenAtom ).y ) / 2 );
-        breakApartAngle = Math.PI / 4 + RAND.nextDouble() * Math.PI / 4;
+        breakApartAngle = Math.PI / 4 + Math.random() * Math.PI / 4;
         singleOxygenMolecule.setCenterOfGravityPos( -this.initialOxygenHorizontalOffset, this.initialOxygenVerticalOffset );
       }
       else {
         nitrogenMonoxideMolecule.rotate( Math.PI + diatomicMoleculeRotationAngle );
-        breakApartAngle = Math.PI / 2 + RAND.nextDouble() * Math.PI / 4;
+        breakApartAngle = Math.PI / 2 + Math.random() * Math.PI / 4;
         nitrogenMonoxideMolecule.setCenterOfGravityPos( ( this.getInitialAtomCogOffset( this.nitrogenAtom ).x + this.getInitialAtomCogOffset( this.leftOxygenAtom ).x ) / 2,
             ( this.getInitialAtomCogOffset( this.nitrogenAtom ).y + this.getInitialAtomCogOffset( this.leftOxygenAtom ).y ) / 2 );
         singleOxygenMolecule.setCenterOfGravityPos( this.initialOxygenHorizontalOffset, this.initialOxygenVerticalOffset );
@@ -187,7 +181,6 @@ define( function( require ) {
       this.addConstituentMolecule( nitrogenMonoxideMolecule );
       this.addConstituentMolecule( singleOxygenMolecule );
     }
-
   } );
 } );
 
