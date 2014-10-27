@@ -33,6 +33,7 @@ define( function( require ) {
    * @constructor
    */
   function CarbonAtom( options ) {
+
     // Supertype constructor
     Atom.call( this, options );
 
