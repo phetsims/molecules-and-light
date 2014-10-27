@@ -23,6 +23,7 @@ define( function( require ) {
 
     // Supertype constructor
     PhotonAbsorptionStrategy.call( this, molecule );
+
   }
 
   return inherit( PhotonAbsorptionStrategy, NullPhotonAbsorptionStrategy, {
@@ -32,7 +33,6 @@ define( function( require ) {
      *
      * @param {Number} dt - The incremental time step.
      */
-
     step: function( dt ) {
       // Does nothing.
     },
