@@ -12,16 +12,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var PhotonHoldStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonHoldStrategy' );
 
-  //Random number generator.
-  //TODO: This can be removed after the rest of the file has been ported.
-  //TODO: We created it temporarily to help during the porting process.
+  //Random boolean generator.
   var RAND = {
-    nextDouble: function() {
-      return Math.random();
-    },
-
     nextBoolean: function() {
-      return RAND.nextDouble() < 0.50;
+      return Math.random() < 0.50;
     }
   };
 
@@ -36,6 +30,7 @@ define( function( require ) {
     // Supertype constructor
     PhotonHoldStrategy.call( this, molecule );
     this.molecule = molecule;
+
   }
 
   return inherit( PhotonHoldStrategy, RotationStrategy, {
@@ -48,6 +43,7 @@ define( function( require ) {
 
       this.getMolecule().setRotationDirectionClockwise( RAND.nextBoolean() );
       this.getMolecule().setRotating( true );
+
     },
 
     /**
@@ -57,6 +53,7 @@ define( function( require ) {
 
       PhotonHoldStrategy.prototype.reemitPhoton.call( this );
       this.getMolecule().setRotating( false );
+
     }
 
   } );
