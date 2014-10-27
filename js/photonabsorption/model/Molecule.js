@@ -23,16 +23,6 @@ define( function( require ) {
   //------------------------------------------------------------------------
   var PHOTON_EMISSION_SPEED = 3; // Picometers per second.
   var PHOTON_ABSORPTION_DISTANCE = 100;
-
-  //Random number generator.
-  //TODO: This can be removed after the rest of the file has been ported.
-  //TODO: We created it temporarily to help during the porting process.
-  var RAND = {
-    nextDouble: function() {
-      return Math.random();
-    }
-  };
-
   var VIBRATION_FREQUENCY = 5;  // Cycles per second of sim time.
   var ROTATION_RATE = 1.1;  // Revolutions per second of sim time.
   var ABSORPTION_HYSTERESIS_TIME = 200; // Milliseconds of sim time.
@@ -51,7 +41,7 @@ define( function( require ) {
       centerOfGravity: new Vector2( 0, 0 )
     } );
 
-    // Atoms and bonds that comprise this molecule.
+    // Atoms and bonds that form this molecule.
     this.atoms = []; // Elements are of type Atoms
     this.atomicBonds = []; // Elements are of type AtomicBonds
 
@@ -61,17 +51,14 @@ define( function( require ) {
 
     // Structure of the molecule in terms of offsets from the center of gravity.  These indicate the atom's position in
     // the "relaxed" (i.e. non-vibrating), non-rotated state.
-    this.initialAtomCogOffsets = {}; // Object contains keys of type Atoms ID and values of type Vector2
+    this.initialAtomCogOffsets = {}; // Object contains keys of the atom's uniqueID and values of type Vector2
 
     // Vibration offsets - these represent the amount of deviation from the initial (a.k.a relaxed) configuration for
     // each molecule.
-    this.vibrationAtomOffsets = {}; // Object contains keys of type Atoms ID and values of type Vector2
+    this.vibrationAtomOffsets = {}; // Object contains keys of the atom's uniqueID and values of type Vector2
 
     //  Map containing the atoms which compose this molecule.  Allows us to call on each atom by their unique ID.
     this.atomsByID = {};  // Objects contains keys of the atom's uniqueID, and values of type atom.
-
-    // Listeners to events that come from this molecule.
-    this.listeners = []; // Elements are event listeners
 
     // Velocity for this molecule.
     this.velocity = new Vector2();
@@ -114,9 +101,7 @@ define( function( require ) {
 
   return inherit( PropertySet, Molecule, {
     /**
-     * Reset the molecule.  Any photons that have been absorbed are forgotten,
-     * and any vibration is reset.
-     * TODO: Implement PhotonAbsorptionStrategy for full porting
+     * Reset the molecule.  Any photons that have been absorbed are forgotten, and any vibration is reset.
      **/
     reset: function() {
 
@@ -127,6 +112,7 @@ define( function( require ) {
       this.setVibration( 0 );
       this.setRotating( false );
       this.setRotation( 0 );
+
     },
 
     setPhotonAbsorptionStrategy: function( wavelength, strategy ) {
@@ -147,7 +133,6 @@ define( function( require ) {
      * Add an initial offset from the molecule's Center of Gravity (COG). The offset is "initial" because this is where
      * the atom should be when it is not vibrating or rotating.
      *
-     * TODO: Is there a better way to do the @param? Way to check for subclasses?
      * @param {Atom || CarbonAtom || HydrogenAtom || NitrogenAtom || OxygenAtom} atom
      * @param {Vector2} offset - Initial COG offset for when atom is not vibrating or rotating.
      */
@@ -250,7 +235,7 @@ define( function( require ) {
     },
 
     /**
-     * Set the current molecule state to vibrating.
+     * Set the current molecule state to rotating.
      *
      * @param {Boolean} rotating
      **/
@@ -297,7 +282,6 @@ define( function( require ) {
       if ( this.centerOfGravityProperty.get().x !== x || this.centerOfGravityProperty.get().y !== y ) {
         this.centerOfGravityProperty.set( new Vector2( x, y ) );
         this.updateAtomPositions();
-        //notifyCenterOfGravityPosChanged();
       }
     },
 
@@ -409,12 +393,8 @@ define( function( require ) {
      * @return {Boolean}
      **/
     isPhotonMarkedForPassThrough: function( photon ) {
-      if ( this.passThroughPhotonList.indexOf( photon ) === -1 ) {
-        return false;
-      }
-      else {
-        return true;
-      }
+      // If the photon does not appear in the passThroughPhotonList, return false.
+      return !(this.passThroughPhotonList.indexOf( photon ) === -1);
     },
 
     /**
@@ -463,7 +443,9 @@ define( function( require ) {
             this.activePhotonAbsorptionStrategy.queryAndAbsorbPhoton( photon );
           }
           else {
-            this.markPhotonForPassThrough( photon );//we have the decision logic once for whether a photon should be absorbed, so it is not queried a second time
+            // We have the decision logic once for whether a photon should be absorbed, so it is not queried a second
+            // time.
+            this.markPhotonForPassThrough( photon );
           }
         }
       }
@@ -491,6 +473,7 @@ define( function( require ) {
       this.vibrationAtomOffsets[atom.uniqueID] = new Vector2( 0, 0 );
       this.atomsByID[atom.uniqueID] = atom;
     },
+
     /**
      * Add an atomic bond to this Molecule's list of atomic bonds.
      *
@@ -507,7 +490,7 @@ define( function( require ) {
      **/
     emitPhoton: function( photonToEmit ) {
 
-      var emissionAngle = RAND.nextDouble() * Math.PI * 2;
+      var emissionAngle = Math.random() * Math.PI * 2;
       photonToEmit.setVelocity( PHOTON_EMISSION_SPEED * Math.cos( emissionAngle ),
         ( PHOTON_EMISSION_SPEED * Math.sin( emissionAngle ) ) );
       var centerOfGravityPosRef = this.getCenterOfGravityPosRef();
@@ -515,6 +498,7 @@ define( function( require ) {
       this.emittedPhotonProperty.set( photonToEmit );
       this.absorbtionHysteresisCountdownTime = ABSORPTION_HYSTERESIS_TIME;
       this.notifyPhotonEmitted( photonToEmit, this.photonAbsorptionModel );
+
     },
 
     /**
@@ -608,24 +592,3 @@ define( function( require ) {
 
   } );
 } );
-
-//  //------------------------------------------------------------------------
-//  // Methods
-//  //------------------------------------------------------------------------
-//
-//  /**
-//   * Get an enclosing rectangle for this molecule.  This was created to support searching for open locations for new
-//   * molecules.  This method is to be used in Greenhouse Gas.  Unsure if I should still port this for Molecules
-//   * and light.
-//   *
-//   * @return
-//   */
-//  public Rectangle2D getBoundingRect() {
-//    Rectangle2D[] atomRects = new Rectangle2D[atoms.size()];
-//    for ( int i = 0; i < atoms.size(); i++ ) {
-//      atomRects[i] = atoms.get( i ).getBoundingRect();
-//    }
-//
-//    return RectangleUtils.union( atomRects );
-//  }
-
