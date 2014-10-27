@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Wavelength Constants, taken from photon-absorption/WavelengthConstants.java
+ * Wavelength Constants for photons of the PhotonAbsorptionModel
  *
  * @author Jesse Greenberg (Phet Interactive Simulations)
  * @author Sam Reid (PhET Interactive Simulations)
