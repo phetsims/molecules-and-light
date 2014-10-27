@@ -23,7 +23,7 @@ define( function( require ) {
   var RADIUS = 37;     // In picometers.
 
   // Static Variable
-  var instanceCount = 0;
+  var instanceCount = 0; // Base count for unique ID of this atom.
 
   /**
    * Constructor for a Hydrogen atom.  There is an optional Vector2 parameter
@@ -33,6 +33,7 @@ define( function( require ) {
    * @constructor
    */
   function HydrogenAtom( options ) {
+
     // Supertype constructor
     Atom.call( this, options );
 
