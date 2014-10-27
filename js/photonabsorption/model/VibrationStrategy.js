@@ -1,9 +1,8 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * Photon absorption strategy that causes a molecule to vibrate after
- * absorbing a photon, and re-emit the photon after some length of time.
- * This is to be inherited by the general PhotonAbsorptionStrategy class.
+ * Photon absorption strategy that causes a molecule to vibrate after absorbing a photon, and re-emit the photon after
+ * some length of time. This is to be inherited by the general PhotonAbsorptionStrategy class.
  *
  * @author Jesse Greenberg
  */
@@ -26,6 +25,7 @@ define( function( require ) {
     // Supertype constructor
     PhotonHoldStrategy.call( this, molecule );
     this.molecule = molecule;
+
   }
 
   return inherit( PhotonHoldStrategy, VibrationStrategy, {
