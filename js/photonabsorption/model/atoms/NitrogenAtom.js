@@ -23,7 +23,7 @@ define( function( require ) {
   var RADIUS = 75;     // In picometers.
 
   // Static data
-  var instanceCount = 0;
+  var instanceCount = 0; // Base count for the unique ID of this atom.
 
   /**
    * Constructor for a Nitrogen atom.  There is an optional Vector2 parameter
@@ -33,6 +33,7 @@ define( function( require ) {
    * @constructor
    */
   function NitrogenAtom( options ) {
+
     // Supertype constructor
     Atom.call( this, options );
 
