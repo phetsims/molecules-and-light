@@ -25,7 +25,6 @@ define( function( require ) {
 
     // Supertype constructor
     PhotonAbsorptionStrategy.call( this, molecule );
-    this.strategy = this; // TODO: is this necessary?
 
   }
 
@@ -53,6 +52,7 @@ define( function( require ) {
       this.getMolecule().emitNewPhoton( this.absorbedWavelength );
       this.getMolecule().setActiveStrategy( new NullPhotonAbsorptionStrategy( this.getMolecule() ) );
       this.isPhotonAbsorbed = false;
+
     },
 
     /**
