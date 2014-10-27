@@ -1,5 +1,11 @@
 // Copyright 2002-2014, University of Colorado
 
+/**
+ * Class that represents O2 ( oxygen gas ) in the model.
+ *
+ * @author John Blanco
+ * @author Jesse Greenberg
+ */
 define( function( require ) {
   'use strict';
 
@@ -56,9 +62,11 @@ define( function( require ) {
      * Initialize and set the COG offsets for the oxygen atoms which compose this molecule.
      */
     initializeAtomOffsets: function() {
+
       this.addInitialAtomCogOffset( this.oxygenAtom1, new Vector2( -INITIAL_OXYGEN_OXYGEN_DISTANCE / 2, 0 ) );
       this.addInitialAtomCogOffset( this.oxygenAtom2, new Vector2( INITIAL_OXYGEN_OXYGEN_DISTANCE / 2, 0 ) );
       this.updateAtomPositions();
+
     }
 
   } );

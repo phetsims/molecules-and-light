@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * Class that represents water (H2O) in the model.
+ * Class that represents H2O ( water ) in the model.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -22,11 +22,9 @@ define( function( require ) {
   var HydrogenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/HydrogenAtom' );
 
   // Model Data for the water molecule
-  // These constants define the initial shape of the water atom.  The angle
-  // between the atoms is intended to be correct, and the bond is somewhat
-  // longer than real life.  The algebraic calculations are intended to make
-  // it so that the bond length and/or the angle could be changed and the
-  // correct center of gravity will be maintained.
+  // These constants define the initial shape of the water atom.  The angle between the atoms is intended to be correct,
+  // and the bond is somewhat longer than real life.  The algebraic calculations are intended to make it so that the
+  // bond length and/or the angle could be changed and the correct center of gravity will be maintained.
   var OXYGEN_HYDROGEN_BOND_LENGTH = 130;
   var INITIAL_HYDROGEN_OXYGEN_HYDROGEN_ANGLE = 109 * Math.PI / 180;
   var INITIAL_MOLECULE_HEIGHT = OXYGEN_HYDROGEN_BOND_LENGTH * Math.cos( INITIAL_HYDROGEN_OXYGEN_HYDROGEN_ANGLE / 2 );
@@ -81,23 +79,27 @@ define( function( require ) {
   }
 
   return inherit( Molecule, H20, {
+
     /**
-     * Initialize and set the initial center of gravity  locations for
-     * each atom in this molecule.
+     * Initialize and set the initial center of gravity  locations for each atom in this molecule.
      */
     initializeAtomOffsets: function() {
+
       this.addInitialAtomCogOffset( this.oxygenAtom, new Vector2( 0, this.initialOxygenVerticalOffset ) );
       this.addInitialAtomCogOffset( this.hydrogenAtom1, new Vector2( INITIAL_HYDROGEN_HORIZONTAL_OFFSET, this.initialHydrogenVerticalOffset ) );
       this.addInitialAtomCogOffset( this.hydrogenAtom2, new Vector2( -INITIAL_HYDROGEN_HORIZONTAL_OFFSET, this.initialHydrogenVerticalOffset ) );
       this.updateAtomPositions();
+
     },
 
     /**
-     * Set the vibration behavior for this water molecule.  Set the current angle in vibration cycle,
-     * udate center of gravity offsets, and update the atom positions.
-     * @param {Number} vibrationRadians - The current angle of the vibration cycle.
+     * Set the vibration behavior for this water molecule.  Set the current angle in vibration cycle, update center of
+     * gravity offsets, and update the atom positions.
+     *
+     * @param {Number} vibrationRadians - The current angle of the vibration cycle in radians.
      */
     setVibration: function( vibrationRadians ) {
+
       Molecule.prototype.setVibration.call( this, vibrationRadians );
       var multFactor = Math.sin( vibrationRadians );
       var maxOxygenDisplacement = 3;
@@ -108,6 +110,7 @@ define( function( require ) {
       this.addInitialAtomCogOffset( this.hydrogenAtom2, new Vector2( -INITIAL_HYDROGEN_HORIZONTAL_OFFSET - multFactor * maxHydrogenDisplacement,
           this.initialHydrogenVerticalOffset + multFactor * maxHydrogenDisplacement ) );
       this.updateAtomPositions();
+
     }
   } );
 } );

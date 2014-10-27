@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * Class that represents carbon monoxide in the model.
+ * Class that represents CO ( carbon monoxide ) in the model.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -25,7 +25,6 @@ define( function( require ) {
   var INITIAL_CARBON_OXYGEN_DISTANCE = 170; // In picometers.
   var VIBRATION_MAGNITUDE = 20; // In picometers.
 
-
   /**
    * Constructor for a carbon monoxide molecule.
    *
@@ -34,12 +33,13 @@ define( function( require ) {
    * @constructor
    */
   function CO( model, options ) {
+
     // Supertype constructor
     Molecule.call( this, model );
 
     options = _.extend( {
       // defaults
-      initialCenterOfGravityPos: new Vector2(0, 0) // initial position of the molecule
+      initialCenterOfGravityPos: new Vector2( 0, 0 ) // initial position of the molecule
     }, options );
     this.options = options;
 
@@ -75,20 +75,24 @@ define( function( require ) {
      * @param {Number} vibrationRadians - Where this molecule is in its vibration cycle in radians.
      */
     setVibration: function( vibrationRadians ) {
+
       Molecule.prototype.setVibration.call( this, vibrationRadians );
       var multFactor = Math.sin( vibrationRadians );
       this.getVibrationAtomOffset( this.carbonAtom ).setXY( VIBRATION_MAGNITUDE * multFactor, 0 );
       this.getVibrationAtomOffset( this.oxygenAtom ).setXY( -VIBRATION_MAGNITUDE * multFactor, 0 );
       this.updateAtomPositions();
+
     },
 
     /**
      * Initialize the atom offsets for the carbon and oxygen atoms which compose this molecule.
      */
     initializeAtomOffsets: function() {
+
       this.addInitialAtomCogOffset( this.carbonAtom, new Vector2( -INITIAL_CARBON_OXYGEN_DISTANCE / 2, 0 ) );
       this.addInitialAtomCogOffset( this.oxygenAtom, new Vector2( INITIAL_CARBON_OXYGEN_DISTANCE / 2, 0 ) );
       this.updateAtomPositions();
+
     }
 
   } );

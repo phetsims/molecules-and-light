@@ -20,9 +20,7 @@ define( function( require ) {
   var HydrogenAtom = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/atoms/HydrogenAtom' );
   var PhotonAbsorptionStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionStrategy' );
 
-  /**
-   * Model data for methane.
-   */
+  // Model Data for Methane
   var INITIAL_CARBON_HYDROGEN_DISTANCE = 170; // In picometers.
 
   // Assume that the angle from the carbon to the hydrogen is 45 degrees.
@@ -102,11 +100,12 @@ define( function( require ) {
         -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
 
       this.updateAtomPositions();
+
     },
 
     /**
      * Set the vibration behavior for this CH4 molecule. Initialize and set center of gravity position offsets for the
-     * composing atoms.
+     * composing atoms in its vibration cycle.
      *
      * @param {Number} vibrationRadians - Where this molecule is in its vibration cycle in radians.
      */

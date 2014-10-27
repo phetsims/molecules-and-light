@@ -1,9 +1,8 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * Class that represents a single atom of oxygen in the model.  I hate to name
- * a class "O", but it is necessary for consistency with other molecules
- * names.
+ * Class that represents a single atom of oxygen in the model.  I hate to name a class "O", but it is necessary for
+ * consistency with other molecules names.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -25,6 +24,7 @@ define( function( require ) {
    * @constructor
    */
   function O( model, options ) {
+
     // Supertype constructor
     Molecule.call( this, model );
 
@@ -41,8 +41,6 @@ define( function( require ) {
     // Configure the base class.
     this.addAtom( this.oxygenAtom );
 
-    // Set up the photon wavelengths to absorb.
-
     // Set the initial offsets.
     this.initializeAtomOffsets();
 
@@ -54,12 +52,13 @@ define( function( require ) {
   return inherit( Molecule, O, {
 
     /**
-     * Initialize and set the COG offsets for the position of this Oxygen atom.
+     * Initialize and set the center of gravity offsets for the position of this Oxygen atom.
      */
     initializeAtomOffsets: function() {
-      this.addInitialAtomCogOffset( this.oxygenAtom, new Vector2( 0, 0 ) );
 
+      this.addInitialAtomCogOffset( this.oxygenAtom, new Vector2( 0, 0 ) );
       this.updateAtomPositions();
+
     }
 
   } );

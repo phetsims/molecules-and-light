@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * Class that represents NO (nitrogen monoxide) in the model.
+ * Class that represents NO ( nitrogen monoxide ) in the model.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -65,10 +65,11 @@ define( function( require ) {
      * Initialize and set the COG positions for each atom which compose this NO molecule.
      */
     initializeAtomOffsets: function() {
+
       this.addInitialAtomCogOffset( this.nitrogenAtom, new Vector2( -INITIAL_NITROGEN_OXYGEN_DISTANCE / 2, 0 ) );
       this.addInitialAtomCogOffset( this.oxygenAtom, new Vector2( INITIAL_NITROGEN_OXYGEN_DISTANCE / 2, 0 ) );
-
       this.updateAtomPositions();
+
     }
 
   } );

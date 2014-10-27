@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * Class that represents N2 (nitrogen) in the model.
+ * Class that represents N2 ( nitrogen ) in the model.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -60,12 +60,14 @@ define( function( require ) {
   return inherit( Molecule, N2, {
 
     /**
-     * Initialize and set the COG offsets for the nitrogen atoms which compose this molecule.
+     * Initialize and set the center of gravity offsets for the nitrogen atoms which compose this molecule.
      */
     initializeAtomOffsets: function() {
+
       this.addInitialAtomCogOffset( this.nitrogenAtom1, new Vector2( -INITIAL_NITROGEN_NITROGEN_DISTANCE / 2, 0 ) );
       this.addInitialAtomCogOffset( this.nitrogenAtom2, new Vector2( INITIAL_NITROGEN_NITROGEN_DISTANCE / 2, 0 ) );
       this.updateAtomPositions();
+
     }
 
   } );

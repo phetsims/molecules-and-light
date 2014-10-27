@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado
 
 /**
- * Class that represents carbon dioxide in the model.
+ * Class that represents CO2 ( carbon dioxide ) in the model.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -19,9 +19,7 @@ define( function( require ) {
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
   var VibrationStrategy = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/VibrationStrategy' );
 
-  /**
-   *  Model data for Carbon Dioxide molecule
-   */
+  // Model Data for the carbon dioxide molecule.
   var INITIAL_CARBON_OXYGEN_DISTANCE = 170; // In picometers.
 
   // Deflection amounts used for the vibration of the CO2 atoms.  These
@@ -83,24 +81,27 @@ define( function( require ) {
      * @param {Number} vibrationRadians Where this molecule is in its vibration cycle in radians.
      */
     setVibration: function( vibrationRadians ) {
+
       Molecule.prototype.setVibration.call( this, vibrationRadians );
       var multFactor = Math.sin( vibrationRadians );
       this.addInitialAtomCogOffset( this.carbonAtom, new Vector2( 0, multFactor * CARBON_MAX_DEFLECTION ) );
       this.addInitialAtomCogOffset( this.oxygenAtom1, new Vector2( INITIAL_CARBON_OXYGEN_DISTANCE, -multFactor * OXYGEN_MAX_DEFLECTION ) );
       this.addInitialAtomCogOffset( this.oxygenAtom2, new Vector2( -INITIAL_CARBON_OXYGEN_DISTANCE, -multFactor * OXYGEN_MAX_DEFLECTION ) );
       this.updateAtomPositions();
+
     },
 
     /**
      * Set the initial positions of the atoms which compose this molecule.
      */
     initializeAtomOffsets: function() {
+
       this.addInitialAtomCogOffset( this.carbonAtom, new Vector2( 0, 0 ) );
       this.addInitialAtomCogOffset( this.oxygenAtom1, new Vector2( INITIAL_CARBON_OXYGEN_DISTANCE, 0 ) );
       this.addInitialAtomCogOffset( this.oxygenAtom2, new Vector2( -INITIAL_CARBON_OXYGEN_DISTANCE, 0 ) );
       this.updateAtomPositions();
-    }
 
+    }
 
   } );
 } );
