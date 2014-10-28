@@ -132,8 +132,8 @@ define( function( require ) {
      * Constructor for the labeled arrow in the spectrum window.
      *
      * @param {number} length - Length of the arrow
-     * @param {String} orientation - options are 'left' or 'right'.  Determines direction of the arrow.
-     * @param {String} captionText - Description of what the arrow node represents.
+     * @param {string} orientation - options are 'left' or 'right'.  Determines direction of the arrow.
+     * @param {string} captionText - Description of what the arrow node represents.
      * @param {Color} leftColor
      * @param {Color} rightColor
      * @returns {ArrowNode}

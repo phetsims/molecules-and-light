@@ -22,8 +22,8 @@ define( function( require ) {
   /**
    * Constructor for a molecule selector panel.  This is a single panel of the molecules and light control panel.
    *
-   * @param {String} moleculeName - The written name of the molecule
-   * @param {String} moleculeFormula - The chemical formula representation of the molecule, HTML5 format for SubSupText
+   * @param {string} moleculeName - The written name of the molecule
+   * @param {string} moleculeFormula - The chemical formula representation of the molecule, HTML5 format for SubSupText
    * @param(MoleculeNode} moleculeNode - The molecule node for this selector panel
    * @param {Object} [options]
    * @constructor
