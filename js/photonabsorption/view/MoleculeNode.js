@@ -24,8 +24,9 @@ define( function( require ) {
    */
   function MoleculeNode( molecule, mvt ) {
 
-
+    /// supertype constructor
     Node.call( this );
+
     // Cary this node through the scope in nested functions.
     var thisNode = this;
     this.mvt = mvt;
@@ -39,18 +40,19 @@ define( function( require ) {
     thisNode.addChild( thisNode.atomLayer );
     thisNode.addChild( thisNode.bondLayer );
 
-    // Add the atoms which compose this molecule to the atomLayer
+    // Create nodes and add the atoms which compose this molecule to the atomLayer.
     for ( var atom = 0; atom < molecule.getAtoms().length; atom++ ) {
       this.atomNode = new AtomNode( molecule.getAtoms()[atom], thisNode.mvt );
       this.atomLayer.addChild( this.atomNode );
     }
 
-    // Add the atomic bonds which form the structure of this molecule to the bondLayer
+    // Create and add the atomic bonds which form the structure of this molecule to the bondLayer
     var atomicBonds = molecule.getAtomicBonds();
     for ( var i = 0; i < atomicBonds.length; i++ ) {
       thisNode.bondLayer.addChild( new AtomicBondNode( atomicBonds[i], this.mvt ) );
     }
 
+    // Link the high energy state to the property in the model.
     molecule.highElectronicEnergyStateProperty.link( function() {
       for ( var i = 0; i < thisNode.atomLayer.children.length; i++ ) {
         var atomNode = thisNode.atomLayer.getChildAt( i );
@@ -61,7 +63,6 @@ define( function( require ) {
 
     // Move the bond layer behind the atoms.
     this.bondLayer.moveToBack();
-  
 
     // Make sure the highlighting is correct when the simulation starts.
     molecule.trigger( 'electronicEnergyStateChanged' );
@@ -71,41 +72,3 @@ define( function( require ) {
   return inherit( Node, MoleculeNode );
 
 } );
-
-//
-//
-//  //------------------------------------------------------------------------
-//  // Constructor(s)
-//  //------------------------------------------------------------------------
-//
-//
-//    // If enabled, show the center of gravity of the molecule.
-//    if ( SHOW_COG ) {
-//      double cogMarkerRadius = 5;
-//      Shape cogMarkerShape = new Ellipse2D.Double( -cogMarkerRadius, -cogMarkerRadius, cogMarkerRadius * 2, cogMarkerRadius * 2 );
-//      PNode cogMarkerNode = new PhetPPath( cogMarkerShape, Color.pink );
-//      cogMarkerNode.setOffset( mvt.modelToViewDouble( molecule.getCenterOfGravityPos() ) );
-//      atomLayer.addChild( cogMarkerNode );
-//    }
-//  }
-//
-//  //------------------------------------------------------------------------
-//  // Methods
-//  //------------------------------------------------------------------------
-//
-//  /**
-//   * Retrieve an image representation of this node.  This was created in
-//   * order to support putting molecule images on control panels, but may
-//   * have other usages.
-//   */
-//  public BufferedImage getImage() {
-//    Image image = this.toImage();
-//    assert image instanceof BufferedImage;
-//    if ( image instanceof BufferedImage ) {
-//      return (BufferedImage) this.toImage();
-//    }
-//    else {
-//      return null;
-//    }
-//  }
-//}

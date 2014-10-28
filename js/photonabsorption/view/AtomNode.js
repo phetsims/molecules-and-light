@@ -37,16 +37,20 @@ define( function( require ) {
     thisNode.atom = atom;
     thisNode.mvt = mvt;
 
-    // Create a Shaded Sphere to give the atom a 3D effect.
+    // Scale the radius to the mvt.
     var transformedRadius = mvt.modelToViewDeltaX( atom.getRadius() );
 
+    // Create a color gradient which is used when the molecule enters an excitation state.
     var haloGradientPaint = new RadialGradient( 0, 0, 0, 0, 0, transformedRadius * 2 ).addColorStop( 0, Color.YELLOW ).addColorStop( 1, Color.BLACK );
     this.highlightNode = new Circle( transformedRadius * 2, { fill: haloGradientPaint } );
     this.highlightNode.setOpacity( 0.6 );
+
+    // Represent the atom as a shaded sphere node.
     var atomNode = new ShadedSphereNode( transformedRadius * 2, {mainColor: this.atom.representationColor } );
     thisNode.addChild( atomNode );
     thisNode.addChild( this.highlightNode );
 
+    // Link the model position to the position of this node.
     this.atom.positionProperty.link( function() {
       thisNode.updatePosition();
     } );
@@ -58,6 +62,7 @@ define( function( require ) {
   return inherit( Node, AtomNode, {
 
     /**
+     * Highlight this atom to represent that it is in an excited state.
      * @param {Boolean} highlighted
      */
     setHighlighted: function( highlighted ) {

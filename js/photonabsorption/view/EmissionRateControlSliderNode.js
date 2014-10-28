@@ -41,7 +41,7 @@ define( function( require ) {
   function EmissionRateControlSliderNode( model, color, options ) {
 
     // Supertype constructor
-    Node.call( this, {} );
+    Node.call( this );
 
     options = _.extend( {
       position: new Vector2( 0, 0 ) // position of the emission rate control slider
@@ -60,8 +60,7 @@ define( function( require ) {
     // Create the default background box for this node.
     this.setBackgroundRectangle( new Color( 255, 85, 0 ) );
 
-    // Listen to the model for events that may cause this node to change
-    // state.
+    // Listen to the model for events that may cause this node to change state.
     model.photonWavelengthProperty.link( function() { thisNode.update(); } );
     model.emissionFrequencyProperty.link( function() {
       var sliderProportion = thisModel.emissionFrequencyProperty.get() / SLIDER_RANGE;
@@ -84,9 +83,14 @@ define( function( require ) {
 
   return inherit( Node, EmissionRateControlSliderNode, {
 
+    /**
+     * Update function for the control slider node.  Sets the value property of the slider and the background color
+     * of the rectangle which holds the HSlider.
+     */
     update: function() {
-      // Adjust the position of the slider.  Note that we do a conversion
-      // between period and frequency and map it into the slider's range.
+
+      // Adjust the position of the slider.  Note that we do a conversion between period and frequency and map it into
+      // the slider's range.
       var mappedFrequency;
       if ( this.model.getPhotonTarget() === 'CONFIGURABLE_ATMOSPHERE' ) {
         mappedFrequency = Math.round( MIN_PHOTON_EMISSION_PERIOD_MULTIPLE_TARGET /
@@ -117,6 +121,12 @@ define( function( require ) {
         console.error( "Error: Unrecognized photon." );
       }
     },
+
+    /**
+     * Set the parameters of the background rectangle for teh emission rate control slider.
+     *
+     * @param {Color} baseColor - The base color for the background rectangle which holds the slider.
+     */
     // Set the parameters of the background rectangle for the emission rate control slider.
     setBackgroundRectangle: function( baseColor ) {
       var rectHeight = this.emissionRateControlSlider.height;

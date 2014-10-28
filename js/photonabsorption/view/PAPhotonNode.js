@@ -25,20 +25,22 @@ define( function( require ) {
   /**
    * Constructor for a photon node.
    *
-   * @param { Photon }photon
+   * @param { Photon } photon
    * @param { ModelViewTransform2 } mvt
    * @constructor
    */
   function PAPhotonNode( photon, mvt ) {
+
     // supertype constructor
     Node.call( this );
+
     // Cary this node through the scope in nested functions.
     var thisNode = this;
 
     this.photon = photon;
     this.mvt = mvt;
 
-    // lookup the image file that corresponds to the wavelength and add a centered image.
+    // Lookup the image file that corresponds to the wavelength and add a centered image.
     assert && assert( mapWavelengthToImageName.hasOwnProperty( this.photon.getWavelength() ) );
     this.photonImage = new Image( mapWavelengthToImageName[ this.photon.getWavelength() ]);
 
@@ -52,7 +54,9 @@ define( function( require ) {
 
   return inherit( Node, PAPhotonNode, {
 
-    // Function for updating position.
+    /**
+     * Update the position of this photon.
+     */
     updatePosition: function() {
       // Set overall position.
       this.center = this.mvt.modelToViewPosition( this.photon.getLocation() );

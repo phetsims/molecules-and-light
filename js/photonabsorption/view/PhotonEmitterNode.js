@@ -1,12 +1,9 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Node that represents the photon emitter in the view.  The graphical
- * representation of the emitter changes based on the wavelength of photons
- * that the model is set to emit.
- * This node is set up such that setting its offset on the photon emission
- * point in the model should position it correctly.  This assumes that photons
- * are emitted to the right.
+ * Node that represents the photon emitter in the view.  The graphical representation of the emitter changes based on
+ * the wavelength of photons that the model is set to emit. This node is set up such that setting its offset on the
+ * photon emission point in the model should position it correctly.  This assumes that photons are emitted to the right.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -33,9 +30,8 @@ define( function( require ) {
   /**
    * Constructor for the photon emitter node.
    *
-   * @param {Number} width - Desired width of the emitter image in screen coords.
-   * The height will be based on the aspect ratio of the image.
-   * @param { ModelViewTransform2 } mvt - The moddel view transform for converting between model and view coordinate systems.
+   * @param {Number} wi dth - Desired width of the emitter image in screen coords. Height is based off image aspect ratio.
+   * @param { ModelViewTransform2 } mvt
    * @param {PhotonAbsorptionModel} model
    * @constructor
    */
@@ -75,14 +71,13 @@ define( function( require ) {
      * @param {Number} flashlightWidth
      */
     updateImage: function( flashlightWidth ) {
+
       // Clear any existing image.
       this.emitterImageLayer.removeAllChildren();
       this.emissionControlSliderLayer.removeAllChildren();
 
-      // Create the flashlight image node, setting the offset such that the
-      // center right side of the image is the origin.  This assumes that
-      // photons will be emitted horizontally to the right.
-
+      // Create the flashlight image node, setting the offset such that the center right side of the image is the
+      // origin.  This assumes that photons will be emitted horizontally and to the right.
       if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.IR_WAVELENGTH ) {
         this.photonEmitterImage = new Image( heatLampImage );
       }
@@ -95,6 +90,7 @@ define( function( require ) {
       else if ( this.model.getEmittedPhotonWavelength() === WavelengthConstants.MICRO_WAVELENGTH ) {
         this.photonEmitterImage = new Image( microwaveTransmitter );
       }
+
       // Translate center and scale the emitter image
       this.photonEmitterImage.scale( flashlightWidth / this.photonEmitterImage.getWidth() );
       this.photonEmitterImage.setCenter( new Vector2( 0, 0 ) );
@@ -105,6 +101,7 @@ define( function( require ) {
           this.photonEmitterImage.getCenterX() - this.emissionRateControlSliderNode.getCenterX() / 2,
           this.photonEmitterImage.getCenterY() - this.emissionRateControlSliderNode.getCenterY() / 2 ) );
 
+      // Add the children to this node.
       this.emitterImageLayer.addChild( this.photonEmitterImage );
       this.emissionControlSliderLayer.addChild( this.emissionRateControlSliderNode );
 

@@ -17,8 +17,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Color = require( 'SCENERY/util/Color' );
 
-  // Constants that control the width of the bond representation with
-  // with respect to the average atom radius.
+  // Constants that control the width of the bond representation with with respect to the average atom radius.
   var BOND_WIDTH_PROPORTION_SINGLE = 0.45;
   var BOND_WIDTH_PROPORTION_DOUBLE = 0.28;
   var BOND_WIDTH_PROPORTION_TRIPLE = 0.24;
@@ -173,6 +172,7 @@ define( function( require ) {
           console.error( " - Error: Can't represent bond number, value = " + this.atomicBond.getBondCount() );
           assert && assert( false );
           break;
+
       }
     }
   } );
