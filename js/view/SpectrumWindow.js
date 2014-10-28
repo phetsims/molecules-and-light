@@ -131,7 +131,7 @@ define( function( require ) {
     /**
      * Constructor for the labeled arrow in the spectrum window.
      *
-     * @param {Number} length - Length of the arrow
+     * @param {number} length - Length of the arrow
      * @param {String} orientation - options are 'left' or 'right'.  Determines direction of the arrow.
      * @param {String} captionText - Description of what the arrow node represents.
      * @param {Color} leftColor
@@ -205,7 +205,7 @@ define( function( require ) {
      * Class that depicts the frequencies and wavelengths of the EM spectrum and labels the subsections
      * (e.g. "Infrared").
      *
-     * @param {Number} width
+     * @param {number} width
      * @return {Node}
      * @constructor
      */
@@ -216,7 +216,7 @@ define( function( require ) {
       /**
        * Add a tick mark for the specified frequency.  Frequency tick marks go on top of the strip.
        *
-       * @param {Number} frequency
+       * @param {number} frequency
        * @param {Boolean} addLabel - Whether or not a label should be added to the tick mark.
        */
       function addFrequencyTickMark( frequency, addLabel ) {
@@ -238,8 +238,8 @@ define( function( require ) {
       /**
        * Convert the given frequency to an offset from the left edge of the spectrum strip.
        *
-       * @param {Number} frequency - Frequency in Hz.
-       * @return {Number}
+       * @param {number} frequency - Frequency in Hz.
+       * @return {number}
        */
       function getOffsetFromFrequency( frequency ) {
         assert && assert( frequency >= MIN_FREQUENCY && frequency <= MAX_FREQUENCY );
@@ -251,7 +251,7 @@ define( function( require ) {
       /**
        * Create a label for the tick marks on the spectrum diagram.
        *
-       * @param {Number} value -  Wavelength or frequency to be described by the label.
+       * @param {number} value -  Wavelength or frequency to be described by the label.
        * @return {SubSupText}
        */
       function createExponentialLabel( value ) {
@@ -266,7 +266,7 @@ define( function( require ) {
       /**
        * Add a tick mark for the specified wavelength.  Wavelength tick marks go on the bottom of the strip.
        *
-       * @param {Number} wavelength
+       * @param {number} wavelength
        * @param {Boolean} addLabel
        */
       function addWavelengthTickMark( wavelength, addLabel ) {
@@ -288,8 +288,8 @@ define( function( require ) {
       /**
        * Add a label to a band which sections the spectrum diagram.
        *
-       * @param {Number} lowEndFrequency
-       * @param {Number} highEndFrequency
+       * @param {number} lowEndFrequency
+       * @param {number} highEndFrequency
        * @param {Array} labelText - Array of strings to be put in the label.  LayoutBox handles new lines without HTML.
        */
       function addBandLabel( lowEndFrequency, highEndFrequency, labelText ) {
@@ -322,7 +322,7 @@ define( function( require ) {
        * Add a "band divider" at the given frequency.  A band divider is a dotted line that spans the spectrum strip in
        * the vertical direction.
        *
-       * @param {Number} frequency
+       * @param {number} frequency
        */
       function addBandDivider( frequency ) {
         var drawDividerSegment = function() { return new Line( 0, 0, 0, STRIP_HEIGHT / 9, { stroke: Color.BLACK, lineWidth: 2 } ); };
@@ -430,7 +430,7 @@ define( function( require ) {
      *  Class that depicts a wave that gets progressively shorter in wavelength from left to right, which is called a
      *  chirp.
      *
-     *  @param {Number} width - Width of the bounding box that holds the chirp.
+     *  @param {number} width - Width of the bounding box that holds the chirp.
      *  @constructor
      */
     var ChirpNode = function( width ) {
