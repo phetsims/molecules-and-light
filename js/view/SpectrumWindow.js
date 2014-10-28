@@ -217,7 +217,7 @@ define( function( require ) {
        * Add a tick mark for the specified frequency.  Frequency tick marks go on top of the strip.
        *
        * @param {number} frequency
-       * @param {Boolean} addLabel - Whether or not a label should be added to the tick mark.
+       * @param {boolean} addLabel - Whether or not a label should be added to the tick mark.
        */
       function addFrequencyTickMark( frequency, addLabel ) {
         // Create and add the tick mark line.
@@ -267,7 +267,7 @@ define( function( require ) {
        * Add a tick mark for the specified wavelength.  Wavelength tick marks go on the bottom of the strip.
        *
        * @param {number} wavelength
-       * @param {Boolean} addLabel
+       * @param {boolean} addLabel
        */
       function addWavelengthTickMark( wavelength, addLabel ) {
 
