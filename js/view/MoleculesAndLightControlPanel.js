@@ -25,9 +25,6 @@ define( function( require ) {
   var O2 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/O2' );
   var NO2 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/NO2' );
   var O3 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/O3' );
-  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   // Strings
   var carbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
