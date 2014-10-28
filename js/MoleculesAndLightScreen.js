@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var PhotonAbsorptionModel = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/PhotonAbsorptionModel' );
+  var PhotonAbsorptionModel = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/PhotonAbsorptionModel' );
   var MoleculesAndLightScreenView = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );

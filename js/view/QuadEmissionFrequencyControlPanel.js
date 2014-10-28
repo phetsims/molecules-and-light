@@ -19,14 +19,14 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var Color = require( 'SCENERY/util/Color' );
   var Vector2 = require( 'DOT/Vector2' );
-  var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/WavelengthConstants' );
+  var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/WavelengthConstants' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PhotonEmitterSelectorPanel = require( 'MOLECULES_AND_LIGHT/view/PhotonEmitterSelectorPanel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var PAPhotonNode = require( 'MOLECULES_AND_LIGHT/photonabsorption/view/PAPhotonNode' );
-  var Photon = require( 'MOLECULES_AND_LIGHT/photonabsorption/model/Photon' );
+  var PAPhotonNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/PAPhotonNode' );
+  var Photon = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/Photon' );
 
   // images
   var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
