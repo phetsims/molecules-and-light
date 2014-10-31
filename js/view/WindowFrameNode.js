@@ -19,10 +19,10 @@ define( function( require ) {
    * Constructor for the molecules and light window frame. This is a border around the application play window.  Similar
    * to a typical stroke though each side of the border has a linear gradient.
    *
-   * @param { MoleculesAndLightApplicationWindow } model
-   * @param { Number } lineWidth - width of the window frame, similar to lineWidth for stroke in other scenery objects.
-   * @param { Color } innerColor - boundary color on the inside of the window frame.
-   * @param { Color } outerColor - boundary color along the outer edge of the window frame.
+   * @param {MoleculesAndLightApplicationWindow} model
+   * @param {number} lineWidth - width of the window frame, similar to lineWidth for stroke in other scenery objects.
+   * @param {Color} innerColor - boundary color on the inside of the window frame.
+   * @param {Color} outerColor - boundary color along the outer edge of the window frame.
    * @constructor
    */
   function WindowFrameNode( model, lineWidth, innerColor, outerColor ) {
@@ -71,9 +71,9 @@ define( function( require ) {
     /**
      * Draw a corner of the window frame.
      *
-     * @param { Vector2 } radialCenter - Position vector of the radial center of the frame corner.
-     * @param { String } corner - String describing desired corner of the window frame.
-     * @param { CanvasRenderingContext2D } context - Context for the canvas methods.
+     * @param {String} corner - String describing desired corner of the window frame.
+     * @param {Vector2} radialCenter - Position vector of the radial center of the frame corner.
+     * @param {CanvasRenderingContext2D} context - Context for the canvas methods.
      */
     drawFrameCorner: function( corner, radialCenter, context ) {
 
@@ -121,12 +121,12 @@ define( function( require ) {
      * Function which creates the sections of the frame that span the width.  These sections are the top and
      * bottom of the border.
      *
-     * @param { String } side - String which specifies desired side of the window frame.
-     * @param { Number } x - x position of the upper left corner (left bound)
-     * @param { Number } y - y position of the upper left corner (top bound)
-     * @param { Number } width - Width of the rectangle to the right of the upper left corner
-     * @param { Number } height - Height of the rectangle to the
-     * @param { CanvasRenderingContext2D } context - The drawing context
+     * @param {String} side - String which specifies desired side of the window frame.
+     * @param {number} x - x position of the upper left corner (left bound)
+     * @param {number} y - y position of the upper left corner (top bound)
+     * @param {number} width - Width of the rectangle to the right of the upper left corner
+     * @param {number} height - Height of the rectangle to the
+     * @param {CanvasRenderingContext2D} context - The drawing context
      */
     drawFrameSide: function( side, x, y, width, height, context ) {
 

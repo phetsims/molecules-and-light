@@ -23,6 +23,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var WindowFrameNode = require( 'MOLECULES_AND_LIGHT/view/WindowFrameNode' );
   var Shape = require( 'KITE/Shape' );
+
   // Strings
   var returnMoleculeString = require( 'string!MOLECULES_AND_LIGHT/buttonNode.returnMolecule' );
 
@@ -169,8 +170,8 @@ define( function( require ) {
       var clipArea = new Shape().roundRect(
         this.leftTop.x - this.windowFrame.lineWidth,
         this.leftTop.y - this.windowFrame.lineWidth,
-          this.width + ( 2 * this.windowFrame.lineWidth),
-          this.height + ( 2 * this.windowFrame.lineWidth ),
+        this.width + ( 2 * this.windowFrame.lineWidth),
+        this.height + ( 2 * this.windowFrame.lineWidth ),
         7, 7 );
       this.setClipArea( clipArea );
     }
