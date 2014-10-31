@@ -49,7 +49,7 @@ define( function( require ) {
     var metersUnitsString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.metersUnits' );
 
     /**
-     * Constructor for the Spectrum Window.  Loads all subclass objects into a horizontal layout box.
+     * Constructor for the Spectrum Window.  Loads all subclass objects into a vertical layout box.
      *
      * @constructor
      */
@@ -229,7 +229,7 @@ define( function( require ) {
           // Create and add the label.
           var label = createExponentialLabel( frequency );
           // Calculate x offset for label.  Allows the base number of the label to centered with the tick mark.
-          var xOffset = new Text( '10', {font: TICK_MARK_FONT } ).width / 2;
+          var xOffset = new Text( '10', { font: TICK_MARK_FONT } ).width / 2;
           label.setLeftCenter( new Vector2( tickMarkNode.getCenterX() - xOffset, tickMarkNode.getTop() - label.getHeight() / 2 ) );
           spectrumRootNode.addChild( label );
         }
@@ -281,7 +281,6 @@ define( function( require ) {
           // Calculate x offset for label.  Allows the base number of the label to be centered with the tick mark.
           label.setCenter( new Vector2( tickMarkNode.getCenterX(), tickMarkNode.getTop() + label.getHeight() + 2 ) );
           spectrumRootNode.addChild( label );
-
         }
       }
 
@@ -476,6 +475,5 @@ define( function( require ) {
     };
 
     return inherit( ScreenView, SpectrumWindow );
-
   }
 );
