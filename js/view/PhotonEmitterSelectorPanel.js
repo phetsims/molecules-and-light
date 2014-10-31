@@ -17,8 +17,8 @@ define( function( require ) {
   /**
    * Constructor for a photon emitter panel.  This is a single panel for the emission frequency control panel.
    *
-   * @param( Image } emitterImage
-   * @param( PAPhotonNode } photonNode
+   * @param {Image} emitterImage
+   * @param {PAPhotonNode} photonNode
    * @constructor
    */
   function PhotonEmitterSelectorPanel( emitterImage, photonNode ) {
@@ -27,5 +27,4 @@ define( function( require ) {
   }
 
   return inherit( LayoutBox, PhotonEmitterSelectorPanel );
-
 } );

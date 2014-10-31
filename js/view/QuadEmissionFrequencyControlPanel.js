@@ -51,8 +51,7 @@ define( function( require ) {
   /**
    * Constructor for the control panel of emitted photon frequency.
    *
-   * @param { PhotonAbsorptionModel } photonAbsorptionModel
-   * @param options
+   * @param {PhotonAbsorptionModel} photonAbsorptionModel
    * @constructor
    */
   function QuadEmissionFrequencyControlPanel( photonAbsorptionModel ) {
@@ -117,5 +116,4 @@ define( function( require ) {
   }
 
   return inherit( Panel, QuadEmissionFrequencyControlPanel );
-
 } );

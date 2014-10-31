@@ -1,7 +1,7 @@
 //  Copyright 2002-2014, University of Colorado Boulder
 
 /**
-* Selector panel for a single molecule.  This will construct one of the panels to be used in the full Molecules and
+ * Selector panel for a single molecule.  This will construct one of the panels to be used in the full Molecules and
  * Light control panel.
  *
  * @author Jesse Greenberg ( PhET Interactive Simulations )
@@ -24,7 +24,7 @@ define( function( require ) {
    *
    * @param {string} moleculeName - The written name of the molecule
    * @param {string} moleculeFormula - The chemical formula representation of the molecule, HTML5 format for SubSupText
-   * @param(MoleculeNode} moleculeNode - The molecule node for this selector panel
+   * @param {MoleculeNode} moleculeNode - The molecule node for this selector panel
    * @param {Object} [options]
    * @constructor
    */

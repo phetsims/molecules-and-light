@@ -31,7 +31,6 @@ define( function( require ) {
   var SpectrumWindow = require( 'MOLECULES_AND_LIGHT/view/SpectrumWindow' );
   var Plane = require( 'SCENERY/nodes/Plane' );
 
-
   // Strings
   var buttonCaptionString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.buttonCaption' );
 
