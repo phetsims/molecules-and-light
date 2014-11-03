@@ -129,8 +129,8 @@ define( function( require ) {
       //Renderer must be specified here because the plane is added directly to the scene (instead of to some other node
       // that already has svg renderer)
       var plane = new Plane( {fill: 'black', opacity: 0.3, renderer: 'svg'} );
-      this.myWorldNode.addChild( plane );
-      this.myWorldNode.addChild( spectrumWindow );
+      this.addChild( plane );
+      this.addChild( spectrumWindow );
       var aboutDialogListener = {up: function() {
         spectrumWindow.removeInputListener( aboutDialogListener );
         plane.addInputListener( aboutDialogListener );
