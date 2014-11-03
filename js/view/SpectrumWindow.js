@@ -285,11 +285,12 @@ define( function( require ) {
       }
 
       /**
-       * Add a label to a band which sections the spectrum diagram.
+       * Add a label to a band which sections the spectrum diagram.  Using LayoutBox will format the strings so that new
+       * lines do not need to be coded with HTML.
        *
        * @param {number} lowEndFrequency
        * @param {number} highEndFrequency
-       * @param {Array} labelText - Array of strings to be put in the label.  LayoutBox handles new lines without HTML.
+       * @param {Array.<string>} labelText - Array of strings to be put in the label.
        */
       function addBandLabel( lowEndFrequency, highEndFrequency, labelText ) {
         // Argument validation.
