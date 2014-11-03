@@ -333,16 +333,20 @@ define( function( require ) {
       }
 
       /**
-       * Convert the given wavelength to an offset from the left edge of the spectrum strip.
+       * Convert the given wavelength to an offset from the left edge of the spectrum strip.  The frequency of an
+       * electromagnetic wave is equal to the speed of light divided by the wavelength.
        *
        * @param wavelength - wavelength in meters
+       * @returns {number}
        */
       function getOffsetFromWavelength( wavelength ) {
+        // The constant 299792458 is equal to the speed of light in meters per second.
         return getOffsetFromFrequency( 299792458 / wavelength );
       }
 
       /**
        * Calculate the log base 10 of a value.
+       *
        * @param value
        * @returns {number}
        */
