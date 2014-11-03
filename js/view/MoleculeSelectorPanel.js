@@ -17,7 +17,7 @@ define( function( require ) {
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
 
   // Scaling factor for the molecule images, determined empirically.
-  var MOLECULE_SCALING_FACTOR = 0.13;
+  var MOLECULE_SCALING_FACTOR = 0.0975;
 
   /**
    * Constructor for a molecule selector panel.  This is a single panel of the molecules and light control panel.
@@ -36,15 +36,15 @@ define( function( require ) {
       lineWidth: 3
     }, options );
 
-    Rectangle.call( this, 0, 0, 280, 0, options );
+    Rectangle.call( this, 0, 0, 215, 0, options );
 
     // Create text label for the molecule name and append the chemical formula in parentheses.
-    var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
+    var font = new PhetFont( { size: 13, family: 'Sans-serif' } );
     var molecularName = new SubSupText( moleculeName + ' (' + moleculeFormula + ')', { fill: 'white', font: font } );
     molecularName.setCenterY( this.getCenterY() );
     molecularName.setLeft( this.getLeft() + 10 );
 
-    // Scale the molecule node to an appropriate size for the panel display.
+    // Scale the molecule node to an appropriate size for the panel display and set its position in the panel.
     moleculeNode.scale( MOLECULE_SCALING_FACTOR );
     moleculeNode.setRight( this.getRight() - 10 );
     moleculeNode.setCenterY( this.getCenterY() );

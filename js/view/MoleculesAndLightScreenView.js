@@ -59,15 +59,10 @@ define( function( require ) {
         Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.50 ) ),
       0.10 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
 
-    // Create the node that will be the root for all the world children on this canvas.  This is done to make it easier
-    // to zoom in and out on the world without affecting screen children.
-    this.myWorldNode = new Node(); // TODO: REMOVE nodes like this.  Used in Java but not in javascript.
-    this.addChild( this.myWorldNode );
-
     // Create the application window.  This will hold all photons, molecules, and photonEmitters for this photon
     // absorption model.
     this.applicationWindow = new MoleculesAndLightApplicationWindow( photonAbsorptionModel, this.mvt );
-    this.myWorldNode.addChild( this.applicationWindow );
+    this.addChild( this.applicationWindow );
     this.applicationWindow.translate( APPLICATION_WINDOW_LOCATION );
 
     // Create the control panel for photon emission frequency.
@@ -76,7 +71,6 @@ define( function( require ) {
 
     // Create the molecule control panel
     var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
-    moleculeControlPanel.scale( 0.75 ); // TODO: This scaling should probably be done in MoleculeControlPanel.js
     moleculeControlPanel.setLeftTop( new Vector2( 530, this.applicationWindow.top - this.applicationWindow.windowFrame.lineWidth ) );
 
     // Add reset all button.
@@ -88,7 +82,7 @@ define( function( require ) {
         radius: 18
       } );
 
-    this.myWorldNode.addChild( resetAllButton );
+    this.addChild( resetAllButton );
 
     // Add play/pause button.
     var playPauseButton = new PlayPauseButton( photonAbsorptionModel.playProperty,
@@ -98,7 +92,7 @@ define( function( require ) {
         radius: 23
       } );
 
-    this.myWorldNode.addChild( playPauseButton );
+    this.addChild( playPauseButton );
 
     // Add step button to manually step the animation.
     var stepButton = new StepButton( function() { photonAbsorptionModel.manualStep(); }, photonAbsorptionModel.playProperty,
@@ -108,7 +102,7 @@ define( function( require ) {
         radius: 15
       } );
 
-    this.myWorldNode.addChild( stepButton );
+    this.addChild( stepButton );
 
     // Window that displays the EM spectrum upon request.
     var spectrumWindow = new SpectrumWindow();
@@ -121,16 +115,11 @@ define( function( require ) {
       listener: function() { thisScreenView.updateSpectrumWindowVisibility( spectrumWindow ); }
     } );
     showSpectrumButton.setCenter( new Vector2( moleculeControlPanel.centerX, photonEmissionControlPanel.centerY - 33 ) );
-    this.myWorldNode.addChild( showSpectrumButton );
+    this.addChild( showSpectrumButton );
 
     // Add the nodes in the order necessary for correct layering.
-    this.myWorldNode.addChild( photonEmissionControlPanel );
-    this.myWorldNode.addChild( moleculeControlPanel );
-
-    //Renderer must be specified here because the plane is added directly to the scene (instead of to some other node
-    // that already has svg renderer)
-//    var plane = new Plane( {fill: 'black', opacity: 0.3, renderer: 'svg'} );
-//    this.myWorldNode.addChild( plane );
+    this.addChild( photonEmissionControlPanel );
+    this.addChild( moleculeControlPanel );
 
   }
 

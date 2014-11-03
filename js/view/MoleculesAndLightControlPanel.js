@@ -26,18 +26,10 @@ define( function( require ) {
   var NO2 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/NO2' );
   var O3 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/O3' );
 
-  // Strings
-  var carbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
-  var nitrogenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Nitrogen' );
-  var oxygenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Oxygen' );
-  var carbonDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonDioxide' );
-  var nitrogenDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.NitrogenDioxide' );
-  var ozoneString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Ozone' );
-  var waterString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Water' );
-
   // Class Data
   // Model view transform used for creating images of the various molecules. This is basically a null transform except
-  // that it flips the Y axis so that molecules on the panel are oriented the same as in the play area.
+  // that it scales down the size of the molecules and flips the Y axis so that molecules on the panel are oriented the
+  // same as in the play area.
   var MVT = ModelViewTransform2.createSinglePointScaleInvertedYMapping( new Vector2( 0, 0 ), new Vector2( 0, 0 ), 1 );
 
   // Chemical formulas for the button labels.
@@ -48,6 +40,15 @@ define( function( require ) {
   var NO2_FORMULA_STRING = 'NO<sub>2</sub>';
   var O3_FORMULA_STRING = 'O<sub>3</sub>';
   var H20_FORMULA_STRING = 'H<sub>2</sub>O';
+
+  // Strings
+  var carbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
+  var nitrogenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Nitrogen' );
+  var oxygenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Oxygen' );
+  var carbonDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonDioxide' );
+  var nitrogenDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.NitrogenDioxide' );
+  var ozoneString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Ozone' );
+  var waterString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Water' );
 
   /**
    * Constructor for a Molecules and Light control panel.
@@ -60,6 +61,7 @@ define( function( require ) {
     // Format the chemical formulas.  Append these formulas to the molecule names.
     var photonTargets = ['SINGLE_CO_MOLECULE', 'SINGLE_N2_MOLECULE', 'SINGLE_O2_MOLECULE', 'SINGLE_CO2_MOLECULE',
       'SINGLE_H2O_MOLECULE', 'SINGLE_NO2_MOLECULE', 'SINGLE_O3_MOLECULE'];
+
     // Include all contents of the control panel.
     var content = [
       new MoleculeSelectorPanel( carbonMonoxideString, CO_FORMULA_STRING, new MoleculeNode( new CO(), MVT ) ),
@@ -80,7 +82,8 @@ define( function( require ) {
       {
         spacing: 1.75,
         baseColor: 'black',
-        buttonContentYMargin: 7,
+        buttonContentXMargin: 0,
+        buttonContentYMargin: 5.25,
         selectedStroke: 'white',
         deselectedLineWidth: 0,
         cornerRadius: 7
