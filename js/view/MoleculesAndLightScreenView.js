@@ -53,7 +53,7 @@ define( function( require ) {
     var thisScreenView = this;
     this.photonAbsorptionModel = photonAbsorptionModel;
 
-    this.mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( Math.round( INTERMEDIATE_RENDERING_SIZE.width * 0.55 ),
         Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.50 ) ),
@@ -61,9 +61,9 @@ define( function( require ) {
 
     // Create the application window.  This will hold all photons, molecules, and photonEmitters for this photon
     // absorption model.
-    this.applicationWindow = new MoleculesAndLightApplicationWindow( photonAbsorptionModel, this.mvt );
-    this.addChild( this.applicationWindow );
-    this.applicationWindow.translate( APPLICATION_WINDOW_LOCATION );
+    var applicationWindow = new MoleculesAndLightApplicationWindow( photonAbsorptionModel, mvt );
+    this.addChild( applicationWindow );
+    applicationWindow.translate( APPLICATION_WINDOW_LOCATION );
 
     // Create the control panel for photon emission frequency.
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
@@ -71,7 +71,7 @@ define( function( require ) {
 
     // Create the molecule control panel
     var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
-    moleculeControlPanel.setLeftTop( new Vector2( 530, this.applicationWindow.top - this.applicationWindow.windowFrame.lineWidth ) );
+    moleculeControlPanel.setLeftTop( new Vector2( 530, applicationWindow.top - applicationWindow.windowFrame.lineWidth ) );
 
     // Add reset all button.
     var resetAllButton = new ResetAllButton(

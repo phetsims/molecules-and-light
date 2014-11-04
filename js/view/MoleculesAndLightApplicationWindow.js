@@ -46,29 +46,30 @@ define( function( require ) {
     this.mvt = mvt;
     this.photonAbsorptionModel = photonAbsorptionModel;
 
+    // Property which keeps track of whether or not the 'Restore Molecule' button should be visible.
     this.restoreButtonVisibleProperty = new Property( false );
 
     // Add the layers for molecules, photons, and photon emitters.
-    this.moleculeLayer = new Node();
-    this.addChild( this.moleculeLayer );
+    var moleculeLayer = new Node();
+    this.addChild( moleculeLayer );
 
-    this.photonLayer = new Node();
-    this.addChild( this.photonLayer );
+    var photonLayer = new Node();
+    this.addChild( photonLayer );
 
-    this.photonEmitterLayer = new Node();
-    this.addChild( this.photonEmitterLayer );
+    var photonEmitterLayer = new Node();
+    this.addChild( photonEmitterLayer );
+
+    // Create and add the photon emitter.
+    var photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, photonAbsorptionModel );
+    photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
+    photonEmitterLayer.addChild( photonEmitterNode );
 
     // Add the frame around the application window.
     this.windowFrame = new WindowFrameNode( this, 5, new Color( "#BED0E7" ), new Color( '#4070CE' ) );
     this.addChild( this.windowFrame );
 
-    // Add a clip area around the edge of the windowframe to clean up photon and molecule removal from screen.
-    this.drawClipFrame();
-
-    // Create and add the photon emitter.
-    this.photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, mvt, photonAbsorptionModel );
-    this.photonEmitterNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
-    this.photonEmitterLayer.addChild( this.photonEmitterNode );
+    // Add a clip area around the edge of the window frame to clean up photon and molecule removal from screen.
+    this.drawClipFrame( this.windowFrame );
 
     // Add the button for restoring molecules that break apart.
     this.restoreMoleculeButtonNode = new RectangularPushButton( {
@@ -85,12 +86,11 @@ define( function( require ) {
         this.restoreMoleculeButtonNode.height + 10 ) );
 
     this.addChild( this.restoreMoleculeButtonNode );
-    this.moleculeCheckBounds();
 
     // Set up an event listener for adding and removing molecules.
     photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
       var moleculeNode = new MoleculeNode( addedMolecule, thisWindow.mvt ); //Create the molecule node.
-      thisWindow.moleculeLayer.addChild( moleculeNode );
+      moleculeLayer.addChild( moleculeNode );
 
       // Determine if it is time to remove molecule and update restore molecule button visibility.
       addedMolecule.centerOfGravityProperty.link( function() {
@@ -99,7 +99,7 @@ define( function( require ) {
 
       photonAbsorptionModel.activeMolecules.addItemRemovedListener( function removalListener( removedMolecule ) {
         if ( removedMolecule === addedMolecule ) {
-          thisWindow.moleculeLayer.removeChild( moleculeNode );
+          moleculeLayer.removeChild( moleculeNode );
           photonAbsorptionModel.activeMolecules.removeItemRemovedListener( removalListener );
         }
       } );
@@ -109,7 +109,7 @@ define( function( require ) {
     photonAbsorptionModel.photons.addItemAddedListener( function( addedPhoton ) {
       var photonNode = new PAPhotonNode( addedPhoton, thisWindow.mvt );
       photonNode.setCenter( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
-      thisWindow.photonLayer.addChild( photonNode );
+      photonLayer.addChild( photonNode );
 
       // Watch photon positions and determine if photon should be removed from window.
       addedPhoton.locationProperty.link( function() {
@@ -118,13 +118,13 @@ define( function( require ) {
 
       photonAbsorptionModel.photons.addItemRemovedListener( function removalListener( removedPhoton ) {
         if ( removedPhoton === addedPhoton ) {
-          thisWindow.photonLayer.removeChild( photonNode );
+          photonLayer.removeChild( photonNode );
           photonAbsorptionModel.photons.removeItemRemovedListener( removalListener );
         }
       } );
     } );
 
-    // If the molecule control panel is used, remove the restore molecule button.
+    // If a new molecule is chosen with the molecule control panel, remove the "Restore Molecule" button.
     this.photonAbsorptionModel.photonTargetProperty.link( function() {
       thisWindow.restoreButtonVisibleProperty.set( false );
     } );
@@ -135,7 +135,7 @@ define( function( require ) {
 
     /**
      * Update the visibility of the button that restores molecules that have broken apart.  This button should be
-     * visible only when one or more molecules are off the screen (more or less).
+     * visible only when one or more molecules are off the screen.
      */
     moleculeCheckBounds: function() {
 
@@ -166,6 +166,11 @@ define( function( require ) {
       this.photonAbsorptionModel.photons.removeAll( photonsToRemove );
     },
 
+    /**
+     * Set the clip area for the application window.  This area is defined as the application window minus its border.
+     * Setting this clip area ensures that photon and molecule removal is smooth rather than sudden as these objects
+     * collide with the application window boundaries.
+     */
     drawClipFrame: function() {
       var clipArea = new Shape().roundRect(
         this.leftTop.x - this.windowFrame.lineWidth,
