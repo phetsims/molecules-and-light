@@ -48,16 +48,17 @@ define( function( require ) {
         'top',
         this.applicationWindow.rectArcWidth,
         -this.lineWidth,
-          this.applicationWindow.rectWidth - 2 * this.applicationWindow.rectArcWidth,
+        ( this.applicationWindow.rectWidth - 2 * this.applicationWindow.rectArcWidth ),
         this.lineWidth,
-        context );
+        context
+      );
 
       // Draw the bottom section of the window frame.
       this.drawFrameSide(
         'bottom',
         this.applicationWindow.rectArcWidth,
         this.applicationWindow.rectHeight,
-          this.applicationWindow.rectWidth - 2 * this.applicationWindow.rectArcWidth,
+        ( this.applicationWindow.rectWidth - 2 * this.applicationWindow.rectArcWidth ),
         this.lineWidth,
         context );
 
@@ -67,7 +68,7 @@ define( function( require ) {
         -this.lineWidth,
         this.applicationWindow.rectArcHeight,
         this.lineWidth,
-          this.applicationWindow.rectHeight - 2 * this.applicationWindow.rectArcHeight,
+        ( this.applicationWindow.rectHeight - 2 * this.applicationWindow.rectArcHeight ),
         context );
 
       // Draw the right section of the window frame.
@@ -76,35 +77,31 @@ define( function( require ) {
         this.applicationWindow.rectWidth,
         this.applicationWindow.rectArcHeight,
         this.lineWidth,
-          this.applicationWindow.rectHeight - 2 * this.applicationWindow.rectArcHeight,
+        ( this.applicationWindow.rectHeight - 2 * this.applicationWindow.rectArcHeight ),
         context );
 
       // Draw the top left corner of the window frame.
       this.drawFrameCorner(
         'topLeft',
-        new Vector2( this.applicationWindow.rectArcWidth,
-          this.applicationWindow.rectArcHeight ),
+        new Vector2( this.applicationWindow.rectArcWidth, this.applicationWindow.rectArcHeight ),
         context );
 
       // Draw the bottom left corner of the window frame.
       this.drawFrameCorner(
         'bottomLeft',
-        new Vector2( this.applicationWindow.rectArcWidth,
-            this.applicationWindow.rectHeight - this.applicationWindow.rectArcHeight ),
+        new Vector2( this.applicationWindow.rectArcWidth, this.applicationWindow.rectHeight - this.applicationWindow.rectArcHeight ),
         context );
 
       // Draw the bottom right corner of the window frame.
       this.drawFrameCorner(
         'bottomRight',
-        new Vector2( this.applicationWindow.rectWidth - this.applicationWindow.rectArcWidth,
-            this.applicationWindow.rectHeight - this.applicationWindow.rectArcHeight ),
+        new Vector2( this.applicationWindow.rectWidth - this.applicationWindow.rectArcWidth, this.applicationWindow.rectHeight - this.applicationWindow.rectArcHeight ),
         context );
 
       // Draw the top right corner of the window frame.
       this.drawFrameCorner(
         'topRight',
-        new Vector2( this.applicationWindow.rectWidth - this.applicationWindow.rectArcWidth,
-          this.applicationWindow.rectArcHeight ),
+        new Vector2( this.applicationWindow.rectWidth - this.applicationWindow.rectArcWidth, this.applicationWindow.rectArcHeight ),
         context );
     },
 
