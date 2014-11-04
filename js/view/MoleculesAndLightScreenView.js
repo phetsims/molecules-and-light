@@ -125,20 +125,28 @@ define( function( require ) {
 
   return inherit( ScreenView, MoleculesAndLightScreenView, {
 
+    /**
+     * Update the spectrum window visibility.  The spectrum window has behavior which is identical to the about dialog
+     * window, and this code is heavily borrowed from AboutDialog.js.
+     *
+     * @param {SpectrumWindow} spectrumWindow - The spectrum window whose visibility should be updated.
+     */
     updateSpectrumWindowVisibility: function( spectrumWindow ) {
-      //Renderer must be specified here because the plane is added directly to the scene (instead of to some other node
+      // Renderer must be specified here because the plane is added directly to the scene (instead of to some other node
       // that already has svg renderer)
       var plane = new Plane( {fill: 'black', opacity: 0.3, renderer: 'svg'} );
       this.addChild( plane );
       this.addChild( spectrumWindow );
-      var aboutDialogListener = {up: function() {
-        spectrumWindow.removeInputListener( aboutDialogListener );
-        plane.addInputListener( aboutDialogListener );
+
+      var spectrumWindowListener = {up: function() {
+        spectrumWindow.removeInputListener( spectrumWindowListener );
+        plane.addInputListener( spectrumWindowListener );
         spectrumWindow.detach();
         plane.detach();
       }};
-      spectrumWindow.addInputListener( aboutDialogListener );
-      plane.addInputListener( aboutDialogListener );
+
+      spectrumWindow.addInputListener( spectrumWindowListener );
+      plane.addInputListener( spectrumWindowListener );
 
     }
 
