@@ -25,18 +25,11 @@ define( function( require ) {
    * @param {string} moleculeName - The written name of the molecule
    * @param {string} moleculeFormula - The chemical formula representation of the molecule, HTML5 format for SubSupText
    * @param {MoleculeNode} moleculeNode - The molecule node for this selector panel
-   * @param {Object} [options]
    * @constructor
    */
-  function MoleculeSelectorPanel( moleculeName, moleculeFormula, moleculeNode, options ) {
+  function MoleculeSelectorPanel( moleculeName, moleculeFormula, moleculeNode ) {
 
-    options = _.extend( {
-      stroke: null,
-      fill: 'black',
-      lineWidth: 3
-    }, options );
-
-    Rectangle.call( this, 0, 0, 215, 0, options );
+    Rectangle.call( this, 0, 0, 215, 0, { stroke: null, fill: 'black', lineWidth: 3 } );
 
     // Create text label for the molecule name and append the chemical formula in parentheses.
     var font = new PhetFont( { size: 13, family: 'Sans-serif' } );
