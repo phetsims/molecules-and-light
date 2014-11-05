@@ -69,7 +69,13 @@ define( function( require ) {
     this.addChild( this.windowFrame );
 
     // Add a clip area around the edge of the window frame to clean up photon and molecule removal from screen.
-    this.drawClipFrame( this.windowFrame );
+    var clipArea = new Shape().roundRect(
+        this.leftTop.x - this.windowFrame.lineWidth,
+        this.leftTop.y - this.windowFrame.lineWidth,
+        this.width + ( 2 * this.windowFrame.lineWidth),
+        this.height + ( 2 * this.windowFrame.lineWidth ),
+      7, 7 );
+    this.setClipArea( clipArea );
 
     // Add the button for restoring molecules that break apart.
     this.restoreMoleculeButtonNode = new RectangularPushButton( {
@@ -164,21 +170,6 @@ define( function( require ) {
         }
       }
       this.photonAbsorptionModel.photons.removeAll( photonsToRemove );
-    },
-
-    /**
-     * Set the clip area for the application window.  This area is defined as the application window minus its border.
-     * Setting this clip area ensures that photon and molecule removal is smooth rather than sudden as these objects
-     * collide with the application window boundaries.
-     */
-    drawClipFrame: function() {
-      var clipArea = new Shape().roundRect(
-        this.leftTop.x - this.windowFrame.lineWidth,
-        this.leftTop.y - this.windowFrame.lineWidth,
-        this.width + ( 2 * this.windowFrame.lineWidth),
-        this.height + ( 2 * this.windowFrame.lineWidth ),
-        7, 7 );
-      this.setClipArea( clipArea );
     }
 
   } );
