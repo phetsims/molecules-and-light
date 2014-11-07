@@ -46,6 +46,9 @@ define( function( require ) {
     this.mvt = mvt;
     this.photonAbsorptionModel = photonAbsorptionModel;
 
+    // Width of the 'window frame' which surrounds the application window.
+    this.frameWidth = 5;
+
     // Property which keeps track of whether or not the 'Restore Molecule' button should be visible.
     this.restoreButtonVisibleProperty = new Property( false );
 
@@ -65,15 +68,15 @@ define( function( require ) {
     photonEmitterLayer.addChild( photonEmitterNode );
 
     // Add the frame around the application window.
-    this.windowFrame = new WindowFrameNode( this, 5, new Color( "#BED0E7" ), new Color( '#4070CE' ) );
-    this.addChild( this.windowFrame );
+    var windowFrame = new WindowFrameNode( this, this.frameWidth, new Color( "#BED0E7" ), new Color( '#4070CE' ) );
+    this.addChild( windowFrame );
 
     // Add a clip area around the edge of the window frame to clean up photon and molecule removal from screen.
     var clipArea = new Shape().roundRect(
-        this.leftTop.x - this.windowFrame.lineWidth,
-        this.leftTop.y - this.windowFrame.lineWidth,
-        this.width + ( 2 * this.windowFrame.lineWidth),
-        this.height + ( 2 * this.windowFrame.lineWidth ),
+        this.leftTop.x - this.frameWidth,
+        this.leftTop.y - this.frameWidth,
+        this.width + ( 2 * this.frameWidth ),
+        this.height + ( 2 * this.frameWidth ),
       7, 7 );
     this.setClipArea( clipArea );
 
