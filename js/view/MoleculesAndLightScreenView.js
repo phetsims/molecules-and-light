@@ -51,7 +51,6 @@ define( function( require ) {
     ScreenView.call( this, { renderer: 'svg' } );
 
     var thisScreenView = this;
-    this.photonAbsorptionModel = photonAbsorptionModel;
 
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
