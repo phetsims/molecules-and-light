@@ -80,7 +80,6 @@ define( function( require ) {
         right: this.layoutBounds.right - 15,
         radius: 18
       } );
-
     this.addChild( resetAllButton );
 
     // Add play/pause button.
@@ -90,7 +89,6 @@ define( function( require ) {
         centerX: moleculeControlPanel.centerX - 25,
         radius: 23
       } );
-
     this.addChild( playPauseButton );
 
     // Add step button to manually step the animation.
@@ -100,7 +98,6 @@ define( function( require ) {
         centerX: moleculeControlPanel.centerX + 25,
         radius: 15
       } );
-
     this.addChild( stepButton );
 
     // Window that displays the EM spectrum upon request.
@@ -126,7 +123,6 @@ define( function( require ) {
     // Add the nodes in the order necessary for correct layering.
     this.addChild( photonEmissionControlPanel );
     this.addChild( moleculeControlPanel );
-
   }
 
   return inherit( ScreenView, MoleculesAndLightScreenView, {

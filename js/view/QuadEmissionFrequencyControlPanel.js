@@ -135,7 +135,6 @@ define( function( require ) {
 
     this.addChild( energyArrow );
     this.addChild( energyText );
-
   }
 
   return inherit( Panel, QuadEmissionFrequencyControlPanel );

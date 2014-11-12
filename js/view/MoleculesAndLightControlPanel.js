@@ -1,7 +1,7 @@
 //  Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Control panel for the "Molecules and Light" sim.  Allows the user control which molecule is being simulated.
+ * Control panel for the "Molecules and Light" sim.  Allows the user to select which molecule is being simulated.
  *
  * @author John Blanco
  * @author Jesse Greenberg
@@ -26,7 +26,16 @@ define( function( require ) {
   var NO2 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/NO2' );
   var O3 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/O3' );
 
-  // Class Data
+  // Strings
+  var carbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
+  var nitrogenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Nitrogen' );
+  var oxygenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Oxygen' );
+  var carbonDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonDioxide' );
+  var nitrogenDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.NitrogenDioxide' );
+  var ozoneString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Ozone' );
+  var waterString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Water' );
+
+  // constants
   // Model view transform used for creating images of the various molecules. This is basically a null transform except
   // that it scales down the size of the molecules and flips the Y axis so that molecules on the panel are oriented the
   // same as in the play area.
@@ -40,15 +49,6 @@ define( function( require ) {
   var NO2_FORMULA_STRING = 'NO<sub>2</sub>';
   var O3_FORMULA_STRING = 'O<sub>3</sub>';
   var H20_FORMULA_STRING = 'H<sub>2</sub>O';
-
-  // Strings
-  var carbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
-  var nitrogenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Nitrogen' );
-  var oxygenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Oxygen' );
-  var carbonDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonDioxide' );
-  var nitrogenDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.NitrogenDioxide' );
-  var ozoneString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Ozone' );
-  var waterString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Water' );
 
   /**
    * Constructor for a Molecules and Light control panel.
