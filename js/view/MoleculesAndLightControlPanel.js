@@ -25,6 +25,7 @@ define( function( require ) {
   var O2 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/O2' );
   var NO2 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/NO2' );
   var O3 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/O3' );
+  var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
 
   // Strings
   var carbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
@@ -43,12 +44,12 @@ define( function( require ) {
 
   // Chemical formulas for the button labels.
   var CO_FORMULA_STRING = 'CO';
-  var N2_FORMULA_STRING = 'N<sub>2</sub>';
-  var O2_FORMULA_STRING = 'O<sub>2</sub>';
-  var CO2_FORMULA_STRING = 'CO<sub>2</sub>';
-  var NO2_FORMULA_STRING = 'NO<sub>2</sub>';
-  var O3_FORMULA_STRING = 'O<sub>3</sub>';
-  var H20_FORMULA_STRING = 'H<sub>2</sub>O';
+  var N2_FORMULA_STRING = ChemUtils.toSubscript( 'N2' );
+  var O2_FORMULA_STRING = ChemUtils.toSubscript('O2');
+  var CO2_FORMULA_STRING = ChemUtils.toSubscript('CO2');
+  var NO2_FORMULA_STRING = ChemUtils.toSubscript('NO2');
+  var O3_FORMULA_STRING = ChemUtils.toSubscript('O3');
+  var H20_FORMULA_STRING = ChemUtils.toSubscript('H2O');
 
   /**
    * Constructor for a Molecules and Light control panel.
