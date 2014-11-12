@@ -70,7 +70,7 @@ define( function( require ) {
       new PhotonEmitterSelectorPanel( new Image( uvLight2 ), ultravioletPhotonNode )
     ];
 
-    // Load the wavelengths into an array for the radio button content.
+    // Load the wavelengths and labels into arrays for initializing radio button content.
     var wavelengths = [ WavelengthConstants.MICRO_WAVELENGTH, WavelengthConstants.IR_WAVELENGTH,
       WavelengthConstants.VISIBLE_WAVELENGTH, WavelengthConstants.UV_WAVELENGTH ];
 
@@ -95,6 +95,23 @@ define( function( require ) {
         cornerRadius: 7
       } );
 
+    // Scale the radio button text.  This is done mostly to support translations.
+    // Determine the max width of panels in the radio button group.
+    var panelWidth = _.max( radioButtonContent, function( content ) { return content.node.width; } ).node.width;
+    // Calculate the minimum scale factor that must be applied to each label. Ensures constant font size for all labels.
+    var scaleFactor = 1;
+    _.each( radioButtonContent, function( content ) {
+      var labelWidth = content.label.width;
+      scaleFactor = Math.min( scaleFactor, panelWidth / labelWidth );
+      console.log( scaleFactor );
+    } );
+    // If necessary, scale down each label by the minimum scale value.
+    if ( scaleFactor < 1 ) {
+      _.each( radioButtonContent, function( content ) {
+        content.label.scale( scaleFactor )
+      } );
+    }
+
     // Place radioButtons into a panel.
     Panel.call( this, radioButtons, { fill: '#C5D6E8', stroke: null } );
 
@@ -107,8 +124,14 @@ define( function( require ) {
       headHeight: ARROW_HEAD_HEIGHT,
       headWidth: ARROW_HEAD_WIDTH,
       tailWidth: ARROW_TAIL_WIDTH } );
+
+    // Scale the text below the arrow node. Max text length is the arrow tail length minus twice the head width.
+    if ( energyText.width > ARROW_LENGTH - 2*ARROW_HEAD_WIDTH ) {
+      energyText.scale( (ARROW_LENGTH - 2*ARROW_HEAD_WIDTH ) / energyText.width );
+    }
+
     energyArrow.setCenter( new Vector2( this.getCenterX(), this.getCenterY() + 60 ) );
-    energyText.setCenter( new Vector2( energyArrow.getCenterX(), energyArrow.getCenterY() + 15 ) );
+    energyText.setCenter( new Vector2( energyArrow.getCenterX(), energyArrow.getCenterY() + 17 ) );
 
     this.addChild( energyArrow );
     this.addChild( energyText );

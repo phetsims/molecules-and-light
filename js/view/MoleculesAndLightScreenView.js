@@ -39,6 +39,7 @@ define( function( require ) {
   // Location of the top left corner of the application window.
   var APPLICATION_WINDOW_LOCATION = new Vector2( 15, 15 );
 
+
   /**
    * Constructor for the screen view of Molecules and Light.
    *
@@ -106,9 +107,16 @@ define( function( require ) {
     var spectrumWindow = new SpectrumWindow();
 
     // Add the button for displaying the electromagnetic spectrum.
+    // Scale down the button content when it gets too large.  This is here to support translations.  Max width of this
+    // button is the width of the panels in the molecule control panel.
     var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
+    var buttonContent = new Text( buttonCaptionString, {font: font} );
+    if ( buttonContent.width > moleculeControlPanel.radioButtons.width ) {
+      buttonContent.scale( (moleculeControlPanel.radioButtons.width ) / buttonContent.width );
+    }
+
     var showSpectrumButton = new RectangularPushButton( {
-      content: new Text( buttonCaptionString, { font: font } ),
+      content: buttonContent,
       baseColor: new Color( 98, 173, 205 ),
       listener: function() { thisScreenView.updateSpectrumWindowVisibility( spectrumWindow ); }
     } );

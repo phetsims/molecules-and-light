@@ -73,12 +73,21 @@ define( function( require ) {
       new MoleculeSelectorPanel( ozoneString, O3_FORMULA_STRING, new MoleculeNode( new O3(), MVT ) )
     ];
 
+    // Scale down the molecule names in each selector panel.  This is done to assist with translations.
+    // Find the minimum scale factor.
+    var scaleFactor = 1;
+    _.each( content, function( panel ) { scaleFactor = Math.min( scaleFactor, panel.scaleFactor ); } );
+    // If necessary, scale down molecule names by the minimum scale factor.
+    if ( scaleFactor < 1 ) {
+      _.each( content, function( panel ) { panel.molecularName.scale( scaleFactor ); } )
+    }
+
     var radioButtonContent = [];
     for ( var i = 0; i < photonTargets.length; i++ ) {
       radioButtonContent.push( { value: photonTargets[i], node: content[i] } );
     }
 
-    var radioButtons = new RadioButtonGroup( model.photonTargetProperty, radioButtonContent,
+    this.radioButtons = new RadioButtonGroup( model.photonTargetProperty, radioButtonContent,
       {
         spacing: 1.75,
         baseColor: 'black',
@@ -89,7 +98,7 @@ define( function( require ) {
         cornerRadius: 7
       } );
 
-    Panel.call( this, radioButtons, { fill: 'black' } );
+    Panel.call( this, this.radioButtons, { fill: 'black' } );
 
     model.photonTargetProperty.link( function() {
       model.setPhotonTarget( model.photonTargetProperty.get() );

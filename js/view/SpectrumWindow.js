@@ -177,8 +177,12 @@ define( function( require ) {
         );
       }
 
-      // Create and add the textual label.
+      // Create and add the textual label.  Scale it so that it can handle translations.  Max label length is the arrow
+      // length minus twice the head length.
       var label = new Text( captionText, { font: LABEL_FONT } );
+      if( label.width > arrowNode.width - 2*ARROW_HEAD_WIDTH ) {
+        label.scale( ( arrowNode.width - 2*ARROW_HEAD_WIDTH ) / label.width );
+      }
       label.setCenter( arrowNode.getCenter() );
       arrowNode.addChild( label );
 
@@ -310,9 +314,9 @@ define( function( require ) {
           content.insertChild( i, new Text( labelText[i], { font: LABEL_FONT } ) );
         }
 
-        if ( ( content.width + 10 ) > width ) {
+        if ( ( content.width + 25 ) > width ) {
           // Scale the label to fit with a little bit of padding on each side.
-          content.scale( width / ( content.width + 10 ) );
+          content.scale( width / ( content.width + 25 ) );
         }
         content.setCenter( new Vector2( centerX, STRIP_HEIGHT / 2 ) );
         spectrumRootNode.addChild( content );
