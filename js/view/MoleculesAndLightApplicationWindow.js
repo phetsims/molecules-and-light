@@ -27,7 +27,7 @@ define( function( require ) {
   // Strings
   var returnMoleculeString = require( 'string!MOLECULES_AND_LIGHT/buttonNode.returnMolecule' );
 
-  // Class data for the Application Window
+  // constants
   var PHOTON_EMITTER_WIDTH = 125;
 
   /**

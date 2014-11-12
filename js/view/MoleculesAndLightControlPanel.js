@@ -35,7 +35,7 @@ define( function( require ) {
   var ozoneString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Ozone' );
   var waterString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Water' );
 
-  // Class Data
+  // constants
   // Model view transform used for creating images of the various molecules. This is basically a null transform except
   // that it scales down the size of the molecules and flips the Y axis so that molecules on the panel are oriented the
   // same as in the play area.
