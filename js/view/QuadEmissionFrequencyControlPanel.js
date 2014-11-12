@@ -103,7 +103,6 @@ define( function( require ) {
     _.each( radioButtonContent, function( content ) {
       var labelWidth = content.label.width;
       scaleFactor = Math.min( scaleFactor, panelWidth / labelWidth );
-      console.log( scaleFactor );
     } );
     // If necessary, scale down each label by the minimum scale value.
     if ( scaleFactor < 1 ) {
