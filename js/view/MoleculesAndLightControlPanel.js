@@ -45,11 +45,11 @@ define( function( require ) {
   // Chemical formulas for the button labels.
   var CO_FORMULA_STRING = 'CO';
   var N2_FORMULA_STRING = ChemUtils.toSubscript( 'N2' );
-  var O2_FORMULA_STRING = ChemUtils.toSubscript('O2');
-  var CO2_FORMULA_STRING = ChemUtils.toSubscript('CO2');
-  var NO2_FORMULA_STRING = ChemUtils.toSubscript('NO2');
-  var O3_FORMULA_STRING = ChemUtils.toSubscript('O3');
-  var H20_FORMULA_STRING = ChemUtils.toSubscript('H2O');
+  var O2_FORMULA_STRING = ChemUtils.toSubscript( 'O2' );
+  var CO2_FORMULA_STRING = ChemUtils.toSubscript( 'CO2' );
+  var NO2_FORMULA_STRING = ChemUtils.toSubscript( 'NO2' );
+  var O3_FORMULA_STRING = ChemUtils.toSubscript( 'O3' );
+  var H20_FORMULA_STRING = ChemUtils.toSubscript( 'H2O' );
 
   /**
    * Constructor for a Molecules and Light control panel.
