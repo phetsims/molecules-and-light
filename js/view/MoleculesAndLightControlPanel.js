@@ -88,7 +88,7 @@ define( function( require ) {
       radioButtonContent.push( { value: photonTargets[i], node: content[i] } );
     }
 
-    this.radioButtons = new RadioButtonGroup( model.photonTargetProperty, radioButtonContent,
+    var radioButtons = new RadioButtonGroup( model.photonTargetProperty, radioButtonContent,
       {
         spacing: 1.75,
         baseColor: 'black',
@@ -98,8 +98,10 @@ define( function( require ) {
         deselectedLineWidth: 0,
         cornerRadius: 7
       } );
+    // Keep track of the max panel width of the radio buttons for scaling and formatting purposes in the screen view.
+    this.radioPanelWidth = radioButtons.width;
 
-    Panel.call( this, this.radioButtons, { fill: 'black' } );
+    Panel.call( this, radioButtons, { fill: 'black' } );
 
     model.photonTargetProperty.link( function() {
       model.setPhotonTarget( model.photonTargetProperty.get() );

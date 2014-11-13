@@ -175,9 +175,13 @@ define( function( require ) {
       );
     }
 
-    // Create and add the textual label.
+    // Create and add the textual label.  Scale it so that it can handle translations.  Max label length is the arrow
+    // length minus twice the head length.
     var label = new Text( captionText, { font: LABEL_FONT } );
-    label.setCenter( arrowNode.getCenter() );
+    if ( label.width > arrowNode.width - 2 * ARROW_HEAD_WIDTH ) {
+      label.scale( ( arrowNode.width - 2 * ARROW_HEAD_WIDTH ) / label.width );
+    }
+    label.center = arrowNode.center;
     arrowNode.addChild( label );
 
     return arrowNode;

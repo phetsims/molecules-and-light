@@ -34,13 +34,13 @@ define( function( require ) {
     // Create text label for the molecule name and append the chemical formula in parentheses.
     var font = new PhetFont( { size: 13, family: 'Sans-serif' } );
     this.molecularName = new SubSupText( moleculeName + ' (' + moleculeFormula + ')', { fill: 'white', font: font } );
-    this.molecularName.setCenterY( this.getCenterY() );
-    this.molecularName.setLeft( this.getLeft() + 10 );
+    this.molecularName.centerY = this.centerY;
+    this.molecularName.left = this.left + 10;
 
     // Scale the molecule node to an appropriate size for the panel display and set its position in the panel.
     moleculeNode.scale( MOLECULE_SCALING_FACTOR );
-    moleculeNode.setRight( this.getRight() - 10 );
-    moleculeNode.setCenterY( this.getCenterY() );
+    moleculeNode.right = this.right - 10;
+    moleculeNode.centerY = this.centerY;
 
     // Scale the molecule name text.  This is here to support translations.
     var nameIconDistance = 35; // Minimum distance between molecule name and icon, chosen empirically.

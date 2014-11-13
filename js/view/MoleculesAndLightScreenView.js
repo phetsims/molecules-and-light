@@ -39,7 +39,6 @@ define( function( require ) {
   // Location of the top left corner of the application window.
   var APPLICATION_WINDOW_LOCATION = new Vector2( 15, 15 );
 
-
   /**
    * Constructor for the screen view of Molecules and Light.
    *
@@ -66,11 +65,11 @@ define( function( require ) {
 
     // Create the control panel for photon emission frequency.
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
-    photonEmissionControlPanel.setLeftTop( new Vector2( APPLICATION_WINDOW_LOCATION.x, 350 ) );
+    photonEmissionControlPanel.leftTop = ( new Vector2( APPLICATION_WINDOW_LOCATION.x, 350 ) );
 
     // Create the molecule control panel
     var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
-    moleculeControlPanel.setLeftTop( new Vector2( 530, applicationWindow.top - applicationWindow.frameWidth ) );
+    moleculeControlPanel.leftTop = ( new Vector2( 530, applicationWindow.top - applicationWindow.frameWidth ) );
 
     // Add reset all button.
     var resetAllButton = new ResetAllButton(
@@ -108,8 +107,8 @@ define( function( require ) {
     // button is the width of the panels in the molecule control panel.
     var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
     var buttonContent = new Text( buttonCaptionString, {font: font} );
-    if ( buttonContent.width > moleculeControlPanel.radioButtons.width ) {
-      buttonContent.scale( (moleculeControlPanel.radioButtons.width ) / buttonContent.width );
+    if ( buttonContent.width > moleculeControlPanel.radioPanelWidth ) {
+      buttonContent.scale( (moleculeControlPanel.radioPanelWidth ) / buttonContent.width );
     }
 
     var showSpectrumButton = new RectangularPushButton( {
@@ -117,7 +116,7 @@ define( function( require ) {
       baseColor: new Color( 98, 173, 205 ),
       listener: function() { thisScreenView.updateSpectrumWindowVisibility( spectrumWindow ); }
     } );
-    showSpectrumButton.setCenter( new Vector2( moleculeControlPanel.centerX, photonEmissionControlPanel.centerY - 33 ) );
+    showSpectrumButton.center = ( new Vector2( moleculeControlPanel.centerX, photonEmissionControlPanel.centerY - 33 ) );
     this.addChild( showSpectrumButton );
 
     // Add the nodes in the order necessary for correct layering.
@@ -153,7 +152,6 @@ define( function( require ) {
     }
 
   } );
-
 
 } );
 
