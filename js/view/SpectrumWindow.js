@@ -224,7 +224,7 @@ define( function( require ) {
     function addFrequencyTickMark( frequency, addLabel ) {
       // Create and add the tick mark line.
       var tickMarkNode = new Line( 0, 0, 0, -TICK_MARK_HEIGHT, { stroke: Color.BLACK, lineWidth: 2 } );
-      tickMarkNode.setCenterBottom( new Vector2( getOffsetFromFrequency( frequency ), strip.getTop() ) );
+      tickMarkNode.centerBottom = new Vector2( getOffsetFromFrequency( frequency ), strip.top );
       spectrumRootNode.addChild( tickMarkNode );
 
       if ( addLabel ) {
@@ -232,7 +232,7 @@ define( function( require ) {
         var label = createExponentialLabel( frequency );
         // Calculate x offset for label.  Allows the base number of the label to centered with the tick mark.
         var xOffset = new Text( '10', { font: TICK_MARK_FONT } ).width / 2;
-        label.setLeftCenter( new Vector2( tickMarkNode.getCenterX() - xOffset, tickMarkNode.getTop() - label.getHeight() / 2 ) );
+        label.leftCenter = new Vector2( tickMarkNode.centerX - xOffset, tickMarkNode.top - label.height / 2 );
         spectrumRootNode.addChild( label );
       }
     }
@@ -275,13 +275,13 @@ define( function( require ) {
 
       // Create and add the tick mark line.
       var tickMarkNode = new Line( 0, 0, 0, TICK_MARK_HEIGHT, { stroke: Color.BLACK, lineWidth: 2 } );
-      tickMarkNode.setCenterTop( new Vector2( getOffsetFromWavelength( wavelength ), strip.getBottom() ) );
+      tickMarkNode.centerTop = new Vector2( getOffsetFromWavelength( wavelength ), strip.bottom );
       spectrumRootNode.addChild( tickMarkNode );
       if ( addLabel ) {
         // Create and add the label.
         var label = createExponentialLabel( wavelength );
         // Calculate x offset for label.  Allows the base number of the label to be centered with the tick mark.
-        label.setCenter( new Vector2( tickMarkNode.getCenterX(), tickMarkNode.getTop() + label.getHeight() + 2 ) );
+        label.center = new Vector2( tickMarkNode.centerX, tickMarkNode.top + label.height + 2 );
         spectrumRootNode.addChild( label );
       }
     }
@@ -330,7 +330,7 @@ define( function( require ) {
       var drawDividerSegment = function() { return new Line( 0, 0, 0, STRIP_HEIGHT / 9, { stroke: Color.BLACK, lineWidth: 2 } ); };
       for ( var i = 0; i < 5; i++ ) {
         var dividerSegment = drawDividerSegment();
-        dividerSegment.setCenterTop( new Vector2( getOffsetFromFrequency( frequency ), 2 * i * STRIP_HEIGHT / 9 ) );
+        dividerSegment.centerTop = new Vector2( getOffsetFromFrequency( frequency ), 2 * i * STRIP_HEIGHT / 9 );
         spectrumRootNode.addChild( dividerSegment );
       }
     }
@@ -403,13 +403,13 @@ define( function( require ) {
     var visSpectrumWidth = Math.round( getOffsetFromFrequency( 790E12 ) - getOffsetFromFrequency( 400E12 ) );
     var visibleSpectrum = new SpectrumNode( visSpectrumWidth, STRIP_HEIGHT - strip.lineWidth, 380, 780, 1 );
     visibleSpectrum.rotate( Math.PI ); // Flip the visible spectrum so that it is represented correctly in the diagram.
-    visibleSpectrum.setLeftTop( new Vector2( getOffsetFromFrequency( 400E12 ), strip.getTop() + strip.lineWidth ) );
+    visibleSpectrum.leftTop = new Vector2( getOffsetFromFrequency( 400E12 ), strip.top + strip.lineWidth );
     spectrumRootNode.addChild( visibleSpectrum );
 
     // Add the label for the visible band.
     var visibleBandLabel = new Text( visibleBandLabelString, { font: new PhetFont( 12 ) } );
     var visibleBandCenterX = visibleSpectrum.centerX;
-    visibleBandLabel.setCenter( new Vector2( visibleBandCenterX, -35 ) );
+    visibleBandLabel.center = new Vector2( visibleBandCenterX, -35 );
     spectrumRootNode.addChild( visibleBandLabel );
 
     // Add the arrow that connects the visible band label to the visible band itself.
@@ -422,10 +422,10 @@ define( function( require ) {
 
     // Add the units.
     var frequencyUnits = new Text( cyclesPerSecondUnitsString, { font: LABEL_FONT } );
-    frequencyUnits.setLeftCenter( new Vector2( stripWidth, -TICK_MARK_HEIGHT - frequencyUnits.getHeight() / 2 ) );
+    frequencyUnits.leftCenter = new Vector2( stripWidth, -TICK_MARK_HEIGHT - frequencyUnits.height/ 2 );
     spectrumRootNode.addChild( frequencyUnits );
     var wavelengthUnits = new Text( metersUnitsString, { font: LABEL_FONT } );
-    wavelengthUnits.setLeftCenter( new Vector2( stripWidth, STRIP_HEIGHT + TICK_MARK_HEIGHT + frequencyUnits.getHeight() / 2 ) );
+    wavelengthUnits.leftCenter = new Vector2( stripWidth, STRIP_HEIGHT + TICK_MARK_HEIGHT + frequencyUnits.height / 2 );
     spectrumRootNode.addChild( wavelengthUnits );
 
     return spectrumRootNode;
@@ -457,7 +457,7 @@ define( function( require ) {
 
     // Create the line that represents the decreasing wavelength.
     context.beginPath();
-    context.moveTo( 0, boundingBox.getCenterY() ); // Move starting point to left center of bounding box.
+    context.moveTo( 0, boundingBox.centerY ); // Move starting point to left center of bounding box.
     var numPointsOnLine = 2000;
     for ( var i = 0; i < numPointsOnLine; i++ ) {
       var x = i * ( width / (numPointsOnLine - 1) );

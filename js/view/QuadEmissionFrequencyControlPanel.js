@@ -129,8 +129,8 @@ define( function( require ) {
       energyText.scale( (ARROW_LENGTH - 2*ARROW_HEAD_WIDTH ) / energyText.width );
     }
 
-    energyArrow.setCenter( new Vector2( this.getCenterX(), this.getCenterY() + 60 ) );
-    energyText.setCenter( new Vector2( energyArrow.getCenterX(), energyArrow.getCenterY() + 17 ) );
+    energyArrow.center = ( new Vector2( this.centerX, this.centerY + 60 ) );
+    energyText.center = ( new Vector2( energyArrow.centerX, energyArrow.centerY + 17 ) );
 
     this.addChild( energyArrow );
     this.addChild( energyText );
