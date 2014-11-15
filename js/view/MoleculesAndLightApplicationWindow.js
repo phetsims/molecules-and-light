@@ -78,7 +78,6 @@ define( function( require ) {
         this.width + ( 2 * this.frameWidth ),
         this.height + ( 2 * this.frameWidth ),
       7, 7 );
-//    this.clipArea = clipArea;
 
     // Add the button for restoring molecules that break apart.
     this.restoreMoleculeButtonNode = new RectangularPushButton( {
@@ -168,7 +167,7 @@ define( function( require ) {
 
       var photonsToRemove = [];
       for ( var photon = 0; photon < this.photonAbsorptionModel.photons.length; photon++ ) {
-        if ( !this.containsPointSelf( this.mvt.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).getLocation() ) ) ) {
+        if ( !this.containsPointSelf( this.mvt.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).locationProperty.get() ) ) ) {
           photonsToRemove.push( this.photonAbsorptionModel.photons.get( photon ) );
         }
       }
