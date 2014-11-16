@@ -22,11 +22,11 @@ define( function( require ) {
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/WavelengthConstants' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var PhotonEmitterSelectorPanel = require( 'MOLECULES_AND_LIGHT/view/PhotonEmitterSelectorPanel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Image = require( 'SCENERY/nodes/Image' );
   var PAPhotonNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/PAPhotonNode' );
   var Photon = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/Photon' );
+  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
 
   // images
   var heatLampImage = require( 'image!MOLECULES_AND_LIGHT/heat-lamp.png' );
@@ -62,12 +62,18 @@ define( function( require ) {
     var visiblePhotonNode = new PAPhotonNode( new Photon( WavelengthConstants.VISIBLE_WAVELENGTH ), new ModelViewTransform2() );
     var ultravioletPhotonNode = new PAPhotonNode( new Photon( WavelengthConstants.UV_WAVELENGTH ), new ModelViewTransform2() );
 
+    // Create a layout box which holds a single panel of this control panel.
+    function createPhotonEmitterPanel( emitterImage, photonNode ) {
+      emitterImage.scale( 0.15 ); // Scale emitter image to fit in the panel, scale factor determined empirically.
+      return new LayoutBox( { orientation: 'horizontal', spacing: 10, children: [ emitterImage, photonNode ] } );
+    }
+
     // Include all contents of the control panel.
     var content = [
-      new PhotonEmitterSelectorPanel( new Image( microwaveTransmitter ), microwavePhotonNode ),
-      new PhotonEmitterSelectorPanel( new Image( heatLampImage ), infraredPhotonNode ),
-      new PhotonEmitterSelectorPanel( new Image( flashlight2Image ), visiblePhotonNode ),
-      new PhotonEmitterSelectorPanel( new Image( uvLight2 ), ultravioletPhotonNode )
+      createPhotonEmitterPanel( new Image( microwaveTransmitter ), microwavePhotonNode ),
+      createPhotonEmitterPanel( new Image( heatLampImage ), infraredPhotonNode ),
+      createPhotonEmitterPanel( new Image( flashlight2Image ), visiblePhotonNode ),
+      createPhotonEmitterPanel( new Image( uvLight2 ), ultravioletPhotonNode )
     ];
 
     // Load the wavelengths and labels into arrays for initializing radio button content.
@@ -125,8 +131,8 @@ define( function( require ) {
       tailWidth: ARROW_TAIL_WIDTH } );
 
     // Scale the text below the arrow node. Max text length is the arrow tail length minus twice the head width.
-    if ( energyText.width > ARROW_LENGTH - 2*ARROW_HEAD_WIDTH ) {
-      energyText.scale( (ARROW_LENGTH - 2*ARROW_HEAD_WIDTH ) / energyText.width );
+    if ( energyText.width > ARROW_LENGTH - 2 * ARROW_HEAD_WIDTH ) {
+      energyText.scale( (ARROW_LENGTH - 2 * ARROW_HEAD_WIDTH ) / energyText.width );
     }
 
     energyArrow.center = ( new Vector2( this.centerX, this.centerY + 60 ) );
