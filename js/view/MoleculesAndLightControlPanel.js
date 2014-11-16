@@ -68,6 +68,13 @@ define( function( require ) {
     var photonTargets = ['SINGLE_CO_MOLECULE', 'SINGLE_N2_MOLECULE', 'SINGLE_O2_MOLECULE', 'SINGLE_CO2_MOLECULE',
       'SINGLE_H2O_MOLECULE', 'SINGLE_NO2_MOLECULE', 'SINGLE_O3_MOLECULE'];
 
+    var scaleFactor = 1; // Scale factor of the text in this control panel.  Value gets updated as panels are created.
+
+    //  Array which holds the formatted text of the control panel.  This will get populated as individual panels are
+    //  created.  Storing the text allows us to call on it later for scaling purposes once the scale factor has been
+    // calculated.
+    var textList = [];
+
     // Function which creates individual panels of the control panel.  Each panel consists of a molecule name, chemical
     // formula, and a visual node representing the molecule.
     function createMoleculeSelectorPanel( moleculeName, moleculeFormula, moleculeNode ) {
@@ -79,6 +86,7 @@ define( function( require ) {
       // Create text label for the molecule name and append the chemical formula in parentheses.
       var font = new PhetFont( { size: 13, family: 'Sans-serif' } );
       var molecularName = new SubSupText( moleculeName + ' (' + moleculeFormula + ')', { fill: 'white', font: font } );
+      textList.push( molecularName );
       molecularName.centerY = backgroundRectangle.centerY;
       molecularName.left = backgroundRectangle.left + 10;
 
@@ -86,6 +94,10 @@ define( function( require ) {
       moleculeNode.scale( MOLECULE_SCALING_FACTOR );
       moleculeNode.right = backgroundRectangle.right - 10;
       moleculeNode.centerY = backgroundRectangle.centerY;
+
+      // Determine the scale factor for the text on this panel, primarily for translation.
+      var nameIconDistance = 35; // Minimum distance between the molecule name and node, determined empirically.
+      scaleFactor = Math.min( scaleFactor, (moleculeNode.left - nameIconDistance) / molecularName.width );
 
       // Add the molecular name and molecule node to the selector panel.
       backgroundRectangle.addChild( molecularName );
@@ -106,6 +118,11 @@ define( function( require ) {
       createMoleculeSelectorPanel( ozoneString, O3_FORMULA_STRING, new MoleculeNode( new O3(), MVT ) )
     ];
 
+    // If necessary, scale down molecule names by the minimum scale factor.
+    if ( scaleFactor < 1 ) {
+      _.each( textList, function( text ) { text.scale( scaleFactor ) } );
+    }
+
     var radioButtonContent = [];
     for ( var i = 0; i < photonTargets.length; i++ ) {
       radioButtonContent.push( { value: photonTargets[i], node: content[i] } );
@@ -121,8 +138,6 @@ define( function( require ) {
         deselectedLineWidth: 0,
         cornerRadius: 7
       } );
-    // Keep track of the max panel width of the radio buttons for scaling and formatting purposes in the screen view.
-    this.radioPanelWidth = radioButtons.width;
 
     Panel.call( this, radioButtons, { fill: 'black' } );
 
