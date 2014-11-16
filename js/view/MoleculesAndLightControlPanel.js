@@ -16,7 +16,6 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
-  var MoleculeSelectorPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculeSelectorPanel' );
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/MoleculeNode' );
   var CO = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/CO' );
   var CO2 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/CO2' );
@@ -26,6 +25,9 @@ define( function( require ) {
   var NO2 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/NO2' );
   var O3 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/O3' );
   var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // Strings
   var carbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
@@ -51,6 +53,9 @@ define( function( require ) {
   var O3_FORMULA_STRING = ChemUtils.toSubscript( 'O3' );
   var H20_FORMULA_STRING = ChemUtils.toSubscript( 'H2O' );
 
+  // Scaling factor for the molecule images, determined empirically.
+  var MOLECULE_SCALING_FACTOR = 0.0975;
+
   /**
    * Constructor for a Molecules and Light control panel.
    *
@@ -63,25 +68,43 @@ define( function( require ) {
     var photonTargets = ['SINGLE_CO_MOLECULE', 'SINGLE_N2_MOLECULE', 'SINGLE_O2_MOLECULE', 'SINGLE_CO2_MOLECULE',
       'SINGLE_H2O_MOLECULE', 'SINGLE_NO2_MOLECULE', 'SINGLE_O3_MOLECULE'];
 
+    // Function which creates individual panels of the control panel.  Each panel consists of a molecule name, chemical
+    // formula, and a visual node representing the molecule.
+    function createMoleculeSelectorPanel( moleculeName, moleculeFormula, moleculeNode ) {
+
+      // Create a rectangle which holds the molecular name and representing node.  Rectangle enables the proper layout
+      // which is the molecular name aligned to the left of the panel and the molecule node aligned to the right.
+      var backgroundRectangle = new Rectangle( 0, 0, 215, 0 );
+
+      // Create text label for the molecule name and append the chemical formula in parentheses.
+      var font = new PhetFont( { size: 13, family: 'Sans-serif' } );
+      var molecularName = new SubSupText( moleculeName + ' (' + moleculeFormula + ')', { fill: 'white', font: font } );
+      molecularName.centerY = backgroundRectangle.centerY;
+      molecularName.left = backgroundRectangle.left + 10;
+
+      // Scale the molecule node to an appropriate size for the panel display and set its position in the panel.
+      moleculeNode.scale( MOLECULE_SCALING_FACTOR );
+      moleculeNode.right = backgroundRectangle.right - 10;
+      moleculeNode.centerY = backgroundRectangle.centerY;
+
+      // Add the molecular name and molecule node to the selector panel.
+      backgroundRectangle.addChild( molecularName );
+      backgroundRectangle.addChild( moleculeNode );
+
+      return backgroundRectangle;
+
+    }
+
     // Include all contents of the control panel.
     var content = [
-      new MoleculeSelectorPanel( carbonMonoxideString, CO_FORMULA_STRING, new MoleculeNode( new CO(), MVT ) ),
-      new MoleculeSelectorPanel( nitrogenString, N2_FORMULA_STRING, new MoleculeNode( new N2(), MVT ) ),
-      new MoleculeSelectorPanel( oxygenString, O2_FORMULA_STRING, new MoleculeNode( new O2(), MVT ) ),
-      new MoleculeSelectorPanel( carbonDioxideString, CO2_FORMULA_STRING, new MoleculeNode( new CO2(), MVT ) ),
-      new MoleculeSelectorPanel( waterString, H20_FORMULA_STRING, new MoleculeNode( new H2O(), MVT ) ),
-      new MoleculeSelectorPanel( nitrogenDioxideString, NO2_FORMULA_STRING, new MoleculeNode( new NO2(), MVT ) ),
-      new MoleculeSelectorPanel( ozoneString, O3_FORMULA_STRING, new MoleculeNode( new O3(), MVT ) )
+      createMoleculeSelectorPanel( carbonMonoxideString, CO_FORMULA_STRING, new MoleculeNode( new CO(), MVT ) ),
+      createMoleculeSelectorPanel( nitrogenString, N2_FORMULA_STRING, new MoleculeNode( new N2(), MVT ) ),
+      createMoleculeSelectorPanel( oxygenString, O2_FORMULA_STRING, new MoleculeNode( new O2(), MVT ) ),
+      createMoleculeSelectorPanel( carbonDioxideString, CO2_FORMULA_STRING, new MoleculeNode( new CO2(), MVT ) ),
+      createMoleculeSelectorPanel( waterString, H20_FORMULA_STRING, new MoleculeNode( new H2O(), MVT ) ),
+      createMoleculeSelectorPanel( nitrogenDioxideString, NO2_FORMULA_STRING, new MoleculeNode( new NO2(), MVT ) ),
+      createMoleculeSelectorPanel( ozoneString, O3_FORMULA_STRING, new MoleculeNode( new O3(), MVT ) )
     ];
-
-    // Scale down the molecule names in each selector panel.  This is done to assist with translations.
-    // Find the minimum scale factor.
-    var scaleFactor = 1;
-    _.each( content, function( panel ) { scaleFactor = Math.min( scaleFactor, panel.scaleFactor ); } );
-    // If necessary, scale down molecule names by the minimum scale factor.
-    if ( scaleFactor < 1 ) {
-      _.each( content, function( panel ) { panel.molecularName.scale( scaleFactor ); } )
-    }
 
     var radioButtonContent = [];
     for ( var i = 0; i < photonTargets.length; i++ ) {
