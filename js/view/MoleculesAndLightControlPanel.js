@@ -77,6 +77,7 @@ define( function( require ) {
 
     // Function which creates individual panels of the control panel.  Each panel consists of a molecule name, chemical
     // formula, and a visual node representing the molecule.
+    // NOTE! As a side-effect, this computes scaleFactor each time it's called.
     function createRadioButtonContent( moleculeName, moleculeFormula, moleculeNode ) {
 
       // Create a rectangle which holds the molecular name and representing node.  Rectangle enables the proper layout
