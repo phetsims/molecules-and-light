@@ -28,6 +28,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var PhotonTarget = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/PhotonTarget' );
 
   // Strings
   var carbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
@@ -63,10 +64,6 @@ define( function( require ) {
    * @constructor
    */
   function MoleculeSelectionPanel( model ) {
-
-    // Format the chemical formulas.  Append these formulas to the molecule names.
-    var photonTargets = ['SINGLE_CO_MOLECULE', 'SINGLE_N2_MOLECULE', 'SINGLE_O2_MOLECULE', 'SINGLE_CO2_MOLECULE',
-      'SINGLE_H2O_MOLECULE', 'SINGLE_NO2_MOLECULE', 'SINGLE_O3_MOLECULE'];
 
     var scaleFactor = 1; // Scale factor of the text in this control panel.  Value gets updated as panels are created.
 
@@ -123,10 +120,13 @@ define( function( require ) {
       _.each( textList, function( text ) { text.scale( scaleFactor ) } );
     }
 
+    // Store all radio button content for the radio button group.
+    var i = 0; // Iteration variable for content array.
     var radioButtonContent = [];
-    for ( var i = 0; i < photonTargets.length; i++ ) {
-      radioButtonContent.push( { value: photonTargets[i], node: content[i] } );
-    }
+    _.each( PhotonTarget, function( target ) {
+      radioButtonContent.push( { value: target, node: content[i] } );
+      i++;
+    } );
 
     var radioButtons = new RadioButtonGroup( model.photonTargetProperty, radioButtonContent,
       {
