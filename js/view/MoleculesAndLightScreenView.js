@@ -20,7 +20,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var Color = require( 'SCENERY/util/Color' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var MoleculesAndLightControlPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightControlPanel' );
+  var MoleculeSelectionPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculeSelectionPanel' );
   var MoleculesAndLightApplicationWindow = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightApplicationWindow' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
@@ -68,7 +68,7 @@ define( function( require ) {
     photonEmissionControlPanel.leftTop = ( new Vector2( APPLICATION_WINDOW_LOCATION.x, 350 ) );
 
     // Create the molecule control panel
-    var moleculeControlPanel = new MoleculesAndLightControlPanel( photonAbsorptionModel );
+    var moleculeControlPanel = new MoleculeSelectionPanel( photonAbsorptionModel );
     moleculeControlPanel.leftTop = ( new Vector2( 530, applicationWindow.top - applicationWindow.frameWidth ) );
 
     // Add reset all button.

@@ -62,7 +62,7 @@ define( function( require ) {
    * @param { PhotonAbsorptionModel } model - The model controlled by this panel.
    * @constructor
    */
-  function MoleculesAndLightControlPanel( model ) {
+  function MoleculeSelectionPanel( model ) {
 
     // Format the chemical formulas.  Append these formulas to the molecule names.
     var photonTargets = ['SINGLE_CO_MOLECULE', 'SINGLE_N2_MOLECULE', 'SINGLE_O2_MOLECULE', 'SINGLE_CO2_MOLECULE',
@@ -146,5 +146,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Panel, MoleculesAndLightControlPanel );
+  return inherit( Panel, MoleculeSelectionPanel );
 } );
