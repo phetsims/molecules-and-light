@@ -48,6 +48,12 @@ define( function( require ) {
   var ARROW_TAIL_WIDTH = 1;
   var ARROW_COLOR = Color.BLACK;
 
+  // Create a layout box which holds a single panel of this control panel.
+  function createRadioButtonContent( emitterImage, photonNode ) {
+    emitterImage.scale( 0.15 ); // Scale emitter image to fit in the panel, scale factor determined empirically.
+    return new LayoutBox( { orientation: 'horizontal', spacing: 10, children: [ emitterImage, photonNode ] } );
+  }
+
   /**
    * Constructor for the control panel of emitted photon frequency.
    *
@@ -62,18 +68,12 @@ define( function( require ) {
     var visiblePhotonNode = new PAPhotonNode( new Photon( WavelengthConstants.VISIBLE_WAVELENGTH ), new ModelViewTransform2() );
     var ultravioletPhotonNode = new PAPhotonNode( new Photon( WavelengthConstants.UV_WAVELENGTH ), new ModelViewTransform2() );
 
-    // Create a layout box which holds a single panel of this control panel.
-    function createPhotonEmitterPanel( emitterImage, photonNode ) {
-      emitterImage.scale( 0.15 ); // Scale emitter image to fit in the panel, scale factor determined empirically.
-      return new LayoutBox( { orientation: 'horizontal', spacing: 10, children: [ emitterImage, photonNode ] } );
-    }
-
-    // Include all contents of the control panel.
+    // Content for radio buttons
     var content = [
-      createPhotonEmitterPanel( new Image( microwaveTransmitter ), microwavePhotonNode ),
-      createPhotonEmitterPanel( new Image( heatLampImage ), infraredPhotonNode ),
-      createPhotonEmitterPanel( new Image( flashlight2Image ), visiblePhotonNode ),
-      createPhotonEmitterPanel( new Image( uvLight2 ), ultravioletPhotonNode )
+      createRadioButtonContent( new Image( microwaveTransmitter ), microwavePhotonNode ),
+      createRadioButtonContent( new Image( heatLampImage ), infraredPhotonNode ),
+      createRadioButtonContent( new Image( flashlight2Image ), visiblePhotonNode ),
+      createRadioButtonContent( new Image( uvLight2 ), ultravioletPhotonNode )
     ];
 
     // Load the wavelengths and labels into arrays for initializing radio button content.

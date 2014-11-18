@@ -77,7 +77,7 @@ define( function( require ) {
 
     // Function which creates individual panels of the control panel.  Each panel consists of a molecule name, chemical
     // formula, and a visual node representing the molecule.
-    function createMoleculeSelectorPanel( moleculeName, moleculeFormula, moleculeNode ) {
+    function createRadioButtonContent( moleculeName, moleculeFormula, moleculeNode ) {
 
       // Create a rectangle which holds the molecular name and representing node.  Rectangle enables the proper layout
       // which is the molecular name aligned to the left of the panel and the molecule node aligned to the right.
@@ -104,18 +104,17 @@ define( function( require ) {
       backgroundRectangle.addChild( moleculeNode );
 
       return backgroundRectangle;
-
     }
 
     // Include all contents of the control panel.
     var content = [
-      createMoleculeSelectorPanel( carbonMonoxideString, CO_FORMULA_STRING, new MoleculeNode( new CO(), MVT ) ),
-      createMoleculeSelectorPanel( nitrogenString, N2_FORMULA_STRING, new MoleculeNode( new N2(), MVT ) ),
-      createMoleculeSelectorPanel( oxygenString, O2_FORMULA_STRING, new MoleculeNode( new O2(), MVT ) ),
-      createMoleculeSelectorPanel( carbonDioxideString, CO2_FORMULA_STRING, new MoleculeNode( new CO2(), MVT ) ),
-      createMoleculeSelectorPanel( waterString, H20_FORMULA_STRING, new MoleculeNode( new H2O(), MVT ) ),
-      createMoleculeSelectorPanel( nitrogenDioxideString, NO2_FORMULA_STRING, new MoleculeNode( new NO2(), MVT ) ),
-      createMoleculeSelectorPanel( ozoneString, O3_FORMULA_STRING, new MoleculeNode( new O3(), MVT ) )
+      createRadioButtonContent( carbonMonoxideString, CO_FORMULA_STRING, new MoleculeNode( new CO(), MVT ) ),
+      createRadioButtonContent( nitrogenString, N2_FORMULA_STRING, new MoleculeNode( new N2(), MVT ) ),
+      createRadioButtonContent( oxygenString, O2_FORMULA_STRING, new MoleculeNode( new O2(), MVT ) ),
+      createRadioButtonContent( carbonDioxideString, CO2_FORMULA_STRING, new MoleculeNode( new CO2(), MVT ) ),
+      createRadioButtonContent( waterString, H20_FORMULA_STRING, new MoleculeNode( new H2O(), MVT ) ),
+      createRadioButtonContent( nitrogenDioxideString, NO2_FORMULA_STRING, new MoleculeNode( new NO2(), MVT ) ),
+      createRadioButtonContent( ozoneString, O3_FORMULA_STRING, new MoleculeNode( new O3(), MVT ) )
     ];
 
     // If necessary, scale down molecule names by the minimum scale factor.
