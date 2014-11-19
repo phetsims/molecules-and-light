@@ -6,6 +6,8 @@
   "ultraviolet": "Ultraviolet",
   "higherEnergy": "Higher Energy",
 
+  "molecularNamePattern": "{0} ({1})",
+
   "ControlPanel.CO": "CO",
   "ControlPanel.N2": "N2",
   "ControlPanel.O2": "O2",

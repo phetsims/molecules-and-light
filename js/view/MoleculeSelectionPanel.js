@@ -29,6 +29,7 @@ define( function( require ) {
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var PhotonTarget = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/PhotonTarget' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   // Strings
   var carbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
@@ -38,6 +39,7 @@ define( function( require ) {
   var nitrogenDioxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.NitrogenDioxide' );
   var ozoneString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Ozone' );
   var waterString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Water' );
+  var molecularNamePattern = require( 'string!MOLECULES_AND_LIGHT/molecularNamePattern' );
 
   // constants
   // Model view transform used for creating images of the various molecules. This is basically a null transform except
@@ -81,9 +83,10 @@ define( function( require ) {
       // which is the molecular name aligned to the left of the panel and the molecule node aligned to the right.
       var backgroundRectangle = new Rectangle( 0, 0, 215, 0 );
 
-      // Create text label for the molecule name and append the chemical formula in parentheses.
+      // Create text label for the molecule name.  Use StringUtils to order chemical names and formulas as desired.
       var font = new PhetFont( { size: 13, family: 'Sans-serif' } );
-      var molecularName = new SubSupText( moleculeName + ' (' + moleculeFormula + ')', { fill: 'white', font: font } );
+      var moleculeNameString = StringUtils.format( molecularNamePattern, moleculeName, moleculeFormula );
+      var molecularName = new SubSupText( moleculeNameString, { fill: 'white', font: font } );
       textList.push( molecularName );
       molecularName.centerY = backgroundRectangle.centerY;
       molecularName.left = backgroundRectangle.left + 10;
