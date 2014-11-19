@@ -113,7 +113,7 @@ define( function( require ) {
     // If necessary, scale down each label by the minimum scale value.
     if ( scaleFactor < 1 ) {
       _.each( radioButtonContent, function( content ) {
-        content.label.scale( scaleFactor )
+        content.label.scale( scaleFactor );
       } );
     }
 

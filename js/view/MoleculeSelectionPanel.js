@@ -117,7 +117,7 @@ define( function( require ) {
 
     // If necessary, scale down molecule names by the minimum scale factor.
     if ( scaleFactor < 1 ) {
-      _.each( textList, function( text ) { text.scale( scaleFactor ) } );
+      _.each( textList, function( text ) { text.scale( scaleFactor ); } );
     }
 
     // Store all radio button content for the radio button group.
