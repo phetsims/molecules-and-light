@@ -145,7 +145,7 @@ define( function( require ) {
     Panel.call( this, radioButtons, { fill: 'black' } );
 
     model.photonTargetProperty.link( function() {
-      model.setPhotonTarget( model.photonTargetProperty.get() );
+      model.setPhotonTarget( model.photonTarget );
     } );
   }
 
