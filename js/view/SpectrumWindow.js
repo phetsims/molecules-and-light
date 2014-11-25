@@ -16,7 +16,6 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
@@ -71,7 +70,7 @@ define( function( require ) {
         centerY: this.layoutBounds.centerY,
         xMargin: 20,
         yMargin: 20,
-        fill: new Color( 233, 236, 174 ) } )
+        fill: 'rgb(233, 236,  174)' } )
     );
   }
 
@@ -99,8 +98,8 @@ define( function( require ) {
       ( OVERALL_DIMENSIONS.width - HORIZONTAL_INSET * 2 ),
       'right',
       frequencyArrowLabelString,
-      Color.WHITE,
-      new Color( 5, 255, 255 )
+      'white',
+      'rgb(5, 255,  255)'
     );
     children.push( frequencyArrow );
 
@@ -113,8 +112,8 @@ define( function( require ) {
       ( OVERALL_DIMENSIONS.width - HORIZONTAL_INSET * 2 ),
       'left',
       wavelengthArrowLabelString,
-      Color.WHITE,
-      new Color( 225, 5, 255 )
+      'white',
+      'rgb(255, 5, 255)'
     );
     children.push( wavelengthArrow );
 
@@ -132,8 +131,8 @@ define( function( require ) {
    * @param {number} length - Length of the arrow
    * @param {string} orientation - options are 'left' or 'right'.  Determines direction of the arrow.
    * @param {string} captionText - Description of what the arrow node represents.
-   * @param {Color} leftColor
-   * @param {Color} rightColor
+   * @param {string} leftColor
+   * @param {string} rightColor
    * @returns {ArrowNode}
    * @constructor
    */
@@ -223,7 +222,7 @@ define( function( require ) {
      */
     function addFrequencyTickMark( frequency, addLabel ) {
       // Create and add the tick mark line.
-      var tickMarkNode = new Line( 0, 0, 0, -TICK_MARK_HEIGHT, { stroke: Color.BLACK, lineWidth: 2 } );
+      var tickMarkNode = new Line( 0, 0, 0, -TICK_MARK_HEIGHT, { stroke: 'black', lineWidth: 2 } );
       tickMarkNode.centerBottom = new Vector2( getOffsetFromFrequency( frequency ), strip.top );
       spectrumRootNode.addChild( tickMarkNode );
 
@@ -274,7 +273,7 @@ define( function( require ) {
     function addWavelengthTickMark( wavelength, addLabel ) {
 
       // Create and add the tick mark line.
-      var tickMarkNode = new Line( 0, 0, 0, TICK_MARK_HEIGHT, { stroke: Color.BLACK, lineWidth: 2 } );
+      var tickMarkNode = new Line( 0, 0, 0, TICK_MARK_HEIGHT, { stroke: 'black', lineWidth: 2 } );
       tickMarkNode.centerTop = new Vector2( getOffsetFromWavelength( wavelength ), strip.bottom );
       spectrumRootNode.addChild( tickMarkNode );
       if ( addLabel ) {
@@ -327,7 +326,7 @@ define( function( require ) {
      * @param {number} frequency
      */
     function addBandDivider( frequency ) {
-      var drawDividerSegment = function() { return new Line( 0, 0, 0, STRIP_HEIGHT / 9, { stroke: Color.BLACK, lineWidth: 2 } ); };
+      var drawDividerSegment = function() { return new Line( 0, 0, 0, STRIP_HEIGHT / 9, { stroke: 'black', lineWidth: 2 } ); };
       for ( var i = 0; i < 5; i++ ) {
         var dividerSegment = drawDividerSegment();
         dividerSegment.centerTop = new Vector2( getOffsetFromFrequency( frequency ), 2 * i * STRIP_HEIGHT / 9 );
@@ -370,9 +369,9 @@ define( function( require ) {
     // Create the "strip", which is the solid background portions that contains the different bands and that has tick
     // marks on the top and bottom.
     var strip = new Rectangle( 0, 0, stripWidth, STRIP_HEIGHT, {
-      fill: new Color( 237, 243, 246 ),
+      fill: 'rgb(237, 243, 246)',
       lineWidth: 2,
-      stroke: Color.BLACK } );
+      stroke: 'black' } );
     spectrumRootNode.addChild( strip );
 
     // Add the frequency tick marks to the top of the spectrum strip.
@@ -422,7 +421,7 @@ define( function( require ) {
 
     // Add the units.
     var frequencyUnits = new Text( cyclesPerSecondUnitsString, { font: LABEL_FONT } );
-    frequencyUnits.leftCenter = new Vector2( stripWidth, -TICK_MARK_HEIGHT - frequencyUnits.height/ 2 );
+    frequencyUnits.leftCenter = new Vector2( stripWidth, -TICK_MARK_HEIGHT - frequencyUnits.height / 2 );
     spectrumRootNode.addChild( frequencyUnits );
     var wavelengthUnits = new Text( metersUnitsString, { font: LABEL_FONT } );
     wavelengthUnits.leftCenter = new Vector2( stripWidth, STRIP_HEIGHT + TICK_MARK_HEIGHT + frequencyUnits.height / 2 );
@@ -444,9 +443,9 @@ define( function( require ) {
     // Create and add the boundary and background.
     var boundingBoxHeight = width * 0.1; // Arbitrary, adjust as needed.
     var boundingBox = new Rectangle( 0, 0, width, boundingBoxHeight, {
-      fill: new Color( 237, 243, 246 ),
+      fill: 'rgb(237, 243, 246)',
       lineWidth: 2,
-      stroke: Color.BLACK
+      stroke: 'black'
     } );
 
     // Draw the spectrum directly to a canvas, to improve performance.

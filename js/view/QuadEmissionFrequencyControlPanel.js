@@ -17,7 +17,6 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var Color = require( 'SCENERY/util/Color' );
   var Vector2 = require( 'DOT/Vector2' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/WavelengthConstants' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
@@ -46,7 +45,7 @@ define( function( require ) {
   var ARROW_HEAD_HEIGHT = 15;
   var ARROW_HEAD_WIDTH = 20;
   var ARROW_TAIL_WIDTH = 1;
-  var ARROW_COLOR = Color.BLACK;
+  var ARROW_COLOR = 'black';
 
   // Create a layout box which holds a single panel of this control panel.
   function createRadioButtonContent( emitterImage, photonNode ) {
@@ -93,7 +92,7 @@ define( function( require ) {
         orientation: 'horizontal',
         spacing: 15,
         baseColor: 'black',
-        selectedStroke: new Color( 47, 101, 209 ),
+        selectedStroke: 'rgb(47, 101,209)',
         deselectedLineWidth: 0,
         buttonContentXMargin: 0,
         buttonContentYMargin: 8,

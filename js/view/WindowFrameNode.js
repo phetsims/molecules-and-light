@@ -21,8 +21,8 @@ define( function( require ) {
    *
    * @param {MoleculesAndLightApplicationWindow} applicationWindow
    * @param {number} lineWidth - width of the window frame, similar to lineWidth for stroke in other scenery objects.
-   * @param {Color} innerColor - boundary color on the inside of the window frame.
-   * @param {Color} outerColor - boundary color along the outer edge of the window frame.
+   * @param {string} innerColor - boundary color on the inside of the window frame.
+   * @param {string} outerColor - boundary color along the outer edge of the window frame.
    * @constructor
    */
   function WindowFrameNode( applicationWindow, lineWidth, innerColor, outerColor ) {
@@ -30,8 +30,8 @@ define( function( require ) {
     // Set inputs as class variables so they can be used in canvas methods.
     this.applicationWindow = applicationWindow;
     this.lineWidth = lineWidth;
-    this.innerColor = innerColor.toCSS();
-    this.outerColor = outerColor.toCSS();
+    this.innerColor = innerColor;
+    this.outerColor = outerColor;
 
     CanvasNode.call( this );
     this.invalidatePaint();

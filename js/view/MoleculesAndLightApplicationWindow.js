@@ -16,7 +16,6 @@ define( function( require ) {
   var PhotonNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/PhotonNode' );
   var PhotonEmitterNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/PhotonEmitterNode' );
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/MoleculeNode' );
-  var Color = require( 'SCENERY/util/Color' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Property = require( 'AXON/Property' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
@@ -68,7 +67,7 @@ define( function( require ) {
     photonEmitterLayer.addChild( photonEmitterNode );
 
     // Add the frame around the application window.
-    var windowFrame = new WindowFrameNode( this, this.frameWidth, new Color( "#BED0E7" ), new Color( '#4070CE' ) );
+    var windowFrame = new WindowFrameNode( this, this.frameWidth, '#BED0E7', '#4070CE' );
     this.addChild( windowFrame );
 
     // Add a clip area around the edge of the window frame to clean up photon and molecule removal from screen.
@@ -82,7 +81,7 @@ define( function( require ) {
     // Add the button for restoring molecules that break apart.
     this.restoreMoleculeButtonNode = new RectangularPushButton( {
       content: new Text( returnMoleculeString ),
-      baseColor: new Color( 255, 144, 0 ),
+      baseColor: 'rgb(255, 144, 0)',
       listener: function() {
         photonAbsorptionModel.restorePhotonTarget();
         thisWindow.restoreButtonVisibleProperty.set( false );

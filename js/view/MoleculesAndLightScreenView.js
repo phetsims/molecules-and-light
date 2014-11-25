@@ -18,7 +18,6 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var QuadEmissionFrequencyControlPanel = require( 'MOLECULES_AND_LIGHT/view/QuadEmissionFrequencyControlPanel' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var Color = require( 'SCENERY/util/Color' );
   var Text = require( 'SCENERY/nodes/Text' );
   var MoleculeSelectionPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculeSelectionPanel' );
   var MoleculesAndLightApplicationWindow = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightApplicationWindow' );
@@ -112,7 +111,7 @@ define( function( require ) {
     }
     var showSpectrumButton = new RectangularPushButton( {
       content: buttonContent,
-      baseColor: new Color( 98, 173, 205 ),
+      baseColor: 'rgb(98, 173, 205)',
       listener: function() { thisScreenView.updateSpectrumWindowVisibility( spectrumWindow ); }
     } );
     showSpectrumButton.center = ( new Vector2( moleculeControlPanel.centerX, photonEmissionControlPanel.centerY - 33 ) );
