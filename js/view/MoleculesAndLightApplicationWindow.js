@@ -100,12 +100,14 @@ define( function( require ) {
       moleculeLayer.addChild( moleculeNode );
 
       // Determine if it is time to remove molecule and update restore molecule button visibility.
-      addedMolecule.centerOfGravityProperty.link( function() {
+      var centerOfGravityObserver = function() {
         thisWindow.moleculeCheckBounds();
-      } );
+      };
+      addedMolecule.centerOfGravityProperty.link( centerOfGravityObserver );
 
       photonAbsorptionModel.activeMolecules.addItemRemovedListener( function removalListener( removedMolecule ) {
         if ( removedMolecule === addedMolecule ) {
+          addedMolecule.centerOfGravityProperty.unlink( centerOfGravityObserver );
           moleculeLayer.removeChild( moleculeNode );
           photonAbsorptionModel.activeMolecules.removeItemRemovedListener( removalListener );
         }
@@ -119,12 +121,14 @@ define( function( require ) {
       photonLayer.addChild( photonNode );
 
       // Watch photon positions and determine if photon should be removed from window.
-      addedPhoton.locationProperty.link( function() {
+      var photonPositionObserver = function() {
         thisWindow.photonCheckBounds();
-      } );
+      };
+      addedPhoton.locationProperty.link( photonPositionObserver );
 
       photonAbsorptionModel.photons.addItemRemovedListener( function removalListener( removedPhoton ) {
         if ( removedPhoton === addedPhoton ) {
+          addedPhoton.locationProperty.unlink( photonPositionObserver );
           photonLayer.removeChild( photonNode );
           photonAbsorptionModel.photons.removeItemRemovedListener( removalListener );
         }
