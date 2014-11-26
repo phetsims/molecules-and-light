@@ -47,43 +47,13 @@ define( function( require ) {
   var metersUnitsString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.metersUnits' );
 
   /**
-   * Constructor for the Spectrum Window.  Loads all subclass objects into a vertical layout box.
-   *
-   * @constructor
-   */
-  function SpectrumWindow() {
-
-    /*
-     * Use ScreenView, to help center and scale content. Renderer must be specified here because the window is added
-     * directly to the scene, instead of to some other node that already has svg renderer.
-     */
-    ScreenView.call( this, {renderer: 'svg'} );
-
-    var children = [
-      new SpectrumDiagram(),
-      new CloseButton()
-    ];
-
-    var content = new LayoutBox( { orientation: 'vertical', align: 'center', spacing: 10, children: children } );
-
-    this.addChild( new Panel( content, {
-        centerX: this.layoutBounds.centerX,
-        centerY: this.layoutBounds.centerY,
-        xMargin: 20,
-        yMargin: 20,
-        fill: 'rgb(233, 236,  174)' } )
-    );
-  }
-
-  /**
    * Class that contains the diagram of the EM spectrum.  This class includes the arrows, the spectrum strip, the
    * wavelength indicator, etc.  In other words, it is the top level node within which the constituent parts that make
    * up the entire diagram are contained.
    *
-   * @returns {LayoutBox}
    * @constructor
    */
-  var SpectrumDiagram = function() {
+  function SpectrumDiagram() {
 
     var OVERALL_DIMENSIONS = new Dimension2( 550, 440 );
     var HORIZONTAL_INSET = 30;
@@ -122,9 +92,10 @@ define( function( require ) {
     var decreasingWavelengthNode = new ChirpNode( OVERALL_DIMENSIONS.width - 2 * HORIZONTAL_INSET );
     children.push( decreasingWavelengthNode );
 
-    return new LayoutBox( { orientation: 'vertical', children: children, spacing: 15 } );
+    LayoutBox.call( this, { orientation: 'vertical', children: children, spacing: 15 } );
+  }
 
-  };
+  inherit( LayoutBox, SpectrumDiagram );
 
   /**
    * Constructor for the labeled arrow in the spectrum window.
@@ -134,10 +105,9 @@ define( function( require ) {
    * @param {string} captionText - Description of what the arrow node represents.
    * @param {string} leftColor
    * @param {string} rightColor
-   * @returns {ArrowNode}
    * @constructor
    */
-  var LabeledArrow = function( length, orientation, captionText, leftColor, rightColor ) {
+  function LabeledArrow( length, orientation, captionText, leftColor, rightColor ) {
 
     var ARROW_HEAD_HEIGHT = 40;
     var ARROW_HEAD_WIDTH = 40;
@@ -149,72 +119,69 @@ define( function( require ) {
       POINTING_RIGHT: 'right'
     };
 
-    // Create and Add the arrow node.  Arrow direction and fill is dependent on orientation.
-    var arrowNode;
+    // Set arrow direction and fill based on desired orientation.
     var gradientPaint;
     // Point the node in the right direction.
     if ( orientation === Orientation.POINTING_LEFT ) {
       gradientPaint = new LinearGradient( 0, 0, -length, 0 ).addColorStop( 0, leftColor ).addColorStop( 1, rightColor );
-      arrowNode = new ArrowNode( 0, 0, -length, 0, {
-          headHeight: ARROW_HEAD_HEIGHT,
-          headWidth: ARROW_HEAD_WIDTH,
-          tailWidth: ARROW_TAIL_WIDTH,
-          fill: gradientPaint,
-          lineWidth: 2 }
-      );
+      length = -length; // Negate the x component of the arrow head so that it points left.
     }
     else {
       assert && assert( orientation === Orientation.POINTING_RIGHT );
       gradientPaint = new LinearGradient( 0, 0, length, 0 ).addColorStop( 0, leftColor ).addColorStop( 1, rightColor );
-      arrowNode = new ArrowNode( 0, 0, length, 0, {
-          headHeight: ARROW_HEAD_HEIGHT,
-          headWidth: ARROW_HEAD_WIDTH,
-          tailWidth: ARROW_TAIL_WIDTH,
-          fill: gradientPaint,
-          lineWidth: 2 }
-      );
     }
+
+    ArrowNode.call( this, 0, 0, length, 0, {
+      headHeight: ARROW_HEAD_HEIGHT,
+      headWidth: ARROW_HEAD_WIDTH,
+      tailWidth: ARROW_TAIL_WIDTH,
+      fill: gradientPaint,
+      lineWidth: 2
+    } );
 
     // Create and add the textual label.  Scale it so that it can handle translations.  Max label length is the arrow
     // length minus twice the head length.
     var label = new Text( captionText, { font: LABEL_FONT } );
-    if ( label.width > arrowNode.width - 2 * ARROW_HEAD_WIDTH ) {
-      label.scale( ( arrowNode.width - 2 * ARROW_HEAD_WIDTH ) / label.width );
+    if ( label.width > this.width - 2 * ARROW_HEAD_WIDTH ) {
+      label.scale( ( this.width - 2 * ARROW_HEAD_WIDTH ) / label.width );
     }
-    label.center = arrowNode.center;
-    arrowNode.addChild( label );
+    label.center = this.center;
+    this.addChild( label );
 
-    return arrowNode;
+  }
 
-  };
+  inherit( ArrowNode, LabeledArrow );
 
   /**
    * Create a button which closes the spectrum window.  As of right now the behavior of the spectrum window is to
    * close whenever the user clicks in the molecules and light screen view ( as in AboutDialog ).  This means that no
    * closing listener is necessary.
    *
-   * @returns {RectangularPushButton}
    * @constructor
    */
-  var CloseButton = function() {
+  function CloseButton() {
 
     var content = new Text( spectrumWindowCloseString, { font: new PhetFont( 16 ) } );
-    return new RectangularPushButton( { content: content, listener: null } );
+    RectangularPushButton.call( this, { content: content, listener: null } );
 
-  };
+  }
+
+  inherit( RectangularPushButton, CloseButton );
 
   /**
    * Class that depicts the frequencies and wavelengths of the EM spectrum and labels the subsections
    * (e.g. "Infrared").
    *
    * @param {number} width
-   * @return {Node}
    * @constructor
    */
-  var LabeledSpectrumNode = function( width ) {
+  function LabeledSpectrumNode( width ) {
+
+    // Supertype constructor
+    Node.call( this );
+    var thisNode = this;
 
     // Define the functions used for the labeled spectrum node.
-
     /**
      * Add a tick mark for the specified frequency.  Frequency tick marks go on top of the strip.
      *
@@ -225,7 +192,7 @@ define( function( require ) {
       // Create and add the tick mark line.
       var tickMarkNode = new Line( 0, 0, 0, -TICK_MARK_HEIGHT, { stroke: 'black', lineWidth: 2 } );
       tickMarkNode.centerBottom = new Vector2( getOffsetFromFrequency( frequency ), strip.top );
-      spectrumRootNode.addChild( tickMarkNode );
+      thisNode.addChild( tickMarkNode );
 
       if ( addLabel ) {
         // Create and add the label.
@@ -233,7 +200,7 @@ define( function( require ) {
         // Calculate x offset for label.  Allows the base number of the label to centered with the tick mark.
         var xOffset = new Text( '10', { font: TICK_MARK_FONT } ).width / 2;
         label.leftCenter = new Vector2( tickMarkNode.centerX - xOffset, tickMarkNode.top - label.height / 2 );
-        spectrumRootNode.addChild( label );
+        thisNode.addChild( label );
       }
     }
 
@@ -276,13 +243,13 @@ define( function( require ) {
       // Create and add the tick mark line.
       var tickMarkNode = new Line( 0, 0, 0, TICK_MARK_HEIGHT, { stroke: 'black', lineWidth: 2 } );
       tickMarkNode.centerTop = new Vector2( getOffsetFromWavelength( wavelength ), strip.bottom );
-      spectrumRootNode.addChild( tickMarkNode );
+      thisNode.addChild( tickMarkNode );
       if ( addLabel ) {
         // Create and add the label.
         var label = createExponentialLabel( wavelength );
         // Calculate x offset for label.  Allows the base number of the label to be centered with the tick mark.
         label.center = new Vector2( tickMarkNode.centerX, tickMarkNode.top + label.height + 2 );
-        spectrumRootNode.addChild( label );
+        thisNode.addChild( label );
       }
     }
 
@@ -317,7 +284,7 @@ define( function( require ) {
         content.scale( width / ( content.width + 10 ) );
       }
       content.setCenter( new Vector2( centerX, STRIP_HEIGHT / 2 ) );
-      spectrumRootNode.addChild( content );
+      thisNode.addChild( content );
     }
 
     /**
@@ -331,7 +298,7 @@ define( function( require ) {
       for ( var i = 0; i < 5; i++ ) {
         var dividerSegment = drawDividerSegment();
         dividerSegment.centerTop = new Vector2( getOffsetFromFrequency( frequency ), 2 * i * STRIP_HEIGHT / 9 );
-        spectrumRootNode.addChild( dividerSegment );
+        thisNode.addChild( dividerSegment );
       }
     }
 
@@ -365,7 +332,6 @@ define( function( require ) {
     var LABEL_FONT = new PhetFont( 16 );
 
     var stripWidth = width;
-    var spectrumRootNode = new Node();
 
     // Create the "strip", which is the solid background portions that contains the different bands and that has tick
     // marks on the top and bottom.
@@ -373,7 +339,7 @@ define( function( require ) {
       fill: 'rgb(237, 243, 246)',
       lineWidth: 2,
       stroke: 'black' } );
-    spectrumRootNode.addChild( strip );
+    this.addChild( strip );
 
     // Add the frequency tick marks to the top of the spectrum strip.
     for ( var i = 4; i <= 20; i++ ) {
@@ -404,13 +370,13 @@ define( function( require ) {
     var visibleSpectrum = new SpectrumNode( visSpectrumWidth, STRIP_HEIGHT - strip.lineWidth, 380, 780, 1 );
     visibleSpectrum.rotate( Math.PI ); // Flip the visible spectrum so that it is represented correctly in the diagram.
     visibleSpectrum.leftTop = new Vector2( getOffsetFromFrequency( 400E12 ), strip.top + strip.lineWidth );
-    spectrumRootNode.addChild( visibleSpectrum );
+    this.addChild( visibleSpectrum );
 
     // Add the label for the visible band.
     var visibleBandLabel = new Text( visibleBandLabelString, { font: new PhetFont( 12 ) } );
     var visibleBandCenterX = visibleSpectrum.centerX;
     visibleBandLabel.center = new Vector2( visibleBandCenterX, -35 );
-    spectrumRootNode.addChild( visibleBandLabel );
+    this.addChild( visibleBandLabel );
 
     // Add the arrow that connects the visible band label to the visible band itself.
     var visibleBandArrow = new ArrowNode( visibleBandCenterX, visibleBandLabel.bottom, visibleBandCenterX, -5, {
@@ -418,19 +384,19 @@ define( function( require ) {
       headWidth: 7,
       headHeight: 7
     } );
-    spectrumRootNode.addChild( visibleBandArrow );
+    this.addChild( visibleBandArrow );
 
     // Add the units.
     var frequencyUnits = new Text( cyclesPerSecondUnitsString, { font: LABEL_FONT } );
     frequencyUnits.leftCenter = new Vector2( stripWidth, -TICK_MARK_HEIGHT - frequencyUnits.height / 2 );
-    spectrumRootNode.addChild( frequencyUnits );
+    this.addChild( frequencyUnits );
     var wavelengthUnits = new Text( metersUnitsString, { font: LABEL_FONT } );
     wavelengthUnits.leftCenter = new Vector2( stripWidth, STRIP_HEIGHT + TICK_MARK_HEIGHT + frequencyUnits.height / 2 );
-    spectrumRootNode.addChild( wavelengthUnits );
+    this.addChild( wavelengthUnits );
 
-    return spectrumRootNode;
+  }
 
-  };
+  inherit( Node, LabeledSpectrumNode );
 
   /**
    *  Class that depicts a wave that gets progressively shorter in wavelength from left to right, which is called a
@@ -439,18 +405,18 @@ define( function( require ) {
    *  @param {number} width - Width of the bounding box that holds the chirp.
    *  @constructor
    */
-  var ChirpNode = function( width ) {
+  function ChirpNode( width ) {
 
     // Create and add the boundary and background.
     var boundingBoxHeight = width * 0.1; // Arbitrary, adjust as needed.
-    var boundingBox = new Rectangle( 0, 0, width, boundingBoxHeight, {
+    Rectangle.call( this, 0, 0, width, boundingBoxHeight, {
       fill: 'rgb(237, 243, 246)',
       lineWidth: 2,
       stroke: 'black'
     } );
 
     var chirpShape = new Shape();
-    chirpShape.moveTo( 0, boundingBox.centerY ); // Move starting point to left center of bounding box.
+    chirpShape.moveTo( 0, this.centerY ); // Move starting point to left center of bounding box.
     var numPointsOnLine = 2000;
     for ( var i = 0; i < numPointsOnLine; i++ ) {
       var x = i * ( width / (numPointsOnLine - 1) );
@@ -466,10 +432,41 @@ define( function( require ) {
 
     }
 
-    boundingBox.addChild( new Path( chirpShape, { lineWidth: 2, stroke: 'black' } ) );
-    return boundingBox;
+    this.addChild( new Path( chirpShape, { lineWidth: 2, stroke: 'black' } ) );
+    return this;
 
-  };
+  }
+
+  inherit( Rectangle, ChirpNode );
+
+  /**
+   * Constructor for the Spectrum Window.  Loads all subclass objects into a vertical layout box.
+   *
+   * @constructor
+   */
+  function SpectrumWindow() {
+
+    /*
+     * Use ScreenView, to help center and scale content. Renderer must be specified here because the window is added
+     * directly to the scene, instead of to some other node that already has svg renderer.
+     */
+    ScreenView.call( this, {renderer: 'svg'} );
+
+    var children = [
+      new SpectrumDiagram(),
+      new CloseButton()
+    ];
+
+    var content = new LayoutBox( { orientation: 'vertical', align: 'center', spacing: 10, children: children } );
+
+    this.addChild( new Panel( content, {
+        centerX: this.layoutBounds.centerX,
+        centerY: this.layoutBounds.centerY,
+        xMargin: 20,
+        yMargin: 20,
+        fill: 'rgb(233, 236,  174)' } )
+    );
+  }
 
   return inherit( ScreenView, SpectrumWindow );
 } );
