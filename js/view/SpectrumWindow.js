@@ -26,7 +26,8 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var SpectrumNode = require( 'SCENERY_PHET/SpectrumNode' );
-  var Image = require( 'SCENERY/nodes/Image' );
+  var Path = require( 'SCENERY/nodes/Path' );
+  var Shape = require( 'KITE/Shape' );
 
   // strings
   var spectrumWindowTitleString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.title' );
@@ -448,15 +449,8 @@ define( function( require ) {
       stroke: 'black'
     } );
 
-    // Draw the spectrum directly to a canvas, to improve performance.
-    var canvas = document.createElement( 'canvas' );
-    var context = canvas.getContext( '2d' );
-    canvas.width = width;
-    canvas.height = boundingBoxHeight;
-
-    // Create the line that represents the decreasing wavelength.
-    context.beginPath();
-    context.moveTo( 0, boundingBox.centerY ); // Move starting point to left center of bounding box.
+    var chirpShape = new Shape();
+    chirpShape.moveTo( 0, boundingBox.centerY ); // Move starting point to left center of bounding box.
     var numPointsOnLine = 2000;
     for ( var i = 0; i < numPointsOnLine; i++ ) {
       var x = i * ( width / (numPointsOnLine - 1) );
@@ -468,14 +462,11 @@ define( function( require ) {
       var sinTerm = Math.sin( 2 * Math.PI * f0 * ( Math.pow( k, t * tScale ) - 1) / Math.log( k ) );
 
       var y = ( sinTerm * boundingBoxHeight * 0.40 + boundingBoxHeight / 2 );
-      context.lineTo( x, y );
+      chirpShape.lineTo( x, y );
 
     }
 
-    context.lineWidth = 2; // Set the line width of the curve.
-    context.stroke(); // Draw the path on the canvas.
-    context.closePath(); // Close path to prepare for further canvas calls.
-    boundingBox.addChild( new Image( canvas.toDataURL() ) ); // Add the canvas to the bounding box as an image.
+    boundingBox.addChild( new Path( chirpShape, { lineWidth: 2, stroke: 'black' } ) );
     return boundingBox;
 
   };
