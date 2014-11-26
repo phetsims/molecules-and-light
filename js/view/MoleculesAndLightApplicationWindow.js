@@ -28,6 +28,7 @@ define( function( require ) {
 
   // constants
   var PHOTON_EMITTER_WIDTH = 125;
+  var CORNER_RADIUS = 7;
 
   /**
    * Constructor for a Molecules and Light application window.
@@ -39,14 +40,14 @@ define( function( require ) {
   function MoleculesAndLightApplicationWindow( photonAbsorptionModel, mvt ) {
 
     // Supertype constructor
-    Rectangle.call( this, 0, 0, 500, 300, 7, 7, {fill: 'black'} );
+    Rectangle.call( this, 0, 0, 500, 300, CORNER_RADIUS, CORNER_RADIUS, {fill: 'black'} );
 
     var thisWindow = this;
     this.mvt = mvt;
     this.photonAbsorptionModel = photonAbsorptionModel;
 
     // Width of the 'window frame' which surrounds the application window.
-    this.frameWidth = 5;
+    this.frameLineWidth = 5;
 
     // Property which keeps track of whether or not the 'Restore Molecule' button should be visible.
     this.restoreButtonVisibleProperty = new Property( false );
@@ -67,16 +68,16 @@ define( function( require ) {
     photonEmitterLayer.addChild( photonEmitterNode );
 
     // Add the frame around the application window.
-    var windowFrame = new WindowFrameNode( this, this.frameWidth, '#BED0E7', '#4070CE' );
+    var windowFrame = new WindowFrameNode( this, this.frameLineWidth, '#BED0E7', '#4070CE' );
     this.addChild( windowFrame );
 
     // Add a clip area around the edge of the window frame to clean up photon and molecule removal from screen.
     this.clipArea = new Shape().roundRect(
-        this.leftTop.x - this.frameWidth,
-        this.leftTop.y - this.frameWidth,
-        this.width + ( 2 * this.frameWidth ),
-        this.height + ( 2 * this.frameWidth ),
-      7, 7 );
+        this.left - this.frameLineWidth,
+        this.top - this.frameLineWidth,
+        this.width + ( 2 * this.frameLineWidth ),
+        this.height + ( 2 * this.frameLineWidth ),
+      CORNER_RADIUS, CORNER_RADIUS );
 
     // Add the button for restoring molecules that break apart.
     this.restoreMoleculeButtonNode = new RectangularPushButton( {
