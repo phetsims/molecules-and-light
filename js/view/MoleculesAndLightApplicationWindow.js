@@ -20,6 +20,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var WindowFrameNode = require( 'MOLECULES_AND_LIGHT/view/WindowFrameNode' );
   var Shape = require( 'KITE/Shape' );
 
@@ -80,9 +81,16 @@ define( function( require ) {
       CORNER_RADIUS, CORNER_RADIUS );
 
     // Add the button for restoring molecules that break apart.
+    var buttonContent = new Text( returnMoleculeString, { font: new PhetFont( 13 ) } );
+    // If necessary, scale the button content for translation purposes.  Max button width is half the width of the
+    // observation window.
+    var maxButtonWidth = this.width / 2;
+    if ( buttonContent.width > maxButtonWidth ) {
+      buttonContent.scale( maxButtonWidth / buttonContent.width );
+    }
     this.restoreMoleculeButtonNode = new RectangularPushButton( {
-      content: new Text( returnMoleculeString ),
-      baseColor: 'rgb(255, 144, 0)',
+      content: buttonContent,
+      baseColor: 'rgb(247, 151, 34)',
       listener: function() {
         photonAbsorptionModel.restorePhotonTarget();
         thisWindow.restoreButtonVisibleProperty.set( false );
@@ -90,8 +98,7 @@ define( function( require ) {
       }
     } );
 
-    this.restoreMoleculeButtonNode.center = ( new Vector2( this.width - this.restoreMoleculeButtonNode.width,
-        this.restoreMoleculeButtonNode.height + 10 ) );
+    this.restoreMoleculeButtonNode.rightTop = ( new Vector2( this.width - 10, 10 ) );
 
     this.addChild( this.restoreMoleculeButtonNode );
 
