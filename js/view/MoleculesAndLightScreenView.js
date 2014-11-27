@@ -50,7 +50,7 @@ define( function( require ) {
 
     var thisScreenView = this;
 
-    var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    var modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( Math.round( INTERMEDIATE_RENDERING_SIZE.width * 0.55 ),
         Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.50 ) ),
@@ -58,7 +58,7 @@ define( function( require ) {
 
     // Create the application window.  This will hold all photons, molecules, and photonEmitters for this photon
     // absorption model.
-    var applicationWindow = new MoleculesAndLightApplicationWindow( photonAbsorptionModel, mvt );
+    var applicationWindow = new MoleculesAndLightApplicationWindow( photonAbsorptionModel, modelViewTransform );
     this.addChild( applicationWindow );
     applicationWindow.translate( APPLICATION_WINDOW_LOCATION );
 

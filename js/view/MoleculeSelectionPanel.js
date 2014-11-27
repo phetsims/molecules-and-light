@@ -45,7 +45,7 @@ define( function( require ) {
   // Model view transform used for creating images of the various molecules. This is basically a null transform except
   // that it scales down the size of the molecules and flips the Y axis so that molecules on the panel are oriented the
   // same as in the play area.
-  var MVT = ModelViewTransform2.createSinglePointScaleInvertedYMapping( new Vector2( 0, 0 ), new Vector2( 0, 0 ), 1 );
+  var MODEL_VIEW_TRANSFORM = ModelViewTransform2.createSinglePointScaleInvertedYMapping( new Vector2( 0, 0 ), new Vector2( 0, 0 ), 1 );
 
   // Chemical formulas for the button labels.
   var CO_FORMULA_STRING = 'CO';
@@ -109,13 +109,13 @@ define( function( require ) {
 
     // Include all contents of the control panel.
     var content = [
-      createRadioButtonContent( carbonMonoxideString, CO_FORMULA_STRING, new MoleculeNode( new CO(), MVT ) ),
-      createRadioButtonContent( nitrogenString, N2_FORMULA_STRING, new MoleculeNode( new N2(), MVT ) ),
-      createRadioButtonContent( oxygenString, O2_FORMULA_STRING, new MoleculeNode( new O2(), MVT ) ),
-      createRadioButtonContent( carbonDioxideString, CO2_FORMULA_STRING, new MoleculeNode( new CO2(), MVT ) ),
-      createRadioButtonContent( waterString, H20_FORMULA_STRING, new MoleculeNode( new H2O(), MVT ) ),
-      createRadioButtonContent( nitrogenDioxideString, NO2_FORMULA_STRING, new MoleculeNode( new NO2(), MVT ) ),
-      createRadioButtonContent( ozoneString, O3_FORMULA_STRING, new MoleculeNode( new O3(), MVT ) )
+      createRadioButtonContent( carbonMonoxideString, CO_FORMULA_STRING, new MoleculeNode( new CO(), MODEL_VIEW_TRANSFORM ) ),
+      createRadioButtonContent( nitrogenString, N2_FORMULA_STRING, new MoleculeNode( new N2(), MODEL_VIEW_TRANSFORM ) ),
+      createRadioButtonContent( oxygenString, O2_FORMULA_STRING, new MoleculeNode( new O2(), MODEL_VIEW_TRANSFORM ) ),
+      createRadioButtonContent( carbonDioxideString, CO2_FORMULA_STRING, new MoleculeNode( new CO2(), MODEL_VIEW_TRANSFORM ) ),
+      createRadioButtonContent( waterString, H20_FORMULA_STRING, new MoleculeNode( new H2O(), MODEL_VIEW_TRANSFORM ) ),
+      createRadioButtonContent( nitrogenDioxideString, NO2_FORMULA_STRING, new MoleculeNode( new NO2(), MODEL_VIEW_TRANSFORM ) ),
+      createRadioButtonContent( ozoneString, O3_FORMULA_STRING, new MoleculeNode( new O3(), MODEL_VIEW_TRANSFORM ) )
     ];
 
     // If necessary, scale down molecule names by the minimum scale factor.

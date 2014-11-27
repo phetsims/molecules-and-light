@@ -34,16 +34,16 @@ define( function( require ) {
    * Constructor for a Molecules and Light application window.
    *
    * @param {PhotonAbsorptionModel} photonAbsorptionModel
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function MoleculesAndLightApplicationWindow( photonAbsorptionModel, mvt ) {
+  function MoleculesAndLightApplicationWindow( photonAbsorptionModel, modelViewTransform ) {
 
     // Supertype constructor
     Rectangle.call( this, 0, 0, 500, 300, CORNER_RADIUS, CORNER_RADIUS, {fill: 'black'} );
 
     var thisWindow = this;
-    this.mvt = mvt;
+    this.modelViewTransform = modelViewTransform;
     this.photonAbsorptionModel = photonAbsorptionModel;
 
     // Width of the 'window frame' which surrounds the application window.
@@ -64,7 +64,7 @@ define( function( require ) {
 
     // Create and add the photon emitter.
     var photonEmitterNode = new PhotonEmitterNode( PHOTON_EMITTER_WIDTH, photonAbsorptionModel );
-    photonEmitterNode.center = ( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
+    photonEmitterNode.center = ( modelViewTransform.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
     photonEmitterLayer.addChild( photonEmitterNode );
 
     // Add the frame around the application window.
@@ -97,7 +97,7 @@ define( function( require ) {
 
     // Set up an event listener for adding and removing molecules.
     photonAbsorptionModel.activeMolecules.addItemAddedListener( function( addedMolecule ) {
-      var moleculeNode = new MoleculeNode( addedMolecule, thisWindow.mvt ); //Create the molecule node.
+      var moleculeNode = new MoleculeNode( addedMolecule, thisWindow.modelViewTransform ); //Create the molecule node.
       moleculeLayer.addChild( moleculeNode );
 
       // Determine if it is time to remove molecule and update restore molecule button visibility.
@@ -117,8 +117,8 @@ define( function( require ) {
 
     // Set up the event listeners for adding and removing photons.
     photonAbsorptionModel.photons.addItemAddedListener( function( addedPhoton ) {
-      var photonNode = new PhotonNode( addedPhoton, thisWindow.mvt );
-      photonNode.center = ( mvt.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
+      var photonNode = new PhotonNode( addedPhoton, thisWindow.modelViewTransform );
+      photonNode.center = ( modelViewTransform.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
       photonLayer.addChild( photonNode );
 
       // Watch photon positions and determine if photon should be removed from window.
@@ -153,7 +153,7 @@ define( function( require ) {
 
       var moleculesToRemove = [];
       for ( var molecule = 0; molecule < this.photonAbsorptionModel.activeMolecules.length; molecule++ ) {
-        if ( !this.containsPointSelf( this.mvt.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
+        if ( !this.containsPointSelf( this.modelViewTransform.modelToViewPosition( this.photonAbsorptionModel.activeMolecules.get( molecule ).getCenterOfGravityPos() ) ) ) {
           moleculesToRemove.push( this.photonAbsorptionModel.activeMolecules.get( molecule ) );
           this.restoreButtonVisibleProperty.set( true );
           break;
@@ -171,7 +171,7 @@ define( function( require ) {
 
       var photonsToRemove = [];
       for ( var photon = 0; photon < this.photonAbsorptionModel.photons.length; photon++ ) {
-        if ( !this.containsPointSelf( this.mvt.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).locationProperty.get() ) ) ) {
+        if ( !this.containsPointSelf( this.modelViewTransform.modelToViewPosition( this.photonAbsorptionModel.photons.get( photon ).locationProperty.get() ) ) ) {
           photonsToRemove.push( this.photonAbsorptionModel.photons.get( photon ) );
         }
       }
