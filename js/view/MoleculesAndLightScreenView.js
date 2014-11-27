@@ -68,7 +68,7 @@ define( function( require ) {
 
     // Create the molecule control panel
     var moleculeControlPanel = new MoleculeSelectionPanel( photonAbsorptionModel );
-    moleculeControlPanel.leftTop = ( new Vector2( 530, applicationWindow.top - applicationWindow.frameWidth ) );
+    moleculeControlPanel.leftTop = ( new Vector2( 530, applicationWindow.top - applicationWindow.frameLineWidth ) );
 
     // Add reset all button.
     var resetAllButton = new ResetAllButton(
