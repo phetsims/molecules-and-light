@@ -61,11 +61,13 @@ define( function( require ) {
    */
   function QuadEmissionFrequencyControlPanel( photonAbsorptionModel ) {
 
-    // Initialize the photon nodes for the control panel
-    var microwavePhotonNode = new PhotonNode( new Photon( WavelengthConstants.MICRO_WAVELENGTH ), new ModelViewTransform2() );
-    var infraredPhotonNode = new PhotonNode( new Photon( WavelengthConstants.IR_WAVELENGTH ), new ModelViewTransform2() );
-    var visiblePhotonNode = new PhotonNode( new Photon( WavelengthConstants.VISIBLE_WAVELENGTH ), new ModelViewTransform2() );
-    var ultravioletPhotonNode = new PhotonNode( new Photon( WavelengthConstants.UV_WAVELENGTH ), new ModelViewTransform2() );
+    // Initialize the photon nodes for the control panel.  Identity model view transform is used because these photon
+    // nodes to not correspond to anything in the model.  They are just visual elements of the control panel.
+    var identityTransform = new ModelViewTransform2();
+    var microwavePhotonNode = new PhotonNode( new Photon( WavelengthConstants.MICRO_WAVELENGTH ), identityTransform);
+    var infraredPhotonNode = new PhotonNode( new Photon( WavelengthConstants.IR_WAVELENGTH ), identityTransform );
+    var visiblePhotonNode = new PhotonNode( new Photon( WavelengthConstants.VISIBLE_WAVELENGTH ), identityTransform );
+    var ultravioletPhotonNode = new PhotonNode( new Photon( WavelengthConstants.UV_WAVELENGTH ), identityTransform );
 
     // Content for radio buttons
     var content = [
