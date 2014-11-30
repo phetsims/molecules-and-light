@@ -44,6 +44,7 @@ define( function( require ) {
     Rectangle.call( this, 0, 0, 500, 300, CORNER_RADIUS, CORNER_RADIUS, {fill: 'black'} );
 
     var thisWindow = this;
+    var thisModel = photonAbsorptionModel;
     this.modelViewTransform = modelViewTransform;
     this.photonAbsorptionModel = photonAbsorptionModel;
 
@@ -92,7 +93,7 @@ define( function( require ) {
       content: buttonContent,
       baseColor: 'rgb(247, 151, 34)',
       listener: function() {
-        photonAbsorptionModel.restorePhotonTarget();
+        photonAbsorptionModel.restoreActiveMolecule();
         thisWindow.restoreButtonVisibleProperty.set( false );
         thisWindow.moleculeCheckBounds();
       }
@@ -141,6 +142,12 @@ define( function( require ) {
           photonAbsorptionModel.photons.removeItemRemovedListener( removalListener );
         }
       } );
+    } );
+
+    // Link the model's active molecule to the photon target property.  Note that this wiring must be done after the
+    // listeners for the activeMolecules observable array have been implemented.
+    photonAbsorptionModel.photonTargetProperty.link( function() {
+      thisModel.updateActiveMolecule( thisModel.photonTarget );
     } );
 
     // If a new molecule is chosen with the molecule control panel, remove the "Restore Molecule" button.

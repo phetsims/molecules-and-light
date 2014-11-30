@@ -144,9 +144,6 @@ define( function( require ) {
 
     Panel.call( this, radioButtons, { fill: 'black' } );
 
-    model.photonTargetProperty.link( function() {
-      model.setPhotonTarget( model.photonTarget );
-    } );
   }
 
   return inherit( Panel, MoleculeSelectionPanel );
