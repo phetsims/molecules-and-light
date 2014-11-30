@@ -12,7 +12,7 @@
 define( function( require ) {
   'use strict';
 
-  // Modules
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -33,7 +33,7 @@ define( function( require ) {
   var microwaveTransmitter = require( 'image!MOLECULES_AND_LIGHT/microwave-transmitter.png' );
   var uvLight2 = require( 'image!MOLECULES_AND_LIGHT/uv_light_2.png' );
 
-  // Strings
+  // strings
   var microwaveString = require( 'string!MOLECULES_AND_LIGHT/microwave' );
   var infraredString = require( 'string!MOLECULES_AND_LIGHT/infrared' );
   var visibleString = require( 'string!MOLECULES_AND_LIGHT/visible' );

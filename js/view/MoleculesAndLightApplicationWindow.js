@@ -24,7 +24,7 @@ define( function( require ) {
   var WindowFrameNode = require( 'MOLECULES_AND_LIGHT/view/WindowFrameNode' );
   var Shape = require( 'KITE/Shape' );
 
-  // Strings
+  // strings
   var returnMoleculeString = require( 'string!MOLECULES_AND_LIGHT/buttonNode.returnMolecule' );
 
   // constants

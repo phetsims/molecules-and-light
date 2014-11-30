@@ -10,7 +10,7 @@
 define( function( require ) {
   'use strict';
 
-  // Modules
+  // modules
   var Vector2 = require( 'DOT/Vector2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
@@ -31,7 +31,7 @@ define( function( require ) {
   var PhotonTarget = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/PhotonTarget' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
-  // Strings
+  // strings
   var carbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
   var nitrogenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Nitrogen' );
   var oxygenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Oxygen' );
