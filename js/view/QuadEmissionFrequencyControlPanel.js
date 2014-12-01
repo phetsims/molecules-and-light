@@ -63,7 +63,7 @@ define( function( require ) {
 
     // Initialize the photon nodes for the control panel.  Identity model view transform is used because these photon
     // nodes do not correspond to anything in the model.  They are just visual elements of the control panel.
-    var identityTransform = new ModelViewTransform2();
+    var identityTransform = ModelViewTransform2.createIdentity();
     var microwavePhotonNode = new PhotonNode( new Photon( WavelengthConstants.MICRO_WAVELENGTH ), identityTransform);
     var infraredPhotonNode = new PhotonNode( new Photon( WavelengthConstants.IR_WAVELENGTH ), identityTransform );
     var visiblePhotonNode = new PhotonNode( new Photon( WavelengthConstants.VISIBLE_WAVELENGTH ), identityTransform );
