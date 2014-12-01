@@ -1,8 +1,8 @@
 //  Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Molecules and Light viewing window which holds the play area for this application.  This is where the photon
- * emitters, photons, and molecules of the photonAbsorptionModel will exist and interact.
+ * Window for Molecules And Light which holds the photon emitter, photons, and molecules of the photon absorption model.
+ * This is where the user observes interactions between photons and molecules.
  *
  * @author Jesse Greenberg (PhET Interactive Simulations)
  */
@@ -32,13 +32,13 @@ define( function( require ) {
   var CORNER_RADIUS = 7;
 
   /**
-   * Constructor for a Molecules and Light application window.
+   * Constructor for a Molecules and Light observation window.
    *
    * @param {PhotonAbsorptionModel} photonAbsorptionModel
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function MoleculesAndLightApplicationWindow( photonAbsorptionModel, modelViewTransform ) {
+  function ObservationWindow( photonAbsorptionModel, modelViewTransform ) {
 
     // Supertype constructor
     Rectangle.call( this, 0, 0, 500, 300, CORNER_RADIUS, CORNER_RADIUS, {fill: 'black'} );
@@ -48,7 +48,7 @@ define( function( require ) {
     this.modelViewTransform = modelViewTransform;
     this.photonAbsorptionModel = photonAbsorptionModel;
 
-    // Width of the 'window frame' which surrounds the application window.
+    // Width of the 'window frame' which surrounds the observation window.
     this.frameLineWidth = 5;
 
     // Property which keeps track of whether or not the 'Restore Molecule' button should be visible.
@@ -69,7 +69,7 @@ define( function( require ) {
     photonEmitterNode.center = ( modelViewTransform.modelToViewPosition( photonAbsorptionModel.getPhotonEmissionLocation() ) );
     photonEmitterLayer.addChild( photonEmitterNode );
 
-    // Add the frame around the application window.
+    // Add the frame around the observation window.
     var windowFrame = new WindowFrameNode( this, this.frameLineWidth, '#BED0E7', '#4070CE' );
     this.addChild( windowFrame );
 
@@ -157,7 +157,7 @@ define( function( require ) {
 
   }
 
-  return inherit( Rectangle, MoleculesAndLightApplicationWindow, {
+  return inherit( Rectangle, ObservationWindow, {
 
     /**
      * Update the visibility of the button that restores molecules that have broken apart.  This button should be
@@ -178,7 +178,7 @@ define( function( require ) {
     },
 
     /**
-     * Check to see if any photons collide with the application window.  If there is a collision, remove the photon
+     * Check to see if any photons collide with the observation window.  If there is a collision, remove the photon
      * from the model.
      */
     photonCheckBounds: function() {

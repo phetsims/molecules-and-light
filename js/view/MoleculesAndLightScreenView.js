@@ -20,7 +20,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var Text = require( 'SCENERY/nodes/Text' );
   var MoleculeSelectionPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculeSelectionPanel' );
-  var MoleculesAndLightApplicationWindow = require( 'MOLECULES_AND_LIGHT/view/MoleculesAndLightApplicationWindow' );
+  var ObservationWindow = require( 'MOLECULES_AND_LIGHT/view/ObservationWindow' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
@@ -35,8 +35,8 @@ define( function( require ) {
   // Model-view transform for intermediate coordinates.
   var INTERMEDIATE_RENDERING_SIZE = new Dimension2( 500, 300 );
 
-  // Location of the top left corner of the application window.
-  var APPLICATION_WINDOW_LOCATION = new Vector2( 15, 15 );
+  // Location of the top left corner of the observation window.
+  var OBSERVATION_WINDOW_LOCATION = new Vector2( 15, 15 );
 
   /**
    * Constructor for the screen view of Molecules and Light.
@@ -56,19 +56,19 @@ define( function( require ) {
         Math.round( INTERMEDIATE_RENDERING_SIZE.height * 0.50 ) ),
       0.10 ); // Scale factor - Smaller number zooms out, bigger number zooms in.
 
-    // Create the application window.  This will hold all photons, molecules, and photonEmitters for this photon
+    // Create the observation window.  This will hold all photons, molecules, and photonEmitters for this photon
     // absorption model.
-    var applicationWindow = new MoleculesAndLightApplicationWindow( photonAbsorptionModel, modelViewTransform );
-    this.addChild( applicationWindow );
-    applicationWindow.translate( APPLICATION_WINDOW_LOCATION );
+    var observationWindow = new ObservationWindow( photonAbsorptionModel, modelViewTransform );
+    this.addChild( observationWindow );
+    observationWindow.translate( OBSERVATION_WINDOW_LOCATION );
 
     // Create the control panel for photon emission frequency.
     var photonEmissionControlPanel = new QuadEmissionFrequencyControlPanel( photonAbsorptionModel );
-    photonEmissionControlPanel.leftTop = ( new Vector2( APPLICATION_WINDOW_LOCATION.x, 350 ) );
+    photonEmissionControlPanel.leftTop = ( new Vector2( OBSERVATION_WINDOW_LOCATION.x, 350 ) );
 
     // Create the molecule control panel
     var moleculeControlPanel = new MoleculeSelectionPanel( photonAbsorptionModel );
-    moleculeControlPanel.leftTop = ( new Vector2( 530, applicationWindow.top - applicationWindow.frameLineWidth ) );
+    moleculeControlPanel.leftTop = ( new Vector2( 530, observationWindow.top - observationWindow.frameLineWidth ) );
 
     // Add reset all button.
     var resetAllButton = new ResetAllButton(
