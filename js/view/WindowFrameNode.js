@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Window frame for the Molecules and Light application window.  This uses canvas node in order to draw certain shapes
+ * Window frame for the Molecules and Light observation window.  This uses canvas node in order to draw certain shapes
  * which are not currently in PhET scenery.
  *
  * @author Jesse Greenberg (PhET Interactive Simulations)
@@ -19,16 +19,16 @@ define( function( require ) {
    * Constructor for the molecules and light window frame. This is a border around the application play window.  Similar
    * to a typical stroke though each side of the border has a linear gradient.
    *
-   * @param {MoleculesAndLightApplicationWindow} applicationWindow
+   * @param {ObservationWindow} observationWindow
    * @param {number} lineWidth - width of the window frame, similar to lineWidth for stroke in other scenery objects.
    * @param {string} innerColor - boundary color on the inside of the window frame.
    * @param {string} outerColor - boundary color along the outer edge of the window frame.
    * @constructor
    */
-  function WindowFrameNode( applicationWindow, lineWidth, innerColor, outerColor ) {
+  function WindowFrameNode( observationWindow, lineWidth, innerColor, outerColor ) {
 
     // Set inputs as class variables so they can be used in canvas methods.
-    this.applicationWindow = applicationWindow;
+    this.observationWindow = observationWindow;
     this.lineWidth = lineWidth;
     this.innerColor = innerColor;
     this.outerColor = outerColor;
@@ -46,9 +46,9 @@ define( function( require ) {
       // Draw the top section of the window frame
       this.drawFrameSide(
         'top',
-        this.applicationWindow.rectArcWidth,
+        this.observationWindow.rectArcWidth,
         -this.lineWidth,
-        ( this.applicationWindow.rectWidth - 2 * this.applicationWindow.rectArcWidth ),
+        ( this.observationWindow.rectWidth - 2 * this.observationWindow.rectArcWidth ),
         this.lineWidth,
         context
       );
@@ -56,9 +56,9 @@ define( function( require ) {
       // Draw the bottom section of the window frame.
       this.drawFrameSide(
         'bottom',
-        this.applicationWindow.rectArcWidth,
-        this.applicationWindow.rectHeight,
-        ( this.applicationWindow.rectWidth - 2 * this.applicationWindow.rectArcWidth ),
+        this.observationWindow.rectArcWidth,
+        this.observationWindow.rectHeight,
+        ( this.observationWindow.rectWidth - 2 * this.observationWindow.rectArcWidth ),
         this.lineWidth,
         context );
 
@@ -66,42 +66,42 @@ define( function( require ) {
       this.drawFrameSide(
         'left',
         -this.lineWidth,
-        this.applicationWindow.rectArcHeight,
+        this.observationWindow.rectArcHeight,
         this.lineWidth,
-        ( this.applicationWindow.rectHeight - 2 * this.applicationWindow.rectArcHeight ),
+        ( this.observationWindow.rectHeight - 2 * this.observationWindow.rectArcHeight ),
         context );
 
       // Draw the right section of the window frame.
       this.drawFrameSide(
         'right',
-        this.applicationWindow.rectWidth,
-        this.applicationWindow.rectArcHeight,
+        this.observationWindow.rectWidth,
+        this.observationWindow.rectArcHeight,
         this.lineWidth,
-        ( this.applicationWindow.rectHeight - 2 * this.applicationWindow.rectArcHeight ),
+        ( this.observationWindow.rectHeight - 2 * this.observationWindow.rectArcHeight ),
         context );
 
       // Draw the top left corner of the window frame.
       this.drawFrameCorner(
         'topLeft',
-        new Vector2( this.applicationWindow.rectArcWidth, this.applicationWindow.rectArcHeight ),
+        new Vector2( this.observationWindow.rectArcWidth, this.observationWindow.rectArcHeight ),
         context );
 
       // Draw the bottom left corner of the window frame.
       this.drawFrameCorner(
         'bottomLeft',
-        new Vector2( this.applicationWindow.rectArcWidth, this.applicationWindow.rectHeight - this.applicationWindow.rectArcHeight ),
+        new Vector2( this.observationWindow.rectArcWidth, this.observationWindow.rectHeight - this.observationWindow.rectArcHeight ),
         context );
 
       // Draw the bottom right corner of the window frame.
       this.drawFrameCorner(
         'bottomRight',
-        new Vector2( this.applicationWindow.rectWidth - this.applicationWindow.rectArcWidth, this.applicationWindow.rectHeight - this.applicationWindow.rectArcHeight ),
+        new Vector2( this.observationWindow.rectWidth - this.observationWindow.rectArcWidth, this.observationWindow.rectHeight - this.observationWindow.rectArcHeight ),
         context );
 
       // Draw the top right corner of the window frame.
       this.drawFrameCorner(
         'topRight',
-        new Vector2( this.applicationWindow.rectWidth - this.applicationWindow.rectArcWidth, this.applicationWindow.rectArcHeight ),
+        new Vector2( this.observationWindow.rectWidth - this.observationWindow.rectArcWidth, this.observationWindow.rectArcHeight ),
         context );
     },
 
@@ -141,11 +141,11 @@ define( function( require ) {
 
       // Draw the corner of the frame with canvas arc.
       context.beginPath(); // Begin and clear the path drawing context.
-      context.arc( radialCenter.x, radialCenter.y, this.applicationWindow.rectArcWidth + this.lineWidth / 2, initialAngle, finalAngle, false );
+      context.arc( radialCenter.x, radialCenter.y, this.observationWindow.rectArcWidth + this.lineWidth / 2, initialAngle, finalAngle, false );
 
       // Create the radial gradient for the arc on the corner.
-      var grad = context.createRadialGradient( radialCenter.x, radialCenter.y, this.applicationWindow.rectArcWidth,
-        radialCenter.x, radialCenter.y, this.lineWidth + this.applicationWindow.rectArcWidth );
+      var grad = context.createRadialGradient( radialCenter.x, radialCenter.y, this.observationWindow.rectArcWidth,
+        radialCenter.x, radialCenter.y, this.lineWidth + this.observationWindow.rectArcWidth );
       grad.addColorStop( 0, this.innerColor );
       grad.addColorStop( 1, this.outerColor );
       context.strokeStyle = grad;
