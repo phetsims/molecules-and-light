@@ -136,8 +136,10 @@ define( function( require ) {
       energyText.scale( (ARROW_LENGTH - 2 * ARROW_HEAD_WIDTH ) / energyText.width );
     }
 
-    energyArrow.center = ( new Vector2( this.centerX, this.centerY + 60 ) );
-    energyText.center = ( new Vector2( energyArrow.centerX, energyArrow.centerY + 17 ) );
+    // Set the positions of all components of the control panel.
+    energyArrow.centerX = energyText.centerX = radioButtons.centerX; // All have the same center x component.
+    energyArrow.top = radioButtons.bottom + 15; // Arrow is below the buttons by an offset which is chosen empirically.
+    energyText.top = energyArrow.bottom;
 
     this.addChild( energyArrow );
     this.addChild( energyText );
