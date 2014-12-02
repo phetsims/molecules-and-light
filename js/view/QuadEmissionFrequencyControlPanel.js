@@ -14,7 +14,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var Panel = require( 'SUN/Panel' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/WavelengthConstants' );
@@ -59,6 +59,9 @@ define( function( require ) {
    * @constructor
    */
   function QuadEmissionFrequencyControlPanel( photonAbsorptionModel ) {
+
+    // Supertype constructor
+    Node.call( this );
 
     // Initialize the photon nodes for the control panel.  Identity model view transform is used because these photon
     // nodes do not correspond to anything in the model.  They are just visual elements of the control panel.
@@ -116,9 +119,6 @@ define( function( require ) {
       } );
     }
 
-    // Place radioButtons into a panel.
-    Panel.call( this, radioButtons, { fill: '#C5D6E8', stroke: null } );
-
     // Draw an arrow node to illustrate energy of the emitted photons.
     var energyText = new Text( higherEnergyString, { font: new PhetFont( 19 ) } );
     var energyArrow = new ArrowNode( 0, 0, ARROW_LENGTH, 0, {
@@ -138,9 +138,11 @@ define( function( require ) {
     energyArrow.top = radioButtons.bottom + 15; // Arrow is below the buttons by an offset which is chosen empirically.
     energyText.top = energyArrow.bottom;
 
+    // Add all components to the control panel.
+    this.addChild( radioButtons );
     this.addChild( energyArrow );
     this.addChild( energyText );
   }
 
-  return inherit( Panel, QuadEmissionFrequencyControlPanel );
+  return inherit( Node, QuadEmissionFrequencyControlPanel );
 } );
