@@ -28,10 +28,10 @@ define( function( require ) {
   function WindowFrameNode( observationWindow, lineWidth, innerColor, outerColor ) {
 
     // Set inputs as class variables so they can be used in canvas methods.
-    this.observationWindow = observationWindow;
-    this.lineWidth = lineWidth;
-    this.innerColor = innerColor;
-    this.outerColor = outerColor;
+    this.observationWindow = observationWindow; // @private
+    this.lineWidth = lineWidth; // @private
+    this.innerColor = innerColor; // @private
+    this.outerColor = outerColor; // @private
 
     CanvasNode.call( this );
     this.invalidatePaint();
@@ -40,6 +40,7 @@ define( function( require ) {
   return inherit( CanvasNode, WindowFrameNode, {
 
     // @param {CanvasContextWrapper} wrapper
+    // @private
     paintCanvas: function( wrapper ) {
       var context = wrapper.context;
 
@@ -111,6 +112,7 @@ define( function( require ) {
      * @param {String} corner - String describing desired corner of the window frame.
      * @param {Vector2} radialCenter - Position vector of the radial center of the frame corner.
      * @param {CanvasRenderingContext2D} context - Context for the canvas methods.
+     * @private
      */
     drawFrameCorner: function( corner, radialCenter, context ) {
 
@@ -164,6 +166,7 @@ define( function( require ) {
      * @param {number} width - Width of the rectangle to the right of the upper left corner
      * @param {number} height - Height of the rectangle to the
      * @param {CanvasRenderingContext2D} context - The drawing context
+     * @private
      */
     drawFrameSide: function( side, x, y, width, height, context ) {
 

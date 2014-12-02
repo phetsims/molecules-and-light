@@ -128,6 +128,7 @@ define( function( require ) {
      * window, and this code is heavily borrowed from AboutDialog.js.
      *
      * @param {SpectrumWindow} spectrumWindow - The spectrum window whose visibility should be updated.
+     * @private
      */
     updateSpectrumWindowVisibility: function( spectrumWindow ) {
       // Renderer must be specified here because the plane is added directly to the scene (instead of to some other node

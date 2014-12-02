@@ -45,14 +45,14 @@ define( function( require ) {
 
     var thisWindow = this;
     var thisModel = photonAbsorptionModel;
-    this.modelViewTransform = modelViewTransform;
-    this.photonAbsorptionModel = photonAbsorptionModel;
+    this.modelViewTransform = modelViewTransform; // @private
+    this.photonAbsorptionModel = photonAbsorptionModel; // @private
 
     // Width of the 'window frame' which surrounds the observation window.
     this.frameLineWidth = 5;
 
     // Property which keeps track of whether or not the 'Restore Molecule' button should be visible.
-    this.restoreButtonVisibleProperty = new Property( false );
+    this.restoreButtonVisibleProperty = new Property( false ); // @private
 
     // Add the layers for molecules, photons, and photon emitters.
     var moleculeLayer = new Node();
@@ -79,7 +79,7 @@ define( function( require ) {
         this.top - this.frameLineWidth,
         this.width + ( 2 * this.frameLineWidth ),
         this.height + ( 2 * this.frameLineWidth ),
-      CORNER_RADIUS, CORNER_RADIUS );
+      CORNER_RADIUS, CORNER_RADIUS ); // @private
 
     // Add the button for restoring molecules that break apart.
     var buttonContent = new Text( returnMoleculeString, { font: new PhetFont( 13 ) } );
@@ -97,7 +97,7 @@ define( function( require ) {
         thisWindow.restoreButtonVisibleProperty.set( false );
         thisWindow.moleculeCheckBounds();
       }
-    } );
+    } ); // @private
 
     this.restoreMoleculeButtonNode.rightTop = ( new Vector2( this.width - 10, 10 ) );
 
@@ -162,6 +162,7 @@ define( function( require ) {
     /**
      * Update the visibility of the button that restores molecules that have broken apart.  This button should be
      * visible only when one or more molecules are off the screen.
+     * @private
      */
     moleculeCheckBounds: function() {
 
@@ -180,6 +181,7 @@ define( function( require ) {
     /**
      * Check to see if any photons collide with the observation window.  If there is a collision, remove the photon
      * from the model.
+     * @private
      */
     photonCheckBounds: function() {
 
