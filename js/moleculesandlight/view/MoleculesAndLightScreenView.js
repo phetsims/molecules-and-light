@@ -16,17 +16,17 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Vector2 = require( 'DOT/Vector2' );
-  var QuadEmissionFrequencyControlPanel = require( 'MOLECULES_AND_LIGHT/view/QuadEmissionFrequencyControlPanel' );
+  var QuadEmissionFrequencyControlPanel = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/QuadEmissionFrequencyControlPanel' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var MoleculeSelectionPanel = require( 'MOLECULES_AND_LIGHT/view/MoleculeSelectionPanel' );
-  var ObservationWindow = require( 'MOLECULES_AND_LIGHT/view/ObservationWindow' );
+  var MoleculeSelectionPanel = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/MoleculeSelectionPanel' );
+  var ObservationWindow = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/ObservationWindow' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var SpectrumWindow = require( 'MOLECULES_AND_LIGHT/view/SpectrumWindow' );
+  var SpectrumWindow = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/SpectrumWindow' );
   var Plane = require( 'SCENERY/nodes/Plane' );
 
   // strings

@@ -21,7 +21,7 @@ define( function( require ) {
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var WindowFrameNode = require( 'MOLECULES_AND_LIGHT/view/WindowFrameNode' );
+  var WindowFrameNode = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/WindowFrameNode' );
   var Shape = require( 'KITE/Shape' );
 
   // strings

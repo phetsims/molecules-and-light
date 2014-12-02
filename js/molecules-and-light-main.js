@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var MoleculesAndLightScreen = require( 'MOLECULES_AND_LIGHT/MoleculesAndLightScreen' );
+  var MoleculesAndLightScreen = require( 'MOLECULES_AND_LIGHT/moleculesandlight/MoleculesAndLightScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
 
