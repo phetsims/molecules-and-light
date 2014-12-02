@@ -16,7 +16,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * Constructor for the molecules and light window frame. This is a border around the application play window.  Similar
+   * Constructor for the molecules and light window frame. This is a border around the observation window.  Similar
    * to a typical stroke though each side of the border has a linear gradient.
    *
    * @param {ObservationWindow} observationWindow
