@@ -104,8 +104,7 @@ define( function( require ) {
     // Add the button for displaying the electromagnetic spectrum.
     // Scale down the button content when it gets too large.  This is here to support translations.  Max width of this
     // button is the width of the molecule control panel minus twice the default x margin of a rectangular push button.
-    var font = new PhetFont( { size: 18, family: 'Sans-serif' } );
-    var buttonContent = new Text( buttonCaptionString, {font: font} );
+    var buttonContent = new Text( buttonCaptionString, {font: new PhetFont( 18 ) } );
     if ( buttonContent.width > moleculeControlPanel.width - 16 ) {
       buttonContent.scale( (moleculeControlPanel.width - 16 ) / buttonContent.width );
     }

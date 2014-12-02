@@ -84,7 +84,7 @@ define( function( require ) {
       var backgroundRectangle = new Rectangle( 0, 0, 215, 0 );
 
       // Create text label for the molecule name.  Use StringUtils to order chemical names and formulas as desired.
-      var font = new PhetFont( { size: 13, family: 'Sans-serif' } );
+      var font = new PhetFont( 13 );
       var moleculeNameString = StringUtils.format( molecularNamePattern, moleculeName, moleculeFormula );
       var molecularName = new SubSupText( moleculeNameString, { fill: 'white', font: font } );
       textList.push( molecularName );
