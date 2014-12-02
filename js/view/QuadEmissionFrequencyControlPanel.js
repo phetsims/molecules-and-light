@@ -66,29 +66,36 @@ define( function( require ) {
     // Initialize the photon nodes for the control panel.  Identity model view transform is used because these photon
     // nodes do not correspond to anything in the model.  They are just visual elements of the control panel.
     var identityTransform = ModelViewTransform2.createIdentity();
-    var microwavePhotonNode = new PhotonNode( new Photon( WavelengthConstants.MICRO_WAVELENGTH ), identityTransform);
+    var microwavePhotonNode = new PhotonNode( new Photon( WavelengthConstants.MICRO_WAVELENGTH ), identityTransform );
     var infraredPhotonNode = new PhotonNode( new Photon( WavelengthConstants.IR_WAVELENGTH ), identityTransform );
     var visiblePhotonNode = new PhotonNode( new Photon( WavelengthConstants.VISIBLE_WAVELENGTH ), identityTransform );
     var ultravioletPhotonNode = new PhotonNode( new Photon( WavelengthConstants.UV_WAVELENGTH ), identityTransform );
 
-    // Content for radio buttons
-    var content = [
-      createRadioButtonContent( new Image( microwaveTransmitter ), microwavePhotonNode ),
-      createRadioButtonContent( new Image( heatLampImage ), infraredPhotonNode ),
-      createRadioButtonContent( new Image( flashlight2Image ), visiblePhotonNode ),
-      createRadioButtonContent( new Image( uvLight2 ), ultravioletPhotonNode )
+    // Load the radio button content into an array of object literals which holds the node, label string, and
+    // value for each button.
+    var labelFont = new PhetFont( 18 );
+    var radioButtonContent = [
+      {
+        node: createRadioButtonContent( new Image( microwaveTransmitter ), microwavePhotonNode ),
+        value: WavelengthConstants.MICRO_WAVELENGTH,
+        label: new Text( microwaveString, { font: labelFont } )
+      },
+      {
+        node: createRadioButtonContent( new Image( heatLampImage ), infraredPhotonNode ),
+        value: WavelengthConstants.IR_WAVELENGTH,
+        label: new Text( infraredString, { font: labelFont } )
+      },
+      {
+        node: createRadioButtonContent( new Image( flashlight2Image ), visiblePhotonNode ),
+        value: WavelengthConstants.VISIBLE_WAVELENGTH,
+        label: new Text( visibleString, { font: labelFont } )
+      },
+      {
+        node: createRadioButtonContent( new Image( uvLight2 ), ultravioletPhotonNode ),
+        value: WavelengthConstants.UV_WAVELENGTH,
+        label: new Text( ultravioletString, { font: labelFont } )
+      }
     ];
-
-    // Load the wavelengths and labels into arrays for initializing radio button content.
-    var wavelengths = [ WavelengthConstants.MICRO_WAVELENGTH, WavelengthConstants.IR_WAVELENGTH,
-      WavelengthConstants.VISIBLE_WAVELENGTH, WavelengthConstants.UV_WAVELENGTH ];
-
-    var labels = [ microwaveString, infraredString, visibleString, ultravioletString ];
-
-    var radioButtonContent = [];
-    for ( var i = 0; i < wavelengths.length; i++ ) {
-      radioButtonContent.push( { value: wavelengths[i], node: content[i], label: new Text( labels[i], { font: new PhetFont( 18 ) } ) } );
-    }
 
     var radioButtons = new RadioButtonGroup( photonAbsorptionModel.photonWavelengthProperty, radioButtonContent,
       {

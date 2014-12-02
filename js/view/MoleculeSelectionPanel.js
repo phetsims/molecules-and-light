@@ -107,29 +107,42 @@ define( function( require ) {
       return backgroundRectangle;
     }
 
-    // Include all contents of the control panel.
-    var content = [
-      createRadioButtonContent( carbonMonoxideString, CO_FORMULA_STRING, new MoleculeNode( new CO(), MODEL_VIEW_TRANSFORM ) ),
-      createRadioButtonContent( nitrogenString, N2_FORMULA_STRING, new MoleculeNode( new N2(), MODEL_VIEW_TRANSFORM ) ),
-      createRadioButtonContent( oxygenString, O2_FORMULA_STRING, new MoleculeNode( new O2(), MODEL_VIEW_TRANSFORM ) ),
-      createRadioButtonContent( carbonDioxideString, CO2_FORMULA_STRING, new MoleculeNode( new CO2(), MODEL_VIEW_TRANSFORM ) ),
-      createRadioButtonContent( waterString, H20_FORMULA_STRING, new MoleculeNode( new H2O(), MODEL_VIEW_TRANSFORM ) ),
-      createRadioButtonContent( nitrogenDioxideString, NO2_FORMULA_STRING, new MoleculeNode( new NO2(), MODEL_VIEW_TRANSFORM ) ),
-      createRadioButtonContent( ozoneString, O3_FORMULA_STRING, new MoleculeNode( new O3(), MODEL_VIEW_TRANSFORM ) )
+    // Load the radio button content into an array of object literals which holds the node and value for each button.
+    var radioButtonContent = [
+      {
+        node: createRadioButtonContent( carbonMonoxideString, CO_FORMULA_STRING, new MoleculeNode( new CO(), MODEL_VIEW_TRANSFORM ) ),
+        value: PhotonTarget.SINGLE_CO_MOLECULE
+      },
+      {
+        node: createRadioButtonContent( nitrogenString, N2_FORMULA_STRING, new MoleculeNode( new N2(), MODEL_VIEW_TRANSFORM ) ),
+        value: PhotonTarget.SINGLE_N2_MOLECULE
+      },
+      {
+        node: createRadioButtonContent( oxygenString, O2_FORMULA_STRING, new MoleculeNode( new O2(), MODEL_VIEW_TRANSFORM ) ),
+        value: PhotonTarget.SINGLE_O2_MOLECULE
+      },
+      {
+        node: createRadioButtonContent( carbonDioxideString, CO2_FORMULA_STRING, new MoleculeNode( new CO2(), MODEL_VIEW_TRANSFORM ) ),
+        value: PhotonTarget.SINGLE_CO2_MOLECULE
+      },
+      {
+        node: createRadioButtonContent( waterString, H20_FORMULA_STRING, new MoleculeNode( new H2O(), MODEL_VIEW_TRANSFORM ) ),
+        value: PhotonTarget.SINGLE_H2O_MOLECULE
+      },
+      {
+        node: createRadioButtonContent( nitrogenDioxideString, NO2_FORMULA_STRING, new MoleculeNode( new NO2(), MODEL_VIEW_TRANSFORM ) ),
+        value: PhotonTarget.SINGLE_NO2_MOLECULE
+      },
+      {
+        node: createRadioButtonContent( ozoneString, O3_FORMULA_STRING, new MoleculeNode( new O3(), MODEL_VIEW_TRANSFORM ) ),
+        value: PhotonTarget.SINGLE_O3_MOLECULE
+      }
     ];
 
     // If necessary, scale down molecule names by the minimum scale factor.
     if ( scaleFactor < 1 ) {
       _.each( textList, function( text ) { text.scale( scaleFactor ); } );
     }
-
-    // Store all radio button content for the radio button group.
-    var i = 0; // Iteration variable for content array.
-    var radioButtonContent = [];
-    _.each( PhotonTarget, function( target ) {
-      radioButtonContent.push( { value: target, node: content[i] } );
-      i++;
-    } );
 
     var radioButtons = new RadioButtonGroup( model.photonTargetProperty, radioButtonContent,
       {
