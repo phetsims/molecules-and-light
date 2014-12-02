@@ -17,7 +17,6 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var Vector2 = require( 'DOT/Vector2' );
   var WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/WavelengthConstants' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
