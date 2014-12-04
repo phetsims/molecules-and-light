@@ -19,7 +19,7 @@ define( function( require ) {
   var simOptions = {
     credits: {
       leadDesign: 'Kelly Lancaster',
-      softwareDevelopment: 'Jesse Greenberg, John Blanco, Sam Reid, Chris Malley, Aaron Davis',
+      softwareDevelopment: 'Jesse Greenberg, John Blanco, Sam Reid, Aaron Davis',
       team: 'Trish Loeblein, Robert Parson, Ariel Paul, Kathy Perkins, Amy Rouinfar'
     }
   };
