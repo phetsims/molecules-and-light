@@ -24,7 +24,7 @@
   "ControlPanel.Ozone": "Ozone",
   "ControlPanel.Water": "Water",
 
-  "buttonNode.ReturnMolecule": "Return Molecule",
+  "ButtonNode.ReturnMolecule": "Return Molecule",
 
   "SpectrumWindow.buttonCaption": "Show Light Spectrum",
   "SpectrumWindow.title": "Light Spectrum",
