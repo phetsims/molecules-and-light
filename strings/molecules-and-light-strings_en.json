@@ -1,10 +1,11 @@
 {
   "molecules-and-light.name": "Molecules and Light",
-  "microwave": "Microwave",
-  "infrared": "Infrared",
-  "visible": "Visible",
-  "ultraviolet": "Ultraviolet",
-  "higherEnergy": "Higher Energy",
+
+  "QuadWavelengthSelector.Microwave": "Microwave",
+  "QuadWavelengthSelector.Infrared": "Infrared",
+  "QuadWavelengthSelector.Visible": "Visible",
+  "QuadWavelengthSelector.Ultraviolet": "Ultraviolet",
+  "QuadWavelengthSelector.HigherEnergy": "Higher Energy",
 
   "molecularNamePattern": "{0} ({1})",
 
@@ -23,7 +24,7 @@
   "ControlPanel.Ozone": "Ozone",
   "ControlPanel.Water": "Water",
 
-  "buttonNode.returnMolecule": "Return Molecule",
+  "buttonNode.ReturnMolecule": "Return Molecule",
 
   "SpectrumWindow.buttonCaption": "Show Light Spectrum",
   "SpectrumWindow.title": "Light Spectrum",
@@ -33,9 +34,11 @@
   "SpectrumWindow.radioBandLabel": "Radio",
   "SpectrumWindow.microwaveBandLabel": "Microwave",
   "SpectrumWindow.infraredBandLabel": "Infrared",
+  "SpectrumWindow.ultraVioletBandLabel": "Ultra-\nviolet",
   "SpectrumWindow.ultraBandLabel": "Ultra -",
   "SpectrumWindow.violetBandLabel": "Violet",
   "SpectrumWindow.xrayBandLabel": "X-ray",
+  "SpectrumWindow.gammaRayBandLabel":  "Gamma\nray",
   "SpectrumWindow.gammaBandLabel": "Gamma",
   "SpectrumWindow.rayBandLabel": "ray",
   "SpectrumWindow.visibleBandLabel": "Visible",
