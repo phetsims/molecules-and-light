@@ -34,7 +34,7 @@
   "SpectrumWindow.radioBandLabel": "Radio",
   "SpectrumWindow.microwaveBandLabel": "Microwave",
   "SpectrumWindow.infraredBandLabel": "Infrared",
-  "SpectrumWindow.ultraVioletBandLabel": "Ultra-\nviolet",
+  "SpectrumWindow.ultravioletBandLabel": "Ultra-\nviolet",
   "SpectrumWindow.ultraBandLabel": "Ultra -",
   "SpectrumWindow.violetBandLabel": "Violet",
   "SpectrumWindow.xrayBandLabel": "X-ray",
