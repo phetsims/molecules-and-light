@@ -1,42 +1,42 @@
 {
   "chipper": {
-    "sha": "dbaf65e09de018e0b419f8550ae13d39dbe7c48e",
+    "sha": "60e3a835364517fddf8bebc759b9ab3d3e2c2afc",
     "branch": "master"
   },
   "sun": {
-    "sha": "a42a2c96450dcfacc0e7e3e234bfeb3bf61747c6",
+    "sha": "85bc9dce280b38a906c95130d44700e04f5fe523",
     "branch": "master"
   },
   "sherpa": {
-    "sha": "2838342b451d0ee829ccc6991f3145c5b61ba42d",
+    "sha": "bf15240caf4ab055d45b669a5a2243b497fc3511",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "6bb0b45bc0b4f4bca2245297484f4e779300c298",
+    "sha": "80f5f48dc006b1fcfe60aa03b64ac7969e6789e6",
     "branch": "master"
   },
   "scenery": {
-    "sha": "3e252d7b564afa95782d883c4bbb56a3e20bd81f",
+    "sha": "f273c846ca4774882dbcb612ca3f7e6f7ceed115",
     "branch": "master"
   },
   "phetcommon": {
-    "sha": "1d3693f84d1db6c6ff5aa3e314d1e9bd220e4918",
+    "sha": "49183543035c2e169dff7deedb6e49f6c58b0afa",
     "branch": "master"
   },
   "phet-core": {
-    "sha": "7d8ed534e6ce7e148d834710f42f77ac5e92f0b6",
+    "sha": "c98d56c366b265802198a7f3eeee8a7f7644215b",
     "branch": "master"
   },
   "kite": {
-    "sha": "29e2af5a6cbcf47c8bf29ef1715c8ed48765fb8a",
+    "sha": "294d830b8e7be6d94b53310c845561defe8b522e",
     "branch": "master"
   },
   "joist": {
-    "sha": "fa1d1ee0f8409c5f16f626f7e08ca3162c9a0f44",
+    "sha": "9020a7ed5dd4feec3a670c49f62010b398365207",
     "branch": "master"
   },
   "dot": {
-    "sha": "5c874cb3fb2359ef3a0390e81159c5e5c26a0634",
+    "sha": "0d8e4292ea836baab14230c20e0f07b7a18dbf28",
     "branch": "master"
   },
   "brand": {
@@ -44,16 +44,16 @@
     "branch": "master"
   },
   "axon": {
-    "sha": "e7cf0606d1a79f1cd962d3995e6848e10a0fd649",
+    "sha": "a9d4cbeec06ad2f0231d5a2d76a725b90292a263",
     "branch": "master"
   },
   "assert": {
-    "sha": "386e00157abe609741d3095120e0e425d10e7b51",
+    "sha": "e9e725994176afd0103aff427acda10bf31192c4",
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "28e4f9a6d9019ae31f5b2fe5d6453b2c03dae2f6",
+    "sha": "a4fa1692d620b245ca35d20e13f9c9d7ba92e0c3",
     "branch": "master"
   },
-  "comment": "# molecules-and-light 1.0.0-dev.4 Thu Feb 05 2015 15:25:53 GMT-0700 (Mountain Standard Time)"
+  "comment": "# molecules-and-light 1.0.0-dev.5 Mon Feb 16 2015 17:21:39 GMT-0700 (Mountain Standard Time)"
 }
