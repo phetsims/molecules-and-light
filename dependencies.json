@@ -1,10 +1,10 @@
 {
   "chipper": {
-    "sha": "00478d176246e103caef8055cab9d0f7c8342ce4",
+    "sha": "522ff3ed9ac716816db94aec87f67477601e8068",
     "branch": "master"
   },
   "sun": {
-    "sha": "e3becd3d320ae4bf60202dc55e376322db0c2837",
+    "sha": "a5e0a77c29c9e58dd8082f7e6cc595103db36b79",
     "branch": "master"
   },
   "sherpa": {
@@ -12,11 +12,11 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "6c7f1d526061e83b5f4d57141ac782babe6b4b28",
+    "sha": "016a7ff38fdcce3ac4924cb942c1a57c81c4f755",
     "branch": "master"
   },
   "scenery": {
-    "sha": "27d639a03b1653c7d443b01b89497a95f5adb81b",
+    "sha": "dc3670e19d890cb4755d949274cb1bee6540c63b",
     "branch": "master"
   },
   "phetcommon": {
@@ -28,15 +28,15 @@
     "branch": "master"
   },
   "kite": {
-    "sha": "8d80e165c771500a67fc508767b682139e7906ae",
+    "sha": "1d3668fa88ee160dd17bbf13a03edc0389938b7d",
     "branch": "master"
   },
   "joist": {
-    "sha": "88e285c04eb622fdbd5670e3f7ac5944ca799b30",
+    "sha": "083b40c65a268eab22be50489bd529ec2097ea9c",
     "branch": "master"
   },
   "dot": {
-    "sha": "b7e24feee13296a76659dcf3070888e5cee9bbcd",
+    "sha": "bccefb655ef000fe5761c243f73ed2e9d97dbd9d",
     "branch": "master"
   },
   "brand": {
@@ -44,7 +44,7 @@
     "branch": "master"
   },
   "axon": {
-    "sha": "9c8d2b0328a1929231bb8a4626e6df5fa8d7f072",
+    "sha": "a63cc44375c1cbd0437bf9920de1b7b5da4f2ad1",
     "branch": "master"
   },
   "assert": {
@@ -52,8 +52,8 @@
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "dfec1185ce9ef853d19dd58118356154db9d4f79",
+    "sha": "88972ab020e95bbbd675dfe4ccaeb5e63a51af15",
     "branch": "master"
   },
-  "comment": "# molecules-and-light 1.0.0-dev.6 Sun Feb 22 2015 22:52:31 GMT-0700 (Mountain Standard Time)"
+  "comment": "# molecules-and-light 1.0.0-dev.7 Wed Feb 25 2015 10:46:04 GMT-0700 (Mountain Standard Time)"
 }
