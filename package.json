@@ -1,6 +1,6 @@
 {
   "name": "molecules-and-light",
-  "version": "1.0.0-dev.9",
+  "version": "1.0.0-dev.10",
   "license": "GPLv3",
   "simTitleStringKey": "MOLECULES_AND_LIGHT/molecules-and-light.name",
   "phetLibs": [
