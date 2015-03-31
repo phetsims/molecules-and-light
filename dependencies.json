@@ -1,54 +1,55 @@
 {
+  "comment": "# molecules-and-light 1.0.0-dev.10 Tue Mar 31 2015 14:28:51 GMT-0600 (Mountain Daylight Time)",
   "molecules-and-light": {
-    "sha": "7d1b4bd9c3fb184c89cdbd0598e247124929394f",
-    "branch": "master"
+    "sha": "d5d6a04a9a011c7b3e7bd39f9fdcbba5445fbee2",
+    "branch": "1.0"
   },
   "assert": {
-    "sha": "ea1c11c986527af4c8e428b149639e3f11045fe5",
+    "sha": "952d1ea66d2aa4c707413ff3a355120a5fe0a6d4",
     "branch": "master"
   },
   "axon": {
-    "sha": "6c0a519324a6fd87418339a7bd6421617d1b9ff1",
+    "sha": "9d415eb95eac561226402535dbbeb34d611b514b",
     "branch": "master"
   },
   "brand": {
-    "sha": "33811940cbf5fd3ccde635d2e30dba1b4898fc31",
+    "sha": "8565ca68078fa1015fa677ee5ff8075508f0216b",
     "branch": "master"
   },
   "chipper": {
-    "sha": "43870475801d0c39b8f93a66342674d1e562bce8",
+    "sha": "4a815b88a71b1796a09efb9fe81c27d491fa0e3a",
     "branch": "master"
   },
   "dot": {
-    "sha": "78e2054714294cb362f458600d7c96d7c73d74c4",
+    "sha": "300d500db2b269cef3a57afff6a484bd22b889c1",
     "branch": "master"
   },
   "joist": {
-    "sha": "3069e0e195a2b5dad1fe04c09be9318c12657a6f",
+    "sha": "469839fa26e6f9dd6dc09efe398b2d62d70a8313",
     "branch": "master"
   },
   "kite": {
-    "sha": "2607cc05ab62e5797c7b52e75e8f855b408c66d3",
+    "sha": "4283618986d554da85329ebdbc6c2ddd54cba84f",
     "branch": "master"
   },
   "nitroglycerin": {
-    "sha": "f4204cf38ab7fd6671669a78a030a699e1c13b4c",
+    "sha": "a1b4005b9a6062887955274a9d14c31dab69b93c",
     "branch": "master"
   },
   "phet-core": {
-    "sha": "4af6a3c97444c15cd863cf6bf80fd6dd377c9d3b",
+    "sha": "33450dabed3c9b3a2ed1c33666db534fb9e51fbc",
     "branch": "master"
   },
   "phetcommon": {
-    "sha": "6ca0bbfdd9437ac7ab9f958ebace561bdc40562d",
+    "sha": "bb92c52cd90fdaa0c2a746fea82594afd439b4db",
     "branch": "master"
   },
   "scenery": {
-    "sha": "df035305fdcfa8019054c0f1557973c999998041",
+    "sha": "422ff322b6b4749406adad4293d6700932ecf49e",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "793745d2fd331d43ff93a635f97a6e8a3b4edfe7",
+    "sha": "adbf7ffe7672f8321b4462a714b397146403e51e",
     "branch": "master"
   },
   "sherpa": {
@@ -56,8 +57,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "0e85de6174b5b77bd1dd31200a7f01ccd3dcd36c",
+    "sha": "f290622fd4e3c6389779ce72fd32539b4d03ea72",
     "branch": "master"
-  },
-  "comment": "# molecules-and-light 1.0.0-dev.10 Fri Mar 20 2015 15:09:38 GMT-0600 (Mountain Daylight Time)"
+  }
 }
