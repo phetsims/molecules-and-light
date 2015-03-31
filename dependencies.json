@@ -1,63 +1,63 @@
 {
-  "comment": "# molecules-and-light 1.0.0-dev.10 Tue Mar 31 2015 14:28:51 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# molecules-and-light 1.0.0-rc.1 Tue Mar 31 2015 14:36:52 GMT-0600 (Mountain Daylight Time)",
   "molecules-and-light": {
-    "sha": "d5d6a04a9a011c7b3e7bd39f9fdcbba5445fbee2",
+    "sha": "94a6d731bc58bf5b7763053581deb71b878f6656",
     "branch": "1.0"
   },
   "assert": {
     "sha": "952d1ea66d2aa4c707413ff3a355120a5fe0a6d4",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "axon": {
     "sha": "9d415eb95eac561226402535dbbeb34d611b514b",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "brand": {
     "sha": "8565ca68078fa1015fa677ee5ff8075508f0216b",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "chipper": {
     "sha": "4a815b88a71b1796a09efb9fe81c27d491fa0e3a",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "300d500db2b269cef3a57afff6a484bd22b889c1",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "joist": {
     "sha": "469839fa26e6f9dd6dc09efe398b2d62d70a8313",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "4283618986d554da85329ebdbc6c2ddd54cba84f",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "nitroglycerin": {
     "sha": "a1b4005b9a6062887955274a9d14c31dab69b93c",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "phet-core": {
     "sha": "33450dabed3c9b3a2ed1c33666db534fb9e51fbc",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "phetcommon": {
     "sha": "bb92c52cd90fdaa0c2a746fea82594afd439b4db",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "422ff322b6b4749406adad4293d6700932ecf49e",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "scenery-phet": {
     "sha": "adbf7ffe7672f8321b4462a714b397146403e51e",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "sherpa": {
     "sha": "9a3ecfeeef516ec6361af14825f0581165625c44",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "sun": {
     "sha": "f290622fd4e3c6389779ce72fd32539b4d03ea72",
-    "branch": "master"
+    "branch": "HEAD"
   }
 }
