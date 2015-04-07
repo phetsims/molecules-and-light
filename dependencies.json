@@ -1,7 +1,7 @@
 {
-  "comment": "# molecules-and-light 1.0.0-rc.1 Tue Mar 31 2015 14:36:52 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# molecules-and-light 1.0.0 Tue Apr 07 2015 15:10:48 GMT-0600 (Mountain Daylight Time)",
   "molecules-and-light": {
-    "sha": "94a6d731bc58bf5b7763053581deb71b878f6656",
+    "sha": "964cb1517668c2184c600f0205fe9cb5ec4e3069",
     "branch": "1.0"
   },
   "assert": {
