@@ -1,0 +1,122 @@
+{
+  "molecules-and-light.name": {
+    "value": "Molecules and Light"
+  },
+  "QuadWavelengthSelector.Microwave": {
+    "value": "Microwave"
+  },
+  "QuadWavelengthSelector.Infrared": {
+    "value": "Infrared"
+  },
+  "QuadWavelengthSelector.Visible": {
+    "value": "Visible"
+  },
+  "QuadWavelengthSelector.Ultraviolet": {
+    "value": "Ultraviolet"
+  },
+  "QuadWavelengthSelector.HigherEnergy": {
+    "value": "Higher Energy"
+  },
+  "molecularNamePattern": {
+    "value": "{0} ({1})"
+  },
+  "ControlPanel.CO": {
+    "value": "CO"
+  },
+  "ControlPanel.N2": {
+    "value": "N2"
+  },
+  "ControlPanel.O2": {
+    "value": "O2"
+  },
+  "ControlPanel.CO2": {
+    "value": "CO2"
+  },
+  "ControlPanel.NO2": {
+    "value": "NO2"
+  },
+  "ControlPanel.O3": {
+    "value": "O3"
+  },
+  "ControlPanel.H20": {
+    "value": "H20"
+  },
+  "ControlPanel.CarbonMonoxide": {
+    "value": "Carbon Monoxide"
+  },
+  "ControlPanel.Nitrogen": {
+    "value": "Nitrogen"
+  },
+  "ControlPanel.Oxygen": {
+    "value": "Oxygen"
+  },
+  "ControlPanel.CarbonDioxide": {
+    "value": "Carbon Dioxide"
+  },
+  "ControlPanel.NitrogenDioxide": {
+    "value": "Nitrogen Dioxide"
+  },
+  "ControlPanel.Ozone": {
+    "value": "Ozone"
+  },
+  "ControlPanel.Water": {
+    "value": "Water"
+  },
+  "ButtonNode.ReturnMolecule": {
+    "value": "Return Molecule"
+  },
+  "SpectrumWindow.buttonCaption": {
+    "value": "Show Light Spectrum"
+  },
+  "SpectrumWindow.title": {
+    "value": "Light Spectrum"
+  },
+  "SpectrumWindow.frequencyArrowLabel": {
+    "value": "Increasing frequency and energy"
+  },
+  "SpectrumWindow.wavelengthArrowLabel": {
+    "value": "Increasing wavelength"
+  },
+  "SpectrumWindow.close": {
+    "value": "Close"
+  },
+  "SpectrumWindow.radioBandLabel": {
+    "value": "Radio"
+  },
+  "SpectrumWindow.microwaveBandLabel": {
+    "value": "Microwave"
+  },
+  "SpectrumWindow.infraredBandLabel": {
+    "value": "Infrared"
+  },
+  "SpectrumWindow.ultravioletBandLabel": {
+    "value": "Ultra-\nviolet"
+  },
+  "SpectrumWindow.ultraBandLabel": {
+    "value": "Ultra -"
+  },
+  "SpectrumWindow.violetBandLabel": {
+    "value": "Violet"
+  },
+  "SpectrumWindow.xrayBandLabel": {
+    "value": "X-ray"
+  },
+  "SpectrumWindow.gammaRayBandLabel": {
+    "value": "Gamma\nray"
+  },
+  "SpectrumWindow.gammaBandLabel": {
+    "value": "Gamma"
+  },
+  "SpectrumWindow.rayBandLabel": {
+    "value": "ray"
+  },
+  "SpectrumWindow.visibleBandLabel": {
+    "value": "Visible"
+  },
+  "SpectrumWindow.cyclesPerSecondUnits": {
+    "value": "Hz"
+  },
+  "SpectrumWindow.metersUnits": {
+    "value": "m"
+  }
+}
