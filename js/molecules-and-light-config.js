@@ -32,12 +32,13 @@ require.config( {
     DOT: '../../dot/js',
     JOIST: '../../joist/js',
     KITE: '../../kite/js',
+    NITROGLYCERIN: '../../nitroglycerin/js',
     PHET_CORE: '../../phet-core/js',
     PHETCOMMON: '../../phetcommon/js',
     SCENERY: '../../scenery/js',
     SCENERY_PHET: '../../scenery-phet/js',
     SUN: '../../sun/js',
-    NITROGLYCERIN: '../../nitroglycerin/js',
+    TANDEM: '../../tandem/js',
 
     // this sim
     MOLECULES_AND_LIGHT: '.'
