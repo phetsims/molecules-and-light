@@ -15,7 +15,6 @@
   },
   "phet": {
     "requirejsNamespace": "MOLECULES_AND_LIGHT",
-    "simTitleStringKey": "MOLECULES_AND_LIGHT/molecules-and-light.name",
     "phetLibs": [
       "nitroglycerin"
     ]
