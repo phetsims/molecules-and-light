@@ -1,63 +1,63 @@
 {
-  "comment": "# molecules-and-light 1.1.0-rc.1 Tue Aug 11 2015 12:49:10 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# molecules-and-light 1.1.0-rc.2 Tue Aug 25 2015 10:43:08 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "858e65ac477bf1861883ce06eed56d9fdefa5027",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "axon": {
     "sha": "1f0ca9f4fca42ddd7912c7c99d6f96edcbb4a8be",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "brand": {
     "sha": "aa39bc48491aaee6c9059e0194c8974fd02bceba",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "chipper": {
     "sha": "6cb12b9c57511e0777495c019889cd0bec8d1f9e",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "e34c6b2c53b83ea1f8d2a5091cadfdc6353a501d",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "joist": {
     "sha": "a28ef245b3c3519cc818eb6ffb1d227ec8055224",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "2497814682e359a8500fcb2a6dca2e276a00b6f9",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "05c075b5117773f7b3b7bfdf081af1745f86bae4",
+    "sha": "50b52ea3c5a2372f32ff27108bdb674bad69c029",
     "branch": "1.1"
   },
   "nitroglycerin": {
     "sha": "c6f79ce4664a1120a8d1d2393d5d48f9b72d4bc9",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "phet-core": {
     "sha": "8e31808c67a23066b43fbbd2080784daa44433c2",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "phetcommon": {
     "sha": "89a44d2cefd4b66f031f7f3fc30c0578a3130b5e",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "fe4f01422d583c828b95a60bfc2a2ccd76451ebc",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "scenery-phet": {
     "sha": "bec2cc7fdc06ece28ca64b34a26fb0ddd858d83c",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "sherpa": {
     "sha": "4f160877ebd03ff850a4523e0b7175a59b5dc547",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "sun": {
     "sha": "66c091cc5ceecbf3bbfbbec396cb3bf51f34ab95",
-    "branch": "master"
+    "branch": "HEAD"
   }
 }
