@@ -20,27 +20,6 @@
   "molecularNamePattern": {
     "value": "{0} ({1})"
   },
-  "ControlPanel.CO": {
-    "value": "CO"
-  },
-  "ControlPanel.N2": {
-    "value": "N2"
-  },
-  "ControlPanel.O2": {
-    "value": "O2"
-  },
-  "ControlPanel.CO2": {
-    "value": "CO2"
-  },
-  "ControlPanel.NO2": {
-    "value": "NO2"
-  },
-  "ControlPanel.O3": {
-    "value": "O3"
-  },
-  "ControlPanel.H20": {
-    "value": "H20"
-  },
   "ControlPanel.CarbonMonoxide": {
     "value": "Carbon Monoxide"
   },
