@@ -15,7 +15,7 @@ define( function( require ) {
   var Tandem = require( 'TANDEM/Tandem' );
 
   // strings
-  var simTitle = require( 'string!MOLECULES_AND_LIGHT/molecules-and-light.name' );
+  var simTitle = require( 'string!MOLECULES_AND_LIGHT/molecules-and-light.title' );
 
   var tandem = new Tandem();
 
