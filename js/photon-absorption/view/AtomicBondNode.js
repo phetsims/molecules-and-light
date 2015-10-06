@@ -106,7 +106,7 @@ define( function( require ) {
           break;
 
         default:
-          console.error( " - Error: Can't represent bond number, value = " + this.atomicBond.getBondCount() );
+          console.error( ' - Error: Can\'t represent bond number, value = ' + this.atomicBond.getBondCount() );
           assert && assert( false );
           break;
       }
@@ -173,7 +173,7 @@ define( function( require ) {
           break;
 
         default:
-          console.error( " - Error: Can't represent bond number, value = " + this.atomicBond.bondCount );
+          console.error( ' - Error: Can\'t represent bond number, value = ' + this.atomicBond.bondCount );
           assert && assert( false );
           break;
 
