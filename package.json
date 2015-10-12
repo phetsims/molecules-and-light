@@ -16,8 +16,7 @@
   "phet": {
     "requirejsNamespace": "MOLECULES_AND_LIGHT",
     "phetLibs": [
-      "nitroglycerin",
-      "tandem"
+      "nitroglycerin"
     ]
   }
 }
