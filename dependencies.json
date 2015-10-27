@@ -1,31 +1,31 @@
 {
   "comment": "# molecules-and-light 1.1.0-rc.4 Wed Oct 07 2015 15:04:46 GMT-0600 (Mountain Daylight Time)",
   "assert": {
-    "sha": "858e65ac477bf1861883ce06eed56d9fdefa5027",
+    "sha": "11bc6a6d0344ba1a8b95982bad3552bffbdfdfd6",
     "branch": "HEAD"
   },
   "axon": {
-    "sha": "1f0ca9f4fca42ddd7912c7c99d6f96edcbb4a8be",
+    "sha": "e22373472d82b525f3de6c817010ee3ee4f74e44",
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "2af17fe775352982468b0b7215096f413339a32a",
+    "sha": "8a756e53f976c89cf091350b67f880fc9b521096",
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "fc81a64efe7fd532939851942069690a4ed9c165",
+    "sha": "157b9cf31c1ba02fe4171acf25ff27b94e058e4e",
     "branch": "HEAD"
   },
   "dot": {
-    "sha": "e34c6b2c53b83ea1f8d2a5091cadfdc6353a501d",
+    "sha": "d99cbe46e8496bbfe2554ddfcc15022ffdfcae83",
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "89a77821efaf9f5e1c364cd17e568c9e62e143c6",
+    "sha": "121bb0de7deb33ab3495339d212c979741ab610a",
     "branch": "HEAD"
   },
   "kite": {
-    "sha": "2497814682e359a8500fcb2a6dca2e276a00b6f9",
+    "sha": "40dc703a07c774464f060dda6a67485704ca9e22",
     "branch": "HEAD"
   },
   "molecules-and-light": {
@@ -37,27 +37,27 @@
     "branch": "HEAD"
   },
   "phet-core": {
-    "sha": "8e31808c67a23066b43fbbd2080784daa44433c2",
+    "sha": "e9f36af114717781b776243db8ed25986cbba7ce",
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "89a44d2cefd4b66f031f7f3fc30c0578a3130b5e",
+    "sha": "0e4754feb35bc853b9a1f685e0270f5d53b9b7f8",
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "317e459d74f14438d53661dd0cfc9970a0d03a23",
+    "sha": "2edf8a0154d7be46b34b973483459df1c7f9782d",
     "branch": "HEAD"
   },
   "scenery-phet": {
-    "sha": "bec2cc7fdc06ece28ca64b34a26fb0ddd858d83c",
+    "sha": "88ade50794057afc23b6b98e3d1757b61612d938",
     "branch": "HEAD"
   },
   "sherpa": {
-    "sha": "4f160877ebd03ff850a4523e0b7175a59b5dc547",
+    "sha": "1759eadefb4f6d680f85aef394ea7727df1928e6",
     "branch": "HEAD"
   },
   "sun": {
-    "sha": "66c091cc5ceecbf3bbfbbec396cb3bf51f34ab95",
+    "sha": "b66398a529a18e696832fd10cae1adf90598e75e",
     "branch": "HEAD"
   }
 }
