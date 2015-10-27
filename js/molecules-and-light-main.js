@@ -24,7 +24,7 @@ define( function( require ) {
       leadDesign: 'Kelly Lancaster (Java), Amy Rouinfar (HTML5)',
       softwareDevelopment: 'Jesse Greenberg, John Blanco, Sam Reid, Aaron Davis',
       team: 'Yuen-ying Carpenter, Trish Loeblein, Emily Moore, Robert Parson, Ariel Paul, Kathy Perkins',
-      qualityAssurance: 'Steele Dalton, Oliver Orejola, Bryan Yoelin',
+      qualityAssurance: 'Steele Dalton, Elise Morgan, Oliver Orejola, Bryan Yoelin',
       graphicArts: 'Alex Klinger'
     },
     tandem: tandem
