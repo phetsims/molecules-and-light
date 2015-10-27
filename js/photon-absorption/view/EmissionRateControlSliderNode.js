@@ -151,7 +151,7 @@ define( function( require ) {
     // draw three lines along the vertical of the thumbNode.
     for ( var n = 1; n < 4; n++ ) {
       thisNode.addChild( new Path( Shape.lineSegment(
-        ( n * THUMB_SIZE.width / 5),
+        ( n * THUMB_SIZE.width / 5), //eslint-disable-line no-unexpected-multiline
         ( THUMB_SIZE.height / 5 ),
         ( n * THUMB_SIZE.width / 5 ),
         ( 4 * THUMB_SIZE.height / 5 ) ), { stroke: 'black', lineWidth: 1 } ) );
