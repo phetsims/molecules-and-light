@@ -15,7 +15,7 @@
 <img id="splash" style="position: absolute;top: 50%;left: 50%;margin-top: -210px;margin-left: -252px;">
 
 <script type="text/javascript">
-  (function() {
+  ( function() {
     // Identify the brand (assume generated brand if not provided with query parameters)
     var brandMatch = location.search.match( /brand=([^&]+)/ );
     var brand = brandMatch ? decodeURIComponent( brandMatch[ 1 ] ) : 'phet';
@@ -24,7 +24,7 @@
     document.getElementById( 'splash' ).src = '../brand/' + brand + '/images/splash.svg';
 
     // Preloads, with more included for phet-io brands
-    var preloads = ( brand === 'phet-io' ) ? [ "../sherpa/lib/jquery-2.1.0.js", "../sherpa/lib/lodash-2.4.1.js", "../sherpa/lib/FileSaver-b8054a2.js", "../assert/js/assert.js", "../chipper/js/initialize-globals.js", "../sherpa/lib/jsondiffpatch-0.1.31.js", "../together/js/together.js", "../together/js/SimIFrameAPI.js", "../together/js/togetherEvents.js", "../together/js/datamite.js", "../together/js/api/TogetherCommon.js", "../together/js/api/molecules-and-light-api.js", "../together/js/finishedPreloads.js" ] : [ "../sherpa/lib/jquery-2.1.0.js", "../sherpa/lib/lodash-2.4.1.js", "../sherpa/lib/FileSaver-b8054a2.js", "../assert/js/assert.js", "../chipper/js/initialize-globals.js" ];
+    var preloads = ( brand === 'phet-io' ) ? [ '../sherpa/lib/jquery-2.1.0.js', '../sherpa/lib/lodash-2.4.1.js', '../sherpa/lib/FileSaver-b8054a2.js', '../assert/js/assert.js', '../chipper/js/initialize-globals.js', '../sherpa/lib/jsondiffpatch-0.1.31.js', '../together/js/together.js', '../together/js/SimIFrameAPI.js', '../together/js/togetherEvents.js', '../together/js/datamite.js', '../together/js/api/TogetherCommon.js', '../together/js/api/molecules-and-light-api.js', '../together/js/finishedPreloads.js' ] : [ '../sherpa/lib/jquery-2.1.0.js', '../sherpa/lib/lodash-2.4.1.js', '../sherpa/lib/FileSaver-b8054a2.js', '../assert/js/assert.js', '../chipper/js/initialize-globals.js' ];
 
     // Loads a synchronously-executed asynchronously-downloaded script tag, with optional data-main parameter.
     // See http://www.html5rocks.com/en/tutorials/speed/script-loading/ for more about script loading. It helps to
@@ -46,7 +46,7 @@
 
     // Then load the main require.js code.
     loadURL( '../sherpa/lib/require-2.1.11.js', 'js/molecules-and-light-config.js' );
-  })();
+  } )();
 </script>
 </body>
 </html>
