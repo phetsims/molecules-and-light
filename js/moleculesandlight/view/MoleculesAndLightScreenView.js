@@ -30,6 +30,7 @@ define( function( require ) {
   var SpectrumWindow = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/SpectrumWindow' );
   var WindowFrameNode = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/WindowFrameNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
 
   // strings
   var spectrumWindowButtonCaptionString = require( 'string!MOLECULES_AND_LIGHT/SpectrumWindow.buttonCaption' );
@@ -152,6 +153,8 @@ define( function( require ) {
     this.addChild( moleculeControlPanel );
   }
 
+  moleculesAndLight.register( 'MoleculesAndLightScreenView', MoleculesAndLightScreenView );
+  
   return inherit( ScreenView, MoleculesAndLightScreenView );
 } );
 

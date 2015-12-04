@@ -15,6 +15,7 @@ define( function( require ) {
   var PhotonTarget = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/PhotonTarget' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
+  var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
 
   // strings
   var moleculesAndLightTitleString = require( 'string!MOLECULES_AND_LIGHT/molecules-and-light.title' );
@@ -31,5 +32,7 @@ define( function( require ) {
     );
   }
 
+  moleculesAndLight.register( 'MoleculesAndLightScreen', MoleculesAndLightScreen );
+  
   return inherit( Screen, MoleculesAndLightScreen );
 } );

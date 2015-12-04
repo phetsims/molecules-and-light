@@ -22,6 +22,7 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var ButtonListener = require( 'SCENERY/input/ButtonListener' );
   var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
+  var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
 
   // constants
   var THUMB_SIZE = new Dimension2( 10, 18 ); // size of the slider thumb
@@ -71,6 +72,8 @@ define( function( require ) {
     this.addChild( this.backgroundRect );
     this.addChild( this.emissionRateControlSlider );
   }
+
+  moleculesAndLight.register( 'EmissionRateControlSliderNode', EmissionRateControlSliderNode );
 
   inherit( Node, EmissionRateControlSliderNode, {
     dispose: function() {
@@ -181,6 +184,8 @@ define( function( require ) {
     };
   }
 
+  moleculesAndLight.register( 'EmissionRateThumbNode', EmissionRateThumbNode );
+  
   inherit( Path, EmissionRateThumbNode, {
     dispose: function() {
       this.disposeEmissionRateThumbNode();

@@ -16,6 +16,7 @@ define( function( require ) {
   var Molecule = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/Molecule' );
   var AtomicBond = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/atoms/AtomicBond' );
   var Atom = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/atoms/Atom' );
+  var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
 
   // Model Data for the nitrogen monoxide molecule.
   var INITIAL_NITROGEN_OXYGEN_DISTANCE = 170; // In picometers.
@@ -48,6 +49,8 @@ define( function( require ) {
 
   }
 
+  moleculesAndLight.register( 'NO', NO );
+  
   return inherit( Molecule, NO, {
 
     /**
