@@ -71,23 +71,11 @@
   "SpectrumWindow.ultravioletBandLabel": {
     "value": "Ultra-\nviolet"
   },
-  "SpectrumWindow.ultraBandLabel": {
-    "value": "Ultra -"
-  },
-  "SpectrumWindow.violetBandLabel": {
-    "value": "Violet"
-  },
   "SpectrumWindow.xrayBandLabel": {
     "value": "X-ray"
   },
   "SpectrumWindow.gammaRayBandLabel": {
     "value": "Gamma\nray"
-  },
-  "SpectrumWindow.gammaBandLabel": {
-    "value": "Gamma"
-  },
-  "SpectrumWindow.rayBandLabel": {
-    "value": "ray"
   },
   "SpectrumWindow.visibleBandLabel": {
     "value": "Visible"
