@@ -17,6 +17,11 @@
     "requirejsNamespace": "MOLECULES_AND_LIGHT",
     "phetLibs": [
       "nitroglycerin"
-    ]
+    ],
+    "phet-io": {
+      "preload": [
+        "../together/js/api/molecules-and-light-api.js"
+      ]
+    }
   }
 }
