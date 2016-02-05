@@ -20,7 +20,7 @@
     ],
     "phet-io": {
       "preload": [
-        "../together/js/api/molecules-and-light-api.js"
+        "../phet-io/js/api/molecules-and-light-api.js"
       ]
     }
   }
