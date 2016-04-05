@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.1.4-rc.1 Fri Apr 01 2016 15:49:24 GMT-0600 (MDT)",
+  "comment": "# molecules-and-light 1.1.4 Tue Apr 05 2016 13:58:51 GMT-0600 (MDT)",
   "assert": {
     "sha": "11bc6a6d0344ba1a8b95982bad3552bffbdfdfd6",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "6c17cb4a9334d29adecc04130e2891ec6ceefe63",
+    "sha": "0d285f9ac7f182af20821ba072fa8799f0681526",
     "branch": "1.1"
   },
   "nitroglycerin": {
