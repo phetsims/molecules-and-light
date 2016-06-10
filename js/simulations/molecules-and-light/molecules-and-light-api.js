@@ -18,22 +18,22 @@ define( function( require ) {
 
   // modules
   var assertInstanceOf = require( 'PHET_IO/assertions/assertInstanceOf' );
-  var PhETIOCommon = require( 'PHET_IO/api/PhETIOCommon' );
+  var PhETIOCommon = require( 'PHET_IO/types/PhETIOCommon' );
   var phetio = require( 'PHET_IO/phetio' );
   var phetioInherit = require( 'PHET_IO/phetioInherit' );
   var phetioNamespace = require( 'PHET_IO/phetioNamespace' );
   var Tandem = require( 'TANDEM/Tandem' );
-  var TBoolean = require( 'PHET_IO/api/TBoolean' );
-  var TButton = require( 'PHET_IO/api/sun/buttons/TButton' );
-  var THSlider = require( 'PHET_IO/api/sun/THSlider' );
-  var TNumber = require( 'PHET_IO/api/TNumber' );
-  var TObservableArray = require( 'PHET_IO/api/axon/TObservableArray' );
-  var TProperty = require( 'PHET_IO/api/axon/TProperty' );
-  var TResetAllButton = require( 'PHET_IO/api/sun/buttons/TResetAllButton' );
-  var TRadioButton = require( 'PHET_IO/api/sun/buttons/TRadioButton' );
-  var TString = require( 'PHET_IO/api/TString' );
-  var TTandemText = require( 'PHET_IO/api/tandem/scenery/nodes/TTandemText' );
-  var TToggleButton = require( 'PHET_IO/api/sun/buttons/TToggleButton' );
+  var TBoolean = require( 'PHET_IO/types/TBoolean' );
+  var TButton = require( 'PHET_IO/types/sun/buttons/TButton' );
+  var THSlider = require( 'PHET_IO/types/sun/THSlider' );
+  var TNumber = require( 'PHET_IO/types/TNumber' );
+  var TObservableArray = require( 'PHET_IO/types/axon/TObservableArray' );
+  var TProperty = require( 'PHET_IO/types/axon/TProperty' );
+  var TResetAllButton = require( 'PHET_IO/types/sun/buttons/TResetAllButton' );
+  var TRadioButton = require( 'PHET_IO/types/sun/buttons/TRadioButton' );
+  var TString = require( 'PHET_IO/types/TString' );
+  var TTandemText = require( 'PHET_IO/types/tandem/scenery/nodes/TTandemText' );
+  var TToggleButton = require( 'PHET_IO/types/sun/buttons/TToggleButton' );
 
   var TPhoton = phetioInherit( Object, 'Photon', function( instance, phetioID ) {
     assertInstanceOf( instance, phet.moleculesAndLight.Photon );
