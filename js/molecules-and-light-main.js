@@ -15,7 +15,7 @@ define( function( require ) {
   var Tandem = require( 'TANDEM/Tandem' );
 
   // If running as phet-io, load the API
-  require( 'ifphetio!PHET_IO/api/molecules-and-light-api' );
+  require( 'ifphetio!PHET_IO/simulations/molecules-and-light/molecules-and-light-api' );
 
   // strings
   var moleculesAndLightTitleString = require( 'string!MOLECULES_AND_LIGHT/molecules-and-light.title' );
