@@ -70,8 +70,8 @@ define( function( require ) {
         model: {
 
           // model properties
-          emissionFrequencyProperty: TProperty( TNumber, { units: 'Hertz' } ),
-          photonWavelengthProperty: TProperty( TNumber, { units: 'meters' } ),
+          emissionFrequencyProperty: TProperty( TNumber( 'hertz' ) ),
+          photonWavelengthProperty: TProperty( TNumber( 'meters' ) ),
           photonTargetProperty: TProperty( TString, {
             values: [
               'SINGLE_CO_MOLECULE',
@@ -110,16 +110,16 @@ define( function( require ) {
             singleO3MoleculeRadioButton: TRadioButton( TString )
           },
           photonEmissionControlPanel: {
-            microwaveRadioButton: TRadioButton( TNumber ),
+            microwaveRadioButton: TRadioButton( TNumber( 'meters' ) ),
             microwaveRadioButtonLabel: TTandemText,
 
-            infraredRadioButton: TRadioButton( TNumber ),
+            infraredRadioButton: TRadioButton( TNumber( 'meters' ) ),
             infraredRadioButtonLabel: TTandemText,
 
-            visibleRadioButton: TRadioButton( TNumber ),
+            visibleRadioButton: TRadioButton( TNumber( 'meters' ) ),
             visibleRadioButtonLabel: TTandemText,
 
-            ultravioletRadioButton: TRadioButton( TNumber ),
+            ultravioletRadioButton: TRadioButton( TNumber( 'meters' ) ),
             ultravioletRadioButtonLabel: TTandemText
           },
           observationWindow: {
