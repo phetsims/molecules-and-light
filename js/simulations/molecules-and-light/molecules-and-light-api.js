@@ -124,7 +124,7 @@ define( function( require ) {
           },
           observationWindow: {
             // photon selector radio buttons
-
+            returnMoleculeButton: TButton,
 
             returnMoleculeButtonVisibleProperty: TProperty( TBoolean ),
             photonEmitterNode: {
