@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.1.5 Wed Jun 22 2016 12:40:44 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# molecules-and-light 1.1.6-rc.1 Wed Jun 22 2016 13:06:27 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "11bc6a6d0344ba1a8b95982bad3552bffbdfdfd6",
     "branch": "HEAD"
@@ -14,7 +14,7 @@
   },
   "chipper": {
     "sha": "47ec93e0b4e334edece2d4cf74606ae740ea73ba",
-    "branch": "molecules-and-light-1.1"
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "d99cbe46e8496bbfe2554ddfcc15022ffdfcae83",
@@ -22,14 +22,14 @@
   },
   "joist": {
     "sha": "540cdf3133ea44d743f69c3eb3743edde1718059",
-    "branch": "molecules-and-light-1.1"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "40dc703a07c774464f060dda6a67485704ca9e22",
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "2aa9947b94a74b2c71851d048237d6b7050c2140",
+    "sha": "d9828f52fdee996d8eefa85fbe18767f3535b1f7",
     "branch": "1.1"
   },
   "nitroglycerin": {
@@ -54,7 +54,7 @@
   },
   "sherpa": {
     "sha": "29a056d5431696431b1f1b593eb82c3f03afd87f",
-    "branch": "molecules-and-light-1.1"
+    "branch": "HEAD"
   },
   "sun": {
     "sha": "b66398a529a18e696832fd10cae1adf90598e75e",
