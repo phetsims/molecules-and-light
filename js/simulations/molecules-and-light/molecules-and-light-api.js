@@ -17,49 +17,23 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var assertInstanceOf = require( 'PHET_IO/assertions/assertInstanceOf' );
   var PhETIOCommon = require( 'PHET_IO/PhETIOCommon' );
   var phetio = require( 'PHET_IO/phetio' );
-  var phetioInherit = require( 'PHET_IO/phetioInherit' );
   var phetioNamespace = require( 'PHET_IO/phetioNamespace' );
   var Tandem = require( 'TANDEM/Tandem' );
   var TBoolean = require( 'PHET_IO/types/TBoolean' );
   var TButton = require( 'PHET_IO/types/sun/buttons/TButton' );
   var THSlider = require( 'PHET_IO/types/sun/THSlider' );
+  var TMolecule = require( 'PHET_IO/simulations/molecules-and-light/types/TMolecule' );
   var TNumber = require( 'PHET_IO/types/TNumber' );
   var TObservableArray = require( 'PHET_IO/types/axon/TObservableArray' );
+  var TPhoton = require( 'PHET_IO/simulations/molecules-and-light/types/TPhoton' );
   var TProperty = require( 'PHET_IO/types/axon/TProperty' );
   var TResetAllButton = require( 'PHET_IO/types/sun/buttons/TResetAllButton' );
   var TRadioButton = require( 'PHET_IO/types/sun/buttons/TRadioButton' );
   var TString = require( 'PHET_IO/types/TString' );
   var TTandemText = require( 'PHET_IO/types/tandem/scenery/nodes/TTandemText' );
   var TToggleButton = require( 'PHET_IO/types/sun/buttons/TToggleButton' );
-
-  var TPhoton = phetioInherit( Object, 'Photon', function( instance, phetioID ) {
-    assertInstanceOf( instance, phet.moleculesAndLight.Photon );
-    Object.call( this, instance, phetioID );
-  }, {}, {
-    fromStateObject: function( stateObject ) {
-      return window.phet.moleculesAndLight.Photon.fromStateObject( stateObject );
-    },
-    toStateObject: function( value ) {
-      return value.toStateObject();
-    },
-    setValue: function() {}
-  } );
-
-  var TMolecule = phetioInherit( Object, 'TMolecule', function( instance, phetioID ) {
-    assertInstanceOf( instance, phet.moleculesAndLight.Molecule );
-    Object.call( this, instance, phetioID );
-  }, {}, {
-    fromStateObject: function( stateObject ) {
-      return window.phet.moleculesAndLight.Molecule.fromStateObject( stateObject );
-    },
-    toStateObject: function( value ) {
-      return value.toStateObject();
-    },
-    setValue: function() {}
-  } );
 
   // Use explicit names for id keys so they will match what researchers see in data files
   // Use id and type instead of phetioID and typeID to simplify things for researchers
