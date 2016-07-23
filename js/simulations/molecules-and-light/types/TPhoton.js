@@ -13,7 +13,7 @@ define( function( require ) {
   var phetioNamespace = require( 'PHET_IO/phetioNamespace' );
   var phetioInherit = require( 'PHET_IO/phetioInherit' );
 
-  var TPhoton = phetioInherit( Object, 'Photon', function( instance, phetioID ) {
+  var TPhoton = phetioInherit( Object, 'TPhoton', function( instance, phetioID ) {
     assertInstanceOf( instance, phet.moleculesAndLight.Photon );
     Object.call( this, instance, phetioID );
   }, {}, {
