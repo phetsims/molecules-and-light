@@ -17,12 +17,15 @@ define( function( require ) {
     assertInstanceOf( instance, phet.moleculesAndLight.Photon );
     Object.call( this, instance, phetioID );
   }, {}, {
+
     fromStateObject: function( stateObject ) {
       return window.phet.moleculesAndLight.Photon.fromStateObject( stateObject );
     },
+
     toStateObject: function( value ) {
       return value.toStateObject();
     },
+
     setValue: function() {}
   } );
 
