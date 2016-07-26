@@ -24,10 +24,10 @@ define( function( require ) {
   var TBoolean = require( 'PHET_IO/types/TBoolean' );
   var TButton = require( 'PHET_IO/types/sun/buttons/TButton' );
   var THSlider = require( 'PHET_IO/types/sun/THSlider' );
-  var TMolecule = require( 'PHET_IO/simulations/molecules-and-light/types/TMolecule' );
+  var TMolecule = require( 'PHET_IO/simulations/molecules-and-light/TMolecule' );
   var TNumber = require( 'PHET_IO/types/TNumber' );
   var TObservableArray = require( 'PHET_IO/types/axon/TObservableArray' );
-  var TPhoton = require( 'PHET_IO/simulations/molecules-and-light/types/TPhoton' );
+  var TPhoton = require( 'PHET_IO/simulations/molecules-and-light/TPhoton' );
   var TProperty = require( 'PHET_IO/types/axon/TProperty' );
   var TResetAllButton = require( 'PHET_IO/types/sun/buttons/TResetAllButton' );
   var TRadioButton = require( 'PHET_IO/types/sun/buttons/TRadioButton' );
