@@ -17,7 +17,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var PhETIOCommon = require( 'PHET_IO/PhETIOCommon' );
   var phetio = require( 'PHET_IO/phetio' );
   var phetioNamespace = require( 'PHET_IO/phetioNamespace' );
   var Tandem = require( 'TANDEM/Tandem' );
@@ -38,8 +37,8 @@ define( function( require ) {
   // Use explicit names for id keys so they will match what researchers see in data files
   // Use id and type instead of phetioID and typeID to simplify things for researchers
   // Use a map so that JS will help us check that there are no duplicate names.
-  var moleculesAndLightAPI = PhETIOCommon.createAPI( {
-    moleculesAndLight: PhETIOCommon.createSim( {
+  var moleculesAndLightAPI = createAPI( {
+    moleculesAndLight: createSim( {
       moleculesAndLightScreen: {
         model: {
 
