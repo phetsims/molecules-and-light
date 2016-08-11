@@ -13,10 +13,12 @@ define( function( require ) {
   var phetioNamespace = require( 'PHET_IO/phetioNamespace' );
   var phetioInherit = require( 'PHET_IO/phetioInherit' );
 
-  var TPhoton = phetioInherit( Object, 'TPhoton', function( instance, phetioID ) {
+  var TPhoton = function( instance, phetioID ) {
     assertInstanceOf( instance, phet.moleculesAndLight.Photon );
     Object.call( this, instance, phetioID );
-  }, {}, {
+  };
+
+  phetioInherit( Object, 'TPhoton', TPhoton, {}, {
 
     fromStateObject: function( stateObject ) {
       return window.phet.moleculesAndLight.Photon.fromStateObject( stateObject );
