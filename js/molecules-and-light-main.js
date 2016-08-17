@@ -26,8 +26,7 @@ define( function( require ) {
       team: 'Yuen-ying Carpenter, Trish Loeblein, Emily Moore, Robert Parson, Ariel Paul, Kathy Perkins',
       qualityAssurance: 'Steele Dalton, Elise Morgan, Oliver Orejola, Bryan Yoelin',
       graphicArts: 'Alex Klinger'
-    },
-    tandem: tandem
+    }
   };
 
   // Appending '?dev' to the URL will enable developer-only features.
