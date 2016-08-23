@@ -21,7 +21,7 @@ define( function( require ) {
   var phetioNamespace = require( 'PHET_IO/phetioNamespace' );
   var Tandem = require( 'TANDEM/Tandem' );
   var TBoolean = require( 'PHET_IO/types/TBoolean' );
-  var TButton = require( 'PHET_IO/types/sun/buttons/TButton' );
+  var TPushButton = require( 'PHET_IO/types/sun/buttons/TPushButton' );
   var THSlider = require( 'PHET_IO/types/sun/THSlider' );
   var TMolecule = require( 'PHET_IO/simulations/molecules-and-light/TMolecule' );
   var TNumber = require( 'PHET_IO/types/TNumber' );
@@ -63,13 +63,13 @@ define( function( require ) {
         view: {
 
           playPauseButton: TToggleButton( TBoolean ),
-          stepButton: TButton,
-          showLightSpectrumButton: TButton,
+          stepButton: TPushButton,
+          showLightSpectrumButton: TPushButton,
 
           resetAllButton: TResetAllButton,
 
           spectrumWindow: {
-            closeButton: TButton,
+            closeButton: TPushButton,
             shownProperty: TProperty( TBoolean )
           },
           moleculeControlPanel: {
@@ -97,7 +97,7 @@ define( function( require ) {
           },
           observationWindow: {
             // photon selector radio buttons
-            returnMoleculeButton: TButton,
+            returnMoleculeButton: TPushButton,
 
             returnMoleculeButtonVisibleProperty: TProperty( TBoolean ),
             photonEmitterNode: {
