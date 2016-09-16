@@ -29,7 +29,7 @@ define( function( require ) {
   var TPhoton = require( 'PHET_IO/simulations/molecules-and-light/TPhoton' );
   var TProperty = require( 'PHET_IO/types/axon/TProperty' );
   var TResetAllButton = require( 'PHET_IO/types/sun/buttons/TResetAllButton' );
-  var TRadioButton = require( 'PHET_IO/types/sun/buttons/TRadioButton' );
+  var TRadioButton = require( 'PHET_IO/types/sun/TRadioButton' );
   var TString = require( 'PHET_IO/types/TString' );
   var TTandemText = require( 'PHET_IO/types/tandem/scenery/nodes/TTandemText' );
   var TToggleButton = require( 'PHET_IO/types/sun/buttons/TToggleButton' );
