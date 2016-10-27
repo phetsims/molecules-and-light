@@ -1,4 +1,5 @@
 {
+  "comment": "# molecules-and-light 1.3.0-phetiorc.1 Thu Oct 27 2016 15:57:43 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "845be6b591cb746b0b05b7023208aef2e49a8855",
     "branch": "HEAD"
@@ -19,10 +20,6 @@
     "sha": "da3b5dd421d06da1f5d1050909f897ec4ad833e2",
     "branch": "HEAD"
   },
-  "faradays-law": {
-    "sha": "81439f1fac2a26000c3a4f7854b6b8b95141053b",
-    "branch": "1.2-phetio"
-  },
   "joist": {
     "sha": "f34eb9b6e02a51f1413308c5bcade7ef803aeb08",
     "branch": "HEAD"
@@ -30,6 +27,14 @@
   "kite": {
     "sha": "d506825f0e044f9715f94b2aac23dbd52b139a82",
     "branch": "HEAD"
+  },
+  "molecules-and-light": {
+    "sha": "125a05df506f43c57c09c4154f8e8151c6ce0c33",
+    "branch": "1.3-phetio"
+  },
+  "nitroglycerin": {
+    "sha": "b19c167e47ee5a7dd879d4fe9f35c66d03a5362d",
+    "branch": "master"
   },
   "phet-core": {
     "sha": "4222a05a927792580846b3bf9b1b53decf154943",
@@ -69,10 +74,6 @@
   },
   "tandem": {
     "sha": "dc9f3cae2963b261ea7c0c505b204a57241d573a",
-    "branch": "HEAD"
-  },
-  "vibe": {
-    "sha": "2dba4d4b71cb0bf43c1f6a4779cc482adc9baed6",
     "branch": "HEAD"
   }
 }
