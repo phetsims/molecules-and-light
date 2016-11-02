@@ -28,9 +28,6 @@ define( function( require ) {
   var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
   var TandemText = require( 'TANDEM/scenery/nodes/TandemText' );
 
-  // phet-io modules
-  var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
-
   // images
   var heatLampImage = require( 'mipmap!MOLECULES_AND_LIGHT/infrared-source.png' );
   var flashlight2Image = require( 'mipmap!MOLECULES_AND_LIGHT/flashlight.png' );
@@ -80,47 +77,39 @@ define( function( require ) {
     // Load the radio button content into an array of object literals which holds the node, label string, and
     // value for each button.
     var labelFont = new PhetFont( 18 );
-    var radioButtonContent = [
-      {
-        node: createRadioButtonContent( new Image( microwaveTransmitter ), microwavePhotonNode ),
-        value: WavelengthConstants.MICRO_WAVELENGTH,
-        label: new TandemText( quadWavelengthSelectorMicrowaveString, {
-          font: labelFont, tandem: tandem.createTandem( 'microwaveRadioButtonLabel' )
-        } ),
-        tandem: tandem.createTandem( 'microwaveRadioButton' ),
-        phetioValueType: TBoolean
-      },
-      {
-        node: createRadioButtonContent( new Image( heatLampImage ), infraredPhotonNode ),
-        value: WavelengthConstants.IR_WAVELENGTH,
-        label: new TandemText( quadWavelengthSelectorInfraredString, {
-          font: labelFont,
-          tandem: tandem.createTandem( 'infraredRadioButtonLabel' )
-        } ),
-        tandem: tandem.createTandem( 'infraredRadioButton' ),
-        phetioValueType: TBoolean
-      },
-      {
-        node: createRadioButtonContent( new Image( flashlight2Image ), visiblePhotonNode ),
-        value: WavelengthConstants.VISIBLE_WAVELENGTH,
-        label: new TandemText( quadWavelengthSelectorVisibleString, {
-          font: labelFont,
-          tandem: tandem.createTandem( 'visibleRadioButtonLabel' )
-        } ),
-        tandem: tandem.createTandem( 'visibleRadioButton' ),
-        phetioValueType: TBoolean
-      },
-      {
-        node: createRadioButtonContent( new Image( uvLight2 ), ultravioletPhotonNode ),
-        value: WavelengthConstants.UV_WAVELENGTH,
-        label: new TandemText( quadWavelengthSelectorUltravioletString, {
-          font: labelFont,
-          tandem: tandem.createTandem( 'ultravioletRadioButtonLabel' )
-        } ),
-        tandem: tandem.createTandem( 'ultravioletRadioButton' ),
-        phetioValueType: TBoolean
-      }
-    ];
+    var radioButtonContent = [ {
+      node: createRadioButtonContent( new Image( microwaveTransmitter ), microwavePhotonNode ),
+      value: WavelengthConstants.MICRO_WAVELENGTH,
+      label: new TandemText( quadWavelengthSelectorMicrowaveString, {
+        font: labelFont,
+        tandem: tandem.createTandem( 'microwaveRadioButtonLabel' )
+      } ),
+      tandem: tandem.createTandem( 'microwaveRadioButton' )
+    }, {
+      node: createRadioButtonContent( new Image( heatLampImage ), infraredPhotonNode ),
+      value: WavelengthConstants.IR_WAVELENGTH,
+      label: new TandemText( quadWavelengthSelectorInfraredString, {
+        font: labelFont,
+        tandem: tandem.createTandem( 'infraredRadioButtonLabel' )
+      } ),
+      tandem: tandem.createTandem( 'infraredRadioButton' )
+    }, {
+      node: createRadioButtonContent( new Image( flashlight2Image ), visiblePhotonNode ),
+      value: WavelengthConstants.VISIBLE_WAVELENGTH,
+      label: new TandemText( quadWavelengthSelectorVisibleString, {
+        font: labelFont,
+        tandem: tandem.createTandem( 'visibleRadioButtonLabel' )
+      } ),
+      tandem: tandem.createTandem( 'visibleRadioButton' )
+    }, {
+      node: createRadioButtonContent( new Image( uvLight2 ), ultravioletPhotonNode ),
+      value: WavelengthConstants.UV_WAVELENGTH,
+      label: new TandemText( quadWavelengthSelectorUltravioletString, {
+        font: labelFont,
+        tandem: tandem.createTandem( 'ultravioletRadioButtonLabel' )
+      } ),
+      tandem: tandem.createTandem( 'ultravioletRadioButton' )
+    } ];
 
     // Scale the radio button text.  This is done mostly to support translations.
     // Determine the max width of panels in the radio button group.

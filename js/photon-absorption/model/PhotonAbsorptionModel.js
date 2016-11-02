@@ -71,26 +71,45 @@ define( function( require ) {
 
     var self = this;
 
-    // @public
-    PropertySet.call( this, {
-      emissionFrequency: 0, // in Hz
-      photonWavelength: WavelengthConstants.IR_WAVELENGTH,
-      photonTarget: initialPhotonTarget, // molecule that photons are fired at
-      running: true // is the sim running or paused
-    }, {
-      tandemSet: {
-        emissionFrequency: tandem.createTandem( 'emissionFrequencyProperty' ),
-        photonWavelength: tandem.createTandem( 'photonWavelengthProperty' ),
-        photonTarget: tandem.createTandem( 'photonTargetProperty' ),
-        running: tandem.createTandem( 'runningProperty' )
+    var properties = {
+
+      // @public
+      emissionFrequency: {
+        value: 0, // Hz
+        tandem: tandem.createTandem( 'emissionFrequencyProperty' ),
+        phetioValueType: TNumber( { units: 'hertz' } )
       },
-      phetioValueTypeSet: {
-        emissionFrequency: TNumber( { units: 'hertz' } ),
-        photonWavelength: TNumber( { units: 'meters' } ),
-        photonTarget: TString,
-        running: TBoolean
+
+      // @public
+      photonWavelength: {
+        value: WavelengthConstants.IR_WAVELENGTH, // nm
+        tandem: tandem.createTandem( 'photonWavelengthProperty' ),
+        phetioValueType: TNumber( {
+          units: 'meters', values: [
+            WavelengthConstants.MICRO_WAVELENGTH,
+            WavelengthConstants.IR_WAVELENGTH,
+            WavelengthConstants.VISIBLE_WAVELENGTH,
+            WavelengthConstants.UV_WAVELENGTH
+          ]
+        } )
+      },
+
+      // @public molecule that photons are fired at
+      photonTarget: {
+        value: initialPhotonTarget,
+        tandem: tandem.createTandem( 'photonTargetProperty' ),
+        phetioValueType: TString
+      },
+
+      // @public is the sim running or paused?
+      running: {
+        value: true,
+        tandem: tandem.createTandem( 'runningProperty' ),
+        phetioValueType: TBoolean
       }
-    } );
+    };
+
+    PropertySet.call( this, null, properties );
 
     // @public
     this.photons = new ObservableArray( {
@@ -112,7 +131,8 @@ define( function( require ) {
     this.emissionFrequencyProperty.link( function( emissionFrequency ) {
       if ( emissionFrequency === 0 ) {
         self.setPhotonEmissionPeriod( Number.POSITIVE_INFINITY );
-      } else {
+      }
+      else {
         var singleTargetPeriodFrequency = self.getSingleTargetPeriodFromFrequency( emissionFrequency );
         self.setPhotonEmissionPeriod( singleTargetPeriodFrequency );
       }
@@ -343,7 +363,7 @@ define( function( require ) {
 
       // Add the new photon target(s).
       var newMolecule;
-      switch ( photonTarget ) {
+      switch( photonTarget ) {
         case PhotonTarget.SINGLE_CO_MOLECULE:
           newMolecule = new CO();
           this.activeMolecules.add( newMolecule );

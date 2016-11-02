@@ -32,9 +32,6 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
 
-  // phet-io modules
-  var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
-
   // strings
   var controlPanelCarbonMonoxideString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.CarbonMonoxide' );
   var controlPanelNitrogenString = require( 'string!MOLECULES_AND_LIGHT/ControlPanel.Nitrogen' );
@@ -116,44 +113,37 @@ define( function( require ) {
       {
         node: createRadioButtonContent( controlPanelCarbonMonoxideString, CO_FORMULA_STRING, new MoleculeNode( new CO(), MODEL_VIEW_TRANSFORM ) ),
         value: PhotonTarget.SINGLE_CO_MOLECULE,
-        tandem: tandem.createTandem( 'singleCOMoleculeRadioButton' ),
-        phetioValueType: TBoolean
+        tandem: tandem.createTandem( 'singleCOMoleculeRadioButton' )
       },
       {
         node: createRadioButtonContent( controlPanelNitrogenString, N2_FORMULA_STRING, new MoleculeNode( new N2(), MODEL_VIEW_TRANSFORM ) ),
         value: PhotonTarget.SINGLE_N2_MOLECULE,
-        tandem: tandem.createTandem( 'singleN2MoleculeRadioButton' ),
-        phetioValueType: TBoolean
+        tandem: tandem.createTandem( 'singleN2MoleculeRadioButton' )
       },
       {
         node: createRadioButtonContent( controlPanelOxygenString, O2_FORMULA_STRING, new MoleculeNode( new O2(), MODEL_VIEW_TRANSFORM ) ),
         value: PhotonTarget.SINGLE_O2_MOLECULE,
-        tandem: tandem.createTandem( 'singleO2MoleculeRadioButton' ),
-        phetioValueType: TBoolean
+        tandem: tandem.createTandem( 'singleO2MoleculeRadioButton' )
       },
       {
         node: createRadioButtonContent( controlPanelCarbonDioxideString, CO2_FORMULA_STRING, new MoleculeNode( new CO2(), MODEL_VIEW_TRANSFORM ) ),
         value: PhotonTarget.SINGLE_CO2_MOLECULE,
-        tandem: tandem.createTandem( 'singleCO2MoleculeRadioButton' ),
-        phetioValueType: TBoolean
+        tandem: tandem.createTandem( 'singleCO2MoleculeRadioButton' )
       },
       {
         node: createRadioButtonContent( controlPanelWaterString, H20_FORMULA_STRING, new MoleculeNode( new H2O(), MODEL_VIEW_TRANSFORM ) ),
         value: PhotonTarget.SINGLE_H2O_MOLECULE,
-        tandem: tandem.createTandem( 'singleH2OMoleculeRadioButton' ),
-        phetioValueType: TBoolean
+        tandem: tandem.createTandem( 'singleH2OMoleculeRadioButton' )
       },
       {
         node: createRadioButtonContent( controlPanelNitrogenDioxideString, NO2_FORMULA_STRING, new MoleculeNode( new NO2(), MODEL_VIEW_TRANSFORM ) ),
         value: PhotonTarget.SINGLE_NO2_MOLECULE,
-        tandem: tandem.createTandem( 'singleNO2MoleculeRadioButton' ),
-        phetioValueType: TBoolean
+        tandem: tandem.createTandem( 'singleNO2MoleculeRadioButton' )
       },
       {
         node: createRadioButtonContent( controlPanelOzoneString, O3_FORMULA_STRING, new MoleculeNode( new O3(), MODEL_VIEW_TRANSFORM ) ),
         value: PhotonTarget.SINGLE_O3_MOLECULE,
-        tandem: tandem.createTandem( 'singleO3MoleculeRadioButton' ),
-        phetioValueType: TBoolean
+        tandem: tandem.createTandem( 'singleO3MoleculeRadioButton' )
       }
     ];
 
