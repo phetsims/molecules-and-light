@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.3.0-phetio Wed Nov 02 2016 10:19:14 GMT-0600 (MDT)",
+  "comment": "# molecules-and-light 1.3.1-phetio Thu Nov 03 2016 16:50:07 GMT-0600 (MDT)",
   "assert": {
     "sha": "845be6b591cb746b0b05b7023208aef2e49a8855",
     "branch": "master"
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "d887e959550649473c342bf073244db7a4964a6c",
+    "sha": "a2ad3332e917b3ed20ad3cf9898384edbe3c72e9",
     "branch": "1.3-phetio"
   },
   "nitroglycerin": {
@@ -41,11 +41,11 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "22157cc8fea8315aaa1b63ff802d7d88f3c57466",
+    "sha": "3526b9258a25388af15a54db7892cbdfeaa49ebd",
     "branch": "master"
   },
   "phet-io-website": {
-    "sha": "7d6d6649072ffc86bc0f6d20ff26afdd2323bb32",
+    "sha": "528402554ab49e7dd2eb5de3044cd90ab8100e8f",
     "branch": "master"
   },
   "phetcommon": {
