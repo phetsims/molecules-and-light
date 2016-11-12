@@ -28,7 +28,7 @@ define( function( require ) {
       return value.toStateObject();
     },
 
-    setValue: function( instance, value) {}
+    setValue: function( instance, value ) {}
   } );
 
   phetioNamespace.register( 'TPhoton', TPhoton );
