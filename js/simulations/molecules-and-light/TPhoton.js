@@ -36,9 +36,7 @@ define( function( require ) {
         vy: TNumber().toStateObject( value.vy ),
         wavelength: TNumber().toStateObject( value.wavelength )
       };
-    },
-
-    setValue: function( instance, value ) {}
+    }
   } );
 
   phetioNamespace.register( 'TPhoton', TPhoton );

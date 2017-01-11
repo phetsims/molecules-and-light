@@ -26,9 +26,7 @@ define( function( require ) {
 
     toStateObject: function( value ) {
       return value.toStateObject();
-    },
-
-    setValue: function( instance, value ) {}
+    }
   } );
 
   phetioNamespace.register( 'TMolecule', TMolecule );
