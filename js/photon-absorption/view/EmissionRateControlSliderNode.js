@@ -185,10 +185,11 @@ define( function( require ) {
   }
 
   moleculesAndLight.register( 'EmissionRateThumbNode', EmissionRateThumbNode );
-  
+
   inherit( Path, EmissionRateThumbNode, {
     dispose: function() {
       this.disposeEmissionRateThumbNode();
+      Path.prototype.dispose.call( this );
     }
   } );
 
