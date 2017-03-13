@@ -8,11 +8,11 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var assertInstanceOf = require( 'PHET_IO/assertions/assertInstanceOf' );
-  var phetioNamespace = require( 'PHET_IO/phetioNamespace' );
-  var phetioInherit = require( 'PHET_IO/phetioInherit' );
-  var TObject = require( 'PHET_IO/types/TObject' );
-  var TPhoton = require( 'PHET_IO/simulations/molecules-and-light/TPhoton' );
+  var assertInstanceOf = require( 'ifphetio!PHET_IO/assertions/assertInstanceOf' );
+  var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
+  var phetioInherit = require( 'ifphetio!PHET_IO/phetioInherit' );
+  var TObject = require( 'ifphetio!PHET_IO/types/TObject' );
+  var TPhoton = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/TPhoton' );
 
   // Instrumented to help restore charged particles.
   var TPhotonAbsorptionModel = function( instance, phetioID ) {
@@ -44,7 +44,7 @@ define( function( require ) {
     }
   );
 
-  phetioNamespace.register( 'TPhotonAbsorptionModel', TPhotonAbsorptionModel );
+  moleculesAndLight.register( 'TPhotonAbsorptionModel', TPhotonAbsorptionModel );
 
   return TPhotonAbsorptionModel;
 } );

@@ -9,11 +9,11 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var assertInstanceOf = require( 'PHET_IO/assertions/assertInstanceOf' );
-  var phetioNamespace = require( 'PHET_IO/phetioNamespace' );
-  var phetioInherit = require( 'PHET_IO/phetioInherit' );
-  var TObject = require( 'PHET_IO/types/TObject' );
-  var TNumber = require( 'PHET_IO/types/TNumber' );
+  var assertInstanceOf = require( 'ifphetio!PHET_IO/assertions/assertInstanceOf' );
+  var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
+  var phetioInherit = require( 'ifphetio!PHET_IO/phetioInherit' );
+  var TObject = require( 'ifphetio!PHET_IO/types/TObject' );
+  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
 
   var TPhoton = function( instance, phetioID ) {
     assertInstanceOf( instance, phet.moleculesAndLight.Photon );
@@ -39,7 +39,7 @@ define( function( require ) {
     }
   } );
 
-  phetioNamespace.register( 'TPhoton', TPhoton );
+  moleculesAndLight.register( 'TPhoton', TPhoton );
 
   return TPhoton;
 } );
