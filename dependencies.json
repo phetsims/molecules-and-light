@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.1.13-rc.1 Thu Apr 06 2017 11:58:39 GMT-0600 (MDT)",
+  "comment": "# molecules-and-light 1.1.13-rc.2 Thu Apr 06 2017 12:03:50 GMT-0600 (MDT)",
   "assert": {
     "sha": "11bc6a6d0344ba1a8b95982bad3552bffbdfdfd6",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "015458a8219e3eaec8ee959bc4fcb30fe2b94c6b",
+    "sha": "dd73fa094fc0c365cc5374254d17a92470e770bd",
     "branch": "1.1"
   },
   "nitroglycerin": {
@@ -42,7 +42,7 @@
   },
   "phetcommon": {
     "sha": "f2ddeb29d58bfd818ed59f5260399630058db53f",
-    "branch": "molecules-and-light-1.1"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "42741ea35fa04984f9e86cb9266fe04e1b53593e",
@@ -50,7 +50,7 @@
   },
   "scenery-phet": {
     "sha": "9d44c70d26e50bddb78ec5748ca944c93e1b9d40",
-    "branch": "molecules-and-light-1.1"
+    "branch": "HEAD"
   },
   "sherpa": {
     "sha": "29a056d5431696431b1f1b593eb82c3f03afd87f",
