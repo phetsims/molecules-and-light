@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.4.0-dev.0 Tue Aug 22 2017 15:59:37 GMT-0600 (MDT)",
+  "comment": "# molecules-and-light 1.4.0-dev.1 Wed Aug 23 2017 10:09:03 GMT-0600 (MDT)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "master"
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "5bb572ee17d8090ede1ffd004bf74eb5c963af3a",
+    "sha": "823c005bd095885b05b91d0c6b60db393e0a4b69",
     "branch": "master"
   },
   "nitroglycerin": {
