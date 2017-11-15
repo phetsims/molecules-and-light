@@ -85,5 +85,8 @@
   },
   "SpectrumWindow.metersUnits": {
     "value": "m"
+  },
+  "KeyboardHelpDialog.lightSourceSlider": {
+    "value": "Light Source Slider"
   }
 }
