@@ -12,7 +12,6 @@ define( function( require ) {
   var assertInstanceOf = require( 'ifphetio!PHET_IO/assertInstanceOf' );
   var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
   var phetioInherit = require( 'ifphetio!PHET_IO/phetioInherit' );
-  var NumberIO = require( 'ifphetio!PHET_IO/types/NumberIO' );
   var ObjectIO = require( 'ifphetio!PHET_IO/types/ObjectIO' );
 
   /**
@@ -21,32 +20,25 @@ define( function( require ) {
    * @param phetioID
    * @constructor
    */
-  function TPhoton( instance, phetioID ) {
-    assert && assertInstanceOf( instance, phet.moleculesAndLight.Photon );
+  function MoleculeIO( instance, phetioID ) {
+    assert && assertInstanceOf( instance, phet.moleculesAndLight.Molecule );
     ObjectIO.call( this, instance, phetioID );
   }
 
-  phetioInherit( ObjectIO, 'TPhoton', TPhoton, {}, {
-    documentation: 'A Photon',
+  phetioInherit( ObjectIO, 'MoleculeIO', MoleculeIO, {}, {
+    documentation: 'Wrapper type for a molecule.',
+
     fromStateObject: function( stateObject ) {
-      return {
-        vx: NumberIO.fromStateObject( stateObject.vx ),
-        vy: NumberIO.fromStateObject( stateObject.vy ),
-        wavelength: NumberIO.fromStateObject( stateObject.wavelength )
-      };
+      return window.phet.moleculesAndLight.Molecule.fromStateObject( stateObject );
     },
 
     toStateObject: function( value ) {
-      return {
-        vx: NumberIO.toStateObject( value.vx ),
-        vy: NumberIO.toStateObject( value.vy ),
-        wavelength: NumberIO.toStateObject( value.wavelength )
-      };
+      return value.toStateObject();
     }
   } );
 
-  moleculesAndLight.register( 'TPhoton', TPhoton );
+  moleculesAndLight.register( 'MoleculeIO', MoleculeIO );
 
-  return TPhoton;
+  return MoleculeIO;
 } );
 
