@@ -24,7 +24,7 @@ define( function( require ) {
    *
    * @constructor
    */
-  function MoleculesAndLightKeyboardHelpContent() {
+  function MoleculesAndLightKeyboardHelpContent( tandem) {
 
     var sliderHelpContent = new SliderControlsHelpContent( { headingString: keyboardHelpDialogLightSourceSliderString } );
     var generalNavigationHelpContent = new GeneralNavigationHelpContent( { withGroupContent: true } );
@@ -37,7 +37,8 @@ define( function( require ) {
 
     Panel.call( this, content, {
       stroke: null,
-      fill: 'rgb( 214, 237, 249 )'
+      fill: 'rgb( 214, 237, 249 )',
+      tandem: tandem
     } );
   }
 
