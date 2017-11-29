@@ -15,7 +15,10 @@ define( function( require ) {
   var MoleculesAndLightA11yStrings = {
 
     lightSourceString: {
-      'value': 'Light Source'
+      value: 'Light Source'
+    },
+    closeString: {
+      value: 'Close'
     }
   };
 
