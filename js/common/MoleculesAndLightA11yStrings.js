@@ -17,8 +17,14 @@ define( function( require ) {
     lightSourceString: {
       value: 'Light Source'
     },
+    lightSourceTitlePattern: {
+      value: '{{lightSourceName}} {{lightSourceString}}'
+    },
     closeString: {
       value: 'Close'
+    },
+    spectrumDiagramString: {
+      value: 'Spectrum Diagram'
     }
   };
 
