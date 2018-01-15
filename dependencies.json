@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.4.0-rc.1 Mon Jan 15 2018 15:51:09 GMT-0700 (Mountain Standard Time)",
+  "comment": "# molecules-and-light 1.4.0-rc.1 Mon Jan 15 2018 16:14:46 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "master"
@@ -13,8 +13,8 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "a631fcfd5b08827fd59ed6dfac891387d38c3d61",
-    "branch": "master"
+    "sha": "6f8b4c139ef54b626df1ac052874826d4b646cc0",
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "ee4d0e25e4e21f798e94275623885a09f50e1831",
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "7a161593055a3db6eba36358269f73a1512939b2",
+    "sha": "d83d1d3a6f32a16661868e8a18057271168bd1fc",
     "branch": "1.4"
   },
   "nitroglycerin": {
@@ -65,7 +65,7 @@
     "branch": "master"
   },
   "tandem": {
-    "sha": "2d911666efb73d2c7ed9cbe4a732b0602b299faa",
-    "branch": "master"
+    "sha": "6db63b4bd9c48fc4a8e034abb4861747d76cca46",
+    "branch": "HEAD"
   }
 }
