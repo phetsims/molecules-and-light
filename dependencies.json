@@ -1,16 +1,16 @@
 {
-  "comment": "# molecules-and-light 1.4.0-rc.1 Mon Jan 15 2018 16:18:32 GMT-0700 (Mountain Standard Time)",
+  "comment": "# molecules-and-light 1.4.0-rc.2 Tue Feb 06 2018 17:06:56 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "axon": {
     "sha": "104f3dcfcb3741a7444b8a31bc4605692801ac25",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "brand": {
     "sha": "53cf227b60ee16af67b771f9f76ca8c896bda99b",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "chipper": {
     "sha": "6f8b4c139ef54b626df1ac052874826d4b646cc0",
@@ -18,51 +18,51 @@
   },
   "dot": {
     "sha": "ee4d0e25e4e21f798e94275623885a09f50e1831",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "joist": {
     "sha": "1188c4690bcc846703f6e39ef5ef7779a69b1583",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "e46f990e1fefaf082fcd0c9cf1fc04695449973f",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "e22bca768294ff573b4a997808589003849b40a8",
+    "sha": "7b4b73f1809dd0244fd6aaf63171b8f698cf82c5",
     "branch": "1.4"
   },
   "nitroglycerin": {
     "sha": "ccaab9cd4d647ed55e03a813b801af4f05ad94df",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "phet-core": {
     "sha": "88a51822059097eae537c6df4b39c944f58fd266",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "phetcommon": {
     "sha": "85d7262630dc9daca6d79e3453dde266dfa7c69b",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "query-string-machine": {
     "sha": "b8bdcc28a073345ce26df8b0f046752d96fa6f68",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "972ca6d79a0e853d0fda62b3f49a0ccedc59c03c",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "scenery-phet": {
     "sha": "3ee0858182545169c3d236c86712efd5295b8c80",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "sherpa": {
     "sha": "9ca67479416bb74f945541ffaefedb419bb29e59",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "sun": {
     "sha": "720214f9f3cfe94907c931824ae6a6e08bef63ea",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "tandem": {
     "sha": "6db63b4bd9c48fc4a8e034abb4861747d76cca46",
