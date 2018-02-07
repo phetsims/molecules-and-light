@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var MoleculesAndLightKeyboardHelpContent = require( 'MOLECULES_AND_LIGHT/common/view/MoleculesAndLightKeyboardHelpContent' );
   var MoleculesAndLightScreen = require( 'MOLECULES_AND_LIGHT/moleculesandlight/MoleculesAndLightScreen' );
+  var platform = require( 'PHET_CORE/platform' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var Tandem = require( 'TANDEM/Tandem' );
@@ -32,6 +33,11 @@ define( function( require ) {
       graphicArts: 'Alex Klinger'
     }
   };
+
+  // if using Edge, render the photon layer and emitter with SVG for improved performance, see #175
+  if ( platform.edge ) {
+    simOptions.rootRenderer = 'svg';
+  }
 
   SimLauncher.launch( function() {
     var sim = new Sim( moleculesAndLightTitleString, [ new MoleculesAndLightScreen( tandem.createTandem( 'moleculesAndLightScreen' ) ) ], simOptions );
