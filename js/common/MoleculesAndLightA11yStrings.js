@@ -14,11 +14,47 @@ define( function( require ) {
 
   var MoleculesAndLightA11yStrings = {
 
-    lightSourceString: {
-      value: 'Light Source'
+    sceneSummaryString: {
+      value: 'This is an interactive sim. Descriptions change as you play with it. It has a Play Area and Control Panel.' +
+             'The Play Area contains an observation window, a list of molecules, and a list of light sources. Within the observation window, there is a light source pointing directly to a molecule.' +
+             'You can select different light sources and molecules, and explore how photons with different frequency and energy interact with the molecules.' +
+             'The Control Panel has buttons to change the view, open a light spectrum graphic for reference, and reset the sim.'
     },
-    lightSourceTitlePattern: {
-      value: '{{lightSourceName}} {{lightSourceString}}'
+    summaryInteractionHintString: {
+      value: 'Look for photon rate slider to play.'
+    },
+    keyboardShortcutsHintString: {
+      value: 'If needed, check out the Keyboard Shortcuts for this sim.'
+    },
+    observationWindowDescriptionPatternString: {
+      value: 'In observation window, {{wavelengthName}} light source {{lightOnOffLanguage}} directly at {{an}} {{molecule}} molecule.'
+    },
+    isOffAndPointsString: {
+      value: 'is off and points'
+    },
+    emitsPhotonsString: {
+      value: 'emits photons'
+    },
+    aString: {
+      value: 'a'
+    },
+    anString: {
+      value: 'an'
+    },
+    emissionSliderDescriptionString: {
+      value: 'Adjust rate at which photons are released.',
+    },
+    lightSourceSliderString: {
+      value: 'Light Source Slider'
+    },
+    // lightSourceTitlePattern: {
+    //   value: '{{lightSourceName}} {{lightSourceString}}'
+    // },
+    returnMoleculeString: {
+      value: 'Return Molecule'
+    },
+    returnMoleculeHelpString: {
+      value: 'Returns a molecule.'
     },
     closeString: {
       value: 'Close'
