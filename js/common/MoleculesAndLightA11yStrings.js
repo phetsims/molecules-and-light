@@ -29,6 +29,9 @@ define( function( require ) {
     observationWindowDescriptionPatternString: {
       value: 'In observation window, {{wavelengthName}} light source {{lightOnOffLanguage}} directly at {{an}} {{molecule}} molecule.'
     },
+    lightSourceSliderString: {
+      value: 'Light Source Slider'
+    },
     isOffAndPointsString: {
       value: 'is off and points'
     },
@@ -44,8 +47,17 @@ define( function( require ) {
     emissionSliderDescriptionString: {
       value: 'Adjust rate at which photons are released.',
     },
-    lightSourceSliderString: {
-      value: 'Light Source Slider'
+    lightSourceString: {
+      value: 'Light Source'
+    },
+    lightSourceDescriptionString: {
+      value: 'Change light source in observation window.'
+    },
+    moleculesString: {
+      value: 'Molecules'
+    },
+    moleculesPanelDescriptionString: {
+      value: 'Place molecule in front of light source.'
     },
     // lightSourceTitlePattern: {
     //   value: '{{lightSourceName}} {{lightSourceString}}'
