@@ -59,6 +59,48 @@ define( function( require ) {
     moleculesPanelDescriptionString: {
       value: 'Place molecule in front of light source.'
     },
+    nitrogenDescriptionString: {
+      value: 'A Nitrogen molecule consists of two Nitrogen atoms by a triple bond'
+    }, 
+    oxygenDescriptionString: {
+      value: 'An Oxygen molecule has two Oxygen atoms connected by a covalent double bond'
+    },
+    carbonMonoxideDescriptionString: {
+      value: 'A Carbon monoxide molecule consists of one carbon atom and one oxygen atom, connected by a triple bond that consists of two covalent bonds as well as one dative covalent bond.'
+    },
+    carbonDioxideDescriptionString: {
+      value: 'A Carbon dioxide molecule consists of a carbonatom covalently double bonded to two oxygen atoms.'
+    },
+    waterDescriptionString: {
+      value: 'Water has two hydrogen atoms covalently bonded to a single oxygenatom.'
+    },
+    nitrogenDioxideDescriptionString: {
+      value: 'A Nitrogen dioxide molecule consists of a nitrogen atom covalently double bonded to an oxygen atom and single bonded to another oxygen atom.'
+    },
+    ozoneDescriptionString: {
+      value: 'A Ozone moledule consists of an Oxygen atom covalently double bonded to an Oxygen atom and single bonded to another Oxygen atom.'
+    },
+    pauseDescriptionString: {
+      value: 'Pause what is happening in the observation window.'
+    },
+    playDescriptionString: {
+      value: 'Resume what is happening in the observation window'
+    },
+    stepButtonLabelString: {
+      value: 'Next Frame'
+    },
+    stepButtonDescriptionString: {
+      value: 'Make careful observations, one frame at a time.'
+    },
+    spectrumButtonLabelString: {
+      value: 'Show light spectrum'
+    }, 
+    spectrumButtonDescriptionString: {
+      value: 'Details about how frequncy, energy, and wavelength change across teh light spectrum.'
+    },
+    spectrumWindowDescriptionString: {
+      value: 'The show light spectrum button opens a window displaying the EM spectrum with the values of the frequency and wavelength shown. Additional arrows show the direction of increasing frequency/energy and wavelength. A sketch of a wave with decreasing wavelength/increasing frequency is also provided.'
+    }, 
     // lightSourceTitlePattern: {
     //   value: '{{lightSourceName}} {{lightSourceString}}'
     // },
@@ -70,9 +112,6 @@ define( function( require ) {
     },
     closeString: {
       value: 'Close'
-    },
-    spectrumDiagramString: {
-      value: 'Spectrum Diagram'
     }
   };
 
