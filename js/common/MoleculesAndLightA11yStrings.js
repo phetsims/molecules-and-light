@@ -72,13 +72,16 @@ define( function( require ) {
       value: 'A Carbon dioxide molecule consists of a carbonatom covalently double bonded to two oxygen atoms.'
     },
     waterDescriptionString: {
-      value: 'Water has two hydrogen atoms covalently bonded to a single oxygenatom.'
+      value: 'Water has two hydrogen atoms covalently bonded to a single oxygen atom.'
     },
     nitrogenDioxideDescriptionString: {
       value: 'A Nitrogen dioxide molecule consists of a nitrogen atom covalently double bonded to an oxygen atom and single bonded to another oxygen atom.'
     },
     ozoneDescriptionString: {
-      value: 'A Ozone moledule consists of an Oxygen atom covalently double bonded to an Oxygen atom and single bonded to another Oxygen atom.'
+      value: 'A Ozone molecule consists of an Oxygen atom covalently double bonded to an Oxygen atom and single bonded to another Oxygen atom.'
+    },
+    methaneDescriptionString: {
+      value: 'A methane molecule consists of a Carbon atom covanlently bonded to four Hydrogen atoms.', 
     },
     pauseDescriptionString: {
       value: 'Pause what is happening in the observation window.'

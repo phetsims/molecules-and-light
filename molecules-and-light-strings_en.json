@@ -32,6 +32,9 @@
   "ControlPanel.CarbonDioxide": {
     "value": "Carbon Dioxide"
   },
+  "ControlPanel.Methane": {
+    "value": "Methane"
+  },
   "ControlPanel.NitrogenDioxide": {
     "value": "Nitrogen Dioxide"
   },
