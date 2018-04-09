@@ -47,6 +47,9 @@ define( function( require ) {
     emissionSliderDescriptionString: {
       value: 'Adjust rate at which photons are released.',
     },
+    emissionSliderWavelengthRatePatterString: {
+      value: '{{wavelength}} photon rate, {{frequency}}'
+    },
     lightSourceString: {
       value: 'Light Source'
     },
@@ -103,15 +106,18 @@ define( function( require ) {
     },
     spectrumWindowDescriptionString: {
       value: 'The show light spectrum button opens a window displaying the EM spectrum with the values of the frequency and wavelength shown. Additional arrows show the direction of increasing frequency/energy and wavelength. A sketch of a wave with decreasing wavelength/increasing frequency is also provided.'
-    }, 
-    // lightSourceTitlePattern: {
-    //   value: '{{lightSourceName}} {{lightSourceString}}'
-    // },
+    },
     returnMoleculeString: {
       value: 'Return Molecule'
     },
     returnMoleculeHelpString: {
       value: 'Returns a molecule.'
+    },
+    moleculeSelectionAlertPatternString: {
+      value: '{{target}} molecule now in observation window.'
+    },
+    wavelengthSelectionAlertPatternString: {
+      value: '{{wavelength}} light source now in observation window.'
     },
     closeString: {
       value: 'Close'
