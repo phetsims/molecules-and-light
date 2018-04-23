@@ -15,7 +15,7 @@ define( function( require ) {
   var MoleculesAndLightA11yStrings = {
 
     sceneSummaryString: {
-      value: 'This is an interactive sim. Descriptions change as you play with it. It has a Play Area and Control Panel.' +
+      value: 'This is an interactive sim. It changes as you play with it. It has a Play Area and Control Panel.' +
              'The Play Area contains an observation window, a list of molecules, and a list of light sources. Within the observation window, there is a light source pointing directly to a molecule.' +
              'You can select different light sources and molecules, and explore how photons with different frequency and energy interact with the molecules.' +
              'The Control Panel has buttons to change the view, open a light spectrum graphic for reference, and reset the sim.'
