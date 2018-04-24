@@ -118,9 +118,6 @@ define( function( require ) {
     },
     wavelengthSelectionAlertPatternString: {
       value: '{{wavelength}} light source now in observation window.'
-    },
-    closeString: {
-      value: 'Close'
     }
   };
 

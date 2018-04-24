@@ -59,9 +59,6 @@
   "SpectrumWindow.wavelengthArrowLabel": {
     "value": "Increasing wavelength"
   },
-  "SpectrumWindow.close": {
-    "value": "Close"
-  },
   "SpectrumWindow.radioBandLabel": {
     "value": "Radio"
   },
