@@ -13,7 +13,6 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
-  var Panel = require( 'SUN/Panel' );
   var SliderControlsHelpContent = require( 'SCENERY_PHET/keyboard/help/SliderControlsHelpContent' );
 
   // strings
@@ -29,20 +28,15 @@ define( function( require ) {
     var sliderHelpContent = new SliderControlsHelpContent( { headingString: keyboardHelpDialogLightSourceSliderString } );
     var generalNavigationHelpContent = new GeneralNavigationHelpContent( { withGroupContent: true } );
 
-    var content = new HBox( {
+    HBox.call( this, {
       children: [ sliderHelpContent, generalNavigationHelpContent ],
       align: 'top',
-      spacing: 30
-    } );
-
-    Panel.call( this, content, {
-      stroke: null,
-      fill: 'rgb( 214, 237, 249 )',
+      spacing: 30,
       tandem: tandem
     } );
   }
 
   moleculesAndLight.register( 'MoleculesAndLightKeyboardHelpContent', MoleculesAndLightKeyboardHelpContent );
 
-  return inherit( Panel, MoleculesAndLightKeyboardHelpContent );
+  return inherit( HBox, MoleculesAndLightKeyboardHelpContent );
 } );
