@@ -45,7 +45,7 @@ define( function( require ) {
       value: 'an'
     },
     emissionSliderDescriptionString: {
-      value: 'Adjust rate at which photons are released.',
+      value: 'Adjust rate at which photons are released.'
     },
     emissionSliderWavelengthRatePatterString: {
       value: '{{wavelength}} photon rate, {{frequency}}'
@@ -84,7 +84,7 @@ define( function( require ) {
       value: 'A Ozone molecule consists of an Oxygen atom covalently double bonded to an Oxygen atom and single bonded to another Oxygen atom.'
     },
     methaneDescriptionString: {
-      value: 'A methane molecule consists of a Carbon atom covanlently bonded to four Hydrogen atoms.', 
+      value: 'A methane molecule consists of a Carbon atom covanlently bonded to four Hydrogen atoms.' 
     },
     pauseDescriptionString: {
       value: 'Pause what is happening in the observation window.'
