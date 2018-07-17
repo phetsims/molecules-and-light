@@ -27,7 +27,7 @@ define( function( require ) {
   var BooleanIO = require( 'ifphetio!PHET_IO/types/BooleanIO' );
 
   // a11y string
-  var spectrumWindowDescriptionString = MoleculesAndLightA11yStrings.spectrumWindowDescriptionString.value;
+  var spectrumDialogDescriptionString = MoleculesAndLightA11yStrings.spectrumDialogDescriptionString.value;
 
   /**
    * @constructor
@@ -41,9 +41,9 @@ define( function( require ) {
       // phet-io
       tandem: tandem,
 
-      // a11y 
+      // a11y
       tagName: 'p',
-      descriptionContent: spectrumWindowDescriptionString
+      descriptionContent: spectrumDialogDescriptionString
     } );
 
     // close it on a click
