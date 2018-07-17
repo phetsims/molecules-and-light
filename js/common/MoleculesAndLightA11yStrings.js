@@ -104,7 +104,7 @@ define( function( require ) {
     spectrumButtonDescriptionString: {
       value: 'Details about how frequncy, energy, and wavelength change across teh light spectrum.'
     },
-    spectrumDialogDescriptionString: {
+    spectrumWindowDescriptionString: {
       value: 'The show light spectrum button opens a window displaying the EM spectrum with the values of the frequency and wavelength shown. Additional arrows show the direction of increasing frequency/energy and wavelength. A sketch of a wave with decreasing wavelength/increasing frequency is also provided.'
     },
     returnMoleculeString: {
