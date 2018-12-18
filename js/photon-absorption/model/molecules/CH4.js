@@ -31,6 +31,14 @@ define( function( require ) {
   var HYDROGEN_VIBRATION_DISTANCE_X = HYDROGEN_VIBRATION_DISTANCE * Math.cos( HYDROGEN_VIBRATION_ANGLE );
   var HYDROGEN_VIBRATION_DISTANCE_Y = HYDROGEN_VIBRATION_DISTANCE * Math.sin( HYDROGEN_VIBRATION_ANGLE );
 
+  // atom offsets for 3d
+  var atom1Angle = Math.PI / 2;
+  var atom2Angle = Math.PI * 1.2;
+  var atom3Angle = Math.PI * 1.65
+  var atom4Angle = Math.PI * 1.9;
+  var atom1OffsetX = 0;
+  var atom1OffsetY = 0;
+
   /**
    * Constructor for a Methane molecule.
    *
@@ -78,10 +86,10 @@ define( function( require ) {
     initializeAtomOffsets: function() {
 
       this.addInitialAtomCogOffset( this.carbonAtom, new Vector2( 0, 0 ) );
-      this.addInitialAtomCogOffset( this.hydrogenAtom1, new Vector2( -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,
-        ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
-      this.addInitialAtomCogOffset( this.hydrogenAtom2, new Vector2( ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,
-        ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
+      this.addInitialAtomCogOffset( this.hydrogenAtom1, new Vector2( -0,
+        ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + 60 ) );
+      this.addInitialAtomCogOffset( this.hydrogenAtom2, new Vector2( ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE + 45,
+        ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE - 155 ) );
       this.addInitialAtomCogOffset( this.hydrogenAtom3, new Vector2( ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,
         -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE ) );
       this.addInitialAtomCogOffset( this.hydrogenAtom4, new Vector2( -ROTATED_INITIAL_CARBON_HYDROGEN_DISTANCE,

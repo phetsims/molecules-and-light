@@ -23,7 +23,7 @@ define( function( require ) {
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function MoleculeNode( molecule, modelViewTransform ) {
+  function MoleculeNode3D( molecule, modelViewTransform ) {
 
     // supertype constructor
     Node.call( this );
@@ -33,21 +33,46 @@ define( function( require ) {
     this.modelViewTransform = modelViewTransform; // @private
 
     // Instance Data
-    var atomLayer = new Node();
-    var bondLayer = new Node();
-    self.addChild( atomLayer );
-    self.addChild( bondLayer ); // Order the bond layer first so that atomic bonds are behind atoms in view
+    var layers = [];
+
+    // Create and add the atomic bonds which form the structure of this molecule to the bondLayer
+    var atomicBonds = molecule.getAtomicBonds();
+    for ( var i = 0; i < atomicBonds.length; i++ ) {
+      var bond = atomicBonds[ i ];
+      if ( bond.is3D() ) {
+        var topAtom = bond.atom1;
+        var bottomAtom = bond.atom2;
+
+        if ( layers.length === 0 ) {
+          layers.push( { bonds: [], atoms: [ bottomAtom ] }, { bonds: [ bond ], atoms: [ topAtom ] } );
+        }
+        else {
+          // loop over the existing layers
+          for (var j = 0; j < layers.length; j++) {
+            if ( layers[ j ].atoms.contains( bottomAtom ) ) {
+              if ( j !== layers.length - 1 ) {
+                if ( !layers[ j + 1 ].atoms.contains( topAtom ) ) {
+                  layers[ j + 1 ].atoms.push( topAtom );
+                }
+              }
+              else {
+                // create a new layer to house the top atom and bond
+                layers.push( { atoms: [ topAtom ], bonds: [ bond ] } );
+              }
+            }
+            else if ( layers[ j ].atoms.contains( topAtom ) ) {
+
+            }
+          }
+        }
+      }
+      bondLayer.addChild( new AtomicBondNode( atomicBonds[ i ], this.modelViewTransform ) );
+    }
 
     // Create nodes and add the atoms which compose this molecule to the atomLayer.
     for ( var atom = 0; atom < molecule.getAtoms().length; atom++ ) {
       this.atomNode = new AtomNode( molecule.getAtoms()[ atom ], self.modelViewTransform );
       atomLayer.addChild( this.atomNode );
-    }
-
-    // Create and add the atomic bonds which form the structure of this molecule to the bondLayer
-    var atomicBonds = molecule.getAtomicBonds();
-    for ( var i = 0; i < atomicBonds.length; i++ ) {
-      bondLayer.addChild( new AtomicBondNode( atomicBonds[ i ], this.modelViewTransform ) );
     }
 
     // Link the high energy state to the property in the model.
@@ -61,8 +86,8 @@ define( function( require ) {
 
   }
 
-  moleculesAndLight.register( 'MoleculeNode', MoleculeNode );
+  moleculesAndLight.register( 'MoleculeNode3D', MoleculeNode3D );
 
-  return inherit( Node, MoleculeNode );
+  return inherit( Node, MoleculeNode3D );
 
 } );
