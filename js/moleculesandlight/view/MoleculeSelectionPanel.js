@@ -20,6 +20,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/MoleculeNode' );
+  var MoleculeNode3D = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/MoleculeNode3D' );
   var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
   var MoleculesAndLightA11yStrings = require( 'MOLECULES_AND_LIGHT/common/MoleculesAndLightA11yStrings' );
   var N2 = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/molecules/N2' );
@@ -176,7 +177,7 @@ define( function( require ) {
         descriptionContent: carbonDioxideDescriptionString
       },
       {
-        node: createRadioButtonContent( controlPanelMethaneString, CH4_FORMULA_STRING, new MoleculeNode( new CH4(), MODEL_VIEW_TRANSFORM ) ),
+        node: createRadioButtonContent( controlPanelMethaneString, CH4_FORMULA_STRING, new MoleculeNode3D( new CH4(), MODEL_VIEW_TRANSFORM ) ),
         value: PhotonTarget.SINGLE_CH4_MOLECULE,
         tandemName: 'singleCH4MoleculeRadioButton',
         labelContent: controlPanelMethaneString,

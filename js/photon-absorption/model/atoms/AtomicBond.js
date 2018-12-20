@@ -26,13 +26,15 @@ define( function( require ) {
 
     options = _.extend( {
       // defaults
-      bondCount: 1 // Indicates whether this is a single, double, triple, etc. bond.
+      bondCount: 1, // Indicates whether this is a single, double, triple, etc. bond.
+      top: 'none'
     }, options );
 
     // @public (read-only)
     this.atom1 = atom1;
     this.atom2 = atom2;
     this.bondCount = options.bondCount;
+    this.top = options.top;
 
   }
 

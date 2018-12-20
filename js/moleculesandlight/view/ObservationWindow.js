@@ -14,6 +14,7 @@ define( function( require ) {
   var BooleanIO = require( 'TANDEM/types/BooleanIO' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/MoleculeNode' );
+  var MoleculeNode3D = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/MoleculeNode3D' );
   var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
   var MoleculesAndLightA11yStrings = require( 'MOLECULES_AND_LIGHT/common/MoleculesAndLightA11yStrings' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -178,6 +179,9 @@ define( function( require ) {
     // function for adding a molecule to this window and hooking up a removal listener
     function addMoleculeToWindow( molecule ) {
       var moleculeNode = new MoleculeNode( molecule, self.modelViewTransform ); //Create the molecule node.
+      if ( molecule.layers ) {
+        moleculeNode = new MoleculeNode3D( molecule, self.modelViewTransform );
+      }
       moleculeLayer.addChild( moleculeNode );
 
       // Determine if it is time to remove molecule and update restore molecule button visibility.
@@ -281,7 +285,7 @@ define( function( require ) {
     },
 
 //     "Case 1 (light source off):
-// In observation window, {{ultraviolet}} light source is off and points directly at {{an}} {{ozone}} molecule. 
+// In observation window, {{ultraviolet}} light source is off and points directly at {{an}} {{ozone}} molecule.
 
 // Case 2 (light source on):
 // In observation window, {{ultraviolet}} light source emits photons directly at {{an}} {{ozone}} molecule.

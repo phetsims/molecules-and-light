@@ -35,8 +35,8 @@ define( function( require ) {
     // Instance Data
     var atomLayer = new Node();
     var bondLayer = new Node();
-    self.addChild( atomLayer );
     self.addChild( bondLayer ); // Order the bond layer first so that atomic bonds are behind atoms in view
+    self.addChild( atomLayer );
 
     // Create nodes and add the atoms which compose this molecule to the atomLayer.
     for ( var atom = 0; atom < molecule.getAtoms().length; atom++ ) {

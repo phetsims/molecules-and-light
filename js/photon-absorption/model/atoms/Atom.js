@@ -49,17 +49,17 @@ define( function( require ) {
   moleculesAndLight.register( 'Atom', Atom );
 
   return inherit( Object, Atom, {
-
+    // NOTE: setPosition & setPositionVec are unused in the sim
     /**
      * Set the position of this atom from a single vector.
      *
      * @param {Vector2} position - The desired position of this atom as a Vector
      */
-    setPositionVec: function( position ) {
-      if ( this.positionProperty.get() !== position ) {
-        this.positionProperty.set( position );
-      }
-    },
+    // setPositionVec: function( position ) {
+    //   if ( this.positionProperty.get() !== position ) {
+    //     this.positionProperty.set( position );
+    //   }
+    // },
 
     /**
      * Set the position of this atom from point coordinates.
@@ -67,11 +67,11 @@ define( function( require ) {
      * @param {number} x - The desired x coordinate of this atom
      * @param {number} y - The desired y coordinate of this atom
      */
-    setPosition: function( x, y ) {
-      if ( this.positionProperty.get().x !== x || this.positionProperty.get().y !== y ) {
-        this.positionProperty.set( new Vector2( x, y ) );
-      }
-    },
+    // setPosition: function( x, y ) {
+    //   if ( this.positionProperty.get().x !== x || this.positionProperty.get().y !== y ) {
+    //     this.positionProperty.set( new Vector2( x, y ) );
+    //   }
+    // },
 
     // serialization support
     toStateObject: function() {
