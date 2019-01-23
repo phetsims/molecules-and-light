@@ -18,6 +18,11 @@ define( function( require ) {
   // strings
   var keyboardHelpDialogLightSourceSliderString = require( 'string!MOLECULES_AND_LIGHT/KeyboardHelpDialog.lightSourceSlider' );
 
+  // constants
+  var HELP_CONTENT_OPTIONS = {
+    baseLabelMaxWidth: 160 // i18n, a bit shorter than default so general and slider content fits side by side
+  };
+
   /**
    * Constructor.
    *
@@ -25,8 +30,12 @@ define( function( require ) {
    */
   function MoleculesAndLightKeyboardHelpContent( tandem) {
 
-    var sliderHelpContent = new SliderControlsHelpContent( { headingString: keyboardHelpDialogLightSourceSliderString } );
-    var generalNavigationHelpContent = new GeneralNavigationHelpContent( { withGroupContent: true } );
+    var sliderHelpContent = new SliderControlsHelpContent( _.extend( HELP_CONTENT_OPTIONS, {
+      headingString: keyboardHelpDialogLightSourceSliderString
+    } ) );
+    var generalNavigationHelpContent = new GeneralNavigationHelpContent( _.extend( HELP_CONTENT_OPTIONS, {
+      withGroupContent: true
+    } ) );
 
     HBox.call( this, {
       children: [ sliderHelpContent, generalNavigationHelpContent ],
