@@ -20,7 +20,7 @@ define( function( require ) {
 
   // constants
   var HELP_CONTENT_OPTIONS = {
-    baseLabelMaxWidth: 160 // i18n, a bit shorter than default so general and slider content fits side by side
+    labelMaxWidth: 160 // i18n, a bit shorter than default so general and slider content fits side by side
   };
 
   /**
