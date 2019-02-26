@@ -17,6 +17,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LightSpectrumDialog = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/LightSpectrumDialog' );
+  var ColorFilterDialog = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/ColorFilterDialog' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
   var MoleculesAndLightA11yStrings = require( 'MOLECULES_AND_LIGHT/common/MoleculesAndLightA11yStrings' );
@@ -106,6 +107,29 @@ define( function( require ) {
     // absorption model.
     var observationWindow = new ObservationWindow( photonAbsorptionModel, modelViewTransform, tandem.createTandem( 'observationWindow' ) );
     playAreaSectionNode.addChild( observationWindow );
+
+    var filterDialog = null;
+    var filterButtonContent = new Text( 'Color Filters!', { font: new PhetFont( 18 ) } );
+    var showColorFilterButton = new RectangularPushButton( {
+      content: filterButtonContent,
+      baseColor: 'rgb(98, 173, 205)',
+      touchAreaXDilation: 7,
+      touchAreaYDilation: 7,
+      listener: function() {
+        if ( !filterDialog ) {
+          filterDialog = new ColorFilterDialog();
+        }
+        filterDialog.show();
+
+        // if listener was fired because of accessibility
+        if ( showColorFilterButton.buttonModel.isA11yClicking() ) {
+          filterDialog.focusCloseButton();
+        }
+      },
+
+      leftTop: observationWindow.leftTop.plusXY( 30, 30 )
+    } );
+    this.addChild( showColorFilterButton );
 
     // This rectangle hides photons that are outside the observation window.
     // TODO: This rectangle is a temporary workaround that replaces the clipping area in ObservationWindow because of a
