@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.3.6-phetio Tue Nov 06 2018 14:20:14 GMT-0700 (MST)",
+  "comment": "# molecules-and-light 1.3.6-phetio Fri Mar 08 2019 13:53:24 GMT-0500 (EST)",
   "assert": {
     "sha": "845be6b591cb746b0b05b7023208aef2e49a8855",
     "branch": "HEAD"
@@ -9,8 +9,8 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "880a18ded11185580cf5950e568931cf0df4eb87",
-    "branch": "HEAD"
+    "sha": "5cf2caad94d4291a975cd28afec8449f76ee708e",
+    "branch": "molecules-and-light-1.3-phetio"
   },
   "chipper": {
     "sha": "432c9e55f77a367f9d5dea4e367c116fd019b9bf",
@@ -21,15 +21,15 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "a275a929d75b18e5c57af77364fc3e775915fb14",
-    "branch": "HEAD"
+    "sha": "31c5bbb7375b3a71cf6574a4c3849a9f83ad7d0b",
+    "branch": "molecules-and-light-1.3-phetio"
   },
   "kite": {
     "sha": "d506825f0e044f9715f94b2aac23dbd52b139a82",
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "7a4f34cb954d76b64baee3a5e5df83cb90d124e2",
+    "sha": "1ff5734350dca2540914795e1cd9b379b03e799b",
     "branch": "1.3-phetio"
   },
   "nitroglycerin": {
