@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.4.4 Fri Mar 08 2019 13:54:12 GMT-0500 (EST)",
+  "comment": "# molecules-and-light 1.4.4 Tue Mar 19 2019 17:05:58 GMT-0400 (EDT)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -10,11 +10,11 @@
   },
   "brand": {
     "sha": "0c3cb4ff95751e838ca55ea69824e74bf2925222",
-    "branch": "molecules-and-light-1.4"
+    "branch": "HEAD"
   },
   "chipper": {
-    "sha": "6f1b8ea8957e0b5a8798095e54941cc5dc53d3e9",
-    "branch": "HEAD"
+    "sha": "414d5f8dbeb589a77f499af86fe703a6e3d0016f",
+    "branch": "molecules-and-light-1.4"
   },
   "dot": {
     "sha": "ee4d0e25e4e21f798e94275623885a09f50e1831",
@@ -22,14 +22,14 @@
   },
   "joist": {
     "sha": "1d09aa935ea7f64afa9462792bcad67255ed225b",
-    "branch": "molecules-and-light-1.4"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "e46f990e1fefaf082fcd0c9cf1fc04695449973f",
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "67d1be57ff4a1ec805e0416e5cac6e838c15c4c3",
+    "sha": "b856556202637f8a36c26d9f74c63ff2dea01f65",
     "branch": "1.4"
   },
   "nitroglycerin": {
@@ -42,6 +42,10 @@
   },
   "phetcommon": {
     "sha": "48af417a1a81c40b0b63970b23f0687b42771032",
+    "branch": "HEAD"
+  },
+  "phetmarks": {
+    "sha": "bb22f4eaaa83c8d2d84d657bda619d2256e12f85",
     "branch": "HEAD"
   },
   "query-string-machine": {
@@ -67,9 +71,5 @@
   "tandem": {
     "sha": "6db63b4bd9c48fc4a8e034abb4861747d76cca46",
     "branch": "HEAD"
-  },
-  "phetmarks": {
-    "branch": "master",
-    "sha": "bb22f4eaaa83c8d2d84d657bda619d2256e12f85"
   }
 }
