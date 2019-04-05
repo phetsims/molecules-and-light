@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var GeneralNavigationHelpContent = require( 'SCENERY_PHET/keyboard/help/GeneralNavigationHelpContent' );
+  var GeneralKeyboardHelpSection = require( 'SCENERY_PHET/keyboard/help/GeneralKeyboardHelpSection' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
@@ -33,7 +33,7 @@ define( function( require ) {
     var sliderHelpContent = new SliderControlsHelpContent( _.extend( HELP_CONTENT_OPTIONS, {
       headingString: keyboardHelpDialogLightSourceSliderString
     } ) );
-    var generalNavigationHelpContent = new GeneralNavigationHelpContent( _.extend( HELP_CONTENT_OPTIONS, {
+    var generalNavigationHelpContent = new GeneralKeyboardHelpSection( _.extend( HELP_CONTENT_OPTIONS, {
       withGroupContent: true
     } ) );
 
