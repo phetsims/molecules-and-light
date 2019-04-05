@@ -13,7 +13,7 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
-  var SliderControlsHelpContent = require( 'SCENERY_PHET/keyboard/help/SliderControlsHelpContent' );
+  var SliderKeyboardHelpSection = require( 'SCENERY_PHET/keyboard/help/SliderKeyboardHelpSection' );
 
   // strings
   var keyboardHelpDialogLightSourceSliderString = require( 'string!MOLECULES_AND_LIGHT/KeyboardHelpDialog.lightSourceSlider' );
@@ -30,7 +30,7 @@ define( function( require ) {
    */
   function MoleculesAndLightKeyboardHelpContent( tandem) {
 
-    var sliderHelpContent = new SliderControlsHelpContent( _.extend( HELP_CONTENT_OPTIONS, {
+    var sliderHelpContent = new SliderKeyboardHelpSection( _.extend( HELP_CONTENT_OPTIONS, {
       headingString: keyboardHelpDialogLightSourceSliderString
     } ) );
     var generalNavigationHelpContent = new GeneralKeyboardHelpSection( _.extend( HELP_CONTENT_OPTIONS, {
