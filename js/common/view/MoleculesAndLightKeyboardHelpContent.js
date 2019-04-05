@@ -19,8 +19,8 @@ define( function( require ) {
   var keyboardHelpDialogLightSourceSliderString = require( 'string!MOLECULES_AND_LIGHT/KeyboardHelpDialog.lightSourceSlider' );
 
   // constants
-  var HELP_CONTENT_OPTIONS = {
-    labelMaxWidth: 160 // i18n, a bit shorter than default so general and slider content fits side by side
+  var HELP_SECTION_OPTIONS = {
+    labelMaxWidth: 160 // i18n, a bit shorter than default so general and slider sections fits side by side
   };
 
   /**
@@ -30,15 +30,15 @@ define( function( require ) {
    */
   function MoleculesAndLightKeyboardHelpContent( tandem) {
 
-    var sliderHelpContent = new SliderKeyboardHelpSection( _.extend( HELP_CONTENT_OPTIONS, {
+    var sliderHelpSection = new SliderKeyboardHelpSection( _.extend( HELP_SECTION_OPTIONS, {
       headingString: keyboardHelpDialogLightSourceSliderString
     } ) );
-    var generalNavigationHelpContent = new GeneralKeyboardHelpSection( _.extend( HELP_CONTENT_OPTIONS, {
+    var generalNavigationHelpSection = new GeneralKeyboardHelpSection( _.extend( HELP_SECTION_OPTIONS, {
       withGroupContent: true
     } ) );
 
     HBox.call( this, {
-      children: [ sliderHelpContent, generalNavigationHelpContent ],
+      children: [ sliderHelpSection, generalNavigationHelpSection ],
       align: 'top',
       spacing: 30,
       tandem: tandem
