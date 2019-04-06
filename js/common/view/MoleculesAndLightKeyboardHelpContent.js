@@ -10,9 +10,9 @@ define( require => {
 
   // modules
   const GeneralKeyboardHelpSection = require( 'SCENERY_PHET/keyboard/help/GeneralKeyboardHelpSection' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
   const moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
   const SliderKeyboardHelpSection = require( 'SCENERY_PHET/keyboard/help/SliderKeyboardHelpSection' );
+  const TwoColumnKeyboardHelpContent = require( 'SCENERY_PHET/keyboard/help/TwoColumnKeyboardHelpContent' );
 
   // strings
   const keyboardHelpDialogLightSourceSliderString = require( 'string!MOLECULES_AND_LIGHT/KeyboardHelpDialog.lightSourceSlider' );
@@ -22,7 +22,7 @@ define( require => {
     labelMaxWidth: 160 // i18n, a bit shorter than default so general and slider sections fits side by side
   };
 
-  class MoleculesAndLightKeyboardHelpContent extends HBox {
+  class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
     /**
      * @param {tandem} tandem
@@ -36,10 +36,7 @@ define( require => {
         withGroupContent: true
       } ) );
 
-      super( {
-        children: [ sliderHelpSection, generalNavigationHelpSection ],
-        align: 'top',
-        spacing: 30,
+      super( sliderHelpSection, generalNavigationHelpSection, {
         tandem: tandem
       } );
     }
