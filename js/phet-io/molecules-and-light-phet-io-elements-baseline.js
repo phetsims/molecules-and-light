@@ -276,7 +276,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PhetioCommandProcessorIO"
     },
-    "moleculesAndLight.general.resizedEmitter": {
+    "moleculesAndLight.general.resizedAction": {
       "phetioDocumentation": "Emits when the sim is resized",
       "phetioEventType": "model",
       "phetioFeatured": false,
@@ -309,7 +309,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
-    "moleculesAndLight.general.stepSimulationEmitter": {
+    "moleculesAndLight.general.stepSimulationAction": {
       "phetioDocumentation": "",
       "phetioEventType": "model",
       "phetioFeatured": false,
