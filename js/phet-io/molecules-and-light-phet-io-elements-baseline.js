@@ -34,7 +34,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO.<>"
     },
-    "moleculesAndLight.general.barrierRectangle.inputListener.pressedAction": {
+    "moleculesAndLight.general.barrierRectangle.inputListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -45,7 +45,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.general.barrierRectangle.inputListener.releasedAction": {
+    "moleculesAndLight.general.barrierRectangle.inputListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -155,7 +155,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<Vector2IO, DOMEventIO>"
     },
-    "moleculesAndLight.general.controller.input.penCanceledAction": {
+    "moleculesAndLight.general.controller.input.penCancelAction": {
       "phetioDocumentation": "Emits when a pen is canceled",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -166,7 +166,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<NumberIO, Vector2IO, DOMEventIO>"
     },
-    "moleculesAndLight.general.controller.input.penEndedAction": {
+    "moleculesAndLight.general.controller.input.penEndAction": {
       "phetioDocumentation": "Emits when a pen is lifted",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -177,7 +177,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<NumberIO, Vector2IO, DOMEventIO>"
     },
-    "moleculesAndLight.general.controller.input.penMovedAction": {
+    "moleculesAndLight.general.controller.input.penMoveAction": {
       "phetioDocumentation": "Emits when a pen is moved",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -188,7 +188,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<NumberIO, Vector2IO, DOMEventIO>"
     },
-    "moleculesAndLight.general.controller.input.penStartedAction": {
+    "moleculesAndLight.general.controller.input.penStartAction": {
       "phetioDocumentation": "Emits when a pen touches the screen",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -199,7 +199,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<NumberIO, Vector2IO, DOMEventIO>"
     },
-    "moleculesAndLight.general.controller.input.touchCanceledAction": {
+    "moleculesAndLight.general.controller.input.touchCancelAction": {
       "phetioDocumentation": "Emits when a touch is canceled",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -210,7 +210,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<NumberIO, Vector2IO, DOMEventIO>"
     },
-    "moleculesAndLight.general.controller.input.touchEndedAction": {
+    "moleculesAndLight.general.controller.input.touchEndAction": {
       "phetioDocumentation": "Emits when a touch ends",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -221,7 +221,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<NumberIO, Vector2IO, DOMEventIO>"
     },
-    "moleculesAndLight.general.controller.input.touchMovedAction": {
+    "moleculesAndLight.general.controller.input.touchMoveAction": {
       "phetioDocumentation": "Emits when a touch moves",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -232,7 +232,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<NumberIO, Vector2IO, DOMEventIO>"
     },
-    "moleculesAndLight.general.controller.input.touchStartedAction": {
+    "moleculesAndLight.general.controller.input.touchStartAction": {
       "phetioDocumentation": "Emits when a touch begins",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -254,7 +254,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<>"
     },
-    "moleculesAndLight.general.controller.input.wheelScrolledAction": {
+    "moleculesAndLight.general.controller.input.wheelScrollAction": {
       "phetioDocumentation": "Emits when the mouse wheel scrolls",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -287,7 +287,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PhetioCommandProcessorIO"
     },
-    "moleculesAndLight.general.resizedAction": {
+    "moleculesAndLight.general.resizeAction": {
       "phetioDocumentation": "Executes when the sim is resized",
       "phetioEventType": "model",
       "phetioFeatured": false,
@@ -617,7 +617,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCH4MoleculeRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCH4MoleculeRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -628,7 +628,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCH4MoleculeRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCH4MoleculeRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -705,7 +705,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCO2MoleculeRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCO2MoleculeRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -716,7 +716,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCO2MoleculeRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCO2MoleculeRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -793,7 +793,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCOMoleculeRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCOMoleculeRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -804,7 +804,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCOMoleculeRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCOMoleculeRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -881,7 +881,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleH2OMoleculeRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleH2OMoleculeRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -892,7 +892,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleH2OMoleculeRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleH2OMoleculeRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -969,7 +969,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleN2MoleculeRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleN2MoleculeRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -980,7 +980,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleN2MoleculeRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleN2MoleculeRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1057,7 +1057,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleNO2MoleculeRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleNO2MoleculeRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1068,7 +1068,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleNO2MoleculeRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleNO2MoleculeRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1145,7 +1145,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleO2MoleculeRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleO2MoleculeRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1156,7 +1156,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleO2MoleculeRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleO2MoleculeRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1233,7 +1233,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleO3MoleculeRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleO3MoleculeRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1244,7 +1244,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleO3MoleculeRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleO3MoleculeRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1354,33 +1354,33 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.thumbInputListener.dragEndedAction": {
-      "phetioDocumentation": "",
-      "phetioEventType": "model",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": false,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<Vector2IO, VoidIO>"
-    },
-    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.thumbInputListener.dragStartedAction": {
-      "phetioDocumentation": "",
-      "phetioEventType": "model",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": false,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<Vector2IO, VoidIO>"
-    },
-    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.thumbInputListener.draggedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.thumbInputListener.dragAction": {
       "phetioDocumentation": "",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": true,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO.<Vector2IO, VoidIO>"
+    },
+    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.thumbInputListener.dragEndAction": {
+      "phetioDocumentation": "",
+      "phetioEventType": "model",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO.<Vector2IO, VoidIO>"
+    },
+    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.thumbInputListener.dragStartAction": {
+      "phetioDocumentation": "",
+      "phetioEventType": "model",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -1409,33 +1409,33 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.track.trackInputListener.dragEndedAction": {
-      "phetioDocumentation": "",
-      "phetioEventType": "model",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": false,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<Vector2IO, VoidIO>"
-    },
-    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.track.trackInputListener.dragStartedAction": {
-      "phetioDocumentation": "",
-      "phetioEventType": "model",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": false,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<Vector2IO, VoidIO>"
-    },
-    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.track.trackInputListener.draggedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.track.trackInputListener.dragAction": {
       "phetioDocumentation": "",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": true,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO.<Vector2IO, VoidIO>"
+    },
+    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.track.trackInputListener.dragEndAction": {
+      "phetioDocumentation": "",
+      "phetioEventType": "model",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO.<Vector2IO, VoidIO>"
+    },
+    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.track.trackInputListener.dragStartAction": {
+      "phetioDocumentation": "",
+      "phetioEventType": "model",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -1519,7 +1519,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.returnMoleculeButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.returnMoleculeButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1530,7 +1530,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.returnMoleculeButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.returnMoleculeButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1783,7 +1783,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.infraredRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.infraredRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1794,7 +1794,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.infraredRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.infraredRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1926,7 +1926,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.microwaveRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.microwaveRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -1937,7 +1937,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.microwaveRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.microwaveRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -2036,7 +2036,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.ultravioletRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.ultravioletRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -2047,7 +2047,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.ultravioletRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.ultravioletRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -2190,7 +2190,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.visibleRadioButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.visibleRadioButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -2201,7 +2201,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.visibleRadioButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.visibleRadioButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -2377,7 +2377,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.playPauseButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.playPauseButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -2388,7 +2388,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.playPauseButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.playPauseButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -2531,7 +2531,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.resetAllButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.resetAllButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -2542,7 +2542,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.resetAllButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.resetAllButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -2619,7 +2619,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.showLightSpectrumButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.showLightSpectrumButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -2630,7 +2630,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.showLightSpectrumButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.showLightSpectrumButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -3169,7 +3169,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.stepButton.pressListener.pressedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.stepButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -3180,7 +3180,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.stepButton.pressListener.releasedAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.stepButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -3279,7 +3279,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO.<>"
     },
-    "moleculesAndLight.navigationBar.phetButton.phetMenu.aboutMenuItem.inputListener.pressedAction": {
+    "moleculesAndLight.navigationBar.phetButton.phetMenu.aboutMenuItem.inputListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -3290,7 +3290,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.navigationBar.phetButton.phetMenu.aboutMenuItem.inputListener.releasedAction": {
+    "moleculesAndLight.navigationBar.phetButton.phetMenu.aboutMenuItem.inputListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -3356,7 +3356,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO.<>"
     },
-    "moleculesAndLight.navigationBar.phetButton.phetMenu.screenshotMenuItem.inputListener.pressedAction": {
+    "moleculesAndLight.navigationBar.phetButton.phetMenu.screenshotMenuItem.inputListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -3367,7 +3367,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.navigationBar.phetButton.phetMenu.screenshotMenuItem.inputListener.releasedAction": {
+    "moleculesAndLight.navigationBar.phetButton.phetMenu.screenshotMenuItem.inputListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -3422,7 +3422,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
-    "moleculesAndLight.navigationBar.phetButton.pressListener.pressedAction": {
+    "moleculesAndLight.navigationBar.phetButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event.",
       "phetioEventType": "user",
       "phetioFeatured": false,
@@ -3433,7 +3433,7 @@ window.phet.phetio.phetioElementsBaseline =
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
-    "moleculesAndLight.navigationBar.phetButton.pressListener.releasedAction": {
+    "moleculesAndLight.navigationBar.phetButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs.",
       "phetioEventType": "user",
       "phetioFeatured": false,
