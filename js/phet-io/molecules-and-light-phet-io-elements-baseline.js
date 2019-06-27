@@ -862,7 +862,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCH4MoleculeRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -950,7 +950,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCO2MoleculeRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -1038,7 +1038,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleCOMoleculeRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -1126,7 +1126,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleH2OMoleculeRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -1214,7 +1214,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleN2MoleculeRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -1302,7 +1302,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleNO2MoleculeRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -1390,7 +1390,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleO2MoleculeRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -1478,7 +1478,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.moleculeControlPanel.radioButtonGroup.singleO3MoleculeRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -1753,7 +1753,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.photonEmitterNode.slider.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -1775,7 +1775,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.observationWindow.returnMoleculeButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -1984,7 +1984,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.infraredRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -2127,7 +2127,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.microwaveRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -2292,7 +2292,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.ultravioletRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -2446,7 +2446,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.photonEmissionControlPanel.radioButtonGroup.visibleRadioButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -2644,7 +2644,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.playPauseButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -2787,7 +2787,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.resetAllButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -2886,7 +2886,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.showLightSpectrumButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -3436,7 +3436,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "moleculesAndLight.moleculesAndLightScreen.view.stepButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioEventType": "model",
-      "phetioFeatured": false,
+      "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
