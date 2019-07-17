@@ -19,8 +19,7 @@ define( function( require ) {
   // strings
   var moleculesAndLightTitleString = require( 'string!MOLECULES_AND_LIGHT/molecules-and-light.title' );
 
-  var tandem = Tandem.rootTandem;
-  var keyboardHelpContent = new MoleculesAndLightKeyboardHelpContent( Tandem.globalTandem.createTandem( 'keyboardHelpContent' ) );
+  var keyboardHelpContent = new MoleculesAndLightKeyboardHelpContent();
 
   var simOptions = {
     keyboardHelpNode: keyboardHelpContent,
@@ -40,7 +39,9 @@ define( function( require ) {
   }
 
   SimLauncher.launch( function() {
-    var sim = new Sim( moleculesAndLightTitleString, [ new MoleculesAndLightScreen( tandem.createTandem( 'moleculesAndLightScreen' ) ) ], simOptions );
+    var sim = new Sim( moleculesAndLightTitleString, [
+      new MoleculesAndLightScreen( Tandem.rootTandem.createTandem( 'moleculesAndLightScreen' ) )
+    ], simOptions );
     sim.start();
   } );
 } );

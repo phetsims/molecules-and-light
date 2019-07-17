@@ -16,19 +16,14 @@ define( require => {
   const keyboardHelpDialogLightSourceSliderString = require( 'string!MOLECULES_AND_LIGHT/KeyboardHelpDialog.lightSourceSlider' );
 
   class MoleculesAndLightKeyboardHelpContent extends SliderAndGeneralKeyboardHelpContent {
-
-    /**
-     * @param {tandem} tandem
-     */
-    constructor( tandem ) {
+    constructor() {
       super( {
         sliderSectionOptions: {
           headingString: keyboardHelpDialogLightSourceSliderString
         },
         generalSectionOptions: {
           withGroupContent: true
-        },
-        tandem: tandem
+        }
       } );
     }
   }
