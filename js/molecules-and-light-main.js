@@ -20,7 +20,7 @@ define( function( require ) {
   var moleculesAndLightTitleString = require( 'string!MOLECULES_AND_LIGHT/molecules-and-light.title' );
 
   var tandem = Tandem.rootTandem;
-  var keyboardHelpContent = new MoleculesAndLightKeyboardHelpContent( Tandem.rootTandem.createTandem( 'keyboardHelpContent' ) );
+  var keyboardHelpContent = new MoleculesAndLightKeyboardHelpContent( Tandem.globalTandem.createTandem( 'keyboardHelpContent' ) );
 
   var simOptions = {
     keyboardHelpNode: keyboardHelpContent,
