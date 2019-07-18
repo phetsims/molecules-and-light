@@ -367,6 +367,14 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "EventIO"
     },
+    "FocusIO": {
+      "documentation": "A IO type for the instance in the simulation which currently has keyboard focus.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ObjectIO",
+      "typeName": "FocusIO"
+    },
     "FontIO": {
       "documentation": "Font handling for text drawing. Options:<ul><li><strong>style:</strong> normal      &mdash; normal | italic | oblique </li><li><strong>variant:</strong> normal    &mdash; normal | small-caps </li><li><strong>weight:</strong> normal     &mdash; normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 </li><li><strong>stretch:</strong> normal    &mdash; normal | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded </li><li><strong>size:</strong> 10px         &mdash; absolute-size | relative-size | length | percentage -- unitless number interpreted as px. absolute suffixes: cm, mm, in, pt, pc, px. relative suffixes: em, ex, ch, rem, vw, vh, vmin, vmax. </li><li><strong>lineHeight:</strong> normal &mdash; normal | number | length | percentage -- NOTE: Canvas spec forces line-height to normal </li><li><strong>family:</strong> sans-serif &mdash; comma-separated list of families, including generic families (serif, sans-serif, cursive, fantasy, monospace). ideally escape with double-quotes</li></ul>",
       "events": [],
@@ -719,6 +727,14 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "LinkedElementIO"
     },
+    "MoleculeIO": {
+      "documentation": "IO type for a molecule.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ObjectIO",
+      "typeName": "MoleculeIO"
+    },
     "NodeIO": {
       "documentation": "The base type for graphical and potentially interactive objects.  NodeIO has nested PropertyIO values for visibility, pickability and opacity.<br><br>Pickable can take one of three values:<br><ul><li>null: pass-through behavior. Nodes with input listeners are pickable, but nodes without input listeners won't block events for nodes behind it.</li><li>false: The node cannot be interacted with, and it blocks events for nodes behind it.</li><li>true: The node can be interacted with (if it has an input listener).</li></ul>For more about Scenery node pickability, please see <a href=\"http://phetsims.github.io/scenery/doc/implementation-notes#pickability\">http://phetsims.github.io/scenery/doc/implementation-notes#pickability</a>",
       "events": [],
@@ -737,6 +753,17 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "NullableIO.<BooleanIO>"
+    },
+    "NullableIO.<EnumerationIO.<>>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO.<>"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO.<EnumerationIO.<>>"
     },
     "NullableIO.<EventIO>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -760,6 +787,50 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "NullableIO.<FocusIO>"
     },
+    "NullableIO.<NullableIO.<BooleanIO>>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "NullableIO.<BooleanIO>"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO.<NullableIO.<BooleanIO>>"
+    },
+    "NullableIO.<NullableIO.<FocusIO>>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "NullableIO.<FocusIO>"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO.<NullableIO.<FocusIO>>"
+    },
+    "NullableIO.<NumberIO>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "NumberIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO.<NumberIO>"
+    },
+    "NullableIO.<RangeIO>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "RangeIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO.<RangeIO>"
+    },
     "NullableIO.<StringIO>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
       "events": [],
@@ -770,6 +841,17 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "NullableIO.<StringIO>"
+    },
+    "NullableIO.<Vector2IO>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "Vector2IO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO.<Vector2IO>"
     },
     "NumberIO": {
       "documentation": "Wrapper for the built-in JS number type (floating point, but also represents integers)",
