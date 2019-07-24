@@ -345,7 +345,7 @@ window.phet.phetio.phetioTypes = assert &&
       "typeName": "EmitterIO.<>"
     },
     "EnumerationIO.<>": {
-      "documentation": "Enumeration pattern that provides a fixed set of possible values",
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: SINGLE_CO_MOLECULE,SINGLE_N2_MOLECULE,SINGLE_O2_MOLECULE,SINGLE_CO2_MOLECULE,SINGLE_CH4_MOLECULE,SINGLE_H2O_MOLECULE,SINGLE_NO2_MOLECULE,SINGLE_O3_MOLECULE",
       "events": [],
       "methodOrder": [],
       "methods": {
