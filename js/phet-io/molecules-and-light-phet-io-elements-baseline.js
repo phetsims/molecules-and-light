@@ -743,7 +743,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(SINGLE_CO_MOLECULE|SINGLE_N2_MOLECULE|SINGLE_O2_MOLECULE|SINGLE_CO2_MOLECULE|SINGLE_CH4_MOLECULE|SINGLE_H2O_MOLECULE|SINGLE_NO2_MOLECULE|SINGLE_O3_MOLECULE)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(SINGLE_CO_MOLECULE|SINGLE_N2_MOLECULE|SINGLE_O2_MOLECULE|SINGLE_CO2_MOLECULE|SINGLE_CH4_MOLECULE|SINGLE_H2O_MOLECULE|SINGLE_NO2_MOLECULE|SINGLE_O3_MOLECULE)>"
     },
     "moleculesAndLight.moleculesAndLightScreen.model.photonWavelengthProperty": {
       "phetioDocumentation": "",
