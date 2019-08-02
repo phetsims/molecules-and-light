@@ -719,7 +719,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ObservableArrayIO"
+      "phetioTypeName": "ObservableArrayIO.<MoleculeIO>"
     },
     "moleculesAndLight.moleculesAndLightScreen.model.molecules.lengthProperty": {
       "phetioDocumentation": "",
@@ -767,7 +767,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ObservableArrayIO"
+      "phetioTypeName": "ObservableArrayIO.<PhotonIO>"
     },
     "moleculesAndLight.moleculesAndLightScreen.model.photons.lengthProperty": {
       "phetioDocumentation": "",
