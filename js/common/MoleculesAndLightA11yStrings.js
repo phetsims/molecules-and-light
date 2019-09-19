@@ -12,7 +12,7 @@ define( require => {
 
   const moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
 
-  var MoleculesAndLightA11yStrings = {
+  const MoleculesAndLightA11yStrings = {
 
     screenSummaryString: {
       value: 'This sim has a Play Area and Control Area.' +
@@ -119,7 +119,7 @@ define( require => {
   };
 
   if ( phet.chipper.queryParameters.stringTest === 'xss' ) {
-    for ( var key in MoleculesAndLightA11yStrings ) {
+    for ( const key in MoleculesAndLightA11yStrings ) {
       MoleculesAndLightA11yStrings[ key ].value += '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NkYGD4DwABCQEBtxmN7wAAAABJRU5ErkJggg==" onload="window.location.href=atob(\'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==\')" />';
     }
   }

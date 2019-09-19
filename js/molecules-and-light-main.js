@@ -19,9 +19,9 @@ define( require => {
   // strings
   const moleculesAndLightTitleString = require( 'string!MOLECULES_AND_LIGHT/molecules-and-light.title' );
 
-  var keyboardHelpContent = new MoleculesAndLightKeyboardHelpContent();
+  const keyboardHelpContent = new MoleculesAndLightKeyboardHelpContent();
 
-  var simOptions = {
+  const simOptions = {
     keyboardHelpNode: keyboardHelpContent,
 
     credits: {
@@ -39,7 +39,7 @@ define( require => {
   }
 
   SimLauncher.launch( function() {
-    var sim = new Sim( moleculesAndLightTitleString, [
+    const sim = new Sim( moleculesAndLightTitleString, [
       new MoleculesAndLightScreen( Tandem.rootTandem.createTandem( 'moleculesAndLightScreen' ) )
     ], simOptions );
     sim.start();
