@@ -7,10 +7,10 @@
  *
  * @author Michael Kauzmann (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
-  var moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
+  const moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
 
   var MoleculesAndLightA11yStrings = {
 
