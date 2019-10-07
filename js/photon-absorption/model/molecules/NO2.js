@@ -94,7 +94,7 @@ define( require => {
   }
 
   moleculesAndLight.register( 'NO2', NO2 );
-  
+
   return inherit( Molecule, NO2, {
 
     /**

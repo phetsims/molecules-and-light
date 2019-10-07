@@ -63,6 +63,6 @@ define( require => {
   }
 
   moleculesAndLight.register( 'PhotonNode', PhotonNode );
-  
+
   return inherit( Node, PhotonNode );
 } );

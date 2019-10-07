@@ -56,7 +56,7 @@ define( require => {
   }
 
   moleculesAndLight.register( 'AtomNode', AtomNode );
-  
+
   return inherit( Node, AtomNode, {
 
     /**
