@@ -11,6 +11,7 @@ define( require => {
   // modules
   const MoleculesAndLightKeyboardHelpContent = require( 'MOLECULES_AND_LIGHT/common/view/MoleculesAndLightKeyboardHelpContent' );
   const MoleculesAndLightScreen = require( 'MOLECULES_AND_LIGHT/moleculesandlight/MoleculesAndLightScreen' );
+  const malSoundOptionsDialogContent = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/malSoundOptionsDialogContent' );
   const platform = require( 'PHET_CORE/platform' );
   const Sim = require( 'JOIST/Sim' );
   const SimLauncher = require( 'JOIST/SimLauncher' );
@@ -23,6 +24,10 @@ define( require => {
 
   const simOptions = {
     keyboardHelpNode: keyboardHelpContent,
+
+    createOptionsDialogContent: phet.chipper.queryParameters.supportsSound ?
+                                () => { return malSoundOptionsDialogContent; } :
+                                null,
 
     credits: {
       leadDesign: 'Kelly Lancaster (Java), Amy Rouinfar (HTML5)',
