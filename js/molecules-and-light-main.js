@@ -34,7 +34,8 @@ define( require => {
       softwareDevelopment: 'Jesse Greenberg, John Blanco, Sam Reid, Aaron Davis',
       team: 'Yuen-ying Carpenter, Trish Loeblein, Emily B. Moore, Robert Parson, Ariel Paul, Kathy Perkins',
       qualityAssurance: 'Steele Dalton, Elise Morgan, Oliver Orejola, Bryan Yoelin',
-      graphicArts: 'Alex Klinger'
+      graphicArts: 'Alex Klinger',
+      soundDesign: 'Ashton Morris'
     }
   };
 
