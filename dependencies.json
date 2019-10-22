@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.5.0-soundDesignProto01.2 Tue Oct 22 2019 11:38:43 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# molecules-and-light 1.5.0-soundDesignProto01.3 Tue Oct 22 2019 11:43:25 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "bd6e3ed0a8b6fea73a4a176d5364809666833e58",
     "branch": "master"
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "d5fd7317770214a1fc7b63d6a0fc9383c3351297",
+    "sha": "82075a95aa68b48944e4ab5e999a5d1ca2cb3c9a",
     "branch": "soundDesignProto01"
   },
   "nitroglycerin": {
