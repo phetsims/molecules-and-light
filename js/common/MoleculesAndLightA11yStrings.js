@@ -59,30 +59,6 @@ define( require => {
     moleculesPanelDescriptionString: {
       value: 'Place molecule in front of light source.'
     },
-    nitrogenDescriptionString: {
-      value: 'A Nitrogen molecule consists of two Nitrogen atoms by a triple bond'
-    },
-    oxygenDescriptionString: {
-      value: 'An Oxygen molecule has two Oxygen atoms connected by a covalent double bond'
-    },
-    carbonMonoxideDescriptionString: {
-      value: 'A Carbon monoxide molecule consists of one carbon atom and one oxygen atom, connected by a triple bond that consists of two covalent bonds as well as one dative covalent bond.'
-    },
-    carbonDioxideDescriptionString: {
-      value: 'A Carbon dioxide molecule consists of a carbonatom covalently double bonded to two oxygen atoms.'
-    },
-    waterDescriptionString: {
-      value: 'Water has two hydrogen atoms covalently bonded to a single oxygen atom.'
-    },
-    nitrogenDioxideDescriptionString: {
-      value: 'A Nitrogen dioxide molecule consists of a nitrogen atom covalently double bonded to an oxygen atom and single bonded to another oxygen atom.'
-    },
-    ozoneDescriptionString: {
-      value: 'A Ozone molecule consists of an Oxygen atom covalently double bonded to an Oxygen atom and single bonded to another Oxygen atom.'
-    },
-    methaneDescriptionString: {
-      value: 'A methane molecule consists of a Carbon atom covanlently bonded to four Hydrogen atoms.'
-    },
     pauseDescriptionString: {
       value: 'Pause what is happening in the observation window.'
     },
