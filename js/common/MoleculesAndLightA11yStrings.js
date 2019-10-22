@@ -15,13 +15,7 @@ define( require => {
   const MoleculesAndLightA11yStrings = {
 
     screenSummaryString: {
-      value: 'This sim has a Play Area and Control Area.' +
-             'The Play Area contains an observation window, a list of molecules, and a list of light sources. Within the observation window, there is a light source pointing directly to a molecule.' +
-             'You can select different light sources and molecules, and explore how photons with different frequency and energy interact with the molecules.' +
-             'The Control Area has buttons to change the view, open a light spectrum graphic for reference, and reset the sim.'
-    },
-    summaryInteractionHintString: {
-      value: 'Look for photon rate slider to play.'
+      value: 'In the Play Area, you find an observation window that contains a light source and a molecule. You can adjust the rate of photons being emitted at molecule, choose a different molecule, or change light source. From the Control Area you can use buttons to pause/play and step forward what’s happening in the observation window. You can also access details about the light spectrum and reset the sim.'
     },
     observationWindowDescriptionPatternString: {
       value: 'In observation window, {{wavelengthName}} light source {{lightOnOffLanguage}} directly at {{an}} {{molecule}} molecule.'
