@@ -21,7 +21,7 @@ define( require => {
   const moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
   const MoleculesAndLightA11yStrings = require( 'MOLECULES_AND_LIGHT/common/MoleculesAndLightA11yStrings' );
   const MoleculeSelectionPanel = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/MoleculeSelectionPanel' );
-  const Node = require( 'SCENERY/nodes/Node' );
+  const MoleculesAndLightScreenSummaryNode = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/MoleculesAndLightScreenSummaryNode' );
   const ObservationWindow = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/ObservationWindow' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
@@ -46,8 +46,6 @@ define( require => {
   // a11y strings
   const spectrumButtonLabelString = MoleculesAndLightA11yStrings.spectrumButtonLabelString.value;
   const spectrumButtonDescriptionString = MoleculesAndLightA11yStrings.spectrumButtonDescriptionString.value;
-  const screenSummaryString = MoleculesAndLightA11yStrings.screenSummaryString.value;
-  const summaryInteractionHintString = MoleculesAndLightA11yStrings.summaryInteractionHintString.value;
   const playDescriptionString = MoleculesAndLightA11yStrings.playDescriptionString.value;
   const pauseDescriptionString = MoleculesAndLightA11yStrings.pauseDescriptionString.value;
   const stepButtonLabelString = MoleculesAndLightA11yStrings.stepButtonLabelString.value;
@@ -109,19 +107,11 @@ define( require => {
    */
   function MoleculesAndLightScreenView( photonAbsorptionModel, tandem ) {
 
-    const summaryNode = new Node( {
-      tagName: 'p',
-      accessibleName: screenSummaryString
-    } );
-
     ScreenView.call( this, {
       layoutBounds: new Bounds2( 0, 0, 768, 504 ),
       tandem: tandem,
-      screenSummaryContent: summaryNode
+      screenSummaryContent: new MoleculesAndLightScreenSummaryNode( photonAbsorptionModel )
     } );
-
-    // interaction hint and keyboard shortcuts
-    summaryNode.addChild( new Node( { tagName: 'p', innerContent: summaryInteractionHintString } ) );
 
     const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,

@@ -15,16 +15,16 @@ define( require => {
   const MoleculesAndLightA11yStrings = {
 
     screenSummaryString: {
-      value: 'This sim has a Play Area and Control Area.' +
-             'The Play Area contains an observation window, a list of molecules, and a list of light sources. Within the observation window, there is a light source pointing directly to a molecule.' +
-             'You can select different light sources and molecules, and explore how photons with different frequency and energy interact with the molecules.' +
-             'The Control Area has buttons to change the view, open a light spectrum graphic for reference, and reset the sim.'
-    },
-    summaryInteractionHintString: {
-      value: 'Look for photon rate slider to play.'
+      value: 'In the Play Area, you find an observation window that contains a light source and a molecule. You can adjust the rate of photons being emitted at molecule, choose a different molecule, or change light source. From the Control Area you can use buttons to pause/play and step forward what’s happening in the observation window. You can also access details about the light spectrum and reset the sim.'
     },
     observationWindowDescriptionPatternString: {
       value: 'In observation window, {{wavelengthName}} light source {{lightOnOffLanguage}} directly at {{an}} {{molecule}} molecule.'
+    },
+    dynamicScreenSummaryString: {
+      value: 'Currently, {{playingState}}, {{lightSource}} light source {{emissionRate}} directly at {{photonTarget}} molecule.'
+    },
+    interactionHintString: {
+      value: 'Look for light source slider to play.'
     },
     lightSourceSliderString: {
       value: 'Light Source Slider'
@@ -32,8 +32,23 @@ define( require => {
     isOffAndPointsString: {
       value: 'is off and points'
     },
+    emitsPhotonsSlowlyString: {
+      value: 'emits photons slowly and'
+    },
+    emitsPhotonsVerySlowlyString: {
+      value: 'emits photons very slowly and'
+    },
+    emitsPhotonsQuicklyString: {
+      value: 'emits photons quickly and'
+    },
     emitsPhotonsString: {
       value: 'emits photons'
+    },
+    emitterInObservationWindowString: {
+      value: 'in observation window'
+    },
+    emitterPausedInObservationWindowString: {
+      value: 'paused in observation window'
     },
     aString: {
       value: 'a'
@@ -58,30 +73,6 @@ define( require => {
     },
     moleculesPanelDescriptionString: {
       value: 'Place molecule in front of light source.'
-    },
-    nitrogenDescriptionString: {
-      value: 'A Nitrogen molecule consists of two Nitrogen atoms by a triple bond'
-    },
-    oxygenDescriptionString: {
-      value: 'An Oxygen molecule has two Oxygen atoms connected by a covalent double bond'
-    },
-    carbonMonoxideDescriptionString: {
-      value: 'A Carbon monoxide molecule consists of one carbon atom and one oxygen atom, connected by a triple bond that consists of two covalent bonds as well as one dative covalent bond.'
-    },
-    carbonDioxideDescriptionString: {
-      value: 'A Carbon dioxide molecule consists of a carbonatom covalently double bonded to two oxygen atoms.'
-    },
-    waterDescriptionString: {
-      value: 'Water has two hydrogen atoms covalently bonded to a single oxygen atom.'
-    },
-    nitrogenDioxideDescriptionString: {
-      value: 'A Nitrogen dioxide molecule consists of a nitrogen atom covalently double bonded to an oxygen atom and single bonded to another oxygen atom.'
-    },
-    ozoneDescriptionString: {
-      value: 'A Ozone molecule consists of an Oxygen atom covalently double bonded to an Oxygen atom and single bonded to another Oxygen atom.'
-    },
-    methaneDescriptionString: {
-      value: 'A methane molecule consists of a Carbon atom covanlently bonded to four Hydrogen atoms.'
     },
     pauseDescriptionString: {
       value: 'Pause what is happening in the observation window.'
