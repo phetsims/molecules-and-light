@@ -35,7 +35,7 @@ define( require => {
       team: 'Yuen-ying Carpenter, Trish Loeblein, Emily B. Moore, Robert Parson, Ariel Paul, Kathy Perkins',
       qualityAssurance: 'Steele Dalton, Elise Morgan, Oliver Orejola, Bryan Yoelin',
       graphicArts: 'Alex Klinger',
-      soundDesign: 'Ashton Morris'
+      soundDesign: 'Ashton Morris, Mike Winters'
     }
   };
 

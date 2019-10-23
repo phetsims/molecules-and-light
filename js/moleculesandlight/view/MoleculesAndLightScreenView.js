@@ -56,23 +56,26 @@ define( require => {
 
   // sounds
   const brokeApartSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/break-apart.mp3' );
-  const infraredPhotonV1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v1-4th-interval-001.mp3' );
-  const infraredPhotonV2SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v2-4th-interval-001.mp3' );
-  const infraredPhotonV3SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v3-4th-interval-001.mp3' );
-  const microwavePhotonV1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v1-4th-interval-000.mp3' );
-  const microwavePhotonV2SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v2-4th-interval-000.mp3' );
-  const microwavePhotonV3SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v3-4th-interval-000.mp3' );
-  const moleculeEnergizedLoopInfo = require( 'sound!MOLECULES_AND_LIGHT/glow-loop.mp3' );
-  const moleculeEnergizedStartSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/glow-start-one-shot.mp3' );
+  const brokeApartSoundV2Info = require( 'sound!MOLECULES_AND_LIGHT/break-apart-v2.mp3' );
+  const moleculeEnergizedLoopInfo = require( 'sound!MOLECULES_AND_LIGHT/glow-loop-higher.mp3' );
   const rotateSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/rotate-loop.mp3' );
-  const ultravioletPhotonV1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v1-4th-interval-003.mp3' );
-  const ultravioletPhotonV2SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v2-4th-interval-003.mp3' );
-  const ultravioletPhotonV3SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v3-4th-interval-003.mp3' );
-  const vibrateLoopSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-loop-v2.mp3' );
-  const vibrateStartSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-one-shot-v2.mp3' );
+  const vibrateOption1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-001.mp3' );
+  const vibrateOption2SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-002.mp3' );
+  const vibrateOption3SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-003.mp3' );
+  const vibrateOption4SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-004.mp3' );
+  const vibrateOption5SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-005.mp3' );
+  const microwavePhotonV1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v1-4th-interval-000.mp3' );
+  const infraredPhotonV1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v1-4th-interval-001.mp3' );
   const visiblePhotonV1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v1-4th-interval-002.mp3' );
+  const ultravioletPhotonV1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v1-4th-interval-003.mp3' );
+  const microwavePhotonV2SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v2-4th-interval-000.mp3' );
+  const infraredPhotonV2SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v2-4th-interval-001.mp3' );
   const visiblePhotonV2SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v2-4th-interval-002.mp3' );
+  const ultravioletPhotonV2SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v2-4th-interval-003.mp3' );
+  const microwavePhotonV3SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v3-4th-interval-000.mp3' );
+  const infraredPhotonV3SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v3-4th-interval-001.mp3' );
   const visiblePhotonV3SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v3-4th-interval-002.mp3' );
+  const ultravioletPhotonV3SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v3-4th-interval-003.mp3' );
 
   // constants
   // Model-view transform for intermediate coordinates.
@@ -94,6 +97,9 @@ define( require => {
     WavelengthConstants.VISIBLE_WAVELENGTH,
     WavelengthConstants.UV_WAVELENGTH
   ];
+
+  // volume of photon emission sounds
+  const PHOTON_SOUND_OUTPUT_LEVEL = 0.1;
 
   /**
    * Constructor for the screen view of Molecules and Light.
@@ -264,16 +270,11 @@ define( require => {
     // sound to play when molecule becomes "energized", which is depicted as glowing in the view
     const moleculeEnergizedLoop = new SoundClip( moleculeEnergizedLoopInfo, {
       loop: true,
-      initialOutputLevel: 0.4
+      initialOutputLevel: 0.1
     } );
     soundManager.addSoundGenerator( moleculeEnergizedLoop );
-    const moleculeEnergizedStartSound = new SoundClip( moleculeEnergizedStartSoundInfo, {
-      initialOutputLevel: 0.7
-    } );
-    soundManager.addSoundGenerator( moleculeEnergizedStartSound );
     const moleculeEnergizedSoundPlayer = moleculeEnergized => {
       if ( moleculeEnergized ) {
-        moleculeEnergizedStartSound.play();
         moleculeEnergizedLoop.play();
       }
       else {
@@ -282,31 +283,59 @@ define( require => {
     };
 
     // broke apart sound
-    const brokeApartSound = new SoundClip( brokeApartSoundInfo, { initialOutputLevel: 0.2 } );
+    const brokeApartSound = new SoundClip( brokeApartSoundInfo, { initialOutputLevel: 0.5 } );
     soundManager.addSoundGenerator( brokeApartSound );
+    const brokeApartSound2 = new SoundClip( brokeApartSoundV2Info, { initialOutputLevel: 1 } );
+    soundManager.addSoundGenerator( brokeApartSound2 );
     const brokeApartSoundPlayer = () => {
-      brokeApartSound.play();
+      if ( malSoundOptionsDialogContent.breakApartSoundProperty.value === 1 ) {
+        brokeApartSound.play();
+      }
+      else {
+        brokeApartSound2.play();
+      }
     };
 
     // molecule rotating sound
-    const rotateSound = new SoundClip( rotateSoundInfo, { initialOutputLevel: 0.2, loop: true } );
+    const rotateSound = new SoundClip( rotateSoundInfo, { initialOutputLevel: 0.05, loop: true } );
     soundManager.addSoundGenerator( rotateSound );
     const rotateSoundPlayer = rotating => {
       rotating ? rotateSound.play() : rotateSound.stop();
     };
 
     // molecule vibration sounds
-    const startVibratingSound = new SoundClip( vibrateStartSoundInfo, { initialOutputLevel: 0.6 } );
-    soundManager.addSoundGenerator( startVibratingSound );
-    const vibratingLoopSound = new SoundClip( vibrateLoopSoundInfo, { initialOutputLevel: 0.4, loop: true } );
-    soundManager.addSoundGenerator( vibratingLoopSound );
+    const moleculeVibrationSoundClips = [
+      new SoundClip( vibrateOption1SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
+      new SoundClip( vibrateOption2SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
+      new SoundClip( vibrateOption3SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
+      new SoundClip( vibrateOption4SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
+      new SoundClip( vibrateOption5SoundInfo, { initialOutputLevel: 0.2, loop: true } )
+    ];
+    moleculeVibrationSoundClips.forEach( soundClip => {
+      soundManager.addSoundGenerator( soundClip );
+    } );
     const vibrationSoundPlayer = vibrating => {
+      const indexToPlay = malSoundOptionsDialogContent.vibrationSoundProperty.value - 1;
       if ( vibrating ) {
-        startVibratingSound.play();
-        vibratingLoopSound.play();
+
+        // play the corresponding sound, stop any that are playing that shouldn't be
+        moleculeVibrationSoundClips.forEach( ( soundClip, index ) => {
+          if ( indexToPlay === index ) {
+            soundClip.play();
+          }
+          else if ( soundClip.isPlaying ) {
+            soundClip.stop();
+          }
+        } );
       }
       else {
-        vibratingLoopSound.stop();
+
+        // make sure nothing is playing
+        moleculeVibrationSoundClips.forEach( soundClip => {
+          if ( soundClip.isPlaying ) {
+            soundClip.stop();
+          }
+        } );
       }
     };
 
@@ -339,7 +368,7 @@ define( require => {
     } );
 
     // photon generation sounds (i.e. the photons coming from the lamps)
-    const photonSoundClipOptions = { initialOutputLevel: 0.3 };
+    const photonSoundClipOptions = { initialOutputLevel: PHOTON_SOUND_OUTPUT_LEVEL };
 
     // TODO: Once the photon sound set is finalized, use a Map here instead of a 2D array
     const photonEmissionSoundPlayers = [
@@ -368,7 +397,17 @@ define( require => {
       } );
     } );
     photonAbsorptionModel.photons.addItemAddedListener( photon => {
-      const soundSetIndex = malSoundOptionsDialogContent.photonSoundSetProperty.value - 1;
+      let soundSetIndex;
+      if ( photon.locationProperty.value.x < 0 ) {
+
+        // photon was emitted from lamp, use the initial emission sound
+        soundSetIndex = malSoundOptionsDialogContent.photonInitialEmissionSoundSetProperty.value - 1;
+      }
+      else {
+
+        // photon was emitted from lamp, use the secondary emission sound
+        soundSetIndex = malSoundOptionsDialogContent.photonSecondaryEmissionSoundSetProperty.value - 1;
+      }
       const soundClipIndex = ORDERED_WAVELENGTHS.indexOf( photon.wavelength );
       photonEmissionSoundPlayers[ soundSetIndex ][ soundClipIndex ].play();
     } );

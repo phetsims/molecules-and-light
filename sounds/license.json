@@ -1,13 +1,5 @@
 {
-  "glow-loop.mp3": {
-    "text": [
-      "Copyright 2018 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "created by Ashton Morris (PhET Interactive Simulations)"
-  },
-  "glow-start-one-shot.mp3": {
+  "glow-loop-higher.mp3": {
     "text": [
       "Copyright 2018 University of Colorado Boulder"
     ],
@@ -22,6 +14,14 @@
     "projectURL": "http://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Ashton Morris (PhET Interactive Simulations)"
+  },
+  "break-apart-v2.mp3": {
+    "text": [
+      "Copyright 2018 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Ashton Morris (PhET Interactive Simulations), originally grab-001.mp3"
   },
   "photon-v1-4th-interval-000.mp3": {
     "text": [
@@ -127,7 +127,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Ashton Morris (PhET Interactive Simulations)"
   },
-  "vibrate-loop-v2.mp3": {
+  "vibrate-option-001.mp3": {
     "text": [
       "Copyright 2018 University of Colorado Boulder"
     ],
@@ -135,7 +135,31 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Ashton Morris (PhET Interactive Simulations)"
   },
-  "vibrate-one-shot-v2.mp3": {
+  "vibrate-option-002.mp3": {
+    "text": [
+      "Copyright 2018 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Ashton Morris (PhET Interactive Simulations)"
+  },
+  "vibrate-option-003.mp3": {
+    "text": [
+      "Copyright 2018 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Ashton Morris (PhET Interactive Simulations)"
+  },
+  "vibrate-option-004.mp3": {
+    "text": [
+      "Copyright 2018 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Ashton Morris (PhET Interactive Simulations)"
+  },
+  "vibrate-option-005.mp3": {
     "text": [
       "Copyright 2018 University of Colorado Boulder"
     ],
