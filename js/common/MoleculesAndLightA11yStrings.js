@@ -20,14 +20,32 @@ define( require => {
     observationWindowDescriptionPatternString: {
       value: 'In observation window, {{wavelengthName}} light source {{lightOnOffLanguage}} directly at {{an}} {{molecule}} molecule.'
     },
+    dynamicScreenSummaryString: {
+      value: 'Currently, {{playingState}}, {{lightSource}} light source {{emissionRate}} directly at {{photonTarget}} molecule.'
+    },
     lightSourceSliderString: {
       value: 'Light Source Slider'
     },
     isOffAndPointsString: {
       value: 'is off and points'
     },
+    emitsPhotonsSlowlyString: {
+      value: 'emits photons slowly and'
+    },
+    emitsPhotonsVerySlowlyString: {
+      value: 'emits photons very slowly and'
+    },
+    emitsPhotonsQuicklyString: {
+      value: 'emits photons quickly and'
+    },
     emitsPhotonsString: {
       value: 'emits photons'
+    },
+    emitterInObservationWindowString: {
+      value: 'in observation window'
+    },
+    emitterPausedInObservationWindowString: {
+      value: 'paused in observation window'
     },
     aString: {
       value: 'a'
