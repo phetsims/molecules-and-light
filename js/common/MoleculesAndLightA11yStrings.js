@@ -53,7 +53,7 @@ define( require => {
     targetMoleculePatternString: {
       value: '{{photonTarget}} molecule'
     },
-    moleculeBendingPatternString: {
+    absorptionPhaseDescriptionPatternString: {
       value: '{{lightSource}} photon absorbed and bonds of {{photonTarget}} molecule {{excitedRepresentation}}.'
     },
     absorbedString: {
