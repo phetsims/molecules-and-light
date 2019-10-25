@@ -17,11 +17,8 @@ define( require => {
     screenSummaryString: {
       value: 'In the Play Area, you find an observation window that contains a light source and a molecule. You can adjust the rate of photons being emitted at molecule, choose a different molecule, or change light source. From the Control Area you can use buttons to pause/play and step forward what’s happening in the observation window. You can also access details about the light spectrum and reset the sim.'
     },
-    observationWindowDescriptionPatternString: {
-      value: 'In observation window, {{wavelengthName}} light source {{lightOnOffLanguage}} directly at {{an}} {{molecule}} molecule.'
-    },
     dynamicScreenSummaryString: {
-      value: 'Currently, {{playingState}}, {{lightSource}} light source {{emissionRate}} directly at {{photonTarget}} molecule.'
+      value: 'Currently, {{playingState}}, {{lightSource}} light source {{emissionRate}} directly at {{target}}.'
     },
     interactionHintString: {
       value: 'Look for light source slider to play.'
@@ -43,6 +40,54 @@ define( require => {
     },
     emitsPhotonsString: {
       value: 'emits photons'
+    },
+    observationWindowLabelString: {
+      value: 'Observation Window'
+    },
+    photonEmitterDescriptionPatternString: {
+      value: '{{lightSource}} light source {{emissionRate}} directly at {{target}}.'
+    },
+    inactiveAndPassingPhaseDescriptionPatternString: {
+      value: '{{lightSource}} photons passing through {{target}}.'
+    },
+    targetMoleculePatternString: {
+      value: '{{photonTarget}} molecule'
+    },
+    moleculeBendingPatternString: {
+      value: '{{lightSource}} photon absorbed and bonds of {{photonTarget}} molecule {{excitedRepresentation}}.'
+    },
+    absorbedString: {
+      value: 'absorbed'
+    },
+    stretchingString: {
+      value: 'stretching'
+    },
+    contractingString: {
+      value: 'contracting'
+    },
+    bendsUpAndDownString: {
+      value: 'bends up and down'
+    },
+    rotatingClockwiseString: {
+      value: 'rotating clockwise'
+    },
+    rotatingCounterClockwiseString: {
+      value: 'rotating counter clockwise'
+    },
+    startsString: {
+      value: 'starts'
+    },
+    stopsString: {
+      value: 'stops'
+    },
+    startsGlowingString: {
+      value: 'starts glowing'
+    },
+    breaksApartString: {
+      value: 'breaks apart'
+    },
+    emptySpaceString: {
+      value: 'empty space'
     },
     emitterInObservationWindowString: {
       value: 'in observation window'
