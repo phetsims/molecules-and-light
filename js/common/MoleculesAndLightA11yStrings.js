@@ -74,11 +74,11 @@ define( require => {
     rotatingCounterClockwiseString: {
       value: 'rotating counter clockwise'
     },
-    startsString: {
-      value: 'starts'
+    startsRotatingPatternString: {
+      value: 'starts {{rotation}}'
     },
     stopsString: {
-      value: 'stops'
+      value: 'stops {{rotation}}'
     },
     startsGlowingString: {
       value: 'starts glowing'
