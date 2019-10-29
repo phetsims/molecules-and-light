@@ -133,7 +133,7 @@ define( require => {
       modelViewTransform,
       tandem.createTandem( 'observationWindow' )
     );
-    this.playAreaNode.addChild( observationWindow );
+    this.pdomPlayAreaNode.addChild( observationWindow );
 
     // This rectangle hides photons that are outside the observation window.
     // TODO: This rectangle is a temporary workaround that replaces the clipping area in ObservationWindow because of a
@@ -144,11 +144,11 @@ define( require => {
         stroke: '#C5D6E8',
         lineWidth: 8 * FRAME_LINE_WIDTH
       } );
-    this.playAreaNode.addChild( clipRectangle );
+    this.pdomPlayAreaNode.addChild( clipRectangle );
 
     // Create the window frame node that borders the observation window.
     const windowFrameNode = new WindowFrameNode( observationWindow, '#BED0E7', '#4070CE' );
-    this.playAreaNode.addChild( windowFrameNode );
+    this.pdomPlayAreaNode.addChild( windowFrameNode );
 
     // Set positions of the observation window and window frame.
     observationWindow.translate( OBSERVATION_WINDOW_LOCATION );
@@ -177,7 +177,7 @@ define( require => {
       radius: 18,
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
-    this.controlAreaNode.addChild( resetAllButton );
+    this.pdomControlAreaNode.addChild( resetAllButton );
 
     // Add play/pause button.
     const playPauseButton = new PlayPauseButton( photonAbsorptionModel.runningProperty, {
@@ -191,7 +191,7 @@ define( require => {
       a11yPauseDescription: pauseDescriptionString,
       a11yPlayDescription: playDescriptionString
     } );
-    this.controlAreaNode.addChild( playPauseButton );
+    this.pdomControlAreaNode.addChild( playPauseButton );
 
     // Add step button to manually step the animation.
     const stepButton = new StepForwardButton( {
@@ -208,7 +208,7 @@ define( require => {
       descriptionContent: stepButtonDescriptionString,
       appendDescription: true
     } );
-    this.controlAreaNode.addChild( stepButton );
+    this.pdomControlAreaNode.addChild( stepButton );
 
     // Content for the window that displays the EM spectrum upon request.  Constructed once here so that time is not
     // waisted drawing a new spectrum window every time the user presses the 'Show Light Spectrum' button.
@@ -261,11 +261,11 @@ define( require => {
     showLightSpectrumButton.setAccessibleAttribute( 'aria-haspopup', true );
 
     showLightSpectrumButton.center = ( new Vector2( moleculeControlPanel.centerX, photonEmissionControlPanel.centerY - 13 ) );
-    this.controlAreaNode.addChild( showLightSpectrumButton );
+    this.pdomControlAreaNode.addChild( showLightSpectrumButton );
 
     // Add the nodes in the order necessary for correct layering.
-    this.playAreaNode.addChild( photonEmissionControlPanel );
-    this.playAreaNode.addChild( moleculeControlPanel );
+    this.pdomPlayAreaNode.addChild( photonEmissionControlPanel );
+    this.pdomPlayAreaNode.addChild( moleculeControlPanel );
 
     //-----------------------------------------------------------------------------------------------------------------
     // sound generation
