@@ -56,6 +56,9 @@ define( require => {
     absorptionPhaseDescriptionPatternString: {
       value: '{{lightSource}} photon absorbed and bonds of {{photonTarget}} molecule {{excitedRepresentation}}.'
     },
+    breakApartPhaseDescriptionPatternString: {
+      value: '{{lightSource}} photon absorbed and {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}.'
+    },
     absorbedString: {
       value: 'absorbed'
     },
@@ -151,6 +154,33 @@ define( require => {
     },
     wavelengthSelectionAlertPatternString: {
       value: '{{wavelength}} light source now in observation window.'
+    },
+    carbonMonoxideString: {
+      value: 'Carbon Monoxide'
+    },
+    nitrogenString: {
+      value: 'Nitrogen'
+    },
+    oxygenString: {
+      value: 'Oxygen'
+    },
+    diatomicOxygenString: {
+      value: 'Diatomic Oxygen'
+    },
+    carbonDioxideString: {
+      value: 'Carbon Dioxide'
+    },
+    nitrogenDioxideString: {
+      value: 'Nitrogen Dioxide'
+    },
+    waterString: {
+      value: 'Water'
+    },
+    ozoneString: {
+      value: 'Ozone'
+    },
+    methaneString: {
+      value: 'Methane'
     }
   };
 
