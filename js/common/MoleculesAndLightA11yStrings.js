@@ -60,7 +60,7 @@ define( require => {
       value: '{{lightSource}} photon absorbed and {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}.'
     },
     emissionPhaseDescriptionPatternString: {
-      value: '{{lightSource}} molecule stops {{excitedRepresentation}} and emits photon {{direction}}.'
+      value: '{{photonTarget}} molecule stops {{excitedRepresentation}} and emits absorbed {{lightSource}} photon {{direction}}.'
     },
     absorbedString: {
       value: 'absorbed'
