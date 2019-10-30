@@ -193,6 +193,30 @@ define( require => {
     },
     methaneString: {
       value: 'Methane'
+    },
+    linearString: {
+      value: 'linear'
+    },
+    bentString: {
+      value: 'bent'
+    },
+    tetrahedralString: {
+      value: 'tetrahderal'
+    },
+    diatomicString: {
+      value: 'diatomic'
+    },
+    geometryLabelPatternString: {
+      value: 'This molecule has {{geometry}} geometry.'
+    },
+    linearGeometryDescriptionString: {
+      value: 'Linear, molecule with a central atom bonded to one or two other atoms forming a straight line. Bond angle is 180 degrees.'
+    },
+    bentGeometryDescriptionString: {
+      value: 'Bent, molecule with a central atom bonded to two other atoms that form an angle. Bond angle varies below 120 degrees.'
+    },
+    tetrahedralGeometryDescriptionString: {
+      value: 'Tetrahedral, molecule with a central atom bonded to four other atoms forming a tetrahedron with 109.5° angles between them, like four-sided dice.'
     }
   };
 
