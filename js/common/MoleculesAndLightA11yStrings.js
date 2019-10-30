@@ -122,20 +122,20 @@ define( require => {
     emissionSliderWavelengthRatePatterString: {
       value: '{{wavelength}} photon rate, {{frequency}}'
     },
-    lightSourceString: {
-      value: 'Light Source'
-    },
     lightSourceDescriptionString: {
       value: 'Change light source in observation window.'
     },
     moleculesString: {
       value: 'Molecules'
     },
-    moleculesPanelDescriptionString: {
-      value: 'Place molecule in front of light source.'
+    moleculesRadioButtonHelpTextString: {
+      value: 'Choose molecule and observe interactions with light source.'
     },
     pauseDescriptionString: {
       value: 'Pause what is happening in the observation window.'
+    },
+    moleculeButtonLabelPatternString: {
+      value: '{{molecularName}}, {{molecularFormula}}, {{geometryTitle}}'
     },
     playDescriptionString: {
       value: 'Resume what is happening in the observation window'
@@ -202,6 +202,18 @@ define( require => {
     },
     diatomicString: {
       value: 'diatomic'
+    },
+    linearTitleString: {
+      value: 'Linear'
+    },
+    bentTitleString: {
+      value: 'Bent'
+    },
+    tetrahedralTitleString: {
+      value: 'Tetrahderal'
+    },
+    diatomicTitleString: {
+      value: 'Diatomic'
     },
     geometryLabelPatternString: {
       value: 'This molecule has {{geometry}} geometry.'
