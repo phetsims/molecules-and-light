@@ -59,6 +59,12 @@ define( require => {
     breakApartPhaseDescriptionPatternString: {
       value: '{{lightSource}} photon absorbed and {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}.'
     },
+    emissionPhaseDescriptionPatternString: {
+      value: '{{photonTarget}} molecule stops {{excitedRepresentation}} and emits absorbed {{lightSource}} photon {{direction}}.'
+    },
+    moleculesOutOfViewPatternString: {
+      value: '{{firstMolecule}} and {{secondMolecule}} out of view. Return molecule to make more observations.'
+    },
     absorbedString: {
       value: 'absorbed'
     },
@@ -67,6 +73,9 @@ define( require => {
     },
     contractingString: {
       value: 'contracting'
+    },
+    bendingString: {
+      value: 'bending'
     },
     bendsUpAndDownString: {
       value: 'bends up and down'
@@ -85,6 +94,9 @@ define( require => {
     },
     startsGlowingString: {
       value: 'starts glowing'
+    },
+    glowingString: {
+      value: 'glowing'
     },
     breaksApartString: {
       value: 'breaks apart'
@@ -181,6 +193,30 @@ define( require => {
     },
     methaneString: {
       value: 'Methane'
+    },
+    linearString: {
+      value: 'linear'
+    },
+    bentString: {
+      value: 'bent'
+    },
+    tetrahedralString: {
+      value: 'tetrahderal'
+    },
+    diatomicString: {
+      value: 'diatomic'
+    },
+    geometryLabelPatternString: {
+      value: 'This molecule has {{geometry}} geometry.'
+    },
+    linearGeometryDescriptionString: {
+      value: 'Linear, molecule with a central atom bonded to one or two other atoms forming a straight line. Bond angle is 180 degrees.'
+    },
+    bentGeometryDescriptionString: {
+      value: 'Bent, molecule with a central atom bonded to two other atoms that form an angle. Bond angle varies below 120 degrees.'
+    },
+    tetrahedralGeometryDescriptionString: {
+      value: 'Tetrahedral, molecule with a central atom bonded to four other atoms forming a tetrahedron with 109.5° angles between them, like four-sided dice.'
     }
   };
 

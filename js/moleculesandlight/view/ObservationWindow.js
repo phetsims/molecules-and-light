@@ -12,25 +12,22 @@ define( require => {
   // modules
   // const Shape = require( 'KITE/Shape' );  // See below for comment on temporary replacement of clipArea shape.
   const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const EmissionRateControlSliderNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/EmissionRateControlSliderNode' );
-  const MoleculeNameMap = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/MoleculeNameMap' );
   const inherit = require( 'PHET_CORE/inherit' );
   const MoleculeNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/MoleculeNode' );
   const moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
   const MoleculesAndLightA11yStrings = require( 'MOLECULES_AND_LIGHT/common/MoleculesAndLightA11yStrings' );
+  const MoleculeUtils = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/MoleculeUtils' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PhotonEmitterNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/PhotonEmitterNode' );
   const PhotonNode = require( 'MOLECULES_AND_LIGHT/photon-absorption/view/PhotonNode' );
-  const PhotonTarget = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/PhotonTarget' );
   const platform = require( 'PHET_CORE/platform' );
-  const Property = require( 'AXON/Property' );
+  const ObservationWindowDescriber = require( 'MOLECULES_AND_LIGHT/moleculesandlight/view/ObservationWindowDescriber' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
-  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Vector2 = require( 'DOT/Vector2' );
-  const WavelengthConstants = require( 'MOLECULES_AND_LIGHT/photon-absorption/model/WavelengthConstants' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   // strings
   // const molecularNamePatternString = require( 'string!MOLECULES_AND_LIGHT/molecularNamePattern' );
@@ -40,19 +37,7 @@ define( require => {
   const returnMoleculeString = MoleculesAndLightA11yStrings.returnMoleculeString.value;
   const observationWindowLabelString = MoleculesAndLightA11yStrings.observationWindowLabelString.value;
   const returnMoleculeHelpString = MoleculesAndLightA11yStrings.returnMoleculeHelpString.value;
-  const emptySpaceString = MoleculesAndLightA11yStrings.emptySpaceString.value;
-  const photonEmitterDescriptionPatternString = MoleculesAndLightA11yStrings.photonEmitterDescriptionPatternString.value;
-  const targetMoleculePatternString = MoleculesAndLightA11yStrings.targetMoleculePatternString.value;
-  const inactiveAndPassingPhaseDescriptionPatternString = MoleculesAndLightA11yStrings.inactiveAndPassingPhaseDescriptionPatternString.value;
-  const absorptionPhaseDescriptionPatternString = MoleculesAndLightA11yStrings.absorptionPhaseDescriptionPatternString.value;
-  const stretchingString = MoleculesAndLightA11yStrings.stretchingString.value;
-  const contractingString = MoleculesAndLightA11yStrings.contractingString.value;
-  const bendsUpAndDownString = MoleculesAndLightA11yStrings.bendsUpAndDownString.value;
-  const startsRotatingPatternString = MoleculesAndLightA11yStrings.startsRotatingPatternString.value;
-  const rotatingCounterClockwiseString = MoleculesAndLightA11yStrings.rotatingCounterClockwiseString.value;
-  const rotatingClockwiseString = MoleculesAndLightA11yStrings. rotatingClockwiseString.value;
-  const startsGlowingString = MoleculesAndLightA11yStrings.startsGlowingString.value;
-  const breakApartPhaseDescriptionPatternString = MoleculesAndLightA11yStrings.breakApartPhaseDescriptionPatternString.value;
+  const geometryLabelPatternString = MoleculesAndLightA11yStrings.geometryLabelPatternString.value;
 
   // constants
   const PHOTON_EMITTER_WIDTH = 125;
@@ -220,49 +205,38 @@ define( require => {
       self.returnMoleculeButtonNode.visible = self.returnMoleculeButtonVisibleProperty.get();
     } );
 
+    // PDOM - generates descriptions for the target molecule
+    const describer = new ObservationWindowDescriber( photonAbsorptionModel, this.modelViewTransform );
+
     // PDOM - list that describes the state of contents in the Observation Window
     const phaseItem = new Node( { tagName: 'li' } );
-    const geometryItem = new Node( { tagName: 'li' } );
-    const geometryDefinitionItem = new Node( { tagName: 'li' } );
+    const geometryLabelItem = new Node( { tagName: 'li' } );
+    const geometryDescriptionItem = new Node( { tagName: 'li' } );
+
+    // PDOM - attach listeners that will describe the initial phase of photons passing through the molecule
+    describer.attachInitialPhaseDescriptionListeners( phaseItem );
+
+    // PDOM - when a new molecule is added to the observation window, add listeners that will generate descriptions
+    // for its state - also add to the initial active molecule
+    photonAbsorptionModel.activeMolecules.addItemAddedListener( molecule => {
+      describer.attachAbsorptionDescriptionListeners( molecule, phaseItem );
+    } );
+    describer.attachAbsorptionDescriptionListeners( photonAbsorptionModel.targetMolecule, phaseItem );
+
+    // PDOM - update geometry descriptions when target changes
+    photonAbsorptionModel.photonTargetProperty.link( target => {
+      const targetMolecule = photonAbsorptionModel.targetMolecule;
+
+      geometryLabelItem.accessibleName = StringUtils.fillIn( geometryLabelPatternString, {
+        geometry: MoleculeUtils.getGeometryLabel( targetMolecule )
+      } );
+      geometryDescriptionItem.accessibleName = MoleculeUtils.getGeometryDescription( targetMolecule );
+    } );
 
     const descriptionList = new Node( {
-      children: [ phaseItem, geometryItem, geometryDefinitionItem ]
+      children: [ phaseItem, geometryLabelItem, geometryDescriptionItem ]
     } );
     this.addChild( descriptionList );
-
-    Property.multilink(
-      [ photonAbsorptionModel.photonWavelengthProperty, photonAbsorptionModel.photonTargetProperty ], ( photonWavelength, photonTarget ) => {
-        phaseItem.accessibleName = this.getInitialPhaseDescription( photonAbsorptionModel.emissionFrequencyProperty.get(), photonWavelength, photonTarget );
-      }
-    );
-
-    photonAbsorptionModel.emissionFrequencyProperty.link( ( emissionFrequency, oldFrequency ) => {
-      if ( emissionFrequency === 0 || oldFrequency === 0 ) {
-        phaseItem.accessibleName = this.getInitialPhaseDescription( emissionFrequency, photonAbsorptionModel.photonWavelengthProperty.get(), photonAbsorptionModel.photonTargetProperty.get() );
-      }
-    } );
-
-    // when the photon target changes, add listeners to the new target molecule that will update the phase description
-    photonAbsorptionModel.photonTargetProperty.link( photonTarget => {
-      const newMolecule = photonAbsorptionModel.targetMolecule;
-
-      // TODO: IMplement these
-      newMolecule.currentVibrationRadiansProperty.lazyLink( vibrationRadians => {
-        phaseItem.accessibleName = this.getVibrationPhaseDescription( vibrationRadians );
-      } );
-
-      newMolecule.rotatingProperty.lazyLink( rotating => {
-        phaseItem.accessibleName = this.getRotationPhaseDescription();
-      } );
-
-      newMolecule.highElectronicEnergyStateProperty.lazyLink( highEnergy => {
-        phaseItem.accessibleName = this.getHighElectronicEnergyPhaseDescription();
-      } );
-
-      newMolecule.brokeApartEmitter.addListener( ( moleculeA, moleculeB ) => {
-        phaseItem.accessibleName = this.getBreakApartPhaseDescription( moleculeA, moleculeB );
-      } );
-    } );
   }
 
   moleculesAndLight.register( 'ObservationWindow', ObservationWindow );
@@ -306,155 +280,6 @@ define( require => {
       for ( let i = 0; i < photonsToRemove.length; i++ ) {
         photonsToRemove[ i ].dispose();
       }
-    },
-
-    /**
-     * Get the description of photon/molecule phase for initial interaction. This will be when photons
-     * start to emit and are passing through the molecule. Once a photon is absorbed a new description strategy begins
-     * where we describe the absorption.
-     *
-     * @param {number} emissionFrequency
-     * @param {number} photonWavelength
-     * @param {PhotonTarget} photonTarget
-     * @returns {string}
-     */
-    getInitialPhaseDescription: function( emissionFrequency, photonWavelength, photonTarget ) {
-      const targetMolecule = this.photonAbsorptionModel.targetMolecule;
-
-      const lightSourceString = WavelengthConstants.getLightSourceName( photonWavelength );
-      const emissionRateString = EmissionRateControlSliderNode.getEmissionFrequencyDescription( emissionFrequency );
-
-      let targetString = null;
-      if ( targetMolecule ) {
-        targetString = StringUtils.fillIn( targetMoleculePatternString, {
-          photonTarget: PhotonTarget.getMoleculeName( photonTarget )
-        } );
-      }
-      else {
-        targetString = emptySpaceString;
-      }
-
-      if ( emissionFrequency === 0 ) {
-
-        // no photons moving, indicate to the user to begin firing photons
-        return StringUtils.fillIn( photonEmitterDescriptionPatternString, {
-          lightSource: lightSourceString,
-          emissionRate: emissionRateString,
-          target: targetString
-        } );
-      }
-      else {
-        return StringUtils.fillIn( inactiveAndPassingPhaseDescriptionPatternString, {
-          lightSource: lightSourceString,
-          target: targetString
-        } );
-      }
-    },
-
-    /**
-     * Gets a description of the vibration representation of absorption. Dependent on whether the molecule is
-     * linear/bent and current angle of vibration. Returns something like
-     *
-     * "Infrared photon absorbed and bonds of carbon monoxide molecule stretching." or
-     * "Infrared absorbed and bonds of ozone molecule bending up and down."
-     *
-     * @param {number} vibrationRadians
-     * @returns {string}
-     */
-    getVibrationPhaseDescription: function( vibrationRadians ) {
-      let descriptionString = '';
-
-      const model = this.photonAbsorptionModel;
-      const targetMolecule = model.targetMolecule;
-      const lightSourceString = WavelengthConstants.getLightSourceName( model.photonWavelengthProperty.get() );
-      const photonTargetString = PhotonTarget.getMoleculeName( model.photonTargetProperty.get() );
-
-      if ( targetMolecule.atoms.length <= 2 ) {
-
-        // vibration for molecules with linear geometry represented by expanding/contracting the molecule
-
-        // more displacement with -sin( vibrationRadians ) and so when the slope of that function is negative
-        // (derivative of sin is cos) the atoms are expanding
-        const stretching = Math.cos( vibrationRadians ) < 0;
-
-        descriptionString = StringUtils.fillIn( absorptionPhaseDescriptionPatternString, {
-          lightSource: lightSourceString,
-          photonTarget: photonTargetString,
-          excitedRepresentation: stretching ? stretchingString : contractingString
-        } );
-      }
-      else {
-
-        // more than atoms have non-linear geometry
-        descriptionString = StringUtils.fillIn( absorptionPhaseDescriptionPatternString, {
-          lightSource: lightSourceString,
-          photonTarget: photonTargetString,
-          excitedRepresentation: bendsUpAndDownString
-        } );
-      }
-
-      return descriptionString;
-    },
-
-    getRotationPhaseDescription: function() {
-      const model = this.photonAbsorptionModel;
-      const targetMolecule = model.targetMolecule;
-      const lightSourceString = WavelengthConstants.getLightSourceName( model.photonWavelengthProperty.get() );
-      const photonTargetString = PhotonTarget.getMoleculeName( model.photonTargetProperty.get() );
-
-      const rotationString = targetMolecule.rotationDirectionClockwiseProperty.get() ? rotatingClockwiseString : rotatingCounterClockwiseString;
-      const startsRotatingString = StringUtils.fillIn( startsRotatingPatternString, {
-        rotation: rotationString
-      } );
-
-      return StringUtils.fillIn( absorptionPhaseDescriptionPatternString, {
-        lightSource: lightSourceString,
-        photonTarget: photonTargetString,
-        excitedRepresentation: startsRotatingString
-      } );
-    },
-
-    /**
-     * Get a string the describes the molecule when it starts to glow from its high electronic energy state
-     * representation after absorption. Will return a string like
-     * "‪Visible‬ photon absorbed and bonds of ‪Nitrogen Dioxide‬ molecule starts glowing."
-     * @private
-     *
-     * @returns {string}
-     */
-    getHighElectronicEnergyPhaseDescription: function() {
-      const model = this.photonAbsorptionModel;
-      const lightSourceString = WavelengthConstants.getLightSourceName( model.photonWavelengthProperty.get() );
-      const photonTargetString = PhotonTarget.getMoleculeName( model.photonTargetProperty.get() );
-
-      return StringUtils.fillIn( absorptionPhaseDescriptionPatternString, {
-        lightSource: lightSourceString,
-        photonTarget: photonTargetString,
-        excitedRepresentation: startsGlowingString
-      } );
-    },
-
-    /**
-     * Returns a string that describes the molecule after it breaks apart into two other molecules. Will return
-     * a string like
-     * "Ultraviolet photon absorbed and Ozone molecule breaks apart into O2 and O."
-     *
-     * @returns {string}
-     */
-    getBreakApartPhaseDescription: function( firstMolecule, secondMolecule ) {
-      const model = this.photonAbsorptionModel;
-      const lightSourceString = WavelengthConstants.getLightSourceName( model.photonWavelengthProperty.get() );
-      const photonTargetString = PhotonTarget.getMoleculeName( model.photonTargetProperty.get() );
-
-      const firstMolecularFormula = MoleculeNameMap.getMolecularFormula( firstMolecule );
-      const secondMolecularFormula = MoleculeNameMap.getMolecularFormula( secondMolecule );
-
-      return StringUtils.fillIn( breakApartPhaseDescriptionPatternString, {
-        lightSource: lightSourceString,
-        photonTarget: photonTargetString,
-        firstMolecule: firstMolecularFormula,
-        secondMolecule: secondMolecularFormula
-      } );
     },
 
     getGeometryDescription: function() {},
