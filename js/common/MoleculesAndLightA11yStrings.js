@@ -23,8 +23,8 @@ define( require => {
     interactionHintString: {
       value: 'Look for light source slider to play.'
     },
-    lightSourceSliderString: {
-      value: 'Light Source Slider'
+    lightSourceString: {
+      value: 'Light Source'
     },
     isOffAndPointsString: {
       value: 'is off and points'
