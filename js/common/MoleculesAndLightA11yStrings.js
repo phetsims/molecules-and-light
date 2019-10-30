@@ -158,9 +158,6 @@ define( require => {
     returnMoleculeString: {
       value: 'Return Molecule'
     },
-    returnMoleculeHelpString: {
-      value: 'Returns a molecule.'
-    },
     moleculeSelectionAlertPatternString: {
       value: '{{target}} molecule now in observation window.'
     },
