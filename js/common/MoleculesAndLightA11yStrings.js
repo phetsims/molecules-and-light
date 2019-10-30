@@ -59,6 +59,9 @@ define( require => {
     breakApartPhaseDescriptionPatternString: {
       value: '{{lightSource}} photon absorbed and {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}.'
     },
+    emissionPhaseDescriptionPatternString: {
+      value: '{{lightSource}} molecule stops {{excitedRepresentation}} and emits photon {{direction}}.'
+    },
     absorbedString: {
       value: 'absorbed'
     },
@@ -67,6 +70,9 @@ define( require => {
     },
     contractingString: {
       value: 'contracting'
+    },
+    bendingString: {
+      value: 'bending'
     },
     bendsUpAndDownString: {
       value: 'bends up and down'
@@ -85,6 +91,9 @@ define( require => {
     },
     startsGlowingString: {
       value: 'starts glowing'
+    },
+    glowingString: {
+      value: 'glowing'
     },
     breaksApartString: {
       value: 'breaks apart'
