@@ -23,8 +23,8 @@ define( require => {
     interactionHintString: {
       value: 'Look for light source slider to play.'
     },
-    lightSourceSliderString: {
-      value: 'Light Source Slider'
+    lightSourceString: {
+      value: 'Light Source'
     },
     isOffAndPointsString: {
       value: 'is off and points'
@@ -117,13 +117,10 @@ define( require => {
       value: 'an'
     },
     emissionSliderDescriptionString: {
-      value: 'Adjust rate at which photons are released.'
+      value: 'Adjust to emit photons at different rates.'
     },
     emissionSliderWavelengthRatePatterString: {
       value: '{{wavelength}} photon rate, {{frequency}}'
-    },
-    lightSourceString: {
-      value: 'Light Source'
     },
     lightSourceDescriptionString: {
       value: 'Change light source in observation window.'
@@ -131,11 +128,14 @@ define( require => {
     moleculesString: {
       value: 'Molecules'
     },
-    moleculesPanelDescriptionString: {
-      value: 'Place molecule in front of light source.'
+    moleculesRadioButtonHelpTextString: {
+      value: 'Choose molecule and observe interactions with light source.'
     },
     pauseDescriptionString: {
       value: 'Pause what is happening in the observation window.'
+    },
+    moleculeButtonLabelPatternString: {
+      value: '{{molecularName}}, {{molecularFormula}}, {{geometryTitle}}'
     },
     playDescriptionString: {
       value: 'Resume what is happening in the observation window'
@@ -157,9 +157,6 @@ define( require => {
     },
     returnMoleculeString: {
       value: 'Return Molecule'
-    },
-    returnMoleculeHelpString: {
-      value: 'Returns a molecule.'
     },
     moleculeSelectionAlertPatternString: {
       value: '{{target}} molecule now in observation window.'
@@ -205,6 +202,18 @@ define( require => {
     },
     diatomicString: {
       value: 'diatomic'
+    },
+    linearTitleString: {
+      value: 'Linear'
+    },
+    bentTitleString: {
+      value: 'Bent'
+    },
+    tetrahedralTitleString: {
+      value: 'Tetrahderal'
+    },
+    diatomicTitleString: {
+      value: 'Diatomic'
     },
     geometryLabelPatternString: {
       value: 'This molecule has {{geometry}} geometry.'
