@@ -122,8 +122,8 @@ define( require => {
     emissionSliderWavelengthRatePatterString: {
       value: '{{wavelength}} photon rate, {{frequency}}'
     },
-    lightSourceDescriptionString: {
-      value: 'Change light source in observation window.'
+    lightSourceRadioButtonHelpTextString: {
+      value: 'Choose light source, ordered low to high energy, and observe effects on molecule.'
     },
     moleculesString: {
       value: 'Molecules'
