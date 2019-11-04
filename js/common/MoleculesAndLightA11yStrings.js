@@ -122,8 +122,8 @@ define( require => {
     emissionSliderWavelengthRatePatterString: {
       value: '{{wavelength}} photon rate, {{frequency}}'
     },
-    lightSourceDescriptionString: {
-      value: 'Change light source in observation window.'
+    lightSourceRadioButtonHelpTextString: {
+      value: 'Choose light source, ordered low to high energy, and observe effects on molecule.'
     },
     moleculesString: {
       value: 'Molecules'
@@ -131,26 +131,20 @@ define( require => {
     moleculesRadioButtonHelpTextString: {
       value: 'Choose molecule and observe interactions with light source.'
     },
-    pauseDescriptionString: {
-      value: 'Pause what is happening in the observation window.'
-    },
     moleculeButtonLabelPatternString: {
       value: '{{molecularName}}, {{molecularFormula}}, {{geometryTitle}}'
-    },
-    playDescriptionString: {
-      value: 'Resume what is happening in the observation window'
     },
     stepButtonLabelString: {
       value: 'Next Frame'
     },
     stepButtonDescriptionString: {
-      value: 'Make careful observations, one frame at a time.'
+      value: 'Pause, play, or step forward in time while paused.'
     },
     spectrumButtonLabelString: {
-      value: 'Show light spectrum'
+      value: 'Show Light Spectrum'
     },
     spectrumButtonDescriptionString: {
-      value: 'Details about how frequncy, energy, and wavelength change across teh light spectrum.'
+      value: 'See details of full light spectrum.'
     },
     spectrumWindowDescriptionString: {
       value: 'The show light spectrum button opens a window displaying the EM spectrum with the values of the frequency and wavelength shown. Additional arrows show the direction of increasing frequency/energy and wavelength. A sketch of a wave with decreasing wavelength/increasing frequency is also provided.'
