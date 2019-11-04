@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.5.0-soundDesignProto01.4 Mon Nov 04 2019 12:51:17 GMT-0700 (Mountain Standard Time)",
+  "comment": "# molecules-and-light 1.5.0-soundDesignProto01.5 Mon Nov 04 2019 13:08:18 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "master"
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "8d61fe37d4512a6230462416d818e9c21f171b7c",
+    "sha": "aa97d33a2629b2f3222c9861e9abe8f0a66220ab",
     "branch": "soundDesignProto01"
   },
   "nitroglycerin": {
@@ -65,16 +65,16 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "02137d63ac17265e5916f04f79c4f180099a92df",
-    "branch": "sounds-in-common-code"
+    "sha": "cbabc9f07db8640661a873a89e953446ab2abfbf",
+    "branch": "master"
   },
   "sherpa": {
     "sha": "00e1bdf99b339aa49c284b340cd11148a4377404",
     "branch": "master"
   },
   "sun": {
-    "sha": "140786d44b7e92b7a885729e2a15cc7f077493ae",
-    "branch": "sounds-in-common-code"
+    "sha": "9f64e127973ca542a5fefe8cf00bc0fc31a466a2",
+    "branch": "master"
   },
   "tambo": {
     "sha": "24a1c1f97c7c5b54ddcbe0b5ba081309d2061a45",
