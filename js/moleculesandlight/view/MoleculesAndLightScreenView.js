@@ -56,16 +56,11 @@ define( require => {
   const breakApartSoundV2Info = require( 'sound!MOLECULES_AND_LIGHT/break-apart-v2.mp3' );
   const moleculeEnergizedLoopInfo = require( 'sound!MOLECULES_AND_LIGHT/glow-loop-higher.mp3' );
   const rotateSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/rotate-loop.mp3' );
-  const vibrateOption1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-001.mp3' );
   const vibrateOption2SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-002.mp3' );
-  const vibrateOption3SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-003.mp3' );
+  const vibrateOption2HigherSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-002-higher.mp3' );
+  const vibrateOption2SaturatedEQSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-002-saturated-eq.mp3' );
   const vibrateOption4SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-004.mp3' );
-  const vibrateOption5SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-005.mp3' );
-  const vibrateOption6SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-006.mp3' );
   const vibrateOption7SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-007.mp3' );
-  const vibrateOption8SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-008.mp3' );
-  const vibrateOption9SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-009.mp3' );
-  const vibrateOption10SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibrate-option-010.mp3' );
   const microwavePhotonV1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v1-4th-interval-000.mp3' );
   const infraredPhotonV1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v1-4th-interval-001.mp3' );
   const visiblePhotonV1SoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-v1-4th-interval-002.mp3' );
@@ -102,6 +97,9 @@ define( require => {
 
   // volume of photon emission sounds
   const PHOTON_SOUND_OUTPUT_LEVEL = 0.1;
+
+  // X position at which the lamp emission sound is played, empirically determined
+  const PLAY_LAMP_EMISSION_X_POSITION = -1400;
 
   /**
    * Constructor for the screen view of Molecules and Light.
@@ -271,10 +269,11 @@ define( require => {
     // sound to play when molecule becomes "energized", which is depicted as glowing in the view
     const moleculeEnergizedLoop = new SoundClip( moleculeEnergizedLoopInfo, {
       loop: true,
-      initialOutputLevel: 0.1
+      initialOutputLevel: 0.1,
+      enableControlProperties: [ photonAbsorptionModel.runningProperty ]
     } );
     soundManager.addSoundGenerator( moleculeEnergizedLoop );
-    const moleculeEnergizedSoundPlayer = moleculeEnergized => {
+    const updateMoleculeEnergizedSound = moleculeEnergized => {
       if ( moleculeEnergized ) {
         moleculeEnergizedLoop.play();
       }
@@ -291,29 +290,33 @@ define( require => {
     };
 
     // molecule rotating sound
-    const rotateSound = new SoundClip( rotateSoundInfo, { initialOutputLevel: 0.05, loop: true } );
+    const rotateSound = new SoundClip( rotateSoundInfo, {
+      initialOutputLevel: 0.05,
+      loop: true,
+      enableControlProperties: [ photonAbsorptionModel.runningProperty ]
+    } );
     soundManager.addSoundGenerator( rotateSound );
-    const rotateSoundPlayer = rotating => {
+    const updateRotationSound = rotating => {
       rotating ? rotateSound.play() : rotateSound.stop();
     };
 
     // molecule vibration sounds
+    const moleculeVibrationSoundClipOptions = {
+      initialOutputLevel: 0.2,
+      loop: true,
+      enableControlProperties: [ photonAbsorptionModel.runningProperty ]
+    };
     const moleculeVibrationSoundClips = [
-      new SoundClip( vibrateOption1SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
-      new SoundClip( vibrateOption2SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
-      new SoundClip( vibrateOption3SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
-      new SoundClip( vibrateOption4SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
-      new SoundClip( vibrateOption5SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
-      new SoundClip( vibrateOption6SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
-      new SoundClip( vibrateOption7SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
-      new SoundClip( vibrateOption8SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
-      new SoundClip( vibrateOption9SoundInfo, { initialOutputLevel: 0.2, loop: true } ),
-      new SoundClip( vibrateOption10SoundInfo, { initialOutputLevel: 0.2, loop: true } )
+      new SoundClip( vibrateOption2SoundInfo, moleculeVibrationSoundClipOptions ),
+      new SoundClip( vibrateOption2HigherSoundInfo, moleculeVibrationSoundClipOptions ),
+      new SoundClip( vibrateOption2SaturatedEQSoundInfo, moleculeVibrationSoundClipOptions ),
+      new SoundClip( vibrateOption4SoundInfo, moleculeVibrationSoundClipOptions ),
+      new SoundClip( vibrateOption7SoundInfo, moleculeVibrationSoundClipOptions )
     ];
     moleculeVibrationSoundClips.forEach( soundClip => {
       soundManager.addSoundGenerator( soundClip );
     } );
-    const vibrationSoundPlayer = vibrating => {
+    const updateVibrationSound = vibrating => {
       const indexToPlay = malSoundOptionsDialogContent.vibrationSoundProperty.value - 1;
       if ( vibrating ) {
 
@@ -340,10 +343,10 @@ define( require => {
 
     // function that adds all of the listeners involved in creating sound
     const addSoundPlayersToMolecule = molecule => {
-      molecule.highElectronicEnergyStateProperty.link( moleculeEnergizedSoundPlayer );
+      molecule.highElectronicEnergyStateProperty.link( updateMoleculeEnergizedSound );
       molecule.brokeApartEmitter.addListener( breakApartSoundPlayer );
-      molecule.rotatingProperty.link( rotateSoundPlayer );
-      molecule.vibratingProperty.link( vibrationSoundPlayer );
+      molecule.rotatingProperty.link( updateRotationSound );
+      molecule.vibratingProperty.link( updateVibrationSound );
     };
 
     // add listeners to molecules for playing the sounds
@@ -352,17 +355,17 @@ define( require => {
 
     // remove listeners when the molecules go away
     photonAbsorptionModel.activeMolecules.addItemRemovedListener( function( removedMolecule ) {
-      if ( removedMolecule.highElectronicEnergyStateProperty.hasListener( moleculeEnergizedSoundPlayer ) ) {
-        removedMolecule.highElectronicEnergyStateProperty.unlink( moleculeEnergizedSoundPlayer );
+      if ( removedMolecule.highElectronicEnergyStateProperty.hasListener( updateMoleculeEnergizedSound ) ) {
+        removedMolecule.highElectronicEnergyStateProperty.unlink( updateMoleculeEnergizedSound );
       }
       if ( removedMolecule.brokeApartEmitter.hasListener( breakApartSoundPlayer ) ) {
         removedMolecule.brokeApartEmitter.removeListener( breakApartSoundPlayer );
       }
-      if ( removedMolecule.rotatingProperty.hasListener( rotateSoundPlayer ) ) {
-        removedMolecule.rotatingProperty.unlink( rotateSoundPlayer );
+      if ( removedMolecule.rotatingProperty.hasListener( updateRotationSound ) ) {
+        removedMolecule.rotatingProperty.unlink( updateRotationSound );
       }
-      if ( removedMolecule.vibratingProperty.hasListener( vibrationSoundPlayer ) ) {
-        removedMolecule.vibratingProperty.unlink( vibrationSoundPlayer );
+      if ( removedMolecule.vibratingProperty.hasListener( updateVibrationSound ) ) {
+        removedMolecule.vibratingProperty.unlink( updateVibrationSound );
       }
     } );
 
@@ -396,19 +399,27 @@ define( require => {
       } );
     } );
     photonAbsorptionModel.photons.addItemAddedListener( photon => {
-      let soundSetIndex;
+      const soundClipIndex = ORDERED_WAVELENGTHS.indexOf( photon.wavelength );
       if ( photon.locationProperty.value.x < 0 ) {
 
         // photon was emitted from lamp, use the initial emission sound
-        soundSetIndex = malSoundOptionsDialogContent.photonInitialEmissionSoundSetProperty.value - 1;
+        // soundSetIndex = malSoundOptionsDialogContent.photonInitialEmissionSoundSetProperty.value - 1;
+
+        const playEmitFromLampSound = position => {
+          if ( position.x >= PLAY_LAMP_EMISSION_X_POSITION ) {
+            const soundSetIndex = malSoundOptionsDialogContent.photonInitialEmissionSoundSetProperty.value - 1;
+            photonEmissionSoundPlayers[ soundSetIndex ][ soundClipIndex ].play();
+            photon.locationProperty.unlink( playEmitFromLampSound );
+          }
+        };
+        photon.locationProperty.link( playEmitFromLampSound );
       }
       else {
 
         // photon was emitted from lamp, use the secondary emission sound
-        soundSetIndex = malSoundOptionsDialogContent.photonSecondaryEmissionSoundSetProperty.value - 1;
+        const soundSetIndex = malSoundOptionsDialogContent.photonSecondaryEmissionSoundSetProperty.value - 1;
+        photonEmissionSoundPlayers[ soundSetIndex ][ soundClipIndex ].play();
       }
-      const soundClipIndex = ORDERED_WAVELENGTHS.indexOf( photon.wavelength );
-      photonEmissionSoundPlayers[ soundSetIndex ][ soundClipIndex ].play();
     } );
   }
 

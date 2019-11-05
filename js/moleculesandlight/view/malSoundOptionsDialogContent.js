@@ -42,7 +42,7 @@ define( require => {
       // @public (read-only)
       this.photonInitialEmissionSoundSetProperty = new NumberProperty( 3 );
       this.photonSecondaryEmissionSoundSetProperty = new NumberProperty( 2 );
-      this.vibrationSoundProperty = new NumberProperty( 1 );
+      this.vibrationSoundProperty = new NumberProperty( 2 );
 
       // @private {Node} - dialog content, created when requested, see explanation below
       this.dialogContent = null;
@@ -93,7 +93,7 @@ define( require => {
         // sound selection for molecule vibration
         const vibrationSoundRadioButtonGroup = new VerticalAquaRadioButtonGroup(
           this.vibrationSoundProperty,
-          createNumberedRadioButtonDescriptorSet( 10 )
+          createNumberedRadioButtonDescriptorSet( 5 )
         );
         const vibrationSoundSelectionPanel = new Panel(
           new VBox( {
