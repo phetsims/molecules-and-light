@@ -26,7 +26,7 @@ define( require => {
     keyboardHelpNode: keyboardHelpContent,
 
     createOptionsDialogContent: phet.chipper.queryParameters.supportsSound ?
-                                () => { return malSoundOptionsDialogContent.getContent(); } :
+                                () => { malSoundOptionsDialogContent.getContent(); } :
                                 null,
 
     credits: {
