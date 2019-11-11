@@ -378,7 +378,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PhetMenuIO"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": false,
@@ -389,9 +389,9 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "PhetioCapsuleIO<DialogIO>"
+      "phetioTypeName": "PhetioSingletonIO<DialogIO>"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -404,7 +404,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "DialogIO"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.closeButton": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.closeButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -417,7 +417,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.closeButton.enabledProperty": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.closeButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -430,7 +430,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.closeButton.firedEmitter": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.closeButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -443,7 +443,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.closeButton.opacityProperty": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.closeButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -456,7 +456,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.closeButton.pickableProperty": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.closeButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -469,7 +469,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.closeButton.pressListener.pressAction": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.closeButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -482,7 +482,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.closeButton.pressListener.releaseAction": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.closeButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -495,7 +495,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.closeButton.visibleProperty": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.closeButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -508,7 +508,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.isShowingProperty": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.isShowingProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -521,7 +521,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.opacityProperty": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -534,7 +534,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.pickableProperty": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -547,7 +547,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.prototype.visibleProperty": {
+    "moleculesAndLight.general.navigationBar.phetButton.phetMenu.aboutDialogSingleton.prototype.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1054,7 +1054,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": false,
@@ -1065,9 +1065,9 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "PhetioCapsuleIO<DialogIO>"
+      "phetioTypeName": "PhetioSingletonIO<DialogIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1080,7 +1080,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "DialogIO"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.closeButton": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.closeButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1093,7 +1093,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.closeButton.enabledProperty": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.closeButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1106,7 +1106,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.closeButton.firedEmitter": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.closeButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1119,7 +1119,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.closeButton.opacityProperty": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.closeButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1132,7 +1132,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.closeButton.pickableProperty": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.closeButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1145,7 +1145,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.closeButton.pressListener.pressAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.closeButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1158,7 +1158,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.closeButton.pressListener.releaseAction": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.closeButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1171,7 +1171,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.closeButton.visibleProperty": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.closeButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1184,7 +1184,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.isShowingProperty": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.isShowingProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1197,7 +1197,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.opacityProperty": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1210,7 +1210,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.pickableProperty": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
@@ -1223,7 +1223,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogCapsule.prototype.visibleProperty": {
+    "moleculesAndLight.moleculesAndLightScreen.view.lightSpectrumDialogSingleton.prototype.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementPrototype": true,
