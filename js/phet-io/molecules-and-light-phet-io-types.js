@@ -767,6 +767,17 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "PhetMenuIO"
     },
+    "PhetioCapsuleIO<DialogIO>": {
+      "documentation": "An array that sends notifications when its values have changed.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "DialogIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PhetioCapsuleIO<DialogIO>"
+    },
     "PhetioCommandProcessorIO": {
       "documentation": "Invokes PhET-iO API commands on a running simulation.",
       "events": [
@@ -989,17 +1000,6 @@ window.phet.phetio.phetioTypes = assert &&
       },
       "supertype": "ObjectIO",
       "typeName": "PhetioEngineIO"
-    },
-    "PhetioSingletonIO<DialogIO>": {
-      "documentation": "An array that sends notifications when its values have changed.",
-      "events": [],
-      "methodOrder": [],
-      "methods": {},
-      "parameterTypes": [
-        "DialogIO"
-      ],
-      "supertype": "ObjectIO",
-      "typeName": "PhetioSingletonIO<DialogIO>"
     },
     "PhotonAbsorptionModelIO": {
       "documentation": "The model for Photon Absorption",
