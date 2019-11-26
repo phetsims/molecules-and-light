@@ -220,6 +220,39 @@ define( require => {
     },
     tetrahedralGeometryDescriptionString: {
       value: 'Tetrahedral, molecule with a central atom bonded to four other atoms forming a tetrahedron with 109.5° angles between them, like four-sided dice.'
+    },
+    shortStretchingAlertString: {
+      value: 'Stretching.'
+    },
+    longStretchingAlertString: {
+      value: 'Bond of molecule stretching.'
+    },
+    shortBendingAlertString: {
+      value: 'Bending.'
+    },
+    longBendingAlertString: {
+      value: 'Bonds of molecule bend up and down.'
+    },
+    shortRotatingAlertString: {
+      value: 'Rotating.'
+    },
+    longRotatingAlertPatternString: {
+      value: 'Molecule rotates {{direction}}.'
+    },
+    shortGlowingAlertString: {
+      value: 'Glowing'
+    },
+    longGlowingAlertString: {
+      value: 'Molecule glows.'
+    },
+    breaksApartAlertPatternString: {
+      value: 'Molecule breaks apart into {{firstMolecule}} and {{secondMolecule}}. Return molecule button appears.'
+    },
+    clockwiseString: {
+      value: 'clockwise'
+    },
+    counterClockwiseString: {
+      value: 'counter clockwise'
     }
   };
 
