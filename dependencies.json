@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.5.0-dev.16 Tue Nov 26 2019 12:40:17 GMT-0500 (Eastern Standard Time)",
+  "comment": "# molecules-and-light 1.5.0-dev.17 Tue Dec 03 2019 13:20:44 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "master"
@@ -13,11 +13,11 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "c65c44917493e0c71865559024797fc3b8966ec0",
+    "sha": "851016dd1f14d1ac0654cc7b3891f11845e28610",
     "branch": "master"
   },
   "dot": {
-    "sha": "4679e19e7049f39b8b0a4d008533285d8f58108b",
+    "sha": "4628f63f904b5a88b0c970d7b9d3233be917d004",
     "branch": "master"
   },
   "joist": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "79559626bc6185b9ca5f8a2248c265425f7d4025",
+    "sha": "5e940bf94407fdc9a80a713df096dda35509b241",
     "branch": "master"
   },
   "nitroglycerin": {
@@ -49,7 +49,7 @@
     "branch": "master"
   },
   "phetcommon": {
-    "sha": "c45e395d010c620e2f635c2cf463e0e073195312",
+    "sha": "cedfad00cd7862e15d7324e35c96172395540ff0",
     "branch": "master"
   },
   "phetmarks": {
@@ -61,27 +61,27 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "1875ce0923d9659d4b57eb1f6b5e08a2251c8eda",
+    "sha": "2c6b0d4a9f8b2b95ed5431018b72e16caa73a2c9",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "730cdd3f8459de157c0a051279ab9579ed06a8b6",
+    "sha": "dec27f0b377a2c6f9aaf6af108295643aadcbe41",
     "branch": "master"
   },
   "sherpa": {
-    "sha": "b57df50d8296c9de63393a44dd59ea8a618d2f50",
+    "sha": "af6eeb0c19e5f75b55165c6f7e89259e3931578c",
     "branch": "master"
   },
   "sun": {
-    "sha": "de8f6bca8d7e3dc7f4594bac58c215d29bcba98d",
+    "sha": "224d082022156922ab8238e394a7b53919c4ffa3",
     "branch": "master"
   },
   "tambo": {
-    "sha": "d9f20c1649ef7b497660c0a77b86342d3d1bbb1a",
+    "sha": "4a7a0a1cf37f5c05964deae507f2197fe6fc82d3",
     "branch": "master"
   },
   "tandem": {
-    "sha": "473cfb3d997923c6481f7627b7fc52747fddd61b",
+    "sha": "7ef9ccfdbbc69a4a7b71823b19b410050c969a28",
     "branch": "master"
   },
   "utterance-queue": {
