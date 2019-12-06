@@ -225,7 +225,7 @@ define( require => {
       value: 'Stretching.'
     },
     longStretchingAlertString: {
-      value: 'Bond of molecule stretching.'
+      value: 'Bonds of molecule stretching.'
     },
     shortBendingAlertString: {
       value: 'Bending.'
