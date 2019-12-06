@@ -256,6 +256,21 @@ define( require => {
     },
     counterClockwiseString: {
       value: 'counter clockwise'
+    },
+    lightSourceOffPatternString: {
+      value: '{{lightSource}} light source off'
+    },
+    emissionRatePatternString: {
+      value: '{{lightSource}} photon emits {{emissionRate}}'
+    },
+    verySlowlyString: {
+      value: 'very slowly'
+    },
+    slowlyString: {
+      value: 'slowly'
+    },
+    quicklyString: {
+      value: 'quickly'
     }
   };
 
