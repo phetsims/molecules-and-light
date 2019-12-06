@@ -53,8 +53,11 @@ define( require => {
     targetMoleculePatternString: {
       value: '{{photonTarget}} molecule'
     },
-    absorptionPhaseDescriptionPatternString: {
+    absorptionPhaseBondsDescriptionPatternString: {
       value: '{{lightSource}} photon absorbed and bonds of {{photonTarget}} molecule {{excitedRepresentation}}.'
+    },
+    absorptionPhaseMoleculeDescriptionPatternString: {
+      value: '{{lightSource}} photon absorbed and {{photonTarget}} molecule {{excitedRepresentation}}.'
     },
     breakApartPhaseDescriptionPatternString: {
       value: '{{lightSource}} photon absorbed and {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}.'
