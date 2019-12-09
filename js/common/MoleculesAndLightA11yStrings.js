@@ -126,13 +126,13 @@ define( require => {
       value: '{{wavelength}} photon rate, {{frequency}}'
     },
     lightSourceRadioButtonHelpTextString: {
-      value: 'Choose light source, ordered low to high energy, and observe effects on molecule.'
+      value: 'Choose light source for observation window ordered low to high energy.'
     },
     moleculesString: {
       value: 'Molecules'
     },
     moleculesRadioButtonHelpTextString: {
-      value: 'Choose molecule and observe interactions with light source.'
+      value: 'Choose molecule for observation window.'
     },
     moleculeButtonLabelPatternString: {
       value: '{{molecularName}}, {{molecularFormula}}, {{geometryTitle}}'
