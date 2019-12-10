@@ -26,6 +26,9 @@ define( require => {
     lightSourceString: {
       value: 'Light Source'
     },
+    lightSourcesString: {
+      value: 'Light Sources'
+    },
     isOffAndPointsString: {
       value: 'is off and points'
     },
