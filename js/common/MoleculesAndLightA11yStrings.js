@@ -21,7 +21,7 @@ define( require => {
       value: 'Currently, {{playingState}}, {{lightSource}} light source {{emissionRate}} directly at {{target}}.'
     },
     interactionHintString: {
-      value: 'Look for light source slider to play.'
+      value: 'Look for photon rate slider to play.'
     },
     lightSourceString: {
       value: 'Light Source'
