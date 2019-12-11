@@ -23,8 +23,8 @@ define( require => {
     interactionHintString: {
       value: 'Look for photon rate slider to play.'
     },
-    lightSourceString: {
-      value: 'Light Source'
+    lightSourceLabelPatternString: {
+      value: '{{lightSource}} Photon Rate'
     },
     lightSourcesString: {
       value: 'Light Sources'
@@ -260,20 +260,20 @@ define( require => {
     counterClockwiseString: {
       value: 'counter clockwise'
     },
-    lightSourceOffPatternString: {
-      value: '{{lightSource}} light source off'
+    lightSourceOffString: {
+      value: 'light source off'
     },
     emissionRatePatternString: {
       value: '{{lightSource}} photon emits {{emissionRate}}'
     },
-    verySlowlyString: {
-      value: 'very slowly'
+    verySlowString: {
+      value: 'very slow'
     },
-    slowlyString: {
-      value: 'slowly'
+    slowString: {
+      value: 'slow'
     },
-    quicklyString: {
-      value: 'quickly'
+    fastString: {
+      value: 'fast'
     }
   };
 
