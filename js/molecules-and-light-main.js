@@ -41,7 +41,7 @@ define( require => {
 
   SimLauncher.launch( function() {
     const sim = new Sim( moleculesAndLightTitleString, [
-      new MoleculesAndLightScreen( Tandem.rootTandem.createTandem( 'moleculesAndLightScreen' ) )
+      new MoleculesAndLightScreen( Tandem.ROOT.createTandem( 'moleculesAndLightScreen' ) )
     ], simOptions );
     sim.start();
   } );
