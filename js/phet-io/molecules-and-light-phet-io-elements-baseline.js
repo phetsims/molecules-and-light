@@ -1080,7 +1080,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "moleculesAndLight.general.soundEnabledProperty": {
+    "moleculesAndLight.general.soundManager.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
