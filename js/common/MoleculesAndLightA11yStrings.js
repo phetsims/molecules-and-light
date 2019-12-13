@@ -142,12 +142,6 @@ define( require => {
     moleculeButtonLabelPatternString: {
       value: '{{molecularName}}, {{molecularFormula}}, {{geometryTitle}}'
     },
-    stepButtonLabelString: {
-      value: 'Next Frame'
-    },
-    stepButtonDescriptionString: {
-      value: 'Pause, play, or step forward in time while paused.'
-    },
     spectrumButtonLabelString: {
       value: 'Show Light Spectrum'
     },
