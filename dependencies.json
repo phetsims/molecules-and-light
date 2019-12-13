@@ -1,11 +1,11 @@
 {
-  "comment": "# molecules-and-light 1.5.0-dev.20 Wed Dec 11 2019 16:49:17 GMT-0500 (Eastern Standard Time)",
+  "comment": "# molecules-and-light 1.5.0-dev.21 Fri Dec 13 2019 14:43:52 GMT-0500 (Eastern Standard Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "master"
   },
   "axon": {
-    "sha": "3bb519feab8b89b00a62181a8543fe0e38c97db4",
+    "sha": "ab6cb748931af7be8d59a86023d15d1863e9fdce",
     "branch": "master"
   },
   "brand": {
@@ -13,15 +13,15 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "a83b9cb41ab20a89f4153a86ca684c10f9ef869c",
+    "sha": "35fc4b620a8507daa2c8925bbbcb4ad106db7570",
     "branch": "master"
   },
   "dot": {
-    "sha": "fd1875e238b4d8382b47e33ace4b872154cd1f93",
+    "sha": "71813bd3f5eaab8431b9e8a39299089eb59c1e55",
     "branch": "master"
   },
   "joist": {
-    "sha": "9b7ca67d2a4589ad81eaafee38a7ea6dca111a52",
+    "sha": "09aa5866f5a2ac07ed2518285b0d3fc30b47c907",
     "branch": "master"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "c81b410c6cd23e2975b70b9d995dbdf850eadbf5",
+    "sha": "c13d8071c26af08cd88c341c08eb14d5f55ea5f5",
     "branch": "master"
   },
   "nitroglycerin": {
@@ -41,15 +41,15 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "30b46ab7d7a49851a10f6b9e53fcc99ba87108c4",
+    "sha": "4f92d8c58353d014772a061d38ac7bb002822c83",
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "a96aff1ecb2f4298429a764b36cafa2b03abae04",
+    "sha": "a3103fa0d6baa687a813d1d5892a49a288569573",
     "branch": "master"
   },
   "phetcommon": {
-    "sha": "2d1b53d49994ec4c4fe1569d753be27f18507f62",
+    "sha": "abada0fc29899be241cee1f49f5fbb6602ec1731",
     "branch": "master"
   },
   "phetmarks": {
@@ -61,11 +61,11 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "196182d4ccc19c45b824cdae27d4170b0d29c647",
+    "sha": "5ad5e5e5ea1da139f1dc9ddf58bf78cace7ea50b",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "1bf89dcf91bc2f55197f0277b48c2f3d40334e62",
+    "sha": "b7bdb9600bf27989a74fc00ca42a9a98bd5a6092",
     "branch": "master"
   },
   "sherpa": {
@@ -73,19 +73,19 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "ccddd997d74cce84180f43fb26f7bf0951cf2dd3",
+    "sha": "ee8a044b123b46bcb8f5c25e2859d6c9fe478d96",
     "branch": "master"
   },
   "tambo": {
-    "sha": "10cfd541a885241d92d0a836a2121ebe3184436a",
+    "sha": "87e52df88083be4bdd47122b5d3dc59e90d0ea2d",
     "branch": "master"
   },
   "tandem": {
-    "sha": "41ee959f5635e353b38f1566acfc8888564dd59c",
+    "sha": "fa7952b831ec1b3a7d9cb1f437bead03317fbc54",
     "branch": "master"
   },
   "utterance-queue": {
-    "sha": "0f047918029132b457fd4ab95d419cb4441cdc26",
+    "sha": "f301f82b3ca210539e54a4c5318ee307c55c5f8b",
     "branch": "master"
   }
 }
