@@ -13,9 +13,11 @@ define( require => {
   const moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
 
   const MoleculesAndLightA11yStrings = {
-
-    screenSummaryString: {
-      value: 'In the Play Area, you find an observation window that contains a light source and a molecule. You can adjust the rate of photons being emitted at the molecule, choose a different molecule, or change light source. From the Control Area you can use buttons to pause/play and step forward what’s happening in the observation window. You can also access details about the light spectrum and reset the sim.'
+    playAreaSummaryString: {
+      value: 'In the Play Area, you find an observation window that contains a light source and a molecule. You can adjust the rate of photons being emitted at the molecule, choose a different molecule, or change light source.'
+    },
+    controlAreaSummaryString: {
+      value: 'From the Control Area you can use buttons to pause/play and step forward what’s happening in the observation window. You can also access details about the light spectrum and reset the sim.'
     },
     dynamicScreenSummaryString: {
       value: 'Currently, {{playingState}}, {{lightSource}} light source {{emissionRate}} directly at {{target}}.'
