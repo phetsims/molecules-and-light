@@ -50,18 +50,19 @@ define( require => {
 
   // sounds
   const breakApartSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/break-apart.mp3' );
+  const infraredPhotonFromMoleculeSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-release-ir.mp3' );
+  const infraredPhotonInitialEmissionSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-emit-ir.mp3' );
+  const microwavePhotonFromMoleculeSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-release-microwave.mp3' );
   const moleculeEnergizedSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/glow-loop-higher.mp3' );
+  const microwavePhotonInitialEmissionSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-emit-microwave.mp3' );
+  const photonAbsorbedSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/absorb-loop.mp3' );
   const rotationClockwiseSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/rotate-clockwise.mp3' );
   const rotationCounterclockwiseSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/rotate-counterclockwise.mp3' );
-  const vibrationSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibration.mp3' );
-  const microwavePhotonFromMoleculeSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-release-microwave.mp3' );
-  const infraredPhotonFromMoleculeSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-release-ir.mp3' );
-  const visiblePhotonFromMoleculeSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-release-visible.mp3' );
   const ultravioletPhotonFromMoleculeSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-release-uv.mp3' );
-  const microwavePhotonInitialEmissionSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-emit-microwave.mp3' );
-  const infraredPhotonInitialEmissionSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-emit-ir.mp3' );
-  const visiblePhotonInitialEmissionSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-emit-visible.mp3' );
   const ultravioletPhotonInitialEmissionSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-emit-uv.mp3' );
+  const vibrationSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/vibration.mp3' );
+  const visiblePhotonFromMoleculeSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-release-visible.mp3' );
+  const visiblePhotonInitialEmissionSoundInfo = require( 'sound!MOLECULES_AND_LIGHT/photon-emit-visible.mp3' );
 
   // constants
   // Model-view transform for intermediate coordinates.
@@ -76,9 +77,8 @@ define( require => {
   // Line width of the observation window frame
   const FRAME_LINE_WIDTH = 5;
 
-  // TODO - @Ashton-Morris - please adjust level if needed, see https://github.com/phetsims/molecules-and-light/issues/233
   // volume of photon emission sounds
-  const PHOTON_SOUND_OUTPUT_LEVEL = 0.07;
+  const PHOTON_SOUND_OUTPUT_LEVEL = 0.09;
 
   // X position at which the lamp emission sound is played, empirically determined
   const PLAY_LAMP_EMISSION_X_POSITION = -1400;
@@ -232,11 +232,17 @@ define( require => {
     // sound generation
     //-----------------------------------------------------------------------------------------------------------------
 
-    // TODO - @Ashton-Morris - please adjust level if needed, see https://github.com/phetsims/molecules-and-light/issues/233
+    // photon absorbed sound
+    const photonAbsorbedSound = new SoundClip( photonAbsorbedSoundInfo, { initialOutputLevel: 0.025 } );
+    soundManager.addSoundGenerator( photonAbsorbedSound );
+    const photonAbsorbedSoundPlayer = () => {
+      photonAbsorbedSound.play();
+    };
+
     // sound to play when molecule becomes "energized", which is depicted as glowing in the view
     const moleculeEnergizedLoop = new SoundClip( moleculeEnergizedSoundInfo, {
       loop: true,
-      initialOutputLevel: 0.1,
+      initialOutputLevel: 0.3,
       enableControlProperties: [ photonAbsorptionModel.runningProperty ]
     } );
     soundManager.addSoundGenerator( moleculeEnergizedLoop );
@@ -249,24 +255,24 @@ define( require => {
       }
     };
 
-    // TODO - @Ashton-Morris - please adjust level if needed, see https://github.com/phetsims/molecules-and-light/issues/233
     // break apart sound
-    const breakApartSound2 = new SoundClip( breakApartSoundInfo, { initialOutputLevel: 1 } );
-    soundManager.addSoundGenerator( breakApartSound2 );
+    const breakApartSound = new SoundClip( breakApartSoundInfo, { initialOutputLevel: 1 } );
+    soundManager.addSoundGenerator( breakApartSound );
     const breakApartSoundPlayer = () => {
-      breakApartSound2.play();
+      breakApartSound.play();
     };
 
-    // TODO - @Ashton-Morris - please adjust level if needed, see https://github.com/phetsims/molecules-and-light/issues/233
     // molecule rotating sounds
     const rotateClockwiseSoundPlayer = new SoundClip( rotationClockwiseSoundInfo, {
-      initialOutputLevel: 0.5,
-      loop: true
+      initialOutputLevel: 0.3,
+      loop: true,
+      enableControlProperties: [ photonAbsorptionModel.runningProperty ]
     } );
     soundManager.addSoundGenerator( rotateClockwiseSoundPlayer );
     const rotateCounterclockwiseSoundPlayer = new SoundClip( rotationCounterclockwiseSoundInfo, {
-      initialOutputLevel: 0.5,
-      loop: true
+      initialOutputLevel: 0.3,
+      loop: true,
+      enableControlProperties: [ photonAbsorptionModel.runningProperty ]
     } );
     soundManager.addSoundGenerator( rotateCounterclockwiseSoundPlayer );
 
@@ -291,10 +297,9 @@ define( require => {
       }
     };
 
-    // TODO - @Ashton-Morris - please adjust level if needed, see https://github.com/phetsims/molecules-and-light/issues/233
     // molecule vibration sound
     const moleculeVibrationLoop = new SoundClip( vibrationSoundInfo, {
-      initialOutputLevel: 0.2,
+      initialOutputLevel: 0.4,
       loop: true,
       enableControlProperties: [ photonAbsorptionModel.runningProperty ]
     } );
@@ -312,6 +317,7 @@ define( require => {
 
     // function that adds all of the listeners involved in creating sound
     const addSoundPlayersToMolecule = molecule => {
+      molecule.photonAbsorbedEmitter.addListener( photonAbsorbedSoundPlayer );
       molecule.highElectronicEnergyStateProperty.link( updateMoleculeEnergizedSound );
       molecule.brokeApartEmitter.addListener( breakApartSoundPlayer );
       molecule.rotatingProperty.link( updateRotationSound );
@@ -324,6 +330,9 @@ define( require => {
 
     // remove listeners when the molecules go away
     photonAbsorptionModel.activeMolecules.addItemRemovedListener( function( removedMolecule ) {
+      if ( removedMolecule.photonAbsorbedEmitter.hasListener( photonAbsorbedSoundPlayer ) ) {
+        removedMolecule.photonAbsorbedEmitter.removeListener( photonAbsorbedSoundPlayer );
+      }
       if ( removedMolecule.highElectronicEnergyStateProperty.hasListener( updateMoleculeEnergizedSound ) ) {
         removedMolecule.highElectronicEnergyStateProperty.unlink( updateMoleculeEnergizedSound );
       }

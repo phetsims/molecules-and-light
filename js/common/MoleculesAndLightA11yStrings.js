@@ -215,7 +215,7 @@ define( require => {
       value: 'This molecule has {{geometry}} geometry.'
     },
     linearGeometryDescriptionString: {
-      value: 'Linear, molecule with a central atom bonded to one or two other atoms forming a straight line. Bond angle is 180 degrees.'
+      value: 'Linear, a molecule with two or three atoms bonded to form a straight line. Bond angle is 180 degrees.'
     },
     bentGeometryDescriptionString: {
       value: 'Bent, molecule with a central atom bonded to two other atoms that form an angle. Bond angle varies below 120 degrees.'
@@ -238,8 +238,8 @@ define( require => {
     shortRotatingAlertString: {
       value: 'Rotating.'
     },
-    longRotatingAlertPatternString: {
-      value: 'Molecule rotates {{direction}}.'
+    longRotatingAlertString: {
+      value: 'Molecule rotates.'
     },
     shortGlowingAlertString: {
       value: 'Glowing'
@@ -270,6 +270,9 @@ define( require => {
     },
     fastString: {
       value: 'fast'
+    },
+    fastestString: {
+      value: 'fastest'
     }
   };
 
