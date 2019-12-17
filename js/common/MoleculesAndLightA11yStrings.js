@@ -270,6 +270,9 @@ define( require => {
     },
     fastString: {
       value: 'fast'
+    },
+    fastestString: {
+      value: 'fastest'
     }
   };
 
