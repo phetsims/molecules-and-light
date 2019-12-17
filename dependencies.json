@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.5.0-dev.21 Fri Dec 13 2019 14:43:52 GMT-0500 (Eastern Standard Time)",
+  "comment": "# molecules-and-light 1.5.0-dev.22 Tue Dec 17 2019 16:09:48 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "master"
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "c13d8071c26af08cd88c341c08eb14d5f55ea5f5",
+    "sha": "de1d4440aadbcdd05858e0c7182bf63e74130112",
     "branch": "master"
   },
   "nitroglycerin": {
@@ -37,7 +37,7 @@
     "branch": "master"
   },
   "phet-core": {
-    "sha": "c92e6fd9cbee5e9ee4e59f49dc0aa5f1647e57aa",
+    "sha": "c21e6a64bad88157a57d65efc74357544b851fa1",
     "branch": "master"
   },
   "phet-io": {
@@ -61,11 +61,11 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "5ad5e5e5ea1da139f1dc9ddf58bf78cace7ea50b",
+    "sha": "700903e8f5c7ad987e130b70f2ec956ba26911ca",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "b7bdb9600bf27989a74fc00ca42a9a98bd5a6092",
+    "sha": "a57b20e9652313bd48bfc798780b8f33d1225cca",
     "branch": "master"
   },
   "sherpa": {
@@ -73,7 +73,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "ee8a044b123b46bcb8f5c25e2859d6c9fe478d96",
+    "sha": "b5ed007b0091af629418e779750388145bcf54e6",
     "branch": "master"
   },
   "tambo": {
@@ -85,7 +85,7 @@
     "branch": "master"
   },
   "utterance-queue": {
-    "sha": "f301f82b3ca210539e54a4c5318ee307c55c5f8b",
+    "sha": "e539f67d40a4ff17081562d91aeb8f1f5c062a0e",
     "branch": "master"
   }
 }
