@@ -148,8 +148,8 @@ define( require => {
     spectrumButtonDescriptionString: {
       value: 'See details of full light spectrum.'
     },
-    spectrumWindowDescriptionString: {
-      value: 'The show light spectrum button opens a window displaying the EM spectrum with the values of the frequency and wavelength shown. Additional arrows show the direction of increasing frequency/energy and wavelength. A sketch of a wave with decreasing wavelength/increasing frequency is also provided.'
+    spectrumDialogDescriptionString: {
+      value: 'The Light Spectrum shows the relative energy of the different classifications of light waves as defined by their characteristic wavelengths (measured in meters) and frequencies (measured in Hertz or inverse seconds). The order from lowest energy (lowest frequency and largest wavelength) to highest energy (highest frequency and smallest wavelength) is Radio, Microwave, Infrared, Visible, Ultraviolet, X-ray, and Gamma ray. A sine wave [waveform] decreasing in wavelength (as measured by the distance from peak to peak) and increasing frequency (as measured by the number of waves per time interval) from Radio to Gamma Ray.'
     },
     returnMoleculeString: {
       value: 'Return Molecule'
