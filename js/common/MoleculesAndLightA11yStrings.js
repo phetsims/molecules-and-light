@@ -238,8 +238,8 @@ define( require => {
     shortRotatingAlertString: {
       value: 'Rotating.'
     },
-    longRotatingAlertPatternString: {
-      value: 'Molecule rotates {{direction}}.'
+    longRotatingAlertString: {
+      value: 'Molecule rotates.'
     },
     shortGlowingAlertString: {
       value: 'Glowing'
