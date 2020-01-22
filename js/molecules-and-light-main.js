@@ -22,6 +22,7 @@ define( require => {
   const keyboardHelpContent = new MoleculesAndLightKeyboardHelpContent();
 
   const simOptions = {
+    accessibility: true,
     keyboardHelpNode: keyboardHelpContent,
 
     credits: {
