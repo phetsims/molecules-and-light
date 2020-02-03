@@ -94,6 +94,9 @@ define( require => {
     rotatingCounterClockwiseString: {
       value: 'rotating counter clockwise'
     },
+    rotatingString: {
+      value: 'rotating'
+    },
     startsRotatingPatternString: {
       value: 'starts {{rotation}}'
     },
@@ -242,7 +245,7 @@ define( require => {
       value: 'Molecule rotates.'
     },
     shortGlowingAlertString: {
-      value: 'Glowing'
+      value: 'Glowing.'
     },
     longGlowingAlertString: {
       value: 'Molecule glows.'
@@ -279,7 +282,14 @@ define( require => {
     },
     pausedPassingPatternString:  {
       value: '{{lightSource}} photons passing through {{molecularName}} molecule.'
+    },
+    slowMotionVibratingPatternString: {
+      value: 'Photon absorbed. Bonds of molecule {{excitedRepresentation}}.'
+    },
+    slowMotionAbsorbedPatternString: {
+      value: 'Photon absorbed. Molecule {{excitedRepresentation}}.'
     }
+
   };
 
   if ( phet.chipper.queryParameters.stringTest === 'xss' ) {
