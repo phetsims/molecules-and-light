@@ -289,10 +289,12 @@ define( require => {
     slowMotionAbsorbedPatternString: {
       value: 'Photon absorbed. Molecule {{excitedRepresentation}}.'
     },
+    slowMotionBreakApartPatternString: {
+      value: 'Photon absorbed. Molecule breaks apart. {{firstMolecule}} and {{secondMolecule}} float away.'
+    },
     slowMotionEmittedPatternString: {
       value: 'Photon emitted {{direction}}.'
     }
-
   };
 
   if ( phet.chipper.queryParameters.stringTest === 'xss' ) {
