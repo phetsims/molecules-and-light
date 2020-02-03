@@ -288,6 +288,9 @@ define( require => {
     },
     slowMotionAbsorbedPatternString: {
       value: 'Photon absorbed. Molecule {{excitedRepresentation}}.'
+    },
+    slowMotionEmittedPatternString: {
+      value: 'Photon emitted {{direction}}.'
     }
 
   };
