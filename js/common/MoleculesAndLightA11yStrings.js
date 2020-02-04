@@ -154,9 +154,6 @@ define( require => {
     spectrumDialogDescriptionString: {
       value: 'The Light Spectrum shows the relative energy of the different classifications of light waves as defined by their characteristic wavelengths (measured in meters) and frequencies (measured in Hertz or inverse seconds). The order from lowest energy (lowest frequency and largest wavelength) to highest energy (highest frequency and smallest wavelength) is Radio, Microwave, Infrared, Visible, Ultraviolet, X-ray, and Gamma ray. A sine wave [waveform] decreasing in wavelength (as measured by the distance from peak to peak) and increasing frequency (as measured by the number of waves per time interval) from Radio to Gamma Ray.'
     },
-    returnMoleculeString: {
-      value: 'Return Molecule'
-    },
     moleculeSelectionAlertPatternString: {
       value: '{{target}} molecule now in observation window.'
     },
