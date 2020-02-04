@@ -248,7 +248,7 @@ define( require => {
       value: 'Molecule glows.'
     },
     breaksApartAlertPatternString: {
-      value: 'Molecule breaks apart into {{firstMolecule}} and {{secondMolecule}}. Return molecule button appears.'
+      value: 'Molecule breaks apart into {{firstMolecule}} and {{secondMolecule}}. New Molecule button appears.'
     },
     clockwiseString: {
       value: 'clockwise'
