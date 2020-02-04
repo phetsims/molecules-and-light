@@ -45,7 +45,7 @@
     "value": "Water"
   },
   "ButtonNode.ReturnMolecule": {
-    "value": "Return Molecule"
+    "value": "New Molecule"
   },
   "SpectrumWindow.buttonCaption": {
     "value": "Show Light Spectrum"
