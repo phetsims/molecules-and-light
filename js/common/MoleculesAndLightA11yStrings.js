@@ -271,9 +271,6 @@ define( require => {
     fastString: {
       value: 'fast'
     },
-    fastestString: {
-      value: 'fastest'
-    },
     pausedEmittingPatternString: {
       value: 'Absorbed {{lightSource}} photon emitting from {{molecularName}} molecule {{direction}}.'
     },
