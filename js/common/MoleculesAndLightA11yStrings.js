@@ -40,8 +40,8 @@ define( require => {
     emitsPhotonsVerySlowlyString: {
       value: 'emits photons very slowly and'
     },
-    emitsPhotonsQuicklyString: {
-      value: 'emits photons quickly and'
+    emitsPhotonsFastString: {
+      value: 'emits photons fast and'
     },
     emitsPhotonsString: {
       value: 'emits photons'
