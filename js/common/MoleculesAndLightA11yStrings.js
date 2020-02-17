@@ -248,7 +248,7 @@ define( require => {
       value: 'Molecule glows.'
     },
     breaksApartAlertPatternString: {
-      value: 'Molecule breaks apart into {{firstMolecule}} and {{secondMolecule}}. New Molecule button appears.'
+      value: 'Molecule breaks apart into {{firstMolecule}} and {{secondMolecule}}.'
     },
     clockwiseString: {
       value: 'clockwise'
@@ -288,6 +288,9 @@ define( require => {
     },
     slowMotionEmittedPatternString: {
       value: 'Photon emitted {{direction}}.'
+    },
+    lookForNewMoleculeButtonString: {
+      value: 'Look for New Molecule button.'
     }
   };
 
