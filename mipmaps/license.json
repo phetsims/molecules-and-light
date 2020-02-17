@@ -1,5 +1,5 @@
 {
-  "flashlight-off.png": {
+  "flashlight.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -7,7 +7,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": ""
   },
-  "infrared-source-off.png": {
+  "infrared-source.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -15,7 +15,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": ""
   },
-  "microwave-photon.png": {
+  "microwave-source.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -23,31 +23,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": ""
   },
-  "photon-100.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": ""
-  },
-  "photon-660.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": ""
-  },
-  "thin2.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": ""
-  },
-  "uv-source-off.png": {
+  "uv-source.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
