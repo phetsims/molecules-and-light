@@ -25,6 +25,9 @@ define( require => {
     interactionHintString: {
       value: 'Look for photon rate slider to play.'
     },
+    interactionHintWithPlayButtonString: {
+      value: 'Look for Play button and photon rate slider to play.'
+    },
     lightSourceLabelPatternString: {
       value: '{{lightSource}} Photon Rate'
     },
