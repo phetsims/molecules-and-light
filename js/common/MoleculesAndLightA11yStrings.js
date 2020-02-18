@@ -194,7 +194,7 @@ define( require => {
       value: 'bent'
     },
     tetrahedralString: {
-      value: 'tetrahderal'
+      value: 'tetrahedral'
     },
     diatomicString: {
       value: 'diatomic'
@@ -206,7 +206,7 @@ define( require => {
       value: 'Bent'
     },
     tetrahedralTitleString: {
-      value: 'Tetrahderal'
+      value: 'Tetrahedral'
     },
     diatomicTitleString: {
       value: 'Diatomic'
