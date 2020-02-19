@@ -22,6 +22,9 @@ define( require => {
     dynamicScreenSummaryString: {
       value: 'Currently, {{playingState}}, {{lightSource}} light source {{emissionRate}} directly at {{target}}.'
     },
+    screenSummaryWithHintPatternString: {
+      value: '{{summary}} Look for New Molecule button.'
+    },
     interactionHintPatternString: {
       value: 'Look for {{button}} button and photon rate slider to play.'
     },
