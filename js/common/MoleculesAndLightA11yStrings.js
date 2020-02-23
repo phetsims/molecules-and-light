@@ -131,7 +131,7 @@ define( require => {
       value: 'an'
     },
     emissionSliderDescriptionString: {
-      value: 'Adjust to emit photons at different rates.'
+      value: 'Set photon emission rate.'
     },
     emissionSliderWavelengthRatePatterString: {
       value: '{{wavelength}} photon rate, {{frequency}}'
