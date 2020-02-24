@@ -25,8 +25,11 @@ define( require => {
     screenSummaryWithHintPatternString: {
       value: '{{summary}} Look for New Molecule button.'
     },
-    interactionHintPatternString: {
-      value: 'Look for {{button}} button and photon rate slider to play.'
+    interactionHintString: {
+      value: 'Look for photon rate slider to explore.'
+    },
+    interactionHintWithPlayPatternString: {
+      value: '{{interactionHint}} If needed, set sim to Play under Timing Controls.'
     },
     lightSourceLabelPatternString: {
       value: '{{lightSource}} Photon Rate'
