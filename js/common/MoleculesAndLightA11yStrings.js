@@ -302,7 +302,7 @@ define( require => {
       value: 'Photon emitted {{direction}}.'
     },
     lookForNewMoleculeButtonString: {
-      value: 'Look for New Molecule button.'
+      value: 'Look for Reset Molecule button.'
     }
   };
 
