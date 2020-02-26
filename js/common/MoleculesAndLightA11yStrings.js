@@ -83,7 +83,7 @@ define( require => {
       value: '{{photonTarget}} molecule stops {{excitedRepresentation}} and emits absorbed {{lightSource}} photon {{direction}}.'
     },
     moleculesOutOfViewPatternString: {
-      value: '{{firstMolecule}} and {{secondMolecule}} out of view. Return molecule to make more observations.'
+      value: '{{firstMolecule}} and {{secondMolecule}} out of view. Reset molecule to make more observations.'
     },
     absorbedString: {
       value: 'absorbed'
