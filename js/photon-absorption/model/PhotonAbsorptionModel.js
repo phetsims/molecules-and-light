@@ -166,9 +166,7 @@ define( require => {
      */
     reset: function() {
 
-      // Remove and dispose any photons that are currently in transit.
-      this.photons.forEach( photon => photon.dispose() );
-      this.photons.clear();
+      this.resetPhotons();
 
       // Reset all active molecules, which will stop any vibrations.
       for ( let molecule = 0; molecule < this.activeMolecules.length; molecule++ ) {
@@ -186,6 +184,16 @@ define( require => {
       this.runningProperty.reset();
       this.slowMotionProperty.reset();
       this.photonTargetProperty.reset();
+    },
+
+    /**
+     * Clears all photons.
+     */
+    resetPhotons() {
+
+      // Remove and dispose any photons that are currently in transit.
+      this.photons.forEach( photon => photon.dispose() );
+      this.photons.clear();
     },
 
     /**

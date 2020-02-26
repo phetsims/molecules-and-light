@@ -23,7 +23,7 @@ define( require => {
       value: 'Currently, {{playingState}}, {{lightSource}} light source {{emissionRate}} directly at {{target}}.'
     },
     screenSummaryWithHintPatternString: {
-      value: '{{summary}} Look for New Molecule button.'
+      value: '{{summary}} Look for Reset Molecule button.'
     },
     interactionHintString: {
       value: 'Look for photon rate slider to explore.'
@@ -83,7 +83,7 @@ define( require => {
       value: '{{photonTarget}} molecule stops {{excitedRepresentation}} and emits absorbed {{lightSource}} photon {{direction}}.'
     },
     moleculesOutOfViewPatternString: {
-      value: '{{firstMolecule}} and {{secondMolecule}} out of view. Return molecule to make more observations.'
+      value: '{{firstMolecule}} and {{secondMolecule}} out of view. Reset molecule to make more observations.'
     },
     absorbedString: {
       value: 'absorbed'
@@ -302,7 +302,7 @@ define( require => {
       value: 'Photon emitted {{direction}}.'
     },
     lookForNewMoleculeButtonString: {
-      value: 'Look for New Molecule button.'
+      value: 'Look for Reset Molecule button.'
     }
   };
 
