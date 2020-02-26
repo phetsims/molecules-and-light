@@ -23,7 +23,7 @@ define( require => {
       value: 'Currently, {{playingState}}, {{lightSource}} light source {{emissionRate}} directly at {{target}}.'
     },
     screenSummaryWithHintPatternString: {
-      value: '{{summary}} Look for New Molecule button.'
+      value: '{{summary}} Look for Reset Molecule button.'
     },
     interactionHintString: {
       value: 'Look for photon rate slider to explore.'
