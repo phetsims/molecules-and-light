@@ -5,28 +5,26 @@
  *
  * @author Michael Kauzmann (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const moleculesAndLight = require( 'MOLECULES_AND_LIGHT/moleculesAndLight' );
-  const SliderAndGeneralKeyboardHelpContent = require( 'SCENERY_PHET/keyboard/help/SliderAndGeneralKeyboardHelpContent' );
+import SliderAndGeneralKeyboardHelpContent
+  from '../../../../scenery-phet/js/keyboard/help/SliderAndGeneralKeyboardHelpContent.js';
+import moleculesAndLightStrings from '../../molecules-and-light-strings.js';
+import moleculesAndLight from '../../moleculesAndLight.js';
 
-  // strings
-  const keyboardHelpDialogLightSourceSliderString = require( 'string!MOLECULES_AND_LIGHT/KeyboardHelpDialog.lightSourceSlider' );
+const keyboardHelpDialogLightSourceSliderString = moleculesAndLightStrings.KeyboardHelpDialog.lightSourceSlider;
 
-  class MoleculesAndLightKeyboardHelpContent extends SliderAndGeneralKeyboardHelpContent {
-    constructor() {
-      super( {
-        sliderSectionOptions: {
-          headingString: keyboardHelpDialogLightSourceSliderString
-        },
-        generalSectionOptions: {
-          withGroupContent: true
-        }
-      } );
-    }
+class MoleculesAndLightKeyboardHelpContent extends SliderAndGeneralKeyboardHelpContent {
+  constructor() {
+    super( {
+      sliderSectionOptions: {
+        headingString: keyboardHelpDialogLightSourceSliderString
+      },
+      generalSectionOptions: {
+        withGroupContent: true
+      }
+    } );
   }
+}
 
-  return moleculesAndLight.register( 'MoleculesAndLightKeyboardHelpContent', MoleculesAndLightKeyboardHelpContent );
-} );
+moleculesAndLight.register( 'MoleculesAndLightKeyboardHelpContent', MoleculesAndLightKeyboardHelpContent );
+export default MoleculesAndLightKeyboardHelpContent;
