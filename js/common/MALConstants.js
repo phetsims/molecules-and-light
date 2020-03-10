@@ -9,7 +9,7 @@
 import moleculesAndLight from '../moleculesAndLight.js';
 
 const MALConstants = {
-  USE_SPATIALIZED_SOUNDS: true
+  USE_SPATIALIZED_SOUNDS: false
 };
 
 moleculesAndLight.register( 'MALConstants', MALConstants );
