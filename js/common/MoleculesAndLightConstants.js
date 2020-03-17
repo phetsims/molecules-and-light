@@ -7,9 +7,10 @@
  */
 
 import moleculesAndLight from '../moleculesAndLight.js';
+import MoleculesAndLightQueryParameters from './MoleculesAndLightQueryParameters.js';
 
 const MoleculesAndLightConstants = {
-  USE_SPATIALIZED_SOUNDS: false
+  USE_SPATIALIZED_SOUNDS: MoleculesAndLightQueryParameters.useStereoSounds
 };
 
 moleculesAndLight.register( 'MoleculesAndLightConstants', MoleculesAndLightConstants );
