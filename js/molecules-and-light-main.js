@@ -19,7 +19,6 @@ const moleculesAndLightTitleString = moleculesAndLightStrings[ 'molecules-and-li
 const keyboardHelpContent = new MoleculesAndLightKeyboardHelpContent();
 
 const simOptions = {
-  accessibility: true,
   keyboardHelpNode: keyboardHelpContent,
 
   credits: {
