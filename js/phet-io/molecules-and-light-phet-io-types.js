@@ -292,6 +292,14 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ActionIO<NullableIO<SceneryEventIO>>",
       "typeName": "EmitterIO<NullableIO<SceneryEventIO>>"
     },
+    "EnumerationIO(FAST|NORMAL|SLOW)": {
+      "documentation": "Possible values: FAST,NORMAL,SLOW.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ObjectIO",
+      "typeName": "EnumerationIO(FAST|NORMAL|SLOW)"
+    },
     "EnumerationIO(SINGLE_CO_MOLECULE|SINGLE_N2_MOLECULE|SINGLE_O2_MOLECULE|SINGLE_CO2_MOLECULE|SINGLE_CH4_MOLECULE|SINGLE_H2O_MOLECULE|SINGLE_NO2_MOLECULE|SINGLE_O3_MOLECULE)": {
       "documentation": "Possible values: SINGLE_CO_MOLECULE,SINGLE_N2_MOLECULE,SINGLE_O2_MOLECULE,SINGLE_CO2_MOLECULE,SINGLE_CH4_MOLECULE,SINGLE_H2O_MOLECULE,SINGLE_NO2_MOLECULE,SINGLE_O3_MOLECULE.",
       "events": [],
@@ -347,6 +355,19 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "FunctionIO(BooleanIO,NullableIO<BooleanIO>)=>VoidIO"
+    },
+    "FunctionIO(EnumerationIO(FAST|NORMAL|SLOW),NullableIO<EnumerationIO(FAST|NORMAL|SLOW)>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(FAST|NORMAL|SLOW), NullableIO<EnumerationIO(FAST|NORMAL|SLOW)><br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(FAST|NORMAL|SLOW)",
+        "NullableIO<EnumerationIO(FAST|NORMAL|SLOW)>",
+        "VoidIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO(EnumerationIO(FAST|NORMAL|SLOW),NullableIO<EnumerationIO(FAST|NORMAL|SLOW)>)=>VoidIO"
     },
     "FunctionIO(EnumerationIO(SINGLE_CO_MOLECULE|SINGLE_N2_MOLECULE|SINGLE_O2_MOLECULE|SINGLE_CO2_MOLECULE|SINGLE_CH4_MOLECULE|SINGLE_H2O_MOLECULE|SINGLE_NO2_MOLECULE|SINGLE_O3_MOLECULE),NullableIO<EnumerationIO(SINGLE_CO_MOLECULE|SINGLE_N2_MOLECULE|SINGLE_O2_MOLECULE|SINGLE_CO2_MOLECULE|SINGLE_CH4_MOLECULE|SINGLE_H2O_MOLECULE|SINGLE_NO2_MOLECULE|SINGLE_O3_MOLECULE)>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(SINGLE_CO_MOLECULE|SINGLE_N2_MOLECULE|SINGLE_O2_MOLECULE|SINGLE_CO2_MOLECULE|SINGLE_CH4_MOLECULE|SINGLE_H2O_MOLECULE|SINGLE_NO2_MOLECULE|SINGLE_O3_MOLECULE), NullableIO<EnumerationIO(SINGLE_CO_MOLECULE|SINGLE_N2_MOLECULE|SINGLE_O2_MOLECULE|SINGLE_CO2_MOLECULE|SINGLE_CH4_MOLECULE|SINGLE_H2O_MOLECULE|SINGLE_NO2_MOLECULE|SINGLE_O3_MOLECULE)><br><strong>Return Type:</strong> VoidIO",
@@ -559,6 +580,17 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "NullableIO<BooleanIO>"
+    },
+    "NullableIO<EnumerationIO(FAST|NORMAL|SLOW)>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(FAST|NORMAL|SLOW)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO<EnumerationIO(FAST|NORMAL|SLOW)>"
     },
     "NullableIO<EnumerationIO(SINGLE_CO_MOLECULE|SINGLE_N2_MOLECULE|SINGLE_O2_MOLECULE|SINGLE_CO2_MOLECULE|SINGLE_CH4_MOLECULE|SINGLE_H2O_MOLECULE|SINGLE_NO2_MOLECULE|SINGLE_O3_MOLECULE)>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -1093,6 +1125,50 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "PropertyIO<BooleanIO>"
+    },
+    "PropertyIO<EnumerationIO(FAST|NORMAL|SLOW)>": {
+      "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
+      "events": [
+        "changed"
+      ],
+      "methodOrder": [
+        "link",
+        "lazyLink"
+      ],
+      "methods": {
+        "getValue": {
+          "documentation": "Gets the current value.",
+          "parameterTypes": [],
+          "returnType": "EnumerationIO(FAST|NORMAL|SLOW)"
+        },
+        "lazyLink": {
+          "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(EnumerationIO(FAST|NORMAL|SLOW),NullableIO<EnumerationIO(FAST|NORMAL|SLOW)>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "link": {
+          "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(EnumerationIO(FAST|NORMAL|SLOW),NullableIO<EnumerationIO(FAST|NORMAL|SLOW)>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "setValue": {
+          "documentation": "Sets the value of the Property. If the value differs from the previous value, listeners are notified with the new value.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "EnumerationIO(FAST|NORMAL|SLOW)"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "EnumerationIO(FAST|NORMAL|SLOW)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PropertyIO<EnumerationIO(FAST|NORMAL|SLOW)>"
     },
     "PropertyIO<EnumerationIO(SINGLE_CO_MOLECULE|SINGLE_N2_MOLECULE|SINGLE_O2_MOLECULE|SINGLE_CO2_MOLECULE|SINGLE_CH4_MOLECULE|SINGLE_H2O_MOLECULE|SINGLE_NO2_MOLECULE|SINGLE_O3_MOLECULE)>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
