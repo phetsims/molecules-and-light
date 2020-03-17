@@ -4276,7 +4276,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ResetAllButtonIO"
+      "phetioTypeName": "NodeIO"
     },
     "moleculesAndLight.moleculesAndLightScreen.view.resetAllButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
@@ -5657,7 +5657,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "phetioEngine": {
-      "phetioDocumentation": "Central point for PhET-iO interoperability",
+      "phetioDocumentation": "Central point for PhET-iO interoperability. Please see the IO Type Documentation for API details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
