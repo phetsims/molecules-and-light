@@ -88,5 +88,298 @@
   },
   "KeyboardHelpDialog.lightSourceSlider": {
     "value": "Light Source Slider"
+  },
+  "a11y": {
+    "playAreaSummary": {
+      "value": "The Play Area has an observation window that contains a light source and a molecule. You choose different light sources and molecules."
+    },
+    "controlAreaSummary": {
+      "value": "The Control Area has radio buttons to switch between normal and slow sim speeds, and buttons to pause and step forward actions happening in the observation window. You can also access details about the light spectrum and reset the sim."
+    },
+    "dynamicScreenSummary": {
+      "value": "Currently, {{playingState}}, {{lightSource}} light source {{emissionRate}} directly at {{target}}."
+    },
+    "screenSummaryWithHintPattern": {
+      "value": "{{summary}} Look for Reset Molecule button."
+    },
+    "interactionHint": {
+      "value": "Look for photon rate slider to explore."
+    },
+    "interactionHintWithPlayPattern": {
+      "value": "{{interactionHint}} If needed, set sim to Play under Timing Controls."
+    },
+    "lightSourceLabelPattern": {
+      "value": "{{lightSource}} Photon Rate"
+    },
+    "lightSources": {
+      "value": "Light Sources"
+    },
+    "isOffAndPoints": {
+      "value": "is off and points"
+    },
+    "emitsPhotonsSlowly": {
+      "value": "emits photons slowly and"
+    },
+    "emitsPhotonsVerySlow": {
+      "value": "emits photons very slow and"
+    },
+    "emitsPhotonsFast": {
+      "value": "emits photons fast and"
+    },
+    "slowly": {
+      "value": "slowly"
+    },
+    "verySlowly": {
+      "value": "very slowly"
+    },
+    "emitsPhotons": {
+      "value": "emits photons"
+    },
+    "observationWindowLabel": {
+      "value": "Observation Window"
+    },
+    "photonEmitterDescriptionPattern": {
+      "value": "{{lightSource}} light source {{emissionRate}} directly at {{target}}."
+    },
+    "inactiveAndPassingPhaseDescriptionPattern": {
+      "value": "{{lightSource}} photons passing through {{target}}."
+    },
+    "targetMoleculePattern": {
+      "value": "{{photonTarget}} molecule"
+    },
+    "absorptionPhaseBondsDescriptionPattern": {
+      "value": "{{lightSource}} photon absorbed and bonds of {{photonTarget}} molecule {{excitedRepresentation}}."
+    },
+    "absorptionPhaseMoleculeDescriptionPattern": {
+      "value": "{{lightSource}} photon absorbed and {{photonTarget}} molecule {{excitedRepresentation}}."
+    },
+    "breakApartPhaseDescriptionPattern": {
+      "value": "{{lightSource}} photon absorbed and {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}."
+    },
+    "emissionPhaseDescriptionPattern": {
+      "value": "{{photonTarget}} molecule stops {{excitedRepresentation}} and emits absorbed {{lightSource}} photon {{direction}}."
+    },
+    "moleculesOutOfViewPattern": {
+      "value": "{{firstMolecule}} and {{secondMolecule}} out of view. Reset molecule to make more observations."
+    },
+    "absorbed": {
+      "value": "absorbed"
+    },
+    "stretching": {
+      "value": "stretching"
+    },
+    "contracting": {
+      "value": "contracting"
+    },
+    "bending": {
+      "value": "bending"
+    },
+    "bendsUpAndDown": {
+      "value": "bends up and down"
+    },
+    "rotatingClockwise": {
+      "value": "rotating clockwise"
+    },
+    "rotatingCounterClockwise": {
+      "value": "rotating counter clockwise"
+    },
+    "rotating": {
+      "value": "rotating"
+    },
+    "startsRotatingPattern": {
+      "value": "starts {{rotation}}"
+    },
+    "stops": {
+      "value": "stops {{rotation}}"
+    },
+    "startsGlowing": {
+      "value": "starts glowing"
+    },
+    "glowing": {
+      "value": "glowing"
+    },
+    "breaksApart": {
+      "value": "breaks apart"
+    },
+    "emptySpace": {
+      "value": "empty space"
+    },
+    "emitterInObservationWindow": {
+      "value": "in observation window"
+    },
+    "emitterPausedInObservationWindow": {
+      "value": "paused in observation window"
+    },
+    "a": {
+      "value": "a"
+    },
+    "an": {
+      "value": "an"
+    },
+    "emissionSliderDescription": {
+      "value": "Set photon emission rate."
+    },
+    "emissionSliderWavelengthRatePatter": {
+      "value": "{{wavelength}} photon rate, {{frequency}}"
+    },
+    "lightSourceRadioButtonHelpText": {
+      "value": "Choose light source for observation window ordered low to high energy."
+    },
+    "molecules": {
+      "value": "Molecules"
+    },
+    "moleculesRadioButtonHelpText": {
+      "value": "Choose molecule for observation window."
+    },
+    "moleculeButtonLabelPattern": {
+      "value": "{{molecularName}}, {{molecularFormula}}, {{geometryTitle}}"
+    },
+    "spectrumButtonLabel": {
+      "value": "Show Light Spectrum"
+    },
+    "spectrumButtonDescription": {
+      "value": "Examine details of full light spectrum."
+    },
+    "spectrumDialogDescription": {
+      "value": "The Light Spectrum shows the relative energy of the different classifications of light waves as defined by their characteristic wavelengths (measured in meters) and frequencies (measured in Hertz or inverse seconds). The order from lowest energy (lowest frequency and largest wavelength) to highest energy (highest frequency and smallest wavelength) is Radio, Microwave, Infrared, Visible, Ultraviolet, X-ray, and Gamma ray. A sine wave [waveform] decreasing in wavelength (as measured by the distance from peak to peak) and increasing frequency (as measured by the number of waves per time interval) from Radio to Gamma Ray."
+    },
+    "moleculeSelectionAlertPattern": {
+      "value": "{{target}} molecule now in observation window."
+    },
+    "wavelengthSelectionAlertPattern": {
+      "value": "{{wavelength}} light source now in observation window."
+    },
+    "carbonMonoxide": {
+      "value": "Carbon Monoxide"
+    },
+    "nitrogen": {
+      "value": "Nitrogen"
+    },
+    "oxygen": {
+      "value": "Oxygen"
+    },
+    "diatomicOxygen": {
+      "value": "Diatomic Oxygen"
+    },
+    "carbonDioxide": {
+      "value": "Carbon Dioxide"
+    },
+    "nitrogenDioxide": {
+      "value": "Nitrogen Dioxide"
+    },
+    "water": {
+      "value": "Water"
+    },
+    "ozone": {
+      "value": "Ozone"
+    },
+    "methane": {
+      "value": "Methane"
+    },
+    "linear": {
+      "value": "linear"
+    },
+    "bent": {
+      "value": "bent"
+    },
+    "tetrahedral": {
+      "value": "tetrahedral"
+    },
+    "diatomic": {
+      "value": "diatomic"
+    },
+    "linearTitle": {
+      "value": "Linear"
+    },
+    "bentTitle": {
+      "value": "Bent"
+    },
+    "tetrahedralTitle": {
+      "value": "Tetrahedral"
+    },
+    "diatomicTitle": {
+      "value": "Diatomic"
+    },
+    "geometryLabelPattern": {
+      "value": "This molecule has {{geometry}} geometry."
+    },
+    "linearGeometryDescription": {
+      "value": "Linear, a molecule with two or three atoms bonded to form a straight line. Bond angle is 180 degrees."
+    },
+    "bentGeometryDescription": {
+      "value": "Bent, molecule with a central atom bonded to two other atoms that form an angle. Bond angle varies below 120 degrees."
+    },
+    "tetrahedralGeometryDescription": {
+      "value": "Tetrahedral, molecule with a central atom bonded to four other atoms forming a tetrahedron with 109.5° angles between them, like four-sided dice."
+    },
+    "shortStretchingAlert": {
+      "value": "Stretching."
+    },
+    "longStretchingAlert": {
+      "value": "Bonds of molecule stretching."
+    },
+    "shortBendingAlert": {
+      "value": "Bending."
+    },
+    "longBendingAlert": {
+      "value": "Bonds of molecule bend up and down."
+    },
+    "shortRotatingAlert": {
+      "value": "Rotating."
+    },
+    "longRotatingAlert": {
+      "value": "Molecule rotates."
+    },
+    "shortGlowingAlert": {
+      "value": "Glowing."
+    },
+    "longGlowingAlert": {
+      "value": "Molecule glows."
+    },
+    "breaksApartAlertPattern": {
+      "value": "Molecule breaks apart into {{firstMolecule}} and {{secondMolecule}}."
+    },
+    "clockwise": {
+      "value": "clockwise"
+    },
+    "counterClockwise": {
+      "value": "counter clockwise"
+    },
+    "lightSourceOff": {
+      "value": "light source off"
+    },
+    "emissionRatePattern": {
+      "value": "{{lightSource}} photon emits {{emissionRate}}"
+    },
+    "verySlow": {
+      "value": "very slow"
+    },
+    "slow": {
+      "value": "slow"
+    },
+    "fast": {
+      "value": "fast"
+    },
+    "pausedEmittingPattern": {
+      "value": "Absorbed {{lightSource}} photon emitting from {{molecularName}} molecule {{direction}}."
+    },
+    "pausedPassingPattern": {
+      "value": "{{lightSource}} photons passing through {{molecularName}} molecule."
+    },
+    "slowMotionVibratingPattern": {
+      "value": "Photon absorbed. Bonds of molecule {{excitedRepresentation}}."
+    },
+    "slowMotionAbsorbedPattern": {
+      "value": "Photon absorbed. Molecule {{excitedRepresentation}}."
+    },
+    "slowMotionBreakApartPattern": {
+      "value": "Photon absorbed. Molecule breaks apart. {{firstMolecule}} and {{secondMolecule}} float away."
+    },
+    "slowMotionEmittedPattern": {
+      "value": "Photon emitted {{direction}}."
+    },
+    "lookForNewMoleculeButton": {
+      "value": "Look for Reset Molecule button."
+    }
   }
 }
