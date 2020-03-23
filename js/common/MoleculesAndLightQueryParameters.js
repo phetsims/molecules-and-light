@@ -28,13 +28,7 @@ const MoleculesAndLightQueryParameters = QueryStringMachine.getAll( {
     isValidValue: value => {
       return 0 <= value && value <= 1;
     }
-  },
-
-  // for testing as we decide whether to use stereo or mono sounds for some of the sonification
-  useStereoSounds: {
-    type: 'flag'
   }
-
 } );
 
 moleculesAndLight.register( 'MoleculesAndLightQueryParameters', MoleculesAndLightQueryParameters );
