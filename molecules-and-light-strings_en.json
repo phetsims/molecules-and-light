@@ -112,10 +112,7 @@
       "value": "{{summary}} Reset or change molecule."
     },
     "interactionHint": {
-      "value": "Look for photon rate slider to explore."
-    },
-    "interactionHintWithPlayPattern": {
-      "value": "{{interactionHint}} If needed, set sim to Play under Timing Controls."
+      "value": "Turn light source on to explore."
     },
     "lightSourceLabelPattern": {
       "value": "{{lightSource}} Photon Rate"
