@@ -97,10 +97,10 @@
       "value": "The Control Area has radio buttons to switch between normal and slow sim speeds, and buttons to pause and step forward actions happening in observation window. You can also access details about the light spectrum and reset the sim."
     },
     "dynamicPlayingScreenSummaryPattern": {
-      "value": "Currently, {{lightSource}} light source {{emissionRate}} directly at {{target}}."
+      "value": "Currently, {{lightSource}} light source {{emissionDescription}} directly at {{target}}."
     },
     "dynamicPausedScreenSummaryPattern": {
-      "value": "Currently, {{playingState}}. {{lightSource}} light source {{emissionRate}} directly at {{target}}."
+      "value": "Currently, {{playingState}}. {{lightSource}} light source {{emissionDescription}} directly at {{target}}."
     },
     "simIsPaused": {
       "value": "sim is paused"
@@ -109,7 +109,7 @@
       "value": "sim is paused on slow speed"
     },
     "screenSummaryWithHintPattern": {
-      "value": "{{summary}} Look for Reset Molecule button."
+      "value": "{{summary}} Reset or change molecule."
     },
     "interactionHint": {
       "value": "Look for photon rate slider to explore."
@@ -143,6 +143,9 @@
     },
     "emitsPhotons": {
       "value": "emits photons"
+    },
+    "emitsPhotonsOnSlowSpeed": {
+      "value": "emits photons on slow speed"
     },
     "observationWindowLabel": {
       "value": "Observation Window"
