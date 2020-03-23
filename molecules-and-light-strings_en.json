@@ -94,10 +94,19 @@
       "value": "The Play Area has an observation window that contains a light source and a molecule. You choose different light sources and molecules."
     },
     "controlAreaSummary": {
-      "value": "The Control Area has radio buttons to switch between normal and slow sim speeds, and buttons to pause and step forward actions happening in the observation window. You can also access details about the light spectrum and reset the sim."
+      "value": "The Control Area has radio buttons to switch between normal and slow sim speeds, and buttons to pause and step forward actions happening in observation window. You can also access details about the light spectrum and reset the sim."
     },
-    "dynamicScreenSummary": {
-      "value": "Currently, {{playingState}}, {{lightSource}} light source {{emissionRate}} directly at {{target}}."
+    "dynamicPlayingScreenSummaryPattern": {
+      "value": "Currently, {{lightSource}} light source {{emissionRate}} directly at {{target}}."
+    },
+    "dynamicPausedScreenSummaryPattern": {
+      "value": "Currently, {{playingState}}. {{lightSource}} light source {{emissionRate}} directly at {{target}}."
+    },
+    "simIsPaused": {
+      "value": "sim is paused"
+    },
+    "simIsPausedOnSlowSpeed": {
+      "value": "sim is paused on slow speed"
     },
     "screenSummaryWithHintPattern": {
       "value": "{{summary}} Look for Reset Molecule button."
@@ -203,12 +212,6 @@
     },
     "emptySpace": {
       "value": "empty space"
-    },
-    "emitterInObservationWindow": {
-      "value": "in observation window"
-    },
-    "emitterPausedInObservationWindow": {
-      "value": "paused in observation window"
     },
     "a": {
       "value": "a"
