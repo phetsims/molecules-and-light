@@ -114,6 +114,23 @@
     "interactionHint": {
       "value": "Turn light source on to explore."
     },
+    "lightSource": {
+      "buttonLabelPattern": {
+        "value": "{{lightSource}} Light Source"
+      },
+      "microwave": {
+        "value": "Microwave"
+      },
+      "infrared": {
+        "value": "Infrared"
+      },
+      "visible": {
+        "value": "Visible"
+      },
+      "ultraviolet": {
+        "value": "Ultraviolet"
+      }
+    },
     "lightSourceLabelPattern": {
       "value": "{{lightSource}} Photon Rate"
     },
