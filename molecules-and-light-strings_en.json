@@ -169,7 +169,7 @@
       "value": "{{photonTarget}} molecule stops {{excitedRepresentation}} and emits absorbed {{lightSource}} photon {{direction}}."
     },
     "moleculesOutOfViewPattern": {
-      "value": "{{firstMolecule}} and {{secondMolecule}} out of view. Reset molecule to make more observations."
+      "value": "{{firstMolecule}} and {{secondMolecule}} out of view. Reset or change molecule to make more observations."
     },
     "absorbed": {
       "value": "absorbed"
@@ -460,7 +460,7 @@
       "value": "Photon emitted {{direction}}."
     },
     "lookForNewMoleculeButton": {
-      "value": "Look for Reset Molecule button."
+      "value": "Reset or change molecule."
     }
   }
 }
