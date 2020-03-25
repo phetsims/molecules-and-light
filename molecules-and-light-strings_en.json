@@ -240,7 +240,7 @@
       "value": "an"
     },
     "emissionSliderDescription": {
-      "value": "Set photon emission rate to desired value."
+      "value": "Set photon emission rate."
     },
     "emissionSliderWavelengthRatePatter": {
       "value": "{{wavelength}} photon rate, {{frequency}}"
