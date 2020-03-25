@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.5.0-dev.40 Mon Mar 23 2020 16:26:49 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# molecules-and-light 1.5.0-dev.41 Wed Mar 25 2020 11:08:09 GMT-0400 (Eastern Daylight Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "master"
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "0bcad286fd9e6f6f8df5f6be15b07de48df09709",
+    "sha": "9c0740a62bf6c31743c6b2599a509c0f5bae389b",
     "branch": "master"
   },
   "dot": {
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "joist": {
-    "sha": "aea0c31912c96d5f871af616b547ca3b472257fd",
+    "sha": "06b2beea75fd8e1067d7e2e09b29eba69fd22d2d",
     "branch": "master"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "d4541fb9fda888be8ca110ff68ff4fb5a5e7cabb",
+    "sha": "ea8c1a2e854262cba29afbccfea0e02959872106",
     "branch": "master"
   },
   "nitroglycerin": {
@@ -65,7 +65,7 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "6cb31d80e99193ebbeeeea6bed4641dd17782974",
+    "sha": "31d067ec758c1f8ff3c2263ae9a75e90fee58515",
     "branch": "master"
   },
   "sherpa": {
@@ -77,7 +77,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "81e1f1b6a1ee3112827f27c1794615139031c410",
+    "sha": "62a515acddfe6837ec4464f1bc1a9941d627ca5b",
     "branch": "master"
   },
   "tambo": {
