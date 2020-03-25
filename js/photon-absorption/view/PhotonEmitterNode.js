@@ -12,6 +12,7 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import inherit from '../../../../phet-core/js/inherit.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import BooleanRoundStickyToggleButton from '../../../../sun/js/buttons/BooleanRoundStickyToggleButton.js';
@@ -22,8 +23,13 @@ import flashlightOnImage from '../../../mipmaps/flashlight_png.js';
 import heatLampOnImage from '../../../mipmaps/infrared-source_png.js';
 import microwaveTransmitterImage from '../../../mipmaps/microwave-source_png.js';
 import uvLightOnImage from '../../../mipmaps/uv-source_png.js';
+import MoleculesAndLightQueryParameters from '../../common/MoleculesAndLightQueryParameters.js';
+import moleculesAndLightStrings from '../../molecules-and-light-strings.js';
 import moleculesAndLight from '../../moleculesAndLight.js';
 import WavelengthConstants from '../model/WavelengthConstants.js';
+
+const lightSourceButtonLabelPatternString = moleculesAndLightStrings.a11y.lightSource.buttonLabelPattern;
+const lightSourceButtonHelpTextString = moleculesAndLightStrings.a11y.lightSource.buttonHelpText;
 
 /**
  * Constructor for the photon emitter node.
@@ -43,6 +49,23 @@ function PhotonEmitterNode( width, model, tandem ) {
 
   this.model = model; // @private
 
+  // create the 'on' button for the emitter
+  this.button = new BooleanRoundStickyToggleButton( this.model.photonEmitterOnProperty, {
+    radius: 15,
+    baseColor: '#33dd33',
+
+    // PDOM
+    descriptionContent: lightSourceButtonHelpTextString,
+    appendDescription: true,
+
+    tandem: tandem.createTandem( 'button' )
+  } );
+
+  // still deciding whether we want this role on the button, see https://github.com/phetsims/molecules-and-light/issues/296
+  if ( MoleculesAndLightQueryParameters.switch ) {
+    this.button.setAriaRole( 'switch' );
+  }
+
   // update the photon emitter upon changes to the photon wavelength
   model.photonWavelengthProperty.link( function( photonWavelength ) {
     const emitterTandemName = WavelengthConstants.getTandemName( photonWavelength );
@@ -53,7 +76,6 @@ function PhotonEmitterNode( width, model, tandem ) {
   model.emissionFrequencyProperty.link( function( emissionFrequency ) {
     self.updateOffImageOpacity( self.model.photonWavelengthProperty.get(), emissionFrequency );
   } );
-
 }
 
 moleculesAndLight.register( 'PhotonEmitterNode', PhotonEmitterNode );
@@ -107,12 +129,9 @@ export default inherit( Node, PhotonEmitterNode, {
       this.addChild( this.photonEmitterOffImage );
     }
 
-    // create the 'on' button for the emitter
-    this.button = this.button || new BooleanRoundStickyToggleButton( this.model.photonEmitterOnProperty, {
-      radius: 15,
-      baseColor: '#33dd33',
-
-      tandem: tandem.createTandem( 'button' )
+    // PDOM - update the accessible name for the button
+    this.button.innerContent = StringUtils.fillIn( lightSourceButtonLabelPatternString, {
+      lightSource: WavelengthConstants.getLightSourceName( photonWavelength )
     } );
 
     // add the button to the correct location on the photon emitter

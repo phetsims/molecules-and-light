@@ -114,6 +114,26 @@
     "interactionHint": {
       "value": "Turn light source on to explore."
     },
+    "lightSource": {
+      "buttonLabelPattern": {
+        "value": "{{lightSource}} Light Source"
+      },
+      "microwave": {
+        "value": "Microwave"
+      },
+      "infrared": {
+        "value": "Infrared"
+      },
+      "visible": {
+        "value": "Visible"
+      },
+      "ultraviolet": {
+        "value": "Ultraviolet"
+      },
+      "buttonHelpText": {
+        "value": "Activate light source to start exploration."
+      }
+    },
     "lightSourceLabelPattern": {
       "value": "{{lightSource}} Photon Rate"
     },
@@ -169,7 +189,7 @@
       "value": "{{photonTarget}} molecule stops {{excitedRepresentation}} and emits absorbed {{lightSource}} photon {{direction}}."
     },
     "moleculesOutOfViewPattern": {
-      "value": "{{firstMolecule}} and {{secondMolecule}} out of view. Reset molecule to make more observations."
+      "value": "{{firstMolecule}} and {{secondMolecule}} out of view. Reset or change molecule to make more observations."
     },
     "absorbed": {
       "value": "absorbed"
@@ -243,8 +263,86 @@
     "spectrumButtonDescription": {
       "value": "Examine details of full light spectrum."
     },
-    "spectrumDialogDescription": {
-      "value": "The Light Spectrum shows the relative energy of the different classifications of light waves as defined by their characteristic wavelengths (measured in meters) and frequencies (measured in Hertz or inverse seconds). The order from lowest energy (lowest frequency and largest wavelength) to highest energy (highest frequency and smallest wavelength) is Radio, Microwave, Infrared, Visible, Ultraviolet, X-ray, and Gamma ray. A sine wave [waveform] decreasing in wavelength (as measured by the distance from peak to peak) and increasing frequency (as measured by the number of waves per time interval) from Radio to Gamma Ray."
+    "spectrumWindowDescription": {
+      "value": "The Light Spectrum shows the relative energy of the different classifications of light waves as defined by their characteristic wavelengths (measured in meters) and frequencies (measured in Hertz or inverse seconds)."
+    },
+    "spectrumWindowEnergyDescription": {
+      "value": "The order from lowest energy (lowest frequency and largest wavelength) to highest energy (highest frequency and smallest wavelength) is Radio, Microwave, Infrared, Visible, Ultraviolet, X-ray, and Gamma ray."
+    },
+    "spectrumWindowSinWaveDescription": {
+      "value": "A sine wave decreasing in wavelength (as measured by the distance from peak to peak) and increasing frequency (as measured by the number of waves per time interval) from Radio to Gamma Ray."
+    },
+    "spectrumWindowLabelledSpectrumLabel": {
+      "value": "Frequency and Wavelength Ranges"
+    },
+    "spectrumWindowLabelledSpectrumDescription": {
+      "value": "In detail, the frequency and wavelength ranges for each spectrum, listed from lowest to highest energy"
+    },
+    "spectrumWindowLabelledSpectrumRadioLabel": {
+      "value": "Radio, large range:"
+    },
+    "spectrumWindowLabelledSpectrumMicrowaveLabel": {
+      "value": "Microwave, medium range:"
+    },
+    "spectrumWindowLabelledSpectrumInfraredLabel": {
+      "value": "Infrared, medium range:"
+    },
+    "spectrumWindowLabelledSpectrumVisibleLabel": {
+      "value": "Visible, tiny range:"
+    },
+    "spectrumWindowLabelledSpectrumUltravioletLabel": {
+      "value": "Ultraviolet, small range:"
+    },
+    "spectrumWindowLabelledSpectrumXRayLabel": {
+      "value": "X-ray, medium range:"
+    },
+    "spectrumWindowLabelledSpectrumGammaRayLabel": {
+      "value": "Gamma ray, medium range:"
+    },
+    "spectrumWindowLabelledSpectrumRadioFrequencyDescription": {
+      "value": "Frequencies less than 10 to the 4 Hertz to 10 to the 9 Hertz."
+    },
+    "spectrumWindowLabelledSpectrumRadioWavelengthDescription": {
+      "value": "Wavelengths greater than 10 to the 4 meters to 5 times 10 to the negative 1 meters."
+    },
+    "spectrumWindowLabelledSpectrumMicrowaveFrequencyDescription": {
+      "value": "Frequencies 10 to the 9 to 5 times 10 to the 11 Hertz."
+    },
+    "spectrumWindowLabelledSpectrumMicrowaveWavelengthDescription": {
+      "value": "Wavelengths 10 to the negative 1 to 10 to the negative 3 meters."
+    },
+    "spectrumWindowLabelledSpectrumInfraredFrequencyDescription": {
+      "value": "Frequencies 5 times 10 to the 11 to 4 times 10 to the 14 Hertz."
+    },
+    "spectrumWindowLabelledSpectrumInfraredWavelengthDescription": {
+      "value": "Wavelengths 10 to the negative 3 to 7 times 10 to the negative 7 meters."
+    },
+    "spectrumWindowLabelledSpectrumVisibleFrequencyDescription": {
+      "value": "Frequencies 4 times 10 to the 14 to 7 times 10 to the 14 Hertz."
+    },
+    "spectrumWindowLabelledSpectrumVisibleWavelengthDescription": {
+      "value": "Wavelengths 7 times 10 to the negative 7 to 4 times 10 to the negative 7 meters."
+    },
+    "spectrumWindowLabelledSpectrumVisibleGraphicalDescription": {
+      "value": "Shown from low energy to high energy as a rainbow of colors (dark red to red to orange to yellow to green to blue to violet)."
+    },
+    "spectrumWindowLabelledSpectrumUltravioletFrequencyDescription": {
+      "value": "Frequencies 10 to the 15 to 10 to the 16 Hertz."
+    },
+    "spectrumWindowLabelledSpectrumUltravioletWavelengthDescription": {
+      "value": "Wavelengths 4 times 10 to the negative 7 to 10 to the negative 8 meters."
+    },
+    "spectrumWindowLabelledSpectrumXRayFrequencyDescription": {
+      "value": "Frequencies 10 to the 16 to 10 to the 19 Hertz."
+    },
+    "spectrumWindowLabelledSpectrumXRayWavelengthDescription": {
+      "value": "Wavelengths 10 to the negative 8 to 5 times 10 to the negative 11 meters."
+    },
+    "spectrumWindowLabelledSpectrumGammaRayFrequencyDescription": {
+      "value": "Frequencies 10 to the 19 Hertz to greater than 10 to the 20 Hertz."
+    },
+    "spectrumWindowLabelledSpectrumGammaRayWavelengthDescription": {
+      "value": "Wavelengths 5 times 10 to the negative 11 meters to less than 10 to the negative 12 meters."
     },
     "moleculeSelectionAlertPattern": {
       "value": "{{target}} molecule now in observation window."
@@ -382,7 +480,7 @@
       "value": "Photon emitted {{direction}}."
     },
     "lookForNewMoleculeButton": {
-      "value": "Look for Reset Molecule button."
+      "value": "Reset or change molecule."
     }
   }
 }
