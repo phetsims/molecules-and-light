@@ -131,7 +131,7 @@
         "value": "Ultraviolet"
       },
       "buttonHelpText": {
-        "value": "Activate light source to start exploration."
+        "value": "Turn light source on to start photons."
       }
     },
     "lightSourceLabelPattern": {
