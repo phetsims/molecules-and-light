@@ -8,7 +8,7 @@
 
 import SliderAndGeneralKeyboardHelpContent
   from '../../../../scenery-phet/js/keyboard/help/SliderAndGeneralKeyboardHelpContent.js';
-import moleculesAndLightStrings from '../../molecules-and-light-strings.js';
+import moleculesAndLightStrings from '../../moleculesAndLightStrings.js';
 import moleculesAndLight from '../../moleculesAndLight.js';
 
 const keyboardHelpDialogLightSourceSliderString = moleculesAndLightStrings.KeyboardHelpDialog.lightSourceSlider;
