@@ -1951,19 +1951,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PhotonAbsorptionModelIO"
     },
-    "moleculesAndLight.moleculesAndLightScreen.model.emissionFrequencyProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": false,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "NumberPropertyIO"
-    },
     "moleculesAndLight.moleculesAndLightScreen.model.molecules": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
