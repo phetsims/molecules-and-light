@@ -6,10 +6,9 @@
  * @author Michael Kauzmann (PhET Interactive Simulations)
  */
 
-import SliderAndGeneralKeyboardHelpContent
-  from '../../../../scenery-phet/js/keyboard/help/SliderAndGeneralKeyboardHelpContent.js';
-import moleculesAndLightStrings from '../../moleculesAndLightStrings.js';
+import SliderAndGeneralKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/SliderAndGeneralKeyboardHelpContent.js';
 import moleculesAndLight from '../../moleculesAndLight.js';
+import moleculesAndLightStrings from '../../moleculesAndLightStrings.js';
 
 const keyboardHelpDialogLightSourceSliderString = moleculesAndLightStrings.KeyboardHelpDialog.lightSourceSlider;
 
