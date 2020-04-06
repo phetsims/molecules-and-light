@@ -167,8 +167,8 @@
     "observationWindowLabel": {
       "value": "Observation Window"
     },
-    "photonEmitterDescriptionPattern": {
-      "value": "{{lightSource}} light source {{emissionRate}} directly at {{target}}."
+    "photonEmitterOffDescriptionPattern": {
+      "value": "{{lightSource}} light source is off and points directly at {{target}}."
     },
     "inactiveAndPassingPhaseDescriptionPattern": {
       "value": "{{lightSource}} photons passing through {{target}}."
