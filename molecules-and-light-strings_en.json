@@ -206,6 +206,9 @@
     "bendsUpAndDown": {
       "value": "bends up and down"
     },
+    "stretchBackAndForth": {
+      "value": "stretch back and forth"
+    },
     "rotatingClockwise": {
       "value": "rotating clockwise"
     },
