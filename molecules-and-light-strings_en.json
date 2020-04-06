@@ -185,8 +185,8 @@
     "breakApartPhaseDescriptionPattern": {
       "value": "{{lightSource}} photon absorbed, {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}."
     },
-    "emissionPhaseDescriptionPattern": {
-      "value": "{{photonTarget}} molecule stops {{excitedRepresentation}} and emits absorbed {{lightSource}} photon {{direction}}."
+      "emissionPhaseDescriptionPattern": {
+      "value": "Absorbed  {{lightSource}} photon emitted from {{photonTarget}} molecule {{direction}}."
     },
     "moleculesOutOfViewPattern": {
       "value": "{{firstMolecule}} and {{secondMolecule}} out of view. Reset or change molecule to make more observations."
