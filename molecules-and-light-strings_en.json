@@ -177,13 +177,13 @@
       "value": "{{photonTarget}} molecule"
     },
     "absorptionPhaseBondsDescriptionPattern": {
-      "value": "{{lightSource}} photon absorbed and bonds of {{photonTarget}} molecule {{excitedRepresentation}}."
+      "value": "{{lightSource}} photon absorbed, bonds of {{photonTarget}} molecule {{excitedRepresentation}}."
     },
     "absorptionPhaseMoleculeDescriptionPattern": {
-      "value": "{{lightSource}} photon absorbed and {{photonTarget}} molecule {{excitedRepresentation}}."
+      "value": "{{lightSource}} photon absorbed, {{photonTarget}} molecule {{excitedRepresentation}}."
     },
     "breakApartPhaseDescriptionPattern": {
-      "value": "{{lightSource}} photon absorbed and {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}."
+      "value": "{{lightSource}} photon absorbed, {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}."
     },
     "emissionPhaseDescriptionPattern": {
       "value": "{{photonTarget}} molecule stops {{excitedRepresentation}} and emits absorbed {{lightSource}} photon {{direction}}."
