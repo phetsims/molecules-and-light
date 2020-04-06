@@ -479,10 +479,16 @@
     "slowMotionBreakApartPattern": {
       "value": "Photon absorbed. Molecule breaks apart. {{firstMolecule}} and {{secondMolecule}} float away."
     },
+    "moleculesFloatAwayPattern": {
+      "value": "{{firstMolecule}} and {{secondMolecule}} float away."
+    },
+    "breakApartDescriptionWithHintPattern": {
+      "value": "{{description}} {{hint}}"
+    },
     "slowMotionEmittedPattern": {
       "value": "Photon emitted {{direction}}."
     },
-    "lookForNewMoleculeButton": {
+    "resetOrChangeMolecule": {
       "value": "Reset or change molecule."
     }
   }
