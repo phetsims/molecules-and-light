@@ -27,16 +27,13 @@ import MoleculeUtils from '../../photon-absorption/view/MoleculeUtils.js';
 import ActiveMoleculeAlertManager from './ActiveMoleculeAlertManager.js';
 
 const emptySpaceString = moleculesAndLightStrings.a11y.emptySpace;
-const photonEmitterDescriptionPatternString = moleculesAndLightStrings.a11y.photonEmitterDescriptionPattern;
+const photonEmitterOffDescriptionPatternString = moleculesAndLightStrings.a11y.photonEmitterOffDescriptionPattern;
 const targetMoleculePatternString = moleculesAndLightStrings.a11y.targetMoleculePattern;
-const inactiveAndPassingPhaseDescriptionPatternString = moleculesAndLightStrings.a11y.inactiveAndPassingPhaseDescriptionPattern;
-const stretchingString = moleculesAndLightStrings.a11y.stretching;
-const bendingString = moleculesAndLightStrings.a11y.bending;
-const glowingString = moleculesAndLightStrings.a11y.glowing;
-const rotatingCounterClockwiseString = moleculesAndLightStrings.a11y.rotatingCounterClockwise;
-const rotatingClockwiseString = moleculesAndLightStrings.a11y.rotatingClockwise;
+const inactiveAndPassesPhaseDescriptionPatternString = moleculesAndLightStrings.a11y.inactiveAndPassesPhaseDescriptionPattern;
 const emissionPhaseDescriptionPatternString = moleculesAndLightStrings.a11y.emissionPhaseDescriptionPattern;
 const moleculesOutOfViewPatternString = moleculesAndLightStrings.a11y.moleculesOutOfViewPattern;
+const breakApartDescriptionWithHintPatternString = moleculesAndLightStrings.a11y.breakApartDescriptionWithHintPattern;
+const resetOrChangeMoleculeString = moleculesAndLightStrings.a11y.resetOrChangeMolecule;
 
 class ObservationWindowDescriber {
 
@@ -162,7 +159,10 @@ class ObservationWindowDescriber {
       this.moleculeBrokeApart = true;
       this.wavelengthOnAbsorption = this.model.photonWavelengthProperty.get();
 
-      descriptionNode.innerContent = this.alertManager.getBreakApartPhaseDescription( moleculeA, moleculeB );
+      descriptionNode.innerContent = StringUtils.fillIn( breakApartDescriptionWithHintPatternString, {
+        description: this.alertManager.getBreakApartPhaseDescription( moleculeA, moleculeB ),
+        hint: resetOrChangeMoleculeString
+      } );
 
       const activeMolecules = this.model.activeMolecules;
 
@@ -202,7 +202,6 @@ class ObservationWindowDescriber {
     const targetMolecule = this.model.targetMolecule;
 
     const lightSourceString = WavelengthConstants.getLightSourceName( photonWavelength );
-    const emissionRateString = 'PLEASE CHANGE THIS'; // emission rates removed, change this
 
     let targetString = null;
     if ( targetMolecule ) {
@@ -217,14 +216,13 @@ class ObservationWindowDescriber {
     if ( !emitterOn ) {
 
       // no photons moving, indicate to the user to begin firing photons
-      return StringUtils.fillIn( photonEmitterDescriptionPatternString, {
+      return StringUtils.fillIn( photonEmitterOffDescriptionPatternString, {
         lightSource: lightSourceString,
-        emissionRate: emissionRateString,
         target: targetString
       } );
     }
     else {
-      return StringUtils.fillIn( inactiveAndPassingPhaseDescriptionPatternString, {
+      return StringUtils.fillIn( inactiveAndPassesPhaseDescriptionPatternString, {
         lightSource: lightSourceString,
         target: targetString
       } );
@@ -233,7 +231,7 @@ class ObservationWindowDescriber {
 
   /**
    * Get a description of the molecule after it emits a photon. Will return something like
-   * "Carbon Monoxide molecule stops stretching and emits absorbed photon up and to the left."
+   * "Absorbed Infrared photon emitted from Carbon Dioxide molecule up and to the left."
    * @private
    *
    * @param {Photon} photon - the emitted photon
@@ -248,23 +246,8 @@ class ObservationWindowDescriber {
       modelViewTransform: this.modelViewTransform
     } );
 
-    let representationString = null;
-    if ( this.moleculeVibrating ) {
-      representationString = this.model.targetMolecule.vibratesByStretching() ? stretchingString : bendingString;
-    }
-    else if ( this.moleculeHighElectronicEnergyState ) {
-      representationString = glowingString;
-    }
-    else if ( this.moleculeRotating ) {
-      representationString = this.moleculeRotatingClockwise ? rotatingClockwiseString : rotatingCounterClockwiseString;
-    }
-    else {
-      throw new Error( 'undhandled excitation representation' );
-    }
-
     return StringUtils.fillIn( emissionPhaseDescriptionPatternString, {
       photonTarget: photonTargetString,
-      excitedRepresentation: representationString,
       lightSource: lightSourceString,
       direction: directionString
     } );

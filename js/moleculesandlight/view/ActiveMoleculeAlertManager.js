@@ -20,7 +20,6 @@ import MoleculeUtils from '../../photon-absorption/view/MoleculeUtils.js';
 const pausedEmittingPatternString = moleculesAndLightStrings.a11y.pausedEmittingPattern;
 const absorptionPhaseBondsDescriptionPatternString = moleculesAndLightStrings.a11y.absorptionPhaseBondsDescriptionPattern;
 const shortStretchingAlertString = moleculesAndLightStrings.a11y.shortStretchingAlert;
-const contractingString = moleculesAndLightStrings.a11y.contracting;
 const bendsUpAndDownString = moleculesAndLightStrings.a11y.bendsUpAndDown;
 const longStretchingAlertString = moleculesAndLightStrings.a11y.longStretchingAlert;
 const shortBendingAlertString = moleculesAndLightStrings.a11y.shortBendingAlert;
@@ -40,10 +39,11 @@ const slowMotionBreakApartPatternString = moleculesAndLightStrings.a11y.slowMoti
 const glowingString = moleculesAndLightStrings.a11y.glowing;
 const slowMotionEmittedPatternString = moleculesAndLightStrings.a11y.slowMotionEmittedPattern;
 const absorptionPhaseMoleculeDescriptionPatternString = moleculesAndLightStrings.a11y.absorptionPhaseMoleculeDescriptionPattern;
-const breakApartPhaseDescriptionPatternString = moleculesAndLightStrings.a11y.breakApartPhaseDescriptionPattern;
 const startsGlowingString = moleculesAndLightStrings.a11y.startsGlowing;
 const startsRotatingPatternString = moleculesAndLightStrings.a11y.startsRotatingPattern;
 const breaksApartString = moleculesAndLightStrings.a11y.breaksApart;
+const stretchBackAndForthString = moleculesAndLightStrings.a11y.stretchBackAndForth;
+const moleculesFloatAwayPatternString = moleculesAndLightStrings.a11y.moleculesFloatAwayPattern;
 
 // constants
 // in seconds, amount of time before an alert describing molecule/photon interaction goes to the utteranceQueue to
@@ -198,15 +198,10 @@ class ActiveMoleculeAlertManager {
     const photonTargetString = PhotonTarget.getMoleculeName( this.photonAbsorptionModel.photonTargetProperty.get() );
 
     if ( targetMolecule.vibratesByStretching() ) {
-
-      // more displacement with -sin( vibrationRadians ) and so when the slope of that function is negative
-      // (derivative of sin is cos) the atoms are expanding
-      const stretching = Math.cos( vibrationRadians ) < 0;
-
       descriptionString = StringUtils.fillIn( absorptionPhaseBondsDescriptionPatternString, {
         lightSource: lightSourceString,
         photonTarget: photonTargetString,
-        excitedRepresentation: stretching ? stretchingString : contractingString
+        excitedRepresentation: stretchBackAndForthString
       } );
     }
     else {
@@ -225,7 +220,7 @@ class ActiveMoleculeAlertManager {
   /**
    * Get a string the describes the molecule when it starts to glow from its high electronic energy state
    * representation after absorption. Will return a string like
-   * "‪Visible‬ photon absorbed and bonds of ‪Nitrogen Dioxide‬ molecule starts glowing."
+   * "‪Visible‬ photon absorbed and Nitrogen Dioxide‬ molecule starts glowing."
    * @private
    *
    * @returns {string}
@@ -234,7 +229,7 @@ class ActiveMoleculeAlertManager {
     const lightSourceString = WavelengthConstants.getLightSourceName( this.wavelengthOnAbsorption );
     const photonTargetString = PhotonTarget.getMoleculeName( this.photonAbsorptionModel.photonTargetProperty.get() );
 
-    return StringUtils.fillIn( absorptionPhaseBondsDescriptionPatternString, {
+    return StringUtils.fillIn( absorptionPhaseMoleculeDescriptionPatternString, {
       lightSource: lightSourceString,
       photonTarget: photonTargetString,
       excitedRepresentation: startsGlowingString
@@ -267,20 +262,15 @@ class ActiveMoleculeAlertManager {
   /**
    * Returns a string that describes the molecule after it breaks apart into two other molecules. Will return
    * a string like
-   * "Ultraviolet photon absorbed and Ozone molecule breaks apart into O2 and O."
+   * "NO and O floating away."
    *
    * @returns {string}
    */
   getBreakApartPhaseDescription( firstMolecule, secondMolecule ) {
-    const lightSourceString = WavelengthConstants.getLightSourceName( this.wavelengthOnAbsorption );
-    const photonTargetString = PhotonTarget.getMoleculeName( this.photonAbsorptionModel.photonTargetProperty.get() );
-
     const firstMolecularFormula = MoleculeUtils.getMolecularFormula( firstMolecule );
     const secondMolecularFormula = MoleculeUtils.getMolecularFormula( secondMolecule );
 
-    return StringUtils.fillIn( breakApartPhaseDescriptionPatternString, {
-      lightSource: lightSourceString,
-      photonTarget: photonTargetString,
+    return StringUtils.fillIn( moleculesFloatAwayPatternString, {
       firstMolecule: firstMolecularFormula,
       secondMolecule: secondMolecularFormula
     } );

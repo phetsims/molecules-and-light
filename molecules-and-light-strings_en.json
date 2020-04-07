@@ -167,26 +167,26 @@
     "observationWindowLabel": {
       "value": "Observation Window"
     },
-    "photonEmitterDescriptionPattern": {
-      "value": "{{lightSource}} light source {{emissionRate}} directly at {{target}}."
+    "photonEmitterOffDescriptionPattern": {
+      "value": "{{lightSource}} light source is off and points directly at {{target}}."
     },
-    "inactiveAndPassingPhaseDescriptionPattern": {
-      "value": "{{lightSource}} photons passing through {{target}}."
+    "inactiveAndPassesPhaseDescriptionPattern": {
+      "value": "{{lightSource}} photon passes through {{target}}."
     },
     "targetMoleculePattern": {
       "value": "{{photonTarget}} molecule"
     },
     "absorptionPhaseBondsDescriptionPattern": {
-      "value": "{{lightSource}} photon absorbed and bonds of {{photonTarget}} molecule {{excitedRepresentation}}."
+      "value": "{{lightSource}} photon absorbed, bonds of {{photonTarget}} molecule {{excitedRepresentation}}."
     },
     "absorptionPhaseMoleculeDescriptionPattern": {
-      "value": "{{lightSource}} photon absorbed and {{photonTarget}} molecule {{excitedRepresentation}}."
+      "value": "{{lightSource}} photon absorbed, {{photonTarget}} molecule {{excitedRepresentation}}."
     },
     "breakApartPhaseDescriptionPattern": {
-      "value": "{{lightSource}} photon absorbed and {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}."
+      "value": "{{lightSource}} photon absorbed, {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}."
     },
-    "emissionPhaseDescriptionPattern": {
-      "value": "{{photonTarget}} molecule stops {{excitedRepresentation}} and emits absorbed {{lightSource}} photon {{direction}}."
+      "emissionPhaseDescriptionPattern": {
+      "value": "Absorbed  {{lightSource}} photon emitted from {{photonTarget}} molecule {{direction}}."
     },
     "moleculesOutOfViewPattern": {
       "value": "{{firstMolecule}} and {{secondMolecule}} out of view. Reset or change molecule to make more observations."
@@ -205,6 +205,9 @@
     },
     "bendsUpAndDown": {
       "value": "bends up and down"
+    },
+    "stretchBackAndForth": {
+      "value": "stretch back and forth"
     },
     "rotatingClockwise": {
       "value": "rotating clockwise"
@@ -476,10 +479,16 @@
     "slowMotionBreakApartPattern": {
       "value": "Photon absorbed. Molecule breaks apart. {{firstMolecule}} and {{secondMolecule}} float away."
     },
+    "moleculesFloatAwayPattern": {
+      "value": "{{firstMolecule}} and {{secondMolecule}} float away."
+    },
+    "breakApartDescriptionWithHintPattern": {
+      "value": "{{description}} {{hint}}"
+    },
     "slowMotionEmittedPattern": {
       "value": "Photon emitted {{direction}}."
     },
-    "lookForNewMoleculeButton": {
+    "resetOrChangeMolecule": {
       "value": "Reset or change molecule."
     }
   }
