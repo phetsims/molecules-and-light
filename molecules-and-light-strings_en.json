@@ -490,6 +490,25 @@
     },
     "resetOrChangeMolecule": {
       "value": "Reset or change molecule."
+    },
+    "photonEmitter": {
+      "alerts": {
+        "photonsOff": {
+          "value": "Photons off."
+        },
+        "photonsOn": {
+          "value": "Photons on."
+        },
+        "photonsOnSlowSpeed": {
+          "value": "Photons on slow speed."
+        },
+        "photonsOnSimPaused": {
+          "value": "Photons on. Sim paused."
+        },
+        "photonsOnSlowSpeedSimPaused": {
+          "value": "Photons on slow speed. Sim paused."
+        }
+      }
     }
   }
 }
