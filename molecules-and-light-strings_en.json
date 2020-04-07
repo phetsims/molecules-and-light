@@ -185,7 +185,7 @@
     "breakApartPhaseDescriptionPattern": {
       "value": "{{lightSource}} photon absorbed, {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}."
     },
-      "emissionPhaseDescriptionPattern": {
+    "emissionPhaseDescriptionPattern": {
       "value": "Absorbed  {{lightSource}} photon emitted from {{photonTarget}} molecule {{direction}}."
     },
     "moleculesOutOfViewPattern": {
@@ -508,6 +508,17 @@
         "photonsOnSlowSpeedSimPaused": {
           "value": "Photons on slow speed. Sim paused."
         }
+      }
+    },
+    "timeControls": {
+      "simPausedEmitterOnAlert": {
+        "value": "Sim paused. Step forward for detailed exploration."
+      },
+      "simPausedEmitterOffAlert": {
+        "value": "Sim paused. Light source off."
+      },
+      "simPlayingHintAlert": {
+        "value": "Turn light source on to play sim."
       }
     }
   }
