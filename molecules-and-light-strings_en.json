@@ -519,6 +519,9 @@
       },
       "simPlayingHintAlert": {
         "value": "Turn light source on to play sim."
+      },
+      "stepHintAlert": {
+        "value": "Turn light source on to use Step Forward."
       }
     }
   }

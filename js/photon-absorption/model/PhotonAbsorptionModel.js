@@ -49,7 +49,7 @@ import WavelengthConstants from './WavelengthConstants.js';
 // ------- constants -------------
 
 // constants that control where and how photons are emitted.
-const PHOTON_EMISSION_LOCATION = new Vector2( -2000, 0 );
+const PHOTON_EMISSION_LOCATION = new Vector2( -1350, 0 );
 
 // Velocity of emitted photons.  Since they are emitted horizontally, only one value is needed.
 const PHOTON_VELOCITY = 3000; // picometers/second
@@ -142,6 +142,9 @@ function PhotonAbsorptionModel( initialPhotonTarget, tandem ) {
 
   // @public - Emits when the model has been reset
   this.resetEmitter = new Emitter();
+
+  // @public - Emits an event when the user manually steps forward one frame
+  this.manualStepEmitter = new Emitter();
 
   // Link the model's active molecule to the photon target property.  Note that this wiring must be done after the
   // listeners for the activeMolecules observable array have been implemented.
@@ -322,6 +325,8 @@ export default inherit( PhetioObject, PhotonAbsorptionModel, {
 
     // Step the molecules.
     this.stepMolecules( 1 / 60 );
+
+    this.manualStepEmitter.emit();
   },
 
   /**
