@@ -420,7 +420,7 @@
       "value": "Stretching."
     },
     "longStretchingAlert": {
-      "value": "Bonds of molecule stretching."
+      "value": "Bonds of molecule stretch back and forth."
     },
     "shortBendingAlert": {
       "value": "Bending."
