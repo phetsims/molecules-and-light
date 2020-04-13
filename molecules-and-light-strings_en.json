@@ -89,6 +89,12 @@
   "KeyboardHelpDialog.lightSourceSlider": {
     "value": "Light Source Slider"
   },
+  "keyboardHelpDialog.lightSource": {
+    "value": "Light Source"
+  },
+  "keyboardHelpDialog.turnLightSourceOnOrOff": {
+    "value": "Turn light source on or off"
+  },
   "a11y": {
     "playAreaSummary": {
       "value": "The Play Area has an observation window that contains a light source and a molecule. You choose different light sources and molecules."
@@ -522,6 +528,11 @@
       },
       "stepHintAlert": {
         "value": "Turn light source on to use Step Forward."
+      }
+    },
+    "keyboardHelpDialog": {
+      "turnLightSourceOnOrOffDescription": {
+        "value": "Turn light source on or off with Space or Enter keys."
       }
     }
   }
