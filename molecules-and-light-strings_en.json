@@ -209,8 +209,8 @@
     "bending": {
       "value": "bending"
     },
-    "bendsUpAndDown": {
-      "value": "bends up and down"
+    "bendUpAndDown": {
+      "value": "bend up and down"
     },
     "stretchBackAndForth": {
       "value": "stretch back and forth"
@@ -488,8 +488,11 @@
     "slowMotionVibratingPattern": {
       "value": "Photon absorbed. Bonds of molecule {{excitedRepresentation}}."
     },
-    "slowMotionAbsorbedPattern": {
+    "slowMotionAbsorbedMoleculeExcitedPattern": {
       "value": "Photon absorbed. Molecule {{excitedRepresentation}}."
+    },
+    "slowMotionAbsorbedShortPattern": {
+      "value": "Photon absorbed. {{excitedRepresentation}}"
     },
     "slowMotionBreakApartPattern": {
       "value": "Photon absorbed. Molecule breaks apart. {{firstMolecule}} and {{secondMolecule}} float away."
