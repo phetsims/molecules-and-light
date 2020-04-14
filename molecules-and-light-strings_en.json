@@ -189,7 +189,7 @@
       "value": "{{lightSource}} photon absorbed, {{photonTarget}} molecule {{excitedRepresentation}}."
     },
     "breakApartPhaseDescriptionPattern": {
-      "value": "{{lightSource}} photon absorbed, {{photonTarget}} molecule breaks part into {{firstMolecule}} and {{secondMolecule}}."
+      "value": "{{lightSource}} photon absorbed, {{photonTarget}} molecule breaks into {{firstMolecule}} and {{secondMolecule}}."
     },
     "emissionPhaseDescriptionPattern": {
       "value": "Absorbed  {{lightSource}} photon emitted from {{photonTarget}} molecule {{direction}}."
@@ -221,6 +221,12 @@
     "rotatingCounterClockwise": {
       "value": "rotating counter clockwise"
     },
+    "rotatesClockwise": {
+      "value": "rotates clockwise"
+    },
+    "rotatesCounterClockwise": {
+      "value": "rotates counter-clockwise"
+    },
     "rotating": {
       "value": "rotating"
     },
@@ -235,6 +241,9 @@
     },
     "glowing": {
       "value": "glowing"
+    },
+    "glowsString": {
+      "value": "glows"
     },
     "breaksApart": {
       "value": "breaks apart"
@@ -485,8 +494,8 @@
     "slowMotionBreakApartPattern": {
       "value": "Photon absorbed. Molecule breaks apart. {{firstMolecule}} and {{secondMolecule}} float away."
     },
-    "moleculesFloatAwayPattern": {
-      "value": "{{firstMolecule}} and {{secondMolecule}} float away."
+    "moleculesFloatingAwayPattern": {
+      "value": "{{firstMolecule}} and {{secondMolecule}} floating away."
     },
     "breakApartDescriptionWithHintPattern": {
       "value": "{{description}} {{hint}}"
