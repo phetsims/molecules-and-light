@@ -480,7 +480,7 @@
       "value": "fast"
     },
     "pausedEmittingPattern": {
-      "value": "Absorbed {{lightSource}} photon emitting from {{molecularName}} molecule {{direction}}."
+      "value": "Absorbed photon emitted from {{molecularName}} molecule {{direction}}."
     },
     "pausedPassingPattern": {
       "value": "{{lightSource}} photon passes through {{molecularName}} molecule."
