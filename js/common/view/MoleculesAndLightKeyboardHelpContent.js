@@ -23,7 +23,7 @@ class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent 
 
     const lightSourceRow = KeyboardHelpSection.labelWithIcon(
       turnLightSourceOnOrOffString,
-      KeyboardHelpIconFactory.enterOrSpace(),
+      KeyboardHelpIconFactory.spaceOrEnter(),
       turnLightSourceOnOrOffDescriptionString
     );
     const emitterHelpSection = new KeyboardHelpSection( keyboardHelpDialogLightSourceString, [ lightSourceRow ] );
