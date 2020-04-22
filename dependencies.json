@@ -1,11 +1,11 @@
 {
-  "comment": "# molecules-and-light 1.5.0-dev.46 Wed Apr 15 2020 23:45:42 GMT-0400 (Eastern Daylight Time)",
+  "comment": "# molecules-and-light 1.5.0-dev.47 Wed Apr 22 2020 11:51:23 GMT-0400 (Eastern Daylight Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "master"
   },
   "axon": {
-    "sha": "efd9bf5b383b5dff1f0efd0acfc4bfd6a34430e9",
+    "sha": "62f66e35ed1f064fdccf37fa93b5bc50e0289b6a",
     "branch": "master"
   },
   "brand": {
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "d2dc1a651ff72398e25530f80af6030663e10f9e",
+    "sha": "f907d6195e39579e4d0dd6d92428b84c2ad3eb8c",
     "branch": "master"
   },
   "dot": {
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "joist": {
-    "sha": "738599762166d3ace990807ef4bbc48a6c7800d0",
+    "sha": "d9d2c502a3db53d7ea817c95e5e054041a1465c4",
     "branch": "master"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecules-and-light": {
-    "sha": "96ce25a5dcf17555a7f4d607ebea1a3fe1c5352d",
+    "sha": "fec1fcfb59becfb454f252fcdb9689eaf5b45694",
     "branch": "master"
   },
   "nitroglycerin": {
@@ -41,7 +41,7 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "a47486550aaf2a80419990f7194108b7953c0a4c",
+    "sha": "c6305262319c0608a37267da52342537fe16a84b",
     "branch": "master"
   },
   "phet-io-wrappers": {
@@ -61,11 +61,11 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "b638fff04c9e5ca18e9b912fec69c52530d8dc39",
+    "sha": "cdcfcd420c7d379c21871a9e25e368564646e58f",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "ac57133450416cd92a27a9c7f2b2ba74bbc5b7c5",
+    "sha": "8b992f5b5bac3e30d8bbe53270558363f7277a81",
     "branch": "master"
   },
   "sherpa": {
@@ -73,11 +73,11 @@
     "branch": "master"
   },
   "studio": {
-    "sha": "625a7a7cc225ae9c36f127c0fe557fa3a950338d",
+    "sha": "c4b926d2f8251bc6ccd6de810856fff86d53cdf2",
     "branch": "master"
   },
   "sun": {
-    "sha": "d74441aaf9ebae151566208486ab8c05a8468ad5",
+    "sha": "0402d99eb9e420774d95a5555c8a271b2b787e7f",
     "branch": "master"
   },
   "tambo": {
@@ -85,7 +85,7 @@
     "branch": "master"
   },
   "tandem": {
-    "sha": "a61045d18263b6bb989b19bf519f903873f7464e",
+    "sha": "dd68c862d54e355eaf585f6a7f5eadb1e6cbc339",
     "branch": "master"
   },
   "utterance-queue": {
