@@ -506,6 +506,9 @@
     "breakApartDescriptionWithHintPattern": {
       "value": "{{description}} {{hint}}"
     },
+    "breakApartDescriptionWithFloatPattern": {
+      "value": "{{description}} {{floatDescription}}"
+    },
     "moleculePiecesGone": {
       "value": "Molecule pieces gone. Reset or change molecule."
     },
