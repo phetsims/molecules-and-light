@@ -97,10 +97,10 @@
   },
   "a11y": {
     "playAreaSummary": {
-      "value": "The Play Area has an observation window that contains a light source and a molecule. You choose different light sources and molecules."
+      "value": "The Play Area is an observation window set up with a light source and a molecule. It has options for light source and molecule."
     },
     "controlAreaSummary": {
-      "value": "The Control Area has radio buttons to switch between normal and slow sim speeds, and buttons to pause and step forward actions happening in observation window. You can also access details about the light spectrum and reset the sim."
+      "value": "The Control Area has options for how fast the action happens in the observation window including buttons to pause and step forward. You can also access details about the light spectrum and reset the sim."
     },
     "dynamicPlayingScreenSummaryPattern": {
       "value": "Currently, {{lightSource}} light source {{emissionDescription}} directly at {{target}}."
