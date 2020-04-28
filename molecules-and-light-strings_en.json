@@ -506,6 +506,9 @@
     "breakApartDescriptionWithHintPattern": {
       "value": "{{description}} {{hint}}"
     },
+    "moleculePiecesGone": {
+      "value": "Molecule pieces gone. Reset or change molecule."
+    },
     "slowMotionEmittedPattern": {
       "value": "Photon emitted {{direction}}."
     },
