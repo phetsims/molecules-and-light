@@ -6,17 +6,20 @@
  * @author Michael Kauzmann (PhET Interactive Simulations)
  */
 
+import AltKeyNode from '../../../../scenery-phet/js/keyboard/AltKeyNode.js';
 import GeneralKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/GeneralKeyboardHelpSection.js';
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';
 import KeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
+import KKeyNode from '../../../../scenery-phet/js/keyboard/KKeyNode.js';
 import moleculesAndLight from '../../moleculesAndLight.js';
 import moleculesAndLightStrings from '../../moleculesAndLightStrings.js';
 
-// const keyboardHelpDialogLightSourceSliderString = moleculesAndLightStrings.KeyboardHelpDialog.lightSourceSlider;
-const keyboardHelpDialogLightSourceString = moleculesAndLightStrings.keyboardHelpDialog.lightSource;
+const keyboardHelpDialogObservationWindowString = moleculesAndLightStrings.keyboardHelpDialog.observationWindow;
 const turnLightSourceOnOrOffString = moleculesAndLightStrings.keyboardHelpDialog.turnLightSourceOnOrOff;
 const turnLightSourceOnOrOffDescriptionString = moleculesAndLightStrings.a11y.keyboardHelpDialog.turnLightSourceOnOrOffDescription;
+const pauseOrPlayShortcutString = moleculesAndLightStrings.keyboardHelpDialog.pauseOrPlayShortcut;
+const pauseOrPlayShortcutDescriptionString = moleculesAndLightStrings.a11y.keyboardHelpDialog.pauseOrPlayShortcutDescription;
 
 class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
   constructor() {
@@ -26,7 +29,15 @@ class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent 
       KeyboardHelpIconFactory.spaceOrEnter(),
       turnLightSourceOnOrOffDescriptionString
     );
-    const emitterHelpSection = new KeyboardHelpSection( keyboardHelpDialogLightSourceString, [ lightSourceRow ] );
+
+    const hotkeyRow = KeyboardHelpSection.labelWithIcon(
+      pauseOrPlayShortcutString,
+      KeyboardHelpIconFactory.iconPlusIcon( new AltKeyNode(), new KKeyNode() ),
+      pauseOrPlayShortcutDescriptionString
+    );
+    const emitterHelpSection = new KeyboardHelpSection( keyboardHelpDialogObservationWindowString, [ lightSourceRow, hotkeyRow ], {
+      labelMaxWidth: 250
+    } );
 
     const generalNavigationHelpSection = new GeneralKeyboardHelpSection( {
 

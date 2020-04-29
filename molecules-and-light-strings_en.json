@@ -86,14 +86,14 @@
   "SpectrumWindow.metersUnits": {
     "value": "m"
   },
-  "KeyboardHelpDialog.lightSourceSlider": {
-    "value": "Light Source Slider"
-  },
-  "keyboardHelpDialog.lightSource": {
-    "value": "Light Source"
+  "keyboardHelpDialog.observationWindow": {
+    "value": "Observation Window"
   },
   "keyboardHelpDialog.turnLightSourceOnOrOff": {
     "value": "Turn light source on or off"
+  },
+  "keyboardHelpDialog.pauseOrPlayShortcut": {
+    "value": "Pause or play action in Observation Window"
   },
   "a11y": {
     "playAreaSummary": {
@@ -557,6 +557,9 @@
     "keyboardHelpDialog": {
       "turnLightSourceOnOrOffDescription": {
         "value": "Turn light source on or off with Space or Enter keys."
+      },
+      "pauseOrPlayShortcutDescription": {
+        "value": "Pause or play action in Observation Window with Alt key plus K."
       }
     }
   }
