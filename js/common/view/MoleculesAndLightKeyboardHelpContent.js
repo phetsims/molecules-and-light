@@ -28,7 +28,11 @@ class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent 
       turnLightSourceOnOrOffDescriptionString
     );
 
-    const hotkeyRow = KeyboardHelpSection.createPlayPauseKeyRow( pauseOrPlayShortcutString, pauseOrPlayShortcutDescriptionString );
+    const hotkeyRow = KeyboardHelpSection.createPlayPauseKeyRow( pauseOrPlayShortcutString, pauseOrPlayShortcutDescriptionString, {
+      labelOptions: {
+        lineWrap: 150
+      }
+    } );
     const emitterHelpSection = new KeyboardHelpSection( keyboardHelpDialogObservationWindowString, [ lightSourceRow, hotkeyRow ], {
       labelMaxWidth: 250
     } );
