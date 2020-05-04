@@ -86,21 +86,21 @@
   "SpectrumWindow.metersUnits": {
     "value": "m"
   },
-  "KeyboardHelpDialog.lightSourceSlider": {
-    "value": "Light Source Slider"
-  },
-  "keyboardHelpDialog.lightSource": {
-    "value": "Light Source"
+  "keyboardHelpDialog.observationWindow": {
+    "value": "Observation Window"
   },
   "keyboardHelpDialog.turnLightSourceOnOrOff": {
     "value": "Turn light source on or off"
   },
+  "keyboardHelpDialog.pauseOrPlayShortcut": {
+    "value": "Pause or play action in Observation Window"
+  },
   "a11y": {
     "playAreaSummary": {
-      "value": "The Play Area has an observation window that contains a light source and a molecule. You choose different light sources and molecules."
+      "value": "The Play Area is an observation window set up with a light source and a molecule. It has options for light source and molecule."
     },
     "controlAreaSummary": {
-      "value": "The Control Area has radio buttons to switch between normal and slow sim speeds, and buttons to pause and step forward actions happening in observation window. You can also access details about the light spectrum and reset the sim."
+      "value": "The Control Area has options for how fast the action happens in the observation window including buttons to pause and step forward. You can also access details about the light spectrum and reset the sim."
     },
     "dynamicPlayingScreenSummaryPattern": {
       "value": "Currently, {{lightSource}} light source {{emissionDescription}} directly at {{target}}."
@@ -506,6 +506,12 @@
     "breakApartDescriptionWithHintPattern": {
       "value": "{{description}} {{hint}}"
     },
+    "breakApartDescriptionWithFloatPattern": {
+      "value": "{{description}} {{floatDescription}}"
+    },
+    "moleculePiecesGone": {
+      "value": "Molecule pieces gone. Reset or change molecule."
+    },
     "slowMotionEmittedPattern": {
       "value": "Photon emitted {{direction}}."
     },
@@ -551,6 +557,9 @@
     "keyboardHelpDialog": {
       "turnLightSourceOnOrOffDescription": {
         "value": "Turn light source on or off with Space or Enter keys."
+      },
+      "pauseOrPlayShortcutDescription": {
+        "value": "Pause or play action in Observation Window with Alt key plus K."
       }
     }
   }

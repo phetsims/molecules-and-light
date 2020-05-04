@@ -31,7 +31,6 @@ import ObservationWindowDescriber from './ObservationWindowDescriber.js';
 const buttonNodeReturnMoleculeString = moleculesAndLightStrings.ButtonNode.ReturnMolecule;
 const observationWindowLabelString = moleculesAndLightStrings.a11y.observationWindowLabel;
 const geometryLabelPatternString = moleculesAndLightStrings.a11y.geometryLabelPattern;
-const resetOrChangeMoleculeString = moleculesAndLightStrings.a11y.resetOrChangeMolecule;
 
 // constants
 const PHOTON_EMITTER_WIDTH = 125;
@@ -200,16 +199,11 @@ function ObservationWindow( photonAbsorptionModel, modelViewTransform, tandem ) 
 
     // hide the return molecule button
     self.returnMoleculeButtonNode.visible = self.returnMoleculeButtonVisibleProperty.get();
-
-    // PDOM - announce to the user when the button becomes visible
-    if ( visible ) {
-      phet.joist.sim.utteranceQueue.addToBack( resetOrChangeMoleculeString );
-    }
   } );
 
   // PDOM
   // @public - generates descriptions for the target molecule
-  this.describer = new ObservationWindowDescriber( photonAbsorptionModel, this.modelViewTransform );
+  this.describer = new ObservationWindowDescriber( photonAbsorptionModel, this.modelViewTransform, this.returnMoleculeButtonVisibleProperty );
 
   // PDOM - list that describes the state of contents in the Observation Window
   const phaseItem = new Node( { tagName: 'li' } );
@@ -261,7 +255,7 @@ function ObservationWindow( photonAbsorptionModel, modelViewTransform, tandem ) 
 
 moleculesAndLight.register( 'ObservationWindow', ObservationWindow );
 
-export default inherit( Rectangle, ObservationWindow, {
+inherit( Rectangle, ObservationWindow, {
 
   /**
    * Update the visibility of the button that restores molecules that have broken apart.  This button should be
@@ -312,3 +306,5 @@ export default inherit( Rectangle, ObservationWindow, {
     this.describer.step( dt );
   }
 } );
+
+export default ObservationWindow;

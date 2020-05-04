@@ -13,10 +13,11 @@ import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/h
 import moleculesAndLight from '../../moleculesAndLight.js';
 import moleculesAndLightStrings from '../../moleculesAndLightStrings.js';
 
-// const keyboardHelpDialogLightSourceSliderString = moleculesAndLightStrings.KeyboardHelpDialog.lightSourceSlider;
-const keyboardHelpDialogLightSourceString = moleculesAndLightStrings.keyboardHelpDialog.lightSource;
+const keyboardHelpDialogObservationWindowString = moleculesAndLightStrings.keyboardHelpDialog.observationWindow;
 const turnLightSourceOnOrOffString = moleculesAndLightStrings.keyboardHelpDialog.turnLightSourceOnOrOff;
 const turnLightSourceOnOrOffDescriptionString = moleculesAndLightStrings.a11y.keyboardHelpDialog.turnLightSourceOnOrOffDescription;
+const pauseOrPlayShortcutString = moleculesAndLightStrings.keyboardHelpDialog.pauseOrPlayShortcut;
+const pauseOrPlayShortcutDescriptionString = moleculesAndLightStrings.a11y.keyboardHelpDialog.pauseOrPlayShortcutDescription;
 
 class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
   constructor() {
@@ -26,7 +27,11 @@ class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent 
       KeyboardHelpIconFactory.spaceOrEnter(),
       turnLightSourceOnOrOffDescriptionString
     );
-    const emitterHelpSection = new KeyboardHelpSection( keyboardHelpDialogLightSourceString, [ lightSourceRow ] );
+
+    const hotkeyRow = KeyboardHelpSection.createPlayPauseKeyRow( pauseOrPlayShortcutString, pauseOrPlayShortcutDescriptionString );
+    const emitterHelpSection = new KeyboardHelpSection( keyboardHelpDialogObservationWindowString, [ lightSourceRow, hotkeyRow ], {
+      labelMaxWidth: 250
+    } );
 
     const generalNavigationHelpSection = new GeneralKeyboardHelpSection( {
 

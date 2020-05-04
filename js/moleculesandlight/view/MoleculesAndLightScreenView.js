@@ -183,7 +183,7 @@ function MoleculesAndLightScreenView( photonAbsorptionModel, tandem ) {
     touchAreaXDilation: 7,
     touchAreaYDilation: 7,
     listener: function() {
-      const dialog = lightSpectrumDialogCapsule.getInstance();
+      const dialog = lightSpectrumDialogCapsule.getElement();
       dialog.show();
 
       // if listener was fired because of accessibility
@@ -246,7 +246,7 @@ function MoleculesAndLightScreenView( photonAbsorptionModel, tandem ) {
 
 moleculesAndLight.register( 'MoleculesAndLightScreenView', MoleculesAndLightScreenView );
 
-export default inherit( ScreenView, MoleculesAndLightScreenView, {
+inherit( ScreenView, MoleculesAndLightScreenView, {
 
   /**
    * View step, called by joist.
@@ -259,3 +259,5 @@ export default inherit( ScreenView, MoleculesAndLightScreenView, {
     this.observationWindow.step( dt );
   }
 } );
+
+export default MoleculesAndLightScreenView;

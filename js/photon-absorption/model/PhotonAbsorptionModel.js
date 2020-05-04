@@ -61,12 +61,9 @@ const DEFAULT_PHOTON_EMISSION_PERIOD = Number.POSITIVE_INFINITY; // Milliseconds
 const DEFAULT_EMITTED_PHOTON_WAVELENGTH = WavelengthConstants.IR_WAVELENGTH;
 const INITIAL_COUNTDOWN_WHEN_EMISSION_ENABLED = 0.0; // seconds, emitted right away
 
-// Minimum for photon emission periods.
-const MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET = 0.4; // seconds
-
-// emission frequency for when the emitter is "on" and "off", when only those two settings are provided
-const ON_FREQUENCY = 0.5;
-const OFF_FREQUENCY = 0;
+// photon emission periods, in seconds
+const EMITTER_ON_EMISSION_PERIOD = 0.8;
+const EMITTER_OFF_EMISSION_PERIOD = Number.POSITIVE_INFINITY;
 
 // when stepping at "slow" speed, animate rate is reduced by this factor
 const SLOW_SPEED_FACTOR = 0.5;
@@ -154,17 +151,9 @@ function PhotonAbsorptionModel( initialPhotonTarget, tandem ) {
   // listeners for the activeMolecules observable array have been implemented.
   self.photonTargetProperty.link( photonTarget => self.updateActiveMolecule( photonTarget, tandem ) );
 
-  // when the photon emitter is on, set to default "on" and "off" frequency
+  // when the photon emitter is on, set to default "on" and "off" period
   this.photonEmitterOnProperty.link( emitterOn => {
-    const emissionFrequency = emitterOn ? ON_FREQUENCY : OFF_FREQUENCY;
-
-    if ( emissionFrequency === 0 ) {
-      this.setPhotonEmissionPeriod( Number.POSITIVE_INFINITY );
-    }
-    else {
-      const singleTargetPeriodFrequency = this.getSingleTargetPeriodFromFrequency( emissionFrequency );
-      this.setPhotonEmissionPeriod( singleTargetPeriodFrequency );
-    }
+    this.setPhotonEmissionPeriod( emitterOn ? EMITTER_ON_EMISSION_PERIOD : EMITTER_OFF_EMISSION_PERIOD );
   } );
 
   // Variables that control periodic photon emission.
@@ -180,7 +169,7 @@ function PhotonAbsorptionModel( initialPhotonTarget, tandem ) {
 
 moleculesAndLight.register( 'PhotonAbsorptionModel', PhotonAbsorptionModel );
 
-export default inherit( PhetioObject, PhotonAbsorptionModel, {
+inherit( PhetioObject, PhotonAbsorptionModel, {
 
   /**
    * Reset the model to its initial state.
@@ -381,25 +370,6 @@ export default inherit( PhetioObject, PhotonAbsorptionModel, {
   },
 
   /**
-   * Map the emission frequency to emission period.
-   *
-   * @param {number} emissionFrequency
-   * @returns {number}
-   */
-  getSingleTargetPeriodFromFrequency: function( emissionFrequency ) {
-    return MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET / emissionFrequency;
-  },
-
-  /**
-   * Map the emission period to emission frequency for this photon emission period target.
-   *
-   * @returns {number}
-   */
-  getSingleTargetFrequencyFromPeriod: function() {
-    return MIN_PHOTON_EMISSION_PERIOD_SINGLE_TARGET / this.photonEmissionPeriodTarget;
-  },
-
-  /**
    * Set the emission period, i.e. the time between photons.
    *
    * @param {number} photonEmissionPeriod - Period between photons in milliseconds.
@@ -408,19 +378,26 @@ export default inherit( PhetioObject, PhotonAbsorptionModel, {
 
     assert && assert( photonEmissionPeriod >= 0 );
     if ( this.photonEmissionPeriodTarget !== photonEmissionPeriod ) {
+
       // If we are transitioning from off to on, set the countdown timer such that a photon will be emitted right away
-      // so that the user doesn't have to wait too long in order to see something come out.
-      if ( this.photonEmissionPeriodTarget === Number.POSITIVE_INFINITY && photonEmissionPeriod !== Number.POSITIVE_INFINITY ) {
+      // so that the user doesn't have to wait too long in order to see something come out, but only if there
+      // are no other photons in the observation window so we don't emit unlimitted photons when turning
+      // on/off rapidly
+      if ( this.photonEmissionPeriodTarget === Number.POSITIVE_INFINITY && photonEmissionPeriod !== Number.POSITIVE_INFINITY && this.photons.length === 0 ) {
+
+        // only reset time on emission of first photon, there should still be a delay after subsequent photons
         this.setEmissionTimerToInitialCountdown();
       }
-      // Handle the case where the new value is smaller than the current countdown value.
       else if ( photonEmissionPeriod < this.photonEmissionCountdownTimer ) {
+
+        // Handle the case where the new value is smaller than the current countdown value.
         this.photonEmissionCountdownTimer = photonEmissionPeriod;
       }
-        // If the new value is infinity, it means that emissions are being
-      // turned off, so set the period to infinity right away.
       else if ( photonEmissionPeriod === Number.POSITIVE_INFINITY ) {
-        this.photonEmissionCountdownTimer = photonEmissionPeriod; // Turn off emissions.
+
+        // If the new value is infinity, it means that emissions are being turned off, so set the period to infinity
+        // right away.
+        this.photonEmissionCountdownTimer = photonEmissionPeriod;
       }
       this.photonEmissionPeriodTarget = photonEmissionPeriod;
     }
@@ -490,6 +467,18 @@ export default inherit( PhetioObject, PhotonAbsorptionModel, {
   },
 
   /**
+   * Returns true if this model still contains both of the constituent molecules provided after a break apart.
+   * @public
+   *
+   * @param {Molecule} moleculeA
+   * @param {Molecule} moleculeB
+   * @returns {boolean}
+   */
+  hasBothConstituentMolecules( moleculeA, moleculeB ) {
+    return this.activeMolecules.contains( moleculeA ) && this.activeMolecules.contains( moleculeB );
+  },
+
+  /**
    * This method restores the active molecule.  This may seem nonsensical, and in some cases it is, but it is useful
    * in cases where an atom has broken apart and needs to be restored to its original condition.
    */
@@ -498,3 +487,5 @@ export default inherit( PhetioObject, PhotonAbsorptionModel, {
     this.updateActiveMolecule( currentTarget, this.photonAbsorptionModel );
   }
 } );
+
+export default PhotonAbsorptionModel;
