@@ -136,7 +136,10 @@
       "ultraviolet": {
         "value": "Ultraviolet"
       },
-      "buttonHelpText": {
+      "buttonPressedHelpText": {
+        "value": "Turn light source off to stop photons."
+      },
+      "buttonUnpressedHelpText": {
         "value": "Turn light source on to start photons."
       }
     },
