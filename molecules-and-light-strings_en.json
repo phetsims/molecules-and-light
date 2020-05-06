@@ -48,7 +48,7 @@
     "value": "Reset Molecule"
   },
   "SpectrumWindow.buttonCaption": {
-    "value": "Show Light Spectrum"
+    "value": "Light Spectrum Diagram"
   },
   "SpectrumWindow.title": {
     "value": "Light Spectrum"
@@ -279,7 +279,7 @@
       "value": "{{molecularName}}, {{molecularFormula}}, {{geometryTitle}}"
     },
     "spectrumButtonLabel": {
-      "value": "Show Light Spectrum"
+      "value": "Light Spectrum Diagram"
     },
     "spectrumButtonDescription": {
       "value": "Examine details of full light spectrum."
