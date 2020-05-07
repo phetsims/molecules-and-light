@@ -7,7 +7,7 @@
  */
 
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import platform from '../../phet-core/js/platform.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import MoleculesAndLightKeyboardHelpContent from './common/view/MoleculesAndLightKeyboardHelpContent.js';
@@ -36,7 +36,7 @@ if ( platform.edge ) {
   simOptions.rootRenderer = 'svg';
 }
 
-SimLauncher.launch( function() {
+simLauncher.launch( function() {
   const sim = new Sim( moleculesAndLightTitleString, [
     new MoleculesAndLightScreen( Tandem.ROOT.createTandem( 'moleculesAndLightScreen' ) )
   ], simOptions );
