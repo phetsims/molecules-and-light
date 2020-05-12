@@ -95,6 +95,9 @@
   "keyboardHelpDialog.pauseOrPlayShortcut": {
     "value": "Pause or play action in Observation Window"
   },
+  "keyboardHelpDialog.stepForwardShortcut": {
+    "value": "When action is paused step forward in bigger steps"
+  },
   "a11y": {
     "playAreaSummary": {
       "value": "The Play Area is an observation window set up with a light source and a molecule. It has options for light source and molecule."
@@ -563,6 +566,9 @@
       },
       "pauseOrPlayShortcutDescription": {
         "value": "Pause or play action in Observation Window with Alt key plus K."
+      },
+      "stepForwardShortcutDescription": {
+        "value": "When action is paused step forward in bigger steps with Alt key plus L."
       }
     }
   }

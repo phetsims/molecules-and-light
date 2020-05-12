@@ -18,6 +18,8 @@ const turnLightSourceOnOrOffString = moleculesAndLightStrings.keyboardHelpDialog
 const turnLightSourceOnOrOffDescriptionString = moleculesAndLightStrings.a11y.keyboardHelpDialog.turnLightSourceOnOrOffDescription;
 const pauseOrPlayShortcutString = moleculesAndLightStrings.keyboardHelpDialog.pauseOrPlayShortcut;
 const pauseOrPlayShortcutDescriptionString = moleculesAndLightStrings.a11y.keyboardHelpDialog.pauseOrPlayShortcutDescription;
+const stepForwardShortcutString = moleculesAndLightStrings.keyboardHelpDialog.stepForwardShortcut;
+const stepForwardShortcutDescriptionString = moleculesAndLightStrings.a11y.keyboardHelpDialog.stepForwardShortcutDescription;
 
 class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
   constructor() {
@@ -28,12 +30,12 @@ class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent 
       turnLightSourceOnOrOffDescriptionString
     );
 
-    const hotkeyRow = KeyboardHelpSection.createPlayPauseKeyRow( pauseOrPlayShortcutString, pauseOrPlayShortcutDescriptionString, {
-      labelOptions: {
-        lineWrap: 150
-      }
-    } );
-    const emitterHelpSection = new KeyboardHelpSection( keyboardHelpDialogObservationWindowString, [ lightSourceRow, hotkeyRow ], {
+
+    const rowOptions = { labelOptions: { lineWrap: 150 } };
+    const playPauseRow = KeyboardHelpSection.createPlayPauseKeyRow( pauseOrPlayShortcutString, pauseOrPlayShortcutDescriptionString, rowOptions );
+    const stepForwardRow = KeyboardHelpSection.createStepForwardKeyRow( stepForwardShortcutString, stepForwardShortcutDescriptionString, rowOptions );
+
+    const emitterHelpSection = new KeyboardHelpSection( keyboardHelpDialogObservationWindowString, [ lightSourceRow, playPauseRow, stepForwardRow ], {
       labelMaxWidth: 250
     } );
 
