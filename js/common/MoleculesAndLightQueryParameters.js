@@ -20,6 +20,6 @@ const MoleculesAndLightQueryParameters = QueryStringMachine.getAll( {
   passThroughCount: { type: 'number', defaultValue: 5 }
 } );
 
-moleculesAndLight.register( 'MoleculesAndLightQuerameters', MoleculesAndLightQueryParameters );
+moleculesAndLight.register( 'MoleculesAndLightQueryParameters', MoleculesAndLightQueryParameters );
 
 export default MoleculesAndLightQueryParameters;
