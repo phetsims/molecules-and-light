@@ -491,8 +491,14 @@
     "pausedPassingPattern": {
       "value": "{{lightSource}} photon passes through {{molecularName}} molecule."
     },
+    "slowMotionPassingPattern": {
+      "value": "{{lightSource}} photons passing through {{molecularName}} molecule."
+    },
     "photonPasses": {
       "value": "Photon passes."
+    },
+    "photonsPassing": {
+      "value": "Photons passing."
     },
     "slowMotionVibratingPattern": {
       "value": "Photon absorbed. Bonds of molecule {{excitedRepresentation}}."
