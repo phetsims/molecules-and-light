@@ -127,18 +127,6 @@
       "buttonLabelPattern": {
         "value": "{{lightSource}} Light Source"
       },
-      "microwave": {
-        "value": "Microwave"
-      },
-      "infrared": {
-        "value": "Infrared"
-      },
-      "visible": {
-        "value": "Visible"
-      },
-      "ultraviolet": {
-        "value": "Ultraviolet"
-      },
       "buttonPressedHelpText": {
         "value": "Turn light source off to stop photons."
       },
@@ -146,29 +134,11 @@
         "value": "Turn light source on to start photons."
       }
     },
-    "lightSourceLabelPattern": {
-      "value": "{{lightSource}} Photon Rate"
-    },
     "lightSources": {
       "value": "Light Sources"
     },
     "isOffAndPoints": {
       "value": "is off and points"
-    },
-    "emitsPhotonsSlowly": {
-      "value": "emits photons slowly and"
-    },
-    "emitsPhotonsVerySlow": {
-      "value": "emits photons very slow and"
-    },
-    "emitsPhotonsFast": {
-      "value": "emits photons fast and"
-    },
-    "slowly": {
-      "value": "slowly"
-    },
-    "verySlowly": {
-      "value": "very slowly"
     },
     "emitsPhotons": {
       "value": "emits photons"
@@ -200,53 +170,17 @@
     "emissionPhaseDescriptionPattern": {
       "value": "Absorbed  {{lightSource}} photon emitted from {{photonTarget}} molecule {{direction}}."
     },
-    "moleculesOutOfViewPattern": {
-      "value": "{{firstMolecule}} and {{secondMolecule}} out of view. Reset or change molecule to make more observations."
-    },
-    "absorbed": {
-      "value": "absorbed"
-    },
-    "stretching": {
-      "value": "stretching"
-    },
-    "contracting": {
-      "value": "contracting"
-    },
-    "bending": {
-      "value": "bending"
-    },
     "bendUpAndDown": {
       "value": "bend up and down"
     },
     "stretchBackAndForth": {
       "value": "stretch back and forth"
     },
-    "rotatingClockwise": {
-      "value": "rotating clockwise"
-    },
-    "rotatingCounterClockwise": {
-      "value": "rotating counter clockwise"
-    },
     "rotatesClockwise": {
       "value": "rotates clockwise"
     },
     "rotatesCounterClockwise": {
       "value": "rotates counter-clockwise"
-    },
-    "rotating": {
-      "value": "rotating"
-    },
-    "startsRotatingPattern": {
-      "value": "starts {{rotation}}"
-    },
-    "stops": {
-      "value": "stops {{rotation}}"
-    },
-    "startsGlowing": {
-      "value": "starts glowing"
-    },
-    "glowing": {
-      "value": "glowing"
     },
     "glowsString": {
       "value": "glows"
@@ -256,18 +190,6 @@
     },
     "emptySpace": {
       "value": "empty space"
-    },
-    "a": {
-      "value": "a"
-    },
-    "an": {
-      "value": "an"
-    },
-    "emissionSliderDescription": {
-      "value": "Set photon emission rate."
-    },
-    "emissionSliderWavelengthRatePatter": {
-      "value": "{{wavelength}} photon rate, {{frequency}}"
     },
     "lightSourceRadioButtonHelpText": {
       "value": "Choose light source for observation window ordered low to high energy."
@@ -368,12 +290,6 @@
     "spectrumWindowLabelledSpectrumGammaRayWavelengthDescription": {
       "value": "Wavelengths 5 times 10 to the negative 11 meters to less than 10 to the negative 12 meters."
     },
-    "moleculeSelectionAlertPattern": {
-      "value": "{{target}} molecule now in observation window."
-    },
-    "wavelengthSelectionAlertPattern": {
-      "value": "{{wavelength}} light source now in observation window."
-    },
     "carbonMonoxide": {
       "value": "Carbon Monoxide"
     },
@@ -412,18 +328,6 @@
     },
     "diatomic": {
       "value": "diatomic"
-    },
-    "linearTitle": {
-      "value": "Linear"
-    },
-    "bentTitle": {
-      "value": "Bent"
-    },
-    "tetrahedralTitle": {
-      "value": "Tetrahedral"
-    },
-    "diatomicTitle": {
-      "value": "Diatomic"
     },
     "geometryLabelPattern": {
       "value": "This molecule has {{geometry}} geometry."
@@ -464,27 +368,6 @@
     "breaksApartAlertPattern": {
       "value": "Molecule breaks apart into {{firstMolecule}} and {{secondMolecule}}."
     },
-    "clockwise": {
-      "value": "clockwise"
-    },
-    "counterClockwise": {
-      "value": "counter clockwise"
-    },
-    "lightSourceOff": {
-      "value": "light source off"
-    },
-    "emissionRatePattern": {
-      "value": "{{lightSource}} photon emits {{emissionRate}}"
-    },
-    "verySlow": {
-      "value": "very slow"
-    },
-    "slow": {
-      "value": "slow"
-    },
-    "fast": {
-      "value": "fast"
-    },
     "pausedEmittingPattern": {
       "value": "Absorbed photon emitted from molecule {{direction}}."
     },
@@ -514,9 +397,6 @@
     },
     "moleculesFloatingAwayPattern": {
       "value": "{{firstMolecule}} and {{secondMolecule}} floating away."
-    },
-    "breakApartDescriptionWithHintPattern": {
-      "value": "{{description}} {{hint}}"
     },
     "breakApartDescriptionWithFloatPattern": {
       "value": "{{description}} {{floatDescription}}"
