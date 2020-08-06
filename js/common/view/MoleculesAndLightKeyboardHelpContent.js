@@ -31,7 +31,7 @@ class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent 
     );
 
 
-    const rowOptions = { labelOptions: { lineWrap: 150 } };
+    const rowOptions = { labelOptions: { lineWrap: 200 } };
     const playPauseRow = KeyboardHelpSection.createPlayPauseKeyRow( pauseOrPlayShortcutString, pauseOrPlayShortcutDescriptionString, rowOptions );
     const stepForwardRow = KeyboardHelpSection.createStepForwardKeyRow( stepForwardShortcutString, stepForwardShortcutDescriptionString, rowOptions );
 
