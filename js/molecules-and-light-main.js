@@ -25,7 +25,7 @@ const simOptions = {
     leadDesign: 'Kelly Lancaster (Java), Amy Rouinfar (HTML5)',
     softwareDevelopment: 'Jesse Greenberg, John Blanco, Sam Reid, Aaron Davis',
     team: 'Yuen-ying Carpenter, Trish Loeblein, Emily B. Moore, Robert Parson, Ariel Paul, Kathy Perkins',
-    qualityAssurance: 'Steele Dalton, Elise Morgan, Oliver Orejola, Bryan Yoelin',
+    qualityAssurance: 'Jaspe Arias, Logan Bray, Steele Dalton, Elise Morgan,  Liam Mulhall, Oliver Orejola, Kathryn Woessner, Bryan Yoelin',
     graphicArts: 'Alex Klinger',
     soundDesign: 'Ashton Morris, Mike Winters'
   }
