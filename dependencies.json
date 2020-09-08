@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.5.5-rc.2 Thu Sep 03 2020 16:54:08 GMT-0800 (Alaska Daylight Time)",
+  "comment": "# molecules-and-light 1.5.5 Tue Sep 08 2020 08:22:25 GMT-0800 (Alaska Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "f818667a1a011dd8d2c92f0a3e33bddc83a41fd6",
+    "sha": "952ed1b2dfa2e2cd3ea6e50ad821d50a593a1bd2",
     "branch": "1.5"
   },
   "nitroglycerin": {
