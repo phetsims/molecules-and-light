@@ -10,16 +10,13 @@ import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import platform from '../../phet-core/js/platform.js';
 import Tandem from '../../tandem/js/Tandem.js';
-import MoleculesAndLightKeyboardHelpContent from './common/view/MoleculesAndLightKeyboardHelpContent.js';
-import moleculesAndLightStrings from './moleculesAndLightStrings.js';
 import MoleculesAndLightScreen from './moleculesandlight/MoleculesAndLightScreen.js';
+import moleculesAndLightStrings from './moleculesAndLightStrings.js';
 
 const moleculesAndLightTitleString = moleculesAndLightStrings[ 'molecules-and-light' ].title;
 
-const keyboardHelpContent = new MoleculesAndLightKeyboardHelpContent();
-
 const simOptions = {
-  keyboardHelpNode: keyboardHelpContent,
+  hasKeyboardHelpContent: true,
 
   credits: {
     leadDesign: 'Kelly Lancaster (Java), Amy Rouinfar (HTML5)',
