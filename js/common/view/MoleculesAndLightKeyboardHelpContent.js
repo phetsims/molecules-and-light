@@ -39,11 +39,7 @@ class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent 
       labelMaxWidth: 250
     } );
 
-    const generalNavigationHelpSection = new GeneralKeyboardHelpSection( {
-
-      // include information about how to interact with groups (radio buttons in this sim)
-      withGroupContent: true
-    } );
+    const generalNavigationHelpSection = new GeneralKeyboardHelpSection();
 
     super( [ emitterHelpSection ], [ generalNavigationHelpSection ] );
   }
