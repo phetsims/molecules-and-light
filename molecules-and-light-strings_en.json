@@ -98,6 +98,11 @@
   "keyboardHelpDialog.stepForwardShortcut": {
     "value": "When action is paused step forward in bigger steps"
   },
+  "openSciEd": {
+    "energySource": {
+      "value": "Energy Source"
+    }
+  },
   "a11y": {
     "playAreaSummary": {
       "value": "The Play Area is an observation window set up with a light source and a molecule. It has options for light source and molecule."
