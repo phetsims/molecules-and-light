@@ -18,8 +18,9 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
 import Panel from '../../../../sun/js/Panel.js';
-import moleculesAndLightStrings from '../../moleculesAndLightStrings.js';
+import MoleculesAndLightQueryParameters from '../../common/MoleculesAndLightQueryParameters.js';
 import moleculesAndLight from '../../moleculesAndLight.js';
+import moleculesAndLightStrings from '../../moleculesAndLightStrings.js';
 import CH4 from '../../photon-absorption/model/molecules/CH4.js';
 import CO from '../../photon-absorption/model/molecules/CO.js';
 import CO2 from '../../photon-absorption/model/molecules/CO2.js';
@@ -49,7 +50,6 @@ const MOLECULE_SCALING_FACTOR = 0.0975;
 
 // the focus highlights are a little larger so they look good in this rounded panel
 const HIGHLIGHT_DILATION = 1.5;
-
 
 /**
  * Constructor for a Molecules and Light control panel.
@@ -109,33 +109,37 @@ function MoleculeSelectionPanel( model, tandem ) {
       labelContent: this.getPDOMLabel( molecule )
     };
   };
+
   const moleculeOptions = { isForIcon: true };
 
+  const carbonMonoxideElement = createElement( PhotonTarget.SINGLE_CO_MOLECULE, MolecularFormulaStrings.CO_FORMULA_STRING, new CO( moleculeOptions ), 'singleCOMoleculeRadioButton' );
+  const nitrogenElement = createElement( PhotonTarget.SINGLE_N2_MOLECULE, MolecularFormulaStrings.N2_FORMULA_STRING, new N2( moleculeOptions ), 'singleN2MoleculeRadioButton' );
+  const oxygenElement = createElement( PhotonTarget.SINGLE_O2_MOLECULE, MolecularFormulaStrings.O2_FORMULA_STRING, new O2( moleculeOptions ), 'singleO2MoleculeRadioButton' );
+  const carbonDioxideElement = createElement( PhotonTarget.SINGLE_CO2_MOLECULE, MolecularFormulaStrings.CO2_FORMULA_STRING, new CO2( moleculeOptions ), 'singleCO2MoleculeRadioButton' );
+  const methaneElement = createElement( PhotonTarget.SINGLE_CH4_MOLECULE, MolecularFormulaStrings.CH4_FORMULA_STRING, new CH4( moleculeOptions ), 'singleCH4MoleculeRadioButton', {
+    scale: 0.88 // scale applied since CH4 is taller than others, empirically determined
+  } );
+  const waterElement = createElement( PhotonTarget.SINGLE_H2O_MOLECULE, MolecularFormulaStrings.H20_FORMULA_STRING, new H2O( moleculeOptions ), 'singleH2OMoleculeRadioButton' );
+  const nitrogenDioxideElement = createElement( PhotonTarget.SINGLE_NO2_MOLECULE, MolecularFormulaStrings.NO2_FORMULA_STRING, new NO2( moleculeOptions ), 'singleNO2MoleculeRadioButton' );
+  const ozoneElement = createElement( PhotonTarget.SINGLE_O3_MOLECULE, MolecularFormulaStrings.O3_FORMULA_STRING, new O3( moleculeOptions ), 'singleO3MoleculeRadioButton' );
+
   // Load the radio button content into an array of object literals which holds the node and value for each button.
-  const radioButtonContent = [
-    createElement( PhotonTarget.SINGLE_CO_MOLECULE, MolecularFormulaStrings.CO_FORMULA_STRING, new CO( moleculeOptions ),
-      'singleCOMoleculeRadioButton' ),
-    createElement( PhotonTarget.SINGLE_N2_MOLECULE, MolecularFormulaStrings.N2_FORMULA_STRING, new N2( moleculeOptions ),
-      'singleN2MoleculeRadioButton' ),
-    createElement( PhotonTarget.SINGLE_O2_MOLECULE, MolecularFormulaStrings.O2_FORMULA_STRING, new O2( moleculeOptions ),
-      'singleO2MoleculeRadioButton' ),
-    createElement( PhotonTarget.SINGLE_CO2_MOLECULE, MolecularFormulaStrings.CO2_FORMULA_STRING, new CO2( moleculeOptions ),
-      'singleCO2MoleculeRadioButton' ),
-    createElement( PhotonTarget.SINGLE_CH4_MOLECULE, MolecularFormulaStrings.CH4_FORMULA_STRING, new CH4( moleculeOptions ),
-      'singleCH4MoleculeRadioButton', {
-        scale: 0.88 // scale applied since CH4 is taller than others, empirically determined
-      } ),
-    createElement( PhotonTarget.SINGLE_H2O_MOLECULE, MolecularFormulaStrings.H20_FORMULA_STRING, new H2O( moleculeOptions ),
-      'singleH2OMoleculeRadioButton' ),
-    createElement( PhotonTarget.SINGLE_NO2_MOLECULE, MolecularFormulaStrings.NO2_FORMULA_STRING, new NO2( moleculeOptions ),
-      'singleNO2MoleculeRadioButton' ),
-    createElement( PhotonTarget.SINGLE_O3_MOLECULE, MolecularFormulaStrings.O3_FORMULA_STRING, new O3( moleculeOptions ),
-      'singleO3MoleculeRadioButton' )
-  ];
+  let radioButtonContent = [];
+  if ( MoleculesAndLightQueryParameters.openSciEd ) {
+
+    // the specific molecules requested by Open Science Ed
+    radioButtonContent = [ nitrogenElement, oxygenElement, carbonDioxideElement, methaneElement, waterElement ];
+  }
+  else {
+    radioButtonContent = [
+      carbonMonoxideElement, nitrogenElement, oxygenElement, carbonDioxideElement,
+      methaneElement, waterElement, nitrogenDioxideElement, ozoneElement
+    ];
+  }
 
   // If necessary, scale down molecule names by the minimum scale factor.
   if ( scaleFactor < 1 ) {
-    _.each( textList, function( text ) { text.scale( scaleFactor ); } );
+    _.each( textList, text => { text.scale( scaleFactor ); } );
   }
 
   const radioButtons = new RadioButtonGroup( model.photonTargetProperty, radioButtonContent, {

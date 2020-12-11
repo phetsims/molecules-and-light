@@ -13,8 +13,10 @@
 import Vector2 from '../../../../dot/js/Vector2.js';
 import inherit from '../../../../phet-core/js/inherit.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import BooleanRoundStickyToggleButton from '../../../../sun/js/buttons/BooleanRoundStickyToggleButton.js';
 import flashlightOffImage from '../../../images/flashlight-off_png.js';
 import heatLampOffImage from '../../../images/infrared-source-off_png.js';
@@ -23,6 +25,7 @@ import flashlightOnImage from '../../../mipmaps/flashlight_png.js';
 import heatLampOnImage from '../../../mipmaps/infrared-source_png.js';
 import microwaveTransmitterImage from '../../../mipmaps/microwave-source_png.js';
 import uvLightOnImage from '../../../mipmaps/uv-source_png.js';
+import MoleculesAndLightQueryParameters from '../../common/MoleculesAndLightQueryParameters.js';
 import moleculesAndLight from '../../moleculesAndLight.js';
 import moleculesAndLightStrings from '../../moleculesAndLightStrings.js';
 import WavelengthConstants from '../model/WavelengthConstants.js';
@@ -30,6 +33,7 @@ import WavelengthConstants from '../model/WavelengthConstants.js';
 const lightSourceButtonLabelPatternString = moleculesAndLightStrings.a11y.lightSource.buttonLabelPattern;
 const lightSourcePressedButtonHelpTextString = moleculesAndLightStrings.a11y.lightSource.buttonPressedHelpText;
 const lightSourceUnpressedButtonHelpTextString = moleculesAndLightStrings.a11y.lightSource.buttonUnpressedHelpText;
+const openSciEdEnergySourceString = moleculesAndLightStrings.openSciEd.energySource;
 
 /**
  * Constructor for the photon emitter node.
@@ -43,9 +47,6 @@ function PhotonEmitterNode( width, model, tandem ) {
 
   // supertype constructor
   Node.call( this );
-
-  // carry this through scope
-  const self = this;
 
   this.model = model; // @private
 
@@ -69,9 +70,9 @@ function PhotonEmitterNode( width, model, tandem ) {
   model.photonEmitterOnProperty.link( setAriaPressed );
 
   // update the photon emitter upon changes to the photon wavelength
-  model.photonWavelengthProperty.link( function( photonWavelength ) {
+  model.photonWavelengthProperty.link( photonWavelength => {
     const emitterTandemName = WavelengthConstants.getTandemName( photonWavelength );
-    self.updateImage( width, photonWavelength, tandem, emitterTandemName );
+    this.updateImage( width, photonWavelength, tandem, emitterTandemName );
   } );
 
   model.photonEmitterOnProperty.link( on => {
@@ -82,6 +83,18 @@ function PhotonEmitterNode( width, model, tandem ) {
     // PDOM - update the help text for the emitter
     this.button.descriptionContent = on ? lightSourcePressedButtonHelpTextString : lightSourceUnpressedButtonHelpTextString;
   } );
+
+  if ( MoleculesAndLightQueryParameters.openSciEd ) {
+
+    // add a label to the photon emitter since there is only one possible light source
+    const lightSourceLabel = new Text( openSciEdEnergySourceString, {
+      font: new PhetFont( 12 ),
+      fill: 'white',
+      maxWidth: 100,
+      centerTop: this.photonEmitterOffImage.centerBottom
+    } );
+    this.addChild( lightSourceLabel );
+  }
 }
 
 moleculesAndLight.register( 'PhotonEmitterNode', PhotonEmitterNode );
