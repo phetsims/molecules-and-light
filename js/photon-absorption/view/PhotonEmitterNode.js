@@ -61,6 +61,23 @@ function PhotonEmitterNode( width, model, tandem ) {
     tandem: tandem.createTandem( 'button' )
   } );
 
+  // @public (read-only) {number} height of the label requested by Open Sci Ed, will be 0 if not in that mode
+  this.openSciEdLabelHeight = 0;
+
+  if ( MoleculesAndLightQueryParameters.openSciEd ) {
+
+    // add a label to the photon emitter since there is only one possible light source
+    this.lightSourceLabel = new Text( openSciEdEnergySourceString, {
+      font: new PhetFont( 12 ),
+      fill: 'white',
+      maxWidth: 100
+      // centerTop: this.photonEmitterOffImage.centerBottom
+    } );
+    this.addChild( this.lightSourceLabel );
+
+    this.openSciEdLabelHeight = this.lightSourceLabel.height;
+  }
+
   // PDOM - this button is indicated as a 'switch' for assistive technology
   this.button.setAriaRole( 'switch' );
 
@@ -83,18 +100,6 @@ function PhotonEmitterNode( width, model, tandem ) {
     // PDOM - update the help text for the emitter
     this.button.descriptionContent = on ? lightSourcePressedButtonHelpTextString : lightSourceUnpressedButtonHelpTextString;
   } );
-
-  if ( MoleculesAndLightQueryParameters.openSciEd ) {
-
-    // add a label to the photon emitter since there is only one possible light source
-    const lightSourceLabel = new Text( openSciEdEnergySourceString, {
-      font: new PhetFont( 12 ),
-      fill: 'white',
-      maxWidth: 100,
-      centerTop: this.photonEmitterOffImage.centerBottom
-    } );
-    this.addChild( lightSourceLabel );
-  }
 }
 
 moleculesAndLight.register( 'PhotonEmitterNode', PhotonEmitterNode );
@@ -146,6 +151,12 @@ inherit( Node, PhotonEmitterNode, {
     this.photonEmitterOnImage.scale( emitterWidth / this.photonEmitterOnImage.width );
     this.photonEmitterOnImage.center = new Vector2( 0, 0 );
     this.addChild( this.photonEmitterOnImage );
+
+    if ( MoleculesAndLightQueryParameters.openSciEd ) {
+      assert && assert( this.lightSourceLabel, 'label should be defined for Open Sci Ed' );
+      this.addChild( this.lightSourceLabel );
+      this.lightSourceLabel.centerTop = this.centerBottom;
+    }
 
     // PDOM - update the accessible name for the button
     this.button.innerContent = StringUtils.fillIn( lightSourceButtonLabelPatternString, {
