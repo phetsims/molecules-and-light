@@ -68,7 +68,7 @@ function PhotonEmitterNode( width, model, tandem ) {
 
     // add a label to the photon emitter since there is only one possible light source
     this.lightSourceLabel = new Text( openSciEdEnergySourceString, {
-      font: new PhetFont( 12 ),
+      font: new PhetFont( 11 ),
       fill: 'white',
       maxWidth: 100
     } );
