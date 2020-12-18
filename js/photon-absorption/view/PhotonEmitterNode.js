@@ -154,7 +154,7 @@ inherit( Node, PhotonEmitterNode, {
     if ( MoleculesAndLightQueryParameters.openSciEd ) {
       assert && assert( this.lightSourceLabel, 'label should be defined for Open Sci Ed' );
       this.addChild( this.lightSourceLabel );
-      this.lightSourceLabel.centerTop = this.photonEmitterOnImage.centerBottom;
+      this.lightSourceLabel.centerTop = this.photonEmitterOnImage.centerBottom.plusXY( 0, 5 );
     }
 
     // PDOM - update the accessible name for the button
