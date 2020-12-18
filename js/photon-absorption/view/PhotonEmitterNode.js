@@ -70,7 +70,7 @@ function PhotonEmitterNode( width, model, tandem ) {
     this.lightSourceLabel = new Text( openSciEdEnergySourceString, {
       font: new PhetFont( 11 ),
       fill: 'white',
-      maxWidth: 100
+      maxWidth: 150
     } );
     this.addChild( this.lightSourceLabel );
 
