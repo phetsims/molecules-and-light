@@ -22,7 +22,7 @@ const simOptions = {
     leadDesign: 'Kelly Lancaster (Java), Amy Rouinfar (HTML5)',
     softwareDevelopment: 'Jesse Greenberg, John Blanco, Sam Reid, Aaron Davis',
     team: 'Yuen-ying Carpenter, Brett Fiedler, Trish Loeblein, Wanda Diaz Merced, Emily B. Moore, Matthew Moore, Robert Parson, Ariel Paul, Kathy Perkins, Taliesin Smith, Brianna Tomlinson, Syan Zhou',
-    qualityAssurance: 'Jaspe Arias, Logan Bray, Steele Dalton, Elise Morgan, Liam Mulhall, Oliver Orejola, Kathryn Woessner, Bryan Yoelin',
+    qualityAssurance: 'Jaspe Arias, Logan Bray, Steele Dalton, Brooklyn Lash, Elise Morgan, Liam Mulhall, Oliver Orejola, Devon Quispe, Kathryn Woessner, Bryan Yoelin',
     graphicArts: 'Alex Klinger',
     soundDesign: 'Ashton Morris, Mike Winters'
   }
