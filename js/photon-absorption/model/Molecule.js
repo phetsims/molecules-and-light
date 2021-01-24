@@ -61,55 +61,55 @@ class Molecule {
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     options = merge( {
       initialPosition: Vector2.ZERO,
       isForIcon: false,
       tandem: Tandem.OPTIONAL // not needed when part of the selection radio buttons.
     }, options );
-  
-    // TODO: Instrument using PhetioGroup, see https://github.com/phetsims/tandem/issues/87
+
+    // TODO (phet-io): Should this be an assertion?  Why is this here?
     options.tandem = Tandem.OPTIONAL;
-  
+
     this.highElectronicEnergyStateProperty = new BooleanProperty( false, !options.isForIcon ? {
       tandem: options.tandem.createTandem( 'highElectronicEnergyStateProperty' ), // Instrumentation requested in https://github.com/phetsims/phet-io-wrappers/issues/53
       phetioState: false // Too tricky to load dynamic particle state in the state wrapper, and not enough benefit.  Opt out for now.
     } : {} );
-  
+
     // TODO: visibility annotation
     this.centerOfGravityProperty = new Vector2Property( options.initialPosition );
-  
+
     // Atoms and bonds that form this molecule.
     this.atoms = []; // @private Elements are of type Atoms
     this.atomicBonds = []; // @private Elements are of type AtomicBonds
-  
+
     // Structure of the molecule in terms of offsets from the center of gravity.  These indicate the atom's position in
     // the "relaxed" (i.e. non-vibrating), non-rotated state.
     this.initialAtomCogOffsets = {}; // @private Object contains keys of the atom's uniqueID and values of type Vector2
-  
+
     // Vibration offsets - these represent the amount of deviation from the initial (a.k.a relaxed) configuration for
     // each molecule.
     this.vibrationAtomOffsets = {}; // @private Object contains keys of the atom's uniqueID and values of type Vector2
-  
+
     //  Map containing the atoms which compose this molecule.  Allows us to call on each atom by their unique ID.
     this.atomsByID = {};  // @private Objects contains keys of the atom's uniqueID, and values of type atom.
-  
+
     // @public Velocity for this molecule.
     this.velocity = new Vector2( 0, 0 );
-  
+
     // Map that matches photon wavelengths to photon absorption strategies. The strategies contained in this structure
     // define whether the molecule can absorb a given photon and, if it does absorb it, how it will react.
     // Object will contain keys of type Number and values of type PhotonAbsorptionStrategy
     this.mapWavelengthToAbsorptionStrategy = {}; // @private
-  
+
     // Currently active photon absorption strategy, active because a photon was absorbed that activated it.
     // @public
     this.activePhotonAbsorptionStrategy = new NullPhotonAbsorptionStrategy( this );
-  
+
     // Variable that prevents reabsorption for a while after emitting a photon.
     // @private
     this.absorptionHysteresisCountdownTime = 0;
-  
+
     // The "pass through photon list" keeps track of photons that were not absorbed due to random probability
     // (essentially a simulation of quantum properties).  If this molecule has no absorption strategy for the photon,
     // it is also added to this list. This is needed since the absorption of a given photon will likely be tested at
@@ -117,13 +117,13 @@ class Molecule {
     // Array will have size PASS_THROUGH_PHOTON_LIST_SIZE with type Photon.
     // @private
     this.passThroughPhotonList = [];
-  
+
     // @public {NumberProperty} - The current point within this molecule's vibration sequence.
     this.currentVibrationRadiansProperty = new NumberProperty( 0 );
-  
+
     // The amount of rotation currently applied to this molecule.  This is relative to its original, non-rotated state.
     this.currentRotationRadians = 0; // @public
-  
+
     // @public - Boolean values that track whether the molecule is vibrating or rotating.
     this.vibratingProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'vibratingProperty' ),
@@ -133,33 +133,33 @@ class Molecule {
       tandem: options.tandem.createTandem( 'rotatingProperty' ),
       phetioState: false // Too tricky to load dynamic particle state in the state wrapper, and not enough benefit.  Opt out for now.
     } );
-  
+
     // Controls the direction of rotation.
     this.rotationDirectionClockwiseProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'rotationDirectionClockwiseProperty' ),
       phetioState: false // Too tricky to load dynamic particle state in the state wrapper, and not enough benefit.  Opt out for now.
     } );
-  
+
     // @public {DerivedProperty.<boolean>} - whether or not the molecule is "stretching" or "contracting" in its vibration.
     this.isStretchingProperty = new DerivedProperty( [ this.currentVibrationRadiansProperty ], vibrationRadians => {
-  
+
       // more displacement with -sin( vibrationRadians ) and so when the slope of that function is negative
       // (derivative of sin is cos) the atoms are expanding
       return Math.cos( vibrationRadians ) < 0;
     } );
-  
+
     // @public, set by PhotonAbsorptionModel
     this.photonGroup = null;
-  
+
     // @public (read-only) {Emitter} - emitter for when a photon is absorbed
     this.photonAbsorbedEmitter = new Emitter( { parameters: [ { valueType: Photon } ] } );
-  
+
     // @public (read-only) {Emitter} - emitter for when a photon is emitted
     this.photonEmittedEmitter = new Emitter( { parameters: [ { valueType: Photon } ] } );
-  
+
     // @public {Emitter} - emitter for when a photon passes through the molecule without absorptions
     this.photonPassedThroughEmitter = new Emitter( { parameters: [ { valueType: Photon } ] } );
-  
+
     // @public Emitter for 'brokeApart' event, when a molecule breaks into two new molecules
     this.brokeApartEmitter = new Emitter( {
       parameters: [
