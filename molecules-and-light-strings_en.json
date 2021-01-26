@@ -98,10 +98,8 @@
   "keyboardHelpDialog.stepForwardShortcut": {
     "value": "When action is paused step forward in bigger steps"
   },
-  "openSciEd": {
-    "energySource": {
-      "value": "Energy from Earth’s Surface"
-    }
+  "openSciEd.energySource": {
+    "value": "Energy from Earth’s Surface"
   },
   "a11y": {
     "playAreaSummary": {
