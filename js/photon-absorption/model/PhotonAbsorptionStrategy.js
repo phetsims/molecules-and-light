@@ -22,19 +22,19 @@ const MIN_PHOTON_HOLD_TIME = 1.1; // seconds
 const MAX_PHOTON_HOLD_TIME = 1.3; // seconds
 
 class PhotonAbsorptionStrategy {
-  
+
   /**
    * Constructor for photon absorption strategy.
    *
    * @param {Molecule} molecule - The molecule which will use this strategy.
    */
   constructor( molecule ) {
-  
+
     // Property that contains the probability that a given photon will be absorbed.
     this.photonAbsorptionProbabilityProperty = new Property( 0.5 ); // @private
-  
+
     this.molecule = molecule; // @protected
-  
+
     // Variables involved in the holding and re-emitting of photons.
     // @protected
     this.isPhotonAbsorbed = false;

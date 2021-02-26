@@ -24,7 +24,7 @@ mapWavelengthToImageName[ WavelengthConstants.VISIBLE_WAVELENGTH ] = thin2Image;
 mapWavelengthToImageName[ WavelengthConstants.UV_WAVELENGTH ] = photon100Image;
 
 class PhotonNode extends Node {
-  
+
   /**
    * Constructor for a photon node.
    *
@@ -32,22 +32,22 @@ class PhotonNode extends Node {
    * @param {ModelViewTransform2} modelViewTransform
    */
   constructor( photon, modelViewTransform ) {
-  
+
     // supertype constructor
     super();
-  
+
     // Carry this node through the scope in nested functions.
-  
+
     // @private
     this.photon = photon;
     this.modelViewTransform = modelViewTransform;
-  
+
     // Lookup the image file that corresponds to the wavelength and add a centered image.
     assert && assert( mapWavelengthToImageName.hasOwnProperty( this.photon.wavelength ) );
     const photonImage = new Image( mapWavelengthToImageName[ this.photon.wavelength ] );
-  
+
     this.addChild( photonImage );
-  
+
     // Observe position changes.
     photon.positionProperty.link( position => {
       // Set overall position.

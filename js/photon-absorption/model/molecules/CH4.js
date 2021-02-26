@@ -35,24 +35,24 @@ const HYDROGEN_VIBRATION_DISTANCE_X = HYDROGEN_VIBRATION_DISTANCE * Math.cos( HY
 const HYDROGEN_VIBRATION_DISTANCE_Y = HYDROGEN_VIBRATION_DISTANCE * Math.sin( HYDROGEN_VIBRATION_ANGLE );
 
 class CH4 extends Molecule {
-  
+
   /**
    * Constructor for a Methane molecule.
    *
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     // Supertype constructor
     super( options );
-  
+
     // Instance data for the CH4 molecule - @private
     this.carbonAtom = Atom.carbon();
     this.hydrogenAtom1 = Atom.hydrogen( { topLayer: true } );
     this.hydrogenAtom2 = Atom.hydrogen();
     this.hydrogenAtom3 = Atom.hydrogen();
     this.hydrogenAtom4 = Atom.hydrogen( { topLayer: true } );
-  
+
     // Configure the base class.
     this.addAtom( this.carbonAtom );
     this.addAtom( this.hydrogenAtom1 );
@@ -63,10 +63,10 @@ class CH4 extends Molecule {
     this.addAtomicBond( new AtomicBond( this.carbonAtom, this.hydrogenAtom2 ) );
     this.addAtomicBond( new AtomicBond( this.carbonAtom, this.hydrogenAtom3 ) );
     this.addAtomicBond( new AtomicBond( this.carbonAtom, this.hydrogenAtom4, { topLayer: true, atom1PositionOffset: new Vector2( PERSPECTIVE_OFFSET / 2, -PERSPECTIVE_OFFSET ) } ) );
-  
+
     // Set up the photon wavelengths to absorb.
     this.setPhotonAbsorptionStrategy( WavelengthConstants.IR_WAVELENGTH, new VibrationStrategy( this ) );
-  
+
     // Set the initial offsets.
     this.initializeAtomOffsets();
   }

@@ -59,7 +59,7 @@ class QuadEmissionFrequencyControlPanel extends Node {
    * @param {Tandem} tandem
    */
   constructor( photonAbsorptionModel, tandem ) {
-  
+
     // Supertype constructor
     super( {
       tagName: 'div',
@@ -67,7 +67,7 @@ class QuadEmissionFrequencyControlPanel extends Node {
       labelContent: lightSourcesString,
       descriptionContent: lightSourceRadioButtonHelpTextString
     } );
-  
+
     // Initialize the photon nodes for the control panel.  Identity model view transform is used because these photon
     // nodes do not correspond to anything in the model.  They are just visual elements of the control panel.
     const identityTransform = ModelViewTransform2.createIdentity();
@@ -87,11 +87,11 @@ class QuadEmissionFrequencyControlPanel extends Node {
       new Photon( WavelengthConstants.UV_WAVELENGTH, { tandem: Tandem.OPT_OUT } ),
       identityTransform
     );
-  
+
     // Load the radio button content into an array of object literals which holds the node, label string, and
     // value for each button.
     const labelFont = new PhetFont( 18 );
-  
+
     // This is sort of hack to pass through the tandem of the radioButtonGroupMember to its child.
     const microwaveTandemName = 'microwaveRadioButton';
     const infraredTandemName = 'infraredRadioButton';
@@ -135,25 +135,25 @@ class QuadEmissionFrequencyControlPanel extends Node {
       tandemName: ultravioletTandemName,
       labelContent: quadWavelengthSelectorUltravioletString
     } ];
-  
+
     // Scale the radio button text.  This is done mostly to support translations.
     // Determine the max width of panels in the radio button group.
     const panelWidth = _.maxBy( radioButtonContent, content => content.node.width ).node.width;
-  
+
     // Calculate the minimum scale factor that must be applied to each label. Ensures constant font size for all labels.
     let scaleFactor = 1;
     _.each( radioButtonContent, content => {
       const labelWidth = content.label.width;
       scaleFactor = Math.min( scaleFactor, panelWidth / labelWidth );
     } );
-  
+
     // If necessary, scale down each label by the minimum scale value.
     if ( scaleFactor < 1 ) {
       _.each( radioButtonContent, content => {
         content.label.scale( scaleFactor );
       } );
     }
-  
+
     // Create sound generators for the radio buttons.  This is done because by default the sound generators for radio
     // button groups decrease in pitch from left to right, but these radio buttons will be selecting higher frequency
     // light from left to right, so this seems more intuitive.
@@ -163,7 +163,7 @@ class QuadEmissionFrequencyControlPanel extends Node {
         multiSelectionSoundPlayerFactory.getSelectionSoundPlayer( radioButtonContent.length - index - 1 )
       );
     } );
-  
+
     const radioButtonGroup = new RectangularRadioButtonGroup( photonAbsorptionModel.photonWavelengthProperty, radioButtonContent, {
       orientation: 'horizontal',
       spacing: 15,
@@ -177,7 +177,7 @@ class QuadEmissionFrequencyControlPanel extends Node {
       soundPlayers: radioButtonSoundPlayers,
       tandem: radioButtonGroupTandem
     } );
-  
+
     // Draw an arrow node to illustrate energy of the emitted photons.
     const energyText = new Text( quadWavelengthSelectorHigherEnergyString, { font: new PhetFont( 19 ) } );
     const energyArrow = new ArrowNode( 0, 0, ARROW_LENGTH, 0, {
@@ -188,17 +188,17 @@ class QuadEmissionFrequencyControlPanel extends Node {
       tailWidth: ARROW_TAIL_WIDTH,
       tandem: tandem.createTandem( 'energyArrow' )
     } );
-  
+
     // Scale the text below the arrow node. Max text length is the arrow tail length minus twice the head width.
     if ( energyText.width > ARROW_LENGTH - 2 * ARROW_HEAD_WIDTH ) {
       energyText.scale( ( ARROW_LENGTH - 2 * ARROW_HEAD_WIDTH ) / energyText.width );
     }
-  
+
     // Set the positions of all components of the control panel.
     energyArrow.centerX = energyText.centerX = radioButtonGroup.centerX; // All have the same center x component.
     energyArrow.top = radioButtonGroup.bottom + 15; // Arrow is below the buttons by an offset which is chosen empirically.
     energyText.top = energyArrow.bottom;
-  
+
     // Add all components to the control panel.
     this.addChild( radioButtonGroup );
     this.addChild( energyArrow );

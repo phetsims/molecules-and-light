@@ -17,22 +17,22 @@ import AtomicBond from '../atoms/AtomicBond.js';
 const INITIAL_NITROGEN_NITROGEN_DISTANCE = 170; // In picometers.
 
 class N2 extends Molecule {
-  
+
   /**
    * Constructor for a molecule of nitrogen.
    *
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     // Supertype constructor
     super( options );
-  
+
     // Instance data for the nitrogen molecule
     // @private
     this.nitrogenAtom1 = Atom.nitrogen();
     this.nitrogenAtom2 = Atom.nitrogen();
-  
+
     // Configure the base class.
     this.addAtom( this.nitrogenAtom1 );
     this.addAtom( this.nitrogenAtom2 );
@@ -40,7 +40,7 @@ class N2 extends Molecule {
 
     // Set the initial offsets
     this.initializeAtomOffsets();
-  
+
   }
 
 

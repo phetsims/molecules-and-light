@@ -21,33 +21,33 @@ const INITIAL_CARBON_OXYGEN_DISTANCE = 170; // In picometers.
 const VIBRATION_MAGNITUDE = 20; // In picometers.
 
 class CO extends Molecule {
-  
+
   /**
    * Constructor for a carbon monoxide molecule.
    *
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     // Supertype constructor
     super( options );
-  
+
     // @private
     this.carbonAtom = Atom.carbon();
     this.oxygenAtom = Atom.oxygen();
-  
+
     // Configure the base class.
     this.addAtom( this.carbonAtom );
     this.addAtom( this.oxygenAtom );
     this.addAtomicBond( new AtomicBond( this.carbonAtom, this.oxygenAtom, { bondCount: 3 } ) );
-  
+
     // Set up the photon wavelengths to absorb
     this.setPhotonAbsorptionStrategy( WavelengthConstants.MICRO_WAVELENGTH, new RotationStrategy( this ) );
     this.setPhotonAbsorptionStrategy( WavelengthConstants.IR_WAVELENGTH, new VibrationStrategy( this ) );
-  
+
     // Set the initial offsets.
     this.initializeAtomOffsets();
-  
+
   }
 
 

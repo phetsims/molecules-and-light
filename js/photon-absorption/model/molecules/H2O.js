@@ -26,17 +26,17 @@ const INITIAL_MOLECULE_HEIGHT = OXYGEN_HYDROGEN_BOND_LENGTH * Math.cos( INITIAL_
 const INITIAL_HYDROGEN_HORIZONTAL_OFFSET = OXYGEN_HYDROGEN_BOND_LENGTH * Math.sin( INITIAL_HYDROGEN_OXYGEN_HYDROGEN_ANGLE / 2 );
 
 class H2O extends Molecule {
-  
+
   /**
    * Constructor for a water molecule.
    *
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     // Supertype constructor
     super( options );
-  
+
     // Instance Data
     // @private
     this.oxygenAtom = Atom.oxygen();
@@ -45,18 +45,18 @@ class H2O extends Molecule {
     this.totalMoleculeMass = this.oxygenAtom.mass + ( 2 * this.hydrogenAtom1.mass );
     this.initialOxygenVerticalOffset = INITIAL_MOLECULE_HEIGHT * ( ( 2 * this.hydrogenAtom1.mass ) / this.totalMoleculeMass );
     this.initialHydrogenVerticalOffset = -( INITIAL_MOLECULE_HEIGHT - this.initialOxygenVerticalOffset );
-  
+
     // Configure the base class.
     this.addAtom( this.oxygenAtom );
     this.addAtom( this.hydrogenAtom1 );
     this.addAtom( this.hydrogenAtom2 );
     this.addAtomicBond( new AtomicBond( this.oxygenAtom, this.hydrogenAtom1, { bondCount: 1 } ) );
     this.addAtomicBond( new AtomicBond( this.oxygenAtom, this.hydrogenAtom2, { bondCount: 1 } ) );
-  
+
     // Set up the photon wavelengths to absorb.
     this.setPhotonAbsorptionStrategy( WavelengthConstants.MICRO_WAVELENGTH, new RotationStrategy( this ) );
     this.setPhotonAbsorptionStrategy( WavelengthConstants.IR_WAVELENGTH, new VibrationStrategy( this ) );
-  
+
     // Set the initial offsets.
     this.initializeAtomOffsets();
   }

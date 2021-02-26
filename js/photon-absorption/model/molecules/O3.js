@@ -39,32 +39,32 @@ const RAND = {
 };
 
 class O3 extends Molecule {
-  
+
   /**
    * Constructor for an ozone molecule.
    *
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     // Supertype constructor
     super( options );
-  
+
     // Instance Data
     // @private
     this.centerOxygenAtom = Atom.oxygen();
     this.leftOxygenAtom = Atom.oxygen();
     this.rightOxygenAtom = Atom.oxygen();
-  
+
     // Tracks the side on which the double bond is shown.  More on this where it is initialized.
     // @private
     this.doubleBondOnRight = RAND.nextBoolean();
-  
+
     // Configure the base class.
     this.addAtom( this.centerOxygenAtom );
     this.addAtom( this.leftOxygenAtom );
     this.addAtom( this.rightOxygenAtom );
-  
+
     // Create the bond structure.  O3 has a type of bond where each O-O has essentially 1.5 bonds, so we randomly choose
     // one side to sho two bonds and another to show one.
     if ( this.doubleBondOnRight ) {
@@ -75,12 +75,12 @@ class O3 extends Molecule {
       this.addAtomicBond( new AtomicBond( this.centerOxygenAtom, this.leftOxygenAtom, { bondCount: 2 } ) );
       this.addAtomicBond( new AtomicBond( this.centerOxygenAtom, this.rightOxygenAtom, { bondCount: 1 } ) );
     }
-  
+
     // Set up the photon wavelengths to absorb.
     this.setPhotonAbsorptionStrategy( WavelengthConstants.MICRO_WAVELENGTH, new RotationStrategy( this ) );
     this.setPhotonAbsorptionStrategy( WavelengthConstants.IR_WAVELENGTH, new VibrationStrategy( this ) );
     this.setPhotonAbsorptionStrategy( WavelengthConstants.UV_WAVELENGTH, new BreakApartStrategy( this ) );
-  
+
     // Set the initial offsets.
     this.initializeAtomOffsets();
   }

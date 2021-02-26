@@ -15,14 +15,14 @@ const RAND = {
 };
 
 class RotationStrategy extends PhotonHoldStrategy {
-  
+
   /**
    * Constructor for a rotation strategy.
    *
    * @param {Molecule} molecule - The molecule which will use this strategy.
    */
   constructor( molecule ) {
-  
+
     // Supertype constructor
     super( molecule );
   }

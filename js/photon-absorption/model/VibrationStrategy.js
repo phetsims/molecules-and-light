@@ -11,17 +11,17 @@ import moleculesAndLight from '../../moleculesAndLight.js';
 import PhotonHoldStrategy from './PhotonHoldStrategy.js';
 
 class VibrationStrategy extends PhotonHoldStrategy {
-  
+
   /**
    * Constructor for the break apart strategy.
    *
    * @param {Molecule} molecule - The molecule which will use this strategy.
    */
   constructor( molecule ) {
-  
+
     // Supertype constructor
     super( molecule );
-  
+
   }
 
 

@@ -17,30 +17,30 @@ import AtomicBond from '../atoms/AtomicBond.js';
 const INITIAL_OXYGEN_OXYGEN_DISTANCE = 170; // In picometers.
 
 class O2 extends Molecule {
-  
+
   /**
    * Constructor for an oxygen molecule
    *
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     // Supertype constructor
     super( options );
-  
+
     // Instance data for the nitrogen molecule
     // @private
     this.oxygenAtom1 = Atom.oxygen();
     this.oxygenAtom2 = Atom.oxygen();
-  
+
     // Configure the base class.
     this.addAtom( this.oxygenAtom1 );
     this.addAtom( this.oxygenAtom2 );
     this.addAtomicBond( new AtomicBond( this.oxygenAtom1, this.oxygenAtom2, { bondCount: 2 } ) );
-  
+
     // Set the initial offsets
     this.initializeAtomOffsets();
-  
+
   }
 
 

@@ -11,17 +11,17 @@ import NullPhotonAbsorptionStrategy from './NullPhotonAbsorptionStrategy.js';
 import PhotonAbsorptionStrategy from './PhotonAbsorptionStrategy.js';
 
 class BreakApartStrategy extends PhotonAbsorptionStrategy {
-  
+
   /**
    * Constructor for the break apart strategy.
    *
    * @param {Molecule} molecule - The molecule which will use this strategy.
    */
   constructor( molecule ) {
-  
+
     // Supertype constructor
     super( molecule );
-  
+
   }
 
 

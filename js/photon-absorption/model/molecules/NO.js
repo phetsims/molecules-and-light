@@ -24,22 +24,22 @@ class NO extends Molecule {
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     // Supertype constructor
     super( options );
-  
+
     // Instance Data
     // @private
     this.nitrogenAtom = Atom.nitrogen();
     this.oxygenAtom = Atom.oxygen();
-  
+
     // Configure the base class.
     this.addAtom( this.nitrogenAtom );
     this.addAtom( this.oxygenAtom );
     this.addAtomicBond( new AtomicBond( this.nitrogenAtom, this.oxygenAtom, { bondCount: 2 } ) );
-  
+
     // Set up the photon wavelengths to absorb.
-  
+
     // Set the initial offsets.
     this.initializeAtomOffsets();
   }

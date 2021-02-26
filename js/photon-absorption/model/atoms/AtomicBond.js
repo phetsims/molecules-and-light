@@ -21,19 +21,19 @@ class AtomicBond {
    * @param {Object} [options]
    */
   constructor( atom1, atom2, options ) {
-  
+
     options = merge( {
       // defaults
       bondCount: 1, // Indicates whether this is a single, double, triple, etc. bond.
-  
+
       // {boolean} if true, the atom will be in the top layer in the visualization, to support 3D looking molecules
       topLayer: false,
-  
+
       // offsets for the positions of the bond endpoints, relative to the centers of each atom in model coordinates
       atom1PositionOffset: new Vector2( 0, 0 ),
       atom2PositionOffset: new Vector2( 0, 0 )
     }, options );
-  
+
     // @public (read-only)
     this.atom1 = atom1;
     this.atom2 = atom2;

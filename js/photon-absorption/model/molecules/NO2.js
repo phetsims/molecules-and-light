@@ -42,10 +42,10 @@ class NO2 extends Molecule {
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     // Supertype constructor
     super( options );
-  
+
     // Instance Data
     // @private
     this.nitrogenAtom = Atom.nitrogen();
@@ -55,16 +55,16 @@ class NO2 extends Molecule {
     this.initialNitrogenVerticalOffset = INITIAL_MOLECULE_HEIGHT * ( ( 2 * this.rightOxygenAtom.mass ) / this.totalMoleculeMass );
     this.initialOxygenVerticalOffset = -( INITIAL_MOLECULE_HEIGHT - this.initialNitrogenVerticalOffset );
     this.initialOxygenHorizontalOffset = NITROGEN_OXYGEN_BOND_LENGTH * Math.sin( INITIAL_OXYGEN_NITROGEN_OXYGEN_ANGLE / 2 );
-  
+
     // Tracks the side on which the double bond is shown.  More on this where it is initialized.
     // @private
     this.doubleBondOnRight = RAND.nextBoolean();
-  
+
     // Configure the base class.
     this.addAtom( this.nitrogenAtom );
     this.addAtom( this.rightOxygenAtom );
     this.addAtom( this.leftOxygenAtom );
-  
+
     // Create the bond structure.  NO2 has a type of bond where each N-O has essentially 1.5 bonds, so we randomly
     // choose one side to show two bonds and another to show one.
     if ( this.doubleBondOnRight ) {
@@ -75,17 +75,17 @@ class NO2 extends Molecule {
       this.addAtomicBond( new AtomicBond( this.nitrogenAtom, this.rightOxygenAtom, { bondCount: 1 } ) );
       this.addAtomicBond( new AtomicBond( this.nitrogenAtom, this.leftOxygenAtom, { bondCount: 2 } ) );
     }
-  
-  
+
+
     // Set up the photon wavelengths to absorb.
     this.setPhotonAbsorptionStrategy( WavelengthConstants.MICRO_WAVELENGTH, new RotationStrategy( this ) );
     this.setPhotonAbsorptionStrategy( WavelengthConstants.IR_WAVELENGTH, new VibrationStrategy( this ) );
     this.setPhotonAbsorptionStrategy( WavelengthConstants.VISIBLE_WAVELENGTH, new ExcitationStrategy( this ) );
     this.setPhotonAbsorptionStrategy( WavelengthConstants.UV_WAVELENGTH, new BreakApartStrategy( this ) );
-  
+
     // Set the initial offsets.
     this.initializeAtomOffsets();
-  
+
   }
 
 

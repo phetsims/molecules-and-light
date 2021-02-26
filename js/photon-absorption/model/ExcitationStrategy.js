@@ -12,14 +12,14 @@ import moleculesAndLight from '../../moleculesAndLight.js';
 import PhotonHoldStrategy from './PhotonHoldStrategy.js';
 
 class ExcitationStrategy extends PhotonHoldStrategy {
-	
+
   /**
    * Constructor for the excitation strategy.
    *
    * @param {Molecule} molecule - The molecule which will use this strategy.
    */
   constructor( molecule ) {
-  
+
     // Supertype constructor
     super( molecule );
   }

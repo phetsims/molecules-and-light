@@ -10,17 +10,17 @@ import moleculesAndLight from '../../moleculesAndLight.js';
 import PhotonAbsorptionStrategy from './PhotonAbsorptionStrategy.js';
 
 class NullPhotonAbsorptionStrategy extends PhotonAbsorptionStrategy {
-  
+
   /**
    * Constructor for the null absorption strategy.  This strategy does nothing.
    *
    * @param {Molecule} molecule - The molecule which will use this strategy.
    */
   constructor( molecule ) {
-  
+
     // Supertype constructor
     super( molecule );
-  
+
   }
 
   /**

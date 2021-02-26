@@ -14,27 +14,27 @@ import Molecule from '../Molecule.js';
 import Atom from '../atoms/Atom.js';
 
 class O extends Molecule {
-  
+
   /**
    * Constructor for a single atom of oxygen.
    *
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     // Supertype constructor
     super( options );
-  
+
     // Instance Data
     // @private
     this.oxygenAtom = Atom.oxygen();
-  
+
     // Configure the base class.
     this.addAtom( this.oxygenAtom );
-  
+
     // Set the initial offsets.
     this.initializeAtomOffsets();
-  
+
   }
 
 

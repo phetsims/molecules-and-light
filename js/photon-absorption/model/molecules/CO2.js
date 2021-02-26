@@ -25,36 +25,36 @@ const CARBON_MAX_DEFLECTION = 40;
 const OXYGEN_MAX_DEFLECTION = Atom.carbon().mass * CARBON_MAX_DEFLECTION / ( 2 * Atom.oxygen().mass );
 
 class CO2 extends Molecule {
-  
+
   /**
    * Constructor for a carbon dioxide molecule.
    *
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     // Supertype constructor
     super( options );
-  
+
     // Instance data for the carbon dioxide molecule
     // @private
     this.carbonAtom = Atom.carbon();
     this.oxygenAtom1 = Atom.oxygen();
     this.oxygenAtom2 = Atom.oxygen();
-  
+
     // Configure the base class.
     this.addAtom( this.carbonAtom );
     this.addAtom( this.oxygenAtom1 );
     this.addAtom( this.oxygenAtom2 );
     this.addAtomicBond( new AtomicBond( this.carbonAtom, this.oxygenAtom1, { bondCount: 2 } ) );
     this.addAtomicBond( new AtomicBond( this.carbonAtom, this.oxygenAtom2, { bondCount: 2 } ) );
-  
+
     // Set up the photon wavelengths to absorb.
     this.setPhotonAbsorptionStrategy( WavelengthConstants.IR_WAVELENGTH, new VibrationStrategy( this ) );
-  
+
     // Set the initial offsets
     this.initializeAtomOffsets();
-  
+
   }
 
 

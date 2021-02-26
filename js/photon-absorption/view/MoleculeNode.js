@@ -13,7 +13,7 @@ import AtomNode from './AtomNode.js';
 import AtomicBondNode from './AtomicBondNode.js';
 
 class MoleculeNode extends Node {
-  
+
   /**
    * Constructor for a molecule node.
    *
@@ -22,26 +22,26 @@ class MoleculeNode extends Node {
    * @param {Object} [options]
    */
   constructor( molecule, modelViewTransform, options ) {
-  
+
     // supertype constructor
     super( options );
-  
+
     // Carry this node through the scope in nested functions.
     this.modelViewTransform = modelViewTransform; // @private
-  
+
     // Instance Data
     const atomTopLayer = new Node();
     const atomBottomLayer = new Node();
     const bondTopLayer = new Node();
     const bondBottomLayer = new Node();
-  
+
     this.addChild( bondBottomLayer );
     this.addChild( atomBottomLayer );
     this.addChild( bondTopLayer );
     this.addChild( atomTopLayer );
-  
+
     const atoms = molecule.getAtoms();
-  
+
     // Create nodes and add the atoms which compose this molecule to the atomLayer.
     for ( let i = 0; i < atoms.length; i++ ) {
       const atom = molecule.getAtoms()[ i ];
@@ -53,7 +53,7 @@ class MoleculeNode extends Node {
         atomBottomLayer.addChild( atomNode );
       }
     }
-  
+
     // Create and add the atomic bonds which form the structure of this molecule to the bondLayer
     const atomicBonds = molecule.getAtomicBonds();
     for ( let i = 0; i < atomicBonds.length; i++ ) {
@@ -66,7 +66,7 @@ class MoleculeNode extends Node {
         bondBottomLayer.addChild( bondNode );
       }
     }
-  
+
     // Link the high energy state to the property in the model.
     const atomNodes = atomTopLayer.children.concat( atomBottomLayer.children );
     molecule.highElectronicEnergyStateProperty.link( () => {
