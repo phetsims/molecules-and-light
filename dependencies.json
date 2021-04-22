@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.5.8 Mon Mar 08 2021 15:08:21 GMT-0500 (Eastern Standard Time)",
+  "comment": "# molecules-and-light 1.5.8 Thu Apr 22 2021 15:22:03 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "f39fc10d07573dc368652ec90afc97e4d257dd7e",
+    "sha": "62dbacb95cf38c9f4953168f494cd29d951bd039",
     "branch": "1.5"
   },
   "nitroglycerin": {
@@ -58,15 +58,15 @@
   },
   "phetmarks": {
     "sha": "4e339268ff4bde92671940a447a033a8e49e9bef",
-    "branch": "molecules-and-light-1.5"
+    "branch": "HEAD"
   },
   "query-string-machine": {
     "sha": "599036755406fff368d329f42f6c9f7613f9ce2c",
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "1652425f3236dbd7bccb70247bf7987cf662de16",
-    "branch": "HEAD"
+    "sha": "9cdb78b665ea0af4d6238e80702de3b111be749a",
+    "branch": "molecules-and-light-1.5"
   },
   "scenery-phet": {
     "sha": "cce81389f2e1aba07db009f7f7132fd6d0822130",
