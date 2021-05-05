@@ -6,10 +6,10 @@
  * @author Jesse Greenberg
  */
 
-import MoleculesAndLightQueryParameters from '../../common/MoleculesAndLightQueryParameters.js';
+import GreenhouseEffectQueryParameters from '../../../../greenhouse-effect/js/common/GreenhouseEffectQueryParameters.js';
 import moleculesAndLight from '../../moleculesAndLight.js';
-import PhotonAbsorptionModel from '../../photon-absorption/model/PhotonAbsorptionModel.js';
-import PhotonTarget from '../../photon-absorption/model/PhotonTarget.js';
+import PhotonAbsorptionModel from '../../../../greenhouse-effect/js/micro/model/PhotonAbsorptionModel.js';
+import PhotonTarget from '../../../../greenhouse-effect/js/micro/model/PhotonTarget.js';
 
 /**
  * @public
@@ -17,7 +17,7 @@ import PhotonTarget from '../../photon-absorption/model/PhotonTarget.js';
 class MoleculesAndLightModel extends PhotonAbsorptionModel {
   constructor( tandem ) {
 
-    const initialTarget = MoleculesAndLightQueryParameters.openSciEd ? PhotonTarget.SINGLE_N2_MOLECULE : PhotonTarget.SINGLE_CO_MOLECULE;
+    const initialTarget = GreenhouseEffectQueryParameters.openSciEd ? PhotonTarget.SINGLE_N2_MOLECULE : PhotonTarget.SINGLE_CO_MOLECULE;
     super( initialTarget, tandem );
   }
 }
