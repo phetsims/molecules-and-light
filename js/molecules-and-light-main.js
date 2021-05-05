@@ -11,7 +11,7 @@ import simLauncher from '../../joist/js/simLauncher.js';
 import platform from '../../phet-core/js/platform.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import moleculesAndLightStrings from './moleculesAndLightStrings.js';
-import MoleculesAndLightScreen from './moleculesandlight/MoleculesAndLightScreen.js';
+import MoleculesAndLightScreen from './molecules-and-light/MoleculesAndLightScreen.js';
 
 const moleculesAndLightTitleString = moleculesAndLightStrings[ 'molecules-and-light' ].title;
 
