@@ -27,6 +27,7 @@ git clone https://github.com/phetsims/babel.git
 git clone https://github.com/phetsims/brand.git
 git clone https://github.com/phetsims/chipper.git
 git clone https://github.com/phetsims/dot.git
+git clone https://github.com/phetsims/greenhouse-effect.git
 git clone https://github.com/phetsims/joist.git
 git clone https://github.com/phetsims/kite.git
 git clone https://github.com/phetsims/molecules-and-light.git

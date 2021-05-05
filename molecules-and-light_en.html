@@ -34,7 +34,8 @@
       "phet": {
         "requirejsNamespace": "MOLECULES_AND_LIGHT",
         "phetLibs": [
-          "nitroglycerin"
+          "nitroglycerin",
+          "greenhouse-effect"
         ],
         "runnable": true,
         "supportedBrands": [
@@ -42,7 +43,7 @@
           "phet-io",
           "adapted-from-phet"
         ],
-        "features":{
+        "features": {
           "supportsInteractiveDescription": true
         },
         "supportsSound": true,
@@ -54,6 +55,10 @@
     };
   window.phet.chipper.stringRepos =
     [
+      {
+        "repo": "greenhouse-effect",
+        "requirejsNamespace": "GREENHOUSE_EFFECT"
+      },
       {
         "repo": "joist",
         "requirejsNamespace": "JOIST"
