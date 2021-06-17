@@ -1,5 +1,5 @@
 {
-  "comment": "# molecules-and-light 1.3.14-phetiorc.2 Thu Jun 10 2021 14:29:43 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# molecules-and-light 1.3.14-phetio Thu Jun 17 2021 15:55:19 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "845be6b591cb746b0b05b7023208aef2e49a8855",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "252f5a78675b7d1cf3ddda3177005722b72fbbe5",
+    "sha": "df8947cddf9bb506e970ee00e93d6e3e3547c500",
     "branch": "1.3-phetio"
   },
   "nitroglycerin": {
