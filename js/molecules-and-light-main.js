@@ -30,7 +30,8 @@ const simOptions = {
 
 // if using Edge, render the photon layer and emitter with SVG for improved performance, see #175
 if ( platform.edge ) {
-  simOptions.rootRenderer = 'svg';
+  simOptions.simDisplayOptions = {};
+  simOptions.simDisplayOptions.rootRenderer = 'svg';
 }
 
 simLauncher.launch( () => {
