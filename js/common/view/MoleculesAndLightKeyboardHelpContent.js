@@ -6,7 +6,7 @@
  * @author Michael Kauzmann (PhET Interactive Simulations)
  */
 
-import GeneralKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/GeneralKeyboardHelpSection.js';
+import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';
 import KeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
@@ -39,9 +39,9 @@ class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent 
       labelMaxWidth: 250
     } );
 
-    const generalNavigationHelpSection = new GeneralKeyboardHelpSection();
+    const basicActionsHelpSection = new BasicActionsKeyboardHelpSection();
 
-    super( [ emitterHelpSection ], [ generalNavigationHelpSection ] );
+    super( [ emitterHelpSection ], [ basicActionsHelpSection ] );
   }
 }
 
