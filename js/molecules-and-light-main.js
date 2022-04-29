@@ -8,7 +8,6 @@
 
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
-import platform from '../../phet-core/js/platform.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import moleculesAndLightStrings from './moleculesAndLightStrings.js';
 import MoleculesAndLightScreen from './molecules-and-light/MoleculesAndLightScreen.js';
@@ -27,12 +26,6 @@ const simOptions = {
     soundDesign: 'Ashton Morris, Mike Winters'
   }
 };
-
-// if using Edge, render the photon layer and emitter with SVG for improved performance, see #175
-if ( platform.edge ) {
-  simOptions.simDisplayOptions = {};
-  simOptions.simDisplayOptions.rootRenderer = 'svg';
-}
 
 simLauncher.launch( () => {
   const sim = new Sim( moleculesAndLightTitleString, [
