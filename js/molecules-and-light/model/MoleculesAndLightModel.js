@@ -7,9 +7,9 @@
  */
 
 import GreenhouseEffectQueryParameters from '../../../../greenhouse-effect/js/common/GreenhouseEffectQueryParameters.js';
-import moleculesAndLight from '../../moleculesAndLight.js';
 import PhotonAbsorptionModel from '../../../../greenhouse-effect/js/micro/model/PhotonAbsorptionModel.js';
 import PhotonTarget from '../../../../greenhouse-effect/js/micro/model/PhotonTarget.js';
+import moleculesAndLight from '../../moleculesAndLight.js';
 
 /**
  * @public
