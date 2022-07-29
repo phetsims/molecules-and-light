@@ -40,7 +40,7 @@ class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent 
     }, rowOptions ) );
 
     const emitterHelpSection = new KeyboardHelpSection( keyboardHelpDialogObservationWindowString, [ lightSourceRow, playPauseRow, stepForwardRow ], {
-      labelMaxWidth: 250
+      textMaxWidth: 250
     } );
 
     const basicActionsHelpSection = new BasicActionsKeyboardHelpSection();
