@@ -10,6 +10,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';
 import KeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
+import KeyboardHelpSectionRow from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSectionRow.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
 import moleculesAndLight from '../../moleculesAndLight.js';
 import moleculesAndLightStrings from '../../moleculesAndLightStrings.js';
@@ -25,17 +26,17 @@ const stepForwardShortcutDescriptionString = moleculesAndLightStrings.a11y.keybo
 class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
   constructor() {
 
-    const lightSourceRow = KeyboardHelpSection.labelWithIcon(
+    const lightSourceRow = KeyboardHelpSectionRow.labelWithIcon(
       turnLightSourceOnOrOffString,
       KeyboardHelpIconFactory.spaceOrEnter(), {
         labelInnerContent: turnLightSourceOnOrOffDescriptionString
       } );
 
     const rowOptions = { labelOptions: { lineWrap: 200 } };
-    const playPauseRow = KeyboardHelpSection.createPlayPauseKeyRow( pauseOrPlayShortcutString, merge( {
+    const playPauseRow = KeyboardHelpSectionRow.createPlayPauseKeyRow( pauseOrPlayShortcutString, merge( {
       labelInnerContent: pauseOrPlayShortcutDescriptionString
     }, rowOptions ) );
-    const stepForwardRow = KeyboardHelpSection.createStepForwardKeyRow( stepForwardShortcutString, merge( {
+    const stepForwardRow = KeyboardHelpSectionRow.createStepForwardKeyRow( stepForwardShortcutString, merge( {
       labelInnerContent: stepForwardShortcutDescriptionString
     }, rowOptions ) );
 
