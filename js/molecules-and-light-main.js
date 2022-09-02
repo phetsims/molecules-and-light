@@ -12,7 +12,7 @@ import Tandem from '../../tandem/js/Tandem.js';
 import MoleculesAndLightScreen from './molecules-and-light/MoleculesAndLightScreen.js';
 import moleculesAndLightStrings from './moleculesAndLightStrings.js';
 
-const moleculesAndLightTitleString = moleculesAndLightStrings[ 'molecules-and-light' ].title;
+const moleculesAndLightTitleStringProperty = moleculesAndLightStrings[ 'molecules-and-light' ].titleStringProperty;
 
 const simOptions = {
   hasKeyboardHelpContent: true,
@@ -28,7 +28,7 @@ const simOptions = {
 };
 
 simLauncher.launch( () => {
-  const sim = new Sim( moleculesAndLightTitleString, [
+  const sim = new Sim( moleculesAndLightTitleStringProperty, [
     new MoleculesAndLightScreen( Tandem.ROOT.createTandem( 'moleculesAndLightScreen' ) )
   ], simOptions );
   sim.start();
