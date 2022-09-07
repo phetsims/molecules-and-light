@@ -337,8 +337,8 @@ type StringsType = {
   }
 };
 
-const moleculesAndLightStrings = getStringModule( 'MOLECULES_AND_LIGHT' ) as StringsType;
+const MoleculesAndLightStrings = getStringModule( 'MOLECULES_AND_LIGHT' ) as StringsType;
 
-moleculesAndLight.register( 'moleculesAndLightStrings', moleculesAndLightStrings );
+moleculesAndLight.register( 'MoleculesAndLightStrings', MoleculesAndLightStrings );
 
-export default moleculesAndLightStrings;
+export default MoleculesAndLightStrings;

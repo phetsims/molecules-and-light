@@ -13,15 +13,15 @@ import KeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/Keybo
 import KeyboardHelpSectionRow from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSectionRow.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
 import moleculesAndLight from '../../moleculesAndLight.js';
-import moleculesAndLightStrings from '../../moleculesAndLightStrings.js';
+import MoleculesAndLightStrings from '../../MoleculesAndLightStrings.js';
 
-const keyboardHelpDialogObservationWindowString = moleculesAndLightStrings.keyboardHelpDialog.observationWindow;
-const turnLightSourceOnOrOffString = moleculesAndLightStrings.keyboardHelpDialog.turnLightSourceOnOrOff;
-const turnLightSourceOnOrOffDescriptionString = moleculesAndLightStrings.a11y.keyboardHelpDialog.turnLightSourceOnOrOffDescription;
-const pauseOrPlayShortcutString = moleculesAndLightStrings.keyboardHelpDialog.pauseOrPlayShortcut;
-const pauseOrPlayShortcutDescriptionString = moleculesAndLightStrings.a11y.keyboardHelpDialog.pauseOrPlayShortcutDescription;
-const stepForwardShortcutString = moleculesAndLightStrings.keyboardHelpDialog.stepForwardShortcut;
-const stepForwardShortcutDescriptionString = moleculesAndLightStrings.a11y.keyboardHelpDialog.stepForwardShortcutDescription;
+const keyboardHelpDialogObservationWindowString = MoleculesAndLightStrings.keyboardHelpDialog.observationWindow;
+const turnLightSourceOnOrOffString = MoleculesAndLightStrings.keyboardHelpDialog.turnLightSourceOnOrOff;
+const turnLightSourceOnOrOffDescriptionString = MoleculesAndLightStrings.a11y.keyboardHelpDialog.turnLightSourceOnOrOffDescription;
+const pauseOrPlayShortcutString = MoleculesAndLightStrings.keyboardHelpDialog.pauseOrPlayShortcut;
+const pauseOrPlayShortcutDescriptionString = MoleculesAndLightStrings.a11y.keyboardHelpDialog.pauseOrPlayShortcutDescription;
+const stepForwardShortcutString = MoleculesAndLightStrings.keyboardHelpDialog.stepForwardShortcut;
+const stepForwardShortcutDescriptionString = MoleculesAndLightStrings.a11y.keyboardHelpDialog.stepForwardShortcutDescription;
 
 class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
   constructor() {

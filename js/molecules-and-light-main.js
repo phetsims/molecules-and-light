@@ -10,9 +10,9 @@ import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import MoleculesAndLightScreen from './molecules-and-light/MoleculesAndLightScreen.js';
-import moleculesAndLightStrings from './moleculesAndLightStrings.js';
+import MoleculesAndLightStrings from './MoleculesAndLightStrings.js';
 
-const moleculesAndLightTitleStringProperty = moleculesAndLightStrings[ 'molecules-and-light' ].titleStringProperty;
+const moleculesAndLightTitleStringProperty = MoleculesAndLightStrings[ 'molecules-and-light' ].titleStringProperty;
 
 const simOptions = {
   hasKeyboardHelpContent: true,
