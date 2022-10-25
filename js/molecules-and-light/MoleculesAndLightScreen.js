@@ -25,7 +25,7 @@ class MoleculesAndLightScreen extends Screen {
       model => new MoleculesAndLightScreenView( model, tandem.createTandem( 'view' ) ), {
         backgroundColorProperty: new Property( '#C5D6E8' ),
         tandem: tandem,
-        keyboardHelpNode: new MoleculesAndLightKeyboardHelpContent()
+        createKeyboardHelpNode: () => new MoleculesAndLightKeyboardHelpContent()
       }
     );
   }
