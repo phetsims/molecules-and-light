@@ -15,8 +15,6 @@ import MoleculesAndLightStrings from './MoleculesAndLightStrings.js';
 const moleculesAndLightTitleStringProperty = MoleculesAndLightStrings[ 'molecules-and-light' ].titleStringProperty;
 
 const simOptions = {
-  hasKeyboardHelpContent: true,
-
   credits: {
     leadDesign: 'Kelly Lancaster (Java), Amy Rouinfar (HTML5)',
     softwareDevelopment: 'Jesse Greenberg, John Blanco, Sam Reid, Aaron Davis',
