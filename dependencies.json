@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "f1c2da32fed2bbc0d05f46045cc473d163aac011",
+    "sha": "69010d32965cfec4880c788bd7d14782ecf43b9a",
     "branch": "HEAD"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "f373798d660398b31e44011d492a1c722726bdf1",
+    "sha": "cf863327565c7c9b5fdb24087a5fd4ad75ad18be",
     "branch": "1.3-phetio"
   },
   "nitroglycerin": {
