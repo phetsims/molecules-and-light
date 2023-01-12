@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "bbd5e10a923813e5a6c9447bb92621f896ea6e75",
+    "sha": "eb55749768a25b2f68426acc1cb5a9ed8981dc53",
     "branch": "1.3-phetio"
   },
   "nitroglycerin": {
@@ -49,7 +49,7 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "570621d5a89fbbfde4fc093ef6710596cd4eb5d7",
+    "sha": "baa91fe054bb2b85b74ae37da8297031a25fd1a3",
     "branch": "HEAD"
   },
   "phetmarks": {
