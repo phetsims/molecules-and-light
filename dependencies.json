@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "4b00b6c56d6552de5c4a8f3f75ef4b2b709e684d",
+    "sha": "5fd8c6aca77d4055b87cd5bf69c7141d3b4d2b5a",
     "branch": "1.5"
   },
   "nitroglycerin": {
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "15041ecb736904afe2a9b50bc78afea2ecb2bd3b",
+    "sha": "f2d1e2b4e1c39a197ba22d49db91fd32b979291c",
     "branch": "HEAD"
   },
   "phetmarks": {
