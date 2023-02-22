@@ -5,7 +5,7 @@
  *
  * @author Jesse Greenberg (PhET Interactive Simulations)
  * @author Sam Reid (PhET Interactive Simulations)
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  *
  */
 

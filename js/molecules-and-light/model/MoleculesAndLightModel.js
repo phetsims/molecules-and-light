@@ -17,7 +17,9 @@ import moleculesAndLight from '../../moleculesAndLight.js';
 class MoleculesAndLightModel extends PhotonAbsorptionModel {
   constructor( tandem ) {
 
-    const initialTarget = GreenhouseEffectQueryParameters.openSciEd ? PhotonTarget.SINGLE_N2_MOLECULE : PhotonTarget.SINGLE_CO_MOLECULE;
+    const initialTarget = GreenhouseEffectQueryParameters.openSciEd ?
+                          PhotonTarget.SINGLE_N2_MOLECULE :
+                          PhotonTarget.SINGLE_CO_MOLECULE;
     super( initialTarget, tandem );
   }
 }
