@@ -1,7 +1,7 @@
 # Molecules And Light Screen
 
 The model describes the interaction between photons and molecules.  In general, a photon emitter fires a
-photon at a molecule with which it will or will not interact.  Whether or not a photon interacts with a given
+photon at a molecule with which it will or will not interact.  Whether a photon interacts with a given
 molecule is determined by fundamental aspects of nature.
 
 This model is composed of a photon emitter, photons, and molecules.  The molecules are modeled with constituent
