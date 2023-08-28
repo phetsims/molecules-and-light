@@ -1,8 +1,10 @@
-# Molecules And Light Screen
+# Molecules And Light - Model Description
 
-The model describes the interaction between photons and molecules. In general, a photon emitter fires a
-photon at a molecule with which it will or will not interact. Whether a photon interacts with a given
-molecule is determined by fundamental aspects of nature.
+## Basic Model Operation
+
+This sim models the interaction between photons and individual molecules of various types. In general, a photon
+emitter fires a single photon at a molecule and an interaction may or may not occur. Whether a photon interacts
+with a given molecule is determined by fundamental aspects of nature which are captured in the software model.
 
 This model is composed of a photon emitter, photons, and molecules. The molecules are modeled with constituent
 atoms and atomic bonds.
@@ -22,9 +24,7 @@ also select photons of a specific wavelength with the QuadEmissionFrequencyContr
 are described by sections of the electromagnetic spectrum and the choices are microwave, infrared, visible, and
 ultraviolet.
 
-----
-
-# Important Modeling Notes / Simplifications
+## Important Modeling Notes / Simplifications
 
 The sim only shows the basic absorption process for each class of radiation - that is, microwaves = rotation, infrared =
 vibration, etc. But in the real world, absorption of infrared can excite rotations along with vibrations, and
