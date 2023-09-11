@@ -2,33 +2,31 @@
 
 ## Basic Model Operation
 
-This sim models the interaction between photons and individual molecules of various types. In general, a photon
-emitter fires a single photon at a molecule and an interaction may or may not occur. Whether a photon interacts
-with a given molecule is determined by fundamental aspects of nature which are captured in the software model.
+This sim models the interaction between photons and individual molecules of various types. In general, a photon emitter
+fires a single photon at a molecule and an interaction may or may not occur. Whether a photon interacts with a given
+molecule is determined by fundamental aspects of nature which are captured in the software model.
 
-This model is composed of a photon emitter, photons, and molecules. The molecules are modeled with constituent
-atoms and atomic bonds.
+This model is composed of a photon emitter, photons, and molecules. The molecules are modeled with constituent atoms and
+atomic bonds.
 
 The photon emitter, photons, and molecules are contained in an isolated window on the screen called the
-ObservationWindow. This is where the user observes all photon and molecule interactions. The flashlight
-looking object in the center left of the observation window is the photon emitter.
-A molecule can have many different absorption strategies which describe how it will interact with a given
-photon. The possible options are BreakApartStrategy, which causes the molecule to break apart into two or more
-constituent molecules, ExcitationStrategy, which causes the molecule to enter an excited state,
-RotationStrategy, which causes the molecule to rotate, VibrationStrategy, which causes the molecule to vibrate,
-and NullPhotonAbsorptionStrategy, which represents no interaction between the photon and molecule.
+ObservationWindow. This is where the user observes all photon and molecule interactions. The flashlight looking object
+in the center left of the observation window is the photon emitter. A molecule can have many different absorption
+strategies which describe how it will interact with a given photon. The possible options are BreakApartStrategy, which
+causes the molecule to break apart into two or more constituent molecules, ExcitationStrategy, which causes the molecule
+to enter an excited state, RotationStrategy, which causes the molecule to rotate, VibrationStrategy, which causes the
+molecule to vibrate, and NullPhotonAbsorptionStrategy, which represents no interaction between the photon and molecule.
 
-The user can decide which molecule to observe with the MoleculeSelectionPanel. The possible Molecules are
-carbon monoxide, carbon dioxide, water, nitrogen gas, nitrogen dioxide, oxygen gas, and ozone. The user can
-also select photons of a specific wavelength with the QuadEmissionFrequencyControlPanel. Possible wavelengths
-are described by sections of the electromagnetic spectrum and the choices are microwave, infrared, visible, and
-ultraviolet.
+The user can decide which molecule to observe with the MoleculeSelectionPanel. The possible Molecules are carbon
+monoxide, carbon dioxide, water, nitrogen gas, nitrogen dioxide, oxygen gas, and ozone. The user can also select photons
+of a specific wavelength with the QuadEmissionFrequencyControlPanel. Possible wavelengths are described by sections of
+the electromagnetic spectrum and the choices are microwave, infrared, visible, and ultraviolet.
 
 ## Important Modeling Notes / Simplifications
 
 The sim only shows the basic absorption process for each class of radiation - that is, microwaves = rotation, infrared =
-vibration, etc. But in the real world, absorption of infrared can excite rotations along with vibrations, and
-absorption of visible (denoted in the sim by the "glow") can excite vibrations and rotations.
+vibration, etc. But in the real world, absorption of infrared can excite rotations along with vibrations, and absorption
+of visible (denoted in the sim by the "glow") can excite vibrations and rotations.
 
 Each photon represents a range of energy, but not all absorptions in that range are shown. Some examples of what is not
 included: CO2, H20, NO2, and O3 all have stretch vibrational modes in the infrared, O3 absorbs weakly in the visible,
