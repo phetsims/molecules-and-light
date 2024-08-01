@@ -6,7 +6,8 @@
  * @author Michael Kauzmann (PhET Interactive Simulations)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import MicroScreenView from '../../../../greenhouse-effect/js/micro/view/MicroScreenView.js';
+import PlayControlButton from '../../../../scenery-phet/js/buttons/PlayControlButton.js';
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';
 import KeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
@@ -18,9 +19,9 @@ import MoleculesAndLightStrings from '../../MoleculesAndLightStrings.js';
 const keyboardHelpDialogObservationWindowString = MoleculesAndLightStrings.keyboardHelpDialog.observationWindow;
 const turnLightSourceOnOrOffString = MoleculesAndLightStrings.keyboardHelpDialog.turnLightSourceOnOrOff;
 const turnLightSourceOnOrOffDescriptionString = MoleculesAndLightStrings.a11y.keyboardHelpDialog.turnLightSourceOnOrOffDescription;
-const pauseOrPlayShortcutString = MoleculesAndLightStrings.keyboardHelpDialog.pauseOrPlayShortcut;
+const pauseOrPlayShortcutStringProperty = MoleculesAndLightStrings.keyboardHelpDialog.pauseOrPlayShortcutStringProperty;
 const pauseOrPlayShortcutDescriptionString = MoleculesAndLightStrings.a11y.keyboardHelpDialog.pauseOrPlayShortcutDescription;
-const stepForwardShortcutString = MoleculesAndLightStrings.keyboardHelpDialog.stepForwardShortcut;
+const stepForwardShortcutStringProperty = MoleculesAndLightStrings.keyboardHelpDialog.stepForwardShortcutStringProperty;
 const stepForwardShortcutDescriptionString = MoleculesAndLightStrings.a11y.keyboardHelpDialog.stepForwardShortcutDescription;
 
 class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
@@ -33,12 +34,18 @@ class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent 
       } );
 
     const rowOptions = { labelOptions: { lineWrap: 200 } };
-    const playPauseRow = KeyboardHelpSectionRow.createPlayPauseKeyRow( pauseOrPlayShortcutString, merge( {
-      labelInnerContent: pauseOrPlayShortcutDescriptionString
-    }, rowOptions ) );
-    const stepForwardRow = KeyboardHelpSectionRow.createStepForwardKeyRow( stepForwardShortcutString, merge( {
-      labelInnerContent: stepForwardShortcutDescriptionString
-    }, rowOptions ) );
+
+    const playPauseRow = KeyboardHelpSectionRow.fromHotkeyData( PlayControlButton.TOGGLE_PLAY_HOTKEY_DATA, {
+      labelStringProperty: pauseOrPlayShortcutStringProperty,
+      pdomLabelStringProperty: pauseOrPlayShortcutDescriptionString,
+      labelWithIconOptions: rowOptions
+    } );
+
+    const stepForwardRow = KeyboardHelpSectionRow.fromHotkeyData( MicroScreenView.STEP_FORWARD_HOTKEY_DATA, {
+      labelStringProperty: stepForwardShortcutStringProperty,
+      pdomLabelStringProperty: stepForwardShortcutDescriptionString,
+      labelWithIconOptions: rowOptions
+    } );
 
     const emitterHelpSection = new KeyboardHelpSection( keyboardHelpDialogObservationWindowString, [ lightSourceRow, playPauseRow, stepForwardRow ], {
       textMaxWidth: 250
