@@ -38,7 +38,7 @@
         ],
         "parserOptions": {
           "project": [
-            "../molecules-and-light/tsconfig.json"
+            "../chipper/tsconfig/eslint-all/tsconfig.json"
           ]
         }
       }
