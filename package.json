@@ -21,6 +21,10 @@
       "phet-io",
       "adapted-from-phet"
     ],
+    "preload": [
+      "../sherpa/lib/fluent-0.13.0.min.js",
+      "../chipper/js/load-unbuilt-fluent-strings.js"
+    ],
     "simFeatures": {
       "supportsSound": true,
       "supportsInteractiveDescription": true
