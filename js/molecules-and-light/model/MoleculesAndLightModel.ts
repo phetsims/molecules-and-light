@@ -9,13 +9,11 @@
 import GreenhouseEffectQueryParameters from '../../../../greenhouse-effect/js/common/GreenhouseEffectQueryParameters.js';
 import PhotonAbsorptionModel from '../../../../greenhouse-effect/js/micro/model/PhotonAbsorptionModel.js';
 import PhotonTarget from '../../../../greenhouse-effect/js/micro/model/PhotonTarget.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculesAndLight from '../../moleculesAndLight.js';
 
-/**
- * @public
- */
 class MoleculesAndLightModel extends PhotonAbsorptionModel {
-  constructor( tandem ) {
+  public constructor( tandem: Tandem ) {
 
     const initialTarget = GreenhouseEffectQueryParameters.openSciEd ?
                           PhotonTarget.SINGLE_N2_MOLECULE :
