@@ -25,7 +25,7 @@ const stepForwardShortcutStringProperty = MoleculesAndLightStrings.keyboardHelpD
 const stepForwardShortcutDescriptionString = MoleculesAndLightStrings.a11y.keyboardHelpDialog.stepForwardShortcutDescription;
 
 class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
-  constructor() {
+  public constructor() {
 
     const lightSourceRow = KeyboardHelpSectionRow.labelWithIcon(
       turnLightSourceOnOrOffString,
