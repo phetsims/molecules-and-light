@@ -9,16 +9,13 @@
  *
  */
 
+import PhotonAbsorptionModel from '../../../../greenhouse-effect/js/micro/model/PhotonAbsorptionModel.js';
 import MicroScreenView from '../../../../greenhouse-effect/js/micro/view/MicroScreenView.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculesAndLight from '../../moleculesAndLight.js';
 
 class MoleculesAndLightScreenView extends MicroScreenView {
-
-  /**
-   * @param {PhotonAbsorptionModel} photonAbsorptionModel
-   * @param {Tandem} tandem
-   */
-  constructor( photonAbsorptionModel, tandem ) {
+  public constructor( photonAbsorptionModel: PhotonAbsorptionModel, tandem: Tandem ) {
     super( photonAbsorptionModel, tandem );
   }
 }
