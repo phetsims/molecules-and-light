@@ -9,17 +9,14 @@
 
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import MoleculesAndLightKeyboardHelpContent from '../common/view/MoleculesAndLightKeyboardHelpContent.js';
 import moleculesAndLight from '../moleculesAndLight.js';
 import MoleculesAndLightModel from './model/MoleculesAndLightModel.js';
 import MoleculesAndLightScreenView from './view/MoleculesAndLightScreenView.js';
 
-class MoleculesAndLightScreen extends Screen {
-
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
+class MoleculesAndLightScreen extends Screen<MoleculesAndLightModel, MoleculesAndLightScreenView> {
+  public constructor( tandem: Tandem ) {
     super(
       () => new MoleculesAndLightModel( tandem.createTandem( 'model' ) ),
       model => new MoleculesAndLightScreenView( model, tandem.createTandem( 'view' ) ), {
