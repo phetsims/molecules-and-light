@@ -93,16 +93,6 @@ type StringsType = {
   'openSciEd': {
     'energySource': string;
     'energySourceStringProperty': LocalizedStringProperty;
-  };
-  'a11y': {
-    'keyboardHelpDialog': {
-      'turnLightSourceOnOrOffDescription': string;
-      'turnLightSourceOnOrOffDescriptionStringProperty': LocalizedStringProperty;
-      'pauseOrPlayShortcutDescription': string;
-      'pauseOrPlayShortcutDescriptionStringProperty': LocalizedStringProperty;
-      'stepForwardShortcutDescription': string;
-      'stepForwardShortcutDescriptionStringProperty': LocalizedStringProperty;
-    }
   }
 };
 
