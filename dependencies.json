@@ -13,7 +13,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "0271111553c8a9377e4e76dac2663b3e6642f537",
+    "sha": "85f2c0483dcfea7ff1daea1e2ea8297930356a5c",
     "branch": "HEAD"
   },
   "dot": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecules-and-light": {
-    "sha": "4588ee41b32e3db5756d65b28a57c79a5a1cdfc8",
+    "sha": "c977b7024dfaafb28f66f76fa0b59b52acc113cf",
     "branch": "1.3-phetio"
   },
   "nitroglycerin": {
