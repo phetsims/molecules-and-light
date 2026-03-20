@@ -98,6 +98,4 @@ type StringsType = {
 
 const MoleculesAndLightStrings = getStringModule( 'MOLECULES_AND_LIGHT' ) as StringsType;
 
-moleculesAndLight.register( 'MoleculesAndLightStrings', MoleculesAndLightStrings );
-
 export default MoleculesAndLightStrings;

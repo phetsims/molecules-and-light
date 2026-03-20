@@ -12,7 +12,6 @@
 import PhotonAbsorptionModel from '../../../../greenhouse-effect/js/micro/model/PhotonAbsorptionModel.js';
 import MicroScreenView from '../../../../greenhouse-effect/js/micro/view/MicroScreenView.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import moleculesAndLight from '../../moleculesAndLight.js';
 
 class MoleculesAndLightScreenView extends MicroScreenView {
   public constructor( photonAbsorptionModel: PhotonAbsorptionModel, tandem: Tandem ) {
@@ -20,5 +19,4 @@ class MoleculesAndLightScreenView extends MicroScreenView {
   }
 }
 
-moleculesAndLight.register( 'MoleculesAndLightScreenView', MoleculesAndLightScreenView );
 export default MoleculesAndLightScreenView;

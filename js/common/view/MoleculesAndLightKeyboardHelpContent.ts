@@ -13,7 +13,6 @@ import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboar
 import KeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
 import KeyboardHelpSectionRow from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSectionRow.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
-import moleculesAndLight from '../../moleculesAndLight.js';
 import MoleculesAndLightStrings from '../../MoleculesAndLightStrings.js';
 
 const keyboardHelpDialogObservationWindowString = MoleculesAndLightStrings.keyboardHelpDialog.observationWindow;
@@ -49,5 +48,4 @@ class MoleculesAndLightKeyboardHelpContent extends TwoColumnKeyboardHelpContent 
   }
 }
 
-moleculesAndLight.register( 'MoleculesAndLightKeyboardHelpContent', MoleculesAndLightKeyboardHelpContent );
 export default MoleculesAndLightKeyboardHelpContent;

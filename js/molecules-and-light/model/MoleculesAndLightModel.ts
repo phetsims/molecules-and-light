@@ -10,7 +10,6 @@ import GreenhouseEffectQueryParameters from '../../../../greenhouse-effect/js/co
 import PhotonAbsorptionModel from '../../../../greenhouse-effect/js/micro/model/PhotonAbsorptionModel.js';
 import PhotonTarget from '../../../../greenhouse-effect/js/micro/model/PhotonTarget.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import moleculesAndLight from '../../moleculesAndLight.js';
 
 class MoleculesAndLightModel extends PhotonAbsorptionModel {
   public constructor( tandem: Tandem ) {
@@ -22,5 +21,4 @@ class MoleculesAndLightModel extends PhotonAbsorptionModel {
   }
 }
 
-moleculesAndLight.register( 'MoleculesAndLightModel', MoleculesAndLightModel );
 export default MoleculesAndLightModel;

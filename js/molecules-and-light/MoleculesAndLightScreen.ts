@@ -11,7 +11,6 @@ import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import MoleculesAndLightKeyboardHelpContent from '../common/view/MoleculesAndLightKeyboardHelpContent.js';
-import moleculesAndLight from '../moleculesAndLight.js';
 import MoleculesAndLightModel from './model/MoleculesAndLightModel.js';
 import MoleculesAndLightScreenView from './view/MoleculesAndLightScreenView.js';
 
@@ -28,5 +27,4 @@ class MoleculesAndLightScreen extends Screen<MoleculesAndLightModel, MoleculesAn
   }
 }
 
-moleculesAndLight.register( 'MoleculesAndLightScreen', MoleculesAndLightScreen );
 export default MoleculesAndLightScreen;
